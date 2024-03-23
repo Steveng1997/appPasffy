@@ -1,0 +1,201 @@
+.registre,
+.registre * {
+    box-sizing: border-box;
+}
+
+ion-grid {
+    background: white;
+    height: -webkit-fill-available;
+    position: absolute;
+    overflow: hidden;
+}
+
+.registre {
+    background: #ffffff;
+    height: 812px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-1 {
+    width: 101px;
+    height: 109px;
+    position: absolute;
+    left: calc(50% - 50.5px);
+    top: 113px;
+    object-fit: cover;
+}
+
+.rectangle-151 {
+    width: 335px;
+    height: 459px;
+    position: absolute;
+    left: calc(50% - 167.5px);
+    top: 223px;
+    overflow: visible;
+}
+
+.rectangle-152 {
+    background: var(--verde-oscuro, #0b9a7a);
+    border-radius: 15px;
+    width: 126px;
+    height: 44px;
+    position: absolute;
+    left: 48px;
+    top: 563px;
+}
+
+.rectangle-153 {
+    background: var(--verde-oscuro, #0b9a7a);
+    border-radius: 15px;
+    width: 126px;
+    height: 44px;
+    position: absolute;
+    left: 201px;
+    top: 563px;
+}
+
+.register {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 700;
+    position: absolute;
+    left: 228px;
+    top: 555px;
+    width: 86px;
+    height: 37px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.back {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 700;
+    position: absolute;
+    left: 88px;
+    top: 555px;
+    width: 123px;
+    height: 37px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.usuario {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 60px;
+    top: 278px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.rectangle-154 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 278px;
+    height: 50px;
+    position: absolute;
+    left: calc(50% - 138.5px);
+    top: 299px;
+}
+
+.sc-ion-input-md-h[name=user] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 68px;
+    width: 242px;
+    --highlight-color-focused: var(--verde, #1fb996);
+}
+
+.nombre {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 60px;
+    top: 372px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.rectangle-155 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 278px;
+    height: 50px;
+    position: absolute;
+    left: 49px;
+    top: 393px;
+}
+
+.sc-ion-input-md-h[name=name] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 68px;
+    width: 242px;
+    --highlight-color-focused: var(--verde, #1fb996);
+}
+
+.contrase-a {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 60px;
+    top: 466px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.rectangle-157 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 278px;
+    height: 50px;
+    position: absolute;
+    left: 49px;
+    top: 487px;
+}
+
+.sc-ion-input-md-h[name=pass] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 68px;
+    width: 242px;
+    --highlight-color-focused: var(--verde, #1fb996);
+}

@@ -1,0 +1,115 @@
+.menu,
+.menu * {
+    box-sizing: border-box;
+}
+
+.menu {
+    background: #ffffff;
+    height: 812px;
+    position: relative;
+    overflow: hidden;
+}
+
+ion-grid {  
+    background: #ffffff;
+    // height: 812px;
+    height: -webkit-fill-available;
+    position: relative;
+    overflow: hidden;
+  }
+
+.rectangle-87 {
+    background: var(--verde-oscuro, #0b9a7a);
+    border-radius: 15px;
+    width: 333px;
+    height: 66px;
+    position: absolute;
+    left: 20px;
+    top: 432px;
+}
+
+.rectangle-88 {
+    background: var(--verde-oscuro, #0b9a7a);
+    border-radius: 15px;
+    width: 333px;
+    height: 66px;
+    position: absolute;
+    left: 20px;
+    top: 511px;
+}
+
+.rectangle-89 {
+    background: var(--verde-oscuro, #0b9a7a);
+    border-radius: 15px;
+    width: 333px;
+    height: 66px;
+    position: absolute;
+    left: 20px;
+    top: 590px;
+}
+
+.notas {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 32px;
+    line-height: 100%;
+    font-weight: 700;
+    position: absolute;
+    left: 47px;
+    top: 449px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.configuraci-n {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 32px;
+    line-height: 100%;
+    font-weight: 700;
+    position: absolute;
+    left: 47px;
+    top: 528px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.ayuda {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 32px;
+    line-height: 100%;
+    font-weight: 700;
+    position: absolute;
+    left: 47px;
+    top: 607px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.icon {
+    width: 3.2%;
+    height: 2.96%;
+    position: absolute;
+    right: 88.27%;
+    left: 8.53%;
+    bottom: 87.56%;
+    top: 9.48%;
+    transform: translate(-13px, -25px);
+    overflow: visible;
+}
+
+.mobile-ui-ux-cuate-1 {
+    width: 314px;
+    height: 314px;
+    position: absolute;
+    left: 31px;
+    top: 74px;
+    object-fit: cover;
+}

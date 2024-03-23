@@ -1,0 +1,610 @@
+.nueva-terapeuta,
+.nueva-terapeuta * {
+    box-sizing: border-box;
+}
+
+ion-grid {
+    background: var(--verde-claro, #e8f2ef);
+    height: -webkit-fill-available;
+    position: absolute;
+    overflow: hidden;
+}
+
+.nueva-terapeuta {
+    height: 661px;
+    position: relative;
+}
+
+.rectangle-123 {
+    background: #ffffff;
+    border-radius: 15px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.nombre {
+    color: var(--verde, #1fb996);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 33px;
+    top: 210px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.propina {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 38px;
+    top: 262px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.div {
+    color: var(--verde, #1fb996);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 121px;
+    top: 300px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.div2 {
+    color: var(--verde, #1fb996);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 273px;
+    top: 300px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.div3 {
+    color: var(--verde, #1fb996);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 121px;
+    top: 400px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.div4 {
+    color: var(--verde, #1fb996);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 273px;
+    top: 400px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.div5 {
+    color: var(--verde, #1fb996);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 121px;
+    top: 502px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.div6 {
+    color: var(--verde, #1fb996);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 273px;
+    top: 502px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.div7 {
+    color: var(--verde, #1fb996);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 273px;
+    top: 210px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.bebida-terap {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 38px;
+    top: 362px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.vitamina {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 38px;
+    top: 462px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.bebida-casa {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 189px;
+    top: 262px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.tabaco {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 189px;
+    top: 362px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.otros {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 189px;
+    top: 462px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.servicio {
+    color: var(--verde, #1fb996);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 184px;
+    top: 210px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.rectangle-124 {
+    background: var(--verde, #1fb996);
+    border-radius: 15px 15px 0px 0px;
+    width: -webkit-fill-available;
+    height: 154px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.x-close {
+    width: 27px;
+    height: 27px;
+    position: absolute;
+    left: 294px;
+    top: 23px;
+    overflow: visible;
+}
+
+.agregar-terapeuta {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 32px;
+    line-height: 100%;
+    font-weight: 700;
+    position: absolute;
+    left: 21px;
+    top: 59px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.establecer-los-de-comisi-n {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-SemiBold", sans-serif;
+    font-size: 20px;
+    line-height: 100%;
+    font-weight: 600;
+    position: absolute;
+    left: 21px;
+    top: 104px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.rectangle-125 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 140px;
+    height: 50px;
+    position: absolute;
+    left: 22px;
+    top: 193px;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 16px;
+    justify-items: flex-end;
+    display: grid;
+    min-height: auto;
+    color: black;
+}
+
+.sc-ion-input-md-h[name=name] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 91px;
+    width: 62px;
+    --highlight-color-focused: var(--verde, #1fb996);
+}
+
+.rectangle-133 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 146px;
+    height: 50px;
+    position: absolute;
+    left: 172px;
+    top: 193px;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 16px;
+    justify-items: flex-end;
+    display: grid;
+    min-height: auto;
+    color: black;
+}
+
+.sc-ion-input-md-h[name=servicio] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 244px;
+    width: 24px;
+}
+
+.rectangle-126 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 143px;
+    height: 50px;
+    position: absolute;
+    left: 23px;
+    top: 283px;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 16px;
+    color: black;
+}
+
+.sc-ion-input-md-h[name=propina] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 45px;
+    width: 70px;
+}
+
+.rectangle-128 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 143px;
+    height: 50px;
+    position: absolute;
+    left: 23px;
+    top: 383px;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 16px;
+    justify-items: flex-end;
+    display: grid;
+    min-height: auto;
+    color: black;
+}
+
+.sc-ion-input-md-h[name=bebidaTerap] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 45px;
+    width: 70px;
+}
+
+.rectangle-130 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 143px;
+    height: 50px;
+    position: absolute;
+    left: 23px;
+    top: 483px;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 16px;
+    justify-items: flex-end;
+    display: grid;
+    min-height: auto;
+    color: black;
+}
+
+.sc-ion-input-md-h[name=vitamina] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 45px;
+    width: 70px;
+}
+
+.rectangle-127 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 146px;
+    height: 50px;
+    position: absolute;
+    left: 172px;
+    top: 283px;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 16px;
+    justify-items: flex-end;
+    display: grid;
+    min-height: auto;
+    color: black;
+}
+
+.sc-ion-input-md-h[name=bebida] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 194px;
+    width: 70px;
+}
+
+.rectangle-129 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 146px;
+    height: 50px;
+    position: absolute;
+    left: 172px;
+    top: 383px;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 16px;
+    justify-items: flex-end;
+    display: grid;
+    min-height: auto;
+    color: black;
+}
+
+.sc-ion-input-md-h[name=tabaco] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 194px;
+    width: 70px;
+}
+
+.rectangle-131 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--verde, #1fb996);
+    border-width: 1.5px;
+    width: 146px;
+    height: 50px;
+    position: absolute;
+    left: 172px;
+    top: 483px;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 16px;
+    justify-items: flex-end;
+    display: grid;
+    min-height: auto;
+    color: black;
+}
+
+.sc-ion-input-md-h[name=otros] {
+    border-style: none;
+    color: black;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    left: 194px;
+    width: 70px;
+}
+
+.group-98 {
+    position: absolute;
+    inset: 0;
+}
+
+.rectangle-77 {
+    background: var(--verde, #1fb996);
+    border-radius: 15px;
+    width: 47.79%;
+    height: 6.81%;
+    position: absolute;
+    right: 6.19%;
+    left: 46.02%;
+    bottom: 8.17%;
+    top: 85.02%;
+}
+
+.group-99 {
+    width: 91px;
+    height: 22px;
+    position: static;
+}
+
+.group-30 {
+    width: 91px;
+    height: 22px;
+    position: static;
+}
+
+.guardar {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 219px;
+    top: 575px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.save {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    left: 192px;
+    top: 574px;
+    overflow: hidden;
+}
+
+.save-01 {
+    width: 19px;
+    height: 19px;
+    position: absolute;
+    left: 194px;
+    top: 576px;
+    overflow: visible;
+}
+
+.group-100 {
+    position: absolute;
+    inset: 0;
+}
+
+.limpiar {
+    color: var(--verde-oscuro, #0b9a7a);
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: 500;
+    position: absolute;
+    left: 55px;
+    top: 576px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.rectangle-132 {
+    background: #0b9a7a;
+    width: 52px;
+    height: 1px;
+    position: absolute;
+    left: 55px;
+    top: 593px;
+}
+
+.loader-css-class {
+    --background: #261bff;
+    --spinner-color: #ffffff;
+}
