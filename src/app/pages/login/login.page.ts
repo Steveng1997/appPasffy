@@ -73,17 +73,7 @@ export class LoginPage {
           if (resp.length > 0) {
             if (resp[0]['activo'] == true) {
               this.dateTpm()
-              // this.serviceLogin.getByUserAndPass(this.manager.usuario, this.manager.pass).subscribe((res: any) => {
-              //   if (res.token != "") {
-              // if (res.token != undefined || res != "Usuario o clave incorrectos") {
-              // localStorage.setItem('token', res.token);
-              // localStorage.setItem('dateTmp', this.dateTmp);
               this.router.navigate([`tabs/${resp[0].id}/vision`])
-              // } else {
-              //   Swal.fire({ icon: 'error', title: 'Oops...', text: 'La contraseña es incorrecta' })
-              // }
-              //   }
-              // })
             } else {
               Swal.fire({ icon: 'error', title: 'Oops...', text: 'Este usuario ya no esta trabajando con nosotros' })
             }

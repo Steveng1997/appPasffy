@@ -1,7 +1,7 @@
 <ion-content padding fullscreen>
   <ion-grid fixed>
 
-    <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12" *ngFor="let therap of therap">
+    <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12" *ngFor="let therap of therapist">
 
       <div class="pop-up-editar-terapeuta">
         <div class="rectangle-123"></div>
@@ -52,7 +52,7 @@
         <div class="rectangle-77" (click)="update(therap.id, therap)"></div>
         <div class="group-99">
           <div class="group-30">
-            <div class="guardar">Guardar</div>
+            <div class="guardar" (click)="update(therap.id, therap)">Guardar</div>
             <div class="save"></div>
           </div>
           <svg class="save-01" width="19" height="19" viewBox="0 0 19 19" fill="none"

@@ -5,7 +5,8 @@ import { SettingPage } from './setting.page';
 const routes: Routes = [
   {
     path: '',
-    component: SettingPage
+    component: SettingPage,
+    pathMatch: 'full'
   },
   {
     path: 'edit-therapist/:id',

@@ -52,6 +52,8 @@ export class TherapistService {
 
   // Update
 
+  // Update
+
   updateTerapeutas(id: number, therapist: ModelTherapist) {
     return this.http.put(`${this.API_Terapeuta}/updateTherapistById/${id}`, therapist);
   }

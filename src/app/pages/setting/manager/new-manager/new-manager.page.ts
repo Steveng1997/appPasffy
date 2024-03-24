@@ -95,7 +95,7 @@ export class NewManagerPage implements OnInit {
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
                 this.resetManager()
                 this.ionLoaderService.dismissLoader()
-                this.router.navigate([`tabs/${this.iduser}/setting`])
+                location.replace(`tabs/${this.iduser}/setting`);
               })
             } else {
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'Ya existe este usuario', showConfirmButton: false, timer: 1000 })

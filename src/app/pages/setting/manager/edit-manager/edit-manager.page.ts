@@ -50,7 +50,6 @@ export class EditManagerPage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    debugger
     const params = this.activeRoute.snapshot.params
     this.id = Number(params['id'])
 
@@ -80,7 +79,7 @@ export class EditManagerPage implements OnInit {
       this.serviceManager.updateUser(id, encargada).subscribe((resp => {
         if (resp = true) {
           Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 1000 })
-          this.router.navigate([`tabs/${this.iduser}/setting`])
+          location.replace(`tabs/${this.iduser}/setting`);
         }
       }))
     } else {
@@ -103,7 +102,7 @@ export class EditManagerPage implements OnInit {
           if (result.isConfirmed) {
             this.serviceManager.deleteManager(id).subscribe((resp => {
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1000 })
-              this.router.navigate([`tabs/${this.iduser}/setting`])
+              location.replace(`tabs/${this.iduser}/setting`);
             }))
           }
         })

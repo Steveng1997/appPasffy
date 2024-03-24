@@ -68,10 +68,10 @@ export class RegisterPage {
     if (this.manager.nombre) {
       if (this.manager.usuario) {
         if (this.manager.pass) {
+          this.ionLoaderService.simpleLoader()
           this.serviceLogin.getByUsuario(this.manager.usuario).subscribe((nameRegistro: any) => {
             if (nameRegistro.length == 0) {
               this.manager.nombre = this.manager.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
-              this.ionLoaderService.simpleLoader()
               this.validateEmpty()
               this.serviceLogin.registerEncargada(this.manager).subscribe((resp: any) => {
                 this.resetTherapist()
@@ -80,6 +80,7 @@ export class RegisterPage {
               })
             } else {
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'Ya existe este usuario', showConfirmButton: false, timer: 1000 })
+              this.ionLoaderService.dismissLoader()
             }
           })
         } else {
