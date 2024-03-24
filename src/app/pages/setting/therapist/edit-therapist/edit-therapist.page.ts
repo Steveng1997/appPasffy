@@ -13,8 +13,6 @@ import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.servi
 import { ServiceService } from 'src/app/core/services/service/service.service';
 import { ServiceLiquidationTherapist } from 'src/app/core/services/liquidation/service-liquidation-therapist.service';
 
-
-
 @Component({
   selector: 'app-edit-therapist',
   templateUrl: './edit-therapist.page.html',
@@ -22,7 +20,6 @@ import { ServiceLiquidationTherapist } from 'src/app/core/services/liquidation/s
 })
 
 export class EditTherapistPage implements OnInit {
-
   therapist: any
   id: any
   iduser: number
