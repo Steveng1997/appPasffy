@@ -21,13 +21,6 @@ ion-grid {
 }
 
 .rectangle-93 {
-  // background: var(--verde-claro, #e8f2ef);
-  // width: 378px;
-  // height: 2296px;
-  // position: absolute;
-  // left: 0px;
-  // top: 160px;
-
   background: var(--verde-claro, #e8f2ef);
   width: -webkit-fill-available;
   height: 4015px;
@@ -71,7 +64,6 @@ ion-grid {
   width: 335px;
   height: 474px;
   position: absolute;
-  // left: 20px;
   left: calc(50% - 167.5px);
   top: 838px;
 }
@@ -82,7 +74,6 @@ ion-grid {
   width: 335px;
   height: 772px;
   position: absolute;
-  // left: 20px;
   left: calc(50% - 167.5px);
   top: 1335px;
 }
@@ -305,7 +296,7 @@ ion-grid {
   bottom: 7.57%;
   top: 87.42%;
   height: 5.01%;
-}
+  }
 
 .notas {
   color: var(--verde, #1fb996);
@@ -321,7 +312,7 @@ ion-grid {
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-}
+  }
 
 .cobros {
   color: var(--verde, #1fb996);
@@ -1582,8 +1573,8 @@ ion-select::part(icon) {
 }
 
 .group-98 {
-  position: absolute;
-  inset: 0;
+  // position: absolute;
+  // inset: 0;
 }
 
 .rectangle-772 {

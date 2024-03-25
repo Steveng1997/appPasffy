@@ -133,7 +133,7 @@
           <ion-select class="encargada2" style="display: grid; min-height: -webkit-fill-available" label="Encargada"
             [(ngModel)]="services.encargada">
             <ion-select-option *ngFor="let manager of manager"
-              [value]="manager.name">{{manager.name}}</ion-select-option>
+              [value]="manager.name">{{manager.nombre}}</ion-select-option>
           </ion-select>
 
         </div>
@@ -273,7 +273,7 @@
           <path d="M0 1L59 0.999995" stroke="#7F7C7C" />
         </svg>
 
-        <div class="eliminar">Eliminar</div>
+        <div class="eliminar" (click)="cancel()">Cancelar</div>
         <div class="group-98">
           <div class="rectangle-772" id="btnSave" (click)="saveService()"></div>
           <div class="group-30">
@@ -300,7 +300,7 @@
           <ion-select class="terapeuta2" style="display: grid; min-height: -webkit-fill-available" label="Terapeuta"
             [(ngModel)]="services.terapeuta">
             <ion-select-option *ngFor="let therapist of terapeuta"
-              [value]="therapist.name">{{therapist.name}}</ion-select-option>
+              [value]="therapist.name">{{therapist.nombre}}</ion-select-option>
           </ion-select>
 
         </div>

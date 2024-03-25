@@ -58,6 +58,10 @@ const routes: Routes = [
       {
         path: 'edit-therapist/:id',
         loadChildren: () => import('../setting/therapist/edit-therapist/edit-therapist.module').then(m => m.EditTherapistPageModule)
+      },
+      {
+        path: 'edit-services/:id',
+    loadChildren: () => import('../service/edit-services/edit-services.module').then( m => m.EditServicesPageModule)
       }
     ]
   }

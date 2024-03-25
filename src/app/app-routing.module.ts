@@ -27,11 +27,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/liquidation/manager/manager.module').then(m => m.ManagerPageModule)
   },
   {
-    path: 'new-manager/:id',
+    path: 'new-manager',
     loadChildren: () => import('./pages/setting/manager/new-manager/new-manager.module').then(m => m.NewManagerPageModule)
   },
   {
-    path: 'edit-manager/:id',
+    path: 'edit-manager',
     loadChildren: () => import('./pages/setting/manager/edit-manager/edit-manager.module').then(m => m.EditManagerPageModule)
   },
   {
@@ -39,11 +39,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/liquidation/therapist/therapist.module').then(m => m.TherapistPageModule)
   },
   {
-    path: 'new-therapist/:id',
+    path: 'new-therapist',
     loadChildren: () => import('./pages/setting/therapist/new-therapist/new-therapist.module').then(m => m.NewTherapistPageModule)
   },
   {
-    path: 'edit-therapist/:id',
+    path: 'edit-therapist',
     loadChildren: () => import('./pages/setting/therapist/edit-therapist/edit-therapist.module').then(m => m.EditTherapistPageModule)
   },
   {
@@ -57,7 +57,12 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/login/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'edit-services',
+    loadChildren: () => import('./pages/service/edit-services/edit-services.module').then( m => m.EditServicesPageModule)
   }
+
 
 ];
 @NgModule({

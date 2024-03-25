@@ -9,6 +9,7 @@ import { ServiceService } from 'src/app/core/services/service/service.service';
 
 // Model 
 import { ModelTherapist } from 'src/app/core/models/therapist';
+import { ModelService } from 'src/app/core/models/service';
 
 @Component({
   selector: 'app-vision',
@@ -105,6 +106,10 @@ export class VisionPage implements OnInit {
     servicio: "",
     tabaco: "",
     vitamina: "",
+  }
+
+  serviceModel: ModelService = {
+    pantalla: ""
   }
 
   constructor(
@@ -1724,22 +1729,18 @@ export class VisionPage implements OnInit {
     return false
   }
 
-  // async editByName(nombre: string) {
-  //   this.service.getTerapeutaWithCurrentDate(nombre).subscribe((rp: any) => {
-  //     if (rp.length > 0) {
-  //       this.serviceModel.pantalla = 'vision'
-  //       this.service.updateScreenById(rp[0]['id'], this.serviceModel).subscribe(async (rp: any) => { })
-  //       this.router.navigate([`menu/${this.idUser}/nuevo-servicio/${rp[0]['id']}/true`])
-  //     }
-  //   })
-  // }
-
+  async editByName(nombre: string) {
+    debugger
+    this.service.getTerapeutaWithCurrentDate(nombre).subscribe((rp: any) => {
+      if (rp.length > 0) {
+        this.serviceModel.pantalla = 'vision'
+        this.service.updateScreenById(rp[0]['id'], this.serviceModel).subscribe(async (rp: any) => { })
+        this.router.navigate([`tabs/${this.idUser}/edit-services/${rp[0]['id']}`])
+      }
+    })
+  }
 
   menu() {
     this.router.navigate([`tabs/${this.idUser}/menu`])
-  }
-
-  ssss() {
-    debugger
   }
 }

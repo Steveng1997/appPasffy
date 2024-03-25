@@ -73,7 +73,8 @@ export class LoginPage {
           if (resp.length > 0) {
             if (resp[0]['activo'] == true) {
               this.dateTpm()
-              this.router.navigate([`tabs/${resp[0].id}/vision`])
+              location.replace(`tabs/${resp[0].id}/vision`)
+              // this.router.navigate([`tabs/${resp[0].id}/vision`])
             } else {
               Swal.fire({ icon: 'error', title: 'Oops...', text: 'Este usuario ya no esta trabajando con nosotros' })
             }
