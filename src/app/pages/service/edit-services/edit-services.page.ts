@@ -22,16 +22,18 @@ export class EditServicesPage implements OnInit {
   idUser: number
   id: number
   manager: any
+  terapeuta: any
   administratorRole: boolean = false
 
   fechaActual = ''
+  fecha = ''
   horaInicialServicio: string
+  horaStarted = new Date().toTimeString().substring(0, 5)
 
   restamosCobroEdit = 0
   sumatoriaCobrosEdit = 0
   idEditar: number
   editarService: ModelService[]
-  terapeutaSelect: any
 
   terapEdit: any
   buttonEdit: any
@@ -167,6 +169,8 @@ export class EditServicesPage implements OnInit {
       })
     }
 
+    this.horaInicialServicio = this.horaStarted
+    this.getTherapist()
     this.editForm()
   }
 
@@ -176,7 +180,13 @@ export class EditServicesPage implements OnInit {
     })
   }
 
-  editPaymentMethod(): void {
+  getTherapist() {
+    this.serviceTherapist.getAllTerapeuta().subscribe((datosTerapeuta: any) => {
+      this.terapeuta = datosTerapeuta
+    })
+  }
+
+  paymentMethod(): void {
     const formPago = []
     if (localStorage.getItem('Efectivo')) {
       formPago.push('Efectivo')
@@ -214,6 +224,7 @@ export class EditServicesPage implements OnInit {
     if (selectDate < currentDateWithoutHours || currentHours > 24) {
       this.buttonEdit.disabled = false;
       Swal.fire({
+        heightAuto: false,
         icon: 'error',
         title: 'Oops...',
         text: 'No se puede crear el servicio por la fecha.',
@@ -226,7 +237,7 @@ export class EditServicesPage implements OnInit {
     return true
   }
 
-  editStartTime(event: any) {
+  startTime(event: any) {
     this.horaInicialServicio = event.target.value.toString()
 
     if (Number(this.editarService[0]['minuto']) > 0) {
@@ -279,11 +290,15 @@ export class EditServicesPage implements OnInit {
     }
   }
 
-  editMinutes(event: any) {
+  chosenDate(event: any) {
+    this.editarService[0]['fechaHoyInicio'] = event.target.value
+    this.fechaActual = event.target.value
+  }
 
-    let sumarsesion = event, horas = 0, minutos = 0, convertHora = '', day = '', month = '', year = ''
+  minutes(event: any) {
+    let sumarsesion = Number(event.value), horas = 0, minutos = 0, convertHora = '', day = '', month = '', year = ''
 
-    if (event === null) sumarsesion = 0
+    if (event.value === null) sumarsesion = 0
 
     const splitDate = this.fechaActual.toString().split('-')
     const splitHour = this.editarService[0]['horaStart'].split(':')
@@ -327,88 +342,88 @@ export class EditServicesPage implements OnInit {
     this.editarService[0]['fechaFin'] = `${day}-${month}-${year}`
   }
 
-  validationsFormOfPaymentToEdit() {
-    // Efectivo Editar
-    if (this.editarService[0]['efectPiso1'] == true && this.editarService[0]['bizuPiso1'] == true ||
-      this.editarService[0]['efectPiso2'] == true && this.editarService[0]['bizuPiso2'] == true ||
-      this.editarService[0]['efectTerap'] == true && this.editarService[0]['bizuTerap'] == true ||
-      this.editarService[0]['efectEncarg'] == true && this.editarService[0]['bizuEncarg'] == true ||
-      this.editarService[0]['efectDriverTaxi'] == true && this.editarService[0]['bizuDriverTaxi'] == true ||
-      this.editarService[0]['efectPiso1'] == true && this.editarService[0]['tarjPiso1'] == true ||
-      this.editarService[0]['efectPiso2'] == true && this.editarService[0]['tarjPiso2'] == true ||
-      this.editarService[0]['efectTerap'] == true && this.editarService[0]['tarjTerap'] == true ||
-      this.editarService[0]['efectEncarg'] == true && this.editarService[0]['tarjEncarg'] == true ||
-      this.editarService[0]['efectDriverTaxi'] == true && this.editarService[0]['tarjDriverTaxi'] == true ||
-      this.editarService[0]['efectPiso1'] == true && this.editarService[0]['transPiso1'] == true ||
-      this.editarService[0]['efectPiso2'] == true && this.editarService[0]['transPiso2'] == true ||
-      this.editarService[0]['efectTerap'] == true && this.editarService[0]['transTerap'] == true ||
-      this.editarService[0]['efectEncarg'] == true && this.editarService[0]['transEncarg'] == true ||
-      this.editarService[0]['efectDriverTaxi'] == true && this.editarService[0]['transDriverTaxi'] == true) {
+  validationsFormOfPayment() {
+    // Efectivo
+    if (Boolean(this.editarService[0]['efectPiso1']) == true && Boolean(this.editarService[0]['bizuPiso1']) == true ||
+      Boolean(this.editarService[0]['efectPiso2']) == true && Boolean(this.editarService[0]['bizuPiso2']) == true ||
+      Boolean(this.editarService[0]['efectTerap']) == true && Boolean(this.editarService[0]['bizuTerap']) == true ||
+      Boolean(this.editarService[0]['efectEncarg']) == true && Boolean(this.editarService[0]['bizuEncarg']) == true ||
+      Boolean(this.editarService[0]['efectDriverTaxi']) == true && Boolean(this.editarService[0]['bizuDriverTaxi']) == true ||
+      Boolean(this.editarService[0]['efectPiso1']) == true && Boolean(this.editarService[0]['tarjPiso1']) == true ||
+      Boolean(this.editarService[0]['efectPiso2']) == true && Boolean(this.editarService[0]['tarjPiso2']) == true ||
+      Boolean(this.editarService[0]['efectTerap']) == true && Boolean(this.editarService[0]['tarjTerap']) == true ||
+      Boolean(this.editarService[0]['efectEncarg']) == true && Boolean(this.editarService[0]['tarjEncarg']) == true ||
+      Boolean(this.editarService[0]['efectDriverTaxi']) == true && Boolean(this.editarService[0]['tarjDriverTaxi']) == true ||
+      Boolean(this.editarService[0]['efectPiso1']) == true && Boolean(this.editarService[0]['transPiso1']) == true ||
+      Boolean(this.editarService[0]['efectPiso2']) == true && Boolean(this.editarService[0]['transPiso2']) == true ||
+      Boolean(this.editarService[0]['efectTerap']) == true && Boolean(this.editarService[0]['transTerap']) == true ||
+      Boolean(this.editarService[0]['efectEncarg']) == true && Boolean(this.editarService[0]['transEncarg']) == true ||
+      Boolean(this.editarService[0]['efectDriverTaxi']) == true && Boolean(this.editarService[0]['transDriverTaxi']) == true) {
       this.buttonEdit.disabled = false
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
 
-    // Bizum Editar
-    if (this.editarService[0]['bizuPiso1'] == true && this.editarService[0]['efectPiso1'] == true ||
-      this.editarService[0]['bizuPiso2'] == true && this.editarService[0]['efectPiso2'] == true ||
-      this.editarService[0]['bizuTerap'] == true && this.editarService[0]['efectTerap'] == true ||
-      this.editarService[0]['bizuEncarg'] == true && this.editarService[0]['efectEncarg'] == true ||
-      this.editarService[0]['bizuDriverTaxi'] == true && this.editarService[0]['efectDriverTaxi'] == true ||
-      this.editarService[0]['bizuPiso1'] == true && this.editarService[0]['tarjPiso1'] == true ||
-      this.editarService[0]['bizuPiso2'] == true && this.editarService[0]['tarjPiso2'] == true ||
-      this.editarService[0]['bizuTerap'] == true && this.editarService[0]['tarjTerap'] == true ||
-      this.editarService[0]['bizuEncarg'] == true && this.editarService[0]['tarjEncarg'] == true ||
-      this.editarService[0]['bizuDriverTaxi'] == true && this.editarService[0]['tarjDriverTaxi'] == true ||
-      this.editarService[0]['bizuPiso1'] == true && this.editarService[0]['transPiso1'] == true ||
-      this.editarService[0]['bizuPiso2'] == true && this.editarService[0]['transPiso2'] == true ||
-      this.editarService[0]['bizuTerap'] == true && this.editarService[0]['transTerap'] == true ||
-      this.editarService[0]['bizuEncarg'] == true && this.editarService[0]['transEncarg'] == true ||
-      this.editarService[0]['bizuDriverTaxi'] == true && this.editarService[0]['transDriverTaxi'] == true) {
+    // Bizum
+    if (Boolean(this.editarService[0]['bizuPiso1']) == true && Boolean(this.editarService[0]['efectPiso1']) == true ||
+      Boolean(this.editarService[0]['bizuPiso2']) == true && Boolean(this.editarService[0]['efectPiso2']) == true ||
+      Boolean(this.editarService[0]['bizuTerap']) == true && Boolean(this.editarService[0]['efectTerap']) == true ||
+      Boolean(this.editarService[0]['bizuEncarg']) == true && Boolean(this.editarService[0]['efectEncarg']) == true ||
+      Boolean(this.editarService[0]['bizuDriverTaxi']) == true && Boolean(this.editarService[0]['efectDriverTaxi']) == true ||
+      Boolean(this.editarService[0]['bizuPiso1']) == true && Boolean(this.editarService[0]['tarjPiso1']) == true ||
+      Boolean(this.editarService[0]['bizuPiso2']) == true && Boolean(this.editarService[0]['tarjPiso2']) == true ||
+      Boolean(this.editarService[0]['bizuTerap']) == true && Boolean(this.editarService[0]['tarjTerap']) == true ||
+      Boolean(this.editarService[0]['bizuEncarg']) == true && Boolean(this.editarService[0]['tarjEncarg']) == true ||
+      Boolean(this.editarService[0]['bizuDriverTaxi']) == true && Boolean(this.editarService[0]['tarjDriverTaxi']) == true ||
+      Boolean(this.editarService[0]['bizuPiso1']) == true && Boolean(this.editarService[0]['transPiso1']) == true ||
+      Boolean(this.editarService[0]['bizuPiso2']) == true && Boolean(this.editarService[0]['transPiso2']) == true ||
+      Boolean(this.editarService[0]['bizuTerap']) == true && Boolean(this.editarService[0]['transTerap']) == true ||
+      Boolean(this.editarService[0]['bizuEncarg']) == true && Boolean(this.editarService[0]['transEncarg']) == true ||
+      Boolean(this.editarService[0]['bizuDriverTaxi']) == true && Boolean(this.editarService[0]['transDriverTaxi']) == true) {
       this.buttonEdit.disabled = false
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
 
-    // Tarjeta Editar
-    if (this.editarService[0]['tarjPiso1'] == true && this.editarService[0]['efectPiso1'] == true ||
-      this.editarService[0]['tarjPiso2'] == true && this.editarService[0]['efectPiso2'] == true ||
-      this.editarService[0]['tarjTerap'] == true && this.editarService[0]['efectTerap'] == true ||
-      this.editarService[0]['tarjEncarg'] == true && this.editarService[0]['efectEncarg'] == true ||
-      this.editarService[0]['tarjDriverTaxi'] == true && this.editarService[0]['efectDriverTaxi'] == true ||
-      this.editarService[0]['tarjPiso1'] == true && this.editarService[0]['bizuPiso1'] == true ||
-      this.editarService[0]['tarjPiso2'] == true && this.editarService[0]['bizuPiso2'] == true ||
-      this.editarService[0]['tarjTerap'] == true && this.editarService[0]['bizuTerap'] == true ||
-      this.editarService[0]['tarjEncarg'] == true && this.editarService[0]['bizuEncarg'] == true ||
-      this.editarService[0]['tarjDriverTaxi'] == true && this.editarService[0]['bizuDriverTaxi'] == true ||
-      this.editarService[0]['tarjPiso1'] == true && this.editarService[0]['transPiso1'] == true ||
-      this.editarService[0]['tarjPiso2'] == true && this.editarService[0]['transPiso2'] == true ||
-      this.editarService[0]['tarjTerap'] == true && this.editarService[0]['transTerap'] == true ||
-      this.editarService[0]['tarjEncarg'] == true && this.editarService[0]['transEncarg'] == true ||
-      this.editarService[0]['tarjDriverTaxi'] == true && this.editarService[0]['transDriverTaxi'] == true) {
+    // Tarjeta
+    if (Boolean(this.editarService[0]['tarjPiso1']) == true && Boolean(this.editarService[0]['efectPiso1']) == true ||
+      Boolean(this.editarService[0]['tarjPiso2']) == true && Boolean(this.editarService[0]['efectPiso2']) == true ||
+      Boolean(this.editarService[0]['tarjTerap']) == true && Boolean(this.editarService[0]['efectTerap']) == true ||
+      Boolean(this.editarService[0]['tarjEncarg']) == true && Boolean(this.editarService[0]['efectEncarg']) == true ||
+      Boolean(this.editarService[0]['tarjDriverTaxi']) == true && Boolean(this.editarService[0]['efectDriverTaxi']) == true ||
+      Boolean(this.editarService[0]['tarjPiso1']) == true && Boolean(this.editarService[0]['bizuPiso1']) == true ||
+      Boolean(this.editarService[0]['tarjPiso2']) == true && Boolean(this.editarService[0]['bizuPiso2']) == true ||
+      Boolean(this.editarService[0]['tarjTerap']) == true && Boolean(this.editarService[0]['bizuTerap']) == true ||
+      Boolean(this.editarService[0]['tarjEncarg']) == true && Boolean(this.editarService[0]['bizuEncarg']) == true ||
+      Boolean(this.editarService[0]['tarjDriverTaxi']) == true && Boolean(this.editarService[0]['bizuDriverTaxi']) == true ||
+      Boolean(this.editarService[0]['tarjPiso1']) == true && Boolean(this.editarService[0]['transPiso1']) == true ||
+      Boolean(this.editarService[0]['tarjPiso2']) == true && Boolean(this.editarService[0]['transPiso2']) == true ||
+      Boolean(this.editarService[0]['tarjTerap']) == true && Boolean(this.editarService[0]['transTerap']) == true ||
+      Boolean(this.editarService[0]['tarjEncarg']) == true && Boolean(this.editarService[0]['transEncarg']) == true ||
+      Boolean(this.editarService[0]['tarjDriverTaxi']) == true && Boolean(this.editarService[0]['transDriverTaxi']) == true) {
       this.buttonEdit.disabled = false
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
 
-    // Trans Editar
-    if (this.editarService[0]['transPiso1'] == true && this.editarService[0]['efectPiso1'] == true ||
-      this.editarService[0]['transPiso2'] == true && this.editarService[0]['efectPiso2'] == true ||
-      this.editarService[0]['transTerap'] == true && this.editarService[0]['efectTerap'] == true ||
-      this.editarService[0]['transEncarg'] == true && this.editarService[0]['efectEncarg'] == true ||
-      this.editarService[0]['transDriverTaxi'] == true && this.editarService[0]['efectDriverTaxi'] == true ||
-      this.editarService[0]['transPiso1'] == true && this.editarService[0]['bizuPiso1'] == true ||
-      this.editarService[0]['transPiso2'] == true && this.editarService[0]['bizuPiso2'] == true ||
-      this.editarService[0]['transTerap'] == true && this.editarService[0]['bizuTerap'] == true ||
-      this.editarService[0]['transEncarg'] == true && this.editarService[0]['bizuEncarg'] == true ||
-      this.editarService[0]['transDriverTaxi'] == true && this.editarService[0]['bizuDriverTaxi'] == true ||
-      this.editarService[0]['transPiso1'] == true && this.editarService[0]['tarjPiso1'] == true ||
-      this.editarService[0]['transPiso2'] == true && this.editarService[0]['tarjPiso2'] == true ||
-      this.editarService[0]['transTerap'] == true && this.editarService[0]['tarjTerap'] == true ||
-      this.editarService[0]['transEncarg'] == true && this.editarService[0]['tarjEncarg'] == true ||
-      this.editarService[0]['transDriverTaxi'] == true && this.editarService[0]['tarjDriverTaxi'] == true) {
+    // Trans
+    if (Boolean(this.editarService[0]['transPiso1']) == true && Boolean(this.editarService[0]['efectPiso1']) == true ||
+      Boolean(this.editarService[0]['transPiso2']) == true && Boolean(this.editarService[0]['efectPiso2']) == true ||
+      Boolean(this.editarService[0]['transTerap']) == true && Boolean(this.editarService[0]['efectTerap']) == true ||
+      Boolean(this.editarService[0]['transEncarg']) == true && Boolean(this.editarService[0]['efectEncarg']) == true ||
+      Boolean(this.editarService[0]['transDriverTaxi']) == true && Boolean(this.editarService[0]['efectDriverTaxi']) == true ||
+      Boolean(this.editarService[0]['transPiso1']) == true && Boolean(this.editarService[0]['bizuPiso1']) == true ||
+      Boolean(this.editarService[0]['transPiso2']) == true && Boolean(this.editarService[0]['bizuPiso2']) == true ||
+      Boolean(this.editarService[0]['transTerap']) == true && Boolean(this.editarService[0]['bizuTerap']) == true ||
+      Boolean(this.editarService[0]['transEncarg']) == true && Boolean(this.editarService[0]['bizuEncarg']) == true ||
+      Boolean(this.editarService[0]['transDriverTaxi']) == true && Boolean(this.editarService[0]['bizuDriverTaxi']) == true ||
+      Boolean(this.editarService[0]['transPiso1']) == true && Boolean(this.editarService[0]['tarjPiso1']) == true ||
+      Boolean(this.editarService[0]['transPiso2']) == true && Boolean(this.editarService[0]['tarjPiso2']) == true ||
+      Boolean(this.editarService[0]['transTerap']) == true && Boolean(this.editarService[0]['tarjTerap']) == true ||
+      Boolean(this.editarService[0]['transEncarg']) == true && Boolean(this.editarService[0]['tarjEncarg']) == true ||
+      Boolean(this.editarService[0]['transDriverTaxi']) == true && Boolean(this.editarService[0]['tarjDriverTaxi']) == true) {
       this.buttonEdit.disabled = false
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
     return true
@@ -416,39 +431,39 @@ export class EditServicesPage implements OnInit {
 
   validationsToSelectAPaymentMethod() {
 
-    if (Number(this.editarService[0]['numberPiso1']) > 0 && this.editarService[0]['efectPiso1'] == false &&
-      this.editarService[0]['bizuPiso1'] == false && this.editarService[0]['tarjPiso1'] == false &&
-      this.editarService[0]['transPiso1'] == false) {
+    if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['efectPiso1']) == false &&
+      Boolean(this.editarService[0]['bizuPiso1']) == false && Boolean(this.editarService[0]['tarjPiso1']) == false &&
+      Boolean(this.editarService[0]['transPiso1']) == false) {
       this.buttonEdit.disabled = false
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 1' })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 1' })
       return false
     }
-    if (Number(this.editarService[0]['numberPiso2']) > 0 && this.editarService[0]['efectPiso2'] == false &&
-      this.editarService[0]['bizuPiso2'] == false && this.editarService[0]['tarjPiso2'] == false &&
-      this.editarService[0]['transPiso2'] == false) {
+    if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['efectPiso2']) == false &&
+      Boolean(this.editarService[0]['bizuPiso2']) == false && Boolean(this.editarService[0]['tarjPiso2']) == false &&
+      Boolean(this.editarService[0]['transPiso2']) == false) {
       this.buttonEdit.disabled = false
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 2' })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 2' })
       return false
     }
-    if (Number(this.editarService[0]['numberTerap']) > 0 && this.editarService[0]['efectTerap'] == false &&
-      this.editarService[0]['bizuTerap'] == false && this.editarService[0]['tarjTerap'] == false &&
-      this.editarService[0]['transTerap'] == false) {
+    if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['efectTerap']) == false &&
+      Boolean(this.editarService[0]['bizuTerap']) == false && Boolean(this.editarService[0]['tarjTerap']) == false &&
+      Boolean(this.editarService[0]['transTerap']) == false) {
       this.buttonEdit.disabled = false
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para terapeuta' })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para terapeuta' })
       return false
     }
-    if (Number(this.editarService[0]['numberEncarg']) > 0 && this.editarService[0]['efectEncarg'] == false &&
-      this.editarService[0]['bizuEncarg'] == false && this.editarService[0]['tarjEncarg'] == false &&
-      this.editarService[0]['transEncarg'] == false) {
+    if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['efectEncarg']) == false &&
+      Boolean(this.editarService[0]['bizuEncarg']) == false && Boolean(this.editarService[0]['tarjEncarg']) == false &&
+      Boolean(this.editarService[0]['transEncarg']) == false) {
       this.buttonEdit.disabled = false
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para encargada' })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para encargada' })
       return false
     }
-    if (Number(this.editarService[0]['numberTaxi']) > 0 && this.editarService[0]['efectDriverTaxi'] == false &&
-      this.editarService[0]['bizuDriverTaxi'] == false && this.editarService[0]['tarjDriverTaxi'] == false &&
-      this.editarService[0]['transDriverTaxi'] == false) {
+    if (Number(this.editarService[0]['numberTaxi']) > 0 && Boolean(this.editarService[0]['efectDriverTaxi']) == false &&
+      Boolean(this.editarService[0]['bizuDriverTaxi']) == false && Boolean(this.editarService[0]['tarjDriverTaxi']) == false &&
+      Boolean(this.editarService[0]['transDriverTaxi']) == false) {
       this.buttonEdit.disabled = false
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para taxista' })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para taxista' })
       return false
     }
     return true
@@ -462,12 +477,6 @@ export class EditServicesPage implements OnInit {
     año = this.editarService[0]['fecha'].substring(2, 4)
 
     this.editarService[0]['fecha'] = `${dia}-${mes}-${año}`
-  }
-
-  consultToEditTheTherapist(nombre: string) {
-    this.serviceTherapist.getByNombre(nombre).subscribe((resp) => {
-      this.terapeutaSelect = resp
-    })
   }
 
   SetTheValuesToEmpty() {
@@ -493,15 +502,16 @@ export class EditServicesPage implements OnInit {
     this.serviceServices.getByEditar(this.id).subscribe((datosServicio: any) => {
       if (datosServicio.length > 0) {
         this.editarService = datosServicio
+        this.fecha = datosServicio[0]['fecha']
+        this.fechaActual = datosServicio[0]['fechaHoyInicio']
         this.SetTheValuesToEmpty()
-        this.consultToEditTheTherapist(datosServicio[0].terapeuta)
 
         // Fechas
         dia = this.editarService[0].fecha.substring(0, 2)
         mes = this.editarService[0].fecha.substring(3, 5)
         this.editarService[0].fecha = `${año}-${mes}-${dia}`
 
-        this.editCollectionsValue()
+        this.collectionsValue()
 
         this.serviceManager.getByIdAndAdministrador(this.idUser).subscribe((datoAdministrador: any[]) => {
           if (datoAdministrador.length > 0) {
@@ -511,6 +521,11 @@ export class EditServicesPage implements OnInit {
           }
         })
 
+        setTimeout(() => {
+          this.buttonEdit = document.getElementById('btnEdit') as HTMLButtonElement
+          this.validateCheck()
+        }, 200)
+
       } else {
         this.serviceManager.getById(this.idUser).subscribe((datoUser: any[]) => {
           this.idUser = datoUser[0]
@@ -519,7 +534,7 @@ export class EditServicesPage implements OnInit {
     })
   }
 
-  fullServiceToEdit() {
+  fullService() {
     let piso1 = 0, piso2 = 0, terap = 0, encargada = 0, otros = 0
 
     if (Number(this.editarService[0]['numberPiso1']) === 0) {
@@ -616,92 +631,7 @@ export class EditServicesPage implements OnInit {
     }
   }
 
-  save(idServicio, serv: ModelService) {
-    this.buttonEdit = document.getElementById('btnEdit') as HTMLButtonElement
-    this.buttonEdit.disabled = true;
-    if (this.restamosCobroEdit == 0) {
-      if (serv.minuto != null) {
-        let idUsuario = ''
-        idUsuario = this.activeRoute.snapshot['_urlSegment']['segments'][1]['path']
-
-        if (!this.expiredDateValidationsEdit()) return
-        if (!this.validationsToSelectAPaymentMethod()) return
-        if (!this.validationsFormOfPaymentToEdit()) return
-        this.fullServiceToEdit()
-
-        if (this.editarService[0]['efectPiso1'] == true || this.editarService[0]['efectPiso2'] == true ||
-          this.editarService[0]['efectTerap'] == true || this.editarService[0]['efectEncarg'] == true ||
-          this.editarService[0]['efectDriverTaxi'] == true) {
-          this.validateEfect = true
-          this.efectCheckToggleEdit(this.validateEfect)
-        } else {
-          localStorage.removeItem('Efectivo')
-        }
-
-        if (this.editarService[0]['bizuPiso1'] == true || this.editarService[0]['bizuPiso2'] == true ||
-          this.editarService[0]['bizuTerap'] == true || this.editarService[0]['bizuEncarg'] == true ||
-          this.editarService[0]['bizuDriverTaxi'] == true) {
-          this.validateBizum = true
-          this.bizumCheckToggleEdit(this.validateBizum)
-        } else {
-          localStorage.removeItem('Bizum')
-        }
-
-        if (this.editarService[0]['tarjPiso1'] == true || this.editarService[0]['tarjPiso2'] == true ||
-          this.editarService[0]['tarjTerap'] == true || this.editarService[0]['tarjEncarg'] == true ||
-          this.editarService[0]['tarjDriverTaxi'] == true) {
-          this.validateTarjeta = true
-          this.tarjCheckToggleEdit(this.validateTarjeta)
-        } else {
-          localStorage.removeItem('Tarjeta')
-        }
-
-        if (this.editarService[0]['transPiso1'] == true || this.editarService[0]['transPiso2'] == true ||
-          this.editarService[0]['transTerap'] == true || this.editarService[0]['transEncarg'] == true ||
-          this.editarService[0]['transDriverTaxi'] == true) {
-          this.validateTrans = true
-          this.transCheckToggleEdit(this.validateTrans)
-        } else {
-          localStorage.removeItem('Trans')
-        }
-
-        this.editPaymentMethod()
-
-        this.editManagerAndTherapist()
-        this.editValue()
-
-        this.therapist.horaEnd = serv.horaEnd
-        this.therapist.fechaEnd = serv.fechaFin
-        this.therapist.salida = serv.salida
-        this.therapist.minuto = serv.minuto
-
-        this.serviceServices.getById(idServicio).subscribe((rp: any) => {
-          if (rp[0]['terapeuta'] != serv.terapeuta) {
-            this.serviceTherapist.updateHoraAndSalida(rp[0]['terapeuta'], this.therapist).subscribe((rp: any) => { });
-          }
-        });
-
-        this.serviceTherapist.update(this.editarService[0]['terapeuta'], this.therapist).subscribe((rp: any) => { })
-
-        this.sortDateToEdit()
-        this.serviceServices.updateServicio(idServicio, serv).subscribe((rp: any) => { })
-
-        setTimeout(() => {
-          Swal.fire({ position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 2500 })
-          this.router.navigate([`menu/${idUsuario}/${serv.pantalla}/${idUsuario}`])
-        }, 3000);
-
-      } else {
-        this.buttonEdit.disabled = false
-        Swal.fire({ icon: 'error', title: 'Oops...', text: 'El campo minutos se encuentra vacio', showConfirmButton: false, timer: 2500 })
-      }
-    } else {
-      this.buttonEdit.disabled = false
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'El total servicio no coincide con el total de cobros', showConfirmButton: false, timer: 2500 })
-    }
-  }
-
-  editServiceValue() {
+  serviceValue() {
     let servicioEdit = 0, bebidaEdit = 0, bebidaTerapEdit = 0, tabacoEdit = 0, taxiEdit = 0, vitaminasEdit = 0, propinaEdit = 0, otrosEdit = 0, sumatoriaEdit = 0
 
     if (Number(this.editarService[0]['servicio']) > 0) {
@@ -780,7 +710,7 @@ export class EditServicesPage implements OnInit {
     }
   }
 
-  editCollectionsValue() {
+  collectionsValue() {
     let valuepiso1Edit = 0, valuepiso2Edit = 0, valueterapeutaEdit = 0, valueEncargEdit = 0, valueotrosEdit = 0, restamosEdit = 0, resultadoEdit = 0
 
     if (Number(this.editarService[0]['numberPiso1']) > 0) {
@@ -824,39 +754,129 @@ export class EditServicesPage implements OnInit {
     this.restamosCobroEdit = resultadoEdit
   }
 
-  efectCheckToggleEdit(event: any) {
+  validateCheck() {
+
+    // Cash
+    if (Boolean(this.editarService[0]['efectPiso1']) === true) {
+      document.getElementById("cashHouse1").style.background = '#1fb996'
+      this.services.efectPiso1 = true
+    }
+
+    if (Boolean(this.editarService[0]['efectPiso2']) === true) {
+      document.getElementById('cashHouse2').style.background = '#1fb996'
+      this.services.efectPiso2 = true
+    }
+
+    if (Boolean(this.editarService[0]['efectTerap']) === true) {
+      document.getElementById('cashTherapist').style.background = '#1fb996'
+      this.services.efectTerap = true
+    }
+
+    if (Boolean(this.editarService[0]['efectEncarg']) === true) {
+      document.getElementById('cashManager').style.background = '#1fb996'
+      this.services.efectEncarg = true
+    }
+
+    // Bizum
+
+    if (Boolean(this.editarService[0].bizuPiso1) == true) {
+      document.getElementById('bizumHouse1').style.background = '#1fb996'
+      this.services.bizuPiso1 = true
+    }
+
+    if (Boolean(this.editarService[0].bizuPiso2) == true) {
+      document.getElementById('bizumHouse2').style.background = '#1fb996'
+      this.services.bizuPiso2 = true
+    }
+
+    if (Boolean(this.editarService[0].bizuTerap) == true) {
+      document.getElementById('bizumTherapist').style.background = '#1fb996'
+      this.services.bizuTerap = true
+    }
+
+    if (Boolean(this.editarService[0].bizuEncarg) == true) {
+      document.getElementById('bizumManager').style.background = '#1fb996'
+      this.services.bizuEncarg = true
+    }
+
+    // Card 
+
+    if (Boolean(this.editarService[0].tarjPiso1) == true) {
+      document.getElementById('cardHouse1').style.background = '#1fb996'
+      this.services.tarjPiso1 = true
+    }
+
+    if (Boolean(this.editarService[0].tarjPiso2) == true) {
+      document.getElementById('cardHouse2').style.background = '#1fb996'
+      this.services.tarjPiso2 = true
+    }
+
+    if (Boolean(this.editarService[0].tarjTerap) == true) {
+      document.getElementById('cardTherapist').style.background = '#1fb996'
+      this.services.tarjTerap = true
+    }
+
+    if (Boolean(this.editarService[0].tarjEncarg) == true) {
+      document.getElementById('cardManager').style.background = '#1fb996'
+      this.services.tarjEncarg = true
+    }
+
+    // Trans
+
+    if (Boolean(this.editarService[0].transPiso1) == true) {
+      document.getElementById('transHouse1').style.background = '#1fb996'
+      this.services.transPiso1 = true
+    }
+
+    if (Boolean(this.editarService[0].transPiso2) == true) {
+      document.getElementById('transHouse2').style.background = '#1fb996'
+      this.services.transPiso2 = true
+    }
+
+    if (Boolean(this.editarService[0].transTerap) == true) {
+      document.getElementById('transTherapist').style.background = '#1fb996'
+      this.services.transTerap = true
+    }
+
+    if (Boolean(this.editarService[0].transEncarg) == true) {
+      document.getElementById('transManager').style.background = '#1fb996'
+      this.services.transEncarg = true
+    }
+  }
+
+  efectCheckToggle(event: any) {
     let piso1 = 0, piso2 = 0, terap = 0, encarg = 0, otroserv = 0, suma = 0
-    if (!this.validationsFormOfPaymentToEdit()) return
+    if (!this.validationsFormOfPayment()) return
 
     if (event) {
 
-      if (Number(this.editarService[0]['numberPiso1']) > 0 && this.editarService[0]['efectPiso1'] === true) {
+      if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['efectPiso1']) === true) {
         piso1 = Number(this.editarService[0]['numberPiso1'])
         this.editarService[0]['valuePiso1Efectivo'] = Number(this.editarService[0]['numberPiso1'])
       } else {
         piso1 = 0
       }
 
-      if (Number(this.editarService[0]['numberPiso2']) > 0 && this.editarService[0]['efectPiso2'] === true) {
+      if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['efectPiso2']) === true) {
         piso2 = Number(this.editarService[0]['numberPiso2'])
         this.editarService[0]['valuePiso2Efectivo'] = Number(this.editarService[0]['numberPiso2'])
       } else {
         piso2 = 0
       }
 
-      if (Number(this.editarService[0]['numberTerap']) > 0 && this.editarService[0]['efectTerap'] === true) {
+      if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['efectTerap']) === true) {
         terap = Number(this.editarService[0]['numberTerap'])
       } else {
         terap = 0
       }
 
-      if (Number(this.editarService[0]['numberEncarg']) > 0 && this.editarService[0]['efectEncarg'] === true) {
+      if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['efectEncarg']) === true) {
         encarg = Number(this.editarService[0]['numberEncarg'])
       } else {
         encarg = 0
       }
 
-      if (Number(this.editarService[0]['numberTaxi']) > 0 && this.editarService[0]['efectDriverTaxi'] === true) {
+      if (Number(this.editarService[0]['numberTaxi']) > 0 && Boolean(this.editarService[0]['efectDriverTaxi']) === true) {
         otroserv = Number(this.editarService[0]['numberTaxi'])
       } else {
         otroserv = 0
@@ -870,39 +890,39 @@ export class EditServicesPage implements OnInit {
     }
   }
 
-  bizumCheckToggleEdit(event: any) {
+  bizumCheckToggle(event: any) {
     let piso1 = 0, piso2 = 0, terap = 0, encarg = 0, otroservic = 0, suma = 0
 
-    if (!this.validationsFormOfPaymentToEdit()) return
+    if (!this.validationsFormOfPayment()) return
     if (event) {
 
-      if (Number(this.editarService[0]['numberPiso1']) > 0 && this.editarService[0]['bizuPiso1'] === true) {
+      if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['bizuPiso1']) === true) {
         piso1 = Number(this.editarService[0]['numberPiso1'])
         this.editarService[0]['valuePiso1Bizum'] = Number(this.editarService[0]['numberPiso1'])
       } else {
         piso1 = 0
       }
 
-      if (Number(this.editarService[0]['numberPiso2']) > 0 && this.editarService[0]['bizuPiso2'] === true) {
+      if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['bizuPiso2']) === true) {
         piso2 = Number(this.editarService[0]['numberPiso2'])
         this.editarService[0]['valuePiso2Bizum'] = Number(this.editarService[0]['numberPiso2'])
       } else {
         piso2 = 0
       }
 
-      if (Number(this.editarService[0]['numberTerap']) > 0 && this.editarService[0]['bizuTerap'] === true) {
+      if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['bizuTerap']) === true) {
         terap = Number(this.editarService[0]['numberTerap'])
       } else {
         terap = 0
       }
 
-      if (Number(this.editarService[0]['numberEncarg']) > 0 && this.editarService[0]['bizuEncarg'] === true) {
+      if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['bizuEncarg']) === true) {
         encarg = Number(this.editarService[0]['numberEncarg'])
       } else {
         encarg = 0
       }
 
-      if (Number(this.editarService[0]['numberTaxi']) > 0 && this.editarService[0]['bizuDriverTaxi'] === true) {
+      if (Number(this.editarService[0]['numberTaxi']) > 0 && Boolean(this.editarService[0]['bizuDriverTaxi']) === true) {
         otroservic = Number(this.editarService[0]['numberTaxi'])
       } else {
         otroservic = 0
@@ -915,39 +935,39 @@ export class EditServicesPage implements OnInit {
     }
   }
 
-  tarjCheckToggleEdit(event: any) {
+  tarjCheckToggle(event: any) {
     let piso1 = 0, piso2 = 0, terap = 0, encarg = 0, otroservic = 0, suma = 0
 
-    if (!this.validationsFormOfPaymentToEdit()) return
+    if (!this.validationsFormOfPayment()) return
     if (event) {
 
-      if (Number(this.editarService[0]['numberPiso1']) > 0 && this.editarService[0]['tarjPiso1'] === true) {
+      if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['tarjPiso1']) === true) {
         piso1 = Number(this.editarService[0]['numberPiso1'])
         this.editarService[0]['valuePiso1Tarjeta'] = Number(this.editarService[0]['numberPiso1'])
       } else {
         piso1 = 0
       }
 
-      if (Number(this.editarService[0]['numberPiso2']) > 0 && this.editarService[0]['tarjPiso2'] === true) {
+      if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['tarjPiso2']) === true) {
         piso2 = Number(this.editarService[0]['numberPiso2'])
         this.editarService[0]['valuePiso2Tarjeta'] = Number(this.editarService[0]['numberPiso2'])
       } else {
         piso2 = 0
       }
 
-      if (Number(this.editarService[0]['numberTerap']) > 0 && this.editarService[0]['tarjTerap'] === true) {
+      if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['tarjTerap']) === true) {
         terap = Number(this.editarService[0]['numberTerap'])
       } else {
         terap = 0
       }
 
-      if (Number(this.editarService[0]['numberEncarg']) > 0 && this.editarService[0]['tarjEncarg'] === true) {
+      if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['tarjEncarg']) === true) {
         encarg = Number(this.editarService[0]['numberEncarg'])
       } else {
         encarg = 0
       }
 
-      if (Number(this.editarService[0]['numberTaxi']) > 0 && this.editarService[0]['tarjDriverTaxi'] === true) {
+      if (Number(this.editarService[0]['numberTaxi']) > 0 && Boolean(this.editarService[0]['tarjDriverTaxi']) === true) {
         otroservic = Number(this.editarService[0]['numberTaxi'])
       } else {
         otroservic = 0
@@ -960,39 +980,39 @@ export class EditServicesPage implements OnInit {
     }
   }
 
-  transCheckToggleEdit(event: any) {
+  transCheckToggle(event: any) {
     let piso1 = 0, piso2 = 0, terap = 0, encarg = 0, otroservic = 0, suma = 0
 
-    if (!this.validationsFormOfPaymentToEdit()) return
+    if (!this.validationsFormOfPayment()) return
     if (event) {
 
-      if (Number(this.editarService[0]['numberPiso1']) > 0 && this.editarService[0]['transPiso1'] === true) {
+      if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['transPiso1']) === true) {
         piso1 = Number(this.editarService[0]['numberPiso1'])
         this.editarService[0]['valuePiso1Transaccion'] = Number(this.editarService[0]['numberPiso1'])
       } else {
         piso1 = 0
       }
 
-      if (Number(this.editarService[0]['numberPiso2']) > 0 && this.editarService[0]['transPiso2'] === true) {
+      if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['transPiso2']) === true) {
         piso2 = Number(this.editarService[0]['numberPiso2'])
         this.editarService[0]['valuePiso2Transaccion'] = Number(this.editarService[0]['numberPiso2'])
       } else {
         piso2 = 0
       }
 
-      if (Number(this.editarService[0]['numberTerap']) > 0 && this.editarService[0]['transTerap'] === true) {
+      if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['transTerap']) === true) {
         terap = Number(this.editarService[0]['numberTerap'])
       } else {
         terap = 0
       }
 
-      if (Number(this.editarService[0]['numberEncarg']) > 0 && this.editarService[0]['transEncarg'] === true) {
+      if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['transEncarg']) === true) {
         encarg = Number(this.editarService[0]['numberEncarg'])
       } else {
         encarg = 0
       }
 
-      if (Number(this.editarService[0]['numberTaxi']) > 0 && this.editarService[0]['transDriverTaxi'] === true) {
+      if (Number(this.editarService[0]['numberTaxi']) > 0 && Boolean(this.editarService[0]['transDriverTaxi']) === true) {
         otroservic = Number(this.editarService[0]['numberTaxi'])
       } else {
         otroservic = 0
@@ -1006,52 +1026,52 @@ export class EditServicesPage implements OnInit {
   }
 
   editValue() {
-    if (this.editarService[0]['efectPiso1'] == true) this.editarService[0]['valuePiso1Efectivo'] = Number(this.editarService[0]['numberPiso1'])
+    if (Boolean(this.editarService[0]['efectPiso1']) == true) this.editarService[0]['valuePiso1Efectivo'] = Number(this.editarService[0]['numberPiso1'])
     else this.editarService[0]['valuePiso1Efectivo'] = 0
 
-    if (this.editarService[0]['efectPiso2'] == true) this.editarService[0]['valuePiso2Efectivo'] = Number(this.editarService[0]['numberPiso2'])
+    if (Boolean(this.editarService[0]['efectPiso2']) == true) this.editarService[0]['valuePiso2Efectivo'] = Number(this.editarService[0]['numberPiso2'])
     else this.editarService[0]['valuePiso2Efectivo'] = 0
 
-    if (this.editarService[0]['bizuPiso1'] == true) this.editarService[0]['valuePiso1Bizum'] = Number(this.editarService[0]['numberPiso1'])
+    if (Boolean(this.editarService[0]['bizuPiso1']) == true) this.editarService[0]['valuePiso1Bizum'] = Number(this.editarService[0]['numberPiso1'])
     else this.editarService[0]['valuePiso1Bizum'] = 0
 
-    if (this.editarService[0]['bizuPiso2'] == true) this.editarService[0]['valuePiso2Bizum'] = Number(this.editarService[0]['numberPiso2'])
+    if (Boolean(this.editarService[0]['bizuPiso2']) == true) this.editarService[0]['valuePiso2Bizum'] = Number(this.editarService[0]['numberPiso2'])
     else this.editarService[0]['valuePiso2Bizum'] = 0
 
-    if (this.editarService[0]['tarjPiso1'] == true) this.editarService[0]['valuePiso1Tarjeta'] = Number(this.editarService[0]['numberPiso1'])
+    if (Boolean(this.editarService[0]['tarjPiso1']) == true) this.editarService[0]['valuePiso1Tarjeta'] = Number(this.editarService[0]['numberPiso1'])
     else this.editarService[0]['valuePiso1Tarjeta'] = 0
 
-    if (this.editarService[0]['tarjPiso2'] == true) this.editarService[0]['valuePiso2Tarjeta'] = Number(this.editarService[0]['numberPiso2'])
+    if (Boolean(this.editarService[0]['tarjPiso2']) == true) this.editarService[0]['valuePiso2Tarjeta'] = Number(this.editarService[0]['numberPiso2'])
     else this.editarService[0]['valuePiso2Tarjeta'] = 0
 
-    if (this.editarService[0]['transPiso1'] == true) this.editarService[0]['valuePiso1Transaccion'] = Number(this.editarService[0]['numberPiso1'])
+    if (Boolean(this.editarService[0]['transPiso1']) == true) this.editarService[0]['valuePiso1Transaccion'] = Number(this.editarService[0]['numberPiso1'])
     else this.editarService[0]['valuePiso1Transaccion'] = 0
 
-    if (this.editarService[0]['transPiso2'] == true) this.editarService[0]['valuePiso2Transaccion'] = Number(this.editarService[0]['numberPiso2'])
+    if (Boolean(this.editarService[0]['transPiso2']) == true) this.editarService[0]['valuePiso2Transaccion'] = Number(this.editarService[0]['numberPiso2'])
     else this.editarService[0]['valuePiso2Transaccion'] = 0
   }
 
-  editManagerAndTherapist() {
+  managerAndTherapist() {
 
-    if (this.editarService[0]['efectTerap'] == true && Number(this.editarService[0]['numberTerap']) > 0) {
+    if (Boolean(this.editarService[0]['efectTerap']) == true && Number(this.editarService[0]['numberTerap']) > 0) {
       this.editarService[0]['valueEfectTerapeuta'] = Number(this.editarService[0]['numberTerap'])
     } else {
       this.editarService[0]['valueEfectTerapeuta'] = 0
     }
 
-    if (this.editarService[0]['bizuTerap'] == true && Number(this.editarService[0]['numberTerap']) > 0) {
+    if (Boolean(this.editarService[0]['bizuTerap']) == true && Number(this.editarService[0]['numberTerap']) > 0) {
       this.editarService[0]['valueBizuTerapeuta'] = Number(this.editarService[0]['numberTerap'])
     } else {
       this.editarService[0]['valueBizuTerapeuta'] = 0
     }
 
-    if (this.editarService[0]['tarjTerap'] == true && Number(this.editarService[0]['numberTerap']) > 0) {
+    if (Boolean(this.editarService[0]['tarjTerap']) == true && Number(this.editarService[0]['numberTerap']) > 0) {
       this.editarService[0]['valueTarjeTerapeuta'] = Number(this.editarService[0]['numberTerap'])
     } else {
       this.editarService[0]['valueTarjeTerapeuta'] = 0
     }
 
-    if (this.editarService[0]['transTerap'] == true && Number(this.editarService[0]['numberTerap']) > 0) {
+    if (Boolean(this.editarService[0]['transTerap']) == true && Number(this.editarService[0]['numberTerap']) > 0) {
       this.editarService[0]['valueTransTerapeuta'] = Number(this.editarService[0]['numberTerap'])
     } else {
       this.editarService[0]['valueTransTerapeuta'] = 0
@@ -1059,28 +1079,333 @@ export class EditServicesPage implements OnInit {
 
     // Encargada
 
-    if (this.editarService[0]['efectEncarg'] == true && Number(this.editarService[0]['numberEncarg']) > 0) {
+    if (Boolean(this.editarService[0]['efectEncarg']) == true && Number(this.editarService[0]['numberEncarg']) > 0) {
       this.editarService[0]['valueEfectEncargada'] = Number(this.editarService[0]['numberEncarg'])
     } else {
       this.editarService[0]['valueEfectEncargada'] = 0
     }
 
-    if (this.editarService[0]['bizuEncarg'] == true && Number(this.editarService[0]['numberEncarg']) > 0) {
+    if (Boolean(this.editarService[0]['bizuEncarg']) == true && Number(this.editarService[0]['numberEncarg']) > 0) {
       this.editarService[0]['valueBizuEncargada'] = Number(this.editarService[0]['numberEncarg'])
     } else {
       this.editarService[0]['valueBizuEncargada'] = 0
     }
 
-    if (this.editarService[0]['tarjEncarg'] == true && Number(this.editarService[0]['numberEncarg']) > 0) {
+    if (Boolean(this.editarService[0]['tarjEncarg']) == true && Number(this.editarService[0]['numberEncarg']) > 0) {
       this.editarService[0]['valueTarjeEncargada'] = Number(this.editarService[0]['numberEncarg'])
     } else {
       this.editarService[0]['valueTarjeEncargada'] = 0
     }
 
-    if (this.editarService[0]['transEncarg'] == true && Number(this.editarService[0]['numberEncarg']) > 0) {
+    if (Boolean(this.editarService[0]['transEncarg']) == true && Number(this.editarService[0]['numberEncarg']) > 0) {
       this.editarService[0]['valueTransEncargada'] = Number(this.editarService[0]['numberEncarg'])
     } else {
       this.editarService[0]['valueTransEncargada'] = 0
+    }
+  }
+
+  bizumFloor1() {
+    if (document.getElementById('bizumHouse1').style.background == "") {
+      document.getElementById('bizumHouse1').style.background = '#1fb996'
+      this.services.bizuPiso1 = true
+      this.editarService[0].bizuPiso1 = true
+    } else {
+      document.getElementById('bizumHouse1').style.background = ""
+      this.services.bizuPiso1 = false
+      this.editarService[0].bizuPiso1 = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  cardFloor1() {
+    if (document.getElementById('cardHouse1').style.background == "") {
+      document.getElementById('cardHouse1').style.background = '#1fb996'
+      this.services.tarjPiso1 = true
+      this.editarService[0].tarjPiso1 = true
+    } else {
+      document.getElementById('cardHouse1').style.background = ""
+      this.services.tarjPiso1 = false
+      this.editarService[0].tarjPiso1 = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  transFloor1() {
+    if (document.getElementById('transHouse1').style.background == "") {
+      document.getElementById('transHouse1').style.background = '#1fb996'
+      this.services.transPiso1 = true
+      this.editarService[0].transPiso1 = true
+    } else {
+      document.getElementById('transHouse1').style.background = ""
+      this.services.transPiso1 = false
+      this.editarService[0].transPiso1 = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  cashFloor1() {
+    if (document.getElementById('cashHouse1').style.background == "") {
+      document.getElementById('cashHouse1').style.background = '#1fb996'
+      this.services.efectPiso1 = true
+      this.editarService[0].efectPiso1 = true
+    } else {
+      document.getElementById('cashHouse1').style.background = ""
+      this.services.efectPiso1 = false
+      this.editarService[0].efectPiso1 = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  bizumFloor2() {
+    if (document.getElementById('bizumHouse2').style.background == "") {
+      document.getElementById('bizumHouse2').style.background = '#1fb996'
+      this.services.bizuPiso2 = true
+      this.editarService[0].bizuPiso2 = true
+    } else {
+      document.getElementById('bizumHouse2').style.background = ""
+      this.services.bizuPiso2 = false
+      this.editarService[0].bizuPiso2 = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  cardFloor2() {
+    if (document.getElementById('cardHouse2').style.background == "") {
+      document.getElementById('cardHouse2').style.background = '#1fb996'
+      this.services.tarjPiso2 = true
+      this.editarService[0].tarjPiso2 = true
+    } else {
+      document.getElementById('cardHouse2').style.background = ""
+      this.services.tarjPiso2 = false
+      this.editarService[0].tarjPiso2 = true
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  transFloor2() {
+    if (document.getElementById('transHouse2').style.background == "") {
+      document.getElementById('transHouse2').style.background = '#1fb996'
+      this.services.transPiso2 = true
+      this.editarService[0].transPiso2 = true
+    } else {
+      document.getElementById('transHouse2').style.background = ""
+      this.services.transPiso2 = false
+      this.editarService[0].transPiso2 = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  cashFloor2() {
+    if (document.getElementById('cashHouse2').style.background == "") {
+      document.getElementById('cashHouse2').style.background = '#1fb996'
+      this.services.efectPiso2 = true
+      this.editarService[0].efectPiso2 = true
+    } else {
+      document.getElementById('cashHouse2').style.background = ""
+      this.services.efectPiso2 = false
+      this.editarService[0].efectPiso2 = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  bizumTherapist() {
+    if (document.getElementById('bizumTherapist').style.background == "") {
+      document.getElementById('bizumTherapist').style.background = '#1fb996'
+      this.services.bizuTerap = true
+      this.editarService[0].bizuTerap = true
+    } else {
+      document.getElementById('bizumTherapist').style.background = ""
+      this.services.bizuTerap = false
+      this.editarService[0].bizuTerap = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  cardTherapist() {
+    if (document.getElementById('cardTherapist').style.background == "") {
+      document.getElementById('cardTherapist').style.background = '#1fb996'
+      this.services.tarjTerap = true
+      this.editarService[0].tarjTerap = false
+    } else {
+      document.getElementById('cardTherapist').style.background = ""
+      this.services.tarjTerap = false
+      this.editarService[0].tarjTerap = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  transTherapist() {
+    if (document.getElementById('transTherapist').style.background == "") {
+      document.getElementById('transTherapist').style.background = '#1fb996'
+      this.services.transTerap = true
+      this.editarService[0].transTerap = true
+    } else {
+      document.getElementById('transTherapist').style.background = ""
+      this.services.transTerap = false
+      this.editarService[0].transTerap = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  cashTherapist() {
+    if (document.getElementById('cashTherapist').style.background == "") {
+      document.getElementById('cashTherapist').style.background = '#1fb996'
+      this.services.efectTerap = true
+      this.editarService[0].efectTerap = true
+    } else {
+      document.getElementById('cashTherapist').style.background = ""
+      this.services.efectTerap = false
+      this.editarService[0].efectTerap = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  bizumManager() {
+    if (document.getElementById('bizumManager').style.background == "") {
+      document.getElementById('bizumManager').style.background = '#1fb996'
+      this.services.bizuEncarg = true
+      this.editarService[0].bizuEncarg = true
+    } else {
+      document.getElementById('bizumManager').style.background = ""
+      this.services.bizuEncarg = false
+      this.editarService[0].bizuEncarg = true
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  cardManager() {
+    if (document.getElementById('cardManager').style.background == "") {
+      document.getElementById('cardManager').style.background = '#1fb996'
+      this.services.tarjEncarg = true
+      this.editarService[0].tarjEncarg = true
+    } else {
+      document.getElementById('cardManager').style.background = ""
+      this.services.tarjEncarg = false
+      this.editarService[0].tarjEncarg = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  transManager() {
+    if (document.getElementById('transManager').style.background == "") {
+      document.getElementById('transManager').style.background = '#1fb996'
+      this.services.transEncarg = true
+      this.editarService[0].transEncarg = true
+    } else {
+      document.getElementById('transManager').style.background = ""
+      this.services.transEncarg = false
+      this.editarService[0].transEncarg = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  cashManager() {
+    if (document.getElementById('cashManager').style.background == "") {
+      document.getElementById('cashManager').style.background = '#1fb996'
+      this.services.efectEncarg = true
+      this.editarService[0].efectEncarg = true
+    } else {
+      document.getElementById('cashManager').style.background = ""
+      this.services.efectEncarg = false
+      this.editarService[0].efectEncarg = false
+    }
+
+    this.validationsFormOfPayment()
+  }
+
+  save(idServicio, serv: ModelService) {
+    this.buttonEdit = document.getElementById('btnEdit') as HTMLButtonElement
+    this.buttonEdit.disabled = true;
+    if (this.restamosCobroEdit == 0) {
+      if (serv.minuto != null) {
+        if (!this.expiredDateValidationsEdit()) return
+        if (!this.validationsToSelectAPaymentMethod()) return
+        if (!this.validationsFormOfPayment()) return
+        this.fullService()
+
+        if (Boolean(this.editarService[0]['efectPiso1']) == true || Boolean(this.editarService[0]['efectPiso2']) == true ||
+          Boolean(this.editarService[0]['efectTerap']) == true || Boolean(this.editarService[0]['efectEncarg']) == true ||
+          Boolean(this.editarService[0]['efectDriverTaxi']) == true) {
+          this.validateEfect = true
+          this.efectCheckToggle(this.validateEfect)
+        } else {
+          localStorage.removeItem('Efectivo')
+        }
+
+        if (Boolean(this.editarService[0]['bizuPiso1']) == true || Boolean(this.editarService[0]['bizuPiso2']) == true ||
+          Boolean(this.editarService[0]['bizuTerap']) == true || Boolean(this.editarService[0]['bizuEncarg']) == true ||
+          Boolean(this.editarService[0]['bizuDriverTaxi']) == true) {
+          this.validateBizum = true
+          this.bizumCheckToggle(this.validateBizum)
+        } else {
+          localStorage.removeItem('Bizum')
+        }
+
+        if (Boolean(this.editarService[0]['tarjPiso1']) == true || Boolean(this.editarService[0]['tarjPiso2']) == true ||
+          Boolean(this.editarService[0]['tarjTerap']) == true || Boolean(this.editarService[0]['tarjEncarg']) == true ||
+          Boolean(this.editarService[0]['tarjDriverTaxi']) == true) {
+          this.validateTarjeta = true
+          this.tarjCheckToggle(this.validateTarjeta)
+        } else {
+          localStorage.removeItem('Tarjeta')
+        }
+
+        if (Boolean(this.editarService[0]['transPiso1']) == true || Boolean(this.editarService[0]['transPiso2']) == true ||
+          Boolean(this.editarService[0]['transTerap']) == true || Boolean(this.editarService[0]['transEncarg']) == true ||
+          Boolean(this.editarService[0]['transDriverTaxi']) == true) {
+          this.validateTrans = true
+          this.transCheckToggle(this.validateTrans)
+        } else {
+          localStorage.removeItem('Trans')
+        }
+
+        this.paymentMethod()
+        this.managerAndTherapist()
+        this.editValue()
+
+        this.therapist.horaEnd = serv.horaEnd
+        this.therapist.fechaEnd = serv.fechaFin
+        this.therapist.salida = serv.salida
+        this.therapist.minuto = serv.minuto
+
+        this.serviceServices.getById(idServicio).subscribe((rp: any) => {
+          if (rp[0]['terapeuta'] != serv.terapeuta) {
+            this.serviceTherapist.updateHoraAndSalida(rp[0]['terapeuta'], this.therapist).subscribe((rp: any) => { });
+          }
+        });
+
+        this.serviceTherapist.update(this.editarService[0]['terapeuta'], this.therapist).subscribe((rp: any) => { })
+
+        this.sortDateToEdit()
+        this.serviceServices.updateServicio(idServicio, serv).subscribe((rp: any) => { })
+
+        setTimeout(() => {
+          Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 2500 })
+          location.replace(`tabs/${this.idUser}/${serv.pantalla}`)
+        }, 3000);
+
+      } else {
+        this.buttonEdit.disabled = false
+        Swal.fire({ heightAuto: false, icon: 'error', title: 'Oops...', text: 'El campo minutos se encuentra vacio', showConfirmButton: false, timer: 2500 })
+      }
+    } else {
+      this.buttonEdit.disabled = false
+      Swal.fire({ heightAuto: false, icon: 'error', title: 'Oops...', text: 'El total servicio no coincide con el total de cobros', showConfirmButton: false, timer: 2500 })
     }
   }
 
@@ -1099,6 +1424,7 @@ export class EditServicesPage implements OnInit {
           }).then((result) => {
             if (result.isConfirmed) {
               this.ionLoaderService.simpleLoader()
+              let screen = this.services.pantalla
               this.serviceTherapist.getTerapeuta(datoEliminado[0]['terapeuta']).subscribe((rp: any) => {
                 this.serviceTherapist.updateHoraAndSalida(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
               })
@@ -1107,9 +1433,9 @@ export class EditServicesPage implements OnInit {
               localStorage.removeItem('Tarjeta')
               localStorage.removeItem('Trans')
               this.serviceServices.deleteServicio(id).subscribe((rp: any) => {
-                // this.router.navigate([`menu/${idUser}/vision/${idUser}`])
                 this.ionLoaderService.dismissLoader()
-                location.replace(`tabs/${this.idUser}/setting`);
+                location.replace(`tabs/${this.idUser}/${screen}`)
+                // location.replace(`tabs/${this.idUser}/setting`);
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 2500 })
               })
             }
@@ -1123,5 +1449,4 @@ export class EditServicesPage implements OnInit {
       })
     }
   }
-
 }

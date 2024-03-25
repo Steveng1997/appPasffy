@@ -12,7 +12,6 @@ import { ManagerService } from 'src/app/core/services/manager/manager.service';
 import { ServiceService } from 'src/app/core/services/service/service.service';
 import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.service';
 
-
 @Component({
   selector: 'app-new',
   templateUrl: './new.page.html',
@@ -248,10 +247,6 @@ export class NewPage implements OnInit {
     })
   }
 
-  // isDisabled(date: NgbDateStruct, current: { month: number }) {
-  //   return date.month !== current.month
-  // }
-
   changeFecha(event) {
     this.chageDate = event.target.value.substring(5, 10)
   }
@@ -343,18 +338,7 @@ export class NewPage implements OnInit {
       this.services.bizuPiso1 = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   cardFloor1() {
@@ -366,18 +350,7 @@ export class NewPage implements OnInit {
       this.services.tarjPiso1 = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   transFloor1() {
@@ -389,18 +362,7 @@ export class NewPage implements OnInit {
       this.services.transPiso1 = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   cashFloor1() {
@@ -412,18 +374,7 @@ export class NewPage implements OnInit {
       this.services.efectPiso1 = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   bizumFloor2() {
@@ -435,18 +386,7 @@ export class NewPage implements OnInit {
       this.services.bizuPiso2 = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   cardFloor2() {
@@ -458,18 +398,7 @@ export class NewPage implements OnInit {
       this.services.tarjPiso2 = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   transFloor2() {
@@ -481,18 +410,7 @@ export class NewPage implements OnInit {
       this.services.transPiso2 = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   cashFloor2() {
@@ -504,18 +422,7 @@ export class NewPage implements OnInit {
       this.services.efectPiso2 = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   bizumTherapist() {
@@ -527,18 +434,7 @@ export class NewPage implements OnInit {
       this.services.bizuTerap = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   cardTherapist() {
@@ -550,18 +446,7 @@ export class NewPage implements OnInit {
       this.services.tarjTerap = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   transTherapist() {
@@ -573,18 +458,7 @@ export class NewPage implements OnInit {
       this.services.transTerap = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   cashTherapist() {
@@ -596,18 +470,7 @@ export class NewPage implements OnInit {
       this.services.efectTerap = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   bizumManager() {
@@ -619,18 +482,7 @@ export class NewPage implements OnInit {
       this.services.bizuEncarg = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   cardManager() {
@@ -642,18 +494,7 @@ export class NewPage implements OnInit {
       this.services.tarjEncarg = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   transManager() {
@@ -665,18 +506,7 @@ export class NewPage implements OnInit {
       this.services.transEncarg = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   cashManager() {
@@ -688,18 +518,7 @@ export class NewPage implements OnInit {
       this.services.efectEncarg = false
     }
 
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
+    this.validatePayment()
   }
 
   saveService() {
@@ -1229,6 +1048,70 @@ export class NewPage implements OnInit {
     return true
   }
 
+  validatePayment() {
+
+    // Efectivo
+    if (this.services.efectPiso1 == true && this.services.bizuPiso1 == true || this.services.efectPiso2 == true &&
+      this.services.bizuPiso2 == true || this.services.efectTerap == true && this.services.bizuTerap == true ||
+      this.services.efectEncarg == true && this.services.bizuEncarg == true || this.services.efectDriverTaxi == true &&
+      this.services.bizuDriverTaxi == true || this.services.efectPiso1 == true && this.services.tarjPiso1 == true ||
+      this.services.efectPiso2 == true && this.services.tarjPiso2 == true || this.services.efectTerap == true &&
+      this.services.tarjTerap == true || this.services.efectEncarg == true && this.services.tarjEncarg == true ||
+      this.services.efectDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.efectPiso1 == true &&
+      this.services.transPiso1 == true || this.services.efectPiso2 == true && this.services.transPiso2 == true ||
+      this.services.efectTerap == true && this.services.transTerap == true || this.services.efectEncarg == true &&
+      this.services.transEncarg == true || this.services.efectDriverTaxi == true && this.services.transDriverTaxi == true) {
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      return false
+    }
+
+    // Bizum
+    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
+      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
+      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
+      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
+      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
+      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
+      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
+      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
+      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
+      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      return false
+    }
+
+    // Tarjeta
+    if (this.services.tarjPiso1 == true && this.services.efectPiso1 == true || this.services.tarjPiso2 == true &&
+      this.services.efectPiso2 == true || this.services.tarjTerap == true && this.services.efectTerap == true ||
+      this.services.tarjEncarg == true && this.services.efectEncarg == true || this.services.tarjDriverTaxi == true &&
+      this.services.efectDriverTaxi == true || this.services.tarjPiso1 == true && this.services.bizuPiso1 == true ||
+      this.services.tarjPiso2 == true && this.services.bizuPiso2 == true || this.services.tarjTerap == true &&
+      this.services.bizuTerap == true || this.services.tarjEncarg == true && this.services.bizuEncarg == true ||
+      this.services.tarjDriverTaxi == true && this.services.bizuDriverTaxi == true || this.services.tarjPiso1 == true &&
+      this.services.transPiso1 == true || this.services.tarjPiso2 == true && this.services.transPiso2 == true ||
+      this.services.tarjTerap == true && this.services.transTerap == true || this.services.tarjEncarg == true &&
+      this.services.transEncarg == true || this.services.tarjDriverTaxi == true && this.services.transDriverTaxi == true) {
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      return false
+    }
+
+    // Trans
+    if (this.services.transPiso1 == true && this.services.efectPiso1 == true || this.services.transPiso2 == true &&
+      this.services.efectPiso2 == true || this.services.transTerap == true && this.services.efectTerap == true ||
+      this.services.transEncarg == true && this.services.efectEncarg == true || this.services.transDriverTaxi == true &&
+      this.services.efectDriverTaxi == true || this.services.transPiso1 == true && this.services.bizuPiso1 == true ||
+      this.services.transPiso2 == true && this.services.bizuPiso2 == true || this.services.transTerap == true &&
+      this.services.bizuTerap == true || this.services.transEncarg == true && this.services.bizuEncarg == true ||
+      this.services.transDriverTaxi == true && this.services.bizuDriverTaxi == true || this.services.transPiso1 == true &&
+      this.services.tarjPiso1 == true || this.services.transPiso2 == true && this.services.tarjPiso2 == true ||
+      this.services.transTerap == true && this.services.tarjTerap == true || this.services.transEncarg == true &&
+      this.services.tarjEncarg == true || this.services.transDriverTaxi == true && this.services.tarjDriverTaxi == true) {
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      return false
+    }
+    return true
+  }
+
   paymentMethodValidation() {
     if (Number(this.services.numberPiso1) > 0 && this.services.efectPiso1 == false && this.services.bizuPiso1 == false &&
       this.services.tarjPiso1 == false && this.services.transPiso1 == false) {
@@ -1270,5 +1153,4 @@ export class NewPage implements OnInit {
     localStorage.removeItem('Trans')
     location.replace(`tabs/${this.idUser}/vision`);
   }
-
 }
