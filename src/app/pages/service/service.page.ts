@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+// Services
+import { ServiceService } from 'src/app/core/services/service/service.service';
+
 @Component({
   selector: 'app-service',
   templateUrl: './service.page.html',
@@ -8,11 +11,40 @@ import { Component, OnInit } from '@angular/core';
 
 export class ServicePage implements OnInit {
   details: boolean = true
+  servicio: any
 
-  constructor() { }
+  constructor(
+    private serviceService: ServiceService
+  ) { }
 
   ngOnInit() {
     // this.details = false
+  }
+
+  getServices = async () => {
+    let service
+    // this.serviceManager.getById(this.idUser).subscribe((rp) => {
+    //   if (rp[0]['rol'] == 'administrador') {
+        this.serviceService.getServicio().subscribe((rp: any) => {
+          this.servicio = rp
+          service = rp
+
+          // if (rp.length != 0) {
+          //   this.totalSumOfServices(service)
+          // }
+          return service
+        })
+      // } else {
+      //   this.service.getByManagerOrder(rp[0]['nombre']).subscribe((rp: any) => {
+      //     this.servicio = rp
+      //     service = rp
+      //     if (rp.length != 0) {
+      //       this.totalSumOfServices(service)
+      //     }
+      //     return service
+      //   })
+      // }
+    // })
   }
 
   aqui() {
