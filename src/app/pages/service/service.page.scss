@@ -13,8 +13,9 @@ ion-grid {
 }
 
 .servicios {
-  background: #ffffff;
-  height: 1240px;
+  // background: #ffffff;
+  background: var(--verde-claro, #e8f2ef);
+  height: 1247px;
   position: relative;
 }
 
@@ -59,10 +60,12 @@ ion-grid {
   position: absolute;
   left: calc(50% - 167.5px);
   top: 440px;
+  height: 0%;
 }
 
 .group-77 {
   position: absolute;
+  height: 0%;
   inset: 0;
 }
 
@@ -125,6 +128,7 @@ ion-grid {
 
 .group-17 {
   position: absolute;
+  height: 0%;
   inset: 0;
 }
 
@@ -297,6 +301,7 @@ ion-grid {
 
 .group-80 {
   position: absolute;
+  height: 0%;
   inset: 0;
 }
 
@@ -822,6 +827,7 @@ ion-grid {
 
 .group-79 {
   position: absolute;
+  height: 0%;
   inset: 0;
 }
 
@@ -851,6 +857,7 @@ ion-grid {
 
 .group-81 {
   position: absolute;
+  height: 0%;
   inset: 0;
 }
 

@@ -22,7 +22,7 @@ export class TabsPage implements OnInit {
   }
 
   services() {
-    location.replace(`tabs/${this.id}/services`)
+    this.router.navigate([`tabs/${this.id}/services`])
     document.getElementById('vision').style.stroke = '#3C3C3C'
     document.getElementById('liquidation').style.stroke = '#3C3C3C'
     document.getElementById('closing').style.stroke = '#3C3C3C'
@@ -30,7 +30,7 @@ export class TabsPage implements OnInit {
   }
 
   vision() {
-    location.replace(`tabs/${this.id}/vision`)
+    this.router.navigate([`tabs/${this.id}/vision`])
     document.getElementById('services').style.stroke = '#3C3C3C'
     document.getElementById('liquidation').style.stroke = '#3C3C3C'
     document.getElementById('closing').style.stroke = '#3C3C3C'
@@ -46,7 +46,7 @@ export class TabsPage implements OnInit {
   }
 
   closing() {
-    location.replace(`tabs/${this.id}/closing`)
+    this.router.navigate([`tabs/${this.id}/closing`])
     document.getElementById('vision').style.stroke = '#3C3C3C'
     document.getElementById('services').style.stroke = '#3C3C3C'
     document.getElementById('liquidation').style.stroke = '#3C3C3C'
@@ -54,7 +54,7 @@ export class TabsPage implements OnInit {
   }
 
   liquidation() {
-    location.replace(`tabs/${this.id}/liquidation-therapist`)
+    this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
     document.getElementById('vision').style.stroke = '#3C3C3C'
     document.getElementById('services').style.stroke = '#3C3C3C'
     document.getElementById('closing').style.stroke = '#3C3C3C'
