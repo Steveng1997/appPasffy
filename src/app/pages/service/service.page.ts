@@ -18,6 +18,7 @@ export class ServicePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getServices()
     // this.details = false
   }
 
@@ -25,25 +26,25 @@ export class ServicePage implements OnInit {
     let service
     // this.serviceManager.getById(this.idUser).subscribe((rp) => {
     //   if (rp[0]['rol'] == 'administrador') {
-        this.serviceService.getServicio().subscribe((rp: any) => {
-          this.servicio = rp
-          service = rp
+    this.serviceService.getServicio().subscribe((rp: any) => {
+      this.servicio = rp
+      service = rp
 
-          // if (rp.length != 0) {
-          //   this.totalSumOfServices(service)
-          // }
-          return service
-        })
-      // } else {
-      //   this.service.getByManagerOrder(rp[0]['nombre']).subscribe((rp: any) => {
-      //     this.servicio = rp
-      //     service = rp
-      //     if (rp.length != 0) {
-      //       this.totalSumOfServices(service)
-      //     }
-      //     return service
-      //   })
+      // if (rp.length != 0) {
+      //   this.totalSumOfServices(service)
       // }
+      return service
+    })
+    // } else {
+    //   this.service.getByManagerOrder(rp[0]['nombre']).subscribe((rp: any) => {
+    //     this.servicio = rp
+    //     service = rp
+    //     if (rp.length != 0) {
+    //       this.totalSumOfServices(service)
+    //     }
+    //     return service
+    //   })
+    // }
     // })
   }
 

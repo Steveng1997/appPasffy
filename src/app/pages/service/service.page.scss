@@ -487,13 +487,24 @@ ion-grid {
 }
 
 .rectangle-94 {
+  // background: #ffffff;
+  // border-radius: 15px;
+  // width: 452px;
+  // height: 54px;
+  // position: absolute;
+  // left: calc(50% - 177.5px);
+  // top: 41px;
+
   background: #ffffff;
   border-radius: 15px;
-  width: 452px;
+  min-width: 452px;
   height: 54px;
-  position: absolute;
+  position: relative;
   left: calc(50% - 177.5px);
   top: 41px;
+  margin-top: 2px;
+  display: inline-grid;
+  inline-size: auto;
 }
 
 .rectangle-95 {
