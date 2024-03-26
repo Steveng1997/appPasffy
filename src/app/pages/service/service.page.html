@@ -114,7 +114,8 @@
             stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
 
-        <ion-input *ngIf="textSearch" class="textSearch" type="text" name="search"></ion-input>
+        <ion-input *ngIf="textSearch" class="textSearch" type="text" name="search" [(ngModel)]="filterSearch"
+          (ngModelChange)="textsearch()"></ion-input>
 
         <svg class="icon2" width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg"
           (click)="filters()">
@@ -146,7 +147,7 @@
             <div class="importe">Importe</div>
           </div>
 
-          <div class="rectangle-94" *ngFor="let services of servicio">
+          <div class="rectangle-94" *ngFor="let services of (servicio | search: filterSearch)">
             <div style="position: relative; top: -42px">
               <div class="luc-a6">{{services.terapeuta}}</div>
               <div class="laura6">{{services.encargada}}</div>
@@ -155,54 +156,6 @@
               <div class="ellipse-18"></div>
             </div>
           </div>
-
-          <!-- <div class="rectangle-96"></div>
-          <div class="rectangle-97"></div>
-          <div class="rectangle-98"></div>
-          <div class="rectangle-99"></div>
-          <div class="luc-a">Lucía</div>
-          <div class="laura">Laura</div>
-          <div class="_5-15-6-23">5:15 - 6:23</div>
-          <div class="rectangle-992"></div>
-          <div class="luc-a2">Lucía</div>
-          <div class="laura2">Laura</div>
-          <div class="_5-15-6-232">5:15 - 6:23</div>
-          <div class="rectangle-993"></div>
-          <div class="luc-a3">Lucía</div>
-          <div class="laura3">Laura</div>
-          <div class="_5-15-6-233">5:15 - 6:23</div>
-          <div class="rectangle-994"></div>
-          <div class="luc-a4">Lucía</div>
-          <div class="laura4">Laura</div>
-          <div class="_5-15-6-234">5:15 - 6:23</div>
-          <div class="rectangle-995"></div>
-          <div class="luc-a5">Lucía</div>
-          <div class="laura5">Laura</div>
-          <div class="_5-15-6-235">5:15 - 6:23</div>
-          <div class="rectangle-94"></div>
-          <div class="luc-a6">Lucía</div>
-          <div class="luc-a7">Lucía</div>
-          <div class="luc-a8">Lucía</div>
-          <div class="luc-a9">Lucía</div>
-          <div class="laura6">Laura</div>
-          <div class="laura7">Laura</div>
-          <div class="laura8">Laura</div>
-          <div class="laura9">Laura</div>
-          <div class="_5-15-6-236">5:15 - 6:23</div>
-          <div class="_5-15-6-237">5:15 - 6:23</div>
-          <div class="_5-15-6-238">5:15 - 6:23</div>
-          <div class="_5-15-6-239">5:15 - 6:23</div>
-          <div class="_120">120</div>
-          <div class="_1202">120</div>
-          <div class="_1203">120</div>
-          <div class="_1204">120</div>
-          <div class="_1205">120</div>
-          <div class="_1206">120</div>
-          <div class="_1207">120</div>
-          <div class="_1208">120</div>
-          <div class="_1209">120</div>
-          <div class="ellipse-18"></div>
-          <div class="ellipse-19"></div> -->
         </div>
 
         <div class="component-9">

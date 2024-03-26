@@ -1,16 +1,19 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-// Conection a Firebase
 import { HttpClientModule } from '@angular/common/http';
 
+// Pipes
+import { SearchPipe } from './core/pipe/search.pipe';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    SearchPipe
+  ],
 
   imports: [
     BrowserModule,

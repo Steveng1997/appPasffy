@@ -14,6 +14,7 @@ export class ServicePage implements OnInit {
   details: boolean = false
   textSearch: boolean = false
   filter: boolean = false
+  filterSearch: string
 
   constructor(
     private serviceService: ServiceService
@@ -77,6 +78,20 @@ export class ServicePage implements OnInit {
       this.textSearch = true
     } else {
       this.textSearch = false
+    }
+  }
+
+  textsearch() {
+    this.filterSearch = this.filterSearch.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
+
+    const searchCondition = serv => {
+      if (!this.filterSearch) return true
+      const criterio = this.filterSearch
+      return (serv.terapeuta.match(criterio)
+        || serv.encargada.match(criterio)
+        || serv.formaPago.match(criterio)
+        || serv.fecha.match(criterio)
+        || serv.cliente.match(criterio)) ? true : false
     }
   }
 
