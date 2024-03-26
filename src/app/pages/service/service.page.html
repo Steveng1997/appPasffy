@@ -181,10 +181,10 @@
             <div class="importe">Importe</div>
           </div>
 
-          <div class="rectangle-94" *ngFor="let services of (servicio | search: filterSearch 
+          <div class="rectangle-94" id="detail" *ngFor="let services of (servicio | search: filterSearch 
           | paymentMethod: selectedFormPago | therapist: selectedTerapeuta | manager: selectedEncargada 
           | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd)">
-            <div style="position: relative; top: -42px">
+            <div style="position: relative; top: -42px" (click)="detail()">
               <div class="luc-a6">{{services.terapeuta}}</div>
               <div class="laura6">{{services.encargada}}</div>
               <div class="_5-15-6-236">{{services.horaStart}} - {{services.horaEnd}}</div>
