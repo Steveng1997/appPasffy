@@ -296,7 +296,7 @@ ion-grid {
   bottom: 7.57%;
   top: 87.42%;
   height: 5.01%;
-  }
+}
 
 .notas {
   color: var(--verde, #1fb996);
@@ -306,13 +306,11 @@ ion-grid {
   line-height: 125%;
   font-weight: 400;
   position: absolute;
-  // left: 70.96px;
-  // top: 2160px;
   width: 49.8px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  }
+}
 
 .cobros {
   color: var(--verde, #1fb996);

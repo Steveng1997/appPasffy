@@ -122,6 +122,7 @@ export class VisionPage implements OnInit {
 
   ngOnInit() {
     let manager, element
+    let minute = 0, convertMinute = 0
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.idUser = Number(params['id'])
 
@@ -141,6 +142,16 @@ export class VisionPage implements OnInit {
     })
 
     this.getTherapist()
+
+    setTimeout(() => {
+      minute = this.therapist.filter(serv => serv.minuto > 0)
+      convertMinute = minute[0].minuto * 60000
+      if (convertMinute > 0) {
+        setTimeout(() => {
+          location.reload()
+        }, convertMinute);
+      }
+    }, 2000);
   }
 
   getManagerall(element) {

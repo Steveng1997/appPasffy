@@ -10,8 +10,10 @@ import { ServiceService } from 'src/app/core/services/service/service.service';
 })
 
 export class ServicePage implements OnInit {
-  details: boolean = true
   servicio: any
+  details: boolean = false
+  textSearch: boolean = false
+  filter: boolean = false
 
   constructor(
     private serviceService: ServiceService
@@ -48,6 +50,10 @@ export class ServicePage implements OnInit {
     // })
   }
 
+  filters() {
+    this.filter = true
+  }
+
   aqui() {
     if (this.details == false) {
       this.details = true
@@ -64,5 +70,17 @@ export class ServicePage implements OnInit {
       document.getElementById('segundo5').style.top = '102px'
       this.details = false
     }
+  }
+
+  search() {
+    if (this.textSearch == false) {
+      this.textSearch = true
+    } else {
+      this.textSearch = false
+    }
+  }
+
+  close() {
+    this.filter = false
   }
 }
