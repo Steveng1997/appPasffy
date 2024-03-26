@@ -158,7 +158,6 @@ export class NewPage implements OnInit {
 
   constructor(
     public router: Router,
-    private activeRoute: ActivatedRoute,
     private activatedRoute: ActivatedRoute,
     private serviceTherapist: TherapistService,
     private serviceManager: ManagerService,
@@ -530,6 +529,7 @@ export class NewPage implements OnInit {
           if (this.services.minuto != 0) {
             if (this.sumatoriaCobros == this.sumatoriaServicios) {
               // Methods 
+              this.ionLoaderService.simpleLoader()
               this.createUniqueId()
               this.validateTheEmptyField()
               if (!this.expiredDateValidations()) return
@@ -595,6 +595,7 @@ export class NewPage implements OnInit {
                   localStorage.removeItem('Tarjeta')
                   localStorage.removeItem('Trans')
                   setTimeout(() => {
+                    this.ionLoaderService.dismissLoader()
                     location.replace(`tabs/${this.idUser}/vision`)
                     Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1500 })
                   }, 1000)

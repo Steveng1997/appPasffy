@@ -146,7 +146,8 @@ export class VisionPage implements OnInit {
     setTimeout(() => {
       minute = this.therapist.filter(serv => serv.minuto > 0)
       if (minute > 0) convertMinute = minute[0].minuto * 60000
-      if (convertMinute > 0 || convertMinute != undefined) {
+      debugger
+      if (convertMinute > 0) {
         setTimeout(() => {
           location.reload()
         }, convertMinute);

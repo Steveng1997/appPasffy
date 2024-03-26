@@ -6,13 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
-// Pipes
-import { SearchPipe } from './core/pipe/search.pipe';
-
 @NgModule({
   declarations: [
-    AppComponent,
-    SearchPipe
+    AppComponent
   ],
 
   imports: [

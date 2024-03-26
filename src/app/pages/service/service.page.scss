@@ -70,7 +70,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 400;
   position: absolute;
-  left: 330.96px;
+  left: 330.06px;
   top: 312px;
   width: 55.04px;
   height: 23.42px;
@@ -83,7 +83,7 @@ ion-grid {
   width: 27px;
   height: 29px;
   position: absolute;
-  left: 230px;
+  left: 251px;
   top: 309px;
   overflow: visible;
 }
@@ -763,7 +763,7 @@ ion-grid {
   color: var(--negro, #3c3c3c);
   text-align: left;
   font-family: "Inter-Regular", sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 125%;
   font-weight: 400;
   position: absolute;
@@ -771,7 +771,7 @@ ion-grid {
   left: 10.83%;
   width: 42.68%;
   bottom: 41.18%;
-  top: 27.45%;
+  top: 33.00%;
   height: 31.37%;
   display: flex;
   align-items: flex-end;
@@ -814,12 +814,13 @@ ion-grid {
   position: absolute;
   right: 55.86%;
   left: 19.69%;
-  top: 28%;
+  top: 26%;
   transform: translate(-20px, -1px);
   border-radius: 15px;
 }
 
 .sc-ion-input-md-h[name=search] {
+  position: relative;
   color: black;
   text-transform: capitalize;
   height: 23px;
@@ -831,7 +832,7 @@ ion-grid {
   height: 2.96%;
   position: absolute;
   right: 5.45%;
-  left: 92.1%;
+  left: 86.00%;
   bottom: 74.57%;
   top: 22.46%;
   transform: translate(-20px, -1px);

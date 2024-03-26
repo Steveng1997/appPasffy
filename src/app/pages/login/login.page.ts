@@ -72,14 +72,19 @@ export class LoginPage {
         this.serviceLogin.getByUsuario(this.manager.usuario).subscribe((resp: any) => {
           if (resp.length > 0) {
             if (resp[0]['activo'] == true) {
-              this.dateTpm()
-              location.replace(`tabs/${resp[0].id}/vision`)
-              // this.router.navigate([`tabs/${resp[0].id}/vision`])
+              this.serviceLogin.getByUserAndPass(this.manager.usuario, this.manager.pass).subscribe((rp: any) => {
+                if (rp.length > 0) {
+                  this.dateTpm()
+                  location.replace(`tabs/${resp[0].id}/vision`)
+                } else {
+                  Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'La contraseña es incorrecta' })
+                }
+              })
             } else {
-              Swal.fire({ icon: 'error', title: 'Oops...', text: 'Este usuario ya no esta trabajando con nosotros' })
+              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Este usuario ya no esta trabajando con nosotros' })
             }
           } else {
-            Swal.fire({ icon: 'error', title: 'Oops...', text: 'No existe este usuario en la base de datos' })
+            Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No existe este usuario en la base de datos' })
           }
         })
       }
