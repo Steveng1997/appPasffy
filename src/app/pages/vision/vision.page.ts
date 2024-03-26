@@ -146,7 +146,6 @@ export class VisionPage implements OnInit {
     setTimeout(() => {
       minute = this.therapist.filter(serv => serv.minuto > 0)
       if (minute > 0) convertMinute = minute[0].minuto * 60000
-      debugger
       if (convertMinute > 0) {
         setTimeout(() => {
           location.reload()
@@ -1742,7 +1741,6 @@ export class VisionPage implements OnInit {
   }
 
   async editByName(nombre: string) {
-    debugger
     this.service.getTerapeutaWithCurrentDate(nombre).subscribe((rp: any) => {
       if (rp.length > 0) {
         this.serviceModel.pantalla = 'vision'
