@@ -7,6 +7,11 @@ import { ServicePage } from './service.page';
 
 // Pipes
 import { SearchPipe } from 'src/app/core/pipe/search.pipe';
+import { PaymentMethodPipe } from 'src/app/core/pipe/payment-method.pipe';
+import { TherapistPipe } from 'src/app/core/pipe/therapist.pipe';
+import { ManagerPipe } from 'src/app/core/pipe/manager.pipe';
+import { DatePipe } from 'src/app/core/pipe/date.pipe';
+import { HourDatePipe } from 'src/app/core/pipe/hour-date.pipe';
 
 @NgModule({
   imports: [
@@ -16,7 +21,15 @@ import { SearchPipe } from 'src/app/core/pipe/search.pipe';
     ReactiveFormsModule,
     ServicePageRoutingModule
   ],
-  declarations: [ServicePage, SearchPipe]
+  declarations: [
+    ServicePage,
+    SearchPipe,
+    TherapistPipe,
+    ManagerPipe,
+    DatePipe,
+    HourDatePipe,
+    PaymentMethodPipe
+  ]
 })
 
 export class ServicePageModule { }

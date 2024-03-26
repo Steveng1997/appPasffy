@@ -252,7 +252,7 @@ export class NewPage implements OnInit {
 
   expiredDateValidations() {
     this.buttonSave = document.getElementById('btnSave') as HTMLButtonElement
-    this.buttonSave.disabled = true;
+    this.buttonSave.disabled = true
 
     let currentHours, diferenceHour
     const splitDate = this.fechaActual.split('-')
@@ -267,7 +267,7 @@ export class NewPage implements OnInit {
 
     // const currentHours = currentDate.getHours()
     if (selectDate < currentDateWithoutHours || currentHours > 24) {
-      this.buttonSave.disabled = false;
+      this.buttonSave.disabled = false
       Swal.fire({
         heightAuto: false,
         position: 'top-end',

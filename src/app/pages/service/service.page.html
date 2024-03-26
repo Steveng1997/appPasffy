@@ -7,7 +7,7 @@
         <div class="rectangle-92"></div>
         <div class="servicios-realizados">Servicios Realizados</div>
         <div class="group-40">
-          <div class="filtros">Filtros</div>
+          <div class="filtros" (click)="btnFilter()">Filtros</div>
         </div>
 
         <!-- Filter -->
@@ -16,40 +16,63 @@
           <div class="rectangle-30"></div>
           <div class="_filtros">Filtros</div>
           <div class="rectangle_41"></div>
+
           <svg class="vector-6" width="59" height="2" viewBox="0 0 59 2" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 1L59 0.999995" stroke="#3C3C3C" />
           </svg>
-          <div class="limpiar">Limpiar</div>
+
+          <div class="limpiar" id="btnDelete" (click)="deleteService()">Eliminar</div>
           <div class="filtrar">Filtrar</div>
           <div class="_terapeuta">Terapeuta</div>
           <div class="inicial">Inicial</div>
           <div class="final">Final</div>
           <div class="_encargada">Encargada</div>
+
           <div class="m-todo-de-pago">Método de pago</div>
+
           <div class="group-48">
-            <div class="rectangle-412"></div>
+            <div class="rectangle-412" id="bizum1"></div>
+            <ion-input class="rectangle-412" id="Bizum" name="bizum" [(ngModel)]="selectedFormPago"
+              (click)="bizum()"></ion-input>
             <div class="bizum">Bizum</div>
           </div>
+
           <div class="group-49">
-            <div class="rectangle-37"></div>
+            <div class="rectangle-37" id="cash1"></div>
+            <ion-input class="rectangle-37" id="cash" name="cash" [(ngModel)]="selectedFormPago"
+              (click)="cash()"></ion-input>
             <div class="efectivo">Efectivo</div>
           </div>
+
           <div class="group-50">
-            <div class="rectangle-39"></div>
+            <div class="rectangle-39" id="card1"></div>
+            <ion-input class="rectangle-39" id="card" name="card" [(ngModel)]="selectedFormPago"
+              (click)="card()"></ion-input>
             <div class="tarjeta">Tarjeta</div>
           </div>
+
           <div class="group-51">
-            <div class="rectangle-40"></div>
+            <div class="rectangle-40" id="transaction1"></div>
+            <ion-input class="rectangle-40" id="transaction" name="transaction" [(ngModel)]="selectedFormPago"
+              (click)="transaction()"></ion-input>
             <div class="transferencia">Transferencia</div>
           </div>
+
           <div class="component-1">
             <div class="rectangle-4"></div>
-            <div class="selecciona">Selecciona</div>
+            <ion-select class="selecciona" style="display: grid; min-height: -webkit-fill-available"
+              placeholder="Selecciona" [(ngModel)]="selectedTerapeuta" (ngModelChange)="filters()">
+              <ion-select-option *ngFor="let therapist of terapeuta">{{therapist.nombre}}</ion-select-option>
+            </ion-select>
           </div>
 
           <div class="component-2">
             <div class="rectangle-4"></div>
-            <div class="selecciona">Selecciona</div>
+            <!-- <div class="selecciona">Selecciona</div> -->
+            <ion-select class="selecciona" style="display: grid; min-height: -webkit-fill-available"
+              placeholder="Selecciona" [(ngModel)]="selectedEncargada" (ngModelChange)="filters()">
+              <ion-select-option *ngFor="let manager of manager">{{manager.nombre}}</ion-select-option>
+            </ion-select>
           </div>
 
           <svg class="x-close" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -69,13 +92,24 @@
           </svg>
 
           <div class="rectangle-154"></div>
+          <!-- <div class="_02-feb-2024">02 feb 2024</div> -->
+          <ion-input class="rectangle-154" type="date" name="dateStart" [(ngModel)]="dateStart"
+            (ngModelChange)="filters()"></ion-input>
+
           <div class="rectangle-156"></div>
+          <!-- <div class="_02-feb-20242">02 feb 2024</div> -->
+          <ion-input class="rectangle-156" type="date" name="dateEnd" [(ngModel)]="dateEnd"
+            (ngModelChange)="filters()"></ion-input>
+
           <div class="rectangle-155"></div>
+          <!-- <div class="_10-12-a-m">10:12 a.m.</div> -->
+          <ion-input class="rectangle-155" type="time" name="hourStart" [(ngModel)]="hourStart"
+            (ngModelChange)="filters()"></ion-input>
+
           <div class="rectangle-157"></div>
-          <div class="_02-feb-2024">02 feb 2024</div>
-          <div class="_10-12-a-m">10:12 a.m.</div>
-          <div class="_02-feb-20242">02 feb 2024</div>
-          <div class="_08-02-p-m">08:02 p.m.</div>
+          <!-- <div class="_08-02-p-m">08:02 p.m.</div> -->
+          <ion-input class="rectangle-157" type="time" name="hourEnd" [(ngModel)]="hourEnd"
+            (ngModelChange)="filters()"></ion-input>
         </div>
 
         <svg class="capa-1" width="27" height="29" viewBox="0 0 27 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -118,7 +152,7 @@
           (ngModelChange)="textsearch()"></ion-input>
 
         <svg class="icon2" width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg"
-          (click)="filters()">
+          (click)="btnFilter()">
           <path
             d="M1.47178 3.45413C0.503441 2.35927 0.0192734 1.81184 0.00101043 1.34659C-0.0148546 0.942435 0.156827 0.553983 0.465134 0.296454C0.82004 0 1.54615 0 2.99838 0H22.0016C23.4538 0 24.18 0 24.5349 0.296454C24.8432 0.553983 25.0149 0.942435 24.999 1.34659C24.9807 1.81184 24.4966 2.35927 23.5282 3.45413L16.2226 11.7143C16.0296 11.9326 15.933 12.0417 15.8642 12.1659C15.8032 12.276 15.7584 12.3946 15.7313 12.5179C15.7007 12.6569 15.7007 12.8033 15.7007 13.0961V20.0217C15.7007 20.275 15.7007 20.4016 15.6603 20.5111C15.6247 20.6079 15.5666 20.6946 15.4911 20.764C15.4056 20.8426 15.2894 20.8896 15.0569 20.9837L10.7039 22.7452C10.2333 22.9356 9.99805 23.0308 9.80918 22.9911C9.64401 22.9564 9.49907 22.8571 9.40586 22.7149C9.29928 22.5522 9.29928 22.2958 9.29928 21.7831V13.0961C9.29928 12.8033 9.29928 12.6569 9.26871 12.5179C9.24159 12.3946 9.19681 12.276 9.13577 12.1659C9.06695 12.0417 8.97044 11.9326 8.77741 11.7143L1.47178 3.45413Z"
             stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -147,7 +181,9 @@
             <div class="importe">Importe</div>
           </div>
 
-          <div class="rectangle-94" *ngFor="let services of (servicio | search: filterSearch)">
+          <div class="rectangle-94" *ngFor="let services of (servicio | search: filterSearch 
+          | paymentMethod: selectedFormPago | therapist: selectedTerapeuta | manager: selectedEncargada 
+          | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd)">
             <div style="position: relative; top: -42px">
               <div class="luc-a6">{{services.terapeuta}}</div>
               <div class="laura6">{{services.encargada}}</div>
@@ -165,7 +201,7 @@
               stroke-linejoin="round" />
           </svg>
           <div class="total">Total</div>
-          <div class="_370">€370</div>
+          <div class="_370">€{{TotalValueLetter}}</div>
         </div>
       </div>
 

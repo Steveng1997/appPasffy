@@ -595,6 +595,12 @@ ion-grid {
   top: 0%;
 }
 
+.sc-ion-input-md-h[name=bizum] {
+  color: transparent;
+  --highlight-color-focused: transparent;
+  --highlight-color: transparent;
+}
+
 .bizum {
   color: var(--negro, #3c3c3c);
   text-align: left;
@@ -634,6 +640,12 @@ ion-grid {
   left: 0%;
   bottom: 0%;
   top: 0%;
+}
+
+.sc-ion-input-md-h[name=cash] {
+  color: transparent;
+  --highlight-color-focused: transparent;
+  --highlight-color: transparent;
 }
 
 .efectivo {
@@ -677,6 +689,12 @@ ion-grid {
   top: 0%;
 }
 
+.sc-ion-input-md-h[name=card] {
+  color: transparent;
+  --highlight-color-focused: transparent;
+  --highlight-color: transparent;
+}
+
 .tarjeta {
   color: var(--negro, #3c3c3c);
   text-align: left;
@@ -716,6 +734,12 @@ ion-grid {
   left: 0%;
   bottom: 0%;
   top: 0%;
+}
+
+.sc-ion-input-md-h[name=transaction] {
+  color: transparent;
+  --highlight-color-focused: transparent;
+  --highlight-color: transparent;
 }
 
 .transferencia {
@@ -759,6 +783,14 @@ ion-grid {
   top: 0%;
 }
 
+ion-select::part(icon) {
+  color: transparent !important;
+}
+
+ion-select::part(placeholder) {
+  opacity: 1 !important;
+}
+
 .selecciona {
   color: var(--negro, #3c3c3c);
   text-align: left;
@@ -771,7 +803,7 @@ ion-grid {
   left: 10.83%;
   width: 42.68%;
   bottom: 41.18%;
-  top: 33.00%;
+  top: 29%;
   height: 31.37%;
   display: flex;
   align-items: flex-end;
@@ -802,7 +834,7 @@ ion-grid {
   right: 55.86%;
   left: 41.69%;
   bottom: 74.57%;
-  top: 22.46%;
+  top: 22.76%;
   transform: translate(-20px, -1px);
   overflow: visible;
 }
@@ -851,6 +883,18 @@ ion-grid {
   top: 214px;
 }
 
+.sc-ion-input-md-h[name=dateStart] {
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+  position: relative;
+  color: black;
+  left: 8%;
+  width: 108px;
+  --highlight-color: transparent;
+}
+
 .rectangle-156 {
   border-radius: 15px;
   border-style: solid;
@@ -861,6 +905,19 @@ ion-grid {
   position: absolute;
   left: 16px;
   top: 309px;
+}
+
+.sc-ion-input-md-h[name=dateEnd] {
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+  position: relative;
+  color: black;
+  left: 8%;
+  top: 41.35%;
+  width: 108px;
+  --highlight-color: transparent;
 }
 
 .rectangle-155 {
@@ -875,6 +932,19 @@ ion-grid {
   top: 214px;
 }
 
+.sc-ion-input-md-h[name=hourStart] {
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+  position: relative;
+  color: black;
+  left: 52.39%;
+  top: 19.45%;
+  width: 108px;
+  --highlight-color: transparent;
+}
+
 .rectangle-157 {
   border-radius: 15px;
   border-style: solid;
@@ -885,6 +955,19 @@ ion-grid {
   position: absolute;
   left: 194px;
   top: 309px;
+}
+
+.sc-ion-input-md-h[name=hourEnd] {
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+  position: relative;
+  color: black;
+  left: 52.39%;
+  top: 27.21%;
+  width: 108px;
+  --highlight-color: transparent;
 }
 
 ._02-feb-2024 {
