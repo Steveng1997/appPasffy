@@ -6,9 +6,11 @@ import Swal from 'sweetalert2';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 
+// Model
+import { ModelService } from 'src/app/core/models/service';
+
 // Services
 import { ServiceService } from 'src/app/core/services/service/service.service';
-import { ModelService } from 'src/app/core/models/service';
 import { ManagerService } from 'src/app/core/services/manager/manager.service';
 import { TherapistService } from 'src/app/core/services/therapist/therapist.service';
 import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.service';
@@ -728,10 +730,22 @@ export class ServicePage implements OnInit {
     this.validateCheck()
   }
 
-  detail() {
-    let element = document.getElementById('detail');
-    let elementStyle = window.getComputedStyle(element);
-    let elementTop = elementStyle.getPropertyValue('top');
+  detail(services: ModelService) {
+    debugger
+
+    let element = document.getElementById('detail')
+    let aqui = document.getSelection()
+    let elementStyle = window.getComputedStyle(element)
+    let elementTop = elementStyle.getPropertyValue('top')
+    let elementLength = elementStyle.getPropertyValue('length')
+
+    if (this.details == false) {
+      this.details = true
+      // document.getElementById('detail').style.marginBottom = '80px'
+    } else {
+      this.details = false
+      // document.getElementById('detail').style.marginBottom = '0px'
+    }
   }
 
   search() {
