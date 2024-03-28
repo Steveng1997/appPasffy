@@ -731,20 +731,10 @@ export class ServicePage implements OnInit {
   }
 
   detail(services: ModelService) {
-    debugger
-
-    let element = document.getElementById('detail')
-    let aqui = document.getSelection()
-    let elementStyle = window.getComputedStyle(element)
-    let elementTop = elementStyle.getPropertyValue('top')
-    let elementLength = elementStyle.getPropertyValue('length')
-
     if (this.details == false) {
       this.details = true
-      // document.getElementById('detail').style.marginBottom = '80px'
     } else {
       this.details = false
-      // document.getElementById('detail').style.marginBottom = '0px'
     }
   }
 
