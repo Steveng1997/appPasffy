@@ -112,7 +112,7 @@
             (ngModelChange)="filters()"></ion-input>
         </div>
 
-        <svg class="capa-1" width="27" height="29" viewBox="0 0 27 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="capa-1" width="27" height="29" viewBox="0 0 27 29" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="exportExcel()">
           <g clip-path="url(#clip0_226_317)">
 
             <path
@@ -166,12 +166,12 @@
         </div>
 
         <svg class="icon3" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-          (click)="right()">
+          (click)="nextArrow()">
           <path d="M0 24L12 12L0 0" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
 
         <svg class="icon4" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-          (click)="left()">
+          (click)="backArrow()">
           <path d="M12 0L1.04907e-06 12L12 24" stroke="white" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>

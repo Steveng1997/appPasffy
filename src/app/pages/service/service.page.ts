@@ -71,6 +71,13 @@ export class ServicePage implements OnInit {
   TotalValueLetter: string
   TotalServiceLetter: string
 
+  // Conteo fecha
+  count: number = 0
+  dateTodayCurrent: string
+  atrasCount: number = 0
+  siguienteCount: number = 0
+  fechaFormat = new Date()
+
   // Excel
   private _workbook!: Workbook;
 
@@ -126,7 +133,6 @@ export class ServicePage implements OnInit {
     await this.getTherapist()
     this.getServices()
     this.emptyTotals()
-    // this.details = false
   }
 
   emptyTotals() {
@@ -906,7 +912,7 @@ export class ServicePage implements OnInit {
         itemData.encargada, // column B
         itemData.fecha, // column C
         itemData.terapeuta, // column D
-        itemData.hourStart + ' - ' + itemData.hourEnd, // column E
+        itemData.horaStart + ' - ' + itemData.horaEnd, // column E
         itemData.minuto + ' min', // column F
         itemData.totalServicio + ' €', // column G
         itemData.formaPago, // column H
@@ -1019,17 +1025,553 @@ export class ServicePage implements OnInit {
     }, 100);
   }
 
-  left() {
+  backArrow = async () => {
+    let fechHoy = new Date(), fechaEnd = '', convertDiaHoy = '', diaHoy = 0, mesHoy = 0,
+      añoHoy = 0, convertMesHoy = ''
 
+    diaHoy = fechHoy.getDate()
+    mesHoy = fechHoy.getMonth() + 1
+    añoHoy = fechHoy.getFullYear()
+
+    if (mesHoy > 0 && mesHoy < 10) {
+      convertMesHoy = '0' + mesHoy
+      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
+    } else {
+      convertMesHoy = mesHoy.toString()
+      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
+    }
+
+    if (diaHoy > 0 && diaHoy < 10) {
+      convertDiaHoy = '0' + diaHoy
+      fechaEnd = `${añoHoy}-${convertMesHoy}-${convertDiaHoy}`
+    } else {
+      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
+    }
+
+    if (this.siguienteCount > 0) {
+      this.siguienteCount = 0
+      this.count = 0
+      this.count++
+      let convertmes = '', convertDia = '', convertAño = '', fechaHoy = '', mes = '', month = '',
+        fechaActualmente = '', convertionAño
+
+      for (let i = 0; i < this.count; i++) {
+
+        this.fechaFormat.setDate(this.fechaFormat.getDate() - this.count)
+        convertDia = this.fechaFormat.toString().substring(8, 10)
+        convertmes = this.fechaFormat.toString().substring(4, 7)
+        convertAño = this.fechaFormat.toString().substring(11, 15)
+        convertionAño = this.fechaFormat.toString().substring(13, 15)
+
+        if (convertmes == 'Dec') {
+          mes = "12"
+          month = 'Diciembre'
+        }
+
+        if (convertmes == 'Nov') {
+          mes = "11"
+          month = 'Noviembre'
+        }
+
+        if (convertmes == 'Oct') {
+          mes = "10"
+          month = 'Octubre'
+        }
+
+        if (convertmes == 'Sep') {
+          mes = "09"
+          month = 'Septiembre'
+        }
+
+        if (convertmes == 'Aug') {
+          mes = "08"
+          month = 'Agosto'
+        }
+
+        if (convertmes == 'Jul') {
+          mes = "07"
+          month = 'Julio'
+        }
+
+        if (convertmes == 'Jun') {
+          mes = "06"
+          month = 'Junio'
+        }
+
+        if (convertmes == 'May') {
+          mes = "05"
+          month = 'Mayo'
+        }
+
+        if (convertmes == 'Apr') {
+          mes = "04"
+          month = 'Abril'
+        }
+
+        if (convertmes == 'Mar') {
+          mes = "03"
+          month = 'Marzo'
+        }
+
+        if (convertmes == 'Feb') {
+          mes = "02"
+          month = 'Febrero'
+        }
+
+        if (convertmes == 'Jan') {
+          mes = "01"
+          month = 'Enero'
+        }
+
+        fechaHoy = `${convertAño}-${mes}-${convertDia}`
+
+        this.day = Number(convertDia)
+        this.month = month
+
+        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
+        this.dateStart = fechaActualmente
+        this.dateEnd = fechaActualmente
+
+        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+          if (rp[0]['rol'] == 'administrador') {
+
+            this.serviceService.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+              if (rp.length > 0) {
+                this.servicio = rp
+                this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
+                this.thousandPoint()
+              } else {
+                this.servicio = rp
+                this.TotalValueLetter = '0'
+              }
+            })
+          } else {
+
+            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+              if (rp.length > 0) {
+                this.servicio = rp
+                this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
+                this.thousandPoint()
+              } else {
+                this.servicio = rp
+                this.TotalValueLetter = '0'
+              }
+            })
+          }
+        })
+
+        this.atrasCount = this.count
+
+        return true
+      }
+    } else {
+      this.atrasCount = 0
+      this.siguienteCount = 0
+      this.count = 0
+      this.count++
+      let convertmes = '', convertDia = '', convertAño = '', mes = '', month = '', fechaHoy = '',
+        convertFecha = '', fechaActualmente = '', convertionAño
+
+      for (let i = 0; i < this.count; i++) {
+
+        this.fechaFormat.setDate(this.fechaFormat.getDate() - this.count)
+        convertFecha = this.fechaFormat.toString()
+        this.fechaFormat = new Date(convertFecha)
+        convertDia = this.fechaFormat.toString().substring(8, 10)
+        convertmes = this.fechaFormat.toString().substring(4, 7)
+        convertAño = this.fechaFormat.toString().substring(11, 15)
+        convertionAño = this.fechaFormat.toString().substring(13, 15)
+
+        if (convertmes == 'Dec') {
+          mes = "12"
+          month = 'Diciembre'
+        }
+
+        if (convertmes == 'Nov') {
+          mes = "11"
+          month = 'Noviembre'
+        }
+
+        if (convertmes == 'Oct') {
+          mes = "10"
+          month = 'Octubre'
+        }
+
+        if (convertmes == 'Sep') {
+          mes = "09"
+          month = 'Septiembre'
+        }
+
+        if (convertmes == 'Aug') {
+          mes = "08"
+          month = 'Agosto'
+        }
+
+        if (convertmes == 'Jul') {
+          mes = "07"
+          month = 'Julio'
+        }
+
+        if (convertmes == 'Jun') {
+          mes = "06"
+          month = 'Junio'
+        }
+
+        if (convertmes == 'May') {
+          mes = "05"
+          month = 'Mayo'
+        }
+
+        if (convertmes == 'Apr') {
+          mes = "04"
+          month = 'Abril'
+        }
+
+        if (convertmes == 'Mar') {
+          mes = "03"
+          month = 'Marzo'
+        }
+
+        if (convertmes == 'Feb') {
+          mes = "02"
+          month = 'Febrero'
+        }
+
+        if (convertmes == 'Jan') {
+          mes = "01"
+          month = 'Enero'
+        }
+
+        fechaHoy = `${convertAño}-${mes}-${convertDia}`
+
+        this.day = Number(convertDia)
+        this.month = month
+
+        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
+        this.dateStart = fechaActualmente
+        this.dateEnd = fechaActualmente
+
+        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+          if (rp[0]['rol'] == 'administrador') {
+
+            this.serviceService.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+              if (rp.length > 0) {
+                this.servicio = rp
+                this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
+                this.thousandPoint()
+              } else {
+                this.servicio = rp
+                this.TotalValueLetter = '0'
+              }
+            })
+          } else {
+
+            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+              if (rp.length > 0) {
+                this.servicio = rp
+                this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
+                this.thousandPoint()
+              } else {
+                this.servicio = rp
+                this.TotalValueLetter = '0'
+              }
+            })
+          }
+        })
+
+        this.atrasCount = this.count
+
+        return true
+      }
+    }
+    return false
   }
 
-  right() {
+  nextArrow = async () => {
+    let fechaDia = new Date(), mesDelDia = 0, convertMess = '', messs = '', convertimosMes = 0
+    mesDelDia = fechaDia.getMonth() + 1
 
+    let fechHoy = new Date(), fechaEnd = '', convertDiaHoy = '', diaHoy = 0, mesHoy = 0, añoHoy = 0, convertMesHoy = ''
+
+    diaHoy = fechHoy.getDate()
+    mesHoy = fechHoy.getMonth() + 1
+    añoHoy = fechHoy.getFullYear()
+
+    if (mesHoy > 0 && mesHoy < 10) {
+      convertMesHoy = '0' + mesHoy
+      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
+    } else {
+      convertMesHoy = mesHoy.toString()
+      fechaEnd = `${añoHoy}-${mesHoy}-${diaHoy}`
+    }
+
+    if (diaHoy > 0 && diaHoy < 10) {
+      convertDiaHoy = '0' + diaHoy
+      fechaEnd = `${añoHoy}-${convertMesHoy}-${convertDiaHoy}`
+    } else {
+      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
+    }
+
+    if (this.atrasCount > 0) {
+      this.atrasCount = 0
+      this.count = 0
+      this.count++
+      convertMess = this.fechaFormat.toString().substring(4, 7)
+      if (convertMess == 'Dec') messs = "12"
+      if (convertMess == 'Nov') messs = "11"
+      if (convertMess == 'Oct') messs = "10"
+      if (convertMess == 'Sep') messs = "09"
+      if (convertMess == 'Aug') messs = "08"
+      if (convertMess == 'Jul') messs = "07"
+      if (convertMess == 'Jun') messs = "06"
+      if (convertMess == 'May') messs = "05"
+      if (convertMess == 'Apr') messs = "04"
+      if (convertMess == 'Mar') messs = "03"
+      if (convertMess == 'Feb') messs = "02"
+      if (convertMess == 'Jan') messs = "01"
+
+      convertimosMes = Number(messs)
+      this.atrasCount = 0
+      this.count = 0
+      this.count++
+
+      let convertmes = '', convertDia = '', convertAño = '', mes = '', month = '', fechaHoy = '',
+        fechaActualmente = '', convertionAño = ''
+
+      for (let i = 0; i < this.count; i++) {
+        this.fechaFormat.setDate(this.fechaFormat.getDate() + this.count)
+        convertDia = this.fechaFormat.toString().substring(8, 10)
+        convertmes = this.fechaFormat.toString().substring(4, 7)
+        convertAño = this.fechaFormat.toString().substring(11, 15)
+        convertionAño = this.fechaFormat.toString().substring(13, 15)
+
+        if (convertmes == 'Dec') {
+          mes = "12"
+          month = 'Diciembre'
+        }
+
+        if (convertmes == 'Nov') {
+          mes = "11"
+          month = 'Noviembre'
+        }
+
+        if (convertmes == 'Oct') {
+          mes = "10"
+          month = 'Octubre'
+        }
+
+        if (convertmes == 'Sep') {
+          mes = "09"
+          month = 'Septiembre'
+        }
+
+        if (convertmes == 'Aug') {
+          mes = "08"
+          month = 'Agosto'
+        }
+
+        if (convertmes == 'Jul') {
+          mes = "07"
+          month = 'Julio'
+        }
+
+        if (convertmes == 'Jun') {
+          mes = "06"
+          month = 'Junio'
+        }
+
+        if (convertmes == 'May') {
+          mes = "05"
+          month = 'Mayo'
+        }
+
+        if (convertmes == 'Apr') {
+          mes = "04"
+          month = 'Abril'
+        }
+
+        if (convertmes == 'Mar') {
+          mes = "03"
+          month = 'Marzo'
+        }
+
+        if (convertmes == 'Feb') {
+          mes = "02"
+          month = 'Febrero'
+        }
+
+        if (convertmes == 'Jan') {
+          mes = "01"
+          month = 'Enero'
+        }
+
+        fechaHoy = `${convertAño}-${mes}-${convertDia}`
+
+        this.day = Number(convertDia)
+        this.month = month
+
+        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
+        this.dateStart = fechaActualmente
+        this.dateEnd = fechaActualmente
+
+        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+          if (rp[0]['rol'] == 'administrador') {
+            this.serviceService.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+              if (rp.length > 0) {
+                this.servicio = rp
+                this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
+                this.thousandPoint()
+              } else {
+                this.servicio = rp
+                this.TotalValueLetter = '0'
+              }
+            })
+          } else {
+
+            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+              if (rp.length > 0) {
+                this.servicio = rp
+                this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
+                this.thousandPoint()
+              } else {
+                this.servicio = rp
+                this.TotalValueLetter = '0'
+              }
+            })
+          }
+        })
+
+        this.atrasCount = 0
+        this.count = 0
+        return true
+      }
+    }
+
+    else {
+      this.atrasCount = 0
+      this.siguienteCount = 0
+      this.count = 0
+      this.count++
+      let convertmes = '', convertDia = '', convertAño = '', mes = '', month = '', fechaHoy = '',
+        convertFecha = '', fechaActualmente = '', convertionAño
+
+      for (let i = 0; i < this.count; i++) {
+
+        this.fechaFormat.setDate(this.fechaFormat.getDate() + this.count)
+        convertFecha = this.fechaFormat.toString()
+        this.fechaFormat = new Date(convertFecha)
+
+        convertDia = this.fechaFormat.toString().substring(8, 10)
+        convertmes = this.fechaFormat.toString().substring(4, 7)
+        convertAño = this.fechaFormat.toString().substring(11, 15)
+        convertionAño = this.fechaFormat.toString().substring(13, 15)
+
+        if (convertmes == 'Dec') {
+          mes = "12"
+          month = 'Diciembre'
+        }
+
+        if (convertmes == 'Nov') {
+          mes = "11"
+          month = 'Noviembre'
+        }
+
+        if (convertmes == 'Oct') {
+          mes = "10"
+          month = 'Octubre'
+        }
+
+        if (convertmes == 'Sep') {
+          mes = "09"
+          month = 'Septiembre'
+        }
+
+        if (convertmes == 'Aug') {
+          mes = "08"
+          month = 'Agosto'
+        }
+
+        if (convertmes == 'Jul') {
+          mes = "07"
+          month = 'Julio'
+        }
+
+        if (convertmes == 'Jun') {
+          mes = "06"
+          month = 'Junio'
+        }
+
+        if (convertmes == 'May') {
+          mes = "05"
+          month = 'Mayo'
+        }
+
+        if (convertmes == 'Apr') {
+          mes = "04"
+          month = 'Abril'
+        }
+
+        if (convertmes == 'Mar') {
+          mes = "03"
+          month = 'Marzo'
+        }
+
+        if (convertmes == 'Feb') {
+          mes = "02"
+          month = 'Febrero'
+        }
+
+        if (convertmes == 'Jan') {
+          mes = "01"
+          month = 'Enero'
+        }
+
+        fechaHoy = `${convertAño}-${mes}-${convertDia}`
+
+        this.day = Number(convertDia)
+        this.month = month
+
+        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
+        this.dateStart = fechaActualmente
+        this.dateEnd = fechaActualmente
+
+        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+          if (rp[0]['rol'] == 'administrador') {
+
+            this.serviceService.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+              if (rp.length > 0) {
+                this.servicio = rp
+              } else {
+                this.servicio = rp
+                this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
+                this.thousandPoint()
+                this.TotalValueLetter = '0'
+              }
+            })
+          } else {
+
+            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+              if (rp.length > 0) {
+                this.servicio = rp
+                this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
+                this.thousandPoint()
+              } else {
+                this.servicio = rp
+                this.TotalValueLetter = '0'
+              }
+            })
+          }
+        })
+
+        this.siguienteCount = this.count
+        return true
+      }
+    }
+    return false
   }
 
   edit(id: number) {
     this.serviceModel.pantalla = 'services'
-    debugger
     this.serviceService.updateScreenById(id, this.serviceModel).subscribe(async (rp: any) => { })
     location.replace(`tabs/${this.idUser}/edit-services/${id}`)
   }
