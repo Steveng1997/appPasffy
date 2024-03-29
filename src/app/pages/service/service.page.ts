@@ -29,7 +29,7 @@ export class ServicePage implements OnInit {
   filterSearch: string
 
   idService: any
-
+  detailService: any
   deleteButton: any
 
   fechaInicio: string
@@ -75,6 +75,24 @@ export class ServicePage implements OnInit {
   serviceModel: ModelService = {
     pantalla: ""
   }
+
+  minute: number
+  total: number
+  payment: string
+  client: string
+  exit: string
+  treatment: string
+  house1: string
+  house2: string
+  therap: string
+  manag: string
+  taxi: string
+  drinkHouse: string
+  drinkTherap: string
+  tabacco: string
+  vitamin: string
+  tip: string
+  others: string
 
   constructor(
     public router: Router,
@@ -639,12 +657,6 @@ export class ServicePage implements OnInit {
     var notaMensaje = []
     this.serviceService.getById(targetModal).subscribe((rp) => {
       notaMensaje = rp[0]
-
-      // if (notaMensaje['nota'] != '')
-      //   this.modalService.open(modal, {
-      //     centered: true,
-      //     backdrop: 'static',
-      //   })
     })
   }
 
@@ -722,7 +734,6 @@ export class ServicePage implements OnInit {
     this.selectedEncargada = ""
     this.fechaInicio = ""
     this.fechaFinal = ""
-    // this.selectedFormPago = ""
   }
 
   btnFilter() {
@@ -733,6 +744,26 @@ export class ServicePage implements OnInit {
   detail(services: ModelService) {
     if (this.details == false) {
       this.details = true
+      this.minute = services.minuto
+      this.total = services.totalServicio
+      this.payment = services.formaPago
+      this.client = services.cliente
+
+      if (services.salida != "") this.exit = services.salida
+      else this.exit = 'N/A'
+
+      this.treatment = services.servicio
+      this.house1 = services.numberPiso1
+      this.house2 = services.numberPiso2
+      this.therap = services.numberTerap
+      this.manag = services.numberEncarg
+      this.taxi = services.numberTaxi
+      this.drinkHouse = services.bebidas
+      this.drinkTherap = services.bebidaTerap
+      this.tabacco = services.tabaco
+      this.vitamin = services.vitaminas
+      this.tip = services.propina
+      this.others = services.otros
     } else {
       this.details = false
     }
