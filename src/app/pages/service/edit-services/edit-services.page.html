@@ -6,7 +6,8 @@
         <div class="rectangle-93"></div>
         <div class="rectangle-18"></div>
 
-        <svg class="icon" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="icon" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+          (click)="back()">
           <path d="M12 0L1.04907e-06 12L12 24" stroke="white" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>
@@ -217,28 +218,28 @@
         <div class="component-103">
           <div class="rectangle-412" id="bizumTherapist"></div>
           <ion-input class="rectangle-412" id="bizumTherapist" name="bizumTherapist"
-              (click)="bizumTherapist()"></ion-input>
+            (click)="bizumTherapist()"></ion-input>
           <div class="bizum">Bizum</div>
         </div>
 
         <div class="group-873">
           <div class="rectangle-392" id="cardTherapist"></div>
           <ion-input class="rectangle-392" id="cardTherapist" name="cardTherapist"
-              (click)="cardTherapist()"></ion-input>
+            (click)="cardTherapist()"></ion-input>
           <div class="tarjeta">Tarjeta</div>
         </div>
 
         <div class="group-853">
           <div class="rectangle-402" id="transTherapist"></div>
           <ion-input class="rectangle-402" id="transTherapist" name="transTherapist"
-          (click)="transTherapist()"></ion-input>
+            (click)="transTherapist()"></ion-input>
           <div class="transferencia">Transferencia</div>
         </div>
 
         <div class="group-863">
           <div class="rectangle-372" id="cashTherapist"></div>
           <ion-input class="rectangle-372" id="cashTherapist" name="cashTherapist"
-              (click)="cashTherapist()"></ion-input>
+            (click)="cashTherapist()"></ion-input>
           <div class="efectivo">Efectivo</div>
         </div>
 
@@ -247,7 +248,7 @@
           <ion-input class="rectangle-412" id="bizumManager" name="bizumManager" (click)="bizumManager()"></ion-input>
           <div class="bizum">Bizum</div>
         </div>
-        
+
         <div class="group-874">
           <div class="rectangle-392" id="cardManager"></div>
           <ion-input class="rectangle-392" id="cardManager" name="cardManager" (click)="cardManager()"></ion-input>
@@ -262,7 +263,7 @@
 
         <div class="group-864">
           <div class="rectangle-372" id="cashManager"></div>
-            <ion-input class="rectangle-372" id="cashManager" name="cashManager" (click)="cashManager()"></ion-input>
+          <ion-input class="rectangle-372" id="cashManager" name="cashManager" (click)="cashManager()"></ion-input>
           <div class="efectivo">Efectivo</div>
         </div>
         <div class="rectangle-772" id="btnEdit" (click)="save(edServ.id, edServ)"></div>

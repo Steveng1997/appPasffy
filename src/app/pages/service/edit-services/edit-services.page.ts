@@ -1328,6 +1328,12 @@ export class EditServicesPage implements OnInit {
     this.validationsFormOfPayment()
   }
 
+  back(){ 
+    this.serviceServices.getById(this.id).subscribe((rp: any) => {
+      location.replace(`tabs/${this.idUser}/${rp[0].pantalla}`)
+    })
+  }
+
   save(idServicio, serv: ModelService) {
     this.buttonEdit = document.getElementById('btnEdit') as HTMLButtonElement
     this.buttonEdit.disabled = true;

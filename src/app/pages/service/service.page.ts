@@ -36,6 +36,8 @@ export class ServicePage implements OnInit {
   fechaFinal: string
   horaInicio: string
   horaFinal: string
+  day: number
+  month: string
 
   // Terapeuta
   terapeuta: any
@@ -142,17 +144,45 @@ export class ServicePage implements OnInit {
     if (month > 0 && month < 10) {
       convertMonth = '0' + month
       currentDate = `${year}-${convertMonth}-${day}`
+      this.day = day
     } else {
       convertMonth = month.toString()
       currentDate = `${year}-${convertMonth}-${day}`
+      this.day = day
     }
 
     if (day > 0 && day < 10) {
       convertDay = '0' + day
       currentDate = `${year}-${convertMonth}-${convertDay}`
+      this.day = day
     } else {
       currentDate = `${year}-${convertMonth}-${day}`
+      this.day = day
     }
+
+    if (convertMonth == '12') this.month = 'Diciembre'
+
+    if (convertMonth == '11') this.month = 'Noviembre'
+
+    if (convertMonth == '10') this.month = 'Octubre'
+
+    if (convertMonth == '09') this.month = 'Septiembre'
+
+    if (convertMonth == '08') this.month = 'Agosto'
+
+    if (convertMonth == '07') this.month = 'Julio'
+
+    if (convertMonth == '06') this.month = 'Junio'
+
+    if (convertMonth == '05') this.month = 'Mayo'
+
+    if (convertMonth == '04') this.month = 'Abril'
+
+    if (convertMonth == '03') this.month = 'Marzo'
+
+    if (convertMonth == '02') this.month = 'Febrero'
+
+    if (convertMonth == '01') this.month = 'Enero'
 
     this.dateStart = currentDate
     this.dateEnd = currentDate
@@ -666,7 +696,7 @@ export class ServicePage implements OnInit {
   }
 
   editForm(id: number) {
-    this.serviceModel.pantalla = 'tabla'
+    this.serviceModel.pantalla = 'services'
     this.serviceService.updateScreenById(id, this.serviceModel).subscribe(async (rp: any) => { })
     this.router.navigate([`menu/${this.idUser}/nuevo-servicio/${id}`])
   }
@@ -987,5 +1017,75 @@ export class ServicePage implements OnInit {
         document.getElementById('transaction1').style.background = '#1fb996'
       }
     }, 100);
+  }
+
+  left() {
+
+  }
+
+  right() {
+
+  }
+
+  edit(id: number) {
+    this.serviceModel.pantalla = 'services'
+    debugger
+    this.serviceService.updateScreenById(id, this.serviceModel).subscribe(async (rp: any) => { })
+    location.replace(`tabs/${this.idUser}/edit-services/${id}`)
+  }
+
+  delete(id: number) {
+    this.serviceManager.getById(this.idUser).subscribe(async (rp) => {
+      if (rp[0]['rol'] == 'administrador') {
+        Swal.fire({
+          heightAuto: false,
+          position: 'top-end',
+          title: '¿Deseas eliminar el registro?',
+          text: "Una vez eliminados ya no se podrán recuperar",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Deseo eliminar!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.ionLoaderService.simpleLoader()
+            Swal.fire({
+              heightAuto: false,
+              position: 'top-end',
+              title: '¿Estas seguro de eliminar?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Si, Deseo eliminar!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.serviceTherapist.getTerapeuta(this.idService[0]['terapeuta']).subscribe((rp: any) => {
+                  this.serviceTherapist.updateHoraAndSalida(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
+                })
+
+                for (let i = 0; i < this.idService.length; i++) {
+                  this.serviceService.deleteServicio(id).subscribe((rp: any) => {
+                  })
+                }
+
+                this.getServices()
+                this.ionLoaderService.dismissLoader()
+                Swal.fire({ heightAuto: false, position: 'center', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1500 })
+                this.emptyFilter()
+              } else {
+                this.ionLoaderService.dismissLoader()
+              }
+            })
+          }
+        })
+      } else {
+        Swal.fire({
+          heightAuto: false, position: 'top-end', icon: 'error', title: '¡Oops...!', showConfirmButton: false, timer: 2500,
+          text: 'No tienes autorización para borrar, si deseas eliminar el servicio habla con el adminisitrador del sistema'
+        })
+      }
+    })
   }
 }
