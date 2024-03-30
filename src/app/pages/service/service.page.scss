@@ -5,11 +5,15 @@
 
 ion-grid {
   background: var(--verde-claro, #e8f2ef);
-  width: -webkit-fill-available;
-  height: min-content;
+  // width: -webkit-fill-available;
+  // height: min-content;
+  // position: absolute;
+  // left: 0px;
+  // top: 0px;
+
   position: absolute;
   left: 0px;
-  top: 0px;
+  top: -23px;
 }
 
 .servicios-1 {
@@ -28,11 +32,18 @@ ion-grid {
 }
 
 .rectangle-92 {
+  // background: var(--verde, #1fb996);
+  // width: -webkit-fill-available;
+  // height: 370px;
+  // position: absolute;
+  // left: 0px;
+  // top: 0px;
+
   background: var(--verde, #1fb996);
-  width: -webkit-fill-available;
+  width: 431px;
   height: 370px;
   position: absolute;
-  left: 0px;
+  left: -5px;
   top: 0px;
 }
 
@@ -173,21 +184,38 @@ ion-grid {
 }
 
 .frame-76 {
-  width: 355px;
+  // width: 355px;
+  // height: 587px;
+  // position: absolute;
+  // left: 20px;
+  // top: 399px;
+  // overflow-x: auto;
+
+  width: -webkit-fill-available;
   height: 587px;
   position: absolute;
-  left: 20px;
+  left: 0px;
   top: 399px;
   overflow-x: auto;
 }
 
 .rectangle-94 {
   background: #ffffff;
+  // border-radius: 15px;
+  // min-width: 648.69%;
+  // height: 54px;
+  // position: relative;
+  // left: calc(50% - 177.5px);
+  // top: 41px;
+  // margin-top: 2px;
+  // display: inline-grid;
+  // inline-size: auto;
+
   border-radius: 15px;
-  min-width: 648.69%;
+  min-width: 572.90%;
   height: 54px;
   position: relative;
-  left: calc(50% - 177.5px);
+  left: 0px;
   top: 41px;
   margin-top: 2px;
   display: inline-grid;
@@ -227,13 +255,6 @@ body {
 .dropdown:hover .dropdown-options {
   position: relative;
   display: inline-block;
-}
-
-.dropdown-options a {
-  display: block;
-  text-decoration: none;
-  /* padding: 20px 40px; */
-  height: 96px;
 }
 
 .dropdown-options a:hover {
@@ -1599,9 +1620,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 274px;
-  top: 15px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 15px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .total {
@@ -1623,9 +1646,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 45px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .pago {
@@ -1647,9 +1672,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 265px;
-  top: 75px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .cliente {
@@ -1671,10 +1698,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  white-space: pre;
-  left: 269px;
-  top: 105px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .salida {
@@ -1696,9 +1724,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 135px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .tratamiento {
@@ -1720,9 +1750,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 165px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-casa {
@@ -1744,9 +1776,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 195px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 ._153 {
@@ -1768,9 +1802,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 225px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-terapeuta {
@@ -1792,9 +1828,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 255px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-encargada {
@@ -1816,9 +1854,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 285px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-taxista {
@@ -1840,9 +1880,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 315px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .bebida-casa {
@@ -1864,9 +1906,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 345px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .bebida-terap {
@@ -1888,9 +1932,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 375px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .tabaco {
@@ -1912,9 +1958,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 405px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .vitamina {
@@ -1936,9 +1984,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 435px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .propina {
@@ -1960,9 +2010,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 465px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .otros {
@@ -1984,9 +2036,11 @@ ion-select::part(placeholder) {
   font-size: 16px;
   line-height: 125%;
   font-weight: 500;
-  position: absolute;
-  left: 295px;
-  top: 495px;
+  display: grid;
+  margin-right: 29px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
 }
 
 .rectangle-112 {
@@ -2052,4 +2106,124 @@ ion-select::part(placeholder) {
   position: absolute;
   left: 15px;
   top: 573px;
+}
+
+@media only screen and (min-device-width: 350px) and (max-device-width: 370px) {
+
+  .filtros {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 278.06px;
+    top: 312px;
+    width: 55.04px;
+    height: 23.42px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .icon2 {
+    border-radius: 0px;
+    width: 6.67%;
+    height: 2.07%;
+    position: absolute;
+    left: 71.03%;
+    bottom: 69.9%;
+    top: 28.03%;
+    overflow: visible;
+  }
+
+  .capa-1 {
+    width: 27px;
+    height: 29px;
+    position: absolute;
+    left: 179px;
+    top: 309px;
+    overflow: visible;
+  }
+
+  .frame-76 {
+    // width: 316px;
+    // height: 587px;
+    // position: absolute;
+    // left: 17px;
+    // top: 399px;
+    // overflow-x: auto;
+
+    width: -webkit-fill-available;
+    height: 587px;
+    position: absolute;
+    left: 0px;
+    top: 399px;
+    overflow-x: auto;
+  }
+
+  .rectangle-94 {
+    border-radius: 15px;
+    min-width: 728.58%;
+    height: 54px;
+    left: calc(50% - 158.5px);
+    top: 41px;
+    margin-top: 2px;
+    inline-size: auto;
+  }
+
+  .pop-up-filtros {
+    height: 641px;
+    position: sticky;
+    top: 11px;
+    z-index: 1;
+  }
+
+  .sc-ion-input-md-h[name=hourStart] {
+    left: 60.39%;
+  }
+
+  .sc-ion-input-md-h[name=hourEnd] {
+    left: 60.39%;
+  }
+
+  ._icon {
+    width: 2.45%;
+    height: 2.96%;
+    position: absolute;
+    right: 55.86%;
+    left: 48.19%;
+    bottom: 74.57%;
+    top: 22.76%;
+    transform: translate(-20px, -1px);
+    overflow: visible;
+  }
+
+  ._icon2 {
+    width: 2.45%;
+    height: 2.96%;
+    position: absolute;
+    right: 5.45%;
+    left: 99.04%;
+    bottom: 74.57%;
+    top: 22.46%;
+    transform: translate(-20px, -1px);
+    overflow: visible;
+  }
+
+  .filtrar {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 236px;
+    top: 566px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
 }

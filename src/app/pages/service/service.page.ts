@@ -198,7 +198,7 @@ export class ServicePage implements OnInit {
     let service
     this.serviceManager.getById(this.idUser).subscribe((rp) => {
       if (rp[0]['rol'] == 'administrador') {
-        this.serviceService.getServicio().subscribe((rp: any) => {
+        this.serviceService.getFechaHoy(this.dateStart).subscribe((rp: any) => {
           this.servicio = rp
           service = rp
 
