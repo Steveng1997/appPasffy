@@ -91,6 +91,8 @@ export class ServicePage implements OnInit {
   client: string
   exit: string
   treatment: string
+  treatment2: string
+  therapist: string
   house1: string
   house2: string
   therap: string
@@ -788,10 +790,13 @@ export class ServicePage implements OnInit {
       if (services.salida != "") this.exit = services.salida
       else this.exit = 'N/A'
 
+      this.treatment2 = services.servicio
+
       this.treatment = services.servicio
       this.house1 = services.numberPiso1
       this.house2 = services.numberPiso2
       this.therap = services.numberTerap
+      this.therapist = services.numberTerap
       this.manag = services.numberEncarg
       this.taxi = services.numberTaxi
       this.drinkHouse = services.bebidas

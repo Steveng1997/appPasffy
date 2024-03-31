@@ -5,12 +5,6 @@
 
 ion-grid {
   background: var(--verde-claro, #e8f2ef);
-  // width: -webkit-fill-available;
-  // height: min-content;
-  // position: absolute;
-  // left: 0px;
-  // top: 0px;
-
   position: absolute;
   left: 0px;
   top: -23px;
@@ -32,13 +26,6 @@ ion-grid {
 }
 
 .rectangle-92 {
-  // background: var(--verde, #1fb996);
-  // width: -webkit-fill-available;
-  // height: 370px;
-  // position: absolute;
-  // left: 0px;
-  // top: 0px;
-
   background: var(--verde, #1fb996);
   width: 431px;
   height: 370px;
@@ -184,13 +171,6 @@ ion-grid {
 }
 
 .frame-76 {
-  // width: 355px;
-  // height: 587px;
-  // position: absolute;
-  // left: 20px;
-  // top: 399px;
-  // overflow-x: auto;
-
   width: -webkit-fill-available;
   height: 587px;
   position: absolute;
@@ -201,16 +181,6 @@ ion-grid {
 
 .rectangle-94 {
   background: #ffffff;
-  // border-radius: 15px;
-  // min-width: 648.69%;
-  // height: 54px;
-  // position: relative;
-  // left: calc(50% - 177.5px);
-  // top: 41px;
-  // margin-top: 2px;
-  // display: inline-grid;
-  // inline-size: auto;
-
   border-radius: 15px;
   min-width: 572.90%;
   height: 54px;
@@ -280,13 +250,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
-  left: 2215px;
+  left: 2184px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .otros9 {
@@ -296,13 +266,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
-  left: 2096px;
+  left: 2071px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .vitamina9 {
@@ -312,13 +282,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
-  left: 1976px;
+  left: 1961px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .tabaco9 {
@@ -328,13 +298,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
-  left: 1856px;
+  left: 1837px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .bebida-terap9 {
@@ -344,13 +314,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
-  left: 1736px;
+  left: 1738px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .bebida-casa9 {
@@ -360,13 +330,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
   left: 1617px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-encargada9 {
@@ -376,13 +346,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
   left: 1497px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-terapeuta9 {
@@ -392,13 +362,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
-  left: 1377px;
+  left: 1372px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-casa9 {
@@ -408,13 +378,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
-  left: 1257px;
+  left: 1236px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-casa18 {
@@ -424,44 +394,49 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
-  left: 1135px;
+  left: 1114px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .cliente9 {
   color: #3c3c3c;
-  text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 117px;
   position: absolute;
-  left: 942px;
+  left: 979px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: start;
+  justify-items: start;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .pago9 {
   color: #3c3c3c;
-  text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
+  width: 75px;
   position: absolute;
-  left: 814px;
+  left: 832px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: start;
+  justify-items: start;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .propina9 {
@@ -471,13 +446,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
-  left: 703px;
+  left: 687px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .tratamiento9 {
@@ -487,13 +462,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 80px;
   position: absolute;
-  left: 580px;
+  left: 578px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .total9 {
@@ -503,13 +478,13 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 70px;
   position: absolute;
-  left: 456px;
+  left: 431px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .minuto9 {
@@ -545,43 +520,56 @@ body {
 
 .terapeuta9 {
   color: #3c3c3c;
-  text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
+  width: 76px;
   position: absolute;
-  // left: 145px;
-  left: 139px;
+  left: 130px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: start;
+  justify-items: start;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .encargada9 {
   color: #3c3c3c;
-  text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
+  width: 76px;
   position: absolute;
-  left: 41px;
+  left: 27px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: start;
+  justify-items: start;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .ellipse-18 {
+  // background: var(--verde, #1fb996);
+  // border-radius: 50%;
+  // width: 8px;
+  // height: 8px;
+  // position: absolute;
+  // left: 20px;
+  // top: 66px;
+
   background: var(--verde, #1fb996);
   border-radius: 50%;
-  width: 8px;
-  height: 8px;
+  width: 13px;
+  height: 13px;
   position: absolute;
-  left: 20px;
-  top: 66px;
+  left: 9px;
+  top: 63px;
 }
 
 .taxi10 {
@@ -1581,13 +1569,6 @@ ion-select::part(placeholder) {
 // Detail
 
 .rectangle-115 {
-  // background: #d9d9d9;
-  // width: 307px;
-  // height: 3px;
-  // position: absolute;
-  // left: 36px;
-  // top: 492px;
-
   background: #d9d9d9;
   width: 307px;
   height: 3px;
@@ -2108,122 +2089,115 @@ ion-select::part(placeholder) {
   top: 573px;
 }
 
-@media only screen and (min-device-width: 350px) and (max-device-width: 370px) {
+// @media only screen and (min-device-width: 350px) and (max-device-width: 370px) {
 
-  .filtros {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 400;
-    position: absolute;
-    left: 278.06px;
-    top: 312px;
-    width: 55.04px;
-    height: 23.42px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-  }
+//   .filtros {
+//     color: #ffffff;
+//     text-align: left;
+//     font-family: "Inter-Regular", sans-serif;
+//     font-size: 16px;
+//     line-height: 125%;
+//     font-weight: 400;
+//     position: absolute;
+//     left: 278.06px;
+//     top: 312px;
+//     width: 55.04px;
+//     height: 23.42px;
+//     display: flex;
+//     align-items: flex-end;
+//     justify-content: flex-start;
+//   }
 
-  .icon2 {
-    border-radius: 0px;
-    width: 6.67%;
-    height: 2.07%;
-    position: absolute;
-    left: 71.03%;
-    bottom: 69.9%;
-    top: 28.03%;
-    overflow: visible;
-  }
+//   .icon2 {
+//     border-radius: 0px;
+//     width: 6.67%;
+//     height: 2.07%;
+//     position: absolute;
+//     left: 71.03%;
+//     bottom: 69.9%;
+//     top: 28.03%;
+//     overflow: visible;
+//   }
 
-  .capa-1 {
-    width: 27px;
-    height: 29px;
-    position: absolute;
-    left: 179px;
-    top: 309px;
-    overflow: visible;
-  }
+//   .capa-1 {
+//     width: 27px;
+//     height: 29px;
+//     position: absolute;
+//     left: 179px;
+//     top: 309px;
+//     overflow: visible;
+//   }
 
-  .frame-76 {
-    // width: 316px;
-    // height: 587px;
-    // position: absolute;
-    // left: 17px;
-    // top: 399px;
-    // overflow-x: auto;
+//   .frame-76 {
+//     width: -webkit-fill-available;
+//     height: 587px;
+//     position: absolute;
+//     left: 0px;
+//     top: 399px;
+//     overflow-x: auto;
+//   }
 
-    width: -webkit-fill-available;
-    height: 587px;
-    position: absolute;
-    left: 0px;
-    top: 399px;
-    overflow-x: auto;
-  }
+//   .rectangle-94 {
+//     border-radius: 15px;
+//     min-width: 728.58%;
+//     height: 54px;
+//     left: calc(50% - 158.5px);
+//     top: 41px;
+//     margin-top: 2px;
+//     inline-size: auto;
+//   }
 
-  .rectangle-94 {
-    border-radius: 15px;
-    min-width: 728.58%;
-    height: 54px;
-    left: calc(50% - 158.5px);
-    top: 41px;
-    margin-top: 2px;
-    inline-size: auto;
-  }
+//   .pop-up-filtros {
+//     height: 641px;
+//     position: sticky;
+//     top: 11px;
+//     z-index: 1;
+//   }
 
-  .pop-up-filtros {
-    height: 641px;
-    position: sticky;
-    top: 11px;
-    z-index: 1;
-  }
+//   .sc-ion-input-md-h[name=hourStart] {
+//     left: 60.39%;
+//   }
 
-  .sc-ion-input-md-h[name=hourStart] {
-    left: 60.39%;
-  }
+//   .sc-ion-input-md-h[name=hourEnd] {
+//     left: 60.39%;
+//   }
 
-  .sc-ion-input-md-h[name=hourEnd] {
-    left: 60.39%;
-  }
+//   ._icon {
+//     width: 2.45%;
+//     height: 2.96%;
+//     position: absolute;
+//     right: 55.86%;
+//     left: 48.19%;
+//     bottom: 74.57%;
+//     top: 22.76%;
+//     transform: translate(-20px, -1px);
+//     overflow: visible;
+//   }
 
-  ._icon {
-    width: 2.45%;
-    height: 2.96%;
-    position: absolute;
-    right: 55.86%;
-    left: 48.19%;
-    bottom: 74.57%;
-    top: 22.76%;
-    transform: translate(-20px, -1px);
-    overflow: visible;
-  }
+//   ._icon2 {
+//     width: 2.45%;
+//     height: 2.96%;
+//     position: absolute;
+//     right: 5.45%;
+//     left: 99.04%;
+//     bottom: 74.57%;
+//     top: 22.46%;
+//     transform: translate(-20px, -1px);
+//     overflow: visible;
+//   }
 
-  ._icon2 {
-    width: 2.45%;
-    height: 2.96%;
-    position: absolute;
-    right: 5.45%;
-    left: 99.04%;
-    bottom: 74.57%;
-    top: 22.46%;
-    transform: translate(-20px, -1px);
-    overflow: visible;
-  }
-
-  .filtrar {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Bold", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 700;
-    position: absolute;
-    left: 236px;
-    top: 566px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-  }
-}
+//   .filtrar {
+//     color: #ffffff;
+//     text-align: left;
+//     font-family: "Inter-Bold", sans-serif;
+//     font-size: 16px;
+//     line-height: 125%;
+//     font-weight: 700;
+//     position: absolute;
+//     left: 236px;
+//     top: 566px;
+//     display: flex;
+//     align-items: flex-end;
+//     justify-content: flex-start;
+//   }
+// }
