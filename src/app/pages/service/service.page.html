@@ -205,7 +205,7 @@
           | paymentMethod: selectedFormPago | therapist: selectedTerapeuta | manager: selectedEncargada 
           | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd)" (click)="detail(services)">
             <div style="position: relative; top: -42px">
-              <div class="ellipse-18"></div>
+              <div [ngClass]="{'ellipse-18': services?.nota !== ''}"></div>
               <div class="encargada9">{{services.encargada}}</div>
               <div class="terapeuta9">{{services.terapeuta}}</div>
               <div class="tiempo9">{{services.horaStart}} - {{services.horaEnd}}</div>
