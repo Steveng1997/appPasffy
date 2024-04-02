@@ -16,9 +16,19 @@ export class TabsPage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const params = this.activatedRoute.snapshot.params;
+    const params = this.activatedRoute.snapshot.params
     this.id = params['id']
-    document.getElementById('services').style.stroke = '#3C3C3C'
+
+    const param = this.activatedRoute.snapshot['_routerState'].url
+    const arr = param.split('/')
+    const route = arr[arr.length - 1]
+
+    if(route == 'vision') {
+      document.getElementById('services').style.stroke = '#3C3C3C'
+      document.getElementById('liquidation').style.stroke = '#3C3C3C'
+      document.getElementById('closing').style.stroke = '#3C3C3C'
+      document.getElementById('vision').style.stroke = '#00AF87'
+    }
   }
 
   services() {
@@ -30,11 +40,7 @@ export class TabsPage implements OnInit {
   }
 
   vision() {
-    this.router.navigate([`tabs/${this.id}/vision`])
-    document.getElementById('services').style.stroke = '#3C3C3C'
-    document.getElementById('liquidation').style.stroke = '#3C3C3C'
-    document.getElementById('closing').style.stroke = '#3C3C3C'
-    document.getElementById('vision').style.stroke = '#00AF87'
+    location.replace(`tabs/${this.id}/vision`)
   }
 
   new() {

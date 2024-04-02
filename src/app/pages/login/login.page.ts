@@ -7,6 +7,7 @@ import { ModelManager } from 'src/app/core/models/manager';
 
 // Services
 import { LoginService } from 'src/app/core/services/login/login.service';
+import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.service';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +40,7 @@ export class LoginPage {
 
   constructor(
     public router: Router,
+    private ionLoaderService: IonLoaderService,
     private serviceLogin: LoginService
   ) { }
 
@@ -69,12 +71,14 @@ export class LoginPage {
   onLogin() {
     if (this.manager.usuario != "") {
       if (this.manager.pass != "") {
+        this.ionLoaderService.simpleLoader()
         this.serviceLogin.getByUsuario(this.manager.usuario).subscribe((resp: any) => {
           if (resp.length > 0) {
             if (resp[0]['activo'] == true) {
               this.serviceLogin.getByUserAndPass(this.manager.usuario, this.manager.pass).subscribe((rp: any) => {
                 if (rp.length > 0) {
                   this.dateTpm()
+                  this.ionLoaderService.dismissLoader()
                   location.replace(`tabs/${resp[0].id}/vision`)
                 } else {
                   Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'La contraseña es incorrecta' })

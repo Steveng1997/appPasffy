@@ -1379,7 +1379,7 @@ ion-select::part(placeholder) {
   position: absolute;
   right: 55.86%;
   left: 19.69%;
-  top: 26%;
+  top: 25.9%;
   transform: translate(-20px, -1px);
   border-radius: 15px;
 }
@@ -2147,6 +2147,131 @@ ion-select::part(placeholder) {
     min-width: 651.58%;
     height: 54px;
     left: calc(50% - 176.5px);
+    top: 41px;
+    margin-top: 2px;
+    inline-size: auto;
+  }
+
+  .pop-up-filtros {
+    height: 641px;
+    position: sticky;
+    top: 11px;
+    z-index: 1;
+  }
+
+  .sc-ion-input-md-h[name=hourStart] {
+    left: 60.39%;
+  }
+
+  .sc-ion-input-md-h[name=hourEnd] {
+    left: 60.39%;
+  }
+
+  ._icon {
+    width: 2.45%;
+    height: 2.96%;
+    position: absolute;
+    right: 55.86%;
+    left: 48.19%;
+    bottom: 74.57%;
+    top: 22.76%;
+    transform: translate(-20px, -1px);
+    overflow: visible;
+  }
+
+  ._icon2 {
+    width: 2.45%;
+    height: 2.96%;
+    position: absolute;
+    right: 5.45%;
+    left: 99.04%;
+    bottom: 74.57%;
+    top: 22.46%;
+    transform: translate(-20px, -1px);
+    overflow: visible;
+  }
+
+  .filtrar {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 236px;
+    top: 566px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+}
+
+@media only screen and (min-device-width: 420px) and (max-device-width: 450px) {
+
+  .filtros {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 348.06px;
+    top: 312px;
+    width: 55.04px;
+    height: 23.42px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .icon2 {
+    border-radius: 0px;
+    width: 6.67%;
+    height: 2.07%;
+    position: absolute;
+    left: 75.3%;
+    bottom: 69.9%;
+    top: 28.03%;
+    overflow: visible;
+  }
+
+  .capa-1 {
+    width: 27px;
+    height: 29px;
+    position: absolute;
+    left: 248px;
+    top: 309px;
+    overflow: visible;
+  }
+
+  .textSearch {
+    background-color: var(--verde-claro, #e8f2ef);
+    width: 35.45%;
+    min-height: 2.36%;
+    position: absolute;
+    right: 55.86%;
+    left: 19.69%;
+    top: 28%;
+    transform: translate(-20px, -1px);
+    border-radius: 15px;
+  }
+
+  .frame-76 {
+    width: 426px;
+    height: 587px;
+    position: absolute;
+    left: -5px;
+    top: 399px;
+    overflow-x: auto;
+  }
+
+  .rectangle-94 {
+    border-radius: 15px;
+    min-width: 540.58%;
+    height: 54px;
+    left: calc(50% - 212.5px);
     top: 41px;
     margin-top: 2px;
     inline-size: auto;
