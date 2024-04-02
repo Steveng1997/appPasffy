@@ -24,16 +24,16 @@ ion-grid {
 .rectangle-93 {
   background: var(--verde-claro, #e8f2ef);
   width: -webkit-fill-available;
-  height: 1072px;
+  height: 1113px;
   position: absolute;
   left: 0px;
-  top: 41px;
+  top: 0px;
 }
 
 .rectangle-92 {
   background: var(--verde, #1fb996);
   width: 431px;
-  height: 370px;
+  height: 320px;
   position: absolute;
   left: -5px;
   top: 0px;
@@ -48,7 +48,7 @@ ion-grid {
   font-weight: 700;
   position: absolute;
   left: 34px;
-  top: 96px;
+  top: 48px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -74,7 +74,7 @@ ion-grid {
   font-weight: 400;
   position: absolute;
   left: 330.06px;
-  top: 312px;
+  top: 264px;
   width: 55.04px;
   height: 23.42px;
   display: flex;
@@ -87,7 +87,7 @@ ion-grid {
   height: 29px;
   position: absolute;
   left: 230px;
-  top: 309px;
+  top: 261px;
   overflow: visible;
 }
 
@@ -97,20 +97,30 @@ ion-grid {
   position: absolute;
   right: 88.53%;
   left: 5.33%;
-  bottom: 69.9%;
-  top: 28.03%;
+  bottom: 74.21%;
+  top: 23.72%;
   overflow: visible;
 }
 
 .icon2 {
+  // border-radius: 0px;
+  // width: 6.67%;
+  // height: 2.07%;
+  // position: absolute;
+  // right: 19.2%;
+  // left: 74.13%;
+  // bottom: 74.21%;
+  // top: 23.72%;
+  // overflow: visible;
+
   border-radius: 0px;
-  width: 6.67%;
-  height: 2.07%;
+  width: 9%;
+  height: 4.8%;
   position: absolute;
   right: 19.2%;
-  left: 74.13%;
-  bottom: 69.9%;
-  top: 28.03%;
+  left: 72.9%;
+  bottom: 74.21%;
+  top: 22.4%;
   overflow: visible;
 }
 
@@ -134,7 +144,7 @@ ion-grid {
   font-weight: 700;
   position: absolute;
   left: calc(50% - 59.5px);
-  top: 156px;
+  top: 108px;
   width: 118px;
   height: 29px;
   display: flex;
@@ -149,7 +159,7 @@ ion-grid {
   height: 2px;
   position: absolute;
   left: calc(50% - 61.5px);
-  top: 184px;
+  top: 136px;
 }
 
 .icon3 {
@@ -158,8 +168,8 @@ ion-grid {
   position: absolute;
   right: 5.33%;
   left: 91.47%;
-  bottom: 83.56%;
-  top: 14.29%;
+  bottom: 87.87%;
+  top: 9.97%;
   overflow: visible;
 }
 
@@ -169,18 +179,18 @@ ion-grid {
   position: absolute;
   right: 88.27%;
   left: 8.53%;
-  bottom: 81.4%;
-  top: 16.44%;
+  bottom: 85.71%;
+  top: 12.13%;
   transform: translate(-13px, -25px);
   overflow: visible;
 }
 
 .frame-76 {
   width: -webkit-fill-available;
-  height: 587px;
+  height: 636px;
   position: absolute;
   left: 0px;
-  top: 399px;
+  top: 349px;
   overflow-x: auto;
 }
 
@@ -410,6 +420,7 @@ body {
 
 .cliente9 {
   color: #3c3c3c;
+  text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 20px;
   line-height: 125%;
@@ -428,6 +439,7 @@ body {
 
 .pago9 {
   color: #3c3c3c;
+  text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 20px;
   line-height: 125%;
@@ -525,6 +537,7 @@ body {
 
 .terapeuta9 {
   color: #3c3c3c;
+  text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 20px;
   line-height: 125%;
@@ -543,6 +556,7 @@ body {
 
 .encargada9 {
   color: #3c3c3c;
+  text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 20px;
   line-height: 125%;
@@ -560,21 +574,13 @@ body {
 }
 
 .ellipse-18 {
-  // background: var(--verde, #1fb996);
-  // border-radius: 50%;
-  // width: 8px;
-  // height: 8px;
-  // position: absolute;
-  // left: 20px;
-  // top: 66px;
-
   background: var(--verde, #1fb996);
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   position: absolute;
   left: 4px;
-  top: 59px;
+  top: 63px;
 }
 
 .taxi10 {
@@ -873,7 +879,7 @@ body {
   height: 50px;
   position: absolute;
   left: calc(50% - 167.5px);
-  top: 215px;
+  top: 167px;
 }
 
 .rectangle-18 {
@@ -1379,7 +1385,7 @@ ion-select::part(placeholder) {
   position: absolute;
   right: 55.86%;
   left: 19.69%;
-  top: 25.9%;
+  top: 21.5%;
   transform: translate(-20px, -1px);
   border-radius: 15px;
 }

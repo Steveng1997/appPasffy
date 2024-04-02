@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -48,6 +48,7 @@ export class ServicePage implements OnInit {
   selectedEncargada: string
   selectedFormPago: string
 
+  today: boolean = true
   dateStart: string
   dateEnd: string
   hourStart: string
@@ -198,6 +199,7 @@ export class ServicePage implements OnInit {
 
   getServices = async () => {
     let service
+    this.dateTodayCurrent = 'HOY'
     this.serviceManager.getById(this.idUser).subscribe((rp) => {
       if (rp[0]['rol'] == 'administrador') {
         this.serviceService.getFechaHoy(this.dateStart).subscribe((rp: any) => {
@@ -1130,6 +1132,13 @@ export class ServicePage implements OnInit {
 
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
 
+        if (fechaEnd == fechaHoy) {
+          this.today = true
+          this.dateTodayCurrent = 'HOY'
+        } else {
+          this.today = false
+        }
+
         this.day = Number(convertDia)
         this.month = month
 
@@ -1248,6 +1257,13 @@ export class ServicePage implements OnInit {
         }
 
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
+
+        if (fechaEnd == fechaHoy) {
+          this.today = true
+          this.dateTodayCurrent = 'HOY'
+        } else {
+          this.today = false
+        }
 
         this.day = Number(convertDia)
         this.month = month
@@ -1412,6 +1428,13 @@ export class ServicePage implements OnInit {
 
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
 
+        if (fechaEnd == fechaHoy) {
+          this.today = true
+          this.dateTodayCurrent = 'HOY'
+        } else {
+          this.today = false
+        }
+
         this.day = Number(convertDia)
         this.month = month
 
@@ -1533,6 +1556,13 @@ export class ServicePage implements OnInit {
 
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
 
+        if (fechaEnd == fechaHoy) {
+          this.today = true
+          this.dateTodayCurrent = 'HOY'
+        } else {
+          this.today = false
+        }
+
         this.day = Number(convertDia)
         this.month = month
 
@@ -1634,5 +1664,12 @@ export class ServicePage implements OnInit {
         })
       }
     })
+  }
+
+  @HostListener('window:wheel', []) onWindowScroll() {
+    // console.log(event);
+    console.log(event['layerY']);
+    if (event['layerY'] >= 15) document.getElementById('frame').style.color = 'red'
+    else document.getElementById('frame').style.color = 'blue'
   }
 }

@@ -33,6 +33,7 @@ export class VisionPage implements OnInit {
   therapist: any
   horaEnd: string
   horaHoy: string
+  today: boolean = true
 
   // TOTALES
   totalVision: number
@@ -538,6 +539,7 @@ export class VisionPage implements OnInit {
 
   async getServiceByManager(manager: string) {
     this.todaysDate()
+    this.dateTodayCurrent = 'HOY'
     this.service.getEncargadaAndDate(this.fechaDiaHoy, manager['nombre']).subscribe((rp: any) => {
       this.vision = rp
 
@@ -592,6 +594,7 @@ export class VisionPage implements OnInit {
 
   async getService() {
     this.todaysDate()
+    this.dateTodayCurrent = 'HOY'
 
     this.service.getFechaHoy(this.fechaDiaHoy).subscribe((datoServicio: any) => {
       this.vision = datoServicio
@@ -1313,6 +1316,13 @@ export class VisionPage implements OnInit {
 
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
 
+        if (fechaEnd == fechaHoy) {
+          this.today = true
+          this.dateTodayCurrent = 'HOY'
+        } else {
+          this.today = false
+        }
+
         this.day = Number(convertDia)
         this.month = month
 
@@ -1426,6 +1436,13 @@ export class VisionPage implements OnInit {
         }
 
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
+
+        if (fechaEnd == fechaHoy) {
+          this.today = true
+          this.dateTodayCurrent = 'HOY'
+        } else {
+          this.today = false
+        }
 
         this.day = Number(convertDia)
         this.month = month
@@ -1585,6 +1602,13 @@ export class VisionPage implements OnInit {
 
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
 
+        if (fechaEnd == fechaHoy) {
+          this.today = true
+          this.dateTodayCurrent = 'HOY'
+        } else {
+          this.today = false
+        }
+
         this.day = Number(convertDia)
         this.month = month
 
@@ -1702,6 +1726,13 @@ export class VisionPage implements OnInit {
         }
 
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
+
+        if (fechaEnd == fechaHoy) {
+          this.today = true
+          this.dateTodayCurrent = 'HOY'
+        } else {
+          this.today = false
+        }
 
         this.day = Number(convertDia)
         this.month = month

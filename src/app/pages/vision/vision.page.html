@@ -45,7 +45,8 @@
 
         <div class="group-17">
           <div class="group-2">
-            <div class="_28-de-enero">{{day}} de {{month}}</div>
+            <div *ngIf="!today" class="_28-de-enero">{{day}} de {{month}}</div>
+            <div *ngIf="today" class="_28-de-enero">{{dateTodayCurrent}}</div>
             <div class="rectangle-10"></div>
           </div>
         </div>
