@@ -26,6 +26,10 @@ export class ServicePage implements OnInit {
   details: boolean = false
   textSearch: boolean = false
   filter: boolean = false
+  administratorRole: boolean = false
+  totals: boolean = false
+  today: boolean = true
+
   filterSearch: string
 
   idService: any
@@ -48,7 +52,6 @@ export class ServicePage implements OnInit {
   selectedEncargada: string
   selectedFormPago: string
 
-  today: boolean = true
   dateStart: string
   dateEnd: string
   hourStart: string
@@ -62,7 +65,6 @@ export class ServicePage implements OnInit {
   horario: any
 
   idUser: number
-  administratorRole: boolean = false
 
   // Servicios
   totalServicio: number
@@ -1008,6 +1010,10 @@ export class ServicePage implements OnInit {
     this.filter = false
   }
 
+  closeTotals() {
+    this.totals = false
+  }
+
   validateCheck() {
     let Bizum = localStorage.getItem('Bizum');
     let Cash = localStorage.getItem('Efectivo');
@@ -1664,6 +1670,10 @@ export class ServicePage implements OnInit {
         })
       }
     })
+  }
+
+  filterTotal() {
+    this.totals = true
   }
 
   @HostListener('window:wheel', []) onWindowScroll() {

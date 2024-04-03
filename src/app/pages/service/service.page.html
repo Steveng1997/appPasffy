@@ -6,8 +6,49 @@
         <div class="rectangle-93"></div>
         <div class="rectangle-92"></div>
         <div class="servicios-realizados">Servicios Realizados</div>
-        <div class="group-40">
+        <!-- <div class="group-40">
           <div class="filtros" (click)="btnFilter()">Filtros</div>
+        </div> -->
+
+        <!-- Filter totales -->
+
+        <div class="pop-up-totales" *ngIf="totals">
+          <div class="rectangle-_30"></div>
+          <div class="totales">Totales</div>
+          <div class="filtrar">Filtrar</div>
+          <div class="a-casa_1">A casa</div>
+          <div class="a-casa_2">A casa</div>
+          <div class="a-casa_3">A terapeuta</div>
+          <div class="a-casa4">A encargada</div>
+          <div class="a-casa5">A taxista</div>
+          <div class="a-casa6">Bebida casa</div>
+          <div class="a-casa7">Bebida terapeuta</div>
+          <div class="a-casa8">Tabaco</div>
+          <div class="a-casa_9">Vitamina</div>
+          <div class="a-casa10">Propina</div>
+          <div class="a-casa11">Otros</div>
+          <div class="a-casa12">Taxi</div>
+          <div class="_tratamiento">Tratamiento</div>
+
+          <svg class="x-_close" width="27" height="27" viewBox="0 0 27 27" fill="none"
+            xmlns="http://www.w3.org/2000/svg" (click)="closeTotals()">
+            <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+
+          <div class="_20-000">20.000 €</div>
+          <div class="_20-0002">20.000 €</div>
+          <div class="_20-0003">20.000 €</div>
+          <div class="_20-0004">20.000 €</div>
+          <div class="_20-0005">20.000 €</div>
+          <div class="_20-0006">20.000 €</div>
+          <div class="_20-0007">20.000 €</div>
+          <div class="_20-0008">20.000 €</div>
+          <div class="_20-0009">20.000 €</div>
+          <div class="_20-00010">20.000 €</div>
+          <div class="_20-00011">20.000 €</div>
+          <div class="_20-00012">20.000 €</div>
+          <div class="_20-00013">20.000 €</div>
         </div>
 
         <!-- Filter -->
@@ -86,7 +127,8 @@
               stroke-linejoin="round" />
           </svg>
 
-          <svg class="_icon2" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="_icon2" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg"
+            (click)="btnFilter()">
             <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
@@ -154,15 +196,16 @@
         <ion-input *ngIf="textSearch" class="textSearch" type="text" name="search" [(ngModel)]="filterSearch"
           (ngModelChange)="textsearch()"></ion-input>
 
-        <svg class="icon2" width="25" height="23" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="btnFilter()">
+        <svg class="icon2" width="25" height="23" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"
+          (click)="btnFilter()">
           <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
             d="M368 128h80M64 128h240M368 384h80M64 384h240M208 256h240M64 256h80" />
-          <circle cx="336" cy="128" r="32" fill="none" stroke="white" stroke-linecap="round"
-            stroke-linejoin="round" stroke-width="32" />
-          <circle cx="176" cy="256" r="32" fill="none" stroke="white" stroke-linecap="round"
-            stroke-linejoin="round" stroke-width="32" />
-          <circle cx="336" cy="384" r="32" fill="none" stroke="white" stroke-linecap="round"
-            stroke-linejoin="round" stroke-width="32" />
+          <circle cx="336" cy="128" r="32" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="32" />
+          <circle cx="176" cy="256" r="32" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="32" />
+          <circle cx="336" cy="384" r="32" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="32" />
         </svg>
 
         <!-- <svg class="icon2" width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -262,7 +305,7 @@
                 <div class="_03">{{manag}} €</div>
                 <div class="bebida-casa">Bebida casa</div>
                 <div class="_04">{{taxi}} €</div>
-                <div class="bebida-terap">Bebida Terap</div>
+                <div class="bebida-terap">Bebida Terapeuta</div>
                 <div class="_05">{{drinkHouse}} €</div>
                 <div class="tabaco">Tabaco</div>
                 <div class="_06">{{drinkTherap}} €</div>
@@ -278,8 +321,11 @@
                 <div class="editar" (click)="edit(services.id)">Editar</div>
                 <div class="rectangle-117" (click)="edit(services.id)"></div>
 
+                <div class="eliminar2" (click)="edit(services.id)">Eliminar</div>
+                <div class="rectangle-118" (click)="edit(services.id)"></div>
+
                 <div class="rectangle-112" (click)="delete(services.id)"></div>
-                <div class="eliminar" (click)="delete(services.id)">Eliminar</div>
+                <div class="eliminar" (click)="delete(services.id)">Cancelar</div>
                 <svg class="trash-03" width="24" height="24" viewBox="0 0 24 24" fill="none"
                   xmlns="http://www.w3.org/2000/svg" (click)="delete(services.id)">
                   <path
@@ -293,7 +339,8 @@
 
         <div class="component-9">
           <div class="rectangle-18"></div>
-          <svg class="icon5" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="icon5" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg"
+            (click)="filterTotal()">
             <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#0B9A7A" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>

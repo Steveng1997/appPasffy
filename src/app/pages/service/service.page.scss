@@ -48,7 +48,7 @@ ion-grid {
   font-weight: 700;
   position: absolute;
   left: 34px;
-  top: 48px;
+  top: 51px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -74,7 +74,7 @@ ion-grid {
   font-weight: 400;
   position: absolute;
   left: 330.06px;
-  top: 264px;
+  top: 267px;
   width: 55.04px;
   height: 23.42px;
   display: flex;
@@ -86,8 +86,9 @@ ion-grid {
   width: 27px;
   height: 29px;
   position: absolute;
-  left: 230px;
-  top: 261px;
+  // left: 230px;
+  left: 74.13%;
+  top: 264px;
   overflow: visible;
 }
 
@@ -97,12 +98,23 @@ ion-grid {
   position: absolute;
   right: 88.53%;
   left: 5.33%;
-  bottom: 74.21%;
-  top: 23.72%;
+  bottom: 73.94%;
+  top: 23.99%;
   overflow: visible;
 }
 
 .icon2 {
+  border-radius: 0px;
+  width: 9.67%;
+  height: 5.07%;
+  position: absolute;
+  right: 19.2%;
+  // left: 74.13%;
+  left: 230px;
+  bottom: 73.94%;
+  top: 22.6%;
+  overflow: visible;
+
   // border-radius: 0px;
   // width: 6.67%;
   // height: 2.07%;
@@ -112,16 +124,6 @@ ion-grid {
   // bottom: 74.21%;
   // top: 23.72%;
   // overflow: visible;
-
-  border-radius: 0px;
-  width: 9%;
-  height: 4.8%;
-  position: absolute;
-  right: 19.2%;
-  left: 72.9%;
-  bottom: 74.21%;
-  top: 22.4%;
-  overflow: visible;
 }
 
 .group-17 {
@@ -144,7 +146,7 @@ ion-grid {
   font-weight: 700;
   position: absolute;
   left: calc(50% - 59.5px);
-  top: 108px;
+  top: 111px;
   width: 118px;
   height: 29px;
   display: flex;
@@ -159,7 +161,7 @@ ion-grid {
   height: 2px;
   position: absolute;
   left: calc(50% - 61.5px);
-  top: 136px;
+  top: 139px;
 }
 
 .icon3 {
@@ -168,8 +170,8 @@ ion-grid {
   position: absolute;
   right: 5.33%;
   left: 91.47%;
-  bottom: 87.87%;
-  top: 9.97%;
+  bottom: 87.6%;
+  top: 10.24%;
   overflow: visible;
 }
 
@@ -179,32 +181,29 @@ ion-grid {
   position: absolute;
   right: 88.27%;
   left: 8.53%;
-  bottom: 85.71%;
-  top: 12.13%;
+  bottom: 85.44%;
+  top: 12.4%;
   transform: translate(-13px, -25px);
   overflow: visible;
 }
 
 .frame-76 {
-  width: -webkit-fill-available;
-  height: 636px;
+  width: 412px;
+  height: 633px;
   position: absolute;
-  left: 0px;
-  top: 349px;
+  left: -5px;
+  top: 352px;
   overflow-x: auto;
 }
 
 .rectangle-94 {
   background: #ffffff;
   border-radius: 15px;
-  min-width: 572.90%;
+  width: 2320px;
   height: 54px;
-  position: relative;
-  left: 0px;
+  position: absolute;
+  left: calc(50% - 205.5px);
   top: 41px;
-  margin-top: 2px;
-  display: inline-grid;
-  inline-size: auto;
 }
 
 .details {
@@ -233,7 +232,7 @@ body {
   border-radius: 15px;
   margin-top: 100px;
   margin-bottom: -41px;
-  width: 350px;
+  width: 411px;
   height: 619px;
 }
 
@@ -251,7 +250,7 @@ body {
 .rectangle-95 {
   background: var(--verde-oscuro, #0b9a7a);
   border-radius: 10px;
-  width: 2303px;
+  width: 2321px;
   height: 34px;
   position: absolute;
   left: 0px;
@@ -444,7 +443,7 @@ body {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: 75px;
+  width: 132px;
   position: absolute;
   left: 832px;
   top: 57px;
@@ -497,7 +496,8 @@ body {
   font-weight: 400;
   width: 70px;
   position: absolute;
-  left: 431px;
+  // left: 431px;
+  left: 442px;
   top: 57px;
   display: flex;
   justify-content: end;
@@ -505,19 +505,33 @@ body {
 }
 
 .minuto9 {
+  // color: #3c3c3c;
+  // text-align: left;
+  // font-family: "Inter-Regular", sans-serif;
+  // font-size: 20px;
+  // line-height: 125%;
+  // font-weight: 400;
+  // width: max-content;
+  // position: absolute;
+  // left: 355px;
+  // top: 57px;
+  // display: flex;
+  // align-items: flex-end;
+  // justify-content: flex-start;
+
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
-  width: max-content;
+  width: 72px;
   position: absolute;
-  left: 355px;
+  left: 345px;
   top: 57px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .tiempo9 {
@@ -579,8 +593,8 @@ body {
   width: 14px;
   height: 14px;
   position: absolute;
-  left: 4px;
-  top: 63px;
+  left: 20px;
+  top: 66px;
 }
 
 .taxi10 {
@@ -807,7 +821,8 @@ body {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 464px;
+  // left: 464px;
+  left: 475px;
   top: 7px;
   display: flex;
   align-items: flex-end;
@@ -879,7 +894,7 @@ body {
   height: 50px;
   position: absolute;
   left: calc(50% - 167.5px);
-  top: 167px;
+  top: 170px;
 }
 
 .rectangle-18 {
@@ -895,7 +910,17 @@ body {
 }
 
 .icon5 {
-  width: 2.69%;
+  // width: 2.69%;
+  // height: 38%;
+  // position: absolute;
+  // right: 4.18%;
+  // left: 93.13%;
+  // bottom: 22%;
+  // top: 40%;
+  // transform: translate(-20px, -1px);
+  // overflow: visible;
+
+  width: 5.69%;
   height: 38%;
   position: absolute;
   right: 4.18%;
@@ -1385,7 +1410,7 @@ ion-select::part(placeholder) {
   position: absolute;
   right: 55.86%;
   left: 19.69%;
-  top: 21.5%;
+  top: 23.9%;
   transform: translate(-20px, -1px);
   border-radius: 15px;
 }
@@ -1577,6 +1602,487 @@ ion-select::part(placeholder) {
   justify-content: flex-start;
 }
 
+// Filter Total
+
+.pop-up-totales,
+.pop-up-totales * {
+  box-sizing: border-box;
+}
+
+.pop-up-totales {
+  height: 641px;
+  position: relative;
+  left: 29px;
+  top: 119px;
+  z-index: 1;
+}
+
+.rectangle-_30 {
+  background: #ffffff;
+  border-radius: 49px 49px 0px 0px;
+  width: 343px;
+  height: 641px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
+}
+
+.totales {
+  color: var(--verde, #1fb996);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 25px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 54px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.filtrar {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 236px;
+  top: 566px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa_1 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 164px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa_2 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa_3 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 236px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa4 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 272px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa5 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 308px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa6 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 344px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa7 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 380px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa8 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 416px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa_9 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 452px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa10 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 488px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa11 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 524px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.a-casa12 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 560px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._tratamiento {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 26px;
+  top: 128px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.x-_close {
+  width: 27px;
+  height: 27px;
+  position: absolute;
+  left: 300px;
+  top: 58px;
+  overflow: visible;
+}
+
+._20-000 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 128px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-0002 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 164px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-0003 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 200px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-0004 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 236px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-0005 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 272px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-0006 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 308px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-0007 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 344px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-0008 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 380px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-0009 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 416px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-00010 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 452px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-00011 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 488px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-00012 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 524px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+._20-00013 {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 222px;
+  top: 560px;
+  width: 93px;
+  height: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
 // Detail
 
 .rectangle-115 {
@@ -1601,7 +2107,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 15px;
 }
 
@@ -1613,7 +2119,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 15px;
   justify-content: end;
   justify-items: end;
@@ -1627,7 +2133,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 45px;
 }
 
@@ -1639,7 +2145,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1653,7 +2159,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 75px;
 }
 
@@ -1665,7 +2171,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1679,7 +2185,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 105px;
 }
 
@@ -1691,7 +2197,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1705,7 +2211,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 135px;
 }
 
@@ -1717,7 +2223,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1731,7 +2237,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 165px;
 }
 
@@ -1743,7 +2249,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1757,7 +2263,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 195px;
 }
 
@@ -1769,7 +2275,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1783,7 +2289,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 225px;
 }
 
@@ -1795,7 +2301,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1809,7 +2315,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 255px;
 }
 
@@ -1821,7 +2327,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1835,7 +2341,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 285px;
 }
 
@@ -1847,7 +2353,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1861,7 +2367,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 315px;
 }
 
@@ -1873,7 +2379,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1887,7 +2393,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 345px;
 }
 
@@ -1899,7 +2405,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1913,7 +2419,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 375px;
 }
 
@@ -1925,7 +2431,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1939,7 +2445,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 405px;
 }
 
@@ -1951,7 +2457,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1965,7 +2471,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 435px;
 }
 
@@ -1977,7 +2483,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -1991,7 +2497,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 465px;
 }
 
@@ -2003,7 +2509,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -2017,7 +2523,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 9px;
+  left: 23px;
   top: 495px;
 }
 
@@ -2029,7 +2535,7 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   display: grid;
-  margin-right: 29px;
+  margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
@@ -2038,11 +2544,11 @@ ion-select::part(placeholder) {
 .rectangle-112 {
   background: var(--verde, #1fb996);
   border-radius: 15px;
-  width: 164px;
-  height: 43px;
+  width: 135px;
+  height: 39px;
   position: absolute;
-  left: 155px;
-  top: 545px;
+  left: 195px;
+  top: 536px;
 }
 
 .group-79 {
@@ -2058,8 +2564,8 @@ ion-select::part(placeholder) {
   line-height: 115%;
   font-weight: 700;
   position: absolute;
-  left: 223px;
-  top: 558px;
+  left: 238px;
+  top: 548px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -2069,8 +2575,8 @@ ion-select::part(placeholder) {
   width: 24px;
   height: 24px;
   position: absolute;
-  left: 193px;
-  top: 554px;
+  left: 212px;
+  top: 543px;
   overflow: visible;
 }
 
@@ -2087,20 +2593,60 @@ ion-select::part(placeholder) {
   line-height: 115%;
   font-weight: 500;
   position: absolute;
-  left: 15px;
+  left: 23px;
   top: 556px;
 }
+
+.eliminar2 {
+  color: #7f7c7c;
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 15px;
+  line-height: 115%;
+  font-weight: 500;
+  position: absolute;
+  left: 108px;
+  top: 556px;
+}
+
 
 .rectangle-117 {
   background: #7f7c7c;
   width: 42px;
   height: 1px;
   position: absolute;
-  left: 15px;
+  left: 23px;
+  top: 573px;
+}
+
+.rectangle-118 {
+  background: #7f7c7c;
+  width: 62px;
+  height: 1px;
+  position: absolute;
+  left: 108px;
   top: 573px;
 }
 
 @media only screen and (min-device-width: 350px) and (max-device-width: 370px) {
+
+  .pop-up-totales {
+    height: 641px;
+    position: sticky;
+    top: 11px;
+    z-index: 1;
+  }
+
+  .dropdown-options {
+    position: fixed;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 15px;
+    margin-top: 100px;
+    margin-bottom: -41px;
+    width: 350px;
+    height: 619px;
+  }
 
   .filtros {
     color: #ffffff;
@@ -2121,12 +2667,13 @@ ion-select::part(placeholder) {
 
   .icon2 {
     border-radius: 0px;
-    width: 6.67%;
-    height: 2.07%;
+    width: 9.67%;
+    height: 5.07%;
     position: absolute;
-    left: 71.03%;
-    bottom: 69.9%;
-    top: 28.03%;
+    right: 19.2%;
+    left: 199px;
+    bottom: 73.94%;
+    top: 22.5%;
     overflow: visible;
   }
 
@@ -2134,150 +2681,27 @@ ion-select::part(placeholder) {
     width: 27px;
     height: 29px;
     position: absolute;
-    left: 179px;
-    top: 309px;
+    right: 88.53%;
+    left: 262px;
+    bottom: 73.94%;
+    top: 23.5%;
     overflow: visible;
   }
 
   .frame-76 {
     width: 353px;
-    height: 587px;
+    height: 630px;
     position: absolute;
     left: -5px;
-    top: 399px;
+    top: 353px;
     overflow-x: auto;
   }
 
   .rectangle-94 {
     border-radius: 15px;
-    min-width: 651.58%;
+    min-width: 657.4%;
     height: 54px;
     left: calc(50% - 176.5px);
-    top: 41px;
-    margin-top: 2px;
-    inline-size: auto;
-  }
-
-  .pop-up-filtros {
-    height: 641px;
-    position: sticky;
-    top: 11px;
-    z-index: 1;
-  }
-
-  .sc-ion-input-md-h[name=hourStart] {
-    left: 60.39%;
-  }
-
-  .sc-ion-input-md-h[name=hourEnd] {
-    left: 60.39%;
-  }
-
-  ._icon {
-    width: 2.45%;
-    height: 2.96%;
-    position: absolute;
-    right: 55.86%;
-    left: 48.19%;
-    bottom: 74.57%;
-    top: 22.76%;
-    transform: translate(-20px, -1px);
-    overflow: visible;
-  }
-
-  ._icon2 {
-    width: 2.45%;
-    height: 2.96%;
-    position: absolute;
-    right: 5.45%;
-    left: 99.04%;
-    bottom: 74.57%;
-    top: 22.46%;
-    transform: translate(-20px, -1px);
-    overflow: visible;
-  }
-
-  .filtrar {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Bold", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 700;
-    position: absolute;
-    left: 236px;
-    top: 566px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-  }
-}
-
-@media only screen and (min-device-width: 420px) and (max-device-width: 450px) {
-
-  .filtros {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 400;
-    position: absolute;
-    left: 348.06px;
-    top: 312px;
-    width: 55.04px;
-    height: 23.42px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-  }
-
-  .icon2 {
-    border-radius: 0px;
-    width: 6.67%;
-    height: 2.07%;
-    position: absolute;
-    left: 75.3%;
-    bottom: 69.9%;
-    top: 28.03%;
-    overflow: visible;
-  }
-
-  .capa-1 {
-    width: 27px;
-    height: 29px;
-    position: absolute;
-    left: 248px;
-    top: 309px;
-    overflow: visible;
-  }
-
-  .textSearch {
-    background-color: var(--verde-claro, #e8f2ef);
-    width: 35.45%;
-    min-height: 2.36%;
-    position: absolute;
-    right: 55.86%;
-    left: 19.69%;
-    top: 28%;
-    transform: translate(-20px, -1px);
-    border-radius: 15px;
-  }
-
-  .frame-76 {
-    width: 426px;
-    height: 587px;
-    position: absolute;
-    left: -5px;
-    top: 399px;
-    overflow-x: auto;
-  }
-
-  .rectangle-94 {
-    border-radius: 15px;
-    min-width: 540.58%;
-    height: 54px;
-    left: calc(50% - 212.5px);
     top: 41px;
     margin-top: 2px;
     inline-size: auto;
