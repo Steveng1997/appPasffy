@@ -16,9 +16,17 @@ ion-grid {
 }
 
 .servicios-1 {
+  // background: #ffffff;
+  // height: 1113px;
+  // position: relative;
+  // overflow: hidden;
+
   background: #ffffff;
+  width: 411px;
   height: 1113px;
   position: relative;
+  overflow: hidden;
+  left: -5px;
 }
 
 .rectangle-93 {
@@ -28,6 +36,7 @@ ion-grid {
   position: absolute;
   left: 0px;
   top: 0px;
+  overflow: hidden;
 }
 
 .rectangle-92 {
@@ -37,6 +46,7 @@ ion-grid {
   position: absolute;
   left: -5px;
   top: 0px;
+  overflow: hidden;
 }
 
 .servicios-realizados {
@@ -48,7 +58,7 @@ ion-grid {
   font-weight: 700;
   position: absolute;
   left: 34px;
-  top: 51px;
+  top: 54px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -74,7 +84,7 @@ ion-grid {
   font-weight: 400;
   position: absolute;
   left: 330.06px;
-  top: 267px;
+  top: 270px;
   width: 55.04px;
   height: 23.42px;
   display: flex;
@@ -86,9 +96,8 @@ ion-grid {
   width: 27px;
   height: 29px;
   position: absolute;
-  // left: 230px;
-  left: 74.13%;
-  top: 264px;
+  left: 88.2%;
+  top: 265px;
   overflow: visible;
 }
 
@@ -98,8 +107,8 @@ ion-grid {
   position: absolute;
   right: 88.53%;
   left: 5.33%;
-  bottom: 73.94%;
-  top: 23.99%;
+  bottom: 73.67%;
+  top: 24.26%;
   overflow: visible;
 }
 
@@ -109,10 +118,9 @@ ion-grid {
   height: 5.07%;
   position: absolute;
   right: 19.2%;
-  // left: 74.13%;
-  left: 230px;
+  left: 287px;
   bottom: 73.94%;
-  top: 22.6%;
+  top: 22.7%;
   overflow: visible;
 
   // border-radius: 0px;
@@ -146,12 +154,12 @@ ion-grid {
   font-weight: 700;
   position: absolute;
   left: calc(50% - 59.5px);
-  top: 111px;
+  top: 114px;
   width: 118px;
   height: 29px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 .rectangle-10 {
@@ -161,7 +169,7 @@ ion-grid {
   height: 2px;
   position: absolute;
   left: calc(50% - 61.5px);
-  top: 139px;
+  top: 142px;
 }
 
 .icon3 {
@@ -170,8 +178,8 @@ ion-grid {
   position: absolute;
   right: 5.33%;
   left: 91.47%;
-  bottom: 87.6%;
-  top: 10.24%;
+  bottom: 87.33%;
+  top: 10.51%;
   overflow: visible;
 }
 
@@ -181,18 +189,18 @@ ion-grid {
   position: absolute;
   right: 88.27%;
   left: 8.53%;
-  bottom: 85.44%;
-  top: 12.4%;
+  bottom: 85.18%;
+  top: 12.67%;
   transform: translate(-13px, -25px);
   overflow: visible;
 }
 
 .frame-76 {
-  width: 412px;
+  width: 417px;
   height: 633px;
   position: absolute;
   left: -5px;
-  top: 352px;
+  top: 355px;
   overflow-x: auto;
 }
 
@@ -250,10 +258,10 @@ body {
 .rectangle-95 {
   background: var(--verde-oscuro, #0b9a7a);
   border-radius: 10px;
-  width: 2321px;
+  width: 2318px;
   height: 34px;
   position: absolute;
-  left: 0px;
+  left: 5px;
   top: 0px;
 }
 
@@ -464,7 +472,7 @@ body {
   font-weight: 400;
   width: 80px;
   position: absolute;
-  left: 687px;
+  left: 681px;
   top: 57px;
   display: flex;
   justify-content: end;
@@ -496,8 +504,7 @@ body {
   font-weight: 400;
   width: 70px;
   position: absolute;
-  // left: 431px;
-  left: 442px;
+  left: 452px;
   top: 57px;
   display: flex;
   justify-content: end;
@@ -505,20 +512,6 @@ body {
 }
 
 .minuto9 {
-  // color: #3c3c3c;
-  // text-align: left;
-  // font-family: "Inter-Regular", sans-serif;
-  // font-size: 20px;
-  // line-height: 125%;
-  // font-weight: 400;
-  // width: max-content;
-  // position: absolute;
-  // left: 355px;
-  // top: 57px;
-  // display: flex;
-  // align-items: flex-end;
-  // justify-content: flex-start;
-
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Regular", sans-serif;
@@ -558,7 +551,7 @@ body {
   font-weight: 400;
   width: 76px;
   position: absolute;
-  left: 130px;
+  left: 126px;
   top: 57px;
   display: flex;
   justify-content: start;
@@ -593,8 +586,8 @@ body {
   width: 14px;
   height: 14px;
   position: absolute;
-  left: 20px;
-  top: 66px;
+  left: 8px;
+  top: 63px;
 }
 
 .taxi10 {
@@ -822,7 +815,7 @@ body {
   font-weight: 700;
   position: absolute;
   // left: 464px;
-  left: 475px;
+  left: 490px;
   top: 7px;
   display: flex;
   align-items: flex-end;
@@ -894,7 +887,7 @@ body {
   height: 50px;
   position: absolute;
   left: calc(50% - 167.5px);
-  top: 170px;
+  top: 173px;
 }
 
 .rectangle-18 {
@@ -926,7 +919,7 @@ body {
   right: 4.18%;
   left: 93.13%;
   bottom: 22%;
-  top: 40%;
+  top: 39%;
   transform: translate(-20px, -1px);
   overflow: visible;
 }
@@ -2630,6 +2623,15 @@ ion-select::part(placeholder) {
 
 @media only screen and (min-device-width: 350px) and (max-device-width: 370px) {
 
+  .servicios-1 {
+    background: #ffffff;
+    width: 353px;
+    height: 1113px;
+    position: relative;
+    overflow: hidden;
+    left: -5px;
+  }
+
   .pop-up-totales {
     height: 641px;
     position: sticky;
@@ -2671,9 +2673,9 @@ ion-select::part(placeholder) {
     height: 5.07%;
     position: absolute;
     right: 19.2%;
-    left: 199px;
+    left: 245px;
     bottom: 73.94%;
-    top: 22.5%;
+    top: 22.8%;
     overflow: visible;
   }
 
@@ -2682,14 +2684,14 @@ ion-select::part(placeholder) {
     height: 29px;
     position: absolute;
     right: 88.53%;
-    left: 262px;
+    left: 308px;
     bottom: 73.94%;
-    top: 23.5%;
+    top: 23.8%;
     overflow: visible;
   }
 
   .frame-76 {
-    width: 353px;
+    width: 358px;
     height: 630px;
     position: absolute;
     left: -5px;
@@ -2697,11 +2699,21 @@ ion-select::part(placeholder) {
     overflow-x: auto;
   }
 
+  .rectangle-95 {
+    background: var(--verde-oscuro, #0b9a7a);
+    border-radius: 10px;
+    width: 2350px;
+    height: 34px;
+    position: absolute;
+    left: 5px;
+    top: 0px;
+  }
+
   .rectangle-94 {
     border-radius: 15px;
-    min-width: 657.4%;
+    min-width: 2349px;
     height: 54px;
-    left: calc(50% - 176.5px);
+    left: calc(50% - 174px);
     top: 41px;
     margin-top: 2px;
     inline-size: auto;
