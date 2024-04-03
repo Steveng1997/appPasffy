@@ -1,6 +1,6 @@
 <ion-content padding fullscreen>
   <ion-grid fixed>
-    <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12">
+    <ion-row size="12" size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="3">
 
       <div class="servicios-1">
         <div class="rectangle-93"></div>
@@ -49,109 +49,6 @@
           <div class="_20-00011">20.000 €</div>
           <div class="_20-00012">20.000 €</div>
           <div class="_20-00013">20.000 €</div>
-        </div>
-
-        <!-- Filter -->
-
-        <div class="pop-up-filtros" *ngIf="filter">
-          <div class="rectangle-30"></div>
-          <div class="_filtros">Filtros</div>
-          <div class="rectangle_41"></div>
-
-          <svg class="vector-6" width="59" height="2" viewBox="0 0 59 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 1L59 0.999995" stroke="#3C3C3C" />
-          </svg>
-
-          <div class="limpiar" id="btnDelete" (click)="deleteService()">Eliminar</div>
-          <div class="filtrar">Filtrar</div>
-          <div class="_terapeuta">Terapeuta</div>
-          <div class="inicial">Inicial</div>
-          <div class="final">Final</div>
-          <div class="_encargada">Encargada</div>
-
-          <div class="m-todo-de-pago">Método de pago</div>
-
-          <div class="group-48">
-            <div class="rectangle-412" id="bizum1"></div>
-            <ion-input class="rectangle-412" id="Bizum" name="bizum" [(ngModel)]="selectedFormPago"
-              (click)="bizum()"></ion-input>
-            <div class="bizum">Bizum</div>
-          </div>
-
-          <div class="group-49">
-            <div class="rectangle-37" id="cash1"></div>
-            <ion-input class="rectangle-37" id="cash" name="cash" [(ngModel)]="selectedFormPago"
-              (click)="cash()"></ion-input>
-            <div class="efectivo">Efectivo</div>
-          </div>
-
-          <div class="group-50">
-            <div class="rectangle-39" id="card1"></div>
-            <ion-input class="rectangle-39" id="card" name="card" [(ngModel)]="selectedFormPago"
-              (click)="card()"></ion-input>
-            <div class="tarjeta">Tarjeta</div>
-          </div>
-
-          <div class="group-51">
-            <div class="rectangle-40" id="transaction1"></div>
-            <ion-input class="rectangle-40" id="transaction" name="transaction" [(ngModel)]="selectedFormPago"
-              (click)="transaction()"></ion-input>
-            <div class="transferencia">Transferencia</div>
-          </div>
-
-          <div class="component-1">
-            <div class="rectangle-4"></div>
-            <ion-select class="selecciona" style="display: grid; min-height: -webkit-fill-available"
-              placeholder="Selecciona" [(ngModel)]="selectedTerapeuta" (ngModelChange)="filters()">
-              <ion-select-option *ngFor="let therapist of terapeuta">{{therapist.nombre}}</ion-select-option>
-            </ion-select>
-          </div>
-
-          <div class="component-2">
-            <div class="rectangle-4"></div>
-            <!-- <div class="selecciona">Selecciona</div> -->
-            <ion-select class="selecciona" style="display: grid; min-height: -webkit-fill-available"
-              placeholder="Selecciona" [(ngModel)]="selectedEncargada" (ngModelChange)="filters()">
-              <ion-select-option *ngFor="let manager of manager">{{manager.nombre}}</ion-select-option>
-            </ion-select>
-          </div>
-
-          <svg class="x-close" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
-            (click)="close()">
-            <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-
-          <svg class="_icon" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-
-          <svg class="_icon2" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg"
-            (click)="btnFilter()">
-            <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-
-          <div class="rectangle-154"></div>
-          <!-- <div class="_02-feb-2024">02 feb 2024</div> -->
-          <ion-input class="rectangle-154" type="date" name="dateStart" [(ngModel)]="dateStart"
-            (ngModelChange)="filters()"></ion-input>
-
-          <div class="rectangle-156"></div>
-          <!-- <div class="_02-feb-20242">02 feb 2024</div> -->
-          <ion-input class="rectangle-156" type="date" name="dateEnd" [(ngModel)]="dateEnd"
-            (ngModelChange)="filters()"></ion-input>
-
-          <div class="rectangle-155"></div>
-          <!-- <div class="_10-12-a-m">10:12 a.m.</div> -->
-          <ion-input class="rectangle-155" type="time" name="hourStart" [(ngModel)]="hourStart"
-            (ngModelChange)="filters()"></ion-input>
-
-          <div class="rectangle-157"></div>
-          <!-- <div class="_08-02-p-m">08:02 p.m.</div> -->
-          <ion-input class="rectangle-157" type="time" name="hourEnd" [(ngModel)]="hourEnd"
-            (ngModelChange)="filters()"></ion-input>
         </div>
 
         <svg class="capa-1" width="27" height="29" viewBox="0 0 27 29" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -256,8 +153,8 @@
             <div class="taxi10">Taxi</div>
           </div>
 
-          <div class="rectangle-94 dropdown" id="detail" *ngFor="let services of (servicio | search: filterSearch 
-          | paymentMethod: selectedFormPago | therapist: selectedTerapeuta | manager: selectedEncargada 
+          <div class="rectangle-94 dropdown" id="detail" *ngFor="let services of (servicio | search: filterSearch
+          | paymentMethod: selectedFormPago | therapist: selectedTerapeuta | manager: selectedEncargada
           | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd)" (click)="detail(services)">
             <div style="position: relative; top: -42px">
               <div [ngClass]="{'ellipse-18': services?.nota !== ''}"></div>
@@ -349,6 +246,115 @@
         </div>
       </div>
 
-    </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
+
+<!-- <ion-content padding fullscreen *ngIf="filter">
+  <ion-grid fixed> -->
+<ion-row size="12" size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="3" *ngIf="filter">
+
+  <!-- Filter -->
+
+  <div class="pop-up-filtros">
+    <div class="rectangle-30"></div>
+    <div class="_filtros">Filtros</div>
+    <div class="rectangle_41"></div>
+
+    <svg class="vector-6" width="59" height="2" viewBox="0 0 59 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 1L59 0.999995" stroke="#3C3C3C" />
+    </svg>
+
+    <div class="limpiar" id="btnDelete" (click)="deleteService()">Eliminar</div>
+    <div class="filtrar">Filtrar</div>
+    <div class="_terapeuta">Terapeuta</div>
+    <div class="inicial">Inicial</div>
+    <div class="final">Final</div>
+    <div class="_encargada">Encargada</div>
+
+    <div class="m-todo-de-pago">Método de pago</div>
+
+    <div class="group-48">
+      <div class="rectangle-412" id="bizum1"></div>
+      <ion-input class="rectangle-412" id="Bizum" name="bizum" [(ngModel)]="selectedFormPago"
+        (click)="bizum()"></ion-input>
+      <div class="bizum">Bizum</div>
+    </div>
+
+    <div class="group-49">
+      <div class="rectangle-37" id="cash1"></div>
+      <ion-input class="rectangle-37" id="cash" name="cash" [(ngModel)]="selectedFormPago" (click)="cash()"></ion-input>
+      <div class="efectivo">Efectivo</div>
+    </div>
+
+    <div class="group-50">
+      <div class="rectangle-39" id="card1"></div>
+      <ion-input class="rectangle-39" id="card" name="card" [(ngModel)]="selectedFormPago" (click)="card()"></ion-input>
+      <div class="tarjeta">Tarjeta</div>
+    </div>
+
+    <div class="group-51">
+      <div class="rectangle-40" id="transaction1"></div>
+      <ion-input class="rectangle-40" id="transaction" name="transaction" [(ngModel)]="selectedFormPago"
+        (click)="transaction()"></ion-input>
+      <div class="transferencia">Transferencia</div>
+    </div>
+
+    <div class="component-1">
+      <div class="rectangle-4"></div>
+      <ion-select class="selecciona" style="display: grid; min-height: -webkit-fill-available" placeholder="Selecciona"
+        [(ngModel)]="selectedTerapeuta" (ngModelChange)="filters()">
+        <ion-select-option *ngFor="let therapist of terapeuta">{{therapist.nombre}}</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="component-2">
+      <div class="rectangle-4"></div>
+      <!-- <div class="selecciona">Selecciona</div> -->
+      <ion-select class="selecciona" style="display: grid; min-height: -webkit-fill-available" placeholder="Selecciona"
+        [(ngModel)]="selectedEncargada" (ngModelChange)="filters()">
+        <ion-select-option *ngFor="let manager of manager">{{manager.nombre}}</ion-select-option>
+      </ion-select>
+    </div>
+
+    <svg class="x-close" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+      (click)="close()">
+      <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+
+    <svg class="_icon" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+
+    <svg class="_icon2" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg"
+      (click)="btnFilter()">
+      <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+
+    <div class="rectangle-154"></div>
+    <!-- <div class="_02-feb-2024">02 feb 2024</div> -->
+    <ion-input class="rectangle-154" type="date" name="dateStart" [(ngModel)]="dateStart"
+      (ngModelChange)="filters()"></ion-input>
+
+    <div class="rectangle-156"></div>
+    <!-- <div class="_02-feb-20242">02 feb 2024</div> -->
+    <ion-input class="rectangle-156" type="date" name="dateEnd" [(ngModel)]="dateEnd"
+      (ngModelChange)="filters()"></ion-input>
+
+    <div class="rectangle-155"></div>
+    <!-- <div class="_10-12-a-m">10:12 a.m.</div> -->
+    <ion-input class="rectangle-155" type="time" name="hourStart" [(ngModel)]="hourStart"
+      (ngModelChange)="filters()"></ion-input>
+
+    <div class="rectangle-157"></div>
+    <!-- <div class="_08-02-p-m">08:02 p.m.</div> -->
+    <ion-input class="rectangle-157" type="time" name="hourEnd" [(ngModel)]="hourEnd"
+      (ngModelChange)="filters()"></ion-input>
+  </div>
+
+</ion-row>
+<!-- </ion-grid>
+</ion-content> -->
