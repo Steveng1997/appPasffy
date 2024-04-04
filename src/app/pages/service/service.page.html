@@ -250,14 +250,14 @@
   </ion-grid>
 </ion-content>
 
-<ion-content padding fullscreen *ngIf="filter">
+<!-- <ion-content padding fullscreen *ngIf="filter">
   <ion-grid fixed>
-    <ion-row size="12" size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="3" *ngIf="filter">
+    <ion-row size="12" size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="3" *ngIf="filter"> -->
 
       <!-- Filter -->
 
-      <div class="pop-up-filtros">
-        <div class="rectangle-93"></div>
+      <div class="pop-up-filtros" *ngIf="filter">
+
         <div class="rectangle-30"></div>
         <div class="_filtros">Filtros</div>
         <div class="rectangle_41"></div>
@@ -266,7 +266,7 @@
           <path d="M0 1L59 0.999995" stroke="#3C3C3C" />
         </svg>
 
-        <div class="limpiar" id="btnDelete" (click)="deleteService()">Eliminar</div>
+        <div class="limpiar" id="btnDelete" (click)="deleteService()">Limpiar</div>
         <div class="filtrar">Filtrar</div>
         <div class="_terapeuta">Terapeuta</div>
         <div class="inicial">Inicial</div>
@@ -358,6 +358,6 @@
           (ngModelChange)="filters()"></ion-input>
       </div>
 
-    </ion-row>
+    <!-- </ion-row>
   </ion-grid>
-</ion-content>
+</ion-content> -->
