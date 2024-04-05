@@ -776,6 +776,11 @@ export class ServicePage implements OnInit {
     this.selectedEncargada = ""
     this.fechaInicio = ""
     this.fechaFinal = ""
+    localStorage.clear();
+    document.getElementById('bizum1').style.background = ""
+    document.getElementById('cash1').style.background = ""
+    document.getElementById('card1').style.background = ""
+    document.getElementById('transaction1').style.background = ""
   }
 
   btnFilter() {

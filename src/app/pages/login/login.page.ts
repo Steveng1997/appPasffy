@@ -81,6 +81,7 @@ export class LoginPage {
                   this.ionLoaderService.dismissLoader()
                   location.replace(`tabs/${resp[0].id}/vision`)
                 } else {
+                  this.ionLoaderService.dismissLoader()
                   Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'La contraseña es incorrecta' })
                 }
               })
