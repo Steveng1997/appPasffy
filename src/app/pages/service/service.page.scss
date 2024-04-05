@@ -2370,8 +2370,6 @@ ion-select::part(placeholder) {
   font-size: 13px;
 }
 
-
-// Pedro
 @media only screen and (min-device-width: 259px) and (max-device-width: 370px) {
   .icon2 {
     border-radius: 0px;
@@ -2584,6 +2582,249 @@ ion-select::part(placeholder) {
     position: absolute;
     left: 60px;
     top: 495px;
+    transform: translate(0px, -0.5px);
+    overflow: visible;
+    min-height: -webkit-fill-available;
+  }
+
+  .rectangle_41 {
+    background: var(--verde, #1fb996);
+    border-radius: 15px;
+    width: 40.05%;
+    height: 6.99%;
+    position: absolute;
+    right: 9.26%;
+    left: 50.68%;
+    bottom: 6.73%;
+    top: 546px;
+  }
+
+  .filtrar {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 232px;
+    top: 559px;
+  }
+}
+
+// Pedro
+@media only screen and (min-device-width: 362px) and (max-device-width: 368px) {
+  .icon2 {
+    border-radius: 0px;
+    width: 9.67%;
+    height: 5.07%;
+    position: absolute;
+    right: 19.2%;
+    left: 260px;
+    bottom: 73.94%;
+    top: 22.7%;
+    overflow: visible;
+  }
+
+  .capa-1 {
+    width: 27px;
+    height: 29px;
+    position: absolute;
+    left: 87.4%;
+    top: 266px;
+    overflow: visible;
+  }
+
+  // Filter
+
+  .pop-up-filtros {
+    margin-top: -76px;
+    margin-left: -9px;
+  }
+
+  .rectangle-30 {
+    background: #ffffff;
+    border-radius: 49px;
+    width: 346px;
+    height: 609px;
+    position: relative;
+    left: 15px;
+    top: 101px;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .x-close {
+    width: 27px;
+    height: 27px;
+    position: absolute;
+    left: 305px;
+    top: 58px;
+    overflow: visible;
+  }
+
+  ._icon {
+    width: 3.45%;
+    height: 2.96%;
+    position: absolute;
+    right: 55.86%;
+    left: 39.69%;
+    bottom: 74.57%;
+    top: 21.46%;
+    transform: translate(-20px, -1px);
+    overflow: visible;
+  }
+
+  ._icon2 {
+    width: 3.45%;
+    height: 2.96%;
+    position: absolute;
+    right: 5.45%;
+    left: 89.1%;
+    bottom: 74.57%;
+    top: 21.46%;
+    transform: translate(-20px, -1px);
+    overflow: visible;
+  }
+
+  .rectangle-4 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--negro, #3c3c3c);
+    border-width: 1px;
+    width: 100%;
+    height: 87.91%;
+    position: absolute;
+    right: 0%;
+    left: -3%;
+    bottom: 12.09%;
+    top: 0%;
+  }
+
+  .rectangle-154 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--negro, #3c3c3c);
+    border-width: 1px;
+    width: 157px;
+    height: 45px;
+    position: absolute;
+    left: 11px;
+    top: 214px;
+  }
+
+  .rectangle-155 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--negro, #3c3c3c);
+    border-width: 1px;
+    width: 157px;
+    height: 45px;
+    position: absolute;
+    left: 189px;
+    top: 214px;
+  }
+
+  .rectangle-156 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--negro, #3c3c3c);
+    border-width: 1px;
+    width: 157px;
+    height: 45px;
+    position: absolute;
+    left: 11px;
+    top: 309px;
+  }
+
+  .rectangle-157 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--negro, #3c3c3c);
+    border-width: 1px;
+    width: 157px;
+    height: 45px;
+    position: absolute;
+    left: 189px;
+    top: 309px;
+  }
+
+  .sc-ion-input-md-h[name=dateStart] {
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    border-bottom: transparent;
+    position: relative;
+    color: black;
+    left: 39px;
+    bottom: 0px;
+    top: -318px;
+    width: 120px;
+    --highlight-color: transparent;
+  }
+
+  .sc-ion-input-md-h[name=dateEnd] {
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    border-bottom: transparent;
+    position: relative;
+    color: black;
+    left: 39px;
+    bottom: 0px;
+    top: -268px;
+    width: 120px;
+    --highlight-color: transparent;
+  }
+
+  .sc-ion-input-md-h[name=hourStart] {
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    border-bottom: transparent;
+    position: relative;
+    color: black;
+    left: 219px;
+    bottom: 0px;
+    top: -407px;
+    width: 104px;
+    --highlight-color: transparent;
+  }
+
+  .sc-ion-input-md-h[name=hourEnd] {
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    border-bottom: transparent;
+    position: relative;
+    color: black;
+    left: 219px;
+    bottom: 0px;
+    top: -358px;
+    width: 104px;
+    --highlight-color: transparent;
+  }
+
+  .limpiar {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 60px;
+    top: 560px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .vector-6 {
+    width: 59px;
+    height: 0px;
+    position: absolute;
+    left: 60px;
+    top: 524px;
     transform: translate(0px, -0.5px);
     overflow: visible;
     min-height: -webkit-fill-available;
