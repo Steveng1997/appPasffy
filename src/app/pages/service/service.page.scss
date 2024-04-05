@@ -2545,7 +2545,7 @@ ion-select::part(placeholder) {
     left: 219px;
     bottom: 0px;
     top: -407px;
-    width: 78px;
+    width: 104px;
     --highlight-color: transparent;
   }
 
@@ -2558,8 +2558,8 @@ ion-select::part(placeholder) {
     color: black;
     left: 219px;
     bottom: 0px;
-    top: -357px;
-    width: 103px;
+    top: -358px;
+    width: 104px;
     --highlight-color: transparent;
   }
 
@@ -3377,19 +3377,19 @@ ion-select::part(placeholder) {
   // Filter
 
   .pop-up-filtros {
-    margin-top: -55px;
-    margin-left: -17px;
+    margin-top: 32px;
+    margin-left: 16px;
     position: fixed;
   }
 
   .rectangle-30 {
     background: #ffffff;
     border-radius: 49px;
-    width: 346px;
+    width: 357px;
     height: 609px;
-    position: relative;
-    left: 15px;
-    top: 101px;
+    position: static;
+    /* left: 15px; */
+    /* top: 101px; */
     box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
   }
 
@@ -3495,9 +3495,9 @@ ion-select::part(placeholder) {
     border-bottom: transparent;
     position: relative;
     color: black;
-    left: 11.7%;
+    left: 8.7%;
     bottom: 0px;
-    top: -327px;
+    top: -393px;
     width: 107px;
     --highlight-color: transparent;
   }
@@ -3509,9 +3509,9 @@ ion-select::part(placeholder) {
     border-bottom: transparent;
     position: relative;
     color: black;
-    left: 62.6%;
+    left: 8.6%;
     bottom: 0px;
-    top: -371px;
+    top: -344px;
     width: 107px;
     --highlight-color: transparent;
   }
@@ -3523,10 +3523,10 @@ ion-select::part(placeholder) {
     border-bottom: transparent;
     position: relative;
     color: black;
-    left: 45px;
+    left: 58.7%;
     bottom: 0px;
-    top: -326px;
-    width: 103px;
+    top: -483px;
+    width: 104px;
     --highlight-color: transparent;
   }
 
@@ -3537,10 +3537,10 @@ ion-select::part(placeholder) {
     border-bottom: transparent;
     position: relative;
     color: black;
-    left: 231px;
+    left: 211px;
     bottom: 0px;
-    top: -371px;
-    width: 103px;
+    top: -434px;
+    width: 104px;
     --highlight-color: transparent;
   }
 
@@ -3560,14 +3560,11 @@ ion-select::part(placeholder) {
   }
 
   .vector-6 {
-    width: 59px;
-    height: 0px;
     position: absolute;
     left: 60px;
-    top: 495px;
+    top: 546px;
     transform: translate(0px, -0.5px);
     overflow: visible;
-    min-height: -webkit-fill-available;
   }
 
   .rectangle_41 {
@@ -3590,8 +3587,8 @@ ion-select::part(placeholder) {
     line-height: 125%;
     font-weight: 700;
     position: absolute;
-    left: 224px;
-    top: 644px;
+    left: 229px;
+    top: 557px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -3771,8 +3768,8 @@ ion-select::part(placeholder) {
     color: black;
     left: 210px;
     bottom: 0px;
-    top: -482px;
-    width: 74px;
+    top: -484px;
+    width: 104px;
     --highlight-color: transparent;
   }
 
@@ -3785,8 +3782,8 @@ ion-select::part(placeholder) {
     color: black;
     left: 210px;
     bottom: 0px;
-    top: -433px;
-    width: 74px;
+    top: -434px;
+    width: 104px;
     --highlight-color: transparent;
   }
 
