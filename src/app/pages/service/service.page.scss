@@ -2638,8 +2638,10 @@ ion-select::part(placeholder) {
   // Filter
 
   .pop-up-filtros {
-    margin-top: -76px;
-    margin-left: -9px;
+    // margin-top: -76px;
+    // margin-left: -9px;
+    margin-top: -86px;
+    margin-left: -7px;
   }
 
   .rectangle-30 {
@@ -2695,7 +2697,7 @@ ion-select::part(placeholder) {
     height: 87.91%;
     position: absolute;
     right: 0%;
-    left: -3%;
+    left: -2%;
     bottom: 12.09%;
     top: 0%;
   }
@@ -2708,7 +2710,7 @@ ion-select::part(placeholder) {
     width: 157px;
     height: 45px;
     position: absolute;
-    left: 11px;
+    left: 13px;
     top: 214px;
   }
 
@@ -2720,7 +2722,7 @@ ion-select::part(placeholder) {
     width: 157px;
     height: 45px;
     position: absolute;
-    left: 189px;
+    left: 191px;
     top: 214px;
   }
 
@@ -2732,7 +2734,7 @@ ion-select::part(placeholder) {
     width: 157px;
     height: 45px;
     position: absolute;
-    left: 11px;
+    left: 13px;
     top: 309px;
   }
 
@@ -2744,7 +2746,7 @@ ion-select::part(placeholder) {
     width: 157px;
     height: 45px;
     position: absolute;
-    left: 189px;
+    left: 191px;
     top: 309px;
   }
 
@@ -2755,9 +2757,9 @@ ion-select::part(placeholder) {
     border-bottom: transparent;
     position: relative;
     color: black;
-    left: 39px;
+    left: 41px;
     bottom: 0px;
-    top: -318px;
+    top: -308px;
     width: 120px;
     --highlight-color: transparent;
   }
@@ -2769,9 +2771,9 @@ ion-select::part(placeholder) {
     border-bottom: transparent;
     position: relative;
     color: black;
-    left: 39px;
+    left: 41px;
     bottom: 0px;
-    top: -268px;
+    top: -258px;
     width: 120px;
     --highlight-color: transparent;
   }
@@ -2783,9 +2785,9 @@ ion-select::part(placeholder) {
     border-bottom: transparent;
     position: relative;
     color: black;
-    left: 219px;
+    left: 221px;
     bottom: 0px;
-    top: -407px;
+    top: -397px;
     width: 104px;
     --highlight-color: transparent;
   }
@@ -2797,11 +2799,43 @@ ion-select::part(placeholder) {
     border-bottom: transparent;
     position: relative;
     color: black;
-    left: 219px;
+    left: 221px;
     bottom: 0px;
-    top: -358px;
+    top: -348px;
     width: 104px;
     --highlight-color: transparent;
+  }
+
+  .group-49 {
+    width: 98px;
+    height: 44.83px;
+    position: absolute;
+    left: 18px;
+    top: 420px;
+  }
+
+  .group-48 {
+    width: 98px;
+    height: 44.83px;
+    position: absolute;
+    left: 125px;
+    top: 420px;
+  }
+
+  .group-50 {
+    width: 103px;
+    height: 44.83px;
+    position: absolute;
+    left: 232px;
+    top: 420px;
+  }
+
+  .group-51 {
+    width: 170px;
+    height: 44.83px;
+    position: absolute;
+    left: 18px;
+    top: 476px;
   }
 
   .limpiar {
