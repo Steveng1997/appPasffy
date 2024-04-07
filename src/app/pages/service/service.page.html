@@ -193,6 +193,44 @@
           <div class="total11">Total</div>
           <div class="_370">{{TotalValueLetter}}€</div>
         </div>
+
+        <!-- <div *ngIf="totals" class="dropdown-options details">
+          <div class="rectangle-115"></div>
+          <a class="min">Min</a>
+          <a class="_2-min">{{minute}} min</a>
+          <div class="total">Total</div>
+          <div class="_15">{{total}} €</div>
+          <div class="pago">Pago</div>
+          <div class="_bizum" id="__bizum">{{payment}}</div>
+          <div class="salida">Salida</div>
+          <div class="salida2">{{client}}</div>
+          <div class="tratamiento">Tratamiento</div>
+          <div class="_152">{{exit}}</div>
+          <div class="a-casa">€ A casa</div>
+          <div class="a-casa2">{{treatment2}} €</div>
+          <div class="_153">€ A casa</div>
+          <div class="_154">{{house1}} €</div>
+          <div class="a-terapeuta">€ A Terapeuta</div>
+          <div class="_0">{{house2}} €</div>
+          <div class="a-encargada">€ A Encargada</div>
+          <div class="_02">{{therapist}} €</div>
+          <div class="a-taxista">€ A Taxista</div>
+          <div class="_03">{{manag}} €</div>
+          <div class="bebida-casa">Bebida casa</div>
+          <div class="_04">{{taxi}} €</div>
+          <div class="bebida-terap">Bebida Terapeuta</div>
+          <div class="_05">{{drinkHouse}} €</div>
+          <div class="tabaco">Tabaco</div>
+          <div class="_06">{{drinkTherap}} €</div>
+          <div class="vitamina">Vitamina</div>
+          <div class="_07">{{tabacco}} €</div>
+          <div class="propina">Propina</div>
+          <div class="_08">{{vitamin}} €</div>
+          <div class="otros">Otros</div>
+          <div class="_09">{{tip}} €</div>
+          <div class="cliente">Cliente</div>
+          <div class="andrea-luszh">{{others}} €</div>
+        </div> -->
       </div>
 
     </ion-row>
@@ -256,7 +294,6 @@
 
   <div class="component-2">
     <div class="rectangle-4"></div>
-    <!-- <div class="selecciona">Selecciona</div> -->
     <ion-select class="selecciona" style="display: grid; min-height: -webkit-fill-available" placeholder="Selecciona"
       [(ngModel)]="selectedEncargada" (ngModelChange)="filters()">
       <ion-select-option *ngFor="let manager of manager">{{manager.nombre}}</ion-select-option>
@@ -281,65 +318,18 @@
   </svg>
 
   <div class="rectangle-154"></div>
-  <!-- <div class="_02-feb-2024">02 feb 2024</div> -->
   <ion-input class="rectangle-154" type="date" name="dateStart" [(ngModel)]="dateStart"
     (ngModelChange)="filters()"></ion-input>
 
   <div class="rectangle-156"></div>
-  <!-- <div class="_02-feb-20242">02 feb 2024</div> -->
   <ion-input class="rectangle-156" type="date" name="dateEnd" [(ngModel)]="dateEnd"
     (ngModelChange)="filters()"></ion-input>
 
   <div class="rectangle-155"></div>
-  <!-- <div class="_10-12-a-m">10:12 a.m.</div> -->
   <ion-input class="rectangle-155" type="time" name="hourStart" [(ngModel)]="hourStart"
     (ngModelChange)="filters()"></ion-input>
 
   <div class="rectangle-157"></div>
-  <!-- <div class="_08-02-p-m">08:02 p.m.</div> -->
   <ion-input class="rectangle-157" type="time" name="hourEnd" [(ngModel)]="hourEnd"
     (ngModelChange)="filters()"></ion-input>
-</div>
-
-<!-- Filter totales -->
-
-<div class="pop-up-totales" *ngIf="totals">
-
-  <div class="rectangle-_30"></div>
-  <div class="totales">Totales</div>
-  <div class="_filtrar">Filtrar</div>
-  
-  <div class="a-casa_1">A casa</div>
-  <div class="a-casa_2">A casa</div>
-  <div class="a-casa_3">A terapeuta</div>
-  <div class="a-casa4">A encargada</div>
-  <div class="a-casa5">A taxista</div>
-  <div class="a-casa6">Bebida casa</div>
-  <div class="a-casa7">Bebida terapeuta</div>
-  <div class="a-casa8">Tabaco</div>
-  <div class="a-casa_9">Vitamina</div>
-  <div class="a-casa10">Propina</div>
-  <div class="a-casa11">Otros</div>
-  <div class="a-casa12">Taxi</div>
-  <div class="_tratamiento">Tratamiento</div>
-
-  <svg class="x-_close" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
-    (click)="closeTotals()">
-    <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
-      stroke-linejoin="round" />
-  </svg>
-
-  <div class="_20-000">20.000 €</div>
-  <div class="_20-0002">20.000 €</div>
-  <div class="_20-0003">20.000 €</div>
-  <div class="_20-0004">20.000 €</div>
-  <div class="_20-0005">20.000 €</div>
-  <div class="_20-0006">20.000 €</div>
-  <div class="_20-0007">20.000 €</div>
-  <div class="_20-0008">20.000 €</div>
-  <div class="_20-0009">20.000 €</div>
-  <div class="_20-00010">20.000 €</div>
-  <div class="_20-00011">20.000 €</div>
-  <div class="_20-00012">20.000 €</div>
-  <div class="_20-00013">20.000 €</div>
 </div>
