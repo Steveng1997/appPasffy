@@ -81,6 +81,8 @@ export class ServicePage implements OnInit {
   siguienteCount: number = 0
   fechaFormat = new Date()
 
+  defaultTouch = { x: 0, y: 0, time: 0 };
+
   // Excel
   private _workbook!: Workbook;
 
@@ -1681,10 +1683,47 @@ export class ServicePage implements OnInit {
     this.totals = true
   }
 
-  @HostListener('window:wheel', []) onWindowScroll() {
-    // console.log(event);
-    console.log(event['layerY']);
-    if (event['layerY'] >= 15) document.getElementById('frame').style.color = 'red'
-    else document.getElementById('frame').style.color = 'blue'
+  // @HostListener('touchmove', ['$event']) onWindowScroll(event) {
+  //   // if (event['layerY'] >= 15) document.getElementById('frame').style.color = 'red'
+  //   // else document.getElementById('frame').style.color = 'blue'
+  // }
+
+  @HostListener('touchstart', ['$event'])
+  //@HostListener('touchmove', ['$event'])
+  @HostListener('touchend', ['$event'])
+  @HostListener('touchcancel', ['$event'])
+  handleTouch(event) {
+    let touch = event.touches[0] || event.changedTouches[0];
+
+    // check the events
+    if (event.type === 'touchstart') {
+      this.defaultTouch.x = touch.pageX;
+      this.defaultTouch.y = touch.pageY;
+      this.defaultTouch.time = event.timeStamp;
+    } else if (event.type === 'touchend') {
+      let deltaX = touch.pageX - this.defaultTouch.x;
+      let deltaY = touch.pageY - this.defaultTouch.y;
+      let deltaTime = event.timeStamp - this.defaultTouch.time;
+
+      // simulte a swipe -> less than 500 ms and more than 60 px
+      if (deltaTime < 500) {
+        if (Math.abs(deltaY) > 60) {
+          // delta y is at least 60 pixels
+          if (deltaY > 0) {
+            this.doSwipeDown(event);
+          } else {
+            this.doSwipeUp(event);
+          }
+        }
+      }
+    }
+  }
+
+  doSwipeUp(event) {
+    console.log('swipe up', event);
+  }
+
+  doSwipeDown(event) {
+    console.log('swipe down', event);
   }
 }
