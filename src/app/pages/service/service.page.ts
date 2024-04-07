@@ -1683,47 +1683,21 @@ export class ServicePage implements OnInit {
     this.totals = true
   }
 
-  // @HostListener('touchmove', ['$event']) onWindowScroll(event) {
-  //   // if (event['layerY'] >= 15) document.getElementById('frame').style.color = 'red'
-  //   // else document.getElementById('frame').style.color = 'blue'
-  // }
-
-  @HostListener('touchstart', ['$event'])
-  //@HostListener('touchmove', ['$event'])
   @HostListener('touchend', ['$event'])
-  @HostListener('touchcancel', ['$event'])
   handleTouch(event) {
-    let touch = event.touches[0] || event.changedTouches[0];
+    console.log(event)
 
-    // check the events
-    if (event.type === 'touchstart') {
-      this.defaultTouch.y = touch.pageY;
-      this.defaultTouch.time = event.timeStamp;
-    } else if (event.type === 'touchend') {
-      let deltaY = touch.pageY - this.defaultTouch.y;
-      let deltaTime = event.timeStamp - this.defaultTouch.time;
+    // if (event.target.className == 'rectangle-95') {
+    //   console.log('aqui')
+    // }
 
-      // simulte a swipe -> less than 500 ms and more than 60 px
-      if (deltaTime < 500) {
-        if (Math.abs(deltaY) > 60) {
-          // delta y is at least 60 pixels
-          // if (deltaY > 0) {
-          if (event.changedTouches[0].pageY < 27) {
-            // this.doSwipeDown(event);
-            console.log('aqui bajo', event.changedTouches[0].pageY)
-          } else {
-            this.doSwipeUp(event);
-          }
-        }
-      }
+    if (event.timeStamp >= 927194) {
+      debugger
     }
-  }
 
-  doSwipeUp(event) {
-    console.log('swipe up', event);
-  }
 
-  doSwipeDown(event) {
-    console.log('swipe down', event);
+    if (event.target.className == 'rectangle-94 dropdown' || event.changedTouches[0].screenY > 517) {
+      console.log('aqui')
+    }
   }
 }
