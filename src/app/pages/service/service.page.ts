@@ -1697,11 +1697,9 @@ export class ServicePage implements OnInit {
 
     // check the events
     if (event.type === 'touchstart') {
-      this.defaultTouch.x = touch.pageX;
       this.defaultTouch.y = touch.pageY;
       this.defaultTouch.time = event.timeStamp;
     } else if (event.type === 'touchend') {
-      let deltaX = touch.pageX - this.defaultTouch.x;
       let deltaY = touch.pageY - this.defaultTouch.y;
       let deltaTime = event.timeStamp - this.defaultTouch.time;
 
@@ -1709,8 +1707,10 @@ export class ServicePage implements OnInit {
       if (deltaTime < 500) {
         if (Math.abs(deltaY) > 60) {
           // delta y is at least 60 pixels
-          if (deltaY > 0) {
-            this.doSwipeDown(event);
+          // if (deltaY > 0) {
+          if (event.changedTouches[0].pageY < 27) {
+            // this.doSwipeDown(event);
+            console.log('aqui bajo', event.changedTouches[0].pageY)
           } else {
             this.doSwipeUp(event);
           }
