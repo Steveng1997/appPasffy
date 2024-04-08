@@ -1683,21 +1683,44 @@ export class ServicePage implements OnInit {
     this.totals = true
   }
 
-  @HostListener('touchend', ['$event'])
+  @HostListener('touchstart', ['$event'])
   handleTouch(event) {
-    console.log(event)
+    var pageY = event.targetTouches[0].pageY
+    var screenY = event.targetTouches[0].clientY
+    var id = event.target.id
+    console.log(pageY)
+    console.log(id)
+
+    if (id == 'rectangle95' && screenY > 351 || id == 'frame' && screenY > 351 || id == 'detail' && screenY > 196) {
+      console.log('aqui')
+    }
+
+    if (id == 'rectangle95' && screenY < 196 || id == 'frame' && screenY < 196 || id == 'detail' && screenY < 196) {
+      console.log('llegamos');
+
+    }
+
+    // if (pageY < 34 || pageY > 216 && pageY < 246) {
+    //   document.getElementById('rectangle95').style.position = 'fixed'
+    //   document.getElementById('rectangle95').style.top = '96px'
+    //   document.getElementById('detail').style.position = 'static'
+    // } else {
+    //   document.getElementById('rectangle95').style.position = 'absolute'
+    //   document.getElementById('rectangle95').style.top = '0px'
+    //   document.getElementById('detail').style.position = 'relative'
+    // }
 
     // if (event.target.className == 'rectangle-95') {
     //   console.log('aqui')
     // }
 
-    if (event.timeStamp >= 927194) {
-      debugger
-    }
+    // if (event.changedTouches[0].screenY >= 223.33334350585938) {
+    //   debugger
+    // }
 
 
-    if (event.target.className == 'rectangle-94 dropdown' || event.changedTouches[0].screenY > 517) {
-      console.log('aqui')
-    }
+    // if (event.target.className == 'rectangle-94 dropdown' || event.changedTouches[0].screenY > 517) {
+    //   console.log('aqui')
+    // }
   }
 }

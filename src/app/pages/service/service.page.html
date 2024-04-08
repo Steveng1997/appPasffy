@@ -80,7 +80,7 @@
 
         <div class="frame-76">
           <div>
-            <div class="rectangle-95"></div>
+            <div class="rectangle-95" id="rectangle95"></div>
             <div class="encargada10">Encargada</div>
             <div class="terapeuta10">Terapeuta</div>
             <div class="tiempo10">Tiempo</div>
@@ -127,7 +127,7 @@
               <div class="otros9">{{services.otros}} €</div>
               <div class="taxi9">{{services.taxi}} €</div>
 
-              <div *ngIf="details" class="dropdown-options details">
+              <div *ngIf="details" class="dropdown-options details" id="detail">
                 <div class="rectangle-115"></div>
                 <a class="min">Min</a>
                 <a class="_2-min">{{minute}} min</a>
