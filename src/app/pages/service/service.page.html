@@ -105,7 +105,7 @@
           <div class="rectangle-94 dropdown" id="detail" *ngFor="let services of (servicio | search: filterSearch
           | paymentMethod: selectedFormPago | therapist: selectedTerapeuta | manager: selectedEncargada
           | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd)" (click)="detail(services)">
-            <div style="position: relative; top: -42px">
+            <div style="position: relative; top: -42px" id="dropdown">
               <div [ngClass]="{'ellipse-18': services?.nota !== ''}"></div>
               <div class="encargada9" id="frame">{{services.encargada}}</div>
               <div class="terapeuta9">{{services.terapeuta}}</div>
