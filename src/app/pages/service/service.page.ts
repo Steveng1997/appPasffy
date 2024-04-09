@@ -81,7 +81,7 @@ export class ServicePage implements OnInit {
   siguienteCount: number = 0
   fechaFormat = new Date()
 
-  defaultTouch = { x: 0, y: 0, time: 0 };
+  defaultTouch: boolean = false
 
   // Excel
   private _workbook!: Workbook;
@@ -1683,40 +1683,44 @@ export class ServicePage implements OnInit {
     this.totals = true
   }
 
-  @HostListener('touchstart', ['$event'])
-  handleTouch(event) {
-    var pageY = event.targetTouches[0].pageY
-    var clientY = event.targetTouches[0].clientY
-    var screenY = event.targetTouches[0].screenY
-    var id = event.target.id
-    // console.log(pageY)
-    // console.log(id)
-    console.log(screenY)
+  // @HostListener('touchstart', ['$event'])
+  // handleTouch(event) {
+  //   var pageY = event.targetTouches[0].pageY
+  //   var clientY = event.targetTouches[0].clientY
+  //   var screenY = event.targetTouches[0].screenY
+  //   var id = event.target.id
+  //   console.log(screenY)
 
-    if (id == 'rectangle95' || id == 'frame' || id == 'detail' && screenY > 500 || screenY > 200) {
-      if (document.getElementById('rectangle95').style.position = 'absolute') {
-        document.getElementById('rectangle95').style.position = 'fixed'
-        document.getElementById('rectangle95').style.top = '305px'
-        document.getElementById('detail').style.position = 'static'
-      }
-    }
+  //   if (screenY > 100) {
+  //     if (this.defaultTouch == false) {
+  //       document.getElementById('rectangle95').style.position = 'fixed'
+  //       document.getElementById('rectangle95').style.top = '1px'
+  //       document.getElementById('rectangle95').style.zIndex = '1'
+  //       this.defaultTouch = true
 
-    if (id == 'rectangle95' || id == 'frame' || id == 'detail' && screenY < 900 || screenY < 400) {
-      if (document.getElementById('rectangle95').style.position = 'fixed') {
-        document.getElementById('rectangle95').style.position = 'absolute'
-        document.getElementById('rectangle95').style.top = '0px'
-        document.getElementById('detail').style.position = 'relative'
-      }
-    }
+  //       if (id == 'rectangle95' || id == 'frame' || id == 'detail' && screenY > 500) {
+  //         document.getElementById('rectangle95').style.position = 'fixed'
+  //         document.getElementById('rectangle95').style.top = '318px'
+  //         document.getElementById('rectangle95').style.zIndex = '1'
+  //         this.defaultTouch = true
+  //       }
+  //     }
+  //   }
 
-    // if (pageY < 34 || screenY > 410 || pageY > 216 && pageY < 246) {
-    //   document.getElementById('rectangle95').style.position = 'fixed'
-    //   document.getElementById('rectangle95').style.top = '96px'
-    //   document.getElementById('detail').style.position = 'static'
-    // } else {
-    //   document.getElementById('rectangle95').style.position = 'absolute'
-    //   document.getElementById('rectangle95').style.top = '0px'
-    //   document.getElementById('detail').style.position = 'relative'
-    // }
-  }
+  //   if (screenY < 450) {
+  //     if (this.defaultTouch == true) {
+  //       if (id == 'rectangle95' || id == 'frame' || id == 'detail' && screenY < 900) {
+  //         document.getElementById('rectangle95').style.position = 'absolute'
+  //         document.getElementById('rectangle95').style.top = '0px'
+  //         document.getElementById('rectangle95').style.zIndex = '0'
+  //         this.defaultTouch = false
+  //       } else {
+  //         document.getElementById('rectangle95').style.position = 'absolute'
+  //         document.getElementById('rectangle95').style.top = '0px'
+  //         document.getElementById('rectangle95').style.zIndex = '0'
+  //         this.defaultTouch = false
+  //       }
+  //     }
+  //   }
+  // }
 }
