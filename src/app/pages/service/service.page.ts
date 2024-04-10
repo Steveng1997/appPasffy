@@ -1716,7 +1716,7 @@ export class ServicePage implements OnInit {
       const totalManager = this.servicio.map(({ numberEncarg }) => numberEncarg).reduce((acc, value) => acc + value, 0)
       let manager = totalManager
 
-      const totalTaxi = this.servicio.map(({ numberTaxi }) => numberTaxi).reduce((acc, value) => acc + value, 0)
+      const totalTaxi = this.servicio.map(({ taxi }) => taxi).reduce((acc, value) => acc + value, 0)
       let taxi = totalTaxi
 
       const totalDrinkHouse = this.servicio.map(({ bebidas }) => bebidas).reduce((acc, value) => acc + value, 0)

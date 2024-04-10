@@ -243,7 +243,7 @@ body {
   margin-top: 54px;
   margin-bottom: -41px;
   width: 335px;
-  height: 389px;
+  height: 420px;
 }
 
 .dropdownTotal:hover .dropdownTotal-options {
@@ -2199,6 +2199,14 @@ ion-select::part(placeholder) {
 
 // Pedro
 @media only screen and (min-device-width: 350px) and (max-device-width: 370px) and (min-device-width: 350px) and (max-device-width: 370px) {
+  .icon {
+    top: 260px;
+  }
+
+  .textSearch {
+    top: 254px;
+  }
+
   .icon2 {
     border-radius: 0px;
     width: 9.67%;
@@ -2207,7 +2215,7 @@ ion-select::part(placeholder) {
     right: 19.2%;
     left: 260px;
     bottom: 73.94%;
-    top: 22.7%;
+    top: 243px;
     overflow: visible;
   }
 
@@ -2216,7 +2224,7 @@ ion-select::part(placeholder) {
     height: 29px;
     position: absolute;
     left: 87.4%;
-    top: 266px;
+    top: 254px;
     overflow: visible;
   }
 
