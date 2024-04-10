@@ -24,10 +24,10 @@ import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.servi
 export class ServicePage implements OnInit {
 
   details: boolean = false
+  totals: boolean = false
   textSearch: boolean = false
   filter: boolean = false
   administratorRole: boolean = false
-  totals: boolean = false
   today: boolean = true
 
   filterSearch: string
@@ -109,6 +109,20 @@ export class ServicePage implements OnInit {
   vitamin: string
   tip: string
   others: string
+
+  // Totals
+  totalTreatment: string
+  totalHouse1: string
+  totalHouse2: string
+  totalManager: string
+  totalTherapist: string
+  totalTaxi: string
+  totalDrinkHouse: string
+  totalDrinkTherap: string
+  totalTobacco: string
+  totalVitamin: string
+  totalTip: string
+  totalOthers: string
 
   constructor(
     public router: Router,
@@ -1049,6 +1063,8 @@ export class ServicePage implements OnInit {
     let fechHoy = new Date(), fechaEnd = '', convertDiaHoy = '', diaHoy = 0, mesHoy = 0,
       añoHoy = 0, convertMesHoy = ''
 
+    this.totals = false
+    this.details = false
     diaHoy = fechHoy.getDate()
     mesHoy = fechHoy.getMonth() + 1
     añoHoy = fechHoy.getFullYear()
@@ -1327,6 +1343,8 @@ export class ServicePage implements OnInit {
 
     let fechHoy = new Date(), fechaEnd = '', convertDiaHoy = '', diaHoy = 0, mesHoy = 0, añoHoy = 0, convertMesHoy = ''
 
+    this.totals = false
+    this.details = false
     diaHoy = fechHoy.getDate()
     mesHoy = fechHoy.getMonth() + 1
     añoHoy = fechHoy.getFullYear()
@@ -1680,7 +1698,340 @@ export class ServicePage implements OnInit {
   }
 
   filterTotal() {
-    this.totals = true
+    if (this.totals == false) {
+      this.totals = true
+
+      const totalTreatment = this.servicio.map(({ servicio }) => servicio).reduce((acc, value) => acc + value, 0)
+      let treatment = totalTreatment
+
+      const totalHouse1 = this.servicio.map(({ numberPiso1 }) => numberPiso1).reduce((acc, value) => acc + value, 0)
+      let house1 = totalHouse1
+
+      const totalHouse2 = this.servicio.map(({ numberPiso2 }) => numberPiso2).reduce((acc, value) => acc + value, 0)
+      let house2 = totalHouse2
+
+      const totalTherapist = this.servicio.map(({ numberTerap }) => numberTerap).reduce((acc, value) => acc + value, 0)
+      let therapist = totalTherapist
+
+      const totalManager = this.servicio.map(({ numberEncarg }) => numberEncarg).reduce((acc, value) => acc + value, 0)
+      let manager = totalManager
+
+      const totalTaxi = this.servicio.map(({ numberTaxi }) => numberTaxi).reduce((acc, value) => acc + value, 0)
+      let taxi = totalTaxi
+
+      const totalDrinkHouse = this.servicio.map(({ bebidas }) => bebidas).reduce((acc, value) => acc + value, 0)
+      let drinkHouse = totalDrinkHouse
+
+      const totalDrinkTherap = this.servicio.map(({ bebidaTerap }) => bebidaTerap).reduce((acc, value) => acc + value, 0)
+      let drinkTherap = totalDrinkTherap
+
+      const totalTobacco = this.servicio.map(({ tabaco }) => tabaco).reduce((acc, value) => acc + value, 0)
+      let tobacco = totalTobacco
+
+      const totalVitamin = this.servicio.map(({ vitaminas }) => vitaminas).reduce((acc, value) => acc + value, 0)
+      let vitamin = totalVitamin
+
+      const totalTip = this.servicio.map(({ propina }) => propina).reduce((acc, value) => acc + value, 0)
+      let tip = totalTip
+
+      const totalOthers = this.servicio.map(({ otros }) => otros).reduce((acc, value) => acc + value, 0)
+      let others = totalOthers
+
+      this.thousandPointTotal(treatment, house1, house2, therapist, manager, taxi, drinkHouse, drinkTherap, tobacco, vitamin, tip, others)
+    } else {
+      this.totals = false
+    }
+  }
+
+  thousandPointTotal(treatment, house1, house2, therapist, manager, taxi, drinkHouse, drinkTherap, tobacco, vitamin, tip, others) {
+
+    if (treatment > 999) {
+      const coma = treatment.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? treatment.toString().split(".") : treatment.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalTreatment = integer[0].toString()
+    } else {
+      this.totalTreatment = treatment.toString()
+    }
+
+    if (house1 > 999) {
+      const coma = house1.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? house1.toString().split(".") : house1.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalHouse1 = integer[0].toString()
+    } else {
+      this.totalHouse1 = house1.toString()
+    }
+
+    if (house2 > 999) {
+      const coma = house2.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? house2.toString().split(".") : house2.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalHouse2 = integer[0].toString()
+    } else {
+      this.totalHouse2 = house2.toString()
+    }
+
+    if (therapist > 999) {
+      const coma = therapist.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? therapist.toString().split(".") : therapist.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalTherapist = integer[0].toString()
+    } else {
+      this.totalTherapist = therapist.toString()
+    }
+
+    if (manager > 999) {
+      const coma = manager.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? manager.toString().split(".") : manager.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalManager = integer[0].toString()
+    } else {
+      this.totalManager = manager.toString()
+    }
+
+    if (taxi > 999) {
+      const coma = taxi.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? taxi.toString().split(".") : taxi.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalTaxi = integer[0].toString()
+    } else {
+      this.totalTaxi = taxi.toString()
+    }
+
+    if (drinkHouse > 999) {
+      const coma = drinkHouse.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? drinkHouse.toString().split(".") : drinkHouse.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalDrinkHouse = integer[0].toString()
+    } else {
+      this.totalDrinkHouse = drinkHouse.toString()
+    }
+
+    if (drinkTherap > 999) {
+      const coma = drinkTherap.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? drinkTherap.toString().split(".") : drinkTherap.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalDrinkTherap = integer[0].toString()
+    } else {
+      this.totalDrinkTherap = drinkTherap.toString()
+    }
+
+    if (tobacco > 999) {
+      const coma = tobacco.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? tobacco.toString().split(".") : tobacco.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalTobacco = integer[0].toString()
+    } else {
+      this.totalTobacco = tobacco.toString()
+    }
+
+    if (vitamin > 999) {
+      const coma = vitamin.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? vitamin.toString().split(".") : vitamin.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalVitamin = integer[0].toString()
+    } else {
+      this.totalVitamin = vitamin.toString()
+    }
+
+    if (tip > 999) {
+      const coma = tip.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? tip.toString().split(".") : tip.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalTip = integer[0].toString()
+    } else {
+      this.totalTip = tip.toString()
+    }
+
+    if (others > 999) {
+      const coma = others.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? others.toString().split(".") : others.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalOthers = integer[0].toString()
+    } else {
+      this.totalOthers = others.toString()
+    }
   }
 
   // @HostListener('touchstart', ['$event'])

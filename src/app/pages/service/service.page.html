@@ -102,12 +102,12 @@
             <div class="taxi10">Taxi</div>
           </div>
 
-          <div class="rectangle-94 dropdown" id="detail" *ngFor="let services of (servicio | search: filterSearch
+          <div class="rectangle-94 dropdown" *ngFor="let services of (servicio | search: filterSearch
           | paymentMethod: selectedFormPago | therapist: selectedTerapeuta | manager: selectedEncargada
           | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd)" (click)="detail(services)">
-            <div style="position: relative; top: -42px" id="dropdown">
+            <div style="position: relative; top: -42px">
               <div [ngClass]="{'ellipse-18': services?.nota !== ''}"></div>
-              <div class="encargada9" id="frame">{{services.encargada}}</div>
+              <div class="encargada9">{{services.encargada}}</div>
               <div class="terapeuta9">{{services.terapeuta}}</div>
               <div class="tiempo9">{{services.horaStart}} - {{services.horaEnd}}</div>
               <div class="minuto9">{{services.minuto}} min</div>
@@ -127,7 +127,7 @@
               <div class="otros9">{{services.otros}} €</div>
               <div class="taxi9">{{services.taxi}} €</div>
 
-              <div *ngIf="details" class="dropdown-options details" id="detail">
+              <div *ngIf="details" class="dropdown-options details">
                 <div class="rectangle-115"></div>
                 <a class="min">Min</a>
                 <a class="_2-min">{{minute}} min</a>
@@ -185,52 +185,77 @@
 
         <div class="component-9">
           <div class="rectangle-18"></div>
-          <svg class="icon5" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg"
-            (click)="filterTotal()">
+          <svg class="icon5 dropdownTotal" width="19" height="9" viewBox="0 0 19 9" fill="none"
+            xmlns="http://www.w3.org/2000/svg" (click)="filterTotal()">
             <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#0B9A7A" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
+
+          <div *ngIf="totals" class="dropdownTotal-options">
+            <div class="rectangle-115"></div>
+            <!-- <a class="min">Min</a>
+            <a class="_2-min">{{TotalValueLetter}} min</a>
+            <div class="total">Total</div>
+            <div class="_15">{{TotalValueLetter}} €</div>
+            <div class="pago">Pago</div>
+            <div class="_bizum" id="__bizum">Efectivo</div>
+            <div class="salida">Salida</div>
+            <div class="salida2">Steven</div>
+            <div class="tratamiento">Tratamiento</div>
+            <div class="_152">Apartamento</div>
+            <div class="a-casa">€ A casa</div>
+            <div class="a-casa2">{{TotalValueLetter}} €</div>
+            <div class="_153">€ A casa</div>
+            <div class="_154">{{TotalValueLetter}} €</div>
+            <div class="a-terapeuta">€ A Terapeuta</div>
+            <div class="_0">{{TotalValueLetter}} €</div>
+            <div class="a-encargada">€ A Encargada</div>
+            <div class="_02">{{TotalValueLetter}} €</div>
+            <div class="a-taxista">€ A Taxista</div>
+            <div class="_03">{{TotalValueLetter}} €</div>
+            <div class="bebida-casa">Bebida casa</div>
+            <div class="_04">{{TotalValueLetter}} €</div>
+            <div class="bebida-terap">Bebida Terapeuta</div>
+            <div class="_05">{{TotalValueLetter}} €</div>
+            <div class="tabaco">Tabaco</div>
+            <div class="_06">{{TotalValueLetter}} €</div>
+            <div class="vitamina">Vitamina</div>
+            <div class="_07">{{TotalValueLetter}} €</div>
+            <div class="propina">Propina</div>
+            <div class="_08">{{TotalValueLetter}} €</div>
+            <div class="otros">Otros</div>
+            <div class="_09">{{TotalValueLetter}} €</div>
+            <div class="cliente">Cliente</div>
+            <div class="andrea-luszh">{{TotalValueLetter}} €</div> -->
+
+            <a class="min">Tratamiento</a>
+            <a class="_2-min">{{totalTreatment}} €</a>
+            <div class="total">€ A casa </div>
+            <div class="_15">{{totalHouse1}} €</div>
+            <div class="pago">€ A casa</div>
+            <div class="_bizum" id="__bizum">{{totalHouse2}} €</div>
+            <div class="salida">€ A Encargada</div>
+            <div class="salida2">{{totalTherapist}} €</div>
+            <div class="tratamiento">€ A Taxista</div>
+            <div class="_152">{{totalManager}} €</div>
+            <div class="a-casa">Bebida casa</div>
+            <div class="a-casa2">{{totalTaxi}} €</div>
+            <div class="_153">Bebida Terapeuta</div>
+            <div class="_154">{{totalDrinkHouse}} €</div>
+            <div class="a-terapeuta">Tabaco</div>
+            <div class="_0">{{totalDrinkTherap}} €</div>
+            <div class="a-encargada">Vitamina</div>
+            <div class="_02">{{totalTobacco}} €</div>
+            <div class="a-taxista">Propina</div>
+            <div class="_03">{{totalVitamin}} €</div>
+            <div class="bebida-casa">Otros</div>
+            <div class="_04">{{totalTip}} €</div>
+            <div class="_05">{{totalOthers}} €</div>
+            <div class="cliente">€ A Terapeuta</div>
+          </div>
           <div class="total11">Total</div>
           <div class="_370">{{TotalValueLetter}}€</div>
         </div>
-
-        <!-- <div *ngIf="totals" class="dropdown-options details">
-          <div class="rectangle-115"></div>
-          <a class="min">Min</a>
-          <a class="_2-min">{{minute}} min</a>
-          <div class="total">Total</div>
-          <div class="_15">{{total}} €</div>
-          <div class="pago">Pago</div>
-          <div class="_bizum" id="__bizum">{{payment}}</div>
-          <div class="salida">Salida</div>
-          <div class="salida2">{{client}}</div>
-          <div class="tratamiento">Tratamiento</div>
-          <div class="_152">{{exit}}</div>
-          <div class="a-casa">€ A casa</div>
-          <div class="a-casa2">{{treatment2}} €</div>
-          <div class="_153">€ A casa</div>
-          <div class="_154">{{house1}} €</div>
-          <div class="a-terapeuta">€ A Terapeuta</div>
-          <div class="_0">{{house2}} €</div>
-          <div class="a-encargada">€ A Encargada</div>
-          <div class="_02">{{therapist}} €</div>
-          <div class="a-taxista">€ A Taxista</div>
-          <div class="_03">{{manag}} €</div>
-          <div class="bebida-casa">Bebida casa</div>
-          <div class="_04">{{taxi}} €</div>
-          <div class="bebida-terap">Bebida Terapeuta</div>
-          <div class="_05">{{drinkHouse}} €</div>
-          <div class="tabaco">Tabaco</div>
-          <div class="_06">{{drinkTherap}} €</div>
-          <div class="vitamina">Vitamina</div>
-          <div class="_07">{{tabacco}} €</div>
-          <div class="propina">Propina</div>
-          <div class="_08">{{vitamin}} €</div>
-          <div class="otros">Otros</div>
-          <div class="_09">{{tip}} €</div>
-          <div class="cliente">Cliente</div>
-          <div class="andrea-luszh">{{others}} €</div>
-        </div> -->
       </div>
 
     </ion-row>
