@@ -102,11 +102,9 @@
             <div class="taxi10">Taxi</div>
           </div>
 
-          <div class="rectangle-94 dropdown"
-            *ngFor="let services of (servicio | search: filterSearch
-          | paymentMethod: selectedFormPago | therapist: selectedTerapeuta | manager: selectedEncargada
-          | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd) | paginate: { itemsPerPage: 9, currentPage: page }"
-            (click)="detail(services)">
+          <div class="rectangle-94" *ngFor="let services of (servicio | search: filterSearch | paymentMethod: selectedFormPago | therapist: selectedTerapeuta 
+            | manager: selectedEncargada | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd) | 
+            paginate: { itemsPerPage: 9, currentPage: page }" (click)="detail()">
             <div style="position: relative; top: -42px">
               <div [ngClass]="{'ellipse-18': services?.nota !== ''}"></div>
               <div class="encargada9">{{services.encargada}}</div>
@@ -128,59 +126,6 @@
               <div class="vitamina9">{{services.vitaminas}} €</div>
               <div class="otros9">{{services.otros}} €</div>
               <div class="taxi9">{{services.taxi}} €</div>
-
-              <div *ngIf="details" class="dropdown-options details">
-                <div class="rectangle-115"></div>
-                <a class="min">Min</a>
-                <a class="_2-min">{{minute}} min</a>
-                <div class="total">Total</div>
-                <div class="_15">{{total}} €</div>
-                <div class="pago">Pago</div>
-                <div class="_bizum" id="__bizum">{{payment}}</div>
-                <div class="salida">Salida</div>
-                <div class="salida2">{{client}}</div>
-                <div class="tratamiento">Tratamiento</div>
-                <div class="_152">{{exit}}</div>
-                <div class="a-casa">€ A casa</div>
-                <div class="a-casa2">{{treatment2}} €</div>
-                <div class="_153">€ A casa</div>
-                <div class="_154">{{house1}} €</div>
-                <div class="a-terapeuta">€ A Terapeuta</div>
-                <div class="_0">{{house2}} €</div>
-                <div class="a-encargada">€ A Encargada</div>
-                <div class="_02">{{therapist}} €</div>
-                <div class="a-taxista">€ A Taxista</div>
-                <div class="_03">{{manag}} €</div>
-                <div class="bebida-casa">Bebida casa</div>
-                <div class="_04">{{taxi}} €</div>
-                <div class="bebida-terap">Bebida Terapeuta</div>
-                <div class="_05">{{drinkHouse}} €</div>
-                <div class="tabaco">Tabaco</div>
-                <div class="_06">{{drinkTherap}} €</div>
-                <div class="vitamina">Vitamina</div>
-                <div class="_07">{{tabacco}} €</div>
-                <div class="propina">Propina</div>
-                <div class="_08">{{vitamin}} €</div>
-                <div class="otros">Otros</div>
-                <div class="_09">{{tip}} €</div>
-                <div class="cliente">Cliente</div>
-                <div class="andrea-luszh">{{others}} €</div>
-
-                <div class="editar" (click)="edit(services.id)">Editar</div>
-                <div class="rectangle-117" (click)="edit(services.id)"></div>
-
-                <div class="eliminar2" (click)="edit(services.id)">Eliminar</div>
-                <div class="rectangle-118" (click)="edit(services.id)"></div>
-
-                <div class="rectangle-112" (click)="delete(services.id)"></div>
-                <div class="eliminar" (click)="delete(services.id)">Cancelar</div>
-                <svg class="trash-03" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  xmlns="http://www.w3.org/2000/svg" (click)="delete(services.id)">
-                  <path
-                    d="M9 3H15M3 6H21M19 6L18.2987 16.5193C18.1935 18.0975 18.1409 18.8867 17.8 19.485C17.4999 20.0118 17.0472 20.4353 16.5017 20.6997C15.882 21 15.0911 21 13.5093 21H10.4907C8.90891 21 8.11803 21 7.49834 20.6997C6.95276 20.4353 6.50009 20.0118 6.19998 19.485C5.85911 18.8867 5.8065 18.0975 5.70129 16.5193L5 6M10 10.5V15.5M14 10.5V15.5"
-                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </div>
             </div>
           </div>
         </div>
@@ -198,32 +143,32 @@
 
           <div *ngIf="totals" class="dropdownTotal-options">
             <div class="rectangle-115"></div>
-            <a class="min">Tratamiento</a>
-            <a class="_2-min">{{totalTreatment}} €</a>
-            <div class="total">Propina </div>
+            <a class="_min">Tratamiento</a>
+            <a class="__2-min">{{totalTreatment}} €</a>
+            <div class="_total">Propina </div>
             <div class="_15">{{totalTip}} €</div>
-            <div class="pago">€ A casa</div>
+            <div class="_pago">€ A casa</div>
             <div class="_bizum" id="__bizum">{{totalHouse1}} €</div>
-            <div class="salida">€ A Terapeuta</div>
+            <div class="_salida">€ A Terapeuta</div>
             <div class="salida2">{{totalHouse2}} €</div>
-            <div class="tratamiento">€ A Encargada</div>
+            <div class="_tratamiento">€ A Encargada</div>
             <div class="_152">{{totalTherapist}} €</div>
-            <div class="a-casa">Bebida casa</div>
-            <div class="a-casa2">{{totalManager}} €</div>
+            <div class="_a-casa">Bebida casa</div>
+            <div class="_a-casa2">{{totalManager}} €</div>
             <div class="_153">Bebida Terapeuta</div>
             <div class="_154">{{totalDrinkHouse}} €</div>
-            <div class="a-terapeuta">Tabaco</div>
+            <div class="_a-terapeuta">Tabaco</div>
             <div class="_0">{{totalDrinkTherap}} €</div>
-            <div class="a-encargada">Vitamina</div>
+            <div class="_a-encargada">Vitamina</div>
             <div class="_02">{{totalTobacco}} €</div>
             <div class="a-taxista">Propina</div>
             <div class="_03">{{totalVitamin}} €</div>
-            <div class="bebida-casa">Otros</div>
+            <div class="_bebida-casa">Otros</div>
             <div class="_04">{{totalTip}} €</div>
             <div class="_05">{{totalOthers}} €</div>
-            <div class="bebida-terap">Taxi</div>
+            <div class="_bebida-terap">Taxi</div>
             <div class="_06">{{totalTaxi}} €</div>
-            <div class="cliente">€ A casa</div>
+            <div class="_cliente">€ A casa</div>
           </div>
           <div class="total11">Total</div>
           <div class="_370">{{TotalValueLetter}}€</div>
@@ -265,7 +210,7 @@
   <div class="group-49">
     <div class="rectangle-37" id="cash1"></div>
     <ion-input class="rectangle-37" id="cash" name="cash" [(ngModel)]="selectedFormPago" (click)="cash()"></ion-input>
-    <div class="efectivo">Efectivo</div>
+    <div class="_efectivo">Efectivo</div>
   </div>
 
   <div class="group-50">
@@ -329,4 +274,67 @@
   <div class="rectangle-157"></div>
   <ion-input class="rectangle-157" type="time" name="hourEnd" [(ngModel)]="hourEnd"
     (ngModelChange)="filters()"></ion-input>
+</div>
+
+<!-- Filter Detail -->
+
+<div class="pop-up-filtros" *ngIf="details">
+
+  <div class="rectangle-30_1"></div>
+  <div class="emily-18-29-19-29">Emily 18:29 - 19:29</div>
+  <div class="rectangle-41"></div>
+
+  <svg class="vector-6" width="59" height="2" viewBox="0 0 59 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 1L59 0.999995" stroke="#3C3C3C" />
+  </svg>
+
+  <div class="min">Min</div>
+  <div class="_2-min">2 min</div>
+  <div class="total">Total</div>
+  <div class="_120">120 €</div>
+  <div class="tratamiento">Tratamiento</div>
+  <div class="_1202">120 €</div>
+  <div class="propina">Propina</div>
+  <div class="_1203">120 €</div>
+  <div class="pago">Pago</div>
+  <div class="efectivo">Efectivo</div>
+  <div class="cliente">Cliente</div>
+  <div class="gestor">Gestor</div>
+  <div class="salida">Salida</div>
+  <div class="n-a">N/A</div>
+  <div class="a-casa">€ A casa</div>
+  <div class="_1204">120 €</div>
+  <div class="a-casa2">€ A casa</div>
+  <div class="_1205">120 €</div>
+  <div class="a-terapeuta">€ A Terapeuta</div>
+  <div class="_1206">120 €</div>
+  <div class="a-encargada">€ A Encargada</div>
+  <div class="_1207">120 €</div>
+  <div class="bebida-casa">Bebida casa</div>
+  <div class="_1208">120 €</div>
+  <div class="_1209">120 €</div>
+  <div class="bebida-terapeuta">Bebida Terapeuta</div>
+  <div class="tabaco">Tabaco</div>
+  <div class="_12010">120 €</div>
+  <div class="vitamina">Vitamina</div>
+  <div class="_12011">120 €</div>
+  <div class="otros">Otros</div>
+  <div class="_12012">120 €</div>
+  <div class="taxi">Taxi</div>
+  <div class="_12013">120 €</div>
+  <div class="editar">Editar</div>
+
+  <svg class="x-close_1" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+    (click)="closeDetail()">
+    <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round" />
+  </svg>
+
+  <svg class="trash-03" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M9 3H15M3 6H21M19 6L18.2987 16.5193C18.1935 18.0975 18.1409 18.8867 17.8 19.485C17.4999 20.0118 17.0472 20.4353 16.5017 20.6997C15.882 21 15.0911 21 13.5093 21H10.4907C8.90891 21 8.11803 21 7.49834 20.6997C6.95276 20.4353 6.50009 20.0118 6.19998 19.485C5.85911 18.8867 5.8065 18.0975 5.70129 16.5193L5 6M10 10.5V15.5M14 10.5V15.5"
+      stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+
+  <div class="eliminar">Eliminar</div>
 </div>

@@ -806,35 +806,36 @@ export class ServicePage implements OnInit {
     this.validateCheck()
   }
 
-  detail(services: ModelService) {
-    if (this.details == false) {
-      this.details = true
-      this.minute = services.minuto
-      this.total = services.totalServicio
-      this.payment = services.formaPago
-      this.client = services.cliente
+  detail() {
+    // if (this.details == false) {
+    //   this.details = true
+    //   this.minute = services.minuto
+    //   this.total = services.totalServicio
+    //   this.payment = services.formaPago
+    //   this.client = services.cliente
 
-      if (services.salida != "") this.exit = services.salida
-      else this.exit = 'N/A'
+    //   if (services.salida != "") this.exit = services.salida
+    //   else this.exit = 'N/A'
 
-      this.treatment2 = services.servicio
+    //   this.treatment2 = services.servicio
 
-      this.treatment = services.servicio
-      this.house1 = services.numberPiso1
-      this.house2 = services.numberPiso2
-      this.therap = services.numberTerap
-      this.therapist = services.numberTerap
-      this.manag = services.numberEncarg
-      this.taxi = services.numberTaxi
-      this.drinkHouse = services.bebidas
-      this.drinkTherap = services.bebidaTerap
-      this.tabacco = services.tabaco
-      this.vitamin = services.vitaminas
-      this.tip = services.propina
-      this.others = services.otros
-    } else {
-      this.details = false
-    }
+    //   this.treatment = services.servicio
+    //   this.house1 = services.numberPiso1
+    //   this.house2 = services.numberPiso2
+    //   this.therap = services.numberTerap
+    //   this.therapist = services.numberTerap
+    //   this.manag = services.numberEncarg
+    //   this.taxi = services.numberTaxi
+    //   this.drinkHouse = services.bebidas
+    //   this.drinkTherap = services.bebidaTerap
+    //   this.tabacco = services.tabaco
+    //   this.vitamin = services.vitaminas
+    //   this.tip = services.propina
+    //   this.others = services.otros
+    // } else {
+    //   this.details = false
+    // }
+    this.details = true
   }
 
   search() {
@@ -1031,6 +1032,10 @@ export class ServicePage implements OnInit {
 
   close() {
     this.filter = false
+  }
+
+  closeDetail(){
+    this.details = false
   }
 
   closeTotals() {
