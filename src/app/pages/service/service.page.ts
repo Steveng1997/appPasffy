@@ -100,8 +100,11 @@ export class ServicePage implements OnInit {
   treatment: string
   treatment2: string
   therapist: string
+  therapisth: string
   house1: string
   house2: string
+  hourstart: string
+  hourend: string
   therap: string
   manag: string
   taxi: string
@@ -806,36 +809,38 @@ export class ServicePage implements OnInit {
     this.validateCheck()
   }
 
-  detail() {
-    // if (this.details == false) {
-    //   this.details = true
-    //   this.minute = services.minuto
-    //   this.total = services.totalServicio
-    //   this.payment = services.formaPago
-    //   this.client = services.cliente
+  detail(services: any) {
+    if (this.details == false) {
+      this.details = true
+      this.minute = services.minuto
+      this.total = services.totalServicio
+      this.payment = services.formaPago
+      this.client = services.cliente
 
-    //   if (services.salida != "") this.exit = services.salida
-    //   else this.exit = 'N/A'
+      if (services.salida != "") this.exit = services.salida
+      else this.exit = 'N/A'
 
-    //   this.treatment2 = services.servicio
+      this.treatment2 = services.servicio
 
-    //   this.treatment = services.servicio
-    //   this.house1 = services.numberPiso1
-    //   this.house2 = services.numberPiso2
-    //   this.therap = services.numberTerap
-    //   this.therapist = services.numberTerap
-    //   this.manag = services.numberEncarg
-    //   this.taxi = services.numberTaxi
-    //   this.drinkHouse = services.bebidas
-    //   this.drinkTherap = services.bebidaTerap
-    //   this.tabacco = services.tabaco
-    //   this.vitamin = services.vitaminas
-    //   this.tip = services.propina
-    //   this.others = services.otros
-    // } else {
-    //   this.details = false
-    // }
-    this.details = true
+      this.treatment = services.servicio
+      this.house1 = services.numberPiso1
+      this.house2 = services.numberPiso2
+      this.hourstart = services.horaStart
+      this.hourend = services.horaEnd
+      this.therap = services.numberTerap
+      this.therapist = services.numberTerap
+      this.manag = services.numberEncarg
+      this.taxi = services.numberTaxi
+      this.drinkHouse = services.bebidas
+      this.drinkTherap = services.bebidaTerap
+      this.tabacco = services.tabaco
+      this.vitamin = services.vitaminas
+      this.tip = services.propina
+      this.others = services.otros
+      this.therapisth = services.terapeuta
+    } else {
+      this.details = false
+    }
   }
 
   search() {
@@ -1034,7 +1039,7 @@ export class ServicePage implements OnInit {
     this.filter = false
   }
 
-  closeDetail(){
+  closeDetail() {
     this.details = false
   }
 

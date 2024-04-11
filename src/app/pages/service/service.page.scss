@@ -1704,15 +1704,6 @@ ion-select::part(placeholder) {
   justify-content: flex-start;
 }
 
-.x-close {
-  width: 27px;
-  height: 27px;
-  position: absolute;
-  left: 323px;
-  top: 28px;
-  overflow: visible;
-}
-
 .min {
   color: #3c3c3c;
   text-align: left;
@@ -1736,11 +1727,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 298px;
+  left: 261px;
   top: 72px;
+  width: 77px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .total {
@@ -1766,11 +1758,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 98px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .tratamiento {
@@ -1796,11 +1789,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 124px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .propina {
@@ -1826,11 +1820,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 150px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .pago {
@@ -1856,11 +1851,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 277px;
+  left: 131px;
   top: 176px;
+  width: 207px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .cliente {
@@ -1886,11 +1882,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 288px;
+  left: 227px;
   top: 202px;
+  width: 110px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .salida {
@@ -1916,11 +1913,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 310px;
+  left: 227px;
   top: 228px;
+  width: 110px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-casa {
@@ -1946,11 +1944,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 254px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-casa2 {
@@ -1976,11 +1975,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 280px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-terapeuta {
@@ -2006,11 +2006,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 306px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .a-encargada {
@@ -2036,11 +2037,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 332px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .bebida-casa {
@@ -2066,11 +2068,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 358px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 ._1209 {
@@ -2126,11 +2129,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 410px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .vitamina {
@@ -2156,11 +2160,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 436px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .otros {
@@ -2186,11 +2191,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 462px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .taxi {
@@ -2216,11 +2222,12 @@ ion-select::part(placeholder) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 297px;
+  left: 257px;
   top: 488px;
+  width: 80px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: end;
+  justify-items: end;
 }
 
 .rectangle-41 {
@@ -2238,30 +2245,6 @@ ion-select::part(placeholder) {
 .group-79 {
   position: absolute;
   inset: 0;
-}
-
-.editar {
-  color: #ffffff;
-  text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 15px;
-  line-height: 115%;
-  font-weight: 700;
-  position: absolute;
-  left: 244px;
-  top: 567px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-}
-
-.trash-03 {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  left: 215px;
-  top: 563px;
-  overflow: visible;
 }
 
 .vector-6 {
@@ -3082,6 +3065,14 @@ ion-select::part(placeholder) {
   }
 
   .editar {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 232px;
     top: 559px;
   }
 
