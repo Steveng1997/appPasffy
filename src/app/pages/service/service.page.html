@@ -102,9 +102,11 @@
             <div class="taxi10">Taxi</div>
           </div>
 
-          <div class="rectangle-94 dropdown" *ngFor="let services of (servicio | search: filterSearch
+          <div class="rectangle-94 dropdown"
+            *ngFor="let services of (servicio | search: filterSearch
           | paymentMethod: selectedFormPago | therapist: selectedTerapeuta | manager: selectedEncargada
-          | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd)" (click)="detail(services)">
+          | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd) | paginate: { itemsPerPage: 9, currentPage: page }"
+            (click)="detail(services)">
             <div style="position: relative; top: -42px">
               <div [ngClass]="{'ellipse-18': services?.nota !== ''}"></div>
               <div class="encargada9">{{services.encargada}}</div>
@@ -182,6 +184,9 @@
             </div>
           </div>
         </div>
+
+        <pagination-controls class="paginator" previousLabel="" nextLabel=""
+          (pageChange)="page = $event"></pagination-controls>
 
         <div class="component-9">
           <div class="rectangle-18"></div>

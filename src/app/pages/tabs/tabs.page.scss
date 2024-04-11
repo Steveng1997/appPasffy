@@ -17,6 +17,18 @@
 }
 
 @media only screen and (min-device-width: 350px) and (max-device-width: 370px) and (min-device-width: 350px) and (max-device-width: 370px) {
+
+  .barra {
+    background: #ffffff;
+    height: 79px;
+    position: sticky;
+    left: calc(50% - 187.5px);
+    bottom: 0px;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+
+
   .group-104 {
     height: auto;
     position: absolute;

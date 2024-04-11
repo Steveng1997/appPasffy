@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -12,6 +12,7 @@ import { TherapistPipe } from 'src/app/core/pipe/therapist.pipe';
 import { ManagerPipe } from 'src/app/core/pipe/manager.pipe';
 import { DatePipe } from 'src/app/core/pipe/date.pipe';
 import { HourDatePipe } from 'src/app/core/pipe/hour-date.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { HourDatePipe } from 'src/app/core/pipe/hour-date.pipe';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    ServicePageRoutingModule
+    ServicePageRoutingModule,
+    NgxPaginationModule
   ],
   declarations: [
     ServicePage,

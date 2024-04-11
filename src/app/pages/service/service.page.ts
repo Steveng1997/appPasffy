@@ -23,6 +23,8 @@ import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.servi
 
 export class ServicePage implements OnInit {
 
+  page!: number
+
   details: boolean = false
   totals: boolean = false
   textSearch: boolean = false

@@ -2199,6 +2199,11 @@ ion-select::part(placeholder) {
 
 // Pedro
 @media only screen and (min-device-width: 350px) and (max-device-width: 370px) and (min-device-width: 350px) and (max-device-width: 370px) {
+
+  .servicios-1 {
+    height: 1044px;
+  }
+
   .icon {
     top: 260px;
   }
@@ -2403,6 +2408,10 @@ ion-select::part(placeholder) {
     --highlight-color: transparent;
   }
 
+  .m-todo-de-pago {
+    left: 26px;
+  }
+
   .group-49 {
     width: 98px;
     height: 44.83px;
@@ -2485,7 +2494,14 @@ ion-select::part(placeholder) {
     top: 559px;
   }
 
-  // Tale
+  // Table
+
+  .frame-76 {
+    height: 563px;
+    top: 343px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
 
   .rectangle-95 {
     width: 2318px;
@@ -2685,6 +2701,13 @@ ion-select::part(placeholder) {
 
   .eliminar {
     left: 225px;
+  }
+
+  .paginator {
+    position: absolute;
+    display: grid;
+    align-items: flex-end;
+    top: 910px;
   }
 }
 
