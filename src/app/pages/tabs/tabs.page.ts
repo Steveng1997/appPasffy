@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 export class TabsPage implements OnInit {
 
   id: string = ""
+  idUser: number
 
   constructor(
     public router: Router,
@@ -18,6 +19,9 @@ export class TabsPage implements OnInit {
   ngOnInit(): void {
     const params = this.activatedRoute.snapshot.params
     this.id = params['id']
+
+    const paramsUser = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
+    this.idUser = Number(paramsUser['id'])
 
     const param = this.activatedRoute.snapshot['_routerState'].url
     const arr = param.split('/')
@@ -52,7 +56,8 @@ export class TabsPage implements OnInit {
   }
 
   closing() {
-    this.router.navigate([`tabs/${this.id}/closing`])
+    // this.router.navigate([`tabs/${this.id}/closing`])
+    this.router.navigate([`tabs/${this.idUser}/menu`])
     document.getElementById('vision').style.stroke = '#3C3C3C'
     document.getElementById('services').style.stroke = '#3C3C3C'
     document.getElementById('liquidation').style.stroke = '#3C3C3C'

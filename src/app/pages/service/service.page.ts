@@ -98,7 +98,6 @@ export class ServicePage implements OnInit {
   client: string
   exit: string
   treatment: string
-  treatment2: string
   therapist: string
   therapisth: string
   house1: string
@@ -567,7 +566,11 @@ export class ServicePage implements OnInit {
   }
 
   filters = async () => {
-    await this.calculateSumOfServices()
+    this.serviceService.getServicio().subscribe(async (rp: any) => {
+      this.servicio = rp
+      await this.calculateSumOfServices()
+    })
+    // await this.calculateSumOfServices()
   }
 
   calculateSumOfServices = async () => {
@@ -631,6 +634,7 @@ export class ServicePage implements OnInit {
         && conditionBetweenHours(serv) && searchCondition(serv) && wayToPay(serv))
       this.totalValor = valorTotal.reduce((accumulator, serv) => {
         this.idService = valorTotal
+        this.servicio = valorTotal
         return accumulator + serv.totalServicio
       }, 0)
     }
@@ -819,8 +823,6 @@ export class ServicePage implements OnInit {
 
       if (services.salida != "") this.exit = services.salida
       else this.exit = 'N/A'
-
-      this.treatment2 = services.servicio
 
       this.treatment = services.servicio
       this.house1 = services.numberPiso1

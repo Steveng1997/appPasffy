@@ -32,4 +32,8 @@ export class MenuPage implements OnInit {
   back() {
     this.router.navigate([`tabs/${this.id}/vision`])
   }
+
+  closing(){
+    this.router.navigate([`tabs/${this.id}/closing`])
+  }
 }

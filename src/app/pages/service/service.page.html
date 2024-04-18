@@ -105,7 +105,7 @@
           <div class="rectangle-94" *ngFor="let services of (servicio | search: filterSearch | paymentMethod: selectedFormPago | therapist: selectedTerapeuta 
             | manager: selectedEncargada | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd) | 
             paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(services)">
-            <div style="position: relative; top: -49px">
+            <div style="position: relative; top: 0px">
               <div [ngClass]="{'ellipse-18': services?.nota !== ''}"></div>
               <div class="encargada9">{{services.encargada}}</div>
               <div class="terapeuta9">{{services.terapeuta}}</div>
@@ -192,7 +192,7 @@
   </svg>
 
   <div class="limpiar" id="btnDelete" (click)="emptyFilter()">Limpiar</div>
-  <div class="filtrar">Filtrar</div>
+  <div class="filtrar" (click)="close()">Filtrar</div>
   <div class="_terapeuta">Terapeuta</div>
   <div class="inicial">Inicial</div>
   <div class="final">Final</div>
@@ -281,7 +281,7 @@
 <div class="POP-UP-DETAILS" *ngIf="details">
   <div class="overlap-group-wrapper">
     <div class="overlap-group">
-      <div class="emily">Emily&nbsp;&nbsp; 18:29 - 19:29</div>
+      <div class="emily">{{therapisth}}&nbsp;&nbsp; {{hourstart}} - {{hourend}}</div>
 
       <svg class="x-close_1" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
         (click)="closeDetail()">
@@ -290,39 +290,39 @@
       </svg>
 
       <div class="text-wrapper">Min</div>
-      <div class="div">2 min</div>
+      <div class="div">{{minute}} min</div>
       <div class="text-wrapper-2">Total</div>
-      <div class="text-wrapper-3">120 €</div>
+      <div class="text-wrapper-3">{{total}} €</div>
       <div class="text-wrapper-4">Tratamiento</div>
-      <div class="text-wrapper-5">120 €</div>
+      <div class="text-wrapper-5">{{treatment}} €</div>
       <div class="text-wrapper-6">Propina</div>
-      <div class="text-wrapper-7">120 €</div>
+      <div class="text-wrapper-7">{{tip}} €</div>
       <div class="text-wrapper-8">Pago</div>
-      <div class="text-wrapper-9">Efectivo</div>
+      <div class="text-wrapper-9">{{payment}}</div>
       <div class="text-wrapper-10">Cliente</div>
-      <div class="text-wrapper-11">Gestor</div>
+      <div class="text-wrapper-11">{{client}}</div>
       <div class="text-wrapper-12">Salida</div>
-      <div class="text-wrapper-13">N/A</div>
+      <div class="text-wrapper-13">{{exit}}</div>
       <div class="text-wrapper-14">€ A casa</div>
-      <div class="text-wrapper-15">120 €</div>
+      <div class="text-wrapper-15">{{house1}} €</div>
       <div class="text-wrapper-16">€ A casa</div>
-      <div class="text-wrapper-17">120 €</div>
+      <div class="text-wrapper-17">{{house2}} €</div>
       <div class="text-wrapper-18">€ A Terapeuta</div>
-      <div class="text-wrapper-19">120 €</div>
+      <div class="text-wrapper-19">{{therapist}} €</div>
       <div class="text-wrapper-20">€ A Encargada</div>
-      <div class="text-wrapper-21">120 €</div>
+      <div class="text-wrapper-21">{{manag}} €</div>
       <div class="text-wrapper-22">Bebida casa</div>
-      <div class="text-wrapper-23">120 €</div>
-      <div class="text-wrapper-24">120 €</div>
+      <div class="text-wrapper-23">{{drinkHouse}} €</div>
+      <div class="text-wrapper-24">{{drinkTherap}} €</div>
       <div class="text-wrapper-25">Bebida Terapeuta</div>
       <div class="text-wrapper-26">Tabaco</div>
-      <div class="text-wrapper-27">120 €</div>
+      <div class="text-wrapper-27">{{tabacco}} €</div>
       <div class="text-wrapper-28">Vitamina</div>
-      <div class="text-wrapper-29">120 €</div>
+      <div class="text-wrapper-29">{{vitamin}} €</div>
       <div class="text-wrapper-30">Otros</div>
-      <div class="text-wrapper-31">120 €</div>
+      <div class="text-wrapper-31">{{others}} €</div>
       <div class="text-wrapper-32">Taxi</div>
-      <div class="text-wrapper-33">120 €</div>
+      <div class="text-wrapper-33">{{taxi}} €</div>
 
       <div class="overlap">
         <div class="group">

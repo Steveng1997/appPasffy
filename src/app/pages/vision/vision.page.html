@@ -2,39 +2,41 @@
   <ion-grid fixed>
 
     <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12">
+
       <div class="visi-n-general">
-        <div class="bienvenida-carolina">
-          <span>
-            <span class="bienvenida-carolina-span">Bienvenida,</span>
-            <span class="bienvenida-carolina-span2"><br /></span>
-            <span class="bienvenida-carolina-span3">{{this.user}}</span>
-          </span>
-        </div>
 
-        <div class="group-32">
-
-          <div class="rectangle-18"> </div>
-
+        <div>
+          <div class="rectangle-18"></div>
           <div class="visi-n-general2">Visión General</div>
+
           <div class="fin">Fin</div>
           <div class="min">Min</div>
           <div class="salida">Salida</div>
 
-          <div class="rectangle-104" *ngFor="let vision of therapist">
+          <div class="rectangle-104"
+            *ngFor="let vision of (therapist) | paginate: { itemsPerPage: 7, currentPage: page }">
 
             <div class="steven" (click)="editByName(vision.nombre)">{{vision.nombre}}</div>
             <div class="_fin">{{vision.horaEnd}}</div>
-            <div class="_0">{{vision.minuto}}</div>
-            <div class="_salida">{{vision.salida}}</div>
+            <div *ngIf="vision.minuto != '' || vision.minuto != 0" class="_0">{{vision.minuto}}</div>
+
+            <div *ngIf="vision.salida != ''">
+              <div class="ellipse-20">
+                <div class="_salida"></div>
+              </div>
+            </div>
 
             <div class="ellipse-17">
               <div [ngClass]="{'ellipse-172': vision?.horaEnd !== '', 'ellipse-172-1': vision?.horaEnd === '', 
-              'ellipse-172-2': vision?.horaEnd === '00:00'}"></div>
+                'ellipse-172-2': vision?.horaEnd === '00:00'}"></div>
             </div>
           </div>
 
-          <div class="rectangle-23"></div>
+          <pagination-controls class="paginator" previousLabel="" nextLabel=""
+            (pageChange)="page = $event"></pagination-controls>
         </div>
+
+        <div class="rectangle-23"></div>
 
         <svg class="vector" width="25" height="25" viewBox="0 0 25 25" fill="white" xmlns="http://www.w3.org/2000/svg"
           onclick="location.reload()">
@@ -43,84 +45,90 @@
             fill="#3C3C3C" />
         </svg>
 
-        <div class="group-17">
-          <div class="group-2">
-            <div *ngIf="!today" class="_28-de-enero">{{day}} de {{month}}</div>
-            <div *ngIf="today" class="_28-de-enero">{{dateTodayCurrent}}</div>
-            <div class="rectangle-10"></div>
-          </div>
-        </div>
+        <div *ngIf="!today" class="_28-de-enero">{{day}} de {{month}}</div>
+        <div *ngIf="today" class="_28-de-enero">{{dateTodayCurrent}}</div>
+        <div class="rectangle-10"></div>
 
         <div class="rectangle-11"></div>
         <div class="servicios">Servicios</div>
         <div class="tratamientos">Tratamientos</div>
-        <div class="_35">€ {{totalTreatment}}</div>
+        <div class="_35">{{totalTreatment}} €</div>
         <div class="propina">Propina</div>
-        <div class="_08">€ {{totalTip}}</div>
+        <div class="_08">{{totalTip}} €</div>
         <div class="taxi">Taxi</div>
         <div class="vitaminas">Vitaminas</div>
-        <div class="_09">€ {{totalTaxi}}</div>
-        <div class="_010">€ {{totalVitamin}}</div>
+        <div class="_09">{{totalTaxi}} €</div>
+        <div class="_010">{{totalVitamin}} €</div>
         <div class="tabaco">Tabaco</div>
-        <div class="_011">€ {{totalTobacco}}</div>
+        <div class="_011">{{totalTobacco}} €</div>
         <div class="otros">Otros</div>
-        <div class="_012">€ {{totalDrinks}}</div>
+        <div class="_012">{{totalDrinks}} €</div>
         <div class="bebida-casa">Bebida casa</div>
-        <div class="_013">€ {{totalDrinksTherapist}}</div>
+        <div class="_013">{{totalDrinksTherapist}} €</div>
         <div class="bebida-terapeuta">Bebida terapeuta</div>
-        <div class="_014">€ {{totalOthers}}</div>
-        <div class="_352">€ {{totalVisions}}</div>
+        <div class="_014">{{totalOthers}} €</div>
+        <div class="_352">{{totalVisions}} €</div>
         <div class="rectangle-17"></div>
 
-        <div class="group-20">
-          <div class="rectangle-12"></div>
-          <div class="cobros">Cobros</div>
-          <div class="tratamientos2">Tratamientos</div>
-          <div class="_353">€ {{totalPiso}}</div>
-          <div class="efectivo">Efectivo</div>
-          <div class="_20">€ {{totalEfectiv}}</div>
-          <div class="bizum">Bizum</div>
-          <div class="_15">€ {{totalBizu}}</div>
-          <div class="tarjeta">Tarjeta</div>
-          <div class="transferencia">Transferencia</div>
-          <div class="_015">€ {{totalTarjet}}</div>
-          <div class="_016">€ {{totalTrasn}}</div>
-          <div class="terapeuta">Terapeuta</div>
-          <div class="_017">€ {{totalTerape}}</div>
-          <div class="encargada">Encargada</div>
-          <div class="_018">€ {{totalEncargada}}</div>
-          <div class="taxista">Taxista</div>
-          <div class="_019">€ {{totalOtr}}</div>
-          <div class="_354">€ {{totalCollections}}</div>
-          <div class="rectangle-172"></div>
+        <div class="rectangle-12"></div>
+        <div class="cobros">Cobros</div>
+        <div class="tratamientos2">Tratamientos</div>
+        <div class="_353">{{totalPiso}} €</div>
+        <div class="efectivo">Efectivo</div>
+        <div class="_20">{{totalEfectiv}} €</div>
+        <div class="bizum">Bizum</div>
+        <div class="_15">{{totalBizu}} €</div>
+        <div class="tarjeta">Tarjeta</div>
+        <div class="transferencia">Transferencia</div>
+        <div class="_015">{{totalTarjet}} €</div>
+        <div class="_016">{{totalTrasn}} €</div>
+        <div class="terapeuta">Terapeuta</div>
+        <div class="_017">{{totalTerape}} €</div>
+        <div class="encargada">Encargada</div>
+        <div class="_018">{{totalEncargada}} €</div>
+        <div class="taxista">Taxista</div>
+        <div class="_019">{{totalOtr}} €</div>
+        <div class="_354">{{totalCollections}} €</div>
+        <div class="rectangle-172"></div>
+
+        <div>
+          <div class="group-21">
+            <div class="rectangle-182"></div>
+            <div class="terapeuta2">Terapeuta</div>
+            <div class="importe">Importe</div>
+            <div class="serv">Serv</div>
+            <div class="rectangle-19"></div>
+
+            <div class="rectangle-192"
+              *ngFor="let therapist of (servicesTherapist) | paginate: { itemsPerPage: 6, currentPage: pageTherapist }">
+              <div class="mar-a2">{{therapist.nombre}}</div>
+              <div class="_152">{{therapist.sum}} €</div>
+              <div class="_1">{{therapist.count}}</div>
+            </div>
+          </div>
+
+          <pagination-controls class="paginatorTherapist" previousLabel="" nextLabel=""
+            (pageChange)="pageTherapist = $event"></pagination-controls>
         </div>
 
-        <div class="group-21">
-          <div class="rectangle-182"></div>
-          <div class="terapeuta2">Terapeuta</div>
-          <div class="importe">Importe</div>
-          <div class="serv">Serv</div>
-          <div class="rectangle-19"></div>
+        <div>
+          <div class="group-22">
+            <div class="rectangle-20"></div>
+            <div class="encargada2">Encargada</div>
+            <div class="importe2">Importe</div>
+            <div class="serv2">Serv</div>
+            <div class="rectangle-21"></div>
 
-          <div class="rectangle-192" *ngFor="let therapist of servicesTherapist">
-            <div class="mar-a2">{{therapist.nombre}}</div>
-            <div class="_152">€ {{therapist.sum}}</div>
-            <div class="_1">{{therapist.count}}</div>
+            <div class="rectangle-192" *ngFor="let manager of (servicesManager) 
+            | paginate: { itemsPerPage: 6, currentPage: pageManager }">
+              <div class="luc-a">{{manager.nombre}}</div>
+              <div class="_355">{{manager.sum}} €</div>
+              <div class="_2">{{manager.count}}</div>
+            </div>
           </div>
-        </div>
 
-        <div class="group-22">
-          <div class="rectangle-20"></div>
-          <div class="encargada2">Encargada</div>
-          <div class="importe2">Importe</div>
-          <div class="serv2">Serv</div>
-          <div class="rectangle-21"></div>
-
-          <div class="rectangle-192" *ngFor="let manager of servicesManager">
-            <div class="luc-a">{{manager.nombre}}</div>
-            <div class="_355">€ {{manager.sum}}</div>
-            <div class="_2">{{manager.count}}</div>
-          </div>
+          <pagination-controls class="paginatorManager" previousLabel="" nextLabel=""
+            (pageChange)="pageManager = $event"></pagination-controls>
         </div>
 
         <svg class="icon" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -133,12 +141,6 @@
           <path d="M12 0L1.04907e-06 12L12 24" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>
-
-        <div class="group-105">
-          <div class="ellipse-21"></div>
-          <div class="ellipse-22" (click)="menu()"></div>
-          <div class="ellipse-23"></div>
-        </div>
       </div>
 
     </ion-col>

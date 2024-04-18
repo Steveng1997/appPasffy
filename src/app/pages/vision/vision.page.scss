@@ -6,53 +6,25 @@
 ion-grid {
   background: var(--verde-claro, #e8f2ef);
   width: -webkit-fill-available;
-  height: 2096px;
+  height: auto;
   position: absolute;
   left: 0px;
   top: 0px;
 }
 
 .visi-n-general {
-  height: 1971px;
+  top: -32px;
+  height: 1896px;
   position: relative;
 }
 
-.bienvenida-carolina {
-  text-align: left;
-  font-family: "-", sans-serif;
-  font-size: 30px;
-  line-height: 100%;
-  font-weight: 400;
+.rectangle-91 {
+  background: var(--verde-claro, #e8f2ef);
+  width: 375px;
+  height: auto;
   position: absolute;
-  left: 17px;
-  top: 69px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-}
-
-.bienvenida-carolina-span {
-  color: #7f7c7c;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 30px;
-  line-height: 100%;
-  font-weight: 400;
-}
-
-.bienvenida-carolina-span2 {
-  color: #a6a6a6;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 30px;
-  line-height: 100%;
-  font-weight: 400;
-}
-
-.bienvenida-carolina-span3 {
-  color: var(--verde, #1fb996);
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 30px;
-  line-height: 100%;
-  font-weight: 700;
+  left: 0px;
+  top: 0px;
 }
 
 .group-32 {
@@ -64,22 +36,23 @@ ion-grid {
   background: #ffffff;
   border-radius: 15px;
   width: 335px;
-  height: 364px;
+  height: 372px;
   position: absolute;
   left: calc(50% - 167.5px);
-  top: 160px;
+  top: 39px;
 }
 
 .visi-n-general2 {
-  color: #3c3c3c;
+  color: #0b9a7a;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 20px;
+  font-size: 26px;
   line-height: 125%;
   font-weight: 700;
   position: absolute;
   left: 42px;
-  top: 188px;
+  // top: 54px;
+  top: 67px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -93,8 +66,8 @@ ion-grid {
   line-height: 125%;
   font-weight: 400;
   position: absolute;
-  left: 42px;
-  top: 273px;
+  left: -1px;
+  top: 160px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -107,12 +80,13 @@ ion-grid {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
+  width: 35px;
   position: absolute;
-  left: 223px;
-  top: 273px;
+  left: 190px;
+  top: 160px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 ._fin {
@@ -122,27 +96,43 @@ ion-grid {
   font-size: 20px;
   line-height: 125%;
   font-weight: 400;
+  width: 63px;
   position: absolute;
-  left: 150px;
-  top: 273px;
+  left: 112px;
+  top: 160px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
+}
+
+.ellipse-20 {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  left: 259px;
+  top: 163px;
 }
 
 ._salida {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 20px;
-  line-height: 125%;
-  font-weight: 400;
+  // color: #de5753;
+  // text-align: left;
+  // font-family: "Inter-Regular", sans-serif;
+  // font-size: 20px;
+  // line-height: 125%;
+  // font-weight: 400;
+  // position: absolute;
+  // left: 240px;
+  // top: 160px;
+
+  background: #de5753;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  left: 282px;
-  top: 273px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  right: 0%;
+  left: 0%;
+  bottom: 0%;
+  top: 0%;
 }
 
 .fin {
@@ -153,11 +143,8 @@ ion-grid {
   line-height: 125%;
   font-weight: 400;
   position: absolute;
-  left: 150px;
-  top: 229px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  left: 174px;
+  top: 116px;
 }
 
 .min {
@@ -168,11 +155,8 @@ ion-grid {
   line-height: 125%;
   font-weight: 400;
   position: absolute;
-  left: 213px;
-  top: 229px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  left: 222px;
+  top: 116px;
 }
 
 .salida {
@@ -183,35 +167,32 @@ ion-grid {
   line-height: 125%;
   font-weight: 400;
   position: absolute;
-  left: 282px;
-  top: 229px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  left: 269px;
+  top: 116px;
 }
 
 .rectangle-23 {
-  background: #3c3c3c;
-  width: 293px;
+  // background: #3c3c3c;
+  background: var(--verde, #1fb996);
+  width: 295px;
   height: 2px;
   position: absolute;
-  left: 44px;
-  top: 256px;
+  left: 29px;
+  top: 143px;
 }
 
 .vector {
   width: 24.17px;
   height: 24.17px;
   position: absolute;
-  left: 313.42px;
-  top: 188.42px;
-  display: grid;
+  left: 299px;
+  // top: 56px;
+  top: 69px;
   overflow: visible;
 }
 
 .group-17 {
   position: absolute;
-  height: 0%;
   inset: 0;
 }
 
@@ -230,12 +211,12 @@ ion-grid {
   font-weight: 700;
   position: absolute;
   left: calc(50% - 59.5px);
-  top: 563px;
+  top: 438px;
   width: 118px;
   height: 29px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 
 .rectangle-10 {
@@ -245,17 +226,17 @@ ion-grid {
   height: 2px;
   position: absolute;
   left: calc(50% - 61.5px);
-  top: 591px;
+  top: 464px;
 }
 
 .rectangle-11 {
   background: #ffffff;
   border-radius: 15px;
   width: 335px;
-  height: 321px;
+  height: 336px;
   position: absolute;
   left: calc(50% - 167.5px);
-  top: 621px;
+  top: 509px;
 }
 
 .servicios {
@@ -266,8 +247,8 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 42px;
-  top: 651px;
+  left: 28px;
+  top: 539px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -276,13 +257,13 @@ ion-grid {
 .tratamientos {
   color: #3c3c3c;
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
   line-height: 125%;
-  font-weight: 700;
+  font-weight: 500;
   position: absolute;
-  left: 43px;
-  top: 702px;
+  left: 29px;
+  top: 589px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -292,27 +273,29 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 702px;
+  // left: 224px;
+  left: 220px;
+  top: 589px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .propina {
   color: #3c3c3c;
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
   line-height: 125%;
-  font-weight: 700;
+  font-weight: 500;
   position: absolute;
-  left: 43px;
-  top: 729px;
+  left: 29px;
+  top: 618px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -322,27 +305,29 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 729px;
+  // left: 224px;
+  left: 220px;
+  top: 618px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .taxi {
   color: #3c3c3c;
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
   line-height: 125%;
-  font-weight: 700;
+  font-weight: 500;
   position: absolute;
-  left: 43px;
-  top: 756px;
+  left: 29px;
+  top: 647px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -351,13 +336,13 @@ ion-grid {
 .vitaminas {
   color: #3c3c3c;
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
   line-height: 125%;
-  font-weight: 700;
+  font-weight: 500;
   position: absolute;
-  left: 43px;
-  top: 783px;
+  left: 29px;
+  top: 676px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -367,44 +352,46 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 756px;
+  // left: 224px;
+  left: 220px;
+  top: 647px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 ._010 {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 783px;
+  // left: 224px;
+  left: 220px;
+  top: 676px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .tabaco {
   color: #3c3c3c;
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
   line-height: 125%;
-  font-weight: 700;
+  font-weight: 500;
   position: absolute;
-  left: 43px;
-  top: 811px;
-  width: 58px;
-  height: 19px;
+  left: 29px;
+  top: 705px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -414,29 +401,29 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 810px;
+  // left: 224px;
+  left: 220px;
+  top: 705px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .otros {
   color: #3c3c3c;
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
   line-height: 125%;
-  font-weight: 700;
+  font-weight: 500;
   position: absolute;
-  left: 43px;
-  top: 894px;
-  width: 44px;
-  height: 17px;
+  left: 29px;
+  top: 792px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -446,29 +433,29 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 837px;
+  // left: 224px;
+  left: 220px;
+  top: 734px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .bebida-casa {
   color: #3c3c3c;
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
   line-height: 125%;
-  font-weight: 700;
+  font-weight: 500;
   position: absolute;
-  left: 43px;
-  top: 837px;
-  width: 95px;
-  height: 20px;
+  left: 29px;
+  top: 734px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -478,29 +465,29 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 864px;
+  // left: 224px;
+  left: 220px;
+  top: 763px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .bebida-terapeuta {
   color: #3c3c3c;
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
   line-height: 125%;
-  font-weight: 700;
+  font-weight: 500;
   position: absolute;
-  left: 43px;
-  top: 865px;
-  width: 135px;
-  height: 19px;
+  left: 29px;
+  top: 763px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -510,15 +497,17 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 891px;
+  // left: 224px;
+  left: 220px;
+  top: 792px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 ._352 {
@@ -528,28 +517,29 @@ ion-grid {
   font-size: 20px;
   line-height: 125%;
   font-weight: 700;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 651px;
+  // left: 224px;
+  left: 220px;
+  top: 539px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .rectangle-17 {
   background: var(--verde, #1fb996);
-  width: 299px;
+  width: 295px;
   height: 2px;
   position: absolute;
-  left: calc(50% - 149.5px);
-  top: 681px;
+  left: 29px;
+  top: 569px;
   transform-origin: 0 0;
   transform: rotate(0deg) scale(1, -1);
 }
 
 .group-20 {
   position: absolute;
-  height: 0%;
   inset: 0;
 }
 
@@ -560,7 +550,7 @@ ion-grid {
   height: 321px;
   position: absolute;
   left: calc(50% - 167.5px);
-  top: 965px;
+  top: 868px;
 }
 
 .cobros {
@@ -571,8 +561,8 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 42px;
-  top: 995px;
+  left: 28px;
+  top: 898px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -582,12 +572,12 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 42px;
-  top: 1046px;
+  left: 28px;
+  top: 949px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -597,27 +587,29 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 1046px;
+  // left: 224px;
+  left: 220px;
+  top: 949px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .efectivo {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 58px;
-  top: 1073px;
+  left: 40px;
+  top: 977px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -627,27 +619,29 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 1073px;
+  // left: 224px;
+  left: 220px;
+  top: 977px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .bizum {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 58px;
-  top: 1100px;
+  left: 40px;
+  top: 1005px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -657,27 +651,29 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 1100px;
+  // left: 224px;
+  left: 220px;
+  top: 1005px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .tarjeta {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 58px;
-  top: 1127px;
+  left: 40px;
+  top: 1033px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -687,12 +683,12 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 58px;
-  top: 1154px;
+  left: 40px;
+  top: 1061px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -702,42 +698,46 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 1127px;
+  // left: 224px;
+  left: 220px;
+  top: 1033px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 ._016 {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 1154px;
+  // left: 224px;
+  left: 220px;
+  top: 1061px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .terapeuta {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 42px;
-  top: 1181px;
+  left: 28px;
+  top: 1089px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -747,27 +747,29 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 1181px;
+  // left: 224px;
+  left: 220px;
+  top: 1089px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .encargada {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 42px;
-  top: 1208px;
+  left: 28px;
+  top: 1117px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -777,27 +779,29 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 1208px;
+  // left: 224px;
+  left: 220px;
+  top: 1117px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .taxista {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 42px;
-  top: 1235px;
+  left: 28px;
+  top: 1145px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -807,15 +811,17 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 1235px;
+  // left: 224px;
+  left: 220px;
+  top: 1145px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 ._354 {
@@ -825,12 +831,14 @@ ion-grid {
   font-size: 20px;
   line-height: 125%;
   font-weight: 700;
+  width: 100px;
   position: absolute;
-  left: 279px;
-  top: 995px;
+  // left: 224px;
+  left: 220px;
+  top: 898px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .rectangle-172 {
@@ -839,25 +847,26 @@ ion-grid {
   height: 2px;
   position: absolute;
   left: calc(50% - 149.5px);
-  top: 1025px;
+  top: 928px;
   transform-origin: 0 0;
   transform: rotate(0deg) scale(1, -1);
 }
 
 .group-21 {
   position: absolute;
-  height: 0%;
   inset: 0;
+  height: 0px;
 }
 
 .rectangle-182 {
   background: #ffffff;
   border-radius: 15px;
   width: 335px;
-  height: 294px;
+  height: 302px;
   position: absolute;
   left: calc(50% - 167.5px);
-  top: 1309px;
+  // top: 1199px;
+  top: 1213px;
 }
 
 .terapeuta2 {
@@ -868,8 +877,9 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 42px;
-  top: 1339px;
+  left: 28px;
+  // top: 1229px;
+  top: 1243px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -883,8 +893,8 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 178px;
-  top: 1339px;
+  left: 164px;
+  top: 1243px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -893,13 +903,13 @@ ion-grid {
 .mar-a2 {
   color: #3c3c3c;
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
   line-height: 125%;
-  font-weight: 700;
+  font-weight: 500;
   position: absolute;
-  left: 42px;
-  top: 1390px;
+  left: 28px;
+  top: 1294px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -909,30 +919,32 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 218px;
-  top: 1390px;
+  left: 137px;
+  top: 1294px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 ._1 {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 40px;
   position: absolute;
-  left: 328px;
-  top: 1390px;
+  left: 280px;
+  top: 1294px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .serv {
@@ -943,8 +955,8 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 291px;
-  top: 1339px;
+  left: 281px;
+  top: 1243px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -956,7 +968,7 @@ ion-grid {
   height: 2px;
   position: absolute;
   left: calc(50% - 149.5px);
-  top: 1369px;
+  top: 1273px;
   transform-origin: 0 0;
   transform: rotate(0deg) scale(1, -1);
 }
@@ -970,18 +982,18 @@ ion-grid {
 
 .group-22 {
   position: absolute;
-  height: 0%;
   inset: 0;
+  height: 0px;
 }
 
 .rectangle-20 {
   background: #ffffff;
   border-radius: 15px;
   width: 335px;
-  height: 294px;
+  height: 302px;
   position: absolute;
   left: calc(50% - 167.5px);
-  top: 1626px;
+  top: 1540px;
 }
 
 .encargada2 {
@@ -992,8 +1004,8 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 42px;
-  top: 1656px;
+  left: 28px;
+  top: 1570px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -1007,8 +1019,8 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 178px;
-  top: 1656px;
+  left: 164px;
+  top: 1570px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -1017,13 +1029,13 @@ ion-grid {
 .luc-a {
   color: #3c3c3c;
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 18px;
   line-height: 125%;
-  font-weight: 700;
+  font-weight: 500;
   position: absolute;
-  left: 42px;
-  top: 1707px;
+  left: 28px;
+  top: 1621px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -1033,30 +1045,32 @@ ion-grid {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 100px;
   position: absolute;
-  left: 220px;
-  top: 1707px;
+  left: 137px;
+  top: 1621px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 ._2 {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 500;
+  width: 40px;
   position: absolute;
-  left: 328px;
-  top: 1707px;
+  left: 280px;
+  top: 1621px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: end;
+  justify-items: end;
 }
 
 .serv2 {
@@ -1067,8 +1081,8 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 291px;
-  top: 1656px;
+  left: 281px;
+  top: 1570px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -1080,7 +1094,7 @@ ion-grid {
   height: 2px;
   position: absolute;
   left: calc(50% - 149.5px);
-  top: 1686px;
+  top: 1600px;
   transform-origin: 0 0;
   transform: rotate(0deg) scale(1, -1);
 }
@@ -1089,133 +1103,70 @@ ion-grid {
   width: 16px;
   height: 16px;
   position: absolute;
-  left: 121px;
-  top: 279px;
+  left: 91px;
+  top: 163px;
 }
 
 .ellipse-172 {
   background: #de5753;
   border-radius: 50%;
+  width: 100%;
+  height: 100%;
   position: absolute;
   right: 0%;
   left: 0%;
-  width: 100%;
   bottom: 0%;
   top: 0%;
-  height: 100%;
 }
 
 .ellipse-172-1 {
-  background: var(--verde, #1fb996);
+  background: green;
   border-radius: 50%;
+  width: 100%;
+  height: 100%;
   position: absolute;
   right: 0%;
   left: 0%;
-  width: 100%;
   bottom: 0%;
   top: 0%;
-  height: 100%;
-}
-
-.ellipse-172-2 {
-  background: var(--verde, #1fb996);
-  border-radius: 50%;
-  position: absolute;
-  right: 0%;
-  left: 0%;
-  width: 100%;
-  bottom: 0%;
-  top: 0%;
-  height: 100%;
 }
 
 .rectangle-104 {
-  min-width: 737px;
+  top: 5px;
+  left: 29px;
+  width: 295px;
   height: 28px;
   position: relative;
   display: inline-grid;
 }
 
-.ellipse-173 {
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  left: 121px;
-  top: 309px;
-}
-
-.ellipse-174 {
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  left: 121px;
-  top: 370px;
-}
-
-.ellipse-175 {
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  left: 121px;
-  top: 402px;
-}
-
-.ellipse-176 {
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  left: 121px;
-  top: 432px;
-}
-
-.ellipse-177 {
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  left: 121px;
-  top: 340px;
-}
-
-.ellipse-178 {
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  left: 121px;
-  top: 464px;
-}
-
 .icon {
-  height: auto;
+  width: 3.2%;
+  height: 1.22%;
   position: absolute;
   right: 5.33%;
-  left: 86.47%;
-  width: 13.2%;
-  bottom: 70.07%;
-  top: 28.72%;
-  height: 1.22%;
+  left: 91.47%;
+  bottom: 75.65%;
+  top: 449px;
   overflow: visible;
 }
 
-.icon_1 {
-  position: absolute;
-}
-
 .icon2 {
-  height: auto;
+  width: 3.2%;
+  height: 1.22%;
   position: absolute;
   right: 88.27%;
-  left: 3.6%;
-  width: 13.2%;
-  bottom: 68.85%;
-  top: 29.93%;
-  height: 1.22%;
-  transform: translate(-13px, -25px);
+  left: 8.53%;
+  bottom: 74.44%;
+  top: 474px;
+  transform: translate(-13px, -24.68px);
   overflow: visible;
 }
 
 .group-105 {
-  position: relative;
-  inset: 0;
+  margin-left: -24px;
+  position: absolute;
+  top: 0px;
 }
 
 .ellipse-21 {
@@ -1225,7 +1176,7 @@ ion-grid {
   height: 7px;
   position: absolute;
   left: 324px;
-  top: 69px;
+  top: 20px;
 }
 
 .ellipse-22 {
@@ -1235,7 +1186,7 @@ ion-grid {
   height: 7px;
   position: absolute;
   left: 336px;
-  top: 69px;
+  top: 20px;
 }
 
 .ellipse-23 {
@@ -1245,24 +1196,44 @@ ion-grid {
   height: 7px;
   position: absolute;
   left: 348px;
-  top: 69px;
+  top: 20px;
 }
 
-.barra {
-  background: #ffffff;
-  width: 375px;
-  height: 79px;
-  position: sticky;
-  left: calc(50% - 187.5px);
-  bottom: 0px;
-  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-}
-
-.group-104 {
-  height: auto;
+.paginator {
   position: absolute;
-  left: 39px;
-  top: 18px;
-  overflow: visible;
+  display: grid;
+  top: 19.2%;
+  right: 12px;
+  align-items: end;
+}
+
+.paginator ::ng-deep .ngx-pagination .current {
+  background: transparent;
+  color: black;
+}
+
+.paginatorTherapist {
+  position: absolute;
+  display: grid;
+  top: 77.4%;
+  right: 12px;
+  align-items: end;
+}
+
+.paginatorTherapist ::ng-deep .ngx-pagination .current {
+  background: transparent;
+  color: black;
+}
+
+.paginatorManager {
+  position: absolute;
+  display: grid;
+  top: 1795px;
+  right: 12px;
+  align-items: end;
+}
+
+.paginatorManager ::ng-deep .ngx-pagination .current {
+  background: transparent;
+  color: black;
 }

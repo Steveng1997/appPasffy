@@ -25,7 +25,11 @@ export class VisionPage implements OnInit {
   tableVision: boolean = false
   loading: boolean = false
   vision: any
+
   page!: number
+  pageTherapist!: number
+  pageManager!: number
+
   fechaDiaHoy = ''
   totalServicio: number
   idUser: number
