@@ -14,7 +14,7 @@
           <div class="salida">Salida</div>
 
           <div class="rectangle-104"
-            *ngFor="let vision of (therapist) | paginate: { itemsPerPage: 7, currentPage: page }">
+            *ngFor="let vision of (therapist) | paginate: { itemsPerPage: 10, currentPage: page }">
 
             <div class="steven" (click)="editByName(vision.nombre)">{{vision.nombre}}</div>
             <div class="_fin">{{vision.horaEnd}}</div>
@@ -49,49 +49,53 @@
         <div *ngIf="today" class="_28-de-enero">{{dateTodayCurrent}}</div>
         <div class="rectangle-10"></div>
 
-        <div class="rectangle-11"></div>
-        <div class="servicios">Servicios</div>
-        <div class="tratamientos">Tratamientos</div>
-        <div class="_35">{{totalTreatment}} €</div>
-        <div class="propina">Propina</div>
-        <div class="_08">{{totalTip}} €</div>
-        <div class="taxi">Taxi</div>
-        <div class="vitaminas">Vitaminas</div>
-        <div class="_09">{{totalTaxi}} €</div>
-        <div class="_010">{{totalVitamin}} €</div>
-        <div class="tabaco">Tabaco</div>
-        <div class="_011">{{totalTobacco}} €</div>
-        <div class="otros">Otros</div>
-        <div class="_012">{{totalDrinks}} €</div>
-        <div class="bebida-casa">Bebida casa</div>
-        <div class="_013">{{totalDrinksTherapist}} €</div>
-        <div class="bebida-terapeuta">Bebida terapeuta</div>
-        <div class="_014">{{totalOthers}} €</div>
-        <div class="_352">{{totalVisions}} €</div>
-        <div class="rectangle-17"></div>
+        <div class="group-23" id="table2">
+          <div class="rectangle-11"></div>
+          <div class="servicios">Servicios</div>
+          <div class="tratamientos">Tratamientos</div>
+          <div class="_35">{{totalTreatment}} €</div>
+          <div class="propina">Propina</div>
+          <div class="_08">{{totalTip}} €</div>
+          <div class="taxi">Taxi</div>
+          <div class="vitaminas">Vitaminas</div>
+          <div class="_09">{{totalTaxi}} €</div>
+          <div class="_010">{{totalVitamin}} €</div>
+          <div class="tabaco">Tabaco</div>
+          <div class="_011">{{totalTobacco}} €</div>
+          <div class="otros">Otros</div>
+          <div class="_012">{{totalDrinks}} €</div>
+          <div class="bebida-casa">Bebida casa</div>
+          <div class="_013">{{totalDrinksTherapist}} €</div>
+          <div class="bebida-terapeuta">Bebida terapeuta</div>
+          <div class="_014">{{totalOthers}} €</div>
+          <div class="_352">{{totalVisions}} €</div>
+          <div class="rectangle-17"></div>
+        </div>
 
-        <div class="rectangle-12"></div>
-        <div class="cobros">Cobros</div>
-        <div class="tratamientos2">Tratamientos</div>
-        <div class="_353">{{totalPiso}} €</div>
-        <div class="efectivo">Efectivo</div>
-        <div class="_20">{{totalEfectiv}} €</div>
-        <div class="bizum">Bizum</div>
-        <div class="_15">{{totalBizu}} €</div>
-        <div class="tarjeta">Tarjeta</div>
-        <div class="transferencia">Transferencia</div>
-        <div class="_015">{{totalTarjet}} €</div>
-        <div class="_016">{{totalTrasn}} €</div>
-        <div class="terapeuta">Terapeuta</div>
-        <div class="_017">{{totalTerape}} €</div>
-        <div class="encargada">Encargada</div>
-        <div class="_018">{{totalEncargada}} €</div>
-        <div class="taxista">Taxista</div>
-        <div class="_019">{{totalOtr}} €</div>
-        <div class="_354">{{totalCollections}} €</div>
-        <div class="rectangle-172"></div>
+        <div class="group-24" id="table3">
+          <div class="rectangle-12"></div>
+          <div class="cobros">Cobros</div>
+          <div class="tratamientos2">Tratamientos</div>
+          <div class="_353">{{totalPiso}} €</div>
+          <div class="efectivo">Efectivo</div>
+          <div class="_20">{{totalEfectiv}} €</div>
+          <div class="bizum">Bizum</div>
+          <div class="_15">{{totalBizu}} €</div>
+          <div class="tarjeta">Tarjeta</div>
+          <div class="transferencia">Transferencia</div>
+          <div class="_015">{{totalTarjet}} €</div>
+          <div class="_016">{{totalTrasn}} €</div>
+          <div class="terapeuta">Terapeuta</div>
+          <div class="_017">{{totalTerape}} €</div>
+          <div class="encargada">Encargada</div>
+          <div class="_018">{{totalEncargada}} €</div>
+          <div class="taxista">Taxista</div>
+          <div class="_019">{{totalOtr}} €</div>
+          <div class="_354">{{totalCollections}} €</div>
+          <div class="rectangle-172"></div>
+        </div>
 
-        <div>
+        <div class="group-21" id="table4">
           <div class="group-21">
             <div class="rectangle-182"></div>
             <div class="terapeuta2">Terapeuta</div>
@@ -100,7 +104,7 @@
             <div class="rectangle-19"></div>
 
             <div class="rectangle-192"
-              *ngFor="let therapist of (servicesTherapist) | paginate: { itemsPerPage: 6, currentPage: pageTherapist }">
+              *ngFor="let therapist of (servicesTherapist) | paginate: { itemsPerPage: 10, currentPage: pageTherapist }">
               <div class="mar-a2">{{therapist.nombre}}</div>
               <div class="_152">{{therapist.sum}} €</div>
               <div class="_1">{{therapist.count}}</div>
@@ -111,7 +115,7 @@
             (pageChange)="pageTherapist = $event"></pagination-controls>
         </div>
 
-        <div>
+        <div class="group-22" id="table5">
           <div class="group-22">
             <div class="rectangle-20"></div>
             <div class="encargada2">Encargada</div>
@@ -120,7 +124,7 @@
             <div class="rectangle-21"></div>
 
             <div class="rectangle-192" *ngFor="let manager of (servicesManager) 
-            | paginate: { itemsPerPage: 6, currentPage: pageManager }">
+            | paginate: { itemsPerPage: 10, currentPage: pageManager }">
               <div class="luc-a">{{manager.nombre}}</div>
               <div class="_355">{{manager.sum}} €</div>
               <div class="_2">{{manager.count}}</div>
