@@ -3,10 +3,10 @@
 
     <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12">
 
-      <div class="visi-n-general">
+      <div class="visi-n-general" id="overview">
 
         <div>
-          <div class="rectangle-18"></div>
+          <div class="rectangle-18" id="rectangle18"></div>
           <div class="visi-n-general2">Visión General</div>
 
           <div class="fin">Fin</div>
@@ -32,7 +32,7 @@
             </div>
           </div>
 
-          <pagination-controls class="paginator" previousLabel="" nextLabel=""
+          <pagination-controls *ngIf="paginaterMinute" class="paginator" previousLabel="" nextLabel=""
             (pageChange)="page = $event"></pagination-controls>
         </div>
 
@@ -45,9 +45,9 @@
             fill="#3C3C3C" />
         </svg>
 
-        <div *ngIf="!today" class="_28-de-enero">{{day}} de {{month}}</div>
-        <div *ngIf="today" class="_28-de-enero">{{dateTodayCurrent}}</div>
-        <div class="rectangle-10"></div>
+        <div *ngIf="!today" id="currentDate" class="_28-de-enero">{{day}} de {{month}}</div>
+        <div *ngIf="today" id="currentDate" class="_28-de-enero">{{dateTodayCurrent}}</div>
+        <div class="rectangle-10" id="stripeToday"></div>
 
         <div class="group-23" id="table2">
           <div class="rectangle-11"></div>
@@ -97,7 +97,7 @@
 
         <div class="group-21" id="table4">
           <div class="group-21">
-            <div class="rectangle-182"></div>
+            <div class="rectangle-182" id="rectangle182"></div>
             <div class="terapeuta2">Terapeuta</div>
             <div class="importe">Importe</div>
             <div class="serv">Serv</div>
@@ -111,13 +111,13 @@
             </div>
           </div>
 
-          <pagination-controls class="paginatorTherapist" previousLabel="" nextLabel=""
+          <pagination-controls *ngIf="paginaterTherapist" class="paginatorTherapist" previousLabel="" nextLabel=""
             (pageChange)="pageTherapist = $event"></pagination-controls>
         </div>
 
         <div class="group-22" id="table5">
           <div class="group-22">
-            <div class="rectangle-20"></div>
+            <div class="rectangle-20" id="rectangle20"></div>
             <div class="encargada2">Encargada</div>
             <div class="importe2">Importe</div>
             <div class="serv2">Serv</div>
@@ -131,17 +131,17 @@
             </div>
           </div>
 
-          <pagination-controls class="paginatorManager" previousLabel="" nextLabel=""
+          <pagination-controls *ngIf="paginaterManager" class="paginatorManager" previousLabel="" nextLabel=""
             (pageChange)="pageManager = $event"></pagination-controls>
         </div>
 
-        <svg class="icon" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-          (click)="nextArrow()">
+        <svg class="icon" id="rightArrow" width="12" height="24" viewBox="0 0 12 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg" (click)="nextArrow()">
           <path d="M0 24L12 12L0 0" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
 
-        <svg class="icon2" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-          (click)="backArrow()">
+        <svg class="icon2" id="leftArrow" width="12" height="24" viewBox="0 0 12 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg" (click)="backArrow()">
           <path d="M12 0L1.04907e-06 12L12 24" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>

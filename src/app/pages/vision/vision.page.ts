@@ -24,6 +24,10 @@ export class VisionPage implements OnInit {
   diferenceMinutes: number
   tableVision: boolean = false
   loading: boolean = false
+
+  paginaterMinute: boolean = false
+  paginaterTherapist: boolean = false
+  paginaterManager: boolean = false
   vision: any
 
   page!: number
@@ -166,6 +170,19 @@ export class VisionPage implements OnInit {
       this.serviceManager.getUsuarios().subscribe((rp: any) => {
         this.servicesManager = rp
 
+        if (rp.length > 7 && rp.length < 10) {
+          let rectangle20 = 334
+
+          for (let i = 8; i <= rp.length; i++) {
+            rectangle20 += 31.5
+            document.getElementById('rectangle20').style.height = rectangle20.toString() + 'px'
+          }
+        }
+
+        if (rp.length == 10) {
+          document.getElementById('rectangle20').style.height = '430px'
+        }
+
         rp.map(item => {
           this.service.getManagerAndDates(item['nombre'], this.fechaDiaHoy).subscribe((rp: any) => {
             this.managerCount = rp.length
@@ -232,6 +249,19 @@ export class VisionPage implements OnInit {
         this.managerCount = rp.length
         this.servicesManager[0]['count'] = this.managerCount
 
+        if (rp.length > 7 && rp.length < 10) {
+          let rectangle20 = 334
+
+          for (let i = 8; i <= rp.length; i++) {
+            rectangle20 += 31.5
+            document.getElementById('rectangle20').style.height = rectangle20.toString() + 'px'
+          }
+        }
+
+        if (rp.length == 10) {
+          document.getElementById('rectangle20').style.height = '430px'
+        }
+
         const servicios = rp.filter(serv => serv)
         const sumatoria = servicios.reduce((accumulator, serv) => {
           return accumulator + serv.totalServicio
@@ -266,6 +296,19 @@ export class VisionPage implements OnInit {
       this.service.getManagerAndDates(element[0]['nombre'], dates).subscribe((rp: any) => {
         this.managerCount = rp.length
         this.servicesManager[0]['count'] = this.managerCount
+
+        if (rp.length > 7 && rp.length < 10) {
+          let rectangle20 = 334
+
+          for (let i = 8; i <= rp.length; i++) {
+            rectangle20 += 31.5
+            document.getElementById('rectangle20').style.height = rectangle20.toString() + 'px'
+          }
+        }
+
+        if (rp.length == 10) {
+          document.getElementById('rectangle20').style.height = '430px'
+        }
 
         const servicios = rp.filter(serv => serv)
         const sumatoria = servicios.reduce((accumulator, serv) => {
@@ -304,6 +347,45 @@ export class VisionPage implements OnInit {
     await this.serviceTherapist.getMinutes().subscribe(async (rp: any) => {
       therapit = rp
       this.therapist = rp
+
+      if (rp.length > 7 && rp.length < 10) {
+        let rectangle18 = 372, currentDate = 439, stripeToday = 465, leftArrow = 471, rightArrow = 447, table2 = 1, table3 = 1,
+          table4 = 1, rectangle182 = 334, table5 = 15, overview = 116
+
+        for (let i = 8; i <= rp.length; i++) {
+          rectangle18 += 31.5, currentDate += 31, stripeToday += 31, leftArrow += 32.4, rightArrow += 31, table2 += 31, table3 += 31,
+            table4 += 30, rectangle182 += 31.5, table5 += 63, overview += 1000
+
+          document.getElementById('rectangle18').style.height = rectangle18.toString() + 'px'
+          document.getElementById('currentDate').style.top = currentDate.toString() + 'px'
+          document.getElementById('stripeToday').style.top = stripeToday.toString() + 'px'
+          document.getElementById('leftArrow').style.top = leftArrow.toString() + 'px'
+          document.getElementById('rightArrow').style.top = rightArrow.toString() + 'px'
+          document.getElementById('table2').style.top = table2.toString() + 'px'
+          document.getElementById('table3').style.top = table3.toString() + 'px'
+          document.getElementById('table4').style.top = table4.toString() + 'px'
+          document.getElementById('rectangle182').style.height = rectangle182.toString() + 'px'
+          document.getElementById('table5').style.top = table5.toString() + 'px'
+          document.getElementById('overview').style.height = overview.toString() + 'px'
+        }
+      }
+
+      if (rp.length == 10) {
+        this.paginaterMinute = true
+        this.paginaterManager = true
+        this.paginaterTherapist = true
+        document.getElementById('rectangle18').style.height = '468px'
+        document.getElementById('currentDate').style.top = '536px'
+        document.getElementById('stripeToday').style.top = '559.5px'
+        document.getElementById('leftArrow').style.top = '568px'
+        document.getElementById('rightArrow').style.top = '543px'
+        document.getElementById('table2').style.top = '96px'
+        document.getElementById('table3').style.top = '96px'
+        document.getElementById('table4').style.top = '48px'
+        document.getElementById('rectangle182').style.height = '429px'
+        document.getElementById('table5').style.top = '111px'
+        document.getElementById('overview').style.height = '2246px'
+      }
 
       await this.getMinute(therapit)
     })
