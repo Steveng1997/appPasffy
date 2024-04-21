@@ -488,6 +488,10 @@ export class ServiceService {
     return this.http.put(`${this.API_URL}/updateScreenById/${id}`, service);
   }
 
+  updateNote(id: number, service: ModelService) {
+    return this.http.put(`${this.API_URL}/updateNotes/${id}`, service);
+  }
+
   // Delete
 
   deleteServicio(id: number) {

@@ -106,7 +106,7 @@
             | manager: selectedEncargada | date: dateStart:dateEnd | hourDate: dateStart:hourStart:dateEnd:hourEnd) | 
             paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(services)">
             <div style="position: relative; top: 0px">
-              <div [ngClass]="{'ellipse-18': services?.nota !== ''}"></div>
+              <div [ngClass]="{'ellipse-18': services?.nota != ''}" (click)="notes()"></div>
               <div class="encargada9">{{services.encargada}}</div>
               <div class="terapeuta9">{{services.terapeuta}}</div>
               <div class="tiempo9">{{services.horaStart}} - {{services.horaEnd}}</div>
@@ -337,4 +337,32 @@
       <div class="text-wrapper-35">Eliminar</div>
     </div>
   </div>
+</div>
+
+<!-- Notas -->
+
+<div class="pop-up-notas" *ngIf="notas">
+  <div class="rectangle-86"></div>
+  <div class="rectangle-87"></div>
+  <div class="anotaci-n">Anotación</div>
+
+  <ion-textarea class="rectangle-88" labelPlacement="floating"
+    style="min-height: -webkit-fill-available; overflow: scroll; color: black" [(ngModel)]="serviceModel.nota">
+    <div slot="label" class="mensaje">Mensaje... <ion-text color="danger"></ion-text></div>
+  </ion-textarea>
+
+  <div class="rectangle-88"></div>
+  <div class="editar_1" (click)="updateNote()">Editar</div>
+  <!-- <div class="mensaje">Mensaje...</div> -->
+  <!-- <div class="_02-02-2024">02/02/2024</div> -->
+  <div class="_02-02-2024">{{date}}</div>
+
+  <svg class="x-close_2" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+    (click)="closeNotes()">
+    <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round" />
+  </svg>
+
+  <!-- <img class="edit-01" src="edit-010.svg" /> -->
+  <div class="rectangle-116"></div>
 </div>

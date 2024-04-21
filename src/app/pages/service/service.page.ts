@@ -31,6 +31,7 @@ export class ServicePage implements OnInit {
   filter: boolean = false
   administratorRole: boolean = false
   today: boolean = true
+  notas: boolean = false
 
   filterSearch: string
 
@@ -93,6 +94,7 @@ export class ServicePage implements OnInit {
     pantalla: ""
   }
 
+  date: string
   minute: number
   total: number
   payment: string
@@ -721,10 +723,17 @@ export class ServicePage implements OnInit {
     })
   }
 
-  notes(targetModal, modal) {
-    var notaMensaje = []
-    this.serviceService.getById(targetModal).subscribe((rp) => {
-      notaMensaje = rp[0]
+  notes() {
+    this.details = false
+    this.notas = true
+  }
+
+  updateNote() {
+    this.serviceService.updateNote(this.idDetail, this.serviceModel).subscribe(async (rp: any) => {
+      this.serviceService.getServicio().subscribe(async (rp: any) => {
+        this.servicio = rp
+        this.notas = false
+      })
     })
   }
 
@@ -808,9 +817,21 @@ export class ServicePage implements OnInit {
     this.validateCheck()
   }
 
+  ajustDate(date: string) {
+    let day = '', month = '', year = ''
+    day = date.substring(8, 10)
+    month = date.substring(5, 7)
+    year = date.substring(0, 4)
+    this.date = `${day}/${month}/${year}`
+  }
+
   detail(services: any) {
     this.idDetail = services.id
-    if (this.details == false) {
+
+    this.serviceModel.nota = services.nota
+    this.ajustDate(services.fechaHoyInicio)
+
+    if (this.details == false && this.notas == false) {
       this.details = true
       this.minute = services.minuto
       this.total = services.totalServicio
@@ -1043,6 +1064,10 @@ export class ServicePage implements OnInit {
 
   closeTotals() {
     this.totals = false
+  }
+
+  closeNotes() {
+    this.notas = false
   }
 
   validateCheck() {
