@@ -67,6 +67,7 @@ export class ServicePage implements OnInit {
   horario: any
 
   idUser: number
+  idDetail: number
 
   // Servicios
   totalServicio: number
@@ -732,12 +733,6 @@ export class ServicePage implements OnInit {
     document.getElementById('arrowLeft').style.display = 'none'
   }
 
-  editForm(id: number) {
-    this.serviceModel.pantalla = 'services'
-    this.serviceService.updateScreenById(id, this.serviceModel).subscribe(async (rp: any) => { })
-    this.router.navigate([`menu/${this.idUser}/nuevo-servicio/${id}`])
-  }
-
   async deleteService() {
     this.serviceManager.getById(this.idUser).subscribe(async (rp) => {
       if (rp[0]['rol'] == 'administrador') {
@@ -814,6 +809,7 @@ export class ServicePage implements OnInit {
   }
 
   detail(services: any) {
+    this.idDetail = services.id
     if (this.details == false) {
       this.details = true
       this.minute = services.minuto
@@ -1650,10 +1646,10 @@ export class ServicePage implements OnInit {
     return false
   }
 
-  edit(id: number) {
+  edit() {
     this.serviceModel.pantalla = 'services'
-    this.serviceService.updateScreenById(id, this.serviceModel).subscribe(async (rp: any) => { })
-    location.replace(`tabs/${this.idUser}/edit-services/${id}`)
+    this.serviceService.updateScreenById(this.idDetail, this.serviceModel).subscribe(async (rp: any) => { })
+    this.router.navigate([`tabs/${this.idUser}/edit-services/${this.idDetail}`])
   }
 
   delete(id: number) {
