@@ -28,7 +28,7 @@ export class NewTherapistPage implements OnInit {
     minuto: 0,
     nombre: "",
     otros: "",
-    propina: "100",
+    propina: "50",
     salida: "",
     servicio: "50",
     tabaco: "",
