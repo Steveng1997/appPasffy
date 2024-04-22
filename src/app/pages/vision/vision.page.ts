@@ -384,7 +384,7 @@ export class VisionPage implements OnInit {
         document.getElementById('table4').style.top = '95px'
         document.getElementById('rectangle182').style.height = '429px'
         document.getElementById('table5').style.top = '205px'
-        document.getElementById('overview').style.height = '2180px'
+        document.getElementById('overview').style.height = '2210px'
       }
 
       await this.getMinute(therapit)
