@@ -68,7 +68,7 @@ ion-grid {
   font-weight: 400;
   position: absolute;
   left: -1px;
-  top: 160px;
+  top: -4px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -84,7 +84,7 @@ ion-grid {
   width: 35px;
   position: absolute;
   left: 190px;
-  top: 160px;
+  top: -4px;
   display: flex;
   justify-content: end;
   justify-items: end;
@@ -100,7 +100,7 @@ ion-grid {
   width: 63px;
   position: absolute;
   left: 112px;
-  top: 160px;
+  top: -4px;
   display: flex;
   justify-content: end;
   justify-items: end;
@@ -111,7 +111,8 @@ ion-grid {
   height: 16px;
   position: absolute;
   left: 259px;
-  top: 163px;
+  // top: 163px;
+  top: -1px;
 }
 
 ._salida {
@@ -235,7 +236,8 @@ ion-grid {
   top: 1px;
   left: calc(50% - 167.5px);
   width: 335px;
-  height: 336px;
+  // height: 336px;
+  height: 0px;
 }
 
 .group-24 {
@@ -243,7 +245,8 @@ ion-grid {
   top: 1px;
   left: calc(50% - 167.5px);
   width: 335px;
-  height: 321px;
+  // height: 321px;
+  height: 0px;
 }
 
 .rectangle-11 {
@@ -908,7 +911,7 @@ ion-grid {
   width: 110px;
   position: absolute;
   left: 36px;
-  top: 1294px;
+  top: 20px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -924,7 +927,7 @@ ion-grid {
   width: 80px;
   position: absolute;
   left: 155px;
-  top: 1294px;
+  top: 20px;
   display: flex;
   justify-content: end;
   justify-items: end;
@@ -940,7 +943,7 @@ ion-grid {
   width: 40px;
   position: absolute;
   left: 275px;
-  top: 1294px;
+  top: 20px;
   display: flex;
   justify-content: end;
   justify-items: end;
@@ -977,6 +980,7 @@ ion-grid {
   height: 28px;
   position: relative;
   display: inline-grid;
+  top: 1274px;
 }
 
 .group-22 {
@@ -1036,7 +1040,7 @@ ion-grid {
   width: 110px;
   position: absolute;
   left: 35.3px;
-  top: 1621px;
+  top: 347px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -1052,7 +1056,7 @@ ion-grid {
   width: 80px;
   position: absolute;
   left: 155px;
-  top: 1621px;
+  top: 347px;
   display: flex;
   justify-content: end;
   justify-items: end;
@@ -1068,7 +1072,7 @@ ion-grid {
   width: 40px;
   position: absolute;
   left: 275px;
-  top: 1621px;
+  top: 347px;
   display: flex;
   justify-content: end;
   justify-items: end;
@@ -1105,7 +1109,8 @@ ion-grid {
   height: 16px;
   position: absolute;
   left: 91px;
-  top: 163px;
+  // top: 163px;
+  top: -1px;
 }
 
 .ellipse-172 {
@@ -1133,7 +1138,8 @@ ion-grid {
 }
 
 .rectangle-104 {
-  top: 5px;
+  // top: 5px;
+  top: 170px;
   left: 29px;
   width: 295px;
   height: 28px;
