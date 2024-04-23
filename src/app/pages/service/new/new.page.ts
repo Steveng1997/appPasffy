@@ -940,7 +940,7 @@ export class NewPage implements OnInit {
       this.restamosCobro = this.sumatoriaServicios - restamos
     }
 
-    if(this.sumatoriaServicios != 0) {
+    if (this.sumatoriaServicios != 0) {
       this.services.numberPiso1 = this.sumatoriaServicios.toString()
       this.collectionsValue()
     }
@@ -1150,6 +1150,21 @@ export class NewPage implements OnInit {
       return false
     }
     return true
+  }
+
+  selectTerap(name: string) {
+    this.getLastDate()
+
+    this.serviceServices.getTerapeutaByDesc(name).subscribe((rp: any) => {
+      if (rp.length > 0) {
+        this.hourStartTerapeuta = rp[0]['horaStart']
+        this.horaEndTerapeuta = rp[0]['horaEnd']
+      }
+      else {
+        this.hourStartTerapeuta = ''
+        this.horaEndTerapeuta = ''
+      }
+    })
   }
 
   cancel() {

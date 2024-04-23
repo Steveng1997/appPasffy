@@ -15,7 +15,7 @@
         <div class="cliente">Cliente</div>
         <ion-input type="text" class="cliente" id="cliente" name="cliente" [(ngModel)]="services.cliente"></ion-input>
 
-        <div class="lugar-salida">Lugar Salida</div>
+        <div class="lugar-salida">Salida</div>
         <ion-input type="text" class="lugar-salida" id="salida" name="salida" [(ngModel)]="services.salida"></ion-input>
 
         <div class="group-67">
@@ -56,6 +56,7 @@
         <div class="group-69">
           <div class="tiempo">Tiempo</div>
           <div class="ltimo-servicio">Último servicio:</div>
+          <div class="ultimo-servicio">{{hourStartTerapeuta + '-' + horaEndTerapeuta}}</div>
         </div>
         <div class="group-70">
           <div class="servicios">Servicios</div>
@@ -140,7 +141,7 @@
 
         <div class="nuevo-servicio2">
           Nuevo
-          <br />
+          <!-- <br /> -->
           servicio
         </div>
 
@@ -163,8 +164,8 @@
         <ion-input type="number" class="rectangle-96" id="manager" name="manager" [(ngModel)]="services.numberEncarg"
           (ngModelChange)="collectionsValue()"></ion-input>
 
-        <div class="_4500">€{{sumatoriaServicios}}</div>
-        <div class="_45002">€{{sumatoriaCobros}}</div>
+        <div class="_4500">{{sumatoriaServicios}} €</div>
+        <div class="_45002">{{sumatoriaCobros}} €</div>
         <div class="div9">€</div>
         <div class="div10">€</div>
         <div class="div11">€</div>
@@ -301,7 +302,7 @@
           </svg>
 
           <ion-select class="terapeuta2" style="display: grid; min-height: -webkit-fill-available" label="Terapeuta"
-            [(ngModel)]="services.terapeuta">
+            [(ngModel)]="services.terapeuta" (ngModelChange)="selectTerap(services.terapeuta)">
             <ion-select-option *ngFor="let therapist of terapeuta"
               [value]="therapist.name">{{therapist.nombre}}</ion-select-option>
           </ion-select>
