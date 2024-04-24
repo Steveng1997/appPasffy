@@ -26,7 +26,8 @@ ion-grid {
 .rectangle-93 {
   background: var(--verde-claro, #e8f2ef);
   width: -webkit-fill-available;
-  height: 4015px;
+  // height: 4015px;
+  height: 4065px;
   position: absolute;
   left: 0px;
   top: 160px;
@@ -310,9 +311,16 @@ ion-grid {
   font-weight: 400;
   position: absolute;
   width: 49.8px;
+  top: 8px;
+  left: 10px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
+}
+
+.rectangle-77 ::ng-deep .native-wrapper.sc-ion-textarea-md{
+  top: 15px;
+  height: 106px;
 }
 
 .cobros {
