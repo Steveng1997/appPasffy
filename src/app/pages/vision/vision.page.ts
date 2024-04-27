@@ -350,11 +350,11 @@ export class VisionPage implements OnInit {
 
       if (rp.length > 7 && rp.length < 10) {
         let rectangle18 = 372, currentDate = 439, stripeToday = 465, leftArrow = 471, rightArrow = 447, table2 = 1, table3 = 1,
-          table4 = 1, rectangle182 = 334, table5 = 15, overview = 2020
+          table4 = 1, rectangle182 = 334, table5 = 15, overview = 1958
 
         for (let i = 8; i <= rp.length; i++) {
           rectangle18 += 31.5, currentDate += 31, stripeToday += 31, leftArrow += 32.4, rightArrow += 31, table2 += 31, table3 += 31,
-            table4 += 30, rectangle182 += 31.5, table5 += 63, overview += 33
+            table4 += 30, rectangle182 += 31.5, table5 += 63, overview += 63
 
           document.getElementById('rectangle18').style.height = rectangle18.toString() + 'px'
           document.getElementById('currentDate').style.top = currentDate.toString() + 'px'
@@ -384,7 +384,7 @@ export class VisionPage implements OnInit {
         document.getElementById('table4').style.top = '95px'
         document.getElementById('rectangle182').style.height = '429px'
         document.getElementById('table5').style.top = '205px'
-        document.getElementById('overview').style.height = '2210px'
+        document.getElementById('overview').style.height = '2148px'
       }
 
       await this.getMinute(therapit)
