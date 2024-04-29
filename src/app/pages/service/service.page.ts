@@ -1717,8 +1717,6 @@ export class ServicePage implements OnInit {
                 this.ionLoaderService.dismissLoader()
                 Swal.fire({ heightAuto: false, position: 'center', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1500 })
                 this.details = false
-              } else {
-                this.ionLoaderService.dismissLoader()
               }
             })
           }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -19,7 +19,6 @@ import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.servi
 })
 
 export class NewPage implements OnInit {
-
   hourStartTerapeuta = ''
   horaEndTerapeuta = ''
 
@@ -28,6 +27,8 @@ export class NewPage implements OnInit {
   dateConvertion = new Date()
   fechaHoyInicio = ''
   currentDate = new Date().getTime()
+
+  select: boolean = false
 
   terapeuta: any[] = []
 
@@ -154,6 +155,130 @@ export class NewPage implements OnInit {
     servicio: "",
     tabaco: "",
     vitamina: "",
+  }
+
+  showKeyBoard(text: string) {
+
+    if (text === 'date') {
+      document.getElementById('box-date').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-date').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'time') {
+      document.getElementById('box-time').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-time').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'duration') {
+      document.getElementById('box-duration').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-duration').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'treatment') {
+      document.getElementById('box-treatment').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-treatment').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'taxi') {
+      document.getElementById('box-taxi').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-taxi').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'tobacco') {
+      document.getElementById('box-tobacco').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-tobacco').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'drinkHouse') {
+      document.getElementById('box-drinkHouse').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-drinkHouse').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'tip') {
+      document.getElementById('box-tip').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-tip').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'vitamins') {
+      document.getElementById('box-vitamins').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-vitamins').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'others') {
+      document.getElementById('box-others').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-others').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'drinkTherapist') {
+      document.getElementById('box-drinkTherapist').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-drinkTherapist').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    setTimeout(() => {
+      document.getElementById('location').style.position = 'initial'
+    }, 350);
+  }
+
+  hideKeyBoard(text: string) {
+
+    if (text === 'date') {
+      document.getElementById('box-date').style.boxShadow = 'none'
+      document.getElementById('box-date').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'time') {
+      document.getElementById('box-time').style.boxShadow = 'none'
+      document.getElementById('box-time').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'duration') {
+      document.getElementById('box-duration').style.boxShadow = 'none'
+      document.getElementById('box-duration').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'treatment') {
+      document.getElementById('box-treatment').style.boxShadow = 'none'
+      document.getElementById('box-treatment').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'taxi') {
+      document.getElementById('box-taxi').style.boxShadow = 'none'
+      document.getElementById('box-taxi').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'tobacco') {
+      document.getElementById('box-tobacco').style.boxShadow = 'none'
+      document.getElementById('box-tobacco').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'drinkHouse') {
+      document.getElementById('box-drinkHouse').style.boxShadow = 'none'
+      document.getElementById('box-drinkHouse').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'tip') {
+      document.getElementById('box-tip').style.boxShadow = 'none'
+      document.getElementById('box-tip').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'vitamins') {
+      document.getElementById('box-vitamins').style.boxShadow = 'none'
+      document.getElementById('box-vitamins').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'others') {
+      document.getElementById('box-others').style.boxShadow = 'none'
+      document.getElementById('box-others').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'drinkTherapist') {
+      document.getElementById('box-drinkTherapist').style.boxShadow = 'none'
+      document.getElementById('box-drinkTherapist').style.borderColor = '#3c3c3c'
+    }
+
+    setTimeout(() => {
+      document.getElementById('location').style.position = 'fixed'
+    }, 350);
   }
 
   constructor(

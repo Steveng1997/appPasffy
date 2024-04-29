@@ -1,6 +1,6 @@
 <ion-content padding fullscreen>
   <ion-grid fixed>
-    <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12">
+    <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12" id="location">
 
       <div class="nuevo-servicio">
         <div class="rectangle-93"></div>
@@ -19,25 +19,28 @@
         <ion-input type="text" class="lugar-salida" id="salida" name="salida" [(ngModel)]="services.salida"></ion-input>
 
         <div class="group-67">
-          <div class="rectangle-40"></div>
-          <div class="rectangle-41"></div>
-          <div class="rectangle-42"></div>
+          <div class="rectangle-40" id="box-date"></div>
+          <div class="rectangle-41" id="box-time"></div>
+          <div class="rectangle-42" id="box-duration"></div>
 
           <div class="fecha">Fecha</div>
           <ion-input type="date" class="fecha" id="date" name="date" (change)="chosenDate($event)"
-            [value]="fechaActual"></ion-input>
+            (ionFocus)="showKeyBoard('date')" (ionBlur)="hideKeyBoard('date')" [value]="fechaActual"></ion-input>
 
           <div class="hora-de-inicio">Hora de Inicio</div>
           <ion-input type="time" class="hora-de-inicio" id="time" name="time" (change)="startTime($event)"
-            [(ngModel)]="services.horaStart" [value]="horaStarted"></ion-input>
+            (ionFocus)="showKeyBoard('time')" (ionBlur)="hideKeyBoard('time')" [(ngModel)]="services.horaStart"
+            [value]="horaStarted"></ion-input>
 
           <div class="duraci-n-min">Duración (min):</div>
           <ion-input type="number" class="duraci-n-min" id="duration" name="duration"
+            (ionFocus)="showKeyBoard('duration')" (ionBlur)="hideKeyBoard('duration')"
             (change)="minutes($event.target)"></ion-input>
         </div>
 
-        <ion-textarea class="rectangle-77" labelPlacement="floating"
-          style="min-height: -webkit-fill-available; overflow: scroll; color: black" [(ngModel)]="services.nota">
+        <ion-textarea class="rectangle-77" labelPlacement="floating" (ionFocus)="showKeyBoard('notes')"
+          (ionBlur)="hideKeyBoard('notes')" style="min-height: -webkit-fill-available; overflow: scroll; color: black"
+          [(ngModel)]="services.nota">
           <div slot="label" class="notas">Notas: <ion-text color="danger"></ion-text></div>
         </ion-textarea>
 
@@ -73,37 +76,45 @@
         </div>
 
         <div class="group-28">
-          <div class="rectangle-45"></div>
+          <div class="rectangle-45" id="box-treatment"></div>
           <ion-input type="number" class="rectangle-45" id="treatment" name="treatment" [(ngModel)]="services.servicio"
+            (ionFocus)="showKeyBoard('treatment')" (ionBlur)="hideKeyBoard('treatment')"
             (ngModelChange)="serviceValue()"></ion-input>
 
-          <div class="rectangle-50"></div>
+          <div class="rectangle-50" id="box-taxi"></div>
           <ion-input type="number" class="rectangle-50" id="taxi" name="taxi" [(ngModel)]="services.taxi"
+            (ionFocus)="showKeyBoard('taxi')" (ionBlur)="hideKeyBoard('taxi')"
             (ngModelChange)="serviceValue()"></ion-input>
 
-          <div class="rectangle-52"></div>
+          <div class="rectangle-52" id="box-tobacco"></div>
           <ion-input type="number" class="rectangle-52" id="tobacco" name="tobacco" [(ngModel)]="services.tabaco"
+            (ionFocus)="showKeyBoard('tobacco')" (ionBlur)="hideKeyBoard('tobacco')"
             (ngModelChange)="serviceValue()"></ion-input>
 
-          <div class="rectangle-54"></div>
+          <div class="rectangle-54" id="box-drinkHouse"></div>
           <ion-input type="number" class="rectangle-54" id="drinkHouse" name="drinkHouse" [(ngModel)]="services.bebidas"
+            (ionFocus)="showKeyBoard('drinkHouse')" (ionBlur)="hideKeyBoard('drinkHouse')"
             (ngModelChange)="serviceValue()"></ion-input>
 
-          <div class="rectangle-49"></div>
+          <div class="rectangle-49" id="box-tip"></div>
           <ion-input type="number" class="rectangle-49" id="tip" name="tip" [(ngModel)]="services.propina"
+            (ionFocus)="showKeyBoard('tip')" (ionBlur)="hideKeyBoard('tip')"
             (ngModelChange)="serviceValue()"></ion-input>
 
-          <div class="rectangle-51"></div>
+          <div class="rectangle-51" id="box-vitamins"></div>
           <ion-input type="number" class="rectangle-51" id="vitamins" name="vitamins" [(ngModel)]="services.vitaminas"
+            (ionFocus)="showKeyBoard('vitamins')" (ionBlur)="hideKeyBoard('vitamins')"
             (ngModelChange)="serviceValue()"></ion-input>
 
-          <div class="rectangle-53"></div>
+          <div class="rectangle-53" id="box-others"></div>
           <ion-input type="number" class="rectangle-53" id="others" name="others" [(ngModel)]="services.otros"
+            (ionFocus)="showKeyBoard('others')" (ionBlur)="hideKeyBoard('others')"
             (ngModelChange)="serviceValue()"></ion-input>
 
-          <div class="rectangle-55"></div>
+          <div class="rectangle-55" id="box-drinkTherapist"></div>
           <ion-input type="number" class="rectangle-55" id="drinkTherapist" name="drinkTherapist"
-            [(ngModel)]="services.bebidaTerap" (ngModelChange)="serviceValue()"></ion-input>
+            [(ngModel)]="services.bebidaTerap" (ngModelChange)="serviceValue()"
+            (ionFocus)="showKeyBoard('drinkTherapist')" (ionBlur)="hideKeyBoard('drinkTherapist')"></ion-input>
 
           <div class="tratamiento">Tratamiento</div>
           <div class="taxi">Taxi</div>
@@ -150,18 +161,22 @@
 
         <div class="rectangle-94"></div>
         <ion-input type="number" class="rectangle-94" id="house1" name="house1" [(ngModel)]="services.numberPiso1"
+          (ionFocus)="showKeyBoard('house1')" (ionBlur)="hideKeyBoard('house1')"
           (ngModelChange)="collectionsValue()"></ion-input>
 
         <div class="rectangle-95"></div>
         <ion-input type="number" class="rectangle-95" id="house2" name="house2" [(ngModel)]="services.numberPiso2"
+          (ionFocus)="showKeyBoard('house2')" (ionBlur)="hideKeyBoard('house2')"
           (ngModelChange)="collectionsValue()"></ion-input>
 
         <div class="rectangle-97"></div>
         <ion-input type="number" class="rectangle-97" id="therapist" name="therapist" [(ngModel)]="services.numberTerap"
+          (ionFocus)="showKeyBoard('therapist')" (ionBlur)="hideKeyBoard('therapist')"
           (ngModelChange)="collectionsValue()"></ion-input>
 
         <div class="rectangle-96"></div>
         <ion-input type="number" class="rectangle-96" id="manager" name="manager" [(ngModel)]="services.numberEncarg"
+          (ionFocus)="showKeyBoard('manager')" (ionBlur)="hideKeyBoard('manager')"
           (ngModelChange)="collectionsValue()"></ion-input>
 
         <div class="_4500">{{sumatoriaServicios}} €</div>
@@ -174,25 +189,29 @@
         <div class="group-88">
           <div class="component-10">
             <div class="rectangle-412" id="bizumHouse1"></div>
-            <ion-input class="rectangle-412" id="bizumFloor1" name="bizumFloor1" (click)="bizumFloor1()"></ion-input>
+            <ion-input class="rectangle-412" type="submit" id="bizumFloor1" name="bizumFloor1"
+              (click)="bizumFloor1()"></ion-input>
             <div class="bizum">Bizum</div>
           </div>
 
           <div class="group-87">
             <div class="rectangle-392" id="cardHouse1"></div>
-            <ion-input class="rectangle-392" id="cardFloor1" name="cardFloor1" (click)="cardFloor1()"></ion-input>
+            <ion-input class="rectangle-392" type="submit" id="cardFloor1" name="cardFloor1"
+              (click)="cardFloor1()"></ion-input>
             <div class="tarjeta">Tarjeta</div>
           </div>
 
           <div class="group-85">
             <div class="rectangle-402" id="transHouse1"></div>
-            <ion-input class="rectangle-402" id="transFloor1" name="transFloor1" (click)="transFloor1()"></ion-input>
+            <ion-input class="rectangle-402" type="submit" id="transFloor1" name="transFloor1"
+              (click)="transFloor1()"></ion-input>
             <div class="transferencia">Transferencia</div>
           </div>
 
           <div class="group-86">
             <div class="rectangle-372" id="cashHouse1"></div>
-            <ion-input class="rectangle-372" id="cashFloor1" name="cashFloor1" (click)="cashFloor1()"></ion-input>
+            <ion-input class="rectangle-372" type="submit" id="cashFloor1" name="cashFloor1"
+              (click)="cashFloor1()"></ion-input>
             <div class="efectivo">Efectivo</div>
           </div>
         </div>
@@ -200,22 +219,26 @@
         <div class="group-99">
           <div class="component-102">
             <div class="rectangle-412" id="bizumHouse2"></div>
-            <ion-input class="rectangle-412" id="bizumFloor2" name="bizumFloor2" (click)="bizumFloor2()"></ion-input>
+            <ion-input class="rectangle-412" type="submit" id="bizumFloor2" name="bizumFloor2"
+              (click)="bizumFloor2()"></ion-input>
             <div class="bizum">Bizum</div>
           </div>
           <div class="group-872">
             <div class="rectangle-392" id="cardHouse2"></div>
-            <ion-input class="rectangle-392" id="cardFloor2" name="cardFloor2" (click)="cardFloor2()"></ion-input>
+            <ion-input class="rectangle-392" type="submit" id="cardFloor2" name="cardFloor2"
+              (click)="cardFloor2()"></ion-input>
             <div class="tarjeta">Tarjeta</div>
           </div>
           <div class="group-852">
             <div class="rectangle-402" id="transHouse2"></div>
-            <ion-input class="rectangle-402" id="transFloor2" name="transFloor2" (click)="transFloor2()"></ion-input>
+            <ion-input class="rectangle-402" type="submit" id="transFloor2" name="transFloor2"
+              (click)="transFloor2()"></ion-input>
             <div class="transferencia">Transferencia</div>
           </div>
           <div class="group-862">
             <div class="rectangle-372" id="cashHouse2"></div>
-            <ion-input class="rectangle-372" id="cashFloor2" name="cashHouse2" (click)="cashFloor2()"></ion-input>
+            <ion-input class="rectangle-372" type="submit" id="cashFloor2" name="cashHouse2"
+              (click)="cashFloor2()"></ion-input>
             <div class="efectivo">Efectivo</div>
           </div>
         </div>
@@ -223,28 +246,28 @@
         <div class="group-100">
           <div class="component-103">
             <div class="rectangle-412" id="bizumTherapist"></div>
-            <ion-input class="rectangle-412" id="bizumTherapist" name="bizumTherapist"
+            <ion-input class="rectangle-412" type="submit" id="bizumTherapist" name="bizumTherapist"
               (click)="bizumTherapist()"></ion-input>
             <div class="bizum">Bizum</div>
           </div>
 
           <div class="group-873">
             <div class="rectangle-392" id="cardTherapist"></div>
-            <ion-input class="rectangle-392" id="cardTherapist" name="cardTherapist"
+            <ion-input class="rectangle-392" type="submit" id="cardTherapist" name="cardTherapist"
               (click)="cardTherapist()"></ion-input>
             <div class="tarjeta">Tarjeta</div>
           </div>
 
           <div class="group-853">
             <div class="rectangle-402" id="transTherapist"></div>
-            <ion-input class="rectangle-402" id="transTherapist" name="transTherapist"
+            <ion-input class="rectangle-402" type="submit" id="transTherapist" name="transTherapist"
               (click)="transTherapist()"></ion-input>
             <div class="transferencia">Transferencia</div>
           </div>
 
           <div class="group-863">
             <div class="rectangle-372" id="cashTherapist"></div>
-            <ion-input class="rectangle-372" id="cashTherapist" name="cashTherapist"
+            <ion-input class="rectangle-372" type="submit" id="cashTherapist" name="cashTherapist"
               (click)="cashTherapist()"></ion-input>
             <div class="efectivo">Efectivo</div>
           </div>
@@ -253,22 +276,26 @@
         <div class="group-101">
           <div class="component-104">
             <div class="rectangle-412" id="bizumManager"></div>
-            <ion-input class="rectangle-412" id="bizumManager" name="bizumManager" (click)="bizumManager()"></ion-input>
+            <ion-input class="rectangle-412" type="submit" id="bizumManager" name="bizumManager"
+              (click)="bizumManager()"></ion-input>
             <div class="bizum">Bizum</div>
           </div>
           <div class="group-874">
             <div class="rectangle-392" id="cardManager"></div>
-            <ion-input class="rectangle-392" id="cardManager" name="cardManager" (click)="cardManager()"></ion-input>
+            <ion-input class="rectangle-392" type="submit" id="cardManager" name="cardManager"
+              (click)="cardManager()"></ion-input>
             <div class="tarjeta">Tarjeta</div>
           </div>
           <div class="group-854">
             <div class="rectangle-402" id="transManager"></div>
-            <ion-input class="rectangle-402" id="transManager" name="transManager" (click)="transManager()"></ion-input>
+            <ion-input class="rectangle-402" type="submit" id="transManager" name="transManager"
+              (click)="transManager()"></ion-input>
             <div class="transferencia">Transferencia</div>
           </div>
           <div class="group-864">
             <div class="rectangle-372" id="cashManager"></div>
-            <ion-input class="rectangle-372" id="cashManager" name="cashManager" (click)="cashManager()"></ion-input>
+            <ion-input class="rectangle-372" type="submit" id="cashManager" name="cashManager"
+              (click)="cashManager()"></ion-input>
             <div class="efectivo">Efectivo</div>
           </div>
         </div>

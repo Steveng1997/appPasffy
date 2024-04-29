@@ -3,14 +3,18 @@
   box-sizing: border-box;
 }
 
-ion-grid {
-  background: var(--verde-claro, #e8f2ef);
-  width: -webkit-fill-available;
-  height: min-content;
+ion-col {
   position: fixed;
-  left: 0px;
-  top: 0px;
 }
+
+// ion-grid {
+//   background: var(--verde-claro, #e8f2ef);
+//   width: -webkit-fill-available;
+//   height: min-content;
+//   position: fixed;
+//   left: 0px;
+//   top: 0px;
+// }
 
 .nuevo-servicio {
   background: #ffffff;
@@ -137,6 +141,10 @@ ion-grid {
   --highlight-color-focused: var(--verde, #1fb996);
 }
 
+.sc-ion-input-md-h[name=cliente] ::ng-deep input {
+  caret-color: black;
+}
+
 .lugar-salida {
   color: #ffffff;
   text-align: left;
@@ -161,6 +169,10 @@ ion-grid {
   left: 126px;
   top: 378px;
   --highlight-color-focused: var(--verde, #1fb996);
+}
+
+.sc-ion-input-md-h[name=salida] ::ng-deep input {
+  caret-color: black;
 }
 
 .group-67 {
@@ -233,7 +245,12 @@ ion-grid {
   width: 150px;
   left: 126px;
   top: 562px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=date] ::ng-deep input {
+  caret-color: black;
 }
 
 .hora-de-inicio {
@@ -259,7 +276,12 @@ ion-grid {
   width: 150px;
   left: 180px;
   top: 619px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=time] ::ng-deep input {
+  caret-color: black;
 }
 
 .duraci-n-min {
@@ -285,7 +307,11 @@ ion-grid {
   width: 110px;
   left: 191px;
   top: 678px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+}
+
+.sc-ion-input-md-h[name=duration] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-77 {
@@ -321,7 +347,7 @@ ion-grid {
   justify-content: flex-start;
 }
 
-.rectangle-77 ::ng-deep .native-wrapper.sc-ion-textarea-md{
+.rectangle-77 ::ng-deep .native-wrapper.sc-ion-textarea-md {
   top: 15px;
   height: 124px;
 }
@@ -557,7 +583,6 @@ ion-grid {
   border-radius: 15px;
   border-style: solid;
   border-color: #3c3c3c;
-  color: #3c3c3c;
   font-family: "Inter-Regular", sans-serif;
   font-size: 16px;
   border-width: 1px;
@@ -580,7 +605,12 @@ ion-grid {
   left: 25.13%;
   bottom: 58.71%;
   top: 39.45%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=treatment] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-50 {
@@ -607,7 +637,12 @@ ion-grid {
   left: 25.13%;
   bottom: 55.17%;
   top: 43%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=taxi] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-52 {
@@ -634,7 +669,12 @@ ion-grid {
   left: 25.13%;
   bottom: 51.63%;
   top: 46.54%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=tobacco] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-54 {
@@ -661,7 +701,12 @@ ion-grid {
   left: 25.13%;
   bottom: 48.09%;
   top: 50.08%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=drinkHouse] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-49 {
@@ -688,7 +733,12 @@ ion-grid {
   left: 55.27%;
   bottom: 58.71%;
   top: 39.45%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=tip] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-51 {
@@ -715,7 +765,12 @@ ion-grid {
   left: 55.27%;
   bottom: 55.17%;
   top: 43%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=vitamins] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-53 {
@@ -742,7 +797,12 @@ ion-grid {
   left: 55.27%;
   bottom: 51.63%;
   top: 46.54%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=others] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-55 {
@@ -769,7 +829,12 @@ ion-grid {
   left: 55.27%;
   bottom: 48.09%;
   top: 50.08%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=drinkTherapist] ::ng-deep input {
+  caret-color: black;
 }
 
 .tratamiento {
@@ -1127,7 +1192,12 @@ ion-select::part(icon) {
   width: 42px;
   left: 140px;
   top: 1459px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=house1] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-95 {
@@ -1150,9 +1220,13 @@ ion-select::part(icon) {
   width: 42px;
   left: 140px;
   top: 1615px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
 }
 
+.sc-ion-input-md-h[name=house2] ::ng-deep input {
+  caret-color: black;
+}
 .rectangle-97 {
   border-radius: 51px;
   border-style: solid;
@@ -1173,7 +1247,12 @@ ion-select::part(icon) {
   width: 45px;
   left: 176px;
   top: 1771px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=therapist] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-96 {
@@ -1196,7 +1275,12 @@ ion-select::part(icon) {
   width: 45px;
   left: 183px;
   top: 1927px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=manager] ::ng-deep input {
+  caret-color: black;
 }
 
 ._4500 {

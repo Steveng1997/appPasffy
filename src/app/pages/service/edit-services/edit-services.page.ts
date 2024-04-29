@@ -1328,7 +1328,7 @@ export class EditServicesPage implements OnInit {
     this.validationsFormOfPayment()
   }
 
-  back(){ 
+  back() {
     this.serviceServices.getById(this.id).subscribe((rp: any) => {
       location.replace(`tabs/${this.idUser}/${rp[0].pantalla}`)
     })
@@ -1339,6 +1339,7 @@ export class EditServicesPage implements OnInit {
     this.buttonEdit.disabled = true;
     if (this.restamosCobroEdit == 0) {
       if (serv.minuto != null) {
+        this.ionLoaderService.simpleLoader()
         if (!this.expiredDateValidationsEdit()) return
         if (!this.validationsToSelectAPaymentMethod()) return
         if (!this.validationsFormOfPayment()) return
@@ -1398,12 +1399,18 @@ export class EditServicesPage implements OnInit {
         this.serviceTherapist.update(this.editarService[0]['terapeuta'], this.therapist).subscribe((rp: any) => { })
 
         this.sortDateToEdit()
-        this.serviceServices.updateServicio(idServicio, serv).subscribe((rp: any) => { })
+        this.serviceServices.updateServicio(idServicio, serv).subscribe((rp: any) => {
+          setTimeout(() => {
+            this.ionLoaderService.dismissLoader()
+            location.replace(`tabs/${this.idUser}/${serv.pantalla}`)
+            Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 2500 })
+          }, 1000)
+        })
 
-        setTimeout(() => {
-          Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 2500 })
-          location.replace(`tabs/${this.idUser}/${serv.pantalla}`)
-        }, 3000);
+        // setTimeout(() => {
+        //   Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 2500 })
+        //   location.replace(`tabs/${this.idUser}/${serv.pantalla}`)
+        // }, 3000);
 
       } else {
         this.buttonEdit.disabled = false
@@ -1441,7 +1448,6 @@ export class EditServicesPage implements OnInit {
               this.serviceServices.deleteServicio(id).subscribe((rp: any) => {
                 this.ionLoaderService.dismissLoader()
                 location.replace(`tabs/${this.idUser}/${screen}`)
-                // location.replace(`tabs/${this.idUser}/setting`);
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 2500 })
               })
             }
