@@ -1703,7 +1703,6 @@ export class ServicePage implements OnInit {
               confirmButtonText: 'Si, Deseo eliminar!'
             }).then((result) => {
               if (result.isConfirmed) {
-                this.ionLoaderService.simpleLoader()
                 this.serviceTherapist.getTerapeuta(this.idService[0]['terapeuta']).subscribe((rp: any) => {
                   this.serviceTherapist.updateHoraAndSalida(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
                 })
@@ -1714,7 +1713,6 @@ export class ServicePage implements OnInit {
                 }
 
                 this.getServices()
-                this.ionLoaderService.dismissLoader()
                 Swal.fire({ heightAuto: false, position: 'center', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1500 })
                 this.details = false
               }

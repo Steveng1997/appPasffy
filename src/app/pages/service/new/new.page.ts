@@ -157,7 +157,43 @@ export class NewPage implements OnInit {
     vitamina: "",
   }
 
+  constructor(
+    public router: Router,
+    private activatedRoute: ActivatedRoute,
+    private serviceTherapist: TherapistService,
+    private serviceManager: ManagerService,
+    private serviceServices: ServiceService,
+    private ionLoaderService: IonLoaderService
+  ) {
+  }
+
+  ngOnInit() {
+    const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
+    this.idUser = Number(params['id'])
+
+    if (this.idUser) {
+      this.serviceManager.getById(this.idUser).subscribe((rp) => {
+        if (rp[0]['rol'] == 'administrador') {
+          this.getManager()
+        } else {
+          this.manager = rp
+          this.services.encargada = this.manager[0].nombre
+        }
+      })
+    }
+
+    this.getTherapist()
+    this.getManager()
+    this.date()
+
+    this.horaInicialServicio = this.horaStarted
+    this.services.horaEnd = this.horaStarted
+    this.services.horaStart = this.horaStarted
+  }
+
   showKeyBoard(text: string) {
+    
+    document.getElementById('overview').style.height = '4065px'
 
     if (text === 'date') {
       document.getElementById('box-date').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
@@ -172,51 +208,282 @@ export class NewPage implements OnInit {
     if (text === 'duration') {
       document.getElementById('box-duration').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
       document.getElementById('box-duration').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('duration')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
     }
 
     if (text === 'treatment') {
       document.getElementById('box-treatment').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
       document.getElementById('box-treatment').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('treatment')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
     }
 
     if (text === 'taxi') {
       document.getElementById('box-taxi').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
       document.getElementById('box-taxi').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('taxi')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
     }
 
     if (text === 'tobacco') {
       document.getElementById('box-tobacco').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
       document.getElementById('box-tobacco').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('tobacco')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
     }
 
     if (text === 'drinkHouse') {
       document.getElementById('box-drinkHouse').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
       document.getElementById('box-drinkHouse').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('drinkHouse')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
     }
 
     if (text === 'tip') {
       document.getElementById('box-tip').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
       document.getElementById('box-tip').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('tip')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
     }
 
     if (text === 'vitamins') {
       document.getElementById('box-vitamins').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
       document.getElementById('box-vitamins').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('vitamins')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
     }
 
     if (text === 'others') {
       document.getElementById('box-others').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
       document.getElementById('box-others').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('others')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
     }
 
     if (text === 'drinkTherapist') {
       document.getElementById('box-drinkTherapist').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
       document.getElementById('box-drinkTherapist').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('drinkTherapist')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
     }
 
-    setTimeout(() => {
-      document.getElementById('location').style.position = 'initial'
-    }, 350);
+    if (text === 'house1') {
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('house1')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1100,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'house2') {
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('house2')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'therapist') {
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('therapist')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1400,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'manager') {
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.getElementById('manager')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1600,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'notes') {
+      var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
+      var element_to_show = document.querySelector<HTMLElement>(".rectangle-77")
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 335) {
+        document.getElementById('overview').style.height = '4165px'
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1800,
+          behavior: "smooth"
+        })
+      }
+    }
   }
 
   hideKeyBoard(text: string) {
@@ -276,43 +543,9 @@ export class NewPage implements OnInit {
       document.getElementById('box-drinkTherapist').style.borderColor = '#3c3c3c'
     }
 
-    setTimeout(() => {
-      document.getElementById('location').style.position = 'fixed'
-    }, 350);
-  }
-
-  constructor(
-    public router: Router,
-    private activatedRoute: ActivatedRoute,
-    private serviceTherapist: TherapistService,
-    private serviceManager: ManagerService,
-    private serviceServices: ServiceService,
-    private ionLoaderService: IonLoaderService
-  ) {
-  }
-
-  ngOnInit() {
-    const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
-    this.idUser = Number(params['id'])
-
-    if (this.idUser) {
-      this.serviceManager.getById(this.idUser).subscribe((rp) => {
-        if (rp[0]['rol'] == 'administrador') {
-          this.getManager()
-        } else {
-          this.manager = rp
-          this.services.encargada = this.manager[0].nombre
-        }
-      })
+    if (text === 'notes') {
+      document.getElementById('overview').style.height = '4065px'
     }
-
-    this.getTherapist()
-    this.getManager()
-    this.date()
-
-    this.horaInicialServicio = this.horaStarted
-    this.services.horaEnd = this.horaStarted
-    this.services.horaStart = this.horaStarted
   }
 
   date() {
@@ -654,13 +887,14 @@ export class NewPage implements OnInit {
           if (this.services.minuto != 0) {
             if (this.sumatoriaCobros == this.sumatoriaServicios) {
               // Methods 
-              this.ionLoaderService.simpleLoader()
               this.createUniqueId()
               this.validateTheEmptyField()
               if (!this.expiredDateValidations()) return
               if (!this.paymentMethodValidation()) return
               if (!this.validatePaymentMethod()) return
               this.sumService()
+
+              this.ionLoaderService.simpleLoader()
 
               if (this.services.efectPiso1 == true || this.services.efectPiso2 == true ||
                 this.services.efectTerap == true || this.services.efectEncarg == true ||

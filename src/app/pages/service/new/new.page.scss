@@ -7,14 +7,15 @@ ion-col {
   position: fixed;
 }
 
-// ion-grid {
-//   background: var(--verde-claro, #e8f2ef);
-//   width: -webkit-fill-available;
-//   height: min-content;
-//   position: fixed;
-//   left: 0px;
-//   top: 0px;
-// }
+ion-grid {
+  background: var(--verde-claro, #e8f2ef);
+  width: -webkit-fill-available;
+  height: min-content;
+  position: fixed;
+  // left: 0px;
+  left: -5px;
+  top: 0px;
+}
 
 .nuevo-servicio {
   background: #ffffff;
@@ -1227,6 +1228,7 @@ ion-select::part(icon) {
 .sc-ion-input-md-h[name=house2] ::ng-deep input {
   caret-color: black;
 }
+
 .rectangle-97 {
   border-radius: 51px;
   border-style: solid;
@@ -1854,4 +1856,15 @@ ion-select::part(icon) {
 
 .selectOption {
   background: var(--verde, #1fb996);
+}
+
+.keyboard {
+  display: none;
+  background-color: black;
+  width: 100%;
+  width: 300px;
+  height: 260px;
+  position: fixed;
+  bottom: 0;
+  top: 250px;
 }
