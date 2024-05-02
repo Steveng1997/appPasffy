@@ -28,7 +28,6 @@
     overflow: hidden;
   }
 
-
   .group-104 {
     height: auto;
     position: absolute;
@@ -39,5 +38,23 @@
 
   .closing {
     transform: translate(266px, 8px) scale(0.57);
+  }
+
+  .circleLiquidation {
+    cx: 217px;
+    r: 29;
+    fill: transparent;
+  }
+
+  .circleServices {
+    cx: 73px;
+    r: 29;
+    fill: transparent;
+  }
+
+  .circleClosing {
+    cx: 280px;
+    r: 29;
+    fill: transparent;
   }
 }
