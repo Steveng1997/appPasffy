@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-therapist',
@@ -7,11 +7,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./therapist.page.scss'],
 })
 
-export class TherapistPage {
+export class TherapistPage implements OnInit {
 
-  constructor(public router: Router) { }
+  id: string = ""
+
+  constructor(
+    public router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
+    const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
+    this.id = params['id']
+  }
 
   manager() {
-    this.router.navigate([`tabs/liquidation-manager`])
+    this.router.navigate([`tabs/${this.id}/liquidation-manager`])
   }
 }

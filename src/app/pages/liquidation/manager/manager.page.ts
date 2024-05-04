@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-manager',
@@ -9,10 +9,19 @@ import { Router } from '@angular/router';
 
 export class ManagerPage {
 
-  constructor(public router: Router) { }
+  id: string = ""
 
-  therapist() {
-    this.router.navigate([`tabs/liquidation-therapist`]);
+  constructor(
+    public router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
+    const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
+    this.id = params['id']
   }
 
+  therapist() {
+    this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
+  }
 }
