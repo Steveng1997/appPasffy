@@ -39,13 +39,6 @@ export class ServicePage implements OnInit {
   detailService: any
   deleteButton: any
 
-  fechaInicio: string
-  fechaFinal: string
-  horaInicio: string
-  horaFinal: string
-  day: number
-  month: string
-
   // Terapeuta
   terapeuta: any
   selectedTerapeuta: string
@@ -55,8 +48,15 @@ export class ServicePage implements OnInit {
   selectedEncargada: string
   selectedFormPago: string
 
+  dateTodayCurrent: string
   dateStart: string
   dateEnd: string
+  fechaInicio: string
+  fechaFinal: string
+  horaInicio: string
+  horaFinal: string
+  day: number
+  month: string
   hourStart: string
   hourEnd: string
   parmHourStart: string
@@ -80,7 +80,6 @@ export class ServicePage implements OnInit {
 
   // Conteo fecha
   count: number = 0
-  dateTodayCurrent: string
   atrasCount: number = 0
   siguienteCount: number = 0
   fechaFormat = new Date()
