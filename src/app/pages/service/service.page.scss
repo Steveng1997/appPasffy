@@ -2391,18 +2391,6 @@ ion-select::part(placeholder) {
 
 .mensaje {
   color: #3c3c3c;
-  // text-align: left;
-  // font-family: "Inter-Medium", sans-serif;
-  // font-size: 13px;
-  // line-height: 125%;
-  // font-weight: 500;
-  // position: absolute;
-  // left: 55px;
-  // top: 158px;
-  // width: 119px;
-  // height: 21px;
-
-  // color: var(--verde, #1fb996);
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
   font-size: 17px;
@@ -2412,7 +2400,8 @@ ion-select::part(placeholder) {
   width: 73px;
   display: flex;
   align-items: flex-end;
-  left: 9px;
+  left: 15px;
+  top: 17px;
 }
 
 .group-32 {
@@ -3318,10 +3307,10 @@ ion-select::part(placeholder) {
   }
 
   .rectangle-88 ::ng-deep .native-wrapper.sc-ion-textarea-md {
-    top: 15px;
-    left: 7px;
+    top: 24px;
+    left: 11px;
     height: 144px;
-    width: 257px;
+    width: 255px;
     font-family: "Inter-Medium", sans-serif;
     font-size: 17px;
   }
