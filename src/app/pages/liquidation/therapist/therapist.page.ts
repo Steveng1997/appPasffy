@@ -130,14 +130,13 @@ export class TherapistPage implements OnInit {
     private services: ServiceService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.id = Number(params['id'])
-    this.ionLoaderService.simpleLoader()
     this.todaysDdate()
 
     this.date()
-    this.getLiquidation()
+    await this.getLiquidation()
     this.getTerapeuta()
 
     if (this.id) {
@@ -156,18 +155,16 @@ export class TherapistPage implements OnInit {
         this.liquidationTherapist.encargada = this.manager[0].nombre
         this.serviceLiquidation.consultManager(this.liquidationTherapist.encargada).subscribe(async (rp) => {
           this.liquidated = rp
-          this.ionLoaderService.dismissLoader()
         })
       }
     })
   }
 
-  async getLiquidation() {
+  getLiquidation = async () => {
     this.dateTodayCurrent = 'HOY'
 
     this.serviceLiquidation.consultTherapistSettlements().subscribe(async (rp: any) => {
       this.liquidated = rp
-      this.ionLoaderService.dismissLoader()
     })
   }
 

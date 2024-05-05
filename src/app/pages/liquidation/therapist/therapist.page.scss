@@ -153,14 +153,14 @@ ion-grid {
     inset: 0;
 }
 
-.rectangle-95 {
-    background: var(--verde, #1fb996);
+.rectangle-116 {
+    background: var(--verde-oscuro, #0b9a7a);
     border-radius: 15px;
-    width: 115px;
+    width: 104px;
     height: 40px;
     position: absolute;
-    left: calc(50% - -53.5px);
-    top: 263px;
+    left: calc(50% - 159px);
+    top: 252px;
 }
 
 .nueva {
@@ -1955,23 +1955,26 @@ ion-select::part(placeholder) {
         width: 10.67%;
         height: 6.07%;
         top: 240px;
+        left: 46px;
+        z-index: 1;
     }
 
     .nueva {
-        left: 297px;
+        left: 66px;
         top: 264px;
+        z-index: 1;
     }
 
     .icon {
-        height: 3%;
-        width: 26px;
-        left: 6.7%;
-        top: 257px;
+        width: 9.67%;
+        height: 5.07%;
+        left: 257px;
+        top: 246px;
     }
 
     .filtros {
         color: #ffffff;
-        left: 59px;
+        left: 297px;
         top: 261px;
     }
 

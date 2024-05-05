@@ -11,10 +11,7 @@ import { LiquidationManager } from '../../models/liquidationManager';
 
 export class ServiceLiquidationManagerService {
 
-  // API_URL = 'http://18.191.250.105:3000/api/liqEncargada';
-
-  // Page pasffey
-  API_URL = 'http://35.181.62.147:3000/api/liqEncargada';
+  API_URL = 'https://brave-marvelous-marquis.glitch.me/api/liqEncargada'
 
   constructor(
     public router: Router,

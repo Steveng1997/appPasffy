@@ -10,9 +10,7 @@ import { ModelService } from '../../models/service';
 })
 
 export class ServiceService {
-
-  // Page pasffey
-  // API_URL = 'http://35.181.62.147:3000/api/servicio';
+  
   API_URL = 'https://brave-marvelous-marquis.glitch.me/api/servicio'
 
   constructor(
