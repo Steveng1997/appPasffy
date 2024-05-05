@@ -61,7 +61,11 @@ const routes: Routes = [
       },
       {
         path: 'edit-services/:id',
-    loadChildren: () => import('../service/edit-services/edit-services.module').then( m => m.EditServicesPageModule)
+        loadChildren: () => import('../service/edit-services/edit-services.module').then(m => m.EditServicesPageModule)
+      },
+      {
+        path: 'new-liquiationTherapist',
+        loadChildren: () => import('../liquidation/therapist/new-liquid-therap/new-liquid-therap.module').then(m => m.NewLiquidTherapPageModule)
       }
     ]
   }

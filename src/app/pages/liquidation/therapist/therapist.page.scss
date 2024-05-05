@@ -526,6 +526,7 @@ ion-grid {
 .containerDetail {
     position: relative;
     top: -14px;
+    height: 746px;
 }
 
 .rectangle-30 {
@@ -669,7 +670,7 @@ ion-grid {
     border-color: var(--negro, #3c3c3c);
     border-width: 1px;
     width: 321px;
-    height: 103%;
+    height: 44px;
     position: absolute;
     right: 0%;
     left: 0%;
@@ -683,7 +684,7 @@ ion-grid {
     border-color: var(--negro, #3c3c3c);
     border-width: 1px;
     width: 321px;
-    height: 103%;
+    height: 44px;
     position: absolute;
     right: 0%;
     left: 0%;
@@ -703,6 +704,7 @@ ion-grid {
     left: 5.07%;
     width: 26.57%;
     bottom: 28.63%;
+    // top: 35px;
     top: 35px;
     height: 44.61%;
     display: flex;
@@ -730,13 +732,25 @@ ion-grid {
 }
 
 ._icon {
-    width: 2.69%;
+    width: 5.69%;
     height: 42.38%;
     position: absolute;
     right: 2.69%;
-    left: 94.63%;
+    left: 88.63%;
     bottom: 15.24%;
-    top: 42.38%;
+    top: 42px;
+    transform: translate(-20px, -1px);
+    overflow: visible;
+}
+
+._icon2 {
+    width: 5.69%;
+    height: 42.38%;
+    position: absolute;
+    right: 2.69%;
+    left: 88.63%;
+    bottom: 15.24%;
+    top: 132px;
     transform: translate(-20px, -1px);
     overflow: visible;
 }
@@ -796,8 +810,8 @@ ion-grid {
     border-style: solid;
     border-color: var(--negro, #3c3c3c);
     border-width: 1px;
-    width: 157px;
-    height: 45px;
+    width: 140px;
+    height: 44px;
     position: absolute;
     left: 20px;
     top: 334px;
@@ -808,10 +822,10 @@ ion-grid {
     border-style: solid;
     border-color: var(--negro, #3c3c3c);
     border-width: 1px;
-    width: 157px;
-    height: 45px;
+    width: 140px;
+    height: 44px;
     position: absolute;
-    left: 198px;
+    left: 201px;
     top: 334px;
 }
 
@@ -820,8 +834,8 @@ ion-grid {
     border-style: solid;
     border-color: var(--negro, #3c3c3c);
     border-width: 1px;
-    width: 157px;
-    height: 45px;
+    width: 140px;
+    height: 44px;
     position: absolute;
     left: 20px;
     top: 422px;
@@ -832,10 +846,10 @@ ion-grid {
     border-style: solid;
     border-color: var(--negro, #3c3c3c);
     border-width: 1px;
-    width: 157px;
-    height: 45px;
+    width: 140px;
+    height: 44px;
     position: absolute;
-    left: 198px;
+    left: 201px;
     top: 422px;
 }
 
@@ -847,8 +861,8 @@ ion-grid {
     line-height: 125%;
     font-weight: 400;
     position: absolute;
-    left: 35px;
-    top: 348px;
+    left: 36px;
+    top: 335px;
     width: 96px;
     height: 20px;
     display: flex;
@@ -865,7 +879,7 @@ ion-grid {
     font-weight: 400;
     position: absolute;
     left: 215px;
-    top: 348px;
+    top: 335px;
     width: 96px;
     height: 20px;
     display: flex;
@@ -881,8 +895,8 @@ ion-grid {
     line-height: 125%;
     font-weight: 400;
     position: absolute;
-    left: 35px;
-    top: 435px;
+    left: 36px;
+    top: 422px;
     width: 96px;
     height: 20px;
     display: flex;
@@ -899,7 +913,7 @@ ion-grid {
     font-weight: 400;
     position: absolute;
     left: 215px;
-    top: 435px;
+    top: 422px;
     width: 96px;
     height: 20px;
     display: flex;
@@ -948,7 +962,7 @@ ion-grid {
     height: 43px;
     position: absolute;
     left: 152px;
-    top: 697px;
+    top: 689px;
 }
 
 .liquidaci-n-1 {
@@ -1095,26 +1109,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 152px;
+    width: 55px;
+    left: 132px;
     top: 286px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
-._2222 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 115%;
-    font-weight: 500;
-    position: absolute;
-    left: 152px;
-    top: 576px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._2223 {
@@ -1125,11 +1125,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 273px;
+    width: 45px;
+    left: 261px;
     top: 286px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._2224 {
@@ -1140,11 +1141,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 273px;
+    width: 100px;
+    left: 206px;
     top: 576px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._2225 {
@@ -1155,11 +1157,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 273px;
+    width: 92px;
+    left: 214px;
     top: 451px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._2226 {
@@ -1170,11 +1173,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 700;
     position: absolute;
-    left: 273px;
+    width: 70px;
+    left: 236px;
     top: 502px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._100 {
@@ -1193,21 +1197,6 @@ ion-grid {
     justify-content: end;
 }
 
-._1002 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 115%;
-    font-weight: 500;
-    position: absolute;
-    left: 212px;
-    top: 576px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
 ._0 {
     color: #3c3c3c;
     text-align: left;
@@ -1216,26 +1205,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 170px;
+    width: 55px;
+    left: 132px;
     top: 308px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
-._02 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 115%;
-    font-weight: 500;
-    position: absolute;
-    left: 170px;
-    top: 598px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._03 {
@@ -1246,11 +1221,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 291px;
+    width: 45px;
+    left: 261px;
     top: 308px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._04 {
@@ -1261,11 +1237,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 291px;
+    width: 100px;
+    left: 206px;
     top: 598px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._05 {
@@ -1276,11 +1253,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 291px;
+    width: 92px;
+    left: 214px;
     top: 473px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._1003 {
@@ -1299,21 +1277,6 @@ ion-grid {
     justify-content: end;
 }
 
-._1004 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 115%;
-    font-weight: 500;
-    position: absolute;
-    left: 212px;
-    top: 598px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
 ._06 {
     color: #3c3c3c;
     text-align: left;
@@ -1322,26 +1285,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 170px;
+    width: 50px;
+    left: 137px;
     top: 330px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
-._07 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 115%;
-    font-weight: 500;
-    position: absolute;
-    left: 170px;
-    top: 620px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._08 {
@@ -1352,11 +1301,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 291px;
+    width: 45px;
+    left: 261px;
     top: 330px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._09 {
@@ -1367,11 +1317,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 291px;
+    width: 100px;
+    left: 206px;
     top: 620px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._50 {
@@ -1390,21 +1341,6 @@ ion-grid {
     justify-content: end;
 }
 
-._502 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 115%;
-    font-weight: 500;
-    position: absolute;
-    left: 219px;
-    top: 620px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
 ._010 {
     color: #3c3c3c;
     text-align: left;
@@ -1413,26 +1349,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 170px;
+    width: 55px;
+    left: 132px;
     top: 352px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
-._011 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 115%;
-    font-weight: 500;
-    position: absolute;
-    left: 170px;
-    top: 642px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._012 {
@@ -1443,11 +1365,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 291px;
+    width: 45px;
+    left: 261px;
     top: 352px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._013 {
@@ -1458,26 +1381,28 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 291px;
+    width: 100px;
+    left: 206px;
     top: 642px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._014 {
     color: #3c3c3c;
     text-align: left;
-    font-family: "Inter-Bold", sans-serif;
+    font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
     line-height: 115%;
-    font-weight: 700;
+    font-weight: 500;
     position: absolute;
-    left: 282px;
+    width: 100px;
+    left: 206px;
     top: 672px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._90 {
@@ -1496,21 +1421,6 @@ ion-grid {
     justify-content: end;
 }
 
-._902 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 115%;
-    font-weight: 500;
-    position: absolute;
-    left: 219px;
-    top: 642px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
 ._015 {
     color: #3c3c3c;
     text-align: left;
@@ -1519,11 +1429,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 170px;
+    width: 55px;
+    left: 132px;
     top: 374px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._016 {
@@ -1534,11 +1445,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 291px;
+    width: 45px;
+    left: 261px;
     top: 374px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._1005 {
@@ -1565,11 +1477,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 170px;
+    width: 55px;
+    left: 132px;
     top: 396px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._018 {
@@ -1580,11 +1493,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 291px;
+    width: 45px;
+    left: 261px;
     top: 396px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._1006 {
@@ -1611,11 +1525,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 170px;
+    width: 55px;
+    left: 132px;
     top: 418px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._020 {
@@ -1626,11 +1541,12 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 291px;
+    width: 45px;
+    left: 261px;
     top: 418px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
 }
 
 ._1007 {
@@ -1953,8 +1869,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 700;
     position: absolute;
-    left: 219px;
-    top: 730px;
+    left: 215px;
+    top: 702px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -1964,8 +1880,8 @@ ion-grid {
     width: 24px;
     height: 24px;
     position: absolute;
-    left: 190px;
-    top: 726px;
+    left: 185px;
+    top: 698px;
     overflow: visible;
 }
 
@@ -1978,7 +1894,16 @@ ion-grid {
     overflow: visible;
 }
 
+ion-select::part(icon) {
+    color: transparent !important;
+    top: -1px;
+    width: 220px;
+    height: 42px;
+}
 
+ion-select::part(placeholder) {
+    opacity: 1 !important;
+}
 
 @media only screen and (min-device-width: 259px) and (max-device-width: 370px) {}
 

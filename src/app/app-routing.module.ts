@@ -61,7 +61,12 @@ const routes: Routes = [
   {
     path: 'edit-services',
     loadChildren: () => import('./pages/service/edit-services/edit-services.module').then( m => m.EditServicesPageModule)
+  },
+  {
+    path: 'new-liquiationTherapist',
+    loadChildren: () => import('./pages/liquidation/therapist/new-liquid-therap/new-liquid-therap.module').then( m => m.NewLiquidTherapPageModule)
   }
+
 ];
 @NgModule({
   imports: [

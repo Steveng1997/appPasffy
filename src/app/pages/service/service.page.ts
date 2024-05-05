@@ -812,8 +812,12 @@ export class ServicePage implements OnInit {
   }
 
   btnFilter() {
-    this.filter = true
-    this.validateCheck()
+    if (this.filter == true) {
+      this.filter = false
+    } else {
+      this.filter = true
+      this.validateCheck()
+    }
   }
 
   ajustDate(date: string) {
@@ -1051,10 +1055,6 @@ export class ServicePage implements OnInit {
     }
 
     this.calculateSumOfServices()
-  }
-
-  close() {
-    this.filter = false
   }
 
   closeDetail() {
