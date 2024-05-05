@@ -6,8 +6,10 @@ import { TherapistPageRoutingModule } from './therapist-routing.module';
 import { TherapistPage } from './therapist.page';
 
 // Pipe
-import { DateLiquidationPipe } from 'src/app/core/pipe/date-liquidation.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TherapistPipe } from 'src/app/core/pipe/therapist.pipe';
+import { ManagerPipe } from 'src/app/core/pipe/manager.pipe';
+import { DateLiquidationPipe } from 'src/app/core/pipe/date-liquidation.pipe';
 
 @NgModule({
   imports: [
@@ -15,12 +17,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     IonicModule,
     TherapistPageRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    TherapistPipe,
+    ManagerPipe,
+    DateLiquidationPipe,
   ],
 
   declarations: [
-    TherapistPage,
-    DateLiquidationPipe
+    TherapistPage
   ]
 })
 

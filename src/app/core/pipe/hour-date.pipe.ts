@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'hourDate'
+  name: 'hourDate',
+  standalone: true
 })
 export class HourDatePipe implements PipeTransform {
 

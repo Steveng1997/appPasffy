@@ -64,11 +64,9 @@
             <div class="tratamiento">Tratamiento</div>
           </div>
 
-          <!-- <div class="rectangle-104" *ngFor="let liquidation of (liquidated | therapist: selectedTerapeuta  
+          <div class="rectangle-104" *ngFor="let liquidation of (liquidated | therapist: selectedTerapeuta  
           | manager: selectedEncargada | dateLiquidation: dateStart:dateEnd ) | 
-          paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(liquidation)"> -->
-          <div class="rectangle-104" *ngFor="let liquidation of (liquidated) | 
-          paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(liquidation)">
+          paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(liquidation.idTerapeuta)">
             <div style="position: relative; top: 0px">
               <div class="luc-a9">{{liquidation.encargada}}</div>
 
@@ -111,7 +109,7 @@
   </svg>
 
   <div class="limpiar" id="btnDelete" (click)="emptyFilter()">Limpiar</div>
-  <div class="filtrar" (click)="close()">Filtrar</div>
+  <div class="filtrar" (click)="btnFilter()">Filtrar</div>
 
   <div class="_terapeuta">Terapeuta</div>
   <div class="_encargada">Encargada</div>
@@ -119,7 +117,7 @@
   <div class="final">Final</div>
 
   <svg class="x-close" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
-    (click)="close()">
+    (click)="btnFilter()">
     <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
       stroke-linejoin="round" />
   </svg>
@@ -155,4 +153,141 @@
   <div class="rectangle-157"></div>
   <ion-input class="_08-02-p-m" type="time" name="hourEnd" [(ngModel)]="hourEnd"
     (ngModelChange)="filters()"></ion-input>
+</div>
+
+<!-- Details -->
+
+<div class="pop-up-liquidaci-n" *ngIf="details">
+  <div class="rectangle-106">
+    <div class="containerDetail">
+      <div class="rectangle-107"></div>
+      <div class="rectangle-112"></div>
+      <div class="liquidaci-n-1">Liquidación</div>
+
+      <div class="_22-01-24-23-25-a-05-02-24-09-14"> {{sinceDate}} {{sinceTime}} a {{toDate}} {{untilTime}} </div>
+
+      <div class="total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta">
+        <span>
+
+          <span class="total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta-span"> Total Liquidación:
+          </span>
+
+          <span class="total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta-span2">
+            {{totalLiquidation}} €
+            <br />
+          </span>
+
+          <span class="total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta-span3">
+            Concepto a regularizar: {{regularization}} €
+          </span>
+
+          <span class="total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago">
+            Tipo de pago:
+          </span>
+
+          <span class="total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta-span4"> {{payment}}
+          </span>
+
+        </span>
+      </div>
+
+      <div class="luc-a">{{nameTherapist}}</div>
+
+      <div class="suma">Suma</div>
+      <div class="comisi-n">Comisión</div>
+      <div class="total">Total</div>
+      <div class="rectangle-108"></div>
+
+      <div class="_tratamiento">Tratamiento</div>
+      <div class="_222">{{totalService}} €</div>
+      <div class="_100" *ngIf="terapeutaName?.servicio != undefined"> {{terapeutaName?.servicio + ' %'}}</div>
+      <div class="_100" *ngIf="terapeutaName?.servicio == undefined" class="columnComission">{{0 + ' %'}}</div>
+      <div class="_2223">{{serviceCommission}} €</div>
+
+      <div class="propina">Propina</div>
+      <div class="_0">{{totalTipValue}} €</div>
+      <div class="_1003">{{commissionTip}} %</div>
+      <div class="_03">0€</div>
+
+      <div class="bebida-a-casa">Bebida a casa</div>
+      <div class="_06">{{totalValueDrink}} €</div>
+      <div class="_50">{{beverageCommission}} %</div>
+      <div class="_08">0€</div>
+
+      <div class="bebida-terap">Bebida Terap</div>
+      <div class="_010">{{totalValueDrinkTherap}} €</div>
+      <div class="_90">{{beverageTherapistCommission}} %</div>
+      <div class="_012">0€</div>
+
+      <div class="tabaco">Tabaco</div>
+      <div class="_015">{{totalTobaccoValue}} €</div>
+      <div class="_1005">{{tobaccoCommission}} %</div>
+      <div class="_016">0€</div>
+
+      <div class="vitamina">Vitamina</div>
+      <div class="_017">{{totalValueVitamins}} €</div>
+      <div class="_1006">{{vitaminCommission}} %</div>
+      <div class="_018">0€</div>
+
+      <div class="otros">Otros</div>
+      <div class="_019">{{totalValueOther}} €</div>
+      <div class="_1007">{{commissionOthers}} %</div>
+      <div class="_020">0€</div>
+
+      <div class="suma2">Suma</div>
+      <div class="_2225">{{totalSum}} €</div>
+
+      <div class="recibido">Recibido</div>
+      <div class="_05">{{totalReceived}} €</div>
+
+      <!-- Raya -->
+      <div class="rectangle-109"></div>
+
+      <div class="total-a-pagar">Total a pagar</div>
+      <div class="_2226">{{totalLiquidation}} €</div>
+
+      <!-- Segunda Tabla -->
+      <div class="pagado-al-terapeuta">Pagado al terapeuta</div>
+
+      <!-- Raya -->
+      <div class="rectangle-110"></div>
+
+
+      <div class="efectivo">Efectivo</div>
+      <div class="_2222">222€</div>
+      <div class="_1002">100%</div>
+      <div class="_2224">222€</div>
+
+      <div class="bizum">Bizum</div>
+      <div class="_02">0€</div>
+      <div class="_1004">100%</div>
+      <div class="_04">0€</div>
+
+      <div class="tarjeta">Tarjeta</div>
+      <div class="_07">0€</div>
+      <div class="_502">50%</div>
+      <div class="_09">0€</div>
+
+      <div class="transferencia">Transferencia</div>
+      <div class="_011">0€</div>
+      <div class="_902">90%</div>
+      <div class="_013">0€</div>
+
+      <!-- Raya -->
+      <div class="rectangle-111"></div>
+
+      <div class="total-a-pagar2">Total a pagar</div>
+      <div class="_014">0€</div>
+
+      <div class="eliminar">Eliminar</div>
+      <img class="trash-03" src="trash-030.svg" />
+
+      <svg class="x-close-1" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+        (click)="detail('null')">
+        <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </div>
+
+  </div>
 </div>

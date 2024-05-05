@@ -21,17 +21,17 @@ import { NgxPaginationModule } from 'ngx-pagination';
     IonicModule,
     ReactiveFormsModule,
     ServicePageRoutingModule,
-    NgxPaginationModule
-  ],
-
-  declarations: [
-    ServicePage,
+    NgxPaginationModule,
     SearchPipe,
     TherapistPipe,
     ManagerPipe,
     DatePipe,
     HourDatePipe,
     PaymentMethodPipe
+  ],
+
+  declarations: [
+    ServicePage    
   ]
 })
 

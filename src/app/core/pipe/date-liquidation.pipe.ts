@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'dateLiquidation'
+  name: 'dateLiquidation',
+  standalone: true
 })
 
 export class DateLiquidationPipe implements PipeTransform {
@@ -13,9 +14,9 @@ export class DateLiquidationPipe implements PipeTransform {
 
     if (items) {
       if (paramFechaInicial === undefined && paramFechaFinal === undefined) return
-      if (paramFechaInicial === undefined) return items.filter((item, index) => item.desdeFechaLiquidado <= paramFechaFinal)
-      if (paramFechaFinal === undefined) return items.filter((item, index) => item.desdeFechaLiquidado === paramFechaInicial)
-      return items.filter((item, index) => item.desdeFechaLiquidado >= paramFechaInicial && item.desdeFechaLiquidado <= paramFechaFinal)
+      if (paramFechaInicial === undefined) return items.filter((item, index) => item.createdDate <= paramFechaFinal)
+      if (paramFechaFinal === undefined) return items.filter((item, index) => item.createdDate === paramFechaInicial)
+      return items.filter((item, index) => item.createdDate >= paramFechaInicial && item.createdDate <= paramFechaFinal)
     }
   }
 }
