@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 // Models
 import { LiquidationTherapist } from 'src/app/core/models/liquidationTherapist';
+import { ModelService } from 'src/app/core/models/service';
 
 // Services
 import { ServiceLiquidationTherapist } from 'src/app/core/services/liquidation/service-liquidation-therapist.service';
@@ -10,6 +12,7 @@ import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.servi
 import { ManagerService } from 'src/app/core/services/manager/manager.service';
 import { ServiceService } from 'src/app/core/services/service/service.service';
 import { TherapistService } from 'src/app/core/services/therapist/therapist.service';
+
 
 @Component({
   selector: 'app-therapist',
@@ -55,6 +58,8 @@ export class TherapistPage implements OnInit {
 
   // ------------------------------------------------------
   // Details
+  idDetail: number
+  idTherapist: string
   nameTherapist: string
   sinceDate: string
   sinceTime: string
@@ -120,6 +125,10 @@ export class TherapistPage implements OnInit {
     valueRegularizacion: 0
   }
 
+  modelServices: ModelService = {
+    idTerapeuta: ""
+  }
+
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
@@ -157,6 +166,14 @@ export class TherapistPage implements OnInit {
           this.liquidated = rp
         })
       }
+    })
+  }
+
+  async consultLiquidationTherapistByManager() {
+    this.serviceLiquidation.consultManager(this.liquidationTherapist.encargada).subscribe(async (rp) => {
+      this.liquidated = rp
+      this.liquidationTherapist.encargada = ""
+      this.liquidationTherapist.terapeuta = ""
     })
   }
 
@@ -352,7 +369,8 @@ export class TherapistPage implements OnInit {
         this.toDate = rp[0].hastaFechaLiquidado
         this.untilTime = rp[0].hastaHoraLiquidado
         this.payment = rp[0].formaPago
-
+        this.idDetail = rp[0].id
+        this.idTherapist = rp[0].idTerapeuta
         this.regularization = rp[0]['valueRegularizacion']
 
         if (rp[0]['valueRegularizacion'] > 999) {
@@ -1264,5 +1282,32 @@ export class TherapistPage implements OnInit {
 
   new() {
     this.router.navigate([`tabs/${this.id}/new-liquiationTherapist`])
+  }
+
+  delete() {
+    Swal.fire({
+      title: '¿Deseas eliminar el registro?',
+      text: "Una vez eliminados ya no se podrán recuperar",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Deseo eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.modelServices.idTerapeuta = ""
+        this.modelServices.liquidadoTerapeuta = false
+        this.services.updateTherapistSettlementTherapistIdByTherapistId(this.idTherapist, this.modelServices).subscribe(async (rp) => {
+          this.serviceLiquidation.deleteLiquidationTherapist(this.idDetail).subscribe(async (rp) => {
+            if (this.administratorRole == true) {
+              await this.getLiquidation()
+            }
+            else {
+              await this.consultLiquidationTherapistByManager()
+            }
+          })
+        })
+      }
+    })
   }
 }
