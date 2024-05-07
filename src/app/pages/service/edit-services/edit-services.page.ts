@@ -17,18 +17,23 @@ import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.servi
   templateUrl: './edit-services.page.html',
   styleUrls: ['./edit-services.page.scss'],
 })
+
 export class EditServicesPage implements OnInit {
+  hourStartTerapeuta = ''
+  horaEndTerapeuta = ''
+
+  fechaActual = ''
+  horaStarted = new Date().toTimeString().substring(0, 5)
+  fecha = ''
+  horaInicialServicio: string
 
   idUser: number
   id: number
   manager: any
   terapeuta: any
-  administratorRole: boolean = false
 
-  fechaActual = ''
-  fecha = ''
-  horaInicialServicio: string
-  horaStarted = new Date().toTimeString().substring(0, 5)
+  fechaLast = []
+  administratorRole: boolean = false
 
   restamosCobroEdit = 0
   sumatoriaCobrosEdit = 0
@@ -172,6 +177,363 @@ export class EditServicesPage implements OnInit {
     this.horaInicialServicio = this.horaStarted
     this.getTherapist()
     this.editForm()
+  }
+
+  showKeyBoard(text: string) {
+
+    document.getElementById('overview').style.height = '4065px'
+
+    if (text === 'date') {
+      document.getElementById('box-date').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-date').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'time') {
+      document.getElementById('box-time').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-time').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+    }
+
+    if (text === 'duration') {
+      document.getElementById('box-duration').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-duration').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('duration')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'treatment') {
+      document.getElementById('box-treatment').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-treatment').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('treatment')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'taxi') {
+      document.getElementById('box-taxi').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-taxi').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('taxi')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'tobacco') {
+      document.getElementById('box-tobacco').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-tobacco').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('tobacco')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'drinkHouse') {
+      document.getElementById('box-drinkHouse').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-drinkHouse').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('drinkHouse')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'tip') {
+      document.getElementById('box-tip').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-tip').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('tip')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'vitamins') {
+      document.getElementById('box-vitamins').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-vitamins').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('vitamins')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'others') {
+      document.getElementById('box-others').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-others').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('others')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'drinkTherapist') {
+      document.getElementById('box-drinkTherapist').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
+      document.getElementById('box-drinkTherapist').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
+
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('drinkTherapist')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'house1') {
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('house1')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1100,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'house2') {
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('house2')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1200,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'therapist') {
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('therapist')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1400,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'manager') {
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.getElementById('manager')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1600,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'notes') {
+      var screen = document.querySelector<HTMLElement>(".editar-servicio")
+      var element_to_show = document.querySelector<HTMLElement>(".rectangle-77")
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 335) {
+        document.getElementById('overview').style.height = '4165px'
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1800,
+          behavior: "smooth"
+        })
+      }
+    }
+  }
+
+  hideKeyBoard(text: string) {
+
+    if (text === 'date') {
+      document.getElementById('box-date').style.boxShadow = 'none'
+      document.getElementById('box-date').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'time') {
+      document.getElementById('box-time').style.boxShadow = 'none'
+      document.getElementById('box-time').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'duration') {
+      document.getElementById('box-duration').style.boxShadow = 'none'
+      document.getElementById('box-duration').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'treatment') {
+      document.getElementById('box-treatment').style.boxShadow = 'none'
+      document.getElementById('box-treatment').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'taxi') {
+      document.getElementById('box-taxi').style.boxShadow = 'none'
+      document.getElementById('box-taxi').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'tobacco') {
+      document.getElementById('box-tobacco').style.boxShadow = 'none'
+      document.getElementById('box-tobacco').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'drinkHouse') {
+      document.getElementById('box-drinkHouse').style.boxShadow = 'none'
+      document.getElementById('box-drinkHouse').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'tip') {
+      document.getElementById('box-tip').style.boxShadow = 'none'
+      document.getElementById('box-tip').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'vitamins') {
+      document.getElementById('box-vitamins').style.boxShadow = 'none'
+      document.getElementById('box-vitamins').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'others') {
+      document.getElementById('box-others').style.boxShadow = 'none'
+      document.getElementById('box-others').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'drinkTherapist') {
+      document.getElementById('box-drinkTherapist').style.boxShadow = 'none'
+      document.getElementById('box-drinkTherapist').style.borderColor = '#3c3c3c'
+    }
+
+    if (text === 'notes') {
+      document.getElementById('overview').style.height = '4065px'
+    }
   }
 
   getManager() {
@@ -505,6 +867,9 @@ export class EditServicesPage implements OnInit {
         this.fecha = datosServicio[0]['fecha']
         this.fechaActual = datosServicio[0]['fechaHoyInicio']
         this.SetTheValuesToEmpty()
+
+        this.hourStartTerapeuta = datosServicio[0]['horaStart']
+        this.horaEndTerapeuta = datosServicio[0]['horaEnd']
 
         // Fechas
         dia = this.editarService[0].fecha.substring(0, 2)

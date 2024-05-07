@@ -3,30 +3,39 @@
   box-sizing: border-box;
 }
 
+ion-col {
+  position: fixed;
+}
+
 ion-grid {
   background: var(--verde-claro, #e8f2ef);
   width: -webkit-fill-available;
   height: min-content;
   position: fixed;
-  left: 0px;
+  left: -5px;
   top: 0px;
 }
 
 .editar-servicio {
   background: #ffffff;
   height: 2456px;
+  width: 362px;
+  left: -5px;
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
+  // top: -24px;
+  top: -60px;
 }
 
 .rectangle-93 {
   background: var(--verde-claro, #e8f2ef);
   width: -webkit-fill-available;
-  height: 4015px;
+  // height: 4015px;
+  height: 4065px;
   position: absolute;
   left: 0px;
-  top: 160px;
+  top: 121px;
 }
 
 .rectangle-18 {
@@ -38,16 +47,17 @@ ion-grid {
   top: 0px;
 }
 
-.icon {
+._icon {
   width: 3.2%;
   height: 0.98%;
   position: absolute;
   right: 88.27%;
   left: 8.53%;
   bottom: 95.89%;
-  top: 3.14%;
+  top: 3.7%;
   transform: translate(-13px, -25px);
   overflow: visible;
+  z-index: 1;
 }
 
 .rectangle-30 {
@@ -138,10 +148,14 @@ ion-grid {
   color: white;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 150px;
-  left: 173px;
+  width: 160px;
+  left: 132px;
   top: 321px;
   --highlight-color-focused: var(--verde, #1fb996);
+}
+
+.sc-ion-input-md-h[name=cliente] ::ng-deep input {
+  caret-color: black;
 }
 
 .lugar-salida {
@@ -164,10 +178,14 @@ ion-grid {
   color: white;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 150px;
-  left: 173px;
+  width: 165px;
+  left: 126px;
   top: 378px;
   --highlight-color-focused: var(--verde, #1fb996);
+}
+
+.sc-ion-input-md-h[name=salida] ::ng-deep input {
+  caret-color: black;
 }
 
 .group-67 {
@@ -240,7 +258,12 @@ ion-grid {
   width: 150px;
   left: 126px;
   top: 562px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=date] ::ng-deep input {
+  caret-color: black;
 }
 
 .hora-de-inicio {
@@ -266,7 +289,12 @@ ion-grid {
   width: 150px;
   left: 180px;
   top: 619px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=time] ::ng-deep input {
+  caret-color: black;
 }
 
 .duraci-n-min {
@@ -289,10 +317,14 @@ ion-grid {
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 35px;
+  width: 110px;
   left: 191px;
   top: 678px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+}
+
+.sc-ion-input-md-h[name=duration] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-77 {
@@ -306,7 +338,9 @@ ion-grid {
   left: 16.27%;
   width: 66.93%;
   bottom: 7.57%;
-  top: 87.42%;
+  // bottom: 86.7%;
+  // top: 87.42%;
+  top: 86.7%;
   height: 5.01%;
 }
 
@@ -318,24 +352,29 @@ ion-grid {
   line-height: 125%;
   font-weight: 400;
   position: absolute;
-  // left: 70.96px;
-  // top: 2160px;
   width: 49.8px;
+  top: 8px;
+  left: 10px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
+}
+
+.rectangle-77 ::ng-deep .native-wrapper.sc-ion-textarea-md {
+  top: 15px;
+  height: 124px;
 }
 
 .cobros {
   color: var(--verde, #1fb996);
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
   position: absolute;
   left: 71px;
-  top: 1374px;
+  top: 1372px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -457,12 +496,12 @@ ion-grid {
   color: var(--verde, #1fb996);
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
   position: absolute;
   left: 73px;
-  top: 501px;
+  top: 499px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -483,6 +522,21 @@ ion-grid {
   justify-content: flex-start;
 }
 
+.ultimo-servicio {
+  color: var(--verde, #1fb996);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 14px;
+  line-height: 125%;
+  font-weight: 500;
+  position: absolute;
+  left: 180px;
+  top: 524px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
 .group-70 {
   position: absolute;
   inset: 0;
@@ -492,12 +546,12 @@ ion-grid {
   color: var(--verde, #1fb996);
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 125%;
   font-weight: 700;
   position: absolute;
   left: 71px;
-  top: 877px;
+  top: 875px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -542,7 +596,6 @@ ion-grid {
   border-radius: 15px;
   border-style: solid;
   border-color: #3c3c3c;
-  color: #3c3c3c;
   font-family: "Inter-Regular", sans-serif;
   font-size: 16px;
   border-width: 1px;
@@ -560,12 +613,17 @@ ion-grid {
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 43px;
+  width: 50px;
   right: 53.07%;
   left: 25.13%;
   bottom: 58.71%;
   top: 39.45%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=treatment] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-50 {
@@ -587,12 +645,17 @@ ion-grid {
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 43px;
+  width: 50px;
   right: 53.07%;
   left: 25.13%;
   bottom: 55.17%;
   top: 43%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=taxi] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-52 {
@@ -614,12 +677,17 @@ ion-grid {
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 43px;
+  width: 50px;
   right: 53.07%;
   left: 25.13%;
   bottom: 51.63%;
   top: 46.54%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=tobacco] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-54 {
@@ -641,12 +709,17 @@ ion-grid {
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 43px;
+  width: 50px;
   right: 53.07%;
   left: 25.13%;
   bottom: 48.09%;
   top: 50.08%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=drinkHouse] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-49 {
@@ -668,12 +741,17 @@ ion-grid {
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 45px;
+  width: 50px;
   right: 22.93%;
   left: 55.27%;
   bottom: 58.71%;
   top: 39.45%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=tip] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-51 {
@@ -695,12 +773,17 @@ ion-grid {
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 45px;
+  width: 50px;
   right: 22.93%;
   left: 55.27%;
   bottom: 55.17%;
   top: 43%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=vitamins] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-53 {
@@ -722,12 +805,17 @@ ion-grid {
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 45px;
+  width: 50px;
   right: 22.93%;
   left: 55.27%;
   bottom: 51.63%;
   top: 46.54%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=others] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-55 {
@@ -749,12 +837,17 @@ ion-grid {
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 45px;
+  width: 50px;
   right: 22.93%;
   left: 55.27%;
   bottom: 48.09%;
   top: 50.08%;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=drinkTherapist] ::ng-deep input {
+  caret-color: black;
 }
 
 .tratamiento {
@@ -780,7 +873,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 113px;
+  left: 109px;
   top: 1034px;
   display: flex;
   align-items: flex-end;
@@ -795,7 +888,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 101px;
+  left: 97px;
   top: 1121px;
   display: flex;
   align-items: flex-end;
@@ -840,7 +933,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 212px;
+  left: 204px;
   top: 946px;
   display: flex;
   align-items: flex-end;
@@ -855,7 +948,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 203px;
+  left: 196px;
   top: 1034px;
   display: flex;
   align-items: flex-end;
@@ -870,7 +963,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 221px;
+  left: 212px;
   top: 1121px;
   display: flex;
   align-items: flex-end;
@@ -945,7 +1038,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 275px;
+  left: 263px;
   top: 982px;
   display: flex;
   align-items: flex-end;
@@ -960,7 +1053,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 275px;
+  left: 263px;
   top: 1069px;
   display: flex;
   align-items: flex-end;
@@ -975,7 +1068,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 275px;
+  left: 263px;
   top: 1156px;
   display: flex;
   align-items: flex-end;
@@ -990,7 +1083,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 275px;
+  left: 263px;
   top: 1243px;
   display: flex;
   align-items: flex-end;
@@ -1038,20 +1131,23 @@ ion-grid {
   justify-content: flex-start;
 }
 
-.icon2 {
-  width: 3.54%;
-  height: 42.22%;
+ion-select::part(icon) {
+  color: transparent !important;
+  width: 157px;
+  right: 32px;
+}
+
+.icon {
+  height: auto;
   position: absolute;
   right: 5.12%;
   left: 91.34%;
+  width: 3.54%;
   bottom: 17.78%;
   top: 40%;
+  height: 42.22%;
   transform: translate(-20px, -1px);
   overflow: visible;
-}
-
-ion-select::part(icon) {
-  color: transparent !important;
 }
 
 .editar-servicio2 {
@@ -1069,21 +1165,6 @@ ion-select::part(icon) {
   justify-content: flex-start;
 }
 
-.lucia-25-02-24 {
-  color: var(--verde-oscuro, #0b9a7a);
-  text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 20px;
-  line-height: 100%;
-  font-weight: 700;
-  position: absolute;
-  left: 61px;
-  top: 121px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-}
-
 .rectangle-56 {
   background: var(--verde, #1fb996);
   border-radius: 51px;
@@ -1091,7 +1172,7 @@ ion-select::part(icon) {
   height: 32px;
   position: absolute;
   left: 230px;
-  top: 861px;
+  top: 860px;
 }
 
 .rectangle-58 {
@@ -1101,7 +1182,7 @@ ion-select::part(icon) {
   height: 32px;
   position: absolute;
   left: 230px;
-  top: 1358px;
+  top: 1357px;
 }
 
 .rectangle-94 {
@@ -1112,20 +1193,24 @@ ion-select::part(icon) {
   width: 83px;
   height: 32px;
   position: absolute;
-  left: 230px;
+  left: 130px;
   top: 1466px;
 }
-
 
 .sc-ion-input-md-h[name=house1] {
   border-style: none;
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 45px;
-  left: 239px;
+  width: 42px;
+  left: 140px;
   top: 1459px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=house1] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-95 {
@@ -1136,7 +1221,7 @@ ion-select::part(icon) {
   width: 83px;
   height: 32px;
   position: absolute;
-  left: 230px;
+  left: 130px;
   top: 1622px;
 }
 
@@ -1145,10 +1230,15 @@ ion-select::part(icon) {
   color: black;
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
-  width: 45px;
-  left: 239px;
+  width: 42px;
+  left: 140px;
   top: 1615px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=house2] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-97 {
@@ -1159,7 +1249,7 @@ ion-select::part(icon) {
   width: 83px;
   height: 32px;
   position: absolute;
-  left: 230px;
+  left: 166px;
   top: 1778px;
 }
 
@@ -1169,9 +1259,14 @@ ion-select::part(icon) {
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
   width: 45px;
-  left: 239px;
+  left: 176px;
   top: 1771px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
+}
+
+.sc-ion-input-md-h[name=therapist] ::ng-deep input {
+  caret-color: black;
 }
 
 .rectangle-96 {
@@ -1182,7 +1277,7 @@ ion-select::part(icon) {
   width: 83px;
   height: 32px;
   position: absolute;
-  left: 230px;
+  left: 173px;
   top: 1934px;
 }
 
@@ -1192,12 +1287,17 @@ ion-select::part(icon) {
   font-family: "Inter-Medium", sans-serif;
   font-size: 15px;
   width: 45px;
-  left: 239px;
+  left: 183px;
   top: 1927px;
-  --highlight-color-focused: var(--verde, #1fb996);
+  --highlight-color-focused: transparent;
+  --highlight-color-valid: transparent
 }
 
-._4-500 {
+.sc-ion-input-md-h[name=manager] ::ng-deep input {
+  caret-color: black;
+}
+
+._4500 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -1213,7 +1313,7 @@ ion-select::part(icon) {
   justify-content: flex-start;
 }
 
-._4-5002 {
+._45002 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -1237,7 +1337,7 @@ ion-select::part(icon) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 288px;
+  left: 188px;
   top: 1472px;
   width: 33px;
   display: flex;
@@ -1253,7 +1353,7 @@ ion-select::part(icon) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 288px;
+  left: 188px;
   top: 1628px;
   width: 33px;
   display: flex;
@@ -1269,7 +1369,7 @@ ion-select::part(icon) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 288px;
+  left: 224px;
   top: 1784px;
   width: 33px;
   display: flex;
@@ -1285,7 +1385,7 @@ ion-select::part(icon) {
   line-height: 125%;
   font-weight: 500;
   position: absolute;
-  left: 288px;
+  left: 231px;
   top: 1940px;
   width: 33px;
   display: flex;
@@ -1302,7 +1402,8 @@ ion-select::part(icon) {
   width: 80px;
   height: 45px;
   position: absolute;
-  left: 67px;
+  // left: 67px;
+  left: 157px;
   top: 1510px;
 }
 
@@ -1425,7 +1526,8 @@ ion-select::part(icon) {
   width: 85px;
   height: 45px;
   position: absolute;
-  left: 152px;
+  // left: 152px;
+  left: 67px;
   top: 1510px;
 }
 
@@ -1471,7 +1573,7 @@ ion-select::part(icon) {
   width: 80px;
   height: 45px;
   position: absolute;
-  left: 67px;
+  left: 157px;
   top: 1658px;
 }
 
@@ -1495,7 +1597,7 @@ ion-select::part(icon) {
   width: 85px;
   height: 45px;
   position: absolute;
-  left: 152px;
+  left: 67px;
   top: 1658px;
 }
 
@@ -1508,7 +1610,7 @@ ion-select::part(icon) {
   width: 80px;
   height: 45px;
   position: absolute;
-  left: 67px;
+  left: 157px;
   top: 1813px;
 }
 
@@ -1532,7 +1634,7 @@ ion-select::part(icon) {
   width: 85px;
   height: 45px;
   position: absolute;
-  left: 152px;
+  left: 67px;
   top: 1813px;
 }
 
@@ -1545,7 +1647,7 @@ ion-select::part(icon) {
   width: 80px;
   height: 45px;
   position: absolute;
-  left: 67px;
+  left: 157px;
   top: 1973px;
 }
 
@@ -1569,7 +1671,7 @@ ion-select::part(icon) {
   width: 85px;
   height: 45px;
   position: absolute;
-  left: 152px;
+  left: 67px;
   top: 1973px;
 }
 
@@ -1596,11 +1698,6 @@ ion-select::part(icon) {
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-}
-
-.group-98 {
-  // position: absolute;
-  // inset: 0;
 }
 
 .rectangle-772 {
@@ -1662,10 +1759,6 @@ ion-select::part(icon) {
   top: 206px;
 }
 
-ion-select::part(icon) {
-  color: white;
-}
-
 .terapeuta2 {
   color: #ffffff;
   text-align: left;
@@ -1685,14 +1778,15 @@ ion-select::part(icon) {
   justify-content: flex-start;
 }
 
-.icon3 {
-  width: 3.54%;
-  height: 42.22%;
+.icon2 {
+  height: auto;
   position: absolute;
   right: 5.12%;
   left: 91.34%;
+  width: 3.54%;
   bottom: 17.78%;
   top: 40%;
+  height: 42.22%;
   transform: translate(-20px, -1px);
   overflow: visible;
 }
@@ -1774,4 +1868,15 @@ ion-select::part(icon) {
 
 .selectOption {
   background: var(--verde, #1fb996);
+}
+
+.keyboard {
+  display: none;
+  background-color: black;
+  width: 100%;
+  width: 300px;
+  height: 260px;
+  position: fixed;
+  bottom: 0;
+  top: 250px;
 }
