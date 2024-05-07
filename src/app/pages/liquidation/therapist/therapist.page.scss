@@ -526,7 +526,7 @@ ion-grid {
 .containerDetail {
     position: relative;
     top: -14px;
-    height: 746px;
+    height: 1032px;
 }
 
 .rectangle-30 {
@@ -962,7 +962,7 @@ ion-grid {
     height: 43px;
     position: absolute;
     left: 152px;
-    top: 689px;
+    top: 977px;
 }
 
 .liquidaci-n-1 {
@@ -1588,6 +1588,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 700;
     position: absolute;
+    width: 150px;
     left: 42px;
     top: 546px;
     display: flex;
@@ -1663,6 +1664,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
+    width: 96px;
     left: 39px;
     top: 330px;
     display: flex;
@@ -1693,6 +1695,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
+    width: 96px;
     left: 39px;
     top: 352px;
     display: flex;
@@ -1798,6 +1801,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 700;
     position: absolute;
+    width: 100px;
     left: 141px;
     top: 502px;
     display: flex;
@@ -1813,6 +1817,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 700;
     position: absolute;
+    width: 100px;
     left: 42px;
     top: 672px;
     display: flex;
@@ -1870,7 +1875,7 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     left: 215px;
-    top: 702px;
+    top: 990px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -1881,7 +1886,7 @@ ion-grid {
     height: 24px;
     position: absolute;
     left: 185px;
-    top: 698px;
+    top: 986px;
     overflow: visible;
 }
 
@@ -1893,6 +1898,457 @@ ion-grid {
     top: 60px;
     overflow: visible;
 }
+
+// Table
+
+.frame-79 {
+    width: -webkit-fill-available;
+    height: 260px;
+    position: absolute;
+    left: 0px;
+    top: 258px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: var(--verde-claro, #e8f2ef);
+}
+
+.rectangle-1005 {
+    background: var(--verde-oscuro, #0b9a7a);
+    border-radius: 10px;
+    width: 2318px;
+    height: 34px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.rectangle-1004 {
+    background: #ffffff;
+    border-radius: 15px;
+    width: 1630px;
+    height: 40px;
+    position: relative;
+    display: inline-grid;
+    left: 0px;
+    top: 41px;
+}
+
+.fecha {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 33px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.tiempo {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 130px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.minutos {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 271px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.tratamiento3 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 385px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.salida1 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 507px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._propina {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 663px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._pago {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 784px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.a-terapeuta10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    width: 100px;
+    left: 934px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.bebida-casa10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    width: 100px;
+    left: 1048px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.bebida-terap10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    width: 100px;
+    left: 1164px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.tabaco10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 1305px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.vitamina10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 1418px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.otros10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 1552px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+// Column
+
+.tiempo2 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    width: 110px;
+    position: absolute;
+    left: 130px;
+    top: 9px;
+    display: flex;
+    justify-content: start;
+    justify-items: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.min {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    width: 80px;
+    position: absolute;
+    left: 253px;
+    top: 9px;
+    display: flex;
+    justify-content: end;
+    justify-items: end;
+}
+
+._1000 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 386px;
+    top: 9px;
+    width: 90px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.salida {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 508px;
+    top: 9px;
+    width: 133px;
+    justify-content: start;
+    justify-items: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+._10001 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 657px;
+    top: 9px;
+    width: 65px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+._bizum {
+    color: #3c3c3c;
+    text-align: left;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    width: 116px;
+    position: absolute;
+    left: 778px;
+    top: 9px;
+    align-items: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.a-terapeuta9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 935px;
+    top: 9px;
+    width: 86px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.bebida-casa9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 1055px;
+    top: 9px;
+    width: 86px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.bebida-terap9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 1175px;
+    top: 9px;
+    width: 86px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.tabaco9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 1285px;
+    top: 9px;
+    width: 75px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.vitamina9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 1398px;
+    top: 9px;
+    width: 75px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.otros9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 1509px;
+    top: 9px;
+    width: 75px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.rectangle-500 {
+    position: absolute;
+    top: 300px;
+}
+
+.paginatorDetail {
+    position: absolute;
+    display: grid;
+    align-items: revert;
+    top: 511px;
+    left: -4px;
+}
+
+.paginatorDetail ::ng-deep .ngx-pagination .current {
+    // background: var(--verde-oscuro, #0b9a7a); */
+    background: transparent;
+    color: black;
+}
+
 
 ion-select::part(icon) {
     color: transparent !important;
@@ -2039,6 +2495,13 @@ ion-select::part(placeholder) {
         left: 50.68%;
         bottom: 6.73%;
         top: 514px;
+    }
+
+    // Detail
+
+    .rectangle-1005 {
+        width: 1630px;
+        left: 0px;
     }
 }
 

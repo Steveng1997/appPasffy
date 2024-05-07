@@ -1280,6 +1280,10 @@ export class TherapistPage implements OnInit {
     }
   }
 
+  notes() {
+    
+  }
+
   new() {
     this.router.navigate([`tabs/${this.id}/new-liquiationTherapist`])
   }
