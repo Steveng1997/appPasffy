@@ -2392,19 +2392,26 @@ ion-select::part(placeholder) {
     }
 
     .icon3 {
+        width: 3.2%;
         height: 2.16%;
+        position: absolute;
         right: 88.27%;
         left: 22.53%;
         bottom: 85.18%;
         top: 224px;
+        transform: translate(-13px, -25px);
+        overflow: visible;
     }
 
     .icon2 {
+        width: 3.2%;
         height: 2.16%;
+        position: absolute;
         right: 5.33%;
-        left: 78%;
+        left: 302px;
         bottom: 87.33%;
         top: 199px;
+        overflow: visible;
     }
 
     .x-circle {
