@@ -9,7 +9,7 @@ import { LiquidationTherapist } from '../../models/liquidationTherapist';
   providedIn: 'root'
 })
 export class ServiceLiquidationTherapist {
-  
+
   API_URL = 'https://brave-marvelous-marquis.glitch.me/api/liqTerapeuta'
 
   constructor(
@@ -70,6 +70,19 @@ export class ServiceLiquidationTherapist {
         hastaHoraLiquidado1,
         hastaFechaLiquidado2,
         hastaHoraLiquidado2,
+      }
+    });
+  }
+
+  getDateCurrentDay(fechaHoy: string) {
+    return this.http.get(`${this.API_URL}/getDateCurrent/${fechaHoy}`);
+  }
+
+  getEncargadaAndDate(createdDate: string, encargada: string) {
+    return this.http.get(`${this.API_URL}/getFechaHoyByManager`, {
+      params: {
+        createdDate,
+        encargada
       }
     });
   }

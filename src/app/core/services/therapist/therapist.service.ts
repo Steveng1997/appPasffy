@@ -10,7 +10,7 @@ import { ModelTherapist } from '../../models/therapist';
 })
 
 export class TherapistService {
-  
+
   API_Terapeuta = 'https://brave-marvelous-marquis.glitch.me/api/terapeuta'
 
   constructor(

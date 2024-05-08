@@ -229,63 +229,7 @@ export class TherapistPage implements OnInit {
   filters = async () => {
     this.serviceLiquidation.consultTherapistSettlements().subscribe(async (rp: any) => {
       this.liquidated = rp
-      await this.calculateSumOfServices()
     })
-  }
-
-  calculateSumOfServices = async () => {
-
-    const therapistCondition = serv => {
-      return (this.selectedTerapeuta) ? serv.terapeuta === this.selectedTerapeuta : true
-    }
-
-    const managerCondition = serv => {
-      return (this.selectedEncargada) ? serv.encargada === this.selectedEncargada : true
-    }
-
-    const conditionBetweenDates = serv => {
-      if (this.dateStart === undefined && this.dateEnd === undefined) return true
-      if (this.dateStart === undefined && serv.fechaHoyInicio <= this.dateEnd) return true
-      if (this.dateEnd === undefined && serv.fechaHoyInicio === this.dateStart) return true
-      if (serv.fechaHoyInicio >= this.dateStart && serv.fechaHoyInicio <= this.dateEnd) return true
-
-      return false
-    }
-
-    this.parmHourStart = `${this.dateStart} ${this.horaInicio}`
-    this.parmHourEnd = `${this.dateEnd} ${this.horaFinal}`
-
-    const conditionBetweenHours = serv => {
-      if (this.horaInicio === undefined && this.hourStart === undefined) return true
-      if (this.horaInicio === undefined && serv.horaFinal <= this.horaFinal) return true
-      if (this.horaFinal === undefined && serv.horaInicio === this.horaInicio) return true
-      if (`${serv.fechaHoyInicio} ${serv.hourStart}` >= this.parmHourStart && `${serv.fechaHoyInicio} ${serv.hourEnd}` <= this.parmHourEnd) return true
-
-      return false
-    }
-
-    // Filter by Servicio
-    // if (Array.isArray(this.liquidated)) {
-
-    //   const servicios = this.liquidated.filter(serv => therapistCondition(serv)
-    //     && managerCondition(serv) && conditionBetweenDates(serv)
-    //     && conditionBetweenHours(serv))
-    //   this.totalServicio = servicios.reduce((accumulator, serv) => {
-    //     return accumulator + serv.servicio
-    //   }, 0)
-
-    //   // Filter by Valor Total
-    //   const valorTotal = this.servicio.filter(serv => therapistCondition(serv)
-    //     && managerCondition(serv) && conditionBetweenDates(serv)
-    //     && conditionBetweenHours(serv))
-    //   this.totalValor = valorTotal.reduce((accumulator, serv) => {
-    //     this.idService = valorTotal
-    //     this.liquidated = valorTotal
-    //     return accumulator + serv.totalServicio
-    //   }, 0)
-    // }
-
-    // this.thousandPoint()
   }
 
   emptyFilter() {
@@ -486,14 +430,12 @@ export class TherapistPage implements OnInit {
 
         this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
-
-            this.services.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
-              this.services = rp
+            this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
+              this.liquidated = rp
             })
           } else {
-
-            this.services.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
-              this.services = rp
+            this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+              this.liquidated = rp
             })
           }
         })
@@ -599,13 +541,12 @@ export class TherapistPage implements OnInit {
         this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
-            this.services.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
-              this.services = rp
+            this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
+              this.liquidated = rp
             })
           } else {
-
-            this.services.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
-              this.services = rp
+            this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+              this.liquidated = rp
             })
           }
         })
@@ -755,17 +696,13 @@ export class TherapistPage implements OnInit {
 
         this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
-            this.services.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
-              this.services = rp
+            this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
+              this.liquidated = rp
             })
           } else {
 
-            this.services.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
-              if (rp.length > 0) {
-                this.services = rp
-              } else {
-                this.services = rp
-              }
+            this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+              this.liquidated = rp
             })
           }
         })
@@ -874,13 +811,13 @@ export class TherapistPage implements OnInit {
         this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
-            this.services.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
-              this.services = rp
+            this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
+              this.liquidated = rp
             })
           } else {
 
-            this.services.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
-              this.services = rp
+            this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+              this.liquidated = rp
             })
           }
         })
