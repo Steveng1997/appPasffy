@@ -3,6 +3,10 @@
     box-sizing: border-box;
 }
 
+ion-col {
+    position: fixed;
+}
+
 ion-grid {
     background: var(--verde-claro, #e8f2ef);
     width: -webkit-fill-available;
@@ -13,35 +17,33 @@ ion-grid {
 }
 
 .nueva-liquidaci-n {
-    // background: #ffffff;
-    // height: 1681px;
-    // position: relative;
-    // overflow: hidden;
-
     background: #ffffff;
-    height: 1681px;
+    height: 2456px;
     width: 362px;
     left: -5px;
-    position: fixed;
+    position: relative;
     overflow-y: auto;
     overflow-x: hidden;
     top: -60px;
 }
 
 .rectangle-93 {
-    // background: var(--verde-claro, #e8f2ef);
-    // width: 375px;
-    // height: 1815px;
-    // position: absolute;
-    // left: 0px;
-    // top: 0px;
-
     background: var(--verde-claro, #e8f2ef);
     width: -webkit-fill-available;
-    height: 2462px;
+    height: 516px;
     position: absolute;
     left: 0px;
     top: 121px;
+}
+
+.rectangle-30 {
+    background: var(--verde-oscuro, #0b9a7a);
+    border-radius: 49px;
+    width: 335px;
+    height: 279px;
+    position: absolute;
+    left: calc(50% - 167.5px);
+    top: 174px;
 }
 
 .icon {
@@ -59,9 +61,9 @@ ion-grid {
 .rectangle-92 {
     background: var(--verde, #1fb996);
     width: 375px;
-    height: 190px;
+    height: 261px;
     position: absolute;
-    left: 0px;
+    left: calc(50% - 187.5px);
     top: 0px;
 }
 
@@ -70,11 +72,11 @@ ion-grid {
     text-align: left;
     font-family: "Inter-Bold", sans-serif;
     font-size: 30px;
-    line-height: 115%;
+    line-height: 100%;
     font-weight: 700;
     position: absolute;
-    left: 18px;
-    top: 77px;
+    left: 61px;
+    top: 92px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -424,15 +426,15 @@ ion-grid {
 .rectangle-34 {
     border-radius: 15px;
     border-style: solid;
-    border-color: #3c3c3c;
+    border-color: #ffffff;
     border-width: 1px;
-    width: 100%;
-    height: 100%;
     position: absolute;
     right: 0%;
     left: 0%;
+    width: 100%;
     bottom: 0%;
     top: 0%;
+    height: 100%;
 }
 
 .seleccionar {
@@ -472,36 +474,41 @@ ion-grid {
 }
 
 .terapeuta {
-    color: var(--negro, #3c3c3c);
+    color: #ffffff;
     text-align: left;
-    font-family: "Inter-Bold", sans-serif;
+    font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 125%;
-    font-weight: 700;
+    font-weight: 400;
     position: absolute;
-    left: 19px;
-    top: 224px;
+    right: 65.75%;
+    left: 3.94%;
+    width: 30.31%;
+    bottom: 26.67%;
+    top: 28.89%;
+    height: 44.44%;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
 }
 
 .component-7 {
-    width: 335px;
-    height: 44.83px;
+    width: 67.2%;
+    height: 1.83%;
     position: absolute;
-    left: calc(50% - 167.5px);
-    top: 253px;
+    left: 16.27%;
+    top: 206px;
 }
 
 .icon3 {
-    width: 2.69%;
-    height: 42.38%;
+    height: auto;
     position: absolute;
-    right: 2.69%;
-    left: 94.63%;
-    bottom: 15.24%;
-    top: 42.38%;
+    right: 5.12%;
+    left: 91.34%;
+    width: 3.54%;
+    bottom: 17.78%;
+    top: 40%;
+    height: 42.22%;
     transform: translate(-20px, -1px);
     overflow: visible;
 }
@@ -1543,6 +1550,23 @@ ion-grid {
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
+}
+
+.keyboard {
+    display: none;
+    background-color: black;
+    width: 100%;
+    width: 300px;
+    height: 260px;
+    position: fixed;
+    bottom: 0;
+    top: 250px;
+}
+
+ion-select::part(icon) {
+    color: transparent !important;
+    width: 157px;
+    right: 32px;
 }
 
 @media only screen and (min-device-width: 259px) and (max-device-width: 370px) {}

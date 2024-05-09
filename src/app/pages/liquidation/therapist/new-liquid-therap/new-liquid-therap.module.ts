@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NewLiquidTherapPageRoutingModule } from './new-liquid-therap-routing.module';
 import { NewLiquidTherapPage } from './new-liquid-therap.page';
@@ -9,6 +9,7 @@ import { NewLiquidTherapPage } from './new-liquid-therap.page';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     NewLiquidTherapPageRoutingModule
   ],
