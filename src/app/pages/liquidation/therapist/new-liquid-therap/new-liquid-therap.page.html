@@ -24,45 +24,64 @@
               stroke-linejoin="round" />
           </svg>
 
-          <ion-select class="terapeuta" style="display: grid; min-height: -webkit-fill-available" label="Terapeuta">
+          <ion-select [(ngModel)]="modelLiquidation.terapeuta" class="terapeuta"
+            style="display: grid; min-height: -webkit-fill-available" label="Terapeuta"
+            (ngModelChange)="calculateServices()">
             <ion-select-option *ngFor="let therapist of terapeuta"
               [value]="therapist.name">{{therapist.nombre}}</ion-select-option>
           </ion-select>
         </div>
 
-        <div class="encargada">Encargada</div>
-
-        <div class="component-82">
+        <div class="component-82" *ngIf="administratorRole">
           <div class="rectangle-34"></div>
-          <div class="seleccionar">Seleccionar</div>
 
           <svg class="icon2" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
+            <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="white" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
+
+          <ion-select [(ngModel)]="modelLiquidation.encargada" class="encargada"
+            style="display: grid; min-height: -webkit-fill-available" label="Encargada"
+            (ngModelChange)="calculateServices()">
+            <ion-select-option *ngFor="let managers of manager"
+              [value]="managers.nombre">{{managers.nombre}}</ion-select-option>
+          </ion-select>
         </div>
 
-        <div class="inicial">Inicial</div>
+        <div class="component-82" *ngIf="!administratorRole">
+          <div class="rectangle-34"></div>
+
+          <svg class="icon2" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="white" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+
+          <ion-select [(ngModel)]="modelLiquidation.encargada" class="encargada"
+            style="display: grid; min-height: -webkit-fill-available" label="Encargada">
+            <ion-select-option *ngFor="let managers of manager"
+              [value]="managers.nombre">{{managers.nombre}}</ion-select-option>
+          </ion-select>
+        </div>
 
         <div class="component-3">
-          <div class="rectangle-4"></div>
-          <div class="selecciona">5 feb. 2024</div>
+          <ion-input type="date" class="inicial" id="sinceDate" name="sinceDate" label="Inicial"
+            [(ngModel)]="modelLiquidation.desdeFechaLiquidado"></ion-input>
         </div>
 
         <div class="component-9">
-          <div class="rectangle-4"></div>
+          <div class="rectangle-5"></div>
           <div class="_5-34-p-m">5:34 p.m.</div>
         </div>
 
         <div class="final">Final</div>
 
         <div class="component-8">
-          <div class="rectangle-4"></div>
+          <div class="rectangle-6"></div>
           <div class="_6-feb-2024">6 feb. 2024</div>
         </div>
 
         <div class="component-10">
-          <div class="rectangle-4"></div>
+          <div class="rectangle-7"></div>
           <div class="_7-12-p-m">7:12 p.m.</div>
         </div>
 

@@ -171,25 +171,39 @@ ion-grid {
 }
 
 .component-3 {
-    width: 165px;
-    height: 51px;
+    width: 67.2%;
+    height: 1.83%;
     position: absolute;
-    left: 19px;
-    top: 429px;
+    left: 16.27%;
+    top: 320px;
 }
 
-.rectangle-4 {
+// .rectangle-4 {
+//     border-radius: 15px;
+//     border-style: solid;
+//     border-color: #ffffff;
+//     border-width: 1px;
+//     position: absolute;
+//     right: 16.53%;
+//     left: 16.27%;
+//     width: 67.2%;
+//     bottom: 85.14%;
+//     top: 13.03%;
+//     height: 1.83%;
+// }
+
+.rectangle-5 {
     border-radius: 15px;
     border-style: solid;
-    border-color: var(--negro, #3c3c3c);
+    border-color: #ffffff;
     border-width: 1px;
-    width: 100%;
-    height: 87.91%;
     position: absolute;
-    right: 0%;
-    left: 0%;
-    bottom: 12.09%;
-    top: 0%;
+    right: 16.53%;
+    left: 16.27%;
+    width: 67.2%;
+    bottom: 82.82%;
+    top: 15.35%;
+    height: 1.83%;
 }
 
 .selecciona {
@@ -357,18 +371,17 @@ ion-grid {
 }
 
 .inicial {
-    color: var(--negro, #3c3c3c);
-    text-align: left;
-    font-family: "Inter-Bold", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 700;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px;
     position: absolute;
-    left: 21px;
-    top: 405px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    right: 0%;
+    left: 0%;
+    width: 100%;
+    bottom: 0%;
+    top: 0%;
+    height: 100%;
 }
 
 .final {
@@ -401,26 +414,30 @@ ion-grid {
 }
 
 .encargada {
-    color: var(--negro, #3c3c3c);
+    color: #ffffff;
     text-align: left;
-    font-family: "Inter-Bold", sans-serif;
+    font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 125%;
-    font-weight: 700;
+    font-weight: 400;
     position: absolute;
-    left: 20px;
-    top: 314px;
+    right: 64.17%;
+    left: 3.94%;
+    width: 31.89%;
+    bottom: 26.67%;
+    top: 28.89%;
+    height: 44.44%;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
 }
 
 .component-82 {
-    width: 335px;
-    height: 44.83px;
+    width: 67.2%;
+    height: 1.83%;
     position: absolute;
-    left: calc(50% - 168.5px);
-    top: 344px;
+    left: 16.27%;
+    top: 263px;
 }
 
 .rectangle-34 {
@@ -457,13 +474,14 @@ ion-grid {
 }
 
 .icon2 {
-    width: 2.69%;
-    height: 42.38%;
+    height: auto;
     position: absolute;
-    right: 2.69%;
-    left: 94.63%;
-    bottom: 15.24%;
-    top: 42.38%;
+    right: 5.12%;
+    left: 91.34%;
+    width: 3.54%;
+    bottom: 17.78%;
+    top: 40%;
+    height: 42.22%;
     transform: translate(-20px, -1px);
     overflow: visible;
 }
@@ -1567,6 +1585,32 @@ ion-select::part(icon) {
     color: transparent !important;
     width: 157px;
     right: 32px;
+}
+
+.sc-ion-input-md-h[name=sinceDate] {
+    /* border-style: none; */
+    color: white;
+    /* font-family: "Inter-Medium", sans-serif; */
+    /* font-size: 15px; */
+    /* width: 160px; */
+    /* left: 11px; */
+    /* top: 2px; */
+    --highlight-color-focused: transparent;
+    --border-color: transparent;
+    --highlight-color: transparent;
+}
+
+.sc-ion-input-md-h[name=sinceDate] ::ng-deep label{
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    position: absolute;
+    left: 3.5%;
+}
+
+.sc-ion-input-md-h[name=sinceDate] ::ng-deep input {
+    caret-color: black;
 }
 
 @media only screen and (min-device-width: 259px) and (max-device-width: 370px) {}
