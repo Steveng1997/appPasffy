@@ -21,6 +21,10 @@ export class ManagerPage {
     this.id = params['id']
   }
 
+  new() {
+    this.router.navigate([`tabs/${this.id}/new-liquiationManager`])
+  }
+
   therapist() {
     this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
   }

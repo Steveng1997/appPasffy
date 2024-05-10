@@ -6,11 +6,11 @@
         <div class="rectangle-93" id="overview"></div>
         <!-- <img class="icon" src="icon0.svg" /> -->
         <div class="rectangle-92"></div>
-        <div class="rectangle-30"></div>
+        <div class="rectangle-30" id="overviewDates"></div>
 
         <div class="nueva-liquidaci-n2"> Nueva Liquidación </div>
 
-        <svg class="x-close" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+        <svg class="x-close" width="12" height="24" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
           (click)="back()">
           <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round" />
@@ -63,41 +63,40 @@
           </ion-select>
         </div>
 
-        <div class="component-3">
+        <div class="component-3" *ngIf="selected">
           <ion-input type="date" class="inicial" id="sinceDate" name="sinceDate" label="Inicial"
-            [(ngModel)]="modelLiquidation.desdeFechaLiquidado"></ion-input>
+            [(ngModel)]="modelLiquidation.desdeFechaLiquidado"
+            [value]="modelLiquidation.desdeFechaLiquidado"></ion-input>
         </div>
 
-        <div class="component-9">
-          <div class="rectangle-5"></div>
-          <div class="_5-34-p-m">5:34 p.m.</div>
+        <div class="component-9" *ngIf="selected">
+          <ion-input type="time" min="18:00" max="21:00" step="3600" class="_5-34-p-m" id="sinceTime" name="sinceTime"
+            label="Inicial" [(ngModel)]="modelLiquidation.desdeHoraLiquidado"
+            [value]="modelLiquidation.desdeHoraLiquidado"></ion-input>
         </div>
 
-        <div class="final">Final</div>
-
-        <div class="component-8">
-          <div class="rectangle-6"></div>
-          <div class="_6-feb-2024">6 feb. 2024</div>
+        <div class="component-8" *ngIf="selected">
+          <ion-input type="date" class="final" id="toDate" name="toDate" label="Final"
+            [(ngModel)]="modelLiquidation.hastaFechaLiquidado"
+            [value]="modelLiquidation.hastaFechaLiquidado"></ion-input>
         </div>
 
-        <div class="component-10">
-          <div class="rectangle-7"></div>
-          <div class="_7-12-p-m">7:12 p.m.</div>
+        <div class="component-10" *ngIf="selected">
+          <ion-input type="time" min="18:00" max="21:00" step="3600" class="_7-12-p-m" id="untilTime" name="untilTime"
+            label="Final" [(ngModel)]="modelLiquidation.hastaHoraLiquidado"
+            [value]="modelLiquidation.hastaHoraLiquidado"></ion-input>
         </div>
 
         <div *ngIf="dates">
-          <div class="total-liquidaci-n">
-            TOTAL
-            <br />
-            LIQUIDACIÓN
-          </div>
-
-          <div class="_0">0€</div>
+          <div class="total-liquidaci-n"> TOTAL LIQUIDACIÓN </div>
+          <div class="_0">{{totalCommission}} €</div>
 
           <div class="rectangle-42"></div>
-          <div class="rectangle-94"></div>
           <div class="concepto-a-regularizar">Concepto a regularizar</div>
+          <div class="rectangle-94"></div>
           <div class="div">€</div>
+          <ion-input type="number" class="rectangle-94" id="numberRegularization" name="numberRegularization"
+            (change)="regularization($event)"></ion-input>
 
           <div class="tratamiento">Tratamiento</div>
           <div class="efectivo">Efectivo</div>

@@ -3,47 +3,20 @@
     box-sizing: border-box;
 }
 
-ion-col {
-    position: fixed;
-}
-
-ion-grid {
-    background: var(--verde-claro, #e8f2ef);
-    width: -webkit-fill-available;
-    height: min-content;
-    position: fixed;
-    left: -5px;
-    top: 0px;
-}
-
 .nueva-liquidaci-n {
     background: #ffffff;
-    height: 2456px;
-    width: 362px;
-    left: -5px;
+    height: 1681px;
     position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
-    top: -60px;
+    overflow: hidden;
 }
 
 .rectangle-93 {
     background: var(--verde-claro, #e8f2ef);
-    width: -webkit-fill-available;
-    height: 646px;
+    width: 375px;
+    height: 1815px;
     position: absolute;
     left: 0px;
-    top: 121px;
-}
-
-.rectangle-30 {
-    background: var(--verde-oscuro, #0b9a7a);
-    border-radius: 49px;
-    width: 335px;
-    height: 165px;
-    position: absolute;
-    left: calc(50% - 167.5px);
-    top: 174px;
+    top: 0px;
 }
 
 .icon {
@@ -61,9 +34,9 @@ ion-grid {
 .rectangle-92 {
     background: var(--verde, #1fb996);
     width: 375px;
-    height: 261px;
+    height: 190px;
     position: absolute;
-    left: calc(50% - 187.5px);
+    left: 0px;
     top: 0px;
 }
 
@@ -72,11 +45,11 @@ ion-grid {
     text-align: left;
     font-family: "Inter-Bold", sans-serif;
     font-size: 30px;
-    line-height: 100%;
+    line-height: 115%;
     font-weight: 700;
     position: absolute;
-    left: 61px;
-    top: 92px;
+    left: 18px;
+    top: 77px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -145,8 +118,8 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     left: 21px;
-    top: 577px;
-    width: 203px;
+    top: 597px;
+    width: 132px;
     height: 36px;
     display: flex;
     align-items: flex-end;
@@ -161,73 +134,116 @@ ion-grid {
     line-height: 125%;
     font-weight: 700;
     position: absolute;
-    left: 246px;
-    width: 97px;
-    top: 588px;
+    left: 327px;
+    top: 615px;
+    width: 28px;
     height: 18px;
     display: flex;
-    justify-content: end;
-    justify-items: end;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 .component-3 {
-    width: 67.2%;
-    height: 1.83%;
+    width: 165px;
+    height: 51px;
     position: absolute;
-    left: 16.27%;
-    top: 320px;
+    left: 19px;
+    top: 429px;
+}
+
+.rectangle-4 {
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--negro, #3c3c3c);
+    border-width: 1px;
+    width: 100%;
+    height: 87.91%;
+    position: absolute;
+    right: 0%;
+    left: 0%;
+    bottom: 12.09%;
+    top: 0%;
+}
+
+.selecciona {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    right: 35.84%;
+    left: 10.83%;
+    width: 53.33%;
+    bottom: 37.25%;
+    top: 23.53%;
+    height: 39.22%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 .component-9 {
-    width: 67.2%;
-    height: 1.83%;
+    width: 165px;
+    height: 51px;
     position: absolute;
-    left: 16.27%;
-    top: 377px;
+    left: 190px;
+    top: 429px;
 }
 
 ._5-34-p-m {
-    border-radius: 15px;
-    border-style: solid;
-    border-color: #ffffff;
-    border-width: 1px;
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
     position: absolute;
-    right: 0%;
-    left: 0%;
-    width: 100%;
-    bottom: 0%;
-    top: 0%;
-    height: 100%;
+    right: 45.54%;
+    left: 10.83%;
+    width: 43.64%;
+    bottom: 37.25%;
+    top: 23.53%;
+    height: 39.22%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 .component-10 {
-    width: 67.2%;
-    height: 1.83%;
+    width: 165px;
+    height: 51px;
     position: absolute;
-    left: 16.27%;
-    top: 491px;
+    left: 190px;
+    top: 518px;
 }
 
 ._7-12-p-m {
-    border-radius: 15px;
-    border-style: solid;
-    border-color: #ffffff;
-    border-width: 1px;
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
     position: absolute;
-    right: 0%;
-    left: 0%;
-    width: 100%;
-    bottom: 0%;
-    top: 0%;
-    height: 100%;
+    right: 47.96%;
+    left: 10.83%;
+    width: 41.21%;
+    bottom: 37.25%;
+    top: 23.53%;
+    height: 39.22%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 .component-8 {
-    width: 67.2%;
-    height: 1.83%;
+    width: 165px;
+    height: 51px;
     position: absolute;
-    left: 16.27%;
-    top: 434px;
+    left: 19px;
+    top: 516px;
 }
 
 ._6-feb-2024 {
@@ -255,24 +271,24 @@ ion-grid {
     border-color: var(--negro, #3c3c3c);
     border-width: 1px;
     width: 57.33%;
-    height: 44px;
+    height: 2.68%;
     position: absolute;
     right: 37.6%;
     left: 5.07%;
     bottom: 57.88%;
-    top: 643px;
+    top: 39.44%;
 }
 
 .rectangle-94 {
     background: var(--verde, #1fb996);
     border-radius: 15px;
     width: 28.53%;
-    height: 44px;
+    height: 2.68%;
     position: absolute;
     right: 5.33%;
     left: 66.13%;
     bottom: 57.88%;
-    top: 643px;
+    top: 39.44%;
 }
 
 .concepto-a-regularizar {
@@ -287,7 +303,7 @@ ion-grid {
     left: 9.83%;
     width: 46.13%;
     bottom: 58.66%;
-    top: 647px;
+    top: 40.15%;
     height: 1.19%;
     display: flex;
     align-items: flex-end;
@@ -295,7 +311,7 @@ ion-grid {
 }
 
 .div {
-    color: #ffffff;
+    color: var(--verde-oscuro, #0b9a7a);
     text-align: left;
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
@@ -306,53 +322,50 @@ ion-grid {
     left: 87.2%;
     width: 2.93%;
     bottom: 58.66%;
-    top: 646px;
+    top: 40.15%;
     height: 1.19%;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
-    z-index: 4;
 }
 
 .inicial {
-    border-radius: 15px;
-    border-style: solid;
-    border-color: #ffffff;
-    border-width: 1px;
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
     position: absolute;
-    right: 0%;
-    left: 0%;
-    width: 100%;
-    bottom: 0%;
-    top: 0%;
-    height: 100%;
+    left: 21px;
+    top: 405px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 .final {
-    border-radius: 15px;
-    border-style: solid;
-    border-color: #ffffff;
-    border-width: 1px;
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
     position: absolute;
-    right: 0%;
-    left: 0%;
-    width: 100%;
-    bottom: 0%;
-    top: 0%;
-    height: 100%;
+    left: 20px;
+    top: 488px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 .x-close {
-    width: 12.2%;
-    height: 3.98%;
+    width: 27px;
+    height: 27px;
     position: absolute;
-    right: 88.27%;
-    left: 21px;
-    bottom: 95.89%;
-    top: 54px;
-    transform: translate(-13px, -25px);
+    left: 333px;
+    top: 80px;
     overflow: visible;
-    z-index: 1;
 }
 
 .group-95 {
@@ -361,44 +374,40 @@ ion-grid {
 }
 
 .encargada {
-    color: #ffffff;
+    color: var(--negro, #3c3c3c);
     text-align: left;
-    font-family: "Inter-Regular", sans-serif;
+    font-family: "Inter-Bold", sans-serif;
     font-size: 16px;
     line-height: 125%;
-    font-weight: 400;
+    font-weight: 700;
     position: absolute;
-    right: 64.17%;
-    left: 3.94%;
-    width: 31.89%;
-    bottom: 26.67%;
-    top: 28.89%;
-    height: 44.44%;
+    left: 20px;
+    top: 314px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
 }
 
 .component-82 {
-    width: 67.2%;
-    height: 1.83%;
+    width: 335px;
+    height: 44.83px;
     position: absolute;
-    left: 16.27%;
-    top: 263px;
+    left: calc(50% - 168.5px);
+    top: 344px;
 }
 
 .rectangle-34 {
     border-radius: 15px;
     border-style: solid;
-    border-color: #ffffff;
+    border-color: #3c3c3c;
     border-width: 1px;
+    width: 100%;
+    height: 100%;
     position: absolute;
     right: 0%;
     left: 0%;
-    width: 100%;
     bottom: 0%;
     top: 0%;
-    height: 100%;
 }
 
 .seleccionar {
@@ -421,14 +430,13 @@ ion-grid {
 }
 
 .icon2 {
-    height: auto;
+    width: 2.69%;
+    height: 42.38%;
     position: absolute;
-    right: 5.12%;
-    left: 91.34%;
-    width: 3.54%;
-    bottom: 17.78%;
-    top: 40%;
-    height: 42.22%;
+    right: 2.69%;
+    left: 94.63%;
+    bottom: 15.24%;
+    top: 42.38%;
     transform: translate(-20px, -1px);
     overflow: visible;
 }
@@ -439,41 +447,36 @@ ion-grid {
 }
 
 .terapeuta {
-    color: #ffffff;
+    color: var(--negro, #3c3c3c);
     text-align: left;
-    font-family: "Inter-Regular", sans-serif;
+    font-family: "Inter-Bold", sans-serif;
     font-size: 16px;
     line-height: 125%;
-    font-weight: 400;
+    font-weight: 700;
     position: absolute;
-    right: 65.75%;
-    left: 3.94%;
-    width: 30.31%;
-    bottom: 26.67%;
-    top: 28.89%;
-    height: 44.44%;
+    left: 19px;
+    top: 224px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
 }
 
 .component-7 {
-    width: 67.2%;
-    height: 1.83%;
+    width: 335px;
+    height: 44.83px;
     position: absolute;
-    left: 16.27%;
-    top: 206px;
+    left: calc(50% - 167.5px);
+    top: 253px;
 }
 
 .icon3 {
-    height: auto;
+    width: 2.69%;
+    height: 42.38%;
     position: absolute;
-    right: 5.12%;
-    left: 91.34%;
-    width: 3.54%;
-    bottom: 17.78%;
-    top: 40%;
-    height: 42.22%;
+    right: 2.69%;
+    left: 94.63%;
+    bottom: 15.24%;
+    top: 42.38%;
     transform: translate(-20px, -1px);
     overflow: visible;
 }
@@ -1517,156 +1520,21 @@ ion-grid {
     justify-content: flex-start;
 }
 
-.keyboard {
-    display: none;
-    background-color: black;
-    width: 100%;
-    width: 300px;
-    height: 260px;
-    position: fixed;
-    bottom: 0;
-    top: 250px;
+.barra {
+    background: #ffffff;
+    width: 375px;
+    height: 79px;
+    position: sticky;
+    left: calc(50% - 187.5px);
+    bottom: 0px;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
 }
 
-ion-select::part(icon) {
-    color: transparent !important;
-    width: 157px;
-    right: 32px;
-}
-
-.sc-ion-input-md-h[name=sinceDate] {
-    color: white;
-    --highlight-color-focused: transparent;
-    --border-color: transparent;
-    --highlight-color: transparent;
-}
-
-.sc-ion-input-md-h[name=sinceDate] ::ng-deep label {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
+.group-102 {
+    height: auto;
     position: absolute;
-    left: 3.5%;
+    left: 39px;
+    top: 18px;
+    overflow: visible;
 }
-
-.sc-ion-input-md-h[name=sinceDate] ::ng-deep input {
-    caret-color: black;
-    left: 16px;
-    width: 100%;
-}
-
-.sc-ion-input-md-h[name=sinceTime] {
-    color: white;
-    --highlight-color-focused: transparent;
-    --border-color: transparent;
-    --highlight-color: transparent;
-}
-
-.sc-ion-input-md-h[name=sinceTime] ::ng-deep label {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
-    position: absolute;
-    left: 3.5%;
-}
-
-.sc-ion-input-md-h[name=sinceTime] ::ng-deep input {
-    caret-color: black;
-    left: 16px;
-    width: 100%;
-}
-
-.sc-ion-input-md-h[name=toDate] {
-    color: white;
-    --highlight-color-focused: transparent;
-    --border-color: transparent;
-    --highlight-color: transparent;
-}
-
-.sc-ion-input-md-h[name=toDate] ::ng-deep label {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
-    position: absolute;
-    left: 3.5%;
-}
-
-.sc-ion-input-md-h[name=toDate] ::ng-deep input {
-    caret-color: black;
-    left: 16px;
-    width: 100%;
-}
-
-.sc-ion-input-md-h[name=untilTime] {
-    color: white;
-    --highlight-color-focused: transparent;
-    --border-color: transparent;
-    --highlight-color: transparent;
-}
-
-.sc-ion-input-md-h[name=untilTime] ::ng-deep label {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
-    position: absolute;
-    left: 3.5%;
-}
-
-.sc-ion-input-md-h[name=untilTime] ::ng-deep input {
-    caret-color: black;
-    left: 16px;
-    width: 100%;
-}
-
-.sc-ion-input-md-h[name=numberRegularization] {
-    color: white;
-    --highlight-color-focused: transparent;
-    --border-color: transparent;
-    --highlight-color: transparent;
-}
-
-.sc-ion-input-md-h[name=numberRegularization] ::ng-deep label {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
-    position: absolute;
-    left: 3.5%;
-}
-
-.sc-ion-input-md-h[name=numberRegularization] ::ng-deep input {
-    position: relative;
-    caret-color: black;
-    left: 10px;
-    max-width: 56%;
-}
-
-@media only screen and (min-device-width: 259px) and (max-device-width: 370px) {}
-
-// Pedro
-@media only screen and (min-device-width: 350px) and (max-device-width: 370px) and (min-device-width: 350px) and (max-device-width: 370px) {}
-
-@media only screen and (min-device-width: 371px) and (max-device-width: 380px) {}
-
-@media only screen and (min-device-width: 375px) and (max-device-height: 667px) {}
-
-@media only screen and (min-device-width: 381px) and (max-device-width: 389px) {}
-
-@media only screen and (min-device-width: 390px) and (max-device-width: 391px) {}
-
-@media only screen and (min-device-width: 392px) and (max-device-width: 393px) {}
-
-@media only screen and (min-device-width: 394px) and (max-device-width: 410px) {}
-
-@media only screen and (min-device-width: 393px) and (max-device-height: 750px) {}
-
-// Steven
-@media only screen and (min-device-width: 411px) and (max-device-width: 413px) {}
-
-@media only screen and (min-device-width: 414px) and (max-device-width: 1030px) {}
-
-@media only screen and (min-device-width: 430px) and (max-device-height: 932px) {}

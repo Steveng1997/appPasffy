@@ -20,6 +20,7 @@ import { ServiceService } from 'src/app/core/services/service/service.service';
 export class NewLiquidTherapPage implements OnInit {
 
   dates: boolean = false
+  selected: boolean = false
   administratorRole: boolean = false
 
   terapeuta: any
@@ -31,6 +32,7 @@ export class NewLiquidTherapPage implements OnInit {
 
   // Comission
   totalCommission: number
+  
 
   modelLiquidation: LiquidationTherapist = {
     createdDate: "",
@@ -177,10 +179,6 @@ export class NewLiquidTherapPage implements OnInit {
     }
   }
 
-  back() {
-    this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
-  }
-
   async inputDateAndTime() {
     let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTerap = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0
     this.totalCommission = 0
@@ -191,11 +189,57 @@ export class NewLiquidTherapPage implements OnInit {
 
         if (rp.length > 0) {
           this.unliquidatedService = rp
-          
+
           this.dates = true
+          this.selected = true
           document.getElementById('overview').style.height = '4065px'
+          document.getElementById('overviewDates').style.height = '392px'
         }
 
       })
+  }
+
+  regularization(event: any) {
+    let numberRegularization = 0, valueRegularization = 0
+    numberRegularization = Number(event.target.value)
+
+    if (numberRegularization > 0) {
+      valueRegularization = this.totalCommission + numberRegularization
+    } else {
+      valueRegularization = this.totalCommission + numberRegularization
+    }
+
+    this.modelLiquidation.valueRegularizacion = numberRegularization;
+
+    if (valueRegularization > 999 || numberRegularization > 999) {
+
+      const coma = valueRegularization.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? this.totalCommission.toString().split(".") : valueRegularization.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalCommission = Number(integer[0])
+    } else {
+      this.totalCommission = valueRegularization
+      // this.valueRegular = numberRegularization.toString()
+    }
+  }
+
+
+  back() {
+    this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
   }
 }

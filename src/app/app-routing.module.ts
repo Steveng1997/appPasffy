@@ -65,7 +65,12 @@ const routes: Routes = [
   {
     path: 'new-liquiationTherapist',
     loadChildren: () => import('./pages/liquidation/therapist/new-liquid-therap/new-liquid-therap.module').then( m => m.NewLiquidTherapPageModule)
+  },
+  {
+    path: 'new-liquiationManager',
+    loadChildren: () => import('./pages/liquidation/manager/new-liquida-manager/new-liquida-manager.module').then( m => m.NewLiquidaManagerPageModule)
   }
+
 
 ];
 @NgModule({
