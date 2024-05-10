@@ -90,13 +90,13 @@ ion-grid {
 .rectangle-77 {
     background: var(--verde, #1fb996);
     border-radius: 15px;
-    width: 41.87%;
-    height: 2.8%;
+    width: 182px;
+    height: 51px;
     position: absolute;
     right: 4.8%;
-    left: 53.33%;
+    left: 172px;
     bottom: 7.02%;
-    top: 90.18%;
+    top: 1517px;
 }
 
 .group-30 {
@@ -465,6 +465,461 @@ ion-grid {
     top: 206px;
 }
 
+// Table
+
+.frame-79 {
+    width: -webkit-fill-available;
+    height: 260px;
+    position: absolute;
+    left: 0px;
+    top: 733px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: var(--verde-claro, #e8f2ef);
+}
+
+.rectangle-1005 {
+    background: var(--verde-oscuro, #0b9a7a);
+    border-radius: 10px;
+    width: 2318px;
+    height: 34px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.rectangle-1004 {
+    background: #ffffff;
+    border-radius: 15px;
+    width: 1630px;
+    height: 40px;
+    position: relative;
+    display: inline-grid;
+    left: 0px;
+    top: 41px;
+}
+
+.fecha {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 33px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.tiempo {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 130px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.minutos {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 271px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.tratamiento3 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 385px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.salida1 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 507px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._propina {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 663px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._pago {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 784px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.a-terapeuta10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    width: 100px;
+    left: 934px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.bebida-casa10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    width: 100px;
+    left: 1048px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.bebida-terap10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    width: 100px;
+    left: 1164px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.tabaco10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 1305px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.vitamina10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 1418px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.otros10 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 1552px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+// Column
+
+.luc-a9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    width: 76px;
+    position: absolute;
+    left: 27px;
+    top: 9px;
+    display: flex;
+    justify-content: start;
+    justify-items: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.tiempo2 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    width: 110px;
+    position: absolute;
+    left: 130px;
+    top: 9px;
+    display: flex;
+    justify-content: start;
+    justify-items: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.min {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    width: 80px;
+    position: absolute;
+    left: 253px;
+    top: 9px;
+    display: flex;
+    justify-content: end;
+    justify-items: end;
+}
+
+._1000 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 386px;
+    top: 9px;
+    width: 90px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.salida {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 508px;
+    top: 9px;
+    width: 133px;
+    justify-content: start;
+    justify-items: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+._10001 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 657px;
+    top: 9px;
+    width: 65px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+._bizum {
+    color: #3c3c3c;
+    text-align: left;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    width: 116px;
+    position: absolute;
+    left: 778px;
+    top: 9px;
+    align-items: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.a-terapeuta9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 935px;
+    top: 9px;
+    width: 86px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.bebida-casa9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 1055px;
+    top: 9px;
+    width: 86px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.bebida-terap9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 1175px;
+    top: 9px;
+    width: 86px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.tabaco9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 1285px;
+    top: 9px;
+    width: 75px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.vitamina9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 1398px;
+    top: 9px;
+    width: 75px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.otros9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 1509px;
+    top: 9px;
+    width: 75px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.rectangle-200 {
+    position: absolute;
+    top: 307px;
+}
+
 .icon3 {
     height: auto;
     position: absolute;
@@ -677,23 +1132,6 @@ ion-grid {
     top: 1018px;
     width: 25px;
     height: 21px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
-._1002 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 16px;
-    line-height: 115%;
-    font-weight: 500;
-    position: absolute;
-    left: 235px;
-    top: 814px;
-    width: 49px;
-    height: 20px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -1645,10 +2083,29 @@ ion-select::part(icon) {
     max-width: 56%;
 }
 
+.paginator {
+    position: absolute;
+    display: grid;
+    align-items: revert;
+    top: 986px;
+    left: -4px;
+}
+
+.paginator ::ng-deep .ngx-pagination .current {
+    background: transparent;
+    color: black;
+}
+
 @media only screen and (min-device-width: 259px) and (max-device-width: 370px) {}
 
 // Pedro
-@media only screen and (min-device-width: 350px) and (max-device-width: 370px) and (min-device-width: 350px) and (max-device-width: 370px) {}
+@media only screen and (min-device-width: 350px) and (max-device-width: 370px) and (min-device-width: 350px) and (max-device-width: 370px) {
+
+    .rectangle-1005 {
+        width: 1630px;
+        left: 0px;
+    }
+}
 
 @media only screen and (min-device-width: 371px) and (max-device-width: 380px) {}
 

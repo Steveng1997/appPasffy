@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NewLiquidTherapPageRoutingModule } from './new-liquid-therap-routing.module';
 import { NewLiquidTherapPage } from './new-liquid-therap.page';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { NewLiquidTherapPage } from './new-liquid-therap.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    NewLiquidTherapPageRoutingModule
+    NewLiquidTherapPageRoutingModule,
+    NgxPaginationModule,
   ],
   
   declarations: [NewLiquidTherapPage]
