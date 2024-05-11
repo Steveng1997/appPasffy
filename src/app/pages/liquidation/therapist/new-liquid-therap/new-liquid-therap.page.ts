@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 
 // Models
 import { LiquidationTherapist } from 'src/app/core/models/liquidationTherapist';
+import { ModelService } from 'src/app/core/models/service';
 
 // Service
 import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.service';
@@ -29,6 +30,7 @@ export class NewLiquidTherapPage implements OnInit {
   terapeuta: any
   unliquidatedService: any
   manager: any
+  buttonSave: any
 
   id: number
   liquidated: any
@@ -69,6 +71,11 @@ export class NewLiquidTherapPage implements OnInit {
   sumTherapist: string
   totalReceived: string
 
+  currentDate = new Date().getTime()
+
+  modelServices: ModelService = {
+    idTerapeuta: ""
+  }
 
   modelLiquidation: LiquidationTherapist = {
     createdDate: "",
@@ -102,7 +109,8 @@ export class NewLiquidTherapPage implements OnInit {
   ngOnInit() {
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.id = Number(params['id'])
-
+    this.dates = false
+    this.selected = false
     this.getTherapist()
 
     if (this.id) {
@@ -130,6 +138,59 @@ export class NewLiquidTherapPage implements OnInit {
     this.serviceTherapist.getAllTerapeuta().subscribe((datosTerapeuta: any) => {
       this.terapeuta = datosTerapeuta
     })
+  }
+
+  validitePayment() {
+    if (this.modelLiquidation.formaPago != '') {
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' }
+      )
+    }
+  }
+
+  bizum() {
+    if (document.getElementById('bizum1').style.background == "") {
+      this.validitePayment()
+      document.getElementById('bizum1').style.background = '#1fb996'
+      this.modelLiquidation.formaPago = 'Bizum'
+    } else {
+      document.getElementById('bizum1').style.background = ""
+      this.modelLiquidation.formaPago = ''
+    }
+  }
+
+  cash() {
+    if (document.getElementById('cash1').style.background == "") {
+      this.validitePayment()
+      document.getElementById('cash1').style.background = '#1fb996'
+      this.modelLiquidation.formaPago = 'Efectivo'
+    } else {
+      document.getElementById('cash1').style.background = ""
+      this.modelLiquidation.formaPago = ''
+    }
+  }
+
+  card() {
+    debugger
+    if (document.getElementById('card1').style.background == "") {
+      this.validitePayment()
+      document.getElementById('card1').style.background = '#1fb996'
+      this.modelLiquidation.formaPago = 'Tarjeta'
+    } else {
+      document.getElementById('card1').style.background = ""
+      this.modelLiquidation.formaPago = ''
+    }
+  }
+
+  transaction() {
+    debugger
+    if (document.getElementById('transaction1').style.background == "") {
+      this.validitePayment()
+      document.getElementById('transaction1').style.background = '#1fb996'
+      this.modelLiquidation.formaPago = 'Trans'
+    } else {
+      document.getElementById('transaction1').style.background = ""
+      this.modelLiquidation.formaPago = ''
+    }
   }
 
   getManager() {
@@ -203,11 +264,17 @@ export class NewLiquidTherapPage implements OnInit {
       this.service.getByTerapeutaAndEncargada(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe(async (resp: any) => {
         if (resp.length > 0) {
           this.dates = false
+          document.getElementById('overview').style.height = '3593px'
+          document.getElementById('overviewDates').style.height = '392px'
           this.ionLoaderService.dismissLoader()
           await this.dateExists()
         } else {
           this.dates = false
+          this.selected = false
           this.ionLoaderService.dismissLoader()
+          document.getElementById('overview').style.height = '646px'
+          document.getElementById('overviewDates').style.height = '165px'
+          Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No existe ningun servicio para liquidar', showConfirmButton: false, timer: 2500 })
         }
       })
     } else {
@@ -216,17 +283,12 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   async inputDateAndTime() {
-    let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTherapist = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0, totalCommission = 0,
-      sumCommission = 0, receivedTherapist = 0
-
     this.service.getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.terapeuta,
       this.modelLiquidation.encargada, this.modelLiquidation.desdeHoraLiquidado, this.modelLiquidation.hastaHoraLiquidado,
       this.modelLiquidation.desdeFechaLiquidado, this.modelLiquidation.hastaFechaLiquidado).subscribe(async (rp: any) => {
 
         if (rp.length > 0) {
           this.unliquidatedService = rp
-          document.getElementById('overview').style.height = '3777px'
-          document.getElementById('overviewDates').style.height = '392px'
 
           // Filter by servicio
           const servicios = rp.filter(serv => serv)
@@ -306,10 +368,8 @@ export class NewLiquidTherapPage implements OnInit {
           this.unliquidatedService = rp
           this.ionLoaderService.dismissLoader()
           this.dates = true
-
-          Swal.fire({
-            icon: 'error', title: 'Oops...', text: 'No hay ningun servicio con la fecha seleccionada', showConfirmButton: false, timer: 2500
-          })
+          this.selected = true
+          Swal.fire({ heightAuto: false, icon: 'error', title: 'Oops...', text: 'No hay ningun servicio con la fecha seleccionada', showConfirmButton: false, timer: 2500 })
         }
       })
   }
@@ -1147,8 +1207,8 @@ export class NewLiquidTherapPage implements OnInit {
     }
   }
 
-  edit(id: string) {
-
+  edit(id: number) {
+    this.router.navigate([`tabs/${this.id}/edit-services/${id}`])
   }
 
   notes() {
@@ -1156,6 +1216,166 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   back() {
+    document.getElementById('overview').style.height = '646px'
+    document.getElementById('overviewDates').style.height = '165px'
+    this.dates = false
+    this.selected = false
+    this.modelLiquidation.encargada = ""
+    this.modelLiquidation.terapeuta = ""
     this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
+  }
+
+  createUniqueId() {
+    var d = new Date().getTime()
+    var uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = (d + Math.random() * 16) % 16 | 0
+      d = Math.floor(d / 16)
+      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16)
+    })
+
+    this.modelServices.idTerapeuta = uuid
+    this.modelLiquidation.idUnico = uuid
+    this.modelLiquidation.idTerapeuta = uuid
+    return this.modelLiquidation.idUnico
+  }
+
+  dateCurrentDay() {
+    let date = new Date(), day = 0, month = 0, year = 0, convertMonth = '', convertDay = ''
+
+    day = date.getDate()
+    month = date.getMonth() + 1
+    year = date.getFullYear()
+
+    if (month > 0 && month < 10) {
+      convertMonth = '0' + month
+      this.modelLiquidation.createdDate = `${year}-${convertMonth}-${day}`
+    } else {
+      convertMonth = month.toString()
+      this.modelLiquidation.createdDate = `${year}-${month}-${day}`
+    }
+
+    if (day > 0 && day < 10) {
+      convertDay = '0' + day
+      this.modelLiquidation.createdDate = `${year}-${convertMonth}-${convertDay}`
+    } else {
+      this.modelLiquidation.createdDate = `${year}-${convertMonth}-${day}`
+    }
+  }
+
+  formatDate() {
+    let fromDay = '', fromMonth = '', fromYear = '', untilDay = '', untilMonth = '', untilYear = ''
+
+    // From 
+
+    fromDay = this.modelLiquidation.desdeFechaLiquidado.substring(8, 10)
+    fromMonth = this.modelLiquidation.desdeFechaLiquidado.substring(5, 7)
+    fromYear = this.modelLiquidation.desdeFechaLiquidado.substring(2, 4)
+
+    this.modelLiquidation.desdeFechaLiquidado = `${fromDay}-${fromMonth}-${fromYear}`
+
+    // Until
+
+    untilDay = this.modelLiquidation.hastaFechaLiquidado.substring(8, 10)
+    untilMonth = this.modelLiquidation.hastaFechaLiquidado.substring(5, 7)
+    untilYear = this.modelLiquidation.hastaFechaLiquidado.substring(2, 4)
+
+    this.modelLiquidation.hastaFechaLiquidado = `${untilDay}-${untilMonth}-${untilYear}`
+  }
+
+  async consultLiquidationTherapistByAdministrator() {
+    this.serviceLiquidation.consultTherapistSettlements().subscribe(async (rp: any) => {
+      this.selected = false
+      this.dates = false
+      this.modelLiquidation.encargada = ""
+      this.modelLiquidation.terapeuta = ""
+    })
+  }
+
+  async consultLiquidationTherapistByManager() {
+    this.serviceLiquidation.consultManager(this.modelLiquidation.encargada).subscribe(async (rp) => {
+      this.liquidated = rp
+      this.selected = false
+      this.dates = false
+      this.modelLiquidation.encargada = ""
+      this.modelLiquidation.terapeuta = ""
+    })
+  }
+
+  save() {
+    this.buttonSave = document.getElementById('btnSave') as HTMLButtonElement
+    this.buttonSave.disabled = true;
+
+    if (this.modelLiquidation.terapeuta != "") {
+      if (this.modelLiquidation.encargada != "") {
+        if (this.modelLiquidation.formaPago != "") {
+
+          this.createUniqueId()
+          this.modelLiquidation.currentDate = this.currentDate.toString()
+          this.formatDate()
+          this.dateCurrentDay()
+          this.validitePayment()
+
+          if (this.modelLiquidation.regularizacion != "") {
+            this.modelLiquidation.regularizacion = this.modelLiquidation.regularizacion.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
+          }
+
+          this.serviceLiquidation.consultTherapistAndManager(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe((rp: any) => {
+
+            if (rp.length > 0) {
+
+              for (let o = 0; o < this.unliquidatedService.length; o++) {
+                this.modelLiquidation.tratamiento = this.unliquidatedService.length
+                this.modelServices.liquidadoTerapeuta = true
+                this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
+              }
+
+              this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
+
+                if (this.administratorRole == true) {
+                  await this.consultLiquidationTherapistByAdministrator()
+                }
+                else {
+                  await this.consultLiquidationTherapistByManager()
+                }
+
+                Swal.fire({ position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
+              })
+            }
+
+            else if (rp.length == 0) {
+
+              for (let o = 0; o < this.unliquidatedService.length; o++) {
+                this.modelLiquidation.tratamiento = this.unliquidatedService.length
+                this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelLiquidation).subscribe((rp) => { })
+              }
+
+              this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
+
+                if (this.administratorRole == true) {
+                  await this.consultLiquidationTherapistByAdministrator()
+                }
+                else {
+                  await this.consultLiquidationTherapistByManager()
+                }
+              })
+
+              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
+            }
+          })
+        } else {
+          this.buttonSave.disabled = false;
+
+          Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna forma de pago seleccionada', showConfirmButton: false, timer: 2500 })
+        }
+      } else {
+        this.buttonSave.disabled = false;
+
+        Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna encargada seleccionada', showConfirmButton: false, timer: 2500 })
+      }
+    } else {
+      this.buttonSave.disabled = false;
+
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna terapeuta seleccionada', showConfirmButton: false, timer: 2500 })
+    }
   }
 }
