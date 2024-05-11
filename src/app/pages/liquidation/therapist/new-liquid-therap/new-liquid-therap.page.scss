@@ -30,7 +30,7 @@ ion-grid {
 .rectangle-93 {
     background: white;
     width: -webkit-fill-available;
-    height: 3518px;
+    height: 3453px;
     position: absolute;
     left: 0px;
     top: 121px;
@@ -145,7 +145,7 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     left: 21px;
-    top: 577px;
+    top: 527px;
     width: 203px;
     height: 36px;
     display: flex;
@@ -163,27 +163,51 @@ ion-grid {
     position: absolute;
     left: 246px;
     width: 97px;
-    top: 588px;
+    top: 538px;
     height: 18px;
     display: flex;
     justify-content: end;
     justify-items: end;
 }
 
+.inicial1 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 71px;
+    top: 317px;
+}
+
+.final1 {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 71px;
+    top: 398px;
+}
+
 .component-3 {
-    width: 67.2%;
+    width: 121px;
     height: 1.83%;
     position: absolute;
     left: 16.27%;
-    top: 320px;
+    top: 344px;
 }
 
 .component-9 {
-    width: 67.2%;
+    width: 101px;
     height: 1.83%;
     position: absolute;
-    left: 16.27%;
-    top: 377px;
+    left: 201px;
+    top: 344px;
 }
 
 ._5-34-p-m {
@@ -201,11 +225,11 @@ ion-grid {
 }
 
 .component-10 {
-    width: 67.2%;
+    width: 101px;
     height: 1.83%;
     position: absolute;
-    left: 16.27%;
-    top: 491px;
+    left: 201px;
+    top: 425px;
 }
 
 ._7-12-p-m {
@@ -227,7 +251,7 @@ ion-grid {
     height: 1.83%;
     position: absolute;
     left: 16.27%;
-    top: 434px;
+    top: 425px;
 }
 
 ._6-feb-2024 {
@@ -260,11 +284,14 @@ ion-grid {
     right: 37.6%;
     left: 5.07%;
     bottom: 57.88%;
-    top: 643px;
+    top: 600px;
 }
 
 .rectangle-94 {
-    background: var(--verde, #1fb996);
+    border-radius: 15px;
+    border-style: solid;
+    border-color: var(--negro, #3c3c3c);
+    border-width: 1px;
     border-radius: 15px;
     width: 28.53%;
     height: 44px;
@@ -272,7 +299,7 @@ ion-grid {
     right: 5.33%;
     left: 66.13%;
     bottom: 57.88%;
-    top: 643px;
+    top: 600px;
 }
 
 .concepto-a-regularizar {
@@ -285,9 +312,9 @@ ion-grid {
     position: absolute;
     right: 44.04%;
     left: 9.83%;
-    width: 46.13%;
+    width: 169px;
     bottom: 58.66%;
-    top: 637px;
+    top: 595px;
     height: 1.19%;
     display: flex;
     align-items: flex-end;
@@ -295,7 +322,7 @@ ion-grid {
 }
 
 .div {
-    color: #ffffff;
+    color: black;
     text-align: left;
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
@@ -306,7 +333,7 @@ ion-grid {
     left: 87.2%;
     width: 2.93%;
     bottom: 58.66%;
-    top: 646px;
+    top: 604px;
     height: 1.19%;
     display: flex;
     align-items: flex-end;
@@ -322,7 +349,7 @@ ion-grid {
     position: absolute;
     right: 0%;
     left: 0%;
-    width: 100%;
+    width: 112%;
     bottom: 0%;
     top: 0%;
     height: 100%;
@@ -336,7 +363,7 @@ ion-grid {
     position: absolute;
     right: 0%;
     left: 0%;
-    width: 100%;
+    width: 135px;
     bottom: 0%;
     top: 0%;
     height: 100%;
@@ -472,7 +499,7 @@ ion-grid {
     height: 260px;
     position: absolute;
     left: 0px;
-    top: 733px;
+    top: 667px;
     overflow-x: auto;
     overflow-y: hidden;
     background: var(--verde-claro, #e8f2ef);
@@ -917,7 +944,7 @@ ion-grid {
 
 .rectangle-200 {
     position: absolute;
-    top: 307px;
+    top: 242px;
 }
 
 .icon3 {
@@ -1980,13 +2007,13 @@ ion-select::part(icon) {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     position: absolute;
-    left: 3.5%;
+    left: 62px;
 }
 
 .sc-ion-input-md-h[name=sinceDate] ::ng-deep input {
     caret-color: black;
-    left: 16px;
-    width: 100%;
+    left: -54px;
+    width: 119px;
 }
 
 .sc-ion-input-md-h[name=sinceTime] {
@@ -2007,7 +2034,7 @@ ion-select::part(icon) {
 
 .sc-ion-input-md-h[name=sinceTime] ::ng-deep input {
     caret-color: black;
-    left: 16px;
+    left: 13px;
     width: 100%;
 }
 
@@ -2029,8 +2056,8 @@ ion-select::part(icon) {
 
 .sc-ion-input-md-h[name=toDate] ::ng-deep input {
     caret-color: black;
-    left: 16px;
-    width: 100%;
+    left: 3px;
+    width: 120px;
 }
 
 .sc-ion-input-md-h[name=untilTime] {
@@ -2051,7 +2078,7 @@ ion-select::part(icon) {
 
 .sc-ion-input-md-h[name=untilTime] ::ng-deep input {
     caret-color: black;
-    left: 16px;
+    left: 14px;
     width: 100%;
 }
 
@@ -2063,12 +2090,13 @@ ion-select::part(icon) {
 }
 
 .sc-ion-input-md-h[name=numberRegularization] ::ng-deep label {
-    color: #ffffff;
+    color: black;
     text-align: left;
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     position: absolute;
     left: 3.5%;
+    top: 0px;
 }
 
 .sc-ion-input-md-h[name=numberRegularization] ::ng-deep input {
@@ -2082,7 +2110,7 @@ ion-select::part(icon) {
     position: absolute;
     display: grid;
     align-items: revert;
-    top: 986px;
+    top: 920px;
     left: -4px;
 }
 

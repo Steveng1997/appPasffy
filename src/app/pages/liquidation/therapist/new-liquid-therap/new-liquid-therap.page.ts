@@ -38,7 +38,7 @@ export class NewLiquidTherapPage implements OnInit {
   // Tables
   terapeutaName: any
 
-  totalLiquidation: number
+  totalLiquidation: string
 
   // Sum
   totalService: string
@@ -426,7 +426,7 @@ export class NewLiquidTherapPage implements OnInit {
       this.dates = true
       this.selected = true
       document.getElementById('nuevaLiquidation').style.overflowY = 'auto'
-      document.getElementById('overviewDates').style.height = '392px'
+      document.getElementById('overviewDates').style.height = '326px'
 
     })
   }
@@ -459,9 +459,9 @@ export class NewLiquidTherapPage implements OnInit {
       }
 
       integer = [integer.toString().replace(/,/gi, "")]
-      this.totalLiquidation = Number(integer[0])
+      this.totalLiquidation = integer[0].toString()
     } else {
-      this.totalLiquidation = totalLiquidation
+      this.totalLiquidation = totalLiquidation.toString()
     }
 
     if (service > 999) {
@@ -1172,9 +1172,9 @@ export class NewLiquidTherapPage implements OnInit {
     numberRegularization = Number(event.target.value)
 
     if (numberRegularization > 0) {
-      valueRegularization = this.totalLiquidation + numberRegularization
+      valueRegularization = Number(this.totalLiquidation) + numberRegularization
     } else {
-      valueRegularization = this.totalLiquidation + numberRegularization
+      valueRegularization = Number(this.totalLiquidation) + numberRegularization
     }
 
     this.modelLiquidation.valueRegularizacion = numberRegularization;
@@ -1199,9 +1199,9 @@ export class NewLiquidTherapPage implements OnInit {
       }
 
       integer = [integer.toString().replace(/,/gi, "")]
-      this.totalLiquidation = Number(integer[0])
+      this.totalLiquidation = integer.toString()
     } else {
-      this.totalLiquidation = valueRegularization
+      this.totalLiquidation = valueRegularization.toString()
       // this.valueRegular = numberRegularization.toString()
     }
   }
