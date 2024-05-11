@@ -30,7 +30,7 @@ ion-grid {
 .rectangle-93 {
     background: white;
     width: -webkit-fill-available;
-    height: 646px;
+    height: 3518px;
     position: absolute;
     left: 0px;
     top: 121px;
@@ -90,13 +90,13 @@ ion-grid {
 .rectangle-77 {
     background: var(--verde, #1fb996);
     border-radius: 15px;
-    width: 182px;
-    height: 51px;
+    width: 139px;
+    height: 45px;
     position: absolute;
     right: 4.8%;
-    left: 172px;
+    left: 162px;
     bottom: 7.02%;
-    top: 1517px;
+    top: 1489px;
 }
 
 .group-30 {
@@ -113,8 +113,8 @@ ion-grid {
     line-height: 125%;
     font-weight: 700;
     position: absolute;
-    left: 260px;
-    top: 1529.32px;
+    left: 219px;
+    top: 1502px;
     width: 64px;
     height: 21.22px;
     display: flex;
@@ -123,11 +123,11 @@ ion-grid {
 }
 
 .save {
-    width: 22px;
-    height: 23.34px;
+    width: 32px;
+    height: 32px;
     position: absolute;
-    left: 233px;
-    top: 1528.26px;
+    left: 182px;
+    top: 1496px;
     overflow: visible;
 }
 
@@ -137,7 +137,7 @@ ion-grid {
 }
 
 .total-liquidaci-n {
-    color: var(--verde, #1fb996);
+    color: var(--verde, #1b1e1d);
     text-align: left;
     font-family: "Inter-Bold", sans-serif;
     font-size: 20px;
@@ -287,7 +287,7 @@ ion-grid {
     left: 9.83%;
     width: 46.13%;
     bottom: 58.66%;
-    top: 647px;
+    top: 637px;
     height: 1.19%;
     display: flex;
     align-items: flex-end;
@@ -1776,6 +1776,11 @@ ion-grid {
     left: 9.18%;
     bottom: -0.37%;
     top: 0%;
+}
+
+.sc-ion-input-md-h[name=conceptoRegularization] {
+    --highlight-color-focused: transparent;
+    --highlight-color: transparent;
 }
 
 .sc-ion-input-md-h[name=bizum] {

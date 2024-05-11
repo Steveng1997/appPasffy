@@ -109,6 +109,7 @@ export class NewLiquidTherapPage implements OnInit {
   ngOnInit() {
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.id = Number(params['id'])
+    document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
     this.dates = false
     this.selected = false
     this.getTherapist()
@@ -264,15 +265,13 @@ export class NewLiquidTherapPage implements OnInit {
       this.service.getByTerapeutaAndEncargada(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe(async (resp: any) => {
         if (resp.length > 0) {
           this.dates = false
-          document.getElementById('overview').style.height = '3593px'
-          document.getElementById('overviewDates').style.height = '392px'
           this.ionLoaderService.dismissLoader()
           await this.dateExists()
         } else {
           this.dates = false
           this.selected = false
           this.ionLoaderService.dismissLoader()
-          document.getElementById('overview').style.height = '646px'
+          document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
           document.getElementById('overviewDates').style.height = '165px'
           Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No existe ningun servicio para liquidar', showConfirmButton: false, timer: 2500 })
         }
@@ -413,8 +412,6 @@ export class NewLiquidTherapPage implements OnInit {
         }, 0)
       })
 
-      // Recibido
-      // receivedTherapist = this.totalTherapistValue
       let totalLiquidation = Math.ceil(sumCommission) - Number(receivedTherapist)
       this.modelLiquidation.importe = totalLiquidation
 
@@ -428,6 +425,8 @@ export class NewLiquidTherapPage implements OnInit {
 
       this.dates = true
       this.selected = true
+      document.getElementById('nuevaLiquidation').style.overflowY = 'auto'
+      document.getElementById('overviewDates').style.height = '392px'
 
     })
   }
@@ -1216,7 +1215,7 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   back() {
-    document.getElementById('overview').style.height = '646px'
+    document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
     document.getElementById('overviewDates').style.height = '165px'
     this.dates = false
     this.selected = false

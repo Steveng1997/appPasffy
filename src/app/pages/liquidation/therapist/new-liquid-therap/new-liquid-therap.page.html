@@ -2,7 +2,7 @@
   <ion-grid fixed>
     <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12" id="location">
 
-      <div class="nueva-liquidaci-n">
+      <div class="nueva-liquidaci-n" id="nuevaLiquidation">
         <div class="rectangle-93" id="overview"></div>
         <div class="rectangle-92"></div>
         <div class="rectangle-30" id="overviewDates"></div>
@@ -91,7 +91,11 @@
           <div class="_0">{{totalLiquidation}} €</div>
 
           <div class="rectangle-42"></div>
-          <div class="concepto-a-regularizar">Concepto a regularizar</div>
+          <!-- <div class="concepto-a-regularizar">Concepto a regularizar</div> -->
+
+          <ion-input class="concepto-a-regularizar" label="Concepto a regularizar" labelPlacement="floating"
+            id="conceptoRegularization" name="conceptoRegularization"></ion-input>
+
           <div class="rectangle-94"></div>
           <div class="div">€</div>
           <ion-input type="number" class="rectangle-94" id="numberRegularization" name="numberRegularization"
