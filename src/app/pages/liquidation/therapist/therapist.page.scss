@@ -358,23 +358,26 @@ ion-grid {
     line-height: 125%;
     font-weight: 400;
     position: absolute;
-    left: 702px;
-    top: 9px;
+    width: 63px;
+    left: 688px;
+    top: 10px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: start;
+    justify-content: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 ._1 {
     color: #3c3c3c;
     text-align: left;
-    /* font-family: "Inter-Regular", sans-serif; */
     font-size: 18px;
     line-height: 125%;
     font-weight: 400;
     width: 30px;
     position: absolute;
-    left: 841px;
+    left: 840px;
     top: 9px;
     display: flex;
     align-items: end;
@@ -419,7 +422,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 700;
     position: absolute;
-    left: 708px;
+    left: 693px;
     top: 7px;
     display: flex;
     align-items: flex-end;
@@ -1667,21 +1670,6 @@ ion-grid {
     width: 96px;
     left: 39px;
     top: 330px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
-.tarjeta {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 115%;
-    font-weight: 500;
-    position: absolute;
-    left: 39px;
-    top: 620px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
