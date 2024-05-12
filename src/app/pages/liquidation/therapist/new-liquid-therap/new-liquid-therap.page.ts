@@ -1305,25 +1305,6 @@ export class NewLiquidTherapPage implements OnInit {
     this.modelLiquidation.hastaFechaLiquidado = `${untilDay}-${untilMonth}-${untilYear}`
   }
 
-  async consultLiquidationTherapistByAdministrator() {
-    this.serviceLiquidation.consultTherapistSettlements().subscribe(async (rp: any) => {
-      this.selected = false
-      this.dates = false
-      this.modelLiquidation.encargada = ""
-      this.modelLiquidation.terapeuta = ""
-    })
-  }
-
-  async consultLiquidationTherapistByManager() {
-    this.serviceLiquidation.consultManager(this.modelLiquidation.encargada).subscribe(async (rp) => {
-      this.liquidated = rp
-      this.selected = false
-      this.dates = false
-      this.modelLiquidation.encargada = ""
-      this.modelLiquidation.terapeuta = ""
-    })
-  }
-
   save() {
     if (this.modelLiquidation.terapeuta != "") {
       if (this.modelLiquidation.encargada != "") {
@@ -1351,17 +1332,13 @@ export class NewLiquidTherapPage implements OnInit {
               }
 
               this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
-
-                if (this.administratorRole == true) {
-                  await this.consultLiquidationTherapistByAdministrator()
-                }
-                else {
-                  await this.consultLiquidationTherapistByManager()
-                }
-
-                this.ionLoaderService.dismissLoader()
+                this.selected = false
+                this.dates = false
+                this.modelLiquidation.encargada = ""
+                this.modelLiquidation.terapeuta = ""
                 localStorage.clear()
-                this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
+                this.ionLoaderService.dismissLoader()
+                location.replace(`tabs/${this.id}/liquidation-therapist`)
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
               })
             }
@@ -1374,15 +1351,15 @@ export class NewLiquidTherapPage implements OnInit {
               }
 
               this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
-
-                if (this.administratorRole == true) {
-                  await this.consultLiquidationTherapistByAdministrator()
-                }
-                else {
-                  await this.consultLiquidationTherapistByManager()
-                }
+                this.selected = false
+                this.dates = false
+                this.modelLiquidation.encargada = ""
+                this.modelLiquidation.terapeuta = ""
               })
 
+              localStorage.clear()
+              this.ionLoaderService.dismissLoader()
+              location.replace(`tabs/${this.id}/liquidation-therapist`)
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
             }
           })

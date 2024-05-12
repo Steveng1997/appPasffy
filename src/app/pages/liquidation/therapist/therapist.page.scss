@@ -350,7 +350,7 @@ ion-grid {
     justify-content: flex-start;
 }
 
-.tarjeta {
+._tarjeta {
     color: #3c3c3c;
     text-align: left;
     font-family: "Inter-Regular", sans-serif;
@@ -361,6 +361,25 @@ ion-grid {
     width: 63px;
     left: 688px;
     top: 10px;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.tarjeta {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 115%;
+    font-weight: 500;
+    position: absolute;
+    width: 63px;
+    left: 39px;
+    top: 620px;
     display: flex;
     align-items: start;
     justify-content: start;
