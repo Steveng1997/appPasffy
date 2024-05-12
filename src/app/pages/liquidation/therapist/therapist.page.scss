@@ -1833,7 +1833,7 @@ ion-grid {
 }
 
 .rectangle-108 {
-    background: #d9d9d9;
+    background: var(--verde-oscuro, #0b9a7a);
     width: 267px;
     height: 2px;
     position: absolute;
@@ -1841,8 +1841,17 @@ ion-grid {
     top: 273px;
 }
 
+.rectangle-109 {
+    background: var(--verde-oscuro, #0b9a7a);
+    width: 167px;
+    height: 2px;
+    position: absolute;
+    left: 141px;
+    top: 495px;
+}
+
 .rectangle-110 {
-    background: #d9d9d9;
+    background: var(--verde-oscuro, #0b9a7a);
     width: 267px;
     height: 2px;
     position: absolute;
@@ -1851,21 +1860,12 @@ ion-grid {
 }
 
 .rectangle-111 {
-    background: #d9d9d9;
+    background: var(--verde-oscuro, #0b9a7a);
     width: 267px;
     height: 2px;
     position: absolute;
     left: 41px;
     top: 665px;
-}
-
-.rectangle-109 {
-    background: #d9d9d9;
-    width: 167px;
-    height: 2px;
-    position: absolute;
-    left: 141px;
-    top: 495px;
 }
 
 .group-79 {

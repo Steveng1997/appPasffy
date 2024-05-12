@@ -392,6 +392,8 @@ export class NewLiquidTherapPage implements OnInit {
           this.ionLoaderService.dismissLoader()
           this.dates = true
           this.selected = true
+          document.getElementById('overviewDates').style.height = '326px'
+          document.getElementById('nuevaLiquidation').style.overflowY = 'auto'
           Swal.fire({ heightAuto: false, icon: 'error', title: 'Oops...', text: 'No hay ningun servicio con la fecha seleccionada', showConfirmButton: false, timer: 2500 })
         }
       })
@@ -451,7 +453,6 @@ export class NewLiquidTherapPage implements OnInit {
       this.selected = true
       document.getElementById('nuevaLiquidation').style.overflowY = 'auto'
       document.getElementById('overviewDates').style.height = '326px'
-
     })
   }
 

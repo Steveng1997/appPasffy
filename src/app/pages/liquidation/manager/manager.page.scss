@@ -200,7 +200,7 @@ ion-grid {
 .rectangle-104 {
     background: #ffffff;
     border-radius: 15px;
-    width: 771px;
+    width: 666px;
     height: 40px;
     position: relative;
     display: inline-grid;
@@ -316,7 +316,7 @@ ion-grid {
     justify-content: flex-start;
 }
 
-.tarjeta {
+._tarjeta {
     color: #3c3c3c;
     text-align: left;
     font-family: "Inter-Regular", sans-serif;
@@ -325,7 +325,7 @@ ion-grid {
     font-weight: 400;
     position: absolute;
     width: 63px;
-    left: 573px;
+    left: 688px;
     top: 10px;
     display: flex;
     align-items: start;
@@ -333,6 +333,21 @@ ion-grid {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.tarjeta {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 115%;
+    font-weight: 500;
+    position: absolute;
+    left: 39px;
+    top: 620px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 ._1 {
@@ -343,7 +358,7 @@ ion-grid {
     font-weight: 400;
     width: 30px;
     position: absolute;
-    left: 726px;
+    left: 614px;
     top: 9px;
     display: flex;
     align-items: end;
@@ -380,21 +395,6 @@ ion-grid {
     justify-content: flex-start;
 }
 
-.pago {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Bold", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 700;
-    position: absolute;
-    left: 579px;
-    top: 7px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
 .tratamiento {
     color: #ffffff;
     text-align: left;
@@ -403,7 +403,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 700;
     position: absolute;
-    left: 670px;
+    left: 558px;
     top: 7px;
     display: flex;
     align-items: flex-end;
@@ -918,7 +918,7 @@ ion-grid {
     background: var(--verde, #1fb996);
     border-radius: 15px;
     width: 296px;
-    height: 87px;
+    height: 70px;
     position: absolute;
     left: 20px;
     top: 156px;
@@ -973,9 +973,9 @@ ion-grid {
     font-weight: 400;
     position: absolute;
     left: 39px;
-    top: 171px;
+    top: 175px;
     width: 215px;
-    height: 57px;
+    height: 35px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -997,14 +997,6 @@ ion-grid {
     font-weight: 700;
 }
 
-.total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago {
-    color: #ffffff;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 16px;
-    line-height: 115%;
-    font-weight: 500;
-}
-
 .total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta-span3 {
     color: #ffffff;
     font-family: "Inter-Medium", sans-serif;
@@ -1015,14 +1007,6 @@ ion-grid {
     display: flex;
     justify-content: start;
     justify-items: start;
-}
-
-.total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta-span4 {
-    color: #ffffff;
-    font-family: "Inter-Bold", sans-serif;
-    font-size: 16px;
-    line-height: 115%;
-    font-weight: 700;
 }
 
 .luc-a {
@@ -1780,7 +1764,7 @@ ion-grid {
 }
 
 .rectangle-108 {
-    background: #d9d9d9;
+    background: var(--verde-oscuro, #0b9a7a);;
     width: 267px;
     height: 2px;
     position: absolute;
@@ -1788,8 +1772,17 @@ ion-grid {
     top: 273px;
 }
 
+.rectangle-109 {
+    background: var(--verde-oscuro, #0b9a7a);
+    width: 167px;
+    height: 2px;
+    position: absolute;
+    left: 141px;
+    top: 495px;
+}
+
 .rectangle-110 {
-    background: #d9d9d9;
+    background: var(--verde-oscuro, #0b9a7a);
     width: 267px;
     height: 2px;
     position: absolute;
@@ -1798,21 +1791,12 @@ ion-grid {
 }
 
 .rectangle-111 {
-    background: #d9d9d9;
+    background: var(--verde-oscuro, #0b9a7a);
     width: 267px;
     height: 2px;
     position: absolute;
     left: 41px;
     top: 665px;
-}
-
-.rectangle-109 {
-    background: #d9d9d9;
-    width: 167px;
-    height: 2px;
-    position: absolute;
-    left: 141px;
-    top: 495px;
 }
 
 .group-79 {
@@ -1857,10 +1841,10 @@ ion-grid {
 
 .frame-79 {
     width: -webkit-fill-available;
-    height: 260px;
+    height: 263px;
     position: absolute;
     left: 0px;
-    top: 258px;
+    top: 241px;
     overflow-x: auto;
     overflow-y: hidden;
     background: var(--verde-claro, #e8f2ef);
@@ -2286,14 +2270,14 @@ ion-grid {
 
 .rectangle-500 {
     position: absolute;
-    top: 300px;
+    top: 287px;
 }
 
 .paginatorDetail {
     position: absolute;
     display: grid;
     align-items: revert;
-    top: 511px;
+    top: 497px;
     left: -4px;
 }
 
@@ -2404,7 +2388,7 @@ ion-select::part(placeholder) {
     }
 
     .rectangle-105 {
-        width: 777px;
+        width: 666px;
         left: 5px;
     }
 
