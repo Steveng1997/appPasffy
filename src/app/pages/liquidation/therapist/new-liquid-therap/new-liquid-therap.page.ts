@@ -30,7 +30,6 @@ export class NewLiquidTherapPage implements OnInit {
   terapeuta: any
   unliquidatedService: any
   manager: any
-  buttonSave: any
 
   id: number
   liquidated: any
@@ -113,6 +112,7 @@ export class NewLiquidTherapPage implements OnInit {
     this.dates = false
     this.selected = false
     this.getTherapist()
+    localStorage.clear()
 
     if (this.id) {
       this.validitingUser()
@@ -141,56 +141,80 @@ export class NewLiquidTherapPage implements OnInit {
     })
   }
 
-  validitePayment() {
-    if (this.modelLiquidation.formaPago != '') {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' }
-      )
-    }
-  }
-
   bizum() {
-    if (document.getElementById('bizum1').style.background == "") {
-      this.validitePayment()
-      document.getElementById('bizum1').style.background = '#1fb996'
-      this.modelLiquidation.formaPago = 'Bizum'
+    localStorage.setItem('Bizum', 'Bizum')
+
+    if (localStorage.length == 1) {
+      if (document.getElementById('bizum1').style.background == "") {
+        document.getElementById('bizum1').style.background = '#1fb996'
+        this.modelLiquidation.formaPago = 'Bizum'
+      } else {
+        document.getElementById('bizum1').style.background = ""
+        this.modelLiquidation.formaPago = ''
+        localStorage.removeItem('Bizum')
+      }
     } else {
       document.getElementById('bizum1').style.background = ""
-      this.modelLiquidation.formaPago = ''
+      localStorage.removeItem('Bizum')
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
     }
   }
 
   cash() {
-    if (document.getElementById('cash1').style.background == "") {
-      this.validitePayment()
-      document.getElementById('cash1').style.background = '#1fb996'
-      this.modelLiquidation.formaPago = 'Efectivo'
+    localStorage.setItem('Efectivo', 'Efectivo')
+
+    if (localStorage.length == 1) {
+      if (document.getElementById('cash1').style.background == "") {
+        document.getElementById('cash1').style.background = '#1fb996'
+        this.modelLiquidation.formaPago = 'Efectivo'
+      } else {
+        document.getElementById('cash1').style.background = ""
+        this.modelLiquidation.formaPago = ''
+        localStorage.removeItem('Efectivo')
+      }
     } else {
       document.getElementById('cash1').style.background = ""
-      this.modelLiquidation.formaPago = ''
+      console.log('aqui')
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago', showConfirmButton: false, timer: 2500 })
+      localStorage.removeItem('Efectivo')
     }
   }
 
   card() {
-    debugger
-    if (document.getElementById('card1').style.background == "") {
-      this.validitePayment()
-      document.getElementById('card1').style.background = '#1fb996'
-      this.modelLiquidation.formaPago = 'Tarjeta'
+    localStorage.setItem('Tarjeta', 'Tarjeta')
+
+    if (localStorage.length == 1) {
+      if (document.getElementById('card1').style.background == "") {
+        document.getElementById('card1').style.background = '#1fb996'
+        this.modelLiquidation.formaPago = 'Tarjeta'
+      } else {
+        document.getElementById('card1').style.background = ""
+        this.modelLiquidation.formaPago = ''
+        localStorage.removeItem('Tarjeta')
+      }
     } else {
       document.getElementById('card1').style.background = ""
-      this.modelLiquidation.formaPago = ''
+      localStorage.removeItem('Tarjeta')
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
     }
   }
 
   transaction() {
-    debugger
-    if (document.getElementById('transaction1').style.background == "") {
-      this.validitePayment()
-      document.getElementById('transaction1').style.background = '#1fb996'
-      this.modelLiquidation.formaPago = 'Trans'
+    localStorage.setItem('Trans', 'Trans')
+
+    if (localStorage.length == 1) {
+      if (document.getElementById('transaction1').style.background == "") {
+        document.getElementById('transaction1').style.background = '#1fb996'
+        this.modelLiquidation.formaPago = 'Trans'
+      } else {
+        document.getElementById('transaction1').style.background = ""
+        this.modelLiquidation.formaPago = ''
+        localStorage.removeItem('Trans')
+      }
     } else {
       document.getElementById('transaction1').style.background = ""
-      this.modelLiquidation.formaPago = ''
+      localStorage.removeItem('Trans')
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
     }
   }
 
@@ -1301,9 +1325,6 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   save() {
-    this.buttonSave = document.getElementById('btnSave') as HTMLButtonElement
-    this.buttonSave.disabled = true;
-
     if (this.modelLiquidation.terapeuta != "") {
       if (this.modelLiquidation.encargada != "") {
         if (this.modelLiquidation.formaPago != "") {
@@ -1312,7 +1333,8 @@ export class NewLiquidTherapPage implements OnInit {
           this.modelLiquidation.currentDate = this.currentDate.toString()
           this.formatDate()
           this.dateCurrentDay()
-          this.validitePayment()
+
+          this.ionLoaderService.simpleLoader()
 
           if (this.modelLiquidation.regularizacion != "") {
             this.modelLiquidation.regularizacion = this.modelLiquidation.regularizacion.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
@@ -1337,7 +1359,10 @@ export class NewLiquidTherapPage implements OnInit {
                   await this.consultLiquidationTherapistByManager()
                 }
 
-                Swal.fire({ position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
+                this.ionLoaderService.dismissLoader()
+                localStorage.clear()
+                this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
+                Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
               })
             }
 
@@ -1362,18 +1387,12 @@ export class NewLiquidTherapPage implements OnInit {
             }
           })
         } else {
-          this.buttonSave.disabled = false;
-
           Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna forma de pago seleccionada', showConfirmButton: false, timer: 2500 })
         }
       } else {
-        this.buttonSave.disabled = false;
-
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna encargada seleccionada', showConfirmButton: false, timer: 2500 })
       }
     } else {
-      this.buttonSave.disabled = false;
-
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna terapeuta seleccionada', showConfirmButton: false, timer: 2500 })
     }
   }

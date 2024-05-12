@@ -1749,6 +1749,7 @@ export class TherapistPage implements OnInit {
 
   delete() {
     Swal.fire({
+      heightAuto: false,
       title: '¿Deseas eliminar el registro?',
       text: "Una vez eliminados ya no se podrán recuperar",
       icon: 'warning',
@@ -1768,6 +1769,8 @@ export class TherapistPage implements OnInit {
             else {
               await this.consultLiquidationTherapistByManager()
             }
+
+            this.details = false
           })
         })
       }
