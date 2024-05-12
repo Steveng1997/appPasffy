@@ -10,7 +10,6 @@ import { ModelService } from 'src/app/core/models/service';
 import { ServiceLiquidationManagerService } from 'src/app/core/services/liquidation/service-liquidation-manager.service';
 import { ManagerService } from 'src/app/core/services/manager/manager.service';
 import { ServiceService } from 'src/app/core/services/service/service.service';
-import { TherapistService } from 'src/app/core/services/therapist/therapist.service';
 
 @Component({
   selector: 'app-manager',
@@ -27,8 +26,10 @@ export class ManagerPage {
   today: boolean = true
   administratorRole: boolean = false
 
+  // Se quita
   terapeuta: any
   selectedTerapeuta: string
+  // ---
 
   manager: any
   selectedEncargada: string
@@ -63,7 +64,7 @@ export class ManagerPage {
   // ------------------------------------------------------
   // Details
   idDetail: number
-  idTherapist: string
+  idManager: string
   nameTherapist: string
   sinceDate: string
   sinceTime: string
@@ -110,7 +111,7 @@ export class ManagerPage {
 
   // --------------------------------
 
-  liquidationTherapist: LiquidationManager = {
+  liquidationManager: LiquidationManager = {
     currentDate: "",
     desdeFechaLiquidado: "",
     desdeHoraLiquidado: "",
@@ -129,7 +130,7 @@ export class ManagerPage {
   }
 
   modelServices: ModelService = {
-    idEncargada: "",
+    idEncargada: ""
   }
 
   constructor(
@@ -137,7 +138,6 @@ export class ManagerPage {
     private activatedRoute: ActivatedRoute,
     private serviceLiquidation: ServiceLiquidationManagerService,
     private serviceManager: ManagerService,
-    private serviceTherapist: TherapistService,
     private services: ServiceService
   ) { }
 
@@ -145,8 +145,9 @@ export class ManagerPage {
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.id = Number(params['id'])
     this.todaysDdate()
+
     this.date()
-    this.thousandPount()
+    await this.getLiquidation()
 
     if (this.id) {
       this.validitingUser()
@@ -161,26 +162,30 @@ export class ManagerPage {
       } else {
         this.manager = rp
         this.administratorRole = false
-        this.liquidationTherapist.encargada = this.manager[0].nombre
-        this.getManager()
+        this.liquidationManager.encargada = this.manager[0].nombre
+        this.serviceLiquidation.getByEncargada(this.liquidationManager.encargada).subscribe(async (rp) => {
+          this.liquidated = rp
+        })
       }
     })
   }
 
-  async consultLiquidationTherapistByManager() {
-    this.serviceLiquidation.getByEncargada(this.liquidationTherapist.encargada).subscribe(async (rp) => {
+  async consultLiquidationManager() {
+    this.serviceLiquidation.getByEncargada(this.liquidationManager.encargada).subscribe(async (rp) => {
       this.liquidated = rp
-      this.liquidationTherapist.encargada = ""
+      this.liquidationManager.encargada = ""
     })
   }
 
-  async GetAllManagers() {
-    this.serviceManager.getUsuarios().subscribe(async (datosEncargada: any) => {
-      this.manager = datosEncargada
+  getLiquidation = async () => {
+    this.dateTodayCurrent = 'HOY'
+
+    this.serviceLiquidation.getLiquidacionesEncargada().subscribe(async (rp: any) => {
+      this.liquidated = rp
     })
   }
 
-  getManager() {
+  GetAllManagers() {
     this.serviceManager.getUsuarios().subscribe((datosEncargada: any) => {
       this.manager = datosEncargada
     })
@@ -209,52 +214,13 @@ export class ManagerPage {
     }
   }
 
-  thousandPount() {
-    this.serviceManager.getById(this.id).subscribe((rp) => {
-      if (rp[0]['rol'] == 'administrador') {
-
-        this.serviceLiquidation.getLiquidacionesEncargada().subscribe((datoLiquidaciones: any) => {
-          this.liquidated = datoLiquidaciones
-
-          for (let o = 0; o < this.liquidated.length; o++) {
-            if (this.liquidated[o].importe > 999) {
-
-              const coma = this.liquidated[o].importe.toString().indexOf(".") !== -1 ? true : false;
-              const array = coma ? this.liquidated[o].importe.toString().split(".") : this.liquidated[o].importe.toString().split("");
-              let integer = coma ? array[o].split("") : array;
-              let subIndex = 1;
-
-              for (let i = integer.length - 1; i >= 0; i--) {
-
-                if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-                  integer.splice(i, 0, ".");
-                  subIndex++;
-
-                } else {
-                  subIndex++;
-                }
-              }
-
-              integer = [integer.toString().replace(/,/gi, "")]
-              this.liquidated[o]['importe'] = integer[0].toString()
-            } else {
-              this.liquidated[o]['importe'] = this.liquidated[o].importe.toString()
-            }
-          }
-        })
-      }
+  filters = async () => {
+    this.serviceLiquidation.getLiquidacionesEncargada().subscribe(async (rp: any) => {
+      this.liquidated = rp
     })
   }
 
-  // filters = async () => {
-  //   this.serviceLiquidation.consultTherapistSettlements().subscribe(async (rp: any) => {
-  //     this.liquidated = rp
-  //   })
-  // }
-
   emptyFilter() {
-    this.selectedTerapeuta = ""
     this.selectedEncargada = ""
     this.fechaInicio = ""
     this.fechaFinal = ""
@@ -331,7 +297,7 @@ export class ManagerPage {
   }
 
   new() {
-    this.router.navigate([`tabs/${this.id}/new-liquiationTherapist`])
+    this.router.navigate([`tabs/${this.id}/new-liquiationManager`])
   }
 
   backArrow = async () => {
@@ -857,15 +823,15 @@ export class ManagerPage {
       this.details = false
     } else {
 
-      this.serviceLiquidation.consultTherapistId(id).subscribe(async (rp) => {
-        this.nameTherapist = rp[0].terapeuta
+      this.serviceLiquidation.getIdEncarg(id).subscribe(async (rp) => {
+        this.nameTherapist = rp[0].encargada
         this.sinceDate = rp[0].desdeFechaLiquidado
         this.sinceTime = rp[0].desdeHoraLiquidado
         this.toDate = rp[0].hastaFechaLiquidado
         this.untilTime = rp[0].hastaHoraLiquidado
         this.payment = rp[0].formaPago
         this.idDetail = rp[0].id
-        this.idTherapist = rp[0].idTerapeuta
+        this.idManager = rp[0].idEncargada
         this.regularization = rp[0]['valueRegularizacion']
 
         if (rp[0]['valueRegularizacion'] > 999) {
@@ -899,7 +865,7 @@ export class ManagerPage {
   }
 
   async sumTotal(id: string) {
-    this.services.getByIdTerap(id).subscribe(async (rp: any) => {
+    this.services.getByIdEncarg(id).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         this.settledData = rp
 
@@ -977,7 +943,7 @@ export class ManagerPage {
 
         this.comission(service, tip, therapistValue, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
       } else {
-        await this.serviceLiquidation.consultTherapistId(id).subscribe(async (rp: any) => {
+        await this.serviceLiquidation.getIdEncarg(id).subscribe(async (rp: any) => {
         })
       }
     })
@@ -987,9 +953,9 @@ export class ManagerPage {
     totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number) {
 
     let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTherapist = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0, totalCommission = 0,
-      sumCommission = 0, receivedTherapist = 0
+      sumCommission = 0, receivedManager = 0
 
-    this.serviceTherapist.getTerapeuta(element[0]['terapeuta']).subscribe(async (rp: any) => {
+    this.serviceManager.getEncargada(element[0]['encargada']).subscribe(async (rp: any) => {
       this.terapeutaName = rp[0]
 
       // Comision
@@ -1017,20 +983,20 @@ export class ManagerPage {
       }
 
       element.map(item => {
-        const numbTerap = this.settledData.filter(serv => serv)
-        receivedTherapist = numbTerap.reduce((accumulator, serv) => {
-          return accumulator + serv.numberTerap
+        const numberEncarg = this.settledData.filter(serv => serv)
+        receivedManager = numberEncarg.reduce((accumulator, serv) => {
+          return accumulator + serv.numberEncarg
         }, 0)
       })
 
-      let totalLiquidation = sumCommission - Number(receivedTherapist) + Number(this.regularization)
-      totalCommission = sumCommission - Number(receivedTherapist)
+      let totalLiquidation = sumCommission - Number(receivedManager) + Number(this.regularization)
+      totalCommission = sumCommission - Number(receivedManager)
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
 
       // this.validateNullData()
       await this.thousandPointEdit(totalLiquidation, service, totalTreatment, tip, totalTip, drink, drinkTherapist, totalDrink, totalDrinkTherap, tobacco,
-        totalTobacco, vitamins, totalVitamin, others, totalOther, sumCommission, receivedTherapist, totalCash, totalBizum, totalCard, totalTransaction, sumTherapist)
+        totalTobacco, vitamins, totalVitamin, others, totalOther, sumCommission, receivedManager, totalCash, totalBizum, totalCard, totalTransaction, sumTherapist)
 
       this.details = true
 
@@ -1040,7 +1006,7 @@ export class ManagerPage {
 
   async thousandPointEdit(totalLiquidation: number, service: number, totalTreatment: number, tip: number, totalTip: number, drink: number, drinkTherap: number, totalDrink: number,
     totalDrinkTherap: number, tobacco: number, totalTobacco: number, vitamins: number, totalVitamin: number, others: number, totalOther: number, sumCommission: number,
-    receivedTherapist: number, totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number, sumTherapist: number) {
+    receivedManager: number, totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number, sumTherapist: number) {
 
     if (totalLiquidation > 999) {
 
@@ -1442,10 +1408,10 @@ export class ManagerPage {
       this.totalSum = sumCommission.toString()
     }
 
-    if (receivedTherapist > 999) {
+    if (receivedManager  > 999) {
 
-      const coma = receivedTherapist.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? receivedTherapist.toString().split(".") : receivedTherapist.toString().split("");
+      const coma = receivedManager .toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? receivedManager .toString().split(".") : receivedManager .toString().split("");
       let integer = coma ? array[0].split("") : array;
       let subIndex = 1;
 
@@ -1464,7 +1430,7 @@ export class ManagerPage {
       integer = [integer.toString().replace(/,/gi, "")]
       this.totalReceived = integer[0].toString()
     } else {
-      this.totalReceived = receivedTherapist.toString()
+      this.totalReceived = receivedManager .toString()
     }
 
     for (let o = 0; o < this.settledData?.length; o++) {
@@ -1781,15 +1747,15 @@ export class ManagerPage {
       confirmButtonText: 'Si, Deseo eliminar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.modelServices.idTerapeuta = ""
-        this.modelServices.liquidadoTerapeuta = false
-        this.services.updateTherapistSettlementTherapistIdByTherapistId(this.idTherapist, this.modelServices).subscribe(async (rp) => {
-          this.serviceLiquidation.deleteLiquidationTherapist(this.idDetail).subscribe(async (rp) => {
+        this.modelServices.idEncargada = ""
+        this.modelServices.liquidadoEncargada  = false
+        this.services.updateManagerSettlementManagerIdByManagerId(this.idManager, this.modelServices).subscribe(async (rp) => {
+          this.serviceLiquidation.deleteLiquidationManager(this.idDetail).subscribe(async (rp) => {
             if (this.administratorRole == true) {
               await this.getLiquidation()
             }
             else {
-              await this.consultLiquidationTherapistByManager()
+              await this.consultLiquidationManager()
             }
           })
         })

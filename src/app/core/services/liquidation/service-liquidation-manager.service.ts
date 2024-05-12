@@ -38,6 +38,19 @@ export class ServiceLiquidationManagerService {
     return this.http.get(`${this.API_URL}/getEncargada/${encargada}`);
   }
 
+  getDateCurrentDay(fechaHoy: string) {
+    return this.http.get(`${this.API_URL}/getDateCurrent/${fechaHoy}`);
+  }
+
+  getEncargadaAndDate(createdDate: string, encargada: string) {
+    return this.http.get(`${this.API_URL}/getFechaHoyByManager`, {
+      params: {
+        createdDate,
+        encargada
+      }
+    });
+  }
+
   // Update
 
   updateById(idEncargada: number, liquidationManger: LiquidationManager) {
@@ -50,7 +63,7 @@ export class ServiceLiquidationManagerService {
 
   // Delete
 
-  deleteLiquidationTherapist(id: number) {
+  deleteLiquidationManager(id: number) {
     return this.http.delete(`${this.API_URL}/deleteLiquidationManagers/${id}`);
   }
 }

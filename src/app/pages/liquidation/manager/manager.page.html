@@ -11,7 +11,7 @@
           <div class="rectangle-18"></div>
           <div class="rectangle-94"></div>
           <div class="terapeuta" (click)="goTherapist()">Terapeuta</div>
-          <div class="encargada" >Encargada</div>
+          <div class="encargada">Encargada</div>
         </div>
 
         <div class="group-2">
@@ -20,7 +20,8 @@
           <div class="rectangle-10"></div>
         </div>
 
-        <svg class="icon2" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="nextArrow()">
+        <svg class="icon2" width="12" height="24" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+          (click)="nextArrow()">
           <path d="M0 24L12 12L0 0" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
 
@@ -73,9 +74,9 @@
             <div class="tratamiento">Tratamiento</div>
           </div>
 
-          <div class="rectangle-104" *ngFor="let liquidation of (liquidated | therapist: selectedTerapeuta  
-          | manager: selectedEncargada | dateLiquidation: dateStart:dateEnd ) | 
-          paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(liquidation.idTerapeuta)">
+          <div class="rectangle-104" *ngFor="let liquidation of (liquidated | manager: selectedEncargada 
+          | dateLiquidation: dateStart:dateEnd ) | paginate: { itemsPerPage: 12, currentPage: page }"
+            (click)="detail(liquidation.idEncargada)">
             <div style="position: relative; top: 0px">
               <div class="luc-a9">{{liquidation.encargada}}</div>
 
@@ -230,7 +231,7 @@
         </div>
 
         <div class="rectangle-1004" *ngFor="let services of (settledData ) | 
-        paginate: { itemsPerPage: 5, currentPage: page }" (click)="detail(services.idTerapeuta)">
+        paginate: { itemsPerPage: 5, currentPage: page }" (click)="detail(services.idEncargada)">
           <div style="position: relative; top: 0px">
 
             <div [ngClass]="{'color2':services.nota !== ''}" (click)="notes()"> </div>
@@ -315,7 +316,7 @@
         <div class="_2226">{{totalLiquidation}} €</div>
 
         <!-- Segunda Tabla -->
-        <div class="pagado-al-terapeuta">Pagado al terapeuta</div>
+        <div class="pagado-al-terapeuta">Pagado a encargada</div>
 
         <!-- Raya -->
         <div class="rectangle-110"></div>

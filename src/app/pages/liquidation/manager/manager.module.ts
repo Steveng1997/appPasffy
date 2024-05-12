@@ -7,7 +7,6 @@ import { ManagerPage } from './manager.page';
 
 // Pipe
 import { NgxPaginationModule } from 'ngx-pagination';
-import { TherapistPipe } from 'src/app/core/pipe/therapist.pipe';
 import { ManagerPipe } from 'src/app/core/pipe/manager.pipe';
 import { DateLiquidationPipe } from 'src/app/core/pipe/date-liquidation.pipe';
 
@@ -18,7 +17,6 @@ import { DateLiquidationPipe } from 'src/app/core/pipe/date-liquidation.pipe';
     IonicModule,
     ManagerPageRoutingModule,
     NgxPaginationModule,
-    TherapistPipe,
     ManagerPipe,
     DateLiquidationPipe,
   ],
