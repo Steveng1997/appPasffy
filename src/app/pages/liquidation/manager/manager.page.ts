@@ -3,12 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 // Models
-import { LiquidationTherapist } from 'src/app/core/models/liquidationTherapist';
+import { LiquidationManager } from 'src/app/core/models/liquidationManager';
 import { ModelService } from 'src/app/core/models/service';
 
 // Services
-import { ServiceLiquidationTherapist } from 'src/app/core/services/liquidation/service-liquidation-therapist.service';
-import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.service';
+import { ServiceLiquidationManagerService } from 'src/app/core/services/liquidation/service-liquidation-manager.service';
 import { ManagerService } from 'src/app/core/services/manager/manager.service';
 import { ServiceService } from 'src/app/core/services/service/service.service';
 import { TherapistService } from 'src/app/core/services/therapist/therapist.service';
@@ -111,34 +110,32 @@ export class ManagerPage {
 
   // --------------------------------
 
-  liquidationTherapist: LiquidationTherapist = {
-    createdDate: "",
+  liquidationTherapist: LiquidationManager = {
     currentDate: "",
     desdeFechaLiquidado: "",
     desdeHoraLiquidado: "",
     encargada: "",
-    formaPago: "",
+    fixedDay: 0,
     hastaFechaLiquidado: "",
     hastaHoraLiquidado: new Date().toTimeString().substring(0, 5),
+    createdDate: "",
     id: 0,
     idUnico: "",
-    idTerapeuta: "",
+    idEncargada: "",
     importe: 0,
     regularizacion: "",
-    terapeuta: "",
     tratamiento: 0,
     valueRegularizacion: 0
   }
 
   modelServices: ModelService = {
-    idTerapeuta: ""
+    idEncargada: "",
   }
 
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
-    private ionLoaderService: IonLoaderService,
-    private serviceLiquidation: ServiceLiquidationTherapist,
+    private serviceLiquidation: ServiceLiquidationManagerService,
     private serviceManager: ManagerService,
     private serviceTherapist: TherapistService,
     private services: ServiceService
@@ -148,10 +145,8 @@ export class ManagerPage {
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.id = Number(params['id'])
     this.todaysDdate()
-
     this.date()
-    await this.getLiquidation()
-    this.getTerapeuta()
+    this.thousandPount()
 
     if (this.id) {
       this.validitingUser()
@@ -162,37 +157,26 @@ export class ManagerPage {
     this.serviceManager.getById(this.id).subscribe((rp) => {
       if (rp[0]['rol'] == 'administrador') {
         this.administratorRole = true
-        this.getManager()
+        this.GetAllManagers()
       } else {
         this.manager = rp
         this.administratorRole = false
         this.liquidationTherapist.encargada = this.manager[0].nombre
-        this.serviceLiquidation.consultManager(this.liquidationTherapist.encargada).subscribe(async (rp) => {
-          this.liquidated = rp
-        })
+        this.getManager()
       }
     })
   }
 
   async consultLiquidationTherapistByManager() {
-    this.serviceLiquidation.consultManager(this.liquidationTherapist.encargada).subscribe(async (rp) => {
+    this.serviceLiquidation.getByEncargada(this.liquidationTherapist.encargada).subscribe(async (rp) => {
       this.liquidated = rp
       this.liquidationTherapist.encargada = ""
-      this.liquidationTherapist.terapeuta = ""
     })
   }
 
-  getLiquidation = async () => {
-    this.dateTodayCurrent = 'HOY'
-
-    this.serviceLiquidation.consultTherapistSettlements().subscribe(async (rp: any) => {
-      this.liquidated = rp
-    })
-  }
-
-  getTerapeuta() {
-    this.serviceTherapist.getAllTerapeuta().subscribe((datosTerapeuta: any) => {
-      this.terapeuta = datosTerapeuta
+  async GetAllManagers() {
+    this.serviceManager.getUsuarios().subscribe(async (datosEncargada: any) => {
+      this.manager = datosEncargada
     })
   }
 
@@ -225,11 +209,49 @@ export class ManagerPage {
     }
   }
 
-  filters = async () => {
-    this.serviceLiquidation.consultTherapistSettlements().subscribe(async (rp: any) => {
-      this.liquidated = rp
+  thousandPount() {
+    this.serviceManager.getById(this.id).subscribe((rp) => {
+      if (rp[0]['rol'] == 'administrador') {
+
+        this.serviceLiquidation.getLiquidacionesEncargada().subscribe((datoLiquidaciones: any) => {
+          this.liquidated = datoLiquidaciones
+
+          for (let o = 0; o < this.liquidated.length; o++) {
+            if (this.liquidated[o].importe > 999) {
+
+              const coma = this.liquidated[o].importe.toString().indexOf(".") !== -1 ? true : false;
+              const array = coma ? this.liquidated[o].importe.toString().split(".") : this.liquidated[o].importe.toString().split("");
+              let integer = coma ? array[o].split("") : array;
+              let subIndex = 1;
+
+              for (let i = integer.length - 1; i >= 0; i--) {
+
+                if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+                  integer.splice(i, 0, ".");
+                  subIndex++;
+
+                } else {
+                  subIndex++;
+                }
+              }
+
+              integer = [integer.toString().replace(/,/gi, "")]
+              this.liquidated[o]['importe'] = integer[0].toString()
+            } else {
+              this.liquidated[o]['importe'] = this.liquidated[o].importe.toString()
+            }
+          }
+        })
+      }
     })
   }
+
+  // filters = async () => {
+  //   this.serviceLiquidation.consultTherapistSettlements().subscribe(async (rp: any) => {
+  //     this.liquidated = rp
+  //   })
+  // }
 
   emptyFilter() {
     this.selectedTerapeuta = ""

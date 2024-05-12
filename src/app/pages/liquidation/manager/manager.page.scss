@@ -200,7 +200,7 @@ ion-grid {
 .rectangle-104 {
     background: #ffffff;
     border-radius: 15px;
-    width: 891px;
+    width: 771px;
     height: 40px;
     position: relative;
     display: inline-grid;
@@ -252,25 +252,6 @@ ion-grid {
     overflow: hidden;
 }
 
-.laura9 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 18px;
-    line-height: 125%;
-    font-weight: 400;
-    width: 76px;
-    position: absolute;
-    left: 130px;
-    top: 9px;
-    display: flex;
-    justify-content: start;
-    justify-items: start;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
 ._5-15-6-239 {
     color: #3c3c3c;
     text-align: left;
@@ -280,26 +261,11 @@ ion-grid {
     font-weight: 400;
     width: 80px;
     position: absolute;
-    left: 245px;
+    left: 130px;
     top: 9px;
     display: flex;
     justify-content: end;
     justify-items: end;
-}
-
-.terapeuta2 {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Bold", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 700;
-    position: absolute;
-    left: 136px;
-    top: 7px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
 }
 
 .importe {
@@ -310,7 +276,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 700;
     position: absolute;
-    left: 271px;
+    left: 157px;
     top: 7px;
     display: flex;
     align-items: flex-end;
@@ -325,7 +291,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 400;
     position: absolute;
-    left: 356px;
+    left: 241px;
     top: 9px;
     width: 160px;
     display: flex;
@@ -342,7 +308,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 400;
     position: absolute;
-    left: 527px;
+    left: 412px;
     top: 9px;
     width: 160px;
     display: flex;
@@ -359,7 +325,7 @@ ion-grid {
     font-weight: 400;
     position: absolute;
     width: 63px;
-    left: 688px;
+    left: 573px;
     top: 10px;
     display: flex;
     align-items: start;
@@ -377,7 +343,7 @@ ion-grid {
     font-weight: 400;
     width: 30px;
     position: absolute;
-    left: 840px;
+    left: 726px;
     top: 9px;
     display: flex;
     align-items: end;
@@ -392,7 +358,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 700;
     position: absolute;
-    left: 404px;
+    left: 290px;
     top: 7px;
     display: flex;
     align-items: flex-end;
@@ -407,7 +373,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 700;
     position: absolute;
-    left: 577px;
+    left: 463px;
     top: 7px;
     display: flex;
     align-items: flex-end;
@@ -422,7 +388,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 700;
     position: absolute;
-    left: 693px;
+    left: 579px;
     top: 7px;
     display: flex;
     align-items: flex-end;
@@ -437,7 +403,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 700;
     position: absolute;
-    left: 784px;
+    left: 670px;
     top: 7px;
     display: flex;
     align-items: flex-end;
@@ -2438,16 +2404,12 @@ ion-select::part(placeholder) {
     }
 
     .rectangle-105 {
-        width: 891px;
+        width: 777px;
         left: 5px;
     }
 
     .luc-a9 {
         left: 28px;
-    }
-
-    .laura9 {
-        left: 130px;
     }
 
     // Filters

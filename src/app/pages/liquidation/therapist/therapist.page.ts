@@ -8,7 +8,6 @@ import { ModelService } from 'src/app/core/models/service';
 
 // Services
 import { ServiceLiquidationTherapist } from 'src/app/core/services/liquidation/service-liquidation-therapist.service';
-import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.service';
 import { ManagerService } from 'src/app/core/services/manager/manager.service';
 import { ServiceService } from 'src/app/core/services/service/service.service';
 import { TherapistService } from 'src/app/core/services/therapist/therapist.service';
@@ -138,7 +137,6 @@ export class TherapistPage implements OnInit {
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
-    private ionLoaderService: IonLoaderService,
     private serviceLiquidation: ServiceLiquidationTherapist,
     private serviceManager: ManagerService,
     private serviceTherapist: TherapistService,
