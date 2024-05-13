@@ -28,7 +28,6 @@ export class ManagerPage {
 
   manager: any
   selectedEncargada: string
-  selectedFormPago: string
 
   id: number
   liquidated: any
@@ -286,6 +285,7 @@ export class ManagerPage {
   }
 
   goTherapist() {
+    this.selectedEncargada = ""
     this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
   }
 
@@ -911,25 +911,25 @@ export class ManagerPage {
         // Filter by totalCash
         const totalCashs = rp.filter(serv => serv)
         let totalCash = totalCashs.reduce((accumulator, serv) => {
-          return accumulator + serv.valueEfectTerapeuta
+          return accumulator + serv.valueEfectEncargada
         }, 0)
 
         // Filter by totalBizum
         const totalBizums = rp.filter(serv => serv)
         let totalBizum = totalBizums.reduce((accumulator, serv) => {
-          return accumulator + serv.valueBizuTerapeuta
+          return accumulator + serv.valueBizuEncargada
         }, 0)
 
         // Filter by totalCard
         const totalCards = rp.filter(serv => serv)
         let totalCard = totalCards.reduce((accumulator, serv) => {
-          return accumulator + serv.valueTarjeTerapeuta
+          return accumulator + serv.valueTarjeEncargada
         }, 0)
 
         // Filter by totalTransaction
         const totalTransactions = rp.filter(serv => serv)
         let totalTransaction = totalTransactions.reduce((accumulator, serv) => {
-          return accumulator + serv.valueTransTerapeuta
+          return accumulator + serv.valueTransEncargada
         }, 0)
 
         this.comission(service, tip, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
@@ -1758,6 +1758,7 @@ export class ManagerPage {
 
   delete() {
     Swal.fire({
+      heightAuto: false,
       title: '¿Deseas eliminar el registro?',
       text: "Una vez eliminados ya no se podrán recuperar",
       icon: 'warning',
@@ -1777,6 +1778,8 @@ export class ManagerPage {
             else {
               await this.consultLiquidationManager()
             }
+
+            this.details = false
           })
         })
       }

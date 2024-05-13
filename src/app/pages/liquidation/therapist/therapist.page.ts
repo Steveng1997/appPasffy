@@ -146,6 +146,9 @@ export class TherapistPage implements OnInit {
   async ngOnInit() {
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.id = Number(params['id'])
+    this.selectedEncargada = ""
+    this.selectedTerapeuta = ""
+    this.selectedFormPago = ""
     this.todaysDdate()
 
     this.date()
