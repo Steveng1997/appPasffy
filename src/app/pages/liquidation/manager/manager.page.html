@@ -2,7 +2,7 @@
   <ion-grid fixed>
     <ion-row size="12" size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="3">
 
-      <div class="liquidaci-n-terapeuta">
+      <div class="liquidaci-n-encargada">
         <div class="rectangle-93"></div>
         <div class="rectangle-92"></div>
         <div class="liquidaci-n">Liquidación</div>
@@ -108,68 +108,57 @@
 <div class="pop-up-filtros" *ngIf="filter">
 
   <div class="rectangle-30"></div>
-  <div class="_filtros">Filtros</div>
-  <div class="rectangle-41"></div>
 
-  <svg class="vector-6" width="59" height="2" viewBox="0 0 59 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 1L59 0.999995" stroke="#3C3C3C" />
-  </svg>
+  <div class="containerFilter">
+    <div class="_filtros">Filtros</div>
+    <div class="rectangle-41"></div>
 
-  <div class="limpiar" id="btnDelete" (click)="emptyFilter()">Limpiar</div>
-  <div class="filtrar" (click)="btnFilter()">Filtrar</div>
+    <svg class="vector-6" width="59" height="2" viewBox="0 0 59 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 1L59 0.999995" stroke="#3C3C3C" />
+    </svg>
 
-  <div class="_terapeuta">Terapeuta</div>
-  <div class="_encargada">Encargada</div>
-  <div class="inicial">Inicial</div>
-  <div class="final">Final</div>
+    <div class="limpiar" id="btnDelete" (click)="emptyFilter()">Limpiar</div>
+    <div class="filtrar" (click)="btnFilter()">Filtrar</div>
 
-  <svg class="x-close" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
-    (click)="btnFilter()">
-    <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
-      stroke-linejoin="round" />
-  </svg>
+    <div class="_encargada">Encargada</div>
+    <div class="inicial">Inicial</div>
+    <div class="final">Final</div>
 
-  <div class="component-7">
-    <div class="rectangle-34"></div>
-    <ion-select class="seleccionar" style="display: grid; min-height: -webkit-fill-available" placeholder="Selecciona"
-      [(ngModel)]="selectedTerapeuta" (ngModelChange)="filters()">
-      <ion-select-option *ngFor="let therapist of terapeuta">{{therapist.nombre}}</ion-select-option>
-    </ion-select>
+    <svg class="x-close" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
+      (click)="btnFilter()">
+      <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+
+    <div class="component-8">
+      <div class="rectangle-34-1"></div>
+      <ion-select class="seleccionar_1" style="display: grid; min-height: -webkit-fill-available"
+        placeholder="Selecciona" [(ngModel)]="selectedEncargada" (ngModelChange)="filters()">
+        <ion-select-option *ngFor="let manager of manager">{{manager.nombre}}</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="rectangle-154"></div>
+    <ion-input class="_02-feb-2024" type="date" name="dateStart" [(ngModel)]="dateStart" [value]="CurrenDate"
+      (ngModelChange)="filters()"></ion-input>
+
+    <div class="rectangle-155"></div>
+    <ion-input class="_10-12-a-m" type="time" name="hourStart" [(ngModel)]="hourStart" [value]="CurrenDate"
+      (ngModelChange)="filters()"></ion-input>
+
+    <div class="rectangle-156"></div>
+    <ion-input class="_02-feb-20242" type="date" name="dateEnd" [(ngModel)]="dateEnd"
+      (ngModelChange)="filters()"></ion-input>
+
+    <div class="rectangle-157"></div>
+    <ion-input class="_08-02-p-m" type="time" name="hourEnd" [(ngModel)]="hourEnd"
+      (ngModelChange)="filters()"></ion-input>
+
+    <svg class="_icon" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
   </div>
-
-  <div class="component-8">
-    <div class="rectangle-34-1"></div>
-    <ion-select class="seleccionar_1" style="display: grid; min-height: -webkit-fill-available" placeholder="Selecciona"
-      [(ngModel)]="selectedEncargada" (ngModelChange)="filters()">
-      <ion-select-option *ngFor="let manager of manager">{{manager.nombre}}</ion-select-option>
-    </ion-select>
-  </div>
-
-  <div class="rectangle-154"></div>
-  <ion-input class="_02-feb-2024" type="date" name="dateStart" [(ngModel)]="dateStart" [value]="CurrenDate"
-    (ngModelChange)="filters()"></ion-input>
-
-  <div class="rectangle-155"></div>
-  <ion-input class="_10-12-a-m" type="time" name="hourStart" [(ngModel)]="hourStart" [value]="CurrenDate"
-    (ngModelChange)="filters()"></ion-input>
-
-  <div class="rectangle-156"></div>
-  <ion-input class="_02-feb-20242" type="date" name="dateEnd" [(ngModel)]="dateEnd"
-    (ngModelChange)="filters()"></ion-input>
-
-  <div class="rectangle-157"></div>
-  <ion-input class="_08-02-p-m" type="time" name="hourEnd" [(ngModel)]="hourEnd"
-    (ngModelChange)="filters()"></ion-input>
-
-  <svg class="_icon" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
-      stroke-linejoin="round" />
-  </svg>
-
-  <svg class="_icon2" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
-      stroke-linejoin="round" />
-  </svg>
 </div>
 
 <!-- Details -->
@@ -300,37 +289,42 @@
         <div class="recibido">Recibido</div>
         <div class="_05">{{totalReceived}} €</div>
 
+        <div class="fijoDia">Fijo/día</div>
+        <div class="_15">{{fixedDay}}</div>
+        <div class="_10012">X {{numberDay}} €</div>
+        <div class="_606">{{totalFixedDay}} €</div>
+
         <!-- Raya -->
         <div class="rectangle-109"></div>
 
         <div class="total-a-pagar">Total a pagar</div>
         <div class="_2226">{{totalLiquidation}} €</div>
 
-        <!-- Segunda Tabla -->
-        <div class="pagado-al-terapeuta">Pagado a encargada</div>
+        <div class="rectangle-501">
+          <!-- Segunda Tabla -->
+          <div class="pagado-al-encargada">Pagado a encargada</div>
 
-        <!-- Raya -->
-        <div class="rectangle-110"></div>
+          <!-- Raya -->
+          <div class="rectangle-110"></div>
 
+          <div class="efectivo">Efectivo</div>
+          <div class="_2224">{{totalCash}} €</div>
 
-        <div class="efectivo">Efectivo</div>
-        <div class="_2224">{{totalCash}} €</div>
+          <div class="bizum">Bizum</div>
+          <div class="_04">{{totalBizum}} €</div>
 
-        <div class="bizum">Bizum</div>
-        <div class="_04">{{totalBizum}} €</div>
+          <div class="tarjeta">Tarjeta</div>
+          <div class="_09">{{totalCard}} €</div>
 
-        <div class="tarjeta">Tarjeta</div>
-        <div class="_09">{{totalCard}} €</div>
+          <div class="transferencia">Transferencia</div>
+          <div class="_013">{{totalTransaction}} €</div>
 
-        <div class="transferencia">Transferencia</div>
-        <div class="_013">{{totalTransaction}} €</div>
+          <!-- Raya -->
+          <div class="rectangle-111"></div>
 
-        <!-- Raya -->
-        <div class="rectangle-111"></div>
-
-        <div class="total-a-pagar2">Total a pagar</div>
-        <div class="_014">{{sumTherapist}} €</div>
-
+          <div class="total-a-pagar2">Total a pagar</div>
+          <div class="_014">{{sumTherapist}} €</div>
+        </div>
       </div>
 
       <svg class="x-close-1" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"

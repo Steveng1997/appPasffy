@@ -26,11 +26,6 @@ export class ManagerPage {
   today: boolean = true
   administratorRole: boolean = false
 
-  // Se quita
-  terapeuta: any
-  selectedTerapeuta: string
-  // ---
-
   manager: any
   selectedEncargada: string
   selectedFormPago: string
@@ -71,7 +66,9 @@ export class ManagerPage {
   toDate: string
   untilTime: string
   regularization: number
-  payment: string
+  fixedDay: number
+  numberDay: number
+  totalFixedDay: string
 
   settledData: any
   terapeutaName: any
@@ -829,7 +826,7 @@ export class ManagerPage {
         this.sinceTime = rp[0].desdeHoraLiquidado
         this.toDate = rp[0].hastaFechaLiquidado
         this.untilTime = rp[0].hastaHoraLiquidado
-        this.payment = rp[0].formaPago
+        this.fixedDay = rp[0].fixedDay
         this.idDetail = rp[0].id
         this.idManager = rp[0].idEncargada
         this.regularization = rp[0]['valueRegularizacion']
@@ -879,12 +876,6 @@ export class ManagerPage {
         const propinas = rp.filter(serv => serv)
         let tip = propinas.reduce((accumulator, serv) => {
           return accumulator + serv.propina
-        }, 0)
-
-        // Filter by Pago
-        const terapeuta = rp.filter(serv => serv)
-        let therapistValue = terapeuta.reduce((accumulator, serv) => {
-          return accumulator + serv.numberTerap
         }, 0)
 
         // Filter by Bebida
@@ -941,7 +932,7 @@ export class ManagerPage {
           return accumulator + serv.valueTransTerapeuta
         }, 0)
 
-        this.comission(service, tip, therapistValue, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
+        this.comission(service, tip, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
       } else {
         await this.serviceLiquidation.getIdEncarg(id).subscribe(async (rp: any) => {
         })
@@ -949,7 +940,7 @@ export class ManagerPage {
     })
   }
 
-  async comission(service: number, tip: number, therapistValue: number, drinkTherapist: number, drink: number, tobacco: number, vitamins: number, others: number, element,
+  async comission(service: number, tip: number, drinkTherapist: number, drink: number, tobacco: number, vitamins: number, others: number, element,
     totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number) {
 
     let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTherapist = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0, totalCommission = 0,
@@ -957,6 +948,7 @@ export class ManagerPage {
 
     this.serviceManager.getEncargada(element[0]['encargada']).subscribe(async (rp: any) => {
       this.terapeutaName = rp[0]
+      this.numberDay = rp[0].fijoDia
 
       // Comision
       comisiServicio = service / 100 * rp[0]?.servicio
@@ -976,6 +968,8 @@ export class ManagerPage {
       let totalVitamin = Number(comiVitamina.toFixed(1))
       let totalOther = Number(comiOtros.toFixed(1))
 
+      let fixedTotalDay = this.fixedDay * this.numberDay
+
       sumComision = Number(totalTreatment) + Number(totalTip) + Number(totalDrink) + Number(totalDrinkTherap) + Number(totalTobacco) + Number(totalVitamin) + Number(totalOther)
 
       if (sumComision != 0 || sumComision != undefined) {
@@ -990,13 +984,14 @@ export class ManagerPage {
       })
 
       let totalLiquidation = sumCommission - Number(receivedManager) + Number(this.regularization)
-      totalCommission = sumCommission - Number(receivedManager)
+      totalCommission = sumCommission + fixedTotalDay - Number(receivedManager)
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
 
       // this.validateNullData()
       await this.thousandPointEdit(totalLiquidation, service, totalTreatment, tip, totalTip, drink, drinkTherapist, totalDrink, totalDrinkTherap, tobacco,
-        totalTobacco, vitamins, totalVitamin, others, totalOther, sumCommission, receivedManager, totalCash, totalBizum, totalCard, totalTransaction, sumTherapist)
+        totalTobacco, vitamins, totalVitamin, others, totalOther, sumCommission, receivedManager, totalCash, totalBizum, totalCard, totalTransaction,
+        sumTherapist, fixedTotalDay)
 
       this.details = true
 
@@ -1006,7 +1001,7 @@ export class ManagerPage {
 
   async thousandPointEdit(totalLiquidation: number, service: number, totalTreatment: number, tip: number, totalTip: number, drink: number, drinkTherap: number, totalDrink: number,
     totalDrinkTherap: number, tobacco: number, totalTobacco: number, vitamins: number, totalVitamin: number, others: number, totalOther: number, sumCommission: number,
-    receivedManager: number, totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number, sumTherapist: number) {
+    receivedManager: number, totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number, sumTherapist: number, fixedTotalDay: number) {
 
     if (totalLiquidation > 999) {
 
@@ -1408,10 +1403,10 @@ export class ManagerPage {
       this.totalSum = sumCommission.toString()
     }
 
-    if (receivedManager  > 999) {
+    if (receivedManager > 999) {
 
-      const coma = receivedManager .toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? receivedManager .toString().split(".") : receivedManager .toString().split("");
+      const coma = receivedManager.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? receivedManager.toString().split(".") : receivedManager.toString().split("");
       let integer = coma ? array[0].split("") : array;
       let subIndex = 1;
 
@@ -1430,7 +1425,7 @@ export class ManagerPage {
       integer = [integer.toString().replace(/,/gi, "")]
       this.totalReceived = integer[0].toString()
     } else {
-      this.totalReceived = receivedManager .toString()
+      this.totalReceived = receivedManager.toString()
     }
 
     for (let o = 0; o < this.settledData?.length; o++) {
@@ -1734,6 +1729,31 @@ export class ManagerPage {
     } else {
       this.sumTherapist = sumTherapist.toString()
     }
+
+    if (fixedTotalDay > 999) {
+
+      const coma = fixedTotalDay.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? fixedTotalDay.toString().split(".") : fixedTotalDay.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalFixedDay = integer[0].toString()
+    } else {
+      this.totalFixedDay = fixedTotalDay.toString()
+    }
   }
 
   delete() {
@@ -1748,7 +1768,7 @@ export class ManagerPage {
     }).then((result) => {
       if (result.isConfirmed) {
         this.modelServices.idEncargada = ""
-        this.modelServices.liquidadoEncargada  = false
+        this.modelServices.liquidadoEncargada = false
         this.services.updateManagerSettlementManagerIdByManagerId(this.idManager, this.modelServices).subscribe(async (rp) => {
           this.serviceLiquidation.deleteLiquidationManager(this.idDetail).subscribe(async (rp) => {
             if (this.administratorRole == true) {

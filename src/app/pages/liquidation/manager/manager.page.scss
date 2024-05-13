@@ -1,5 +1,5 @@
-.liquidaci-n-terapeuta,
-.liquidaci-n-terapeuta * {
+.liquidaci-n-encargada,
+.liquidaci-n-encargada * {
     box-sizing: border-box;
 }
 
@@ -10,7 +10,7 @@ ion-grid {
     top: -23px;
 }
 
-.liquidaci-n-terapeuta {
+.liquidaci-n-encargada {
     background: #ffffff;
     width: 411px;
     height: 1113px;
@@ -495,18 +495,24 @@ ion-grid {
 .containerDetail {
     position: relative;
     top: -14px;
-    height: 1032px;
+    height: 1044px;
 }
 
 .rectangle-30 {
     background: #ffffff;
     border-radius: 49px;
     width: 346px;
-    height: 550px;
+    height: 464px;
     position: relative;
     left: 16.3px;
-    top: -45px;
+    top: -87px;
     box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
+}
+
+.containerFilter {
+    position: relative;
+    top: -596px;
+    left: 8px;
 }
 
 ._filtros {
@@ -534,21 +540,6 @@ ion-grid {
     position: absolute;
     left: 30px;
     top: 128px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
-._terapeuta {
-    color: var(--negro, #3c3c3c);
-    text-align: left;
-    font-family: "Inter-Bold", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 700;
-    position: absolute;
-    left: 30px;
-    top: 217px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -630,21 +621,7 @@ ion-grid {
     height: 44.83px;
     position: absolute;
     left: 20px;
-    top: 219px;
-}
-
-.rectangle-34 {
-    border-radius: 15px;
-    border-style: solid;
-    border-color: var(--negro, #3c3c3c);
-    border-width: 1px;
-    width: 321px;
-    height: 44px;
-    position: absolute;
-    right: 0%;
-    left: 0%;
-    bottom: 0%;
-    top: 48%;
+    top: 132px;
 }
 
 .rectangle-34-1 {
@@ -658,27 +635,7 @@ ion-grid {
     right: 0%;
     left: 0%;
     bottom: 0%;
-    top: 25px;
-}
-
-.seleccionar {
-    color: #7f7c7c;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 400;
-    position: absolute;
-    right: 68.36%;
-    left: 5.07%;
-    width: 26.57%;
-    bottom: 28.63%;
-    // top: 35px;
-    top: 35px;
-    height: 44.61%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    top: 48%;
 }
 
 .seleccionar_1 {
@@ -693,7 +650,7 @@ ion-grid {
     left: 5.07%;
     width: 26.57%;
     bottom: 28.63%;
-    top: 38px;
+    top: 35px;
     height: 44.61%;
     display: flex;
     align-items: flex-end;
@@ -710,26 +667,6 @@ ion-grid {
     top: 42px;
     transform: translate(-20px, -1px);
     overflow: visible;
-}
-
-._icon2 {
-    width: 5.69%;
-    height: 42.38%;
-    position: absolute;
-    right: 2.69%;
-    left: 88.63%;
-    bottom: 15.24%;
-    top: 132px;
-    transform: translate(-20px, -1px);
-    overflow: visible;
-}
-
-.component-7 {
-    width: 335px;
-    height: 44.83px;
-    position: absolute;
-    left: 20px;
-    top: 132px;
 }
 
 .icon2 {
@@ -753,7 +690,7 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     left: 30px;
-    top: 307px;
+    top: 217px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -768,7 +705,7 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     left: 30px;
-    top: 395px;
+    top: 307px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -783,7 +720,7 @@ ion-grid {
     height: 44px;
     position: absolute;
     left: 20px;
-    top: 334px;
+    top: 243px;
 }
 
 .rectangle-155 {
@@ -795,7 +732,7 @@ ion-grid {
     height: 44px;
     position: absolute;
     left: 201px;
-    top: 334px;
+    top: 243px;
 }
 
 .rectangle-156 {
@@ -807,7 +744,7 @@ ion-grid {
     height: 44px;
     position: absolute;
     left: 20px;
-    top: 422px;
+    top: 334px;
 }
 
 .rectangle-157 {
@@ -819,7 +756,7 @@ ion-grid {
     height: 44px;
     position: absolute;
     left: 201px;
-    top: 422px;
+    top: 334px;
 }
 
 ._02-feb-2024 {
@@ -831,7 +768,7 @@ ion-grid {
     font-weight: 400;
     position: absolute;
     left: 36px;
-    top: 335px;
+    top: 244px;
     width: 96px;
     height: 20px;
     display: flex;
@@ -848,7 +785,7 @@ ion-grid {
     font-weight: 400;
     position: absolute;
     left: 215px;
-    top: 335px;
+    top: 244px;
     width: 96px;
     height: 20px;
     display: flex;
@@ -865,7 +802,7 @@ ion-grid {
     font-weight: 400;
     position: absolute;
     left: 36px;
-    top: 422px;
+    top: 334px;
     width: 96px;
     height: 20px;
     display: flex;
@@ -882,7 +819,7 @@ ion-grid {
     font-weight: 400;
     position: absolute;
     left: 215px;
-    top: 422px;
+    top: 334px;
     width: 96px;
     height: 20px;
     display: flex;
@@ -931,7 +868,7 @@ ion-grid {
     height: 43px;
     position: absolute;
     left: 152px;
-    top: 977px;
+    top: 989px;
 }
 
 .liquidaci-n-1 {
@@ -1128,7 +1065,7 @@ ion-grid {
     position: absolute;
     width: 70px;
     left: 236px;
-    top: 502px;
+    top: 524px;
     display: flex;
     align-items: end;
     justify-content: end;
@@ -1208,7 +1145,7 @@ ion-grid {
     position: absolute;
     width: 92px;
     left: 214px;
-    top: 473px;
+    top: 495px;
     display: flex;
     align-items: end;
     justify-content: end;
@@ -1533,7 +1470,7 @@ ion-grid {
     justify-content: flex-start;
 }
 
-.pagado-al-terapeuta {
+.pagado-al-encargada {
     color: #3c3c3c;
     text-align: left;
     font-family: "Inter-Bold", sans-serif;
@@ -1709,8 +1646,71 @@ ion-grid {
     line-height: 115%;
     font-weight: 700;
     position: absolute;
-    left: 141px;
+    left: 122px;
     top: 451px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.fijoDia {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 15px;
+    line-height: 115%;
+    font-weight: 700;
+    position: absolute;
+    left: 123px;
+    top: 473px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._15 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 115%;
+    font-weight: 500;
+    position: absolute;
+    width: 18px;
+    left: 182px;
+    top: 473px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._606 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 115%;
+    font-weight: 500;
+    position: absolute;
+    width: 57px;
+    left: 249px;
+    top: 473px;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+._10012 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 15px;
+    line-height: 115%;
+    font-weight: 500;
+    position: absolute;
+    width: 47px;
+    left: 204px;
+    top: 473px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -1724,8 +1724,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 700;
     position: absolute;
-    left: 141px;
-    top: 473px;
+    left: 122px;
+    top: 495px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -1740,8 +1740,8 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     width: 100px;
-    left: 141px;
-    top: 502px;
+    left: 122px;
+    top: 524px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -1764,7 +1764,8 @@ ion-grid {
 }
 
 .rectangle-108 {
-    background: var(--verde-oscuro, #0b9a7a);;
+    background: var(--verde-oscuro, #0b9a7a);
+    ;
     width: 267px;
     height: 2px;
     position: absolute;
@@ -1774,11 +1775,11 @@ ion-grid {
 
 .rectangle-109 {
     background: var(--verde-oscuro, #0b9a7a);
-    width: 167px;
+    width: 186px;
     height: 2px;
     position: absolute;
-    left: 141px;
-    top: 495px;
+    left: 122px;
+    top: 516px;
 }
 
 .rectangle-110 {
@@ -1813,7 +1814,7 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     left: 215px;
-    top: 990px;
+    top: 1003px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -1824,7 +1825,7 @@ ion-grid {
     height: 24px;
     position: absolute;
     left: 185px;
-    top: 986px;
+    top: 999px;
     overflow: visible;
 }
 
@@ -2273,6 +2274,11 @@ ion-grid {
     top: 287px;
 }
 
+.rectangle-501 {
+    position: absolute;
+    top: 22px;
+}
+
 .paginatorDetail {
     position: absolute;
     display: grid;
@@ -2302,7 +2308,7 @@ ion-select::part(placeholder) {
 
 // Pedro
 @media only screen and (min-device-width: 350px) and (max-device-width: 370px) and (min-device-width: 350px) and (max-device-width: 370px) {
-    .liquidaci-n-terapeuta {
+    .liquidaci-n-encargada {
         height: 1044px;
     }
 
@@ -2406,15 +2412,15 @@ ion-select::part(placeholder) {
     .limpiar {
         color: var(--negro, #3c3c3c);
         left: 60px;
-        top: 529px;
+        top: 443px;
     }
 
     .vector-6 {
         width: 59px;
         height: 0px;
-        position: absolute;
+        position: fixed;
         left: 60px;
-        top: 464px;
+        top: 377px;
         transform: translate(0px, -0.5px);
         overflow: visible;
         min-height: -webkit-fill-available;
@@ -2422,7 +2428,7 @@ ion-select::part(placeholder) {
 
     .filtrar {
         left: 232px;
-        top: 529px;
+        top: 437px;
     }
 
     .rectangle-41 {
@@ -2430,11 +2436,9 @@ ion-select::part(placeholder) {
         border-radius: 15px;
         width: 40.05%;
         height: 6.99%;
-        position: absolute;
-        right: 9.26%;
-        left: 50.68%;
-        bottom: 6.73%;
-        top: 514px;
+        position: fixed;
+        left: 183px;
+        top: 469px;
     }
 
     // Detail

@@ -892,12 +892,6 @@ export class TherapistPage implements OnInit {
           return accumulator + serv.propina
         }, 0)
 
-        // Filter by Pago
-        const terapeuta = rp.filter(serv => serv)
-        let therapistValue = terapeuta.reduce((accumulator, serv) => {
-          return accumulator + serv.numberTerap
-        }, 0)
-
         // Filter by Bebida
         const bebida = rp.filter(serv => serv)
         let drink = bebida.reduce((accumulator, serv) => {
@@ -952,7 +946,7 @@ export class TherapistPage implements OnInit {
           return accumulator + serv.valueTransTerapeuta
         }, 0)
 
-        this.comission(service, tip, therapistValue, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
+        this.comission(service, tip, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
       } else {
         await this.serviceLiquidation.consultTherapistId(id).subscribe(async (rp: any) => {
         })
@@ -960,7 +954,7 @@ export class TherapistPage implements OnInit {
     })
   }
 
-  async comission(service: number, tip: number, therapistValue: number, drinkTherapist: number, drink: number, tobacco: number, vitamins: number, others: number, element,
+  async comission(service: number, tip: number, drinkTherapist: number, drink: number, tobacco: number, vitamins: number, others: number, element,
     totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number) {
 
     let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTherapist = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0, totalCommission = 0,
