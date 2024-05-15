@@ -15,26 +15,10 @@
             stroke-linecap="round" stroke-linejoin="round" />
         </svg>
 
-        <div class="component-7">
-          <div class="rectangle-34"></div>
-
-          <svg class="icon3" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="white" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-
-          <ion-select [(ngModel)]="modelLiquidation.terapeuta" class="terapeuta"
-            style="display: grid; min-height: -webkit-fill-available" label="Terapeuta"
-            (ngModelChange)="calculateServices()">
-            <ion-select-option *ngFor="let therapist of terapeuta"
-              [value]="therapist.name">{{therapist.nombre}}</ion-select-option>
-          </ion-select>
-        </div>
-
         <div class="component-82" *ngIf="administratorRole">
           <div class="rectangle-34"></div>
 
-          <svg class="icon2" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="icon3" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="white" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
@@ -205,13 +189,20 @@
             <div class="recibido">Recibido</div>
             <div class="_06">{{totalReceived}} €</div>
 
+            <div class="fijoDia">Fijo/día</div>
+            <!-- <div class="_15">{{fixedDay}}</div> -->
+            <ion-input type="number" class="_15"></ion-input>
+            <div class="_15">{{fixedDay}}</div>
+            <div class="_10012">X {{numberDay}} €</div>
+            <div class="_606">{{totalFixedDay}} €</div>
+
             <div class="rectangle-109"></div>
 
             <div class="total-a-pagar">Total a pagar</div>
             <div class="_2224">{{totalLiquidation}} €</div>
 
             <!-- Table3 -->
-            <div class="pagado-al-terapeuta">Pagado al terapeuta</div>
+            <div class="pagado-al-encargada">Pagado a encargada</div>
             <div class="rectangle-110"></div>
 
             <div class="efectivo">Efectivo</div>
@@ -230,38 +221,6 @@
 
             <div class="total-a-pagar2">Total a pagar</div>
             <div class="_013">0€</div>
-
-            <div class="m-todo-de-pago-al-terapeuta">Método de pago al Terapeuta</div>
-
-            <div class="group-40">
-              <div class="group-52">
-                <div class="rectangle-41" id="bizum1"></div>
-                <ion-input class="rectangle-41" id="Bizum" name="bizum" [(ngModel)]="modelLiquidation.formaPago"
-                  (click)="bizum()"></ion-input>
-                <div class="bizum2">Bizum</div>
-              </div>
-
-              <div class="group-53">
-                <div class="rectangle-37" id="cash1"></div>
-                <ion-input class="rectangle-37" id="cash" name="cash" [(ngModel)]="modelLiquidation.formaPago"
-                  (click)="cash()"></ion-input>
-                <div class="efectivo2">Efectivo</div>
-              </div>
-
-              <div class="group-54">
-                <div class="rectangle-39" id="card1"></div>
-                <ion-input class="rectangle-39" id="card" name="card" [(ngModel)]="modelLiquidation.formaPago"
-                  (click)="card()"></ion-input>
-                <div class="tarjeta2">Tarjeta</div>
-              </div>
-
-              <div class="group-55">
-                <div class="rectangle-40" id="transaction1"></div>
-                <ion-input class="rectangle-40" id="transaction" name="transaction"
-                  [(ngModel)]="modelLiquidation.formaPago" (click)="transaction()"></ion-input>
-                <div class="transferencia2">Transferencia</div>
-              </div>
-            </div>
 
             <div class="rectangle-77" (click)="save()"></div>
             <div class="group-30">

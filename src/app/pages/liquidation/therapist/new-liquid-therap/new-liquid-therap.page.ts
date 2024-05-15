@@ -442,8 +442,6 @@ export class NewLiquidTherapPage implements OnInit {
       this.modelLiquidation.importe = totalLiquidation
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
-
-      this.validateNullData()
       this.ionLoaderService.dismissLoader()
 
       await this.thousandPoint(totalLiquidation, service, totalTreatment, tip, totalTip, drink, drinkTherapist, totalDrink, totalDrinkTherap, tobacco,
@@ -454,10 +452,6 @@ export class NewLiquidTherapPage implements OnInit {
       document.getElementById('nuevaLiquidation').style.overflowY = 'auto'
       document.getElementById('overviewDates').style.height = '326px'
     })
-  }
-
-  validateNullData() {
-
   }
 
   async thousandPoint(totalLiquidation: number, service: number, totalTreatment: number, tip: number, totalTip: number, drink: number, drinkTherap: number, totalDrink: number,

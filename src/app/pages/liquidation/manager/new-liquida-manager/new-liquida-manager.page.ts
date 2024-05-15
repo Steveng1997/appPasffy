@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import moment from 'moment'
 
 // Models
-import { LiquidationTherapist } from 'src/app/core/models/liquidationTherapist';
+import { LiquidationManager } from 'src/app/core/models/liquidationManager';
 import { ModelService } from 'src/app/core/models/service';
 
 // Service
 import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.service';
 import { ManagerService } from 'src/app/core/services/manager/manager.service';
-import { TherapistService } from 'src/app/core/services/therapist/therapist.service';
-import { ServiceLiquidationTherapist } from 'src/app/core/services/liquidation/service-liquidation-therapist.service';
 import { ServiceService } from 'src/app/core/services/service/service.service';
+import { ServiceLiquidationManagerService } from 'src/app/core/services/liquidation/service-liquidation-manager.service';
+
 
 @Component({
   selector: 'app-new-liquida-manager',
@@ -69,27 +70,30 @@ export class NewLiquidaManagerPage implements OnInit {
   sumTherapist: string
   totalReceived: string
 
+  fixedDay: number
+  numberDay: number
+  totalFixedDay: string
+
   currentDate = new Date().getTime()
 
   modelServices: ModelService = {
-    idTerapeuta: ""
+    idEncargada: ""
   }
 
-  modelLiquidation: LiquidationTherapist = {
-    createdDate: "",
+  modelLiquidation: LiquidationManager = {
     currentDate: "",
     desdeFechaLiquidado: "",
     desdeHoraLiquidado: "",
     encargada: "",
-    formaPago: "",
+    fixedDay: 0,
     hastaFechaLiquidado: "",
     hastaHoraLiquidado: new Date().toTimeString().substring(0, 5),
+    createdDate: "",
     id: 0,
     idUnico: "",
-    idTerapeuta: "",
+    idEncargada: "",
     importe: 0,
     regularizacion: "",
-    terapeuta: "",
     tratamiento: 0,
     valueRegularizacion: 0
   }
@@ -100,8 +104,7 @@ export class NewLiquidaManagerPage implements OnInit {
     private ionLoaderService: IonLoaderService,
     private service: ServiceService,
     private serviceManager: ManagerService,
-    private serviceTherapist: TherapistService,
-    private serviceLiquidation: ServiceLiquidationTherapist
+    private serviceLiquidation: ServiceLiquidationManagerService
   ) { }
 
   ngOnInit() {
@@ -110,8 +113,6 @@ export class NewLiquidaManagerPage implements OnInit {
     document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
     this.dates = false
     this.selected = false
-    this.getTherapist()
-    localStorage.clear()
 
     if (this.id) {
       this.validitingUser()
@@ -122,99 +123,22 @@ export class NewLiquidaManagerPage implements OnInit {
     this.serviceManager.getById(this.id).subscribe((rp) => {
       if (rp[0]['rol'] == 'administrador') {
         this.administratorRole = true
-        this.getManager()
+        this.GetAllManagers()
       } else {
         this.manager = rp
         this.administratorRole = false
         this.modelLiquidation.encargada = this.manager[0].nombre
-        this.serviceLiquidation.consultManager(this.modelLiquidation.encargada).subscribe(async (rp) => {
+        this.serviceLiquidation.getByEncargada(this.modelLiquidation.encargada).subscribe(async (rp) => {
           this.liquidated = rp
         })
       }
     })
   }
 
-  getTherapist() {
-    this.serviceTherapist.getAllTerapeuta().subscribe((datosTerapeuta: any) => {
-      this.terapeuta = datosTerapeuta
+  GetAllManagers() {
+    this.serviceManager.getUsuarios().subscribe((datosEncargada: any) => {
+      this.manager = datosEncargada
     })
-  }
-
-  bizum() {
-    localStorage.setItem('Bizum', 'Bizum')
-
-    if (localStorage.length == 1) {
-      if (document.getElementById('bizum1').style.background == "") {
-        document.getElementById('bizum1').style.background = '#1fb996'
-        this.modelLiquidation.formaPago = 'Bizum'
-      } else {
-        document.getElementById('bizum1').style.background = ""
-        this.modelLiquidation.formaPago = ''
-        localStorage.removeItem('Bizum')
-      }
-    } else {
-      document.getElementById('bizum1').style.background = ""
-      localStorage.removeItem('Bizum')
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
-  }
-
-  cash() {
-    localStorage.setItem('Efectivo', 'Efectivo')
-
-    if (localStorage.length == 1) {
-      if (document.getElementById('cash1').style.background == "") {
-        document.getElementById('cash1').style.background = '#1fb996'
-        this.modelLiquidation.formaPago = 'Efectivo'
-      } else {
-        document.getElementById('cash1').style.background = ""
-        this.modelLiquidation.formaPago = ''
-        localStorage.removeItem('Efectivo')
-      }
-    } else {
-      document.getElementById('cash1').style.background = ""
-      console.log('aqui')
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago', showConfirmButton: false, timer: 2500 })
-      localStorage.removeItem('Efectivo')
-    }
-  }
-
-  card() {
-    localStorage.setItem('Tarjeta', 'Tarjeta')
-
-    if (localStorage.length == 1) {
-      if (document.getElementById('card1').style.background == "") {
-        document.getElementById('card1').style.background = '#1fb996'
-        this.modelLiquidation.formaPago = 'Tarjeta'
-      } else {
-        document.getElementById('card1').style.background = ""
-        this.modelLiquidation.formaPago = ''
-        localStorage.removeItem('Tarjeta')
-      }
-    } else {
-      document.getElementById('card1').style.background = ""
-      localStorage.removeItem('Tarjeta')
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
-  }
-
-  transaction() {
-    localStorage.setItem('Trans', 'Trans')
-
-    if (localStorage.length == 1) {
-      if (document.getElementById('transaction1').style.background == "") {
-        document.getElementById('transaction1').style.background = '#1fb996'
-        this.modelLiquidation.formaPago = 'Trans'
-      } else {
-        document.getElementById('transaction1').style.background = ""
-        this.modelLiquidation.formaPago = ''
-        localStorage.removeItem('Trans')
-      }
-    } else {
-      document.getElementById('transaction1').style.background = ""
-      localStorage.removeItem('Trans')
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
-    }
   }
 
   getManager() {
@@ -224,7 +148,7 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   async getThoseThatNotLiquidated() {
-    this.service.getByLiquidTerapFalse().subscribe(async (datoServicio) => {
+    this.service.getByLiquidManagerFalse().subscribe(async (datoServicio) => {
       this.unliquidatedService = datoServicio
     })
   }
@@ -233,7 +157,7 @@ export class NewLiquidaManagerPage implements OnInit {
     let fromMonth = '', fromDay = '', fromYear = '', convertMonth = '', convertDay = '',
       untilMonth = 0, untilDay = 0, untilYear = 0, currentDate = new Date()
 
-    await this.serviceLiquidation.consultTherapistAndManager(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe(async (rp: any) => {
+    await this.serviceLiquidation.getByEncargada(this.modelLiquidation.encargada).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         fromDay = rp[0]['hastaFechaLiquidado'].substring(0, 2)
         fromMonth = rp[0]['hastaFechaLiquidado'].substring(3, 5)
@@ -270,7 +194,7 @@ export class NewLiquidaManagerPage implements OnInit {
   async dateDoesNotExist() {
     let año = "", mes = "", dia = ""
 
-    await this.service.getTerapeutaFechaAsc(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe(async (rp) => {
+    await this.service.getEncargadaFechaAsc(this.modelLiquidation.encargada).subscribe(async (rp) => {
       año = rp[0]['fechaHoyInicio'].substring(0, 4)
       mes = rp[0]['fechaHoyInicio'].substring(5, 7)
       dia = rp[0]['fechaHoyInicio'].substring(8, 10)
@@ -281,11 +205,11 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   calculateServices() {
-    if (this.modelLiquidation.encargada != "" && this.modelLiquidation.terapeuta != "") {
+    if (this.modelLiquidation.encargada != "") {
       this.getThoseThatNotLiquidated()
       this.ionLoaderService.simpleLoader()
 
-      this.service.getByTerapeutaAndEncargada(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe(async (resp: any) => {
+      this.service.getByEncargada(this.modelLiquidation.encargada).subscribe(async (resp: any) => {
         if (resp.length > 0) {
           this.dates = false
           this.ionLoaderService.dismissLoader()
@@ -305,9 +229,8 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   async inputDateAndTime() {
-    this.service.getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.terapeuta,
-      this.modelLiquidation.encargada, this.modelLiquidation.desdeHoraLiquidado, this.modelLiquidation.hastaHoraLiquidado,
-      this.modelLiquidation.desdeFechaLiquidado, this.modelLiquidation.hastaFechaLiquidado).subscribe(async (rp: any) => {
+    this.service.getByEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.encargada, this.modelLiquidation.desdeHoraLiquidado,
+      this.modelLiquidation.hastaHoraLiquidado, this.modelLiquidation.desdeFechaLiquidado, this.modelLiquidation.hastaFechaLiquidado).subscribe(async (rp: any) => {
 
         if (rp.length > 0) {
           this.unliquidatedService = rp
@@ -322,12 +245,6 @@ export class NewLiquidaManagerPage implements OnInit {
           const propinas = rp.filter(serv => serv)
           let tip = propinas.reduce((accumulator, serv) => {
             return accumulator + serv.propina
-          }, 0)
-
-          // Filter by Pago
-          const terapeuta = rp.filter(serv => serv)
-          let therapistValue = terapeuta.reduce((accumulator, serv) => {
-            return accumulator + serv.numberTerap
           }, 0)
 
           // Filter by Bebida
@@ -363,48 +280,48 @@ export class NewLiquidaManagerPage implements OnInit {
           // Filter by totalCash
           const totalCashs = rp.filter(serv => serv)
           let totalCash = totalCashs.reduce((accumulator, serv) => {
-            return accumulator + serv.valueEfectTerapeuta
+            return accumulator + serv.valueEfectEncargada
           }, 0)
 
           // Filter by totalBizum
           const totalBizums = rp.filter(serv => serv)
           let totalBizum = totalBizums.reduce((accumulator, serv) => {
-            return accumulator + serv.valueBizuTerapeuta
+            return accumulator + serv.valueBizuEncargada
           }, 0)
 
           // Filter by totalCard
           const totalCards = rp.filter(serv => serv)
           let totalCard = totalCards.reduce((accumulator, serv) => {
-            return accumulator + serv.valueTarjeTerapeuta
+            return accumulator + serv.valueTarjeEncargada
           }, 0)
 
           // Filter by totalTransaction
           const totalTransactions = rp.filter(serv => serv)
           let totalTransaction = totalTransactions.reduce((accumulator, serv) => {
-            return accumulator + serv.valueTransTerapeuta
+            return accumulator + serv.valueTransEncargada
           }, 0)
 
-          this.comission(service, tip, therapistValue, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
+          this.comission(service, tip, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
 
         } else {
           this.unliquidatedService = rp
           this.ionLoaderService.dismissLoader()
           this.dates = true
           this.selected = true
-          document.getElementById('overviewDates').style.height = '326px'
+          document.getElementById('overviewDates').style.height = '270px'
           document.getElementById('nuevaLiquidation').style.overflowY = 'auto'
           Swal.fire({ heightAuto: false, icon: 'error', title: 'Oops...', text: 'No hay ningun servicio con la fecha seleccionada', showConfirmButton: false, timer: 2500 })
         }
       })
   }
 
-  async comission(service: number, tip: number, therapistValue: number, drinkTherapist: number, drink: number, tobacco: number, vitamins: number, others: number, element,
+  async comission(service: number, tip: number, drinkTherapist: number, drink: number, tobacco: number, vitamins: number, others: number, element,
     totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number) {
 
     let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTherapist = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0, totalCommission = 0,
-      sumCommission = 0, receivedTherapist = 0
+      sumCommission = 0, receivedManager = 0
 
-    await this.serviceTherapist.getTerapeuta(this.modelLiquidation.terapeuta).subscribe(async (rp) => {
+    await this.serviceManager.getEncargada(this.modelLiquidation.encargada).subscribe(async (rp) => {
       this.terapeutaName = rp[0]
 
       // Comision
@@ -432,12 +349,12 @@ export class NewLiquidaManagerPage implements OnInit {
 
       element.map(item => {
         const numbTerap = this.unliquidatedService.filter(serv => serv)
-        receivedTherapist = numbTerap.reduce((accumulator, serv) => {
-          return accumulator + serv.numberTerap
+        receivedManager = numbTerap.reduce((accumulator, serv) => {
+          return accumulator + serv.numberEncarg
         }, 0)
       })
 
-      let totalLiquidation = Math.ceil(sumCommission) - Number(receivedTherapist)
+      let totalLiquidation = Math.ceil(sumCommission) - Number(receivedManager)
       this.modelLiquidation.importe = totalLiquidation
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
@@ -446,13 +363,34 @@ export class NewLiquidaManagerPage implements OnInit {
       this.ionLoaderService.dismissLoader()
 
       await this.thousandPoint(totalLiquidation, service, totalTreatment, tip, totalTip, drink, drinkTherapist, totalDrink, totalDrinkTherap, tobacco,
-        totalTobacco, vitamins, totalVitamin, others, totalOther, sumCommission, receivedTherapist, totalCash, totalBizum, totalCard, totalTransaction, sumTherapist)
+        totalTobacco, vitamins, totalVitamin, others, totalOther, sumCommission, receivedManager, totalCash, totalBizum, totalCard, totalTransaction, sumTherapist)
 
       this.dates = true
       this.selected = true
       document.getElementById('nuevaLiquidation').style.overflowY = 'auto'
-      document.getElementById('overviewDates').style.height = '326px'
+      document.getElementById('overviewDates').style.height = '270px'
     })
+  }
+
+  calculateTheDays() {
+    let day = '', convertDay = '', month = '', year = '', hour = new Date().toTimeString().substring(0, 8), dayEnd = '', monthEnd = '', yearEnd = ''
+
+    dayEnd = this.modelLiquidation.desdeFechaLiquidado.substring(8, 10)
+    monthEnd = this.modelLiquidation.desdeFechaLiquidado.substring(5, 7)
+    yearEnd = this.modelLiquidation.desdeFechaLiquidado.substring(0, 4)
+
+    var date1 = moment(`${yearEnd}-${monthEnd}-${dayEnd}`, "YYYY-MM-DD")
+
+    // Date 2
+
+    day = this.modelLiquidation.hastaFechaLiquidado.substring(8, 10)
+    month = this.modelLiquidation.hastaFechaLiquidado.substring(5, 7)
+    year = this.modelLiquidation.hastaFechaLiquidado.substring(0, 4)
+
+    var date2 = moment(`${year}-${month}-${day}`, "YYYY-MM-DD")
+
+    // this.fixedDay = date1.diff(date2, 'd')
+    this.fixedDay = date2.diff(date1, 'days')
   }
 
   validateNullData() {
@@ -461,7 +399,7 @@ export class NewLiquidaManagerPage implements OnInit {
 
   async thousandPoint(totalLiquidation: number, service: number, totalTreatment: number, tip: number, totalTip: number, drink: number, drinkTherap: number, totalDrink: number,
     totalDrinkTherap: number, tobacco: number, totalTobacco: number, vitamins: number, totalVitamin: number, others: number, totalOther: number, sumCommission: number,
-    receivedTherapist: number, totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number, sumTherapist: number) {
+    receivedManager: number, totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number, sumTherapist: number) {
 
     if (totalLiquidation > 999) {
 
@@ -863,10 +801,10 @@ export class NewLiquidaManagerPage implements OnInit {
       this.totalSum = sumCommission.toString()
     }
 
-    if (receivedTherapist > 999) {
+    if (receivedManager > 999) {
 
-      const coma = receivedTherapist.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? receivedTherapist.toString().split(".") : receivedTherapist.toString().split("");
+      const coma = receivedManager.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? receivedManager.toString().split(".") : receivedManager.toString().split("");
       let integer = coma ? array[0].split("") : array;
       let subIndex = 1;
 
@@ -885,7 +823,7 @@ export class NewLiquidaManagerPage implements OnInit {
       integer = [integer.toString().replace(/,/gi, "")]
       this.totalReceived = integer[0].toString()
     } else {
-      this.totalReceived = receivedTherapist.toString()
+      this.totalReceived = receivedManager.toString()
     }
 
     for (let o = 0; o < this.unliquidatedService?.length; o++) {
@@ -1240,12 +1178,11 @@ export class NewLiquidaManagerPage implements OnInit {
 
   back() {
     document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
-    document.getElementById('overviewDates').style.height = '165px'
+    document.getElementById('overviewDates').style.height = '109px'
     this.dates = false
     this.selected = false
     this.modelLiquidation.encargada = ""
-    this.modelLiquidation.terapeuta = ""
-    this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
+    this.router.navigate([`tabs/${this.id}/liquidation-manager`])
   }
 
   createUniqueId() {
@@ -1256,9 +1193,9 @@ export class NewLiquidaManagerPage implements OnInit {
       return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16)
     })
 
-    this.modelServices.idTerapeuta = uuid
+    this.modelServices.idEncargada = uuid
     this.modelLiquidation.idUnico = uuid
-    this.modelLiquidation.idTerapeuta = uuid
+    this.modelLiquidation.idEncargada = uuid
     return this.modelLiquidation.idUnico
   }
 
@@ -1306,72 +1243,62 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   save() {
-    if (this.modelLiquidation.terapeuta != "") {
-      if (this.modelLiquidation.encargada != "") {
-        if (this.modelLiquidation.formaPago != "") {
+    if (this.modelLiquidation.encargada != "") {
 
-          this.createUniqueId()
-          this.modelLiquidation.currentDate = this.currentDate.toString()
-          this.formatDate()
-          this.dateCurrentDay()
+      this.createUniqueId()
+      this.modelLiquidation.currentDate = this.currentDate.toString()
+      this.formatDate()
+      this.dateCurrentDay()
 
-          this.ionLoaderService.simpleLoader()
+      if (this.modelLiquidation.fixedDay == 0)
+        this.modelLiquidation.fixedDay = this.fixedDay
 
-          if (this.modelLiquidation.regularizacion != "") {
-            this.modelLiquidation.regularizacion = this.modelLiquidation.regularizacion.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
+      this.ionLoaderService.simpleLoader()
+
+      if (this.modelLiquidation.regularizacion != "") {
+        this.modelLiquidation.regularizacion = this.modelLiquidation.regularizacion.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
+      }
+
+      this.serviceLiquidation.getByEncargada(this.modelLiquidation.encargada).subscribe((rp: any) => {
+
+        if (rp.length > 0) {
+
+          for (let o = 0; o < this.unliquidatedService.length; o++) {
+            this.modelLiquidation.tratamiento = this.unliquidatedService.length
+            this.modelServices.liquidadoEncargada = true
+            this.service.updateLiquidacionEncarg(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
           }
 
-          this.serviceLiquidation.consultTherapistAndManager(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe((rp: any) => {
-
-            if (rp.length > 0) {
-
-              for (let o = 0; o < this.unliquidatedService.length; o++) {
-                this.modelLiquidation.tratamiento = this.unliquidatedService.length
-                this.modelServices.liquidadoTerapeuta = true
-                this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
-              }
-
-              this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
-                this.selected = false
-                this.dates = false
-                this.modelLiquidation.encargada = ""
-                this.modelLiquidation.terapeuta = ""
-                localStorage.clear()
-                this.ionLoaderService.dismissLoader()
-                location.replace(`tabs/${this.id}/liquidation-therapist`)
-                Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
-              })
-            }
-
-            else if (rp.length == 0) {
-
-              for (let o = 0; o < this.unliquidatedService.length; o++) {
-                this.modelLiquidation.tratamiento = this.unliquidatedService.length
-                this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelLiquidation).subscribe((rp) => { })
-              }
-
-              this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
-                this.selected = false
-                this.dates = false
-                this.modelLiquidation.encargada = ""
-                this.modelLiquidation.terapeuta = ""
-              })
-
-              localStorage.clear()
-              this.ionLoaderService.dismissLoader()
-              location.replace(`tabs/${this.id}/liquidation-therapist`)
-              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
-            }
+          this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
+            this.selected = false
+            this.dates = false
+            this.modelLiquidation.encargada = ""
+            this.ionLoaderService.dismissLoader()
+            location.replace(`tabs/${this.id}/liquidation-manager`)
+            Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
           })
-        } else {
-          Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna forma de pago seleccionada', showConfirmButton: false, timer: 2500 })
         }
-      } else {
-        Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna encargada seleccionada', showConfirmButton: false, timer: 2500 })
-      }
+
+        else if (rp.length == 0) {
+
+          for (let o = 0; o < this.unliquidatedService.length; o++) {
+            this.modelLiquidation.tratamiento = this.unliquidatedService.length
+            this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelLiquidation).subscribe((rp) => { })
+          }
+
+          this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
+            this.selected = false
+            this.dates = false
+            this.modelLiquidation.encargada = ""
+          })
+
+          this.ionLoaderService.dismissLoader()
+          location.replace(`tabs/${this.id}/liquidation-therapist`)
+          Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
+        }
+      })
     } else {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna terapeuta seleccionada', showConfirmButton: false, timer: 2500 })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna encargada seleccionada', showConfirmButton: false, timer: 2500 })
     }
   }
-
 }

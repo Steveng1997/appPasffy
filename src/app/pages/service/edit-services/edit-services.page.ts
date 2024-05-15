@@ -148,7 +148,6 @@ export class EditServicesPage implements OnInit {
   constructor(
     public router: Router,
     private activeRoute: ActivatedRoute,
-    private activatedRoute: ActivatedRoute,
     private serviceTherapist: TherapistService,
     private serviceManager: ManagerService,
     private serviceServices: ServiceService,
@@ -1756,6 +1755,7 @@ export class EditServicesPage implements OnInit {
         this.therapist.minuto = serv.minuto
 
         this.serviceServices.getById(idServicio).subscribe((rp: any) => {
+          this.services.pantalla = rp[0].pantalla
           if (rp[0]['terapeuta'] != serv.terapeuta) {
             this.serviceTherapist.updateHoraAndSalida(rp[0]['terapeuta'], this.therapist).subscribe((rp: any) => { });
           }
@@ -1767,16 +1767,10 @@ export class EditServicesPage implements OnInit {
         this.serviceServices.updateServicio(idServicio, serv).subscribe((rp: any) => {
           setTimeout(() => {
             this.ionLoaderService.dismissLoader()
-            location.replace(`tabs/${this.idUser}/${serv.pantalla}`)
+            location.replace(`tabs/${this.idUser}/${this.services.pantalla}`)
             Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 2500 })
           }, 1000)
         })
-
-        // setTimeout(() => {
-        //   Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 2500 })
-        //   location.replace(`tabs/${this.idUser}/${serv.pantalla}`)
-        // }, 3000);
-
       } else {
         this.buttonEdit.disabled = false
         Swal.fire({ heightAuto: false, icon: 'error', title: 'Oops...', text: 'El campo minutos se encuentra vacio', showConfirmButton: false, timer: 2500 })

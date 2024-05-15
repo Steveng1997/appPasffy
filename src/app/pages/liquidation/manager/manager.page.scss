@@ -660,13 +660,14 @@ ion-grid {
 ._icon {
     width: 5.69%;
     height: 42.38%;
-    position: absolute;
+    position: fixed;
     right: 2.69%;
     left: 88.63%;
     bottom: 15.24%;
-    top: 42px;
+    top: 84px;
     transform: translate(-20px, -1px);
     overflow: visible;
+    z-index: 0;
 }
 
 .icon2 {
@@ -784,7 +785,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 400;
     position: absolute;
-    left: 215px;
+    left: 249px;
     top: 244px;
     width: 96px;
     height: 20px;
@@ -818,7 +819,7 @@ ion-grid {
     line-height: 125%;
     font-weight: 400;
     position: absolute;
-    left: 215px;
+    left: 249px;
     top: 334px;
     width: 96px;
     height: 20px;
@@ -854,7 +855,7 @@ ion-grid {
 .rectangle-107 {
     background: var(--verde, #1fb996);
     border-radius: 15px;
-    width: 296px;
+    width: 302px;
     height: 70px;
     position: absolute;
     left: 20px;
@@ -2420,7 +2421,7 @@ ion-select::part(placeholder) {
         height: 0px;
         position: fixed;
         left: 60px;
-        top: 377px;
+        top: 378px;
         transform: translate(0px, -0.5px);
         overflow: visible;
         min-height: -webkit-fill-available;
@@ -2428,7 +2429,7 @@ ion-select::part(placeholder) {
 
     .filtrar {
         left: 232px;
-        top: 437px;
+        top: 440px;
     }
 
     .rectangle-41 {
