@@ -30,6 +30,7 @@ export class NewLiquidaManagerPage implements OnInit {
   terapeuta: any
   unliquidatedService: any
   manager: any
+  receivedManager: any
 
   id: number
   liquidated: any
@@ -64,6 +65,7 @@ export class NewLiquidaManagerPage implements OnInit {
   totalTransaction: string
 
   sumCommission: string
+  sumCommission2: number
 
   // Total de todo
   totalSum: string
@@ -71,10 +73,13 @@ export class NewLiquidaManagerPage implements OnInit {
   totalReceived: string
 
   fixedDay: number
-  numberDay: number
   totalFixedDay: string
 
   currentDate = new Date().getTime()
+
+  fijoDia: number
+  fixedTotalDay: number
+  letterFixedDay = ""
 
   modelServices: ModelService = {
     idEncargada: ""
@@ -323,6 +328,8 @@ export class NewLiquidaManagerPage implements OnInit {
 
     await this.serviceManager.getEncargada(this.modelLiquidation.encargada).subscribe(async (rp) => {
       this.terapeutaName = rp[0]
+      this.fijoDia = rp[0]['fijoDia']
+      this.letterFixedDay = this.fijoDia.toString()
 
       // Comision
       comisiServicio = service / 100 * rp[0]?.servicio
@@ -344,6 +351,7 @@ export class NewLiquidaManagerPage implements OnInit {
       sumComision = Number(totalTreatment) + Number(totalTip) + Number(totalDrink) + Number(totalDrinkTherap) + Number(totalTobacco) + Number(totalVitamin) + Number(totalOther)
 
       if (sumComision != 0 || sumComision != undefined) {
+        this.sumCommission2 = Math.ceil(sumComision)
         sumCommission = Number(sumComision.toFixed(1))
       }
 
@@ -354,7 +362,13 @@ export class NewLiquidaManagerPage implements OnInit {
         }, 0)
       })
 
-      let totalLiquidation = Math.ceil(sumCommission) - Number(receivedManager)
+      this.calculateTheDays()
+      this.fixedTotalDay = this.fixedDay * this.fijoDia
+      this.pountFixedDay()
+
+      this.receivedManager = receivedManager
+
+      let totalLiquidation = Math.ceil(sumCommission) + this.fixedTotalDay - Number(receivedManager)
       this.modelLiquidation.importe = totalLiquidation
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
@@ -1127,6 +1141,31 @@ export class NewLiquidaManagerPage implements OnInit {
     } else {
       this.sumTherapist = sumTherapist.toString()
     }
+
+    if (this.fixedTotalDay > 999) {
+
+      const coma = this.fixedTotalDay.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? this.fixedTotalDay.toString().split(".") : this.fixedTotalDay.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalFixedDay = integer[0].toString()
+    } else {
+      this.totalFixedDay = this.fixedTotalDay.toString()
+    }
   }
 
   regularization(event: any) {
@@ -1174,6 +1213,75 @@ export class NewLiquidaManagerPage implements OnInit {
 
   notes() {
 
+  }
+
+  fixedNumberDay(event: any) {
+    let numberValue = 0
+    numberValue = Number(event.target.value)
+    this.modelLiquidation.fixedDay = Number(event.target.value)
+
+    if (numberValue > 0) {
+      this.serviceManager.getEncargada(this.modelLiquidation.encargada).subscribe((resp: any) => {
+        this.fijoDia = resp[0]['fijoDia']
+        this.letterFixedDay = this.fijoDia.toString()
+        this.fixedTotalDay = numberValue * this.fijoDia
+        this.pountFixedDay()
+        let totalCommission = this.sumCommission2 + this.fixedTotalDay - this.receivedManager
+        this.modelLiquidation.importe = totalCommission
+
+        if (totalCommission > 999) {
+
+          const coma = totalCommission.toString().indexOf(".") !== -1 ? true : false;
+          const array = coma ? totalCommission.toString().split(".") : totalCommission.toString().split("");
+          let integer = coma ? array[0].split("") : array;
+          let subIndex = 1;
+
+          for (let i = integer.length - 1; i >= 0; i--) {
+
+            if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+              integer.splice(i, 0, ".");
+              subIndex++;
+
+            } else {
+              subIndex++;
+            }
+          }
+
+          integer = [integer.toString().replace(/,/gi, "")]
+          this.totalLiquidation = integer[0].toString()
+        } else {
+          this.totalLiquidation = totalCommission.toString()
+        }
+      })
+    }
+  }
+
+  pountFixedDay() {
+    if (this.fixedTotalDay > 999) {
+
+      const coma = this.fixedTotalDay.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? this.fixedTotalDay.toString().split(".") : this.fixedTotalDay.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalFixedDay = integer[0].toString()
+    } else {
+      this.totalFixedDay = this.fixedTotalDay.toString()
+    }
   }
 
   back() {

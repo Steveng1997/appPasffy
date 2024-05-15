@@ -73,6 +73,7 @@ export class ManagerPage {
   terapeutaName: any
 
   totalLiquidation: string
+  importe: number
 
   // Sum
   totalService: string
@@ -830,6 +831,7 @@ export class ManagerPage {
         this.idDetail = rp[0].id
         this.idManager = rp[0].idEncargada
         this.regularization = rp[0]['valueRegularizacion']
+        this.importe = rp[0].importe
 
         if (rp[0]['valueRegularizacion'] > 999) {
 
@@ -983,7 +985,8 @@ export class ManagerPage {
         }, 0)
       })
 
-      let totalLiquidation = sumCommission - Number(receivedManager) + Number(this.regularization)
+      // let totalLiquidation = sumCommission - Number(receivedManager) + Number(this.regularization)
+      let totalLiquidation = this.importe
       totalCommission = sumCommission + fixedTotalDay - Number(receivedManager)
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction

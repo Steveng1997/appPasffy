@@ -191,9 +191,9 @@
 
             <div class="fijoDia">Fijo/día</div>
             <!-- <div class="_15">{{fixedDay}}</div> -->
-            <ion-input type="number" class="_15"></ion-input>
-            <div class="_15">{{fixedDay}}</div>
-            <div class="_10012">X {{numberDay}} €</div>
+            <ion-input type="number" class="_15" (change)="fixedNumberDay($event)" [value]="fixedDay"></ion-input>
+            <!-- <div class="_15">{{fixedDay}}</div> -->
+            <div class="_10012">X {{letterFixedDay}} €</div>
             <div class="_606">{{totalFixedDay}} €</div>
 
             <div class="rectangle-109"></div>
