@@ -121,9 +121,7 @@ export class ManagerPage {
     idUnico: "",
     idEncargada: "",
     importe: 0,
-    regularizacion: "",
     tratamiento: 0,
-    valueRegularizacion: 0
   }
 
   modelServices: ModelService = {
@@ -830,33 +828,7 @@ export class ManagerPage {
         this.fixedDay = rp[0].fixedDay
         this.idDetail = rp[0].id
         this.idManager = rp[0].idEncargada
-        this.regularization = rp[0]['valueRegularizacion']
         this.importe = rp[0].importe
-
-        if (rp[0]['valueRegularizacion'] > 999) {
-
-          const coma = rp[0]['valueRegularizacion'].toString().indexOf(".") !== -1 ? true : false;
-          const array = coma ? rp[0]['valueRegularizacion'].toString().split(".") : rp[0]['valueRegularizacion'].toString().split("");
-          let integer = coma ? array[0].split("") : array;
-          let subIndex = 1;
-
-          for (let i = integer.length - 1; i >= 0; i--) {
-
-            if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-              integer.splice(i, 0, ".");
-              subIndex++;
-
-            } else {
-              subIndex++;
-            }
-          }
-
-          integer = [integer.toString().replace(/,/gi, "")]
-          this.regularization = integer[0]
-        } else {
-          this.regularization = rp[0]['valueRegularizacion'].toString()
-        }
 
         await this.sumTotal(id)
       })

@@ -1342,7 +1342,7 @@ export class NewLiquidTherapPage implements OnInit {
 
               for (let o = 0; o < this.unliquidatedService.length; o++) {
                 this.modelLiquidation.tratamiento = this.unliquidatedService.length
-                this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelLiquidation).subscribe((rp) => { })
+                this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
               }
 
               this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
@@ -1350,12 +1350,11 @@ export class NewLiquidTherapPage implements OnInit {
                 this.dates = false
                 this.modelLiquidation.encargada = ""
                 this.modelLiquidation.terapeuta = ""
+                localStorage.clear()
+                this.ionLoaderService.dismissLoader()
+                location.replace(`tabs/${this.id}/liquidation-therapist`)
+                Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
               })
-
-              localStorage.clear()
-              this.ionLoaderService.dismissLoader()
-              location.replace(`tabs/${this.id}/liquidation-therapist`)
-              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
             }
           })
         } else {

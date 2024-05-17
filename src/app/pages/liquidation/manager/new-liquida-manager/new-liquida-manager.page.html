@@ -86,8 +86,7 @@
 
           <div class="rectangle-94"></div>
           <div class="div">€</div>
-          <ion-input type="number" class="rectangle-94" id="numberRegularization" name="numberRegularization"
-            (change)="regularization($event)"></ion-input>
+          <ion-input type="number" class="rectangle-94" id="numberRegularization" name="numberRegularization"></ion-input>
 
           <!-- Table -->
 
@@ -152,7 +151,7 @@
             <div class="_1003" *ngIf="terapeutaName?.propina == undefined">{{0 + ' %'}}</div>
             <div class="_04">{{totalTip}} €</div>
 
-            <div class="bebida-a-casa">Bebida a casa</div>
+            <div class="bebida-a-casa">Bebida casa</div>
             <div class="_07">{{totalValueDrink}} €</div>
             <div class="_50" *ngIf="terapeutaName?.bebida != undefined"> {{terapeutaName?.bebida + ' %'}}</div>
             <div class="_50" *ngIf="terapeutaName?.bebida == undefined">{{0 + ' %'}}</div>
@@ -186,7 +185,7 @@
             <div class="suma2">Suma</div>
             <div class="_2223">{{totalSum}} €</div>
 
-            <div class="recibido">Recibido</div>
+            <div class="recibido">Pagado</div>
             <div class="_06">{{totalReceived}} €</div>
 
             <div class="rectangle-109"></div>
@@ -214,6 +213,8 @@
 
             <div class="total-a-pagar2">Total a pagar</div>
             <div class="_013">0€</div>
+
+            <div class="eliminar" (click)="back()">Cancelar</div>
 
             <div class="rectangle-77" (click)="save()"></div>
             <div class="group-30">

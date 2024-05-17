@@ -111,7 +111,7 @@
 
   <div class="containerFilter">
     <div class="_filtros">Filtros</div>
-    <div class="rectangle-41"></div>
+    <div class="rectangle-41" (click)="btnFilter()"></div>
 
     <svg class="vector-6" width="59" height="2" viewBox="0 0 59 2" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0 1L59 0.999995" stroke="#3C3C3C" />
@@ -253,7 +253,7 @@
         <div class="_1003" *ngIf="terapeutaName?.propina == undefined">{{0 + ' %'}}</div>
         <div class="_03">{{totalTip}} €</div>
 
-        <div class="bebida-a-casa">Bebida a casa</div>
+        <div class="bebida-a-casa">Bebida casa</div>
         <div class="_06">{{totalValueDrink}} €</div>
         <div class="_50" *ngIf="terapeutaName?.bebida != undefined"> {{terapeutaName?.bebida + ' %'}}</div>
         <div class="_50" *ngIf="terapeutaName?.bebida == undefined">{{0 + ' %'}}</div>
@@ -286,7 +286,7 @@
         <div class="suma2">Suma</div>
         <div class="_2225">{{totalSum}} €</div>
 
-        <div class="recibido">Recibido</div>
+        <div class="recibido">Pagado</div>
         <div class="_05">{{totalReceived}} €</div>
 
         <div class="fijoDia">Fijo/día</div>
