@@ -89,10 +89,8 @@ export class NewLiquidTherapPage implements OnInit {
     idUnico: "",
     idTerapeuta: "",
     importe: 0,
-    regularizacion: "",
     terapeuta: "",
     tratamiento: 0,
-    valueRegularizacion: 0
   }
 
   constructor(
@@ -1186,45 +1184,6 @@ export class NewLiquidTherapPage implements OnInit {
     }
   }
 
-  regularization(event: any) {
-    let numberRegularization = 0, valueRegularization = 0
-    numberRegularization = Number(event.target.value)
-
-    if (numberRegularization > 0) {
-      valueRegularization = Number(this.totalLiquidation) + numberRegularization
-    } else {
-      valueRegularization = Number(this.totalLiquidation) + numberRegularization
-    }
-
-    this.modelLiquidation.valueRegularizacion = numberRegularization;
-
-    if (valueRegularization > 999 || numberRegularization > 999) {
-
-      const coma = valueRegularization.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? valueRegularization.toString().split(".") : valueRegularization.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalLiquidation = integer.toString()
-    } else {
-      this.totalLiquidation = valueRegularization.toString()
-      // this.valueRegular = numberRegularization.toString()
-    }
-  }
-
   edit(id: number) {
     this.router.navigate([`tabs/${this.id}/edit-services/${id}`])
   }
@@ -1311,10 +1270,6 @@ export class NewLiquidTherapPage implements OnInit {
           this.dateCurrentDay()
 
           this.ionLoaderService.simpleLoader()
-
-          if (this.modelLiquidation.regularizacion != "") {
-            this.modelLiquidation.regularizacion = this.modelLiquidation.regularizacion.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
-          }
 
           this.serviceLiquidation.consultTherapistAndManager(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe((rp: any) => {
 

@@ -11,8 +11,6 @@ export class LiquidationTherapist {
     idUnico?: string;
     idTerapeuta?: string;
     importe?: number;
-    regularizacion?: string;
     terapeuta?: string;
     tratamiento?: number;
-    valueRegularizacion?: number;
   }

@@ -105,7 +105,7 @@ ion-grid {
     position: static;
 }
 
-.eliminar{
+.eliminar {
     color: #7f7c7c;
     text-align: left;
     font-family: "Inter-Bold", sans-serif;
@@ -291,13 +291,13 @@ ion-grid {
 .rectangle-42 {
     border-radius: 15px;
     border-style: solid;
-    border-color: var(--negro, #3c3c3c);
+    border-color: var(--verde, #1fb996);
     border-width: 1px;
-    width: 57.33%;
+    width: 50px;
     height: 44px;
     position: absolute;
     right: 37.6%;
-    left: 5.07%;
+    left: 139px;
     bottom: 57.88%;
     top: 544px;
 }
@@ -317,7 +317,7 @@ ion-grid {
     top: 544px;
 }
 
-.concepto-a-regularizar {
+.numbers {
     color: var(--negro, #3c3c3c);
     text-align: left;
     font-family: "Inter-Regular", sans-serif;
@@ -325,11 +325,40 @@ ion-grid {
     line-height: 125%;
     font-weight: 400;
     position: absolute;
-    right: 44.04%;
-    left: 9.83%;
-    width: 169px;
-    bottom: 58.66%;
-    top: 539px;
+    left: 85px;
+    top: 548px;
+    height: 1.19%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.numberDays {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 21px;
+    top: 548px;
+    height: 1.19%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.days {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 202px;
+    top: 548px;
     height: 1.19%;
     display: flex;
     align-items: flex-end;
@@ -344,15 +373,13 @@ ion-grid {
     line-height: 125%;
     font-weight: 400;
     position: absolute;
-    right: 9.87%;
-    left: 87.2%;
-    width: 2.93%;
-    bottom: 58.66%;
+    left: 281px;
+    width: 16.93%;
     top: 548px;
     height: 1.19%;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: end;
+    justify-content: end;
     z-index: 4;
 }
 
@@ -954,7 +981,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     left: 18px;
     top: 786px;
@@ -969,7 +996,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     left: 17px;
     top: 1139px;
@@ -1483,7 +1510,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 700;
     position: absolute;
-    left: 203px;
+    left: 220px;
     top: 752px;
     height: 19px;
     display: flex;
@@ -1513,7 +1540,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     left: 18px;
     top: 814px;
@@ -1528,7 +1555,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     left: 17px;
     top: 1167px;
@@ -1543,7 +1570,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     width: 102px;
     left: 18px;
@@ -1559,7 +1586,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     left: 17px;
     top: 1195px;
@@ -1574,7 +1601,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     width: 96px;
     left: 18px;
@@ -1590,7 +1617,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     left: 17px;
     top: 1222px;
@@ -1605,7 +1632,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     left: 18px;
     top: 896px;
@@ -1620,7 +1647,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     left: 18px;
     top: 923px;
@@ -1635,7 +1662,7 @@ ion-grid {
     font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
     line-height: 115%;
-    font-weight: 500;
+    font-weight: 400;
     position: absolute;
     left: 18px;
     top: 950px;
@@ -1746,11 +1773,6 @@ ion-grid {
     inset: 0;
 }
 
-.sc-ion-input-md-h[name=conceptoRegularization] {
-    --highlight-color-focused: transparent;
-    --highlight-color: transparent;
-}
-
 .keyboard {
     display: none;
     background-color: black;
@@ -1856,28 +1878,22 @@ ion-select::part(icon) {
     width: 100%;
 }
 
-.sc-ion-input-md-h[name=numberRegularization] {
+.sc-ion-input-md-h[name=numberDay] {
     color: white;
     --highlight-color-focused: transparent;
     --border-color: transparent;
     --highlight-color: transparent;
 }
 
-.sc-ion-input-md-h[name=numberRegularization] ::ng-deep label {
-    color: black;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
-    position: absolute;
-    left: 3.5%;
-    top: 0px;
-}
-
-.sc-ion-input-md-h[name=numberRegularization] ::ng-deep input {
+.sc-ion-input-md-h[name=numberDay] ::ng-deep input {
     position: relative;
     caret-color: black;
-    left: 10px;
-    max-width: 56%;
+    color: black;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    left: 156px;
+    max-width: 5%;
+    top: 545px;
 }
 
 .paginator {

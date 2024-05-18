@@ -70,7 +70,6 @@ export class TherapistPage implements OnInit {
   sinceTime: string
   toDate: string
   untilTime: string
-  regularization: number
   payment: string
 
   settledData: any
@@ -124,10 +123,8 @@ export class TherapistPage implements OnInit {
     idUnico: "",
     idTerapeuta: "",
     importe: 0,
-    regularizacion: "",
     terapeuta: "",
     tratamiento: 0,
-    valueRegularizacion: 0
   }
 
   modelServices: ModelService = {
@@ -846,32 +843,6 @@ export class TherapistPage implements OnInit {
         this.payment = rp[0].formaPago
         this.idDetail = rp[0].id
         this.idTherapist = rp[0].idTerapeuta
-        this.regularization = rp[0]['valueRegularizacion']
-
-        if (rp[0]['valueRegularizacion'] > 999) {
-
-          const coma = rp[0]['valueRegularizacion'].toString().indexOf(".") !== -1 ? true : false;
-          const array = coma ? rp[0]['valueRegularizacion'].toString().split(".") : rp[0]['valueRegularizacion'].toString().split("");
-          let integer = coma ? array[0].split("") : array;
-          let subIndex = 1;
-
-          for (let i = integer.length - 1; i >= 0; i--) {
-
-            if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-              integer.splice(i, 0, ".");
-              subIndex++;
-
-            } else {
-              subIndex++;
-            }
-          }
-
-          integer = [integer.toString().replace(/,/gi, "")]
-          this.regularization = integer[0]
-        } else {
-          this.regularization = rp[0]['valueRegularizacion'].toString()
-        }
 
         await this.sumTotal(id)
       })
@@ -997,12 +968,11 @@ export class TherapistPage implements OnInit {
         }, 0)
       })
 
-      let totalLiquidation = sumCommission - Number(receivedTherapist) + Number(this.regularization)
+      let totalLiquidation = sumCommission - Number(receivedTherapist)
       totalCommission = sumCommission - Number(receivedTherapist)
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
-
-      // this.validateNullData()
+      
       await this.thousandPointEdit(totalLiquidation, service, totalTreatment, tip, totalTip, drink, drinkTherapist, totalDrink, totalDrinkTherap, tobacco,
         totalTobacco, vitamins, totalVitamin, others, totalOther, sumCommission, receivedTherapist, totalCash, totalBizum, totalCard, totalTransaction, sumTherapist)
 

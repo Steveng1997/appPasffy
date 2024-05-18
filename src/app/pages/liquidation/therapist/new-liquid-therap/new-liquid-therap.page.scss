@@ -273,20 +273,6 @@ ion-grid {
     justify-content: flex-start;
 }
 
-.rectangle-42 {
-    border-radius: 15px;
-    border-style: solid;
-    border-color: var(--negro, #3c3c3c);
-    border-width: 1px;
-    width: 57.33%;
-    height: 44px;
-    position: absolute;
-    right: 37.6%;
-    left: 5.07%;
-    bottom: 57.88%;
-    top: 600px;
-}
-
 .rectangle-94 {
     border-radius: 15px;
     border-style: solid;
@@ -300,25 +286,6 @@ ion-grid {
     left: 66.13%;
     bottom: 57.88%;
     top: 600px;
-}
-
-.concepto-a-regularizar {
-    color: var(--negro, #3c3c3c);
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 400;
-    position: absolute;
-    right: 44.04%;
-    left: 9.83%;
-    width: 169px;
-    bottom: 58.66%;
-    top: 595px;
-    height: 1.19%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
 }
 
 .div {
@@ -1803,11 +1770,6 @@ ion-grid {
     left: 9.18%;
     bottom: -0.37%;
     top: 0%;
-}
-
-.sc-ion-input-md-h[name=conceptoRegularization] {
-    --highlight-color-focused: transparent;
-    --highlight-color: transparent;
 }
 
 .sc-ion-input-md-h[name=bizum] {

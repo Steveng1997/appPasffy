@@ -338,13 +338,13 @@ export class NewLiquidaManagerPage implements OnInit {
       comiVitamina = vitamins / 100 * rp[0]?.vitamina
       comiOtros = others / 100 * rp[0]?.otros
 
-      let totalTreatment = Number(comisiServicio.toFixed(1))
-      let totalTip = Number(comiPropina.toFixed(1))
-      let totalDrink = Number(comiBebida.toFixed(1))
-      let totalDrinkTherap = Number(comiBebidaTherapist.toFixed(1))
-      let totalTobacco = Number(comiTabaco.toFixed(1))
-      let totalVitamin = Number(comiVitamina.toFixed(1))
-      let totalOther = Number(comiOtros.toFixed(1))
+      let totalTreatment = Number(comisiServicio.toFixed(0))
+      let totalTip = Number(comiPropina.toFixed(0))
+      let totalDrink = Number(comiBebida.toFixed(0))
+      let totalDrinkTherap = Number(comiBebidaTherapist.toFixed(0))
+      let totalTobacco = Number(comiTabaco.toFixed(0))
+      let totalVitamin = Number(comiVitamina.toFixed(0))
+      let totalOther = Number(comiOtros.toFixed(0))
 
       sumComision = Number(totalTreatment) + Number(totalTip) + Number(totalDrink) + Number(totalDrinkTherap) + Number(totalTobacco) + Number(totalVitamin) + Number(totalOther)
 
@@ -371,7 +371,6 @@ export class NewLiquidaManagerPage implements OnInit {
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
 
-      this.validateNullData()
       this.ionLoaderService.dismissLoader()
 
       await this.thousandPoint(totalLiquidation, service, totalTreatment, tip, totalTip, drink, drinkTherapist, totalDrink, totalDrinkTherap, tobacco,
@@ -403,10 +402,6 @@ export class NewLiquidaManagerPage implements OnInit {
 
     // this.fixedDay = date1.diff(date2, 'd')
     this.fixedDay = date2.diff(date1, 'days')
-  }
-
-  validateNullData() {
-
   }
 
   async thousandPoint(totalLiquidation: number, service: number, totalTreatment: number, tip: number, totalTip: number, drink: number, drinkTherap: number, totalDrink: number,
