@@ -934,13 +934,13 @@ export class ManagerPage {
       comiOtros = others / 100 * rp[0]?.otros
 
       // Conversion decimal
-      let totalTreatment = Number(comisiServicio.toFixed(1))
-      let totalTip = Number(comiPropina.toFixed(1))
-      let totalDrink = Number(comiBebida.toFixed(1))
-      let totalDrinkTherap = Number(comiBebidaTherapist.toFixed(1))
-      let totalTobacco = Number(comiTabaco.toFixed(1))
-      let totalVitamin = Number(comiVitamina.toFixed(1))
-      let totalOther = Number(comiOtros.toFixed(1))
+      let totalTreatment = Number(comisiServicio.toFixed(0))
+      let totalTip = Number(comiPropina.toFixed(0))
+      let totalDrink = Number(comiBebida.toFixed(0))
+      let totalDrinkTherap = Number(comiBebidaTherapist.toFixed(0))
+      let totalTobacco = Number(comiTabaco.toFixed(0))
+      let totalVitamin = Number(comiVitamina.toFixed(0))
+      let totalOther = Number(comiOtros.toFixed(0))
 
       let fixedTotalDay = this.fixedDay * this.numberDay
 

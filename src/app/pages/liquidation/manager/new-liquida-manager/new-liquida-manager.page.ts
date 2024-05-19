@@ -74,6 +74,7 @@ export class NewLiquidaManagerPage implements OnInit {
 
   fixedDay: number
   totalFixedDay: string
+  totalServices: string
 
   currentDate = new Date().getTime()
 
@@ -367,6 +368,7 @@ export class NewLiquidaManagerPage implements OnInit {
       this.receivedManager = receivedManager
 
       let totalLiquidation = Math.ceil(sumCommission) + this.fixedTotalDay - Number(receivedManager)
+      let totalServices = Math.ceil(sumCommission) - Number(receivedManager)
       this.modelLiquidation.importe = totalLiquidation
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
@@ -374,7 +376,7 @@ export class NewLiquidaManagerPage implements OnInit {
       this.ionLoaderService.dismissLoader()
 
       await this.thousandPoint(totalLiquidation, service, totalTreatment, tip, totalTip, drink, drinkTherapist, totalDrink, totalDrinkTherap, tobacco,
-        totalTobacco, vitamins, totalVitamin, others, totalOther, sumCommission, receivedManager, totalCash, totalBizum, totalCard, totalTransaction, sumTherapist)
+        totalTobacco, vitamins, totalVitamin, others, totalOther, sumCommission, receivedManager, totalCash, totalBizum, totalCard, totalTransaction, sumTherapist, totalServices)
 
       this.dates = true
       this.selected = true
@@ -406,7 +408,7 @@ export class NewLiquidaManagerPage implements OnInit {
 
   async thousandPoint(totalLiquidation: number, service: number, totalTreatment: number, tip: number, totalTip: number, drink: number, drinkTherap: number, totalDrink: number,
     totalDrinkTherap: number, tobacco: number, totalTobacco: number, vitamins: number, totalVitamin: number, others: number, totalOther: number, sumCommission: number,
-    receivedManager: number, totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number, sumTherapist: number) {
+    receivedManager: number, totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number, sumTherapist: number, totalServices: number) {
 
     if (totalLiquidation > 999) {
 
@@ -1158,6 +1160,31 @@ export class NewLiquidaManagerPage implements OnInit {
       this.totalFixedDay = integer[0].toString()
     } else {
       this.totalFixedDay = this.fixedTotalDay.toString()
+    }
+
+    if (totalServices > 999) {
+
+      const coma = totalServices.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? totalServices.toString().split(".") : totalServices.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalServices = integer[0].toString()
+    } else {
+      this.totalServices = totalServices.toString()
     }
   }
 

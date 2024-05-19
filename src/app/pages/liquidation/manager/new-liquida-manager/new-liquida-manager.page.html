@@ -85,6 +85,9 @@
           <div class="days">días</div>
           <div class="div">{{fixedTotalDay}} €</div>
 
+          <div class="totalServic">Total servicios</div>
+          <div class="_1011">{{totalServices}} €</div>
+
           <!-- Table -->
 
           <div class="frame-79">
@@ -187,29 +190,29 @@
 
             <div class="rectangle-109"></div>
 
-            <div class="total-a-pagar">Total a pagar</div>
-            <div class="_2224">{{totalLiquidation}} €</div>
+            <div class="total-a-pagar">Total servicio</div>
+            <div class="_2224">{{totalServices}} €</div>
 
             <!-- Table3 -->
             <div class="pagado-al-encargada">Pagado a encargada</div>
             <div class="rectangle-110"></div>
 
             <div class="efectivo">Efectivo</div>
-            <div class="_02">0€</div>
+            <div class="_02">{{totalCash}} €</div>
 
             <div class="bizum">Bizum</div>
-            <div class="_05">0€</div>
+            <div class="_05">{{totalBizum}} €</div>
 
             <div class="tarjeta">Tarjeta</div>
-            <div class="_09">0€</div>
+            <div class="_09">{{totalCard}} €</div>
 
             <div class="transferencia">Transferencia</div>
-            <div class="_012">0€</div>
+            <div class="_012">{{totalTransaction}} €</div>
 
             <div class="rectangle-111"></div>
 
             <div class="total-a-pagar2">Total a pagar</div>
-            <div class="_013">0€</div>
+            <div class="_013">{{sumTherapist}} €</div>
 
             <div class="eliminar" (click)="back()">Cancelar</div>
 

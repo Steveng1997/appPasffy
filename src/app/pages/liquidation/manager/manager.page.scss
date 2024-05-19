@@ -343,7 +343,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 39px;
+    left: 20px;
     top: 620px;
     display: flex;
     align-items: flex-end;
@@ -495,7 +495,7 @@ ion-grid {
 .containerDetail {
     position: relative;
     top: -14px;
-    height: 1044px;
+    height: 1061px;
 }
 
 .rectangle-30 {
@@ -856,7 +856,7 @@ ion-grid {
     background: var(--verde, #1fb996);
     border-radius: 15px;
     width: 302px;
-    height: 70px;
+    height: 54px;
     position: absolute;
     left: 20px;
     top: 156px;
@@ -869,7 +869,7 @@ ion-grid {
     height: 43px;
     position: absolute;
     left: 152px;
-    top: 989px;
+    top: 1005px;
 }
 
 .liquidaci-n-1 {
@@ -906,14 +906,13 @@ ion-grid {
     color: #ffffff;
     text-align: left;
     font-family: "-", sans-serif;
-    font-size: 16px;
     line-height: 115%;
     font-weight: 400;
     position: absolute;
     left: 39px;
-    top: 175px;
+    top: 176px;
     width: 215px;
-    height: 35px;
+    height: 19px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -922,7 +921,7 @@ ion-grid {
 .total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta-span {
     color: #ffffff;
     font-family: "Inter-Medium", sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 115%;
     font-weight: 500;
 }
@@ -930,21 +929,40 @@ ion-grid {
 .total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta-span2 {
     color: #ffffff;
     font-family: "Inter-Bold", sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 115%;
     font-weight: 700;
 }
 
 .total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta-span3 {
-    color: #ffffff;
-    font-family: "Inter-Medium", sans-serif;
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
     font-size: 16px;
-    line-height: 115%;
-    font-weight: 500;
-    width: 277px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 21px;
+    top: 233px;
+    height: 1.19%;
     display: flex;
-    justify-content: start;
-    justify-items: start;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.total-liquidaci-n-222-concepto-a-regularizar-0-tipo-de-pago-tarjeta-span4 {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 21px;
+    top: 251px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 .luc-a {
@@ -970,7 +988,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 39px;
+    left: 20px;
     top: 286px;
     display: flex;
     align-items: flex-end;
@@ -985,7 +1003,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 39px;
+    left: 20px;
     top: 576px;
     display: flex;
     align-items: flex-end;
@@ -1000,8 +1018,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 55px;
-    left: 132px;
+    width: 66px;
+    left: 117px;
     top: 286px;
     display: flex;
     align-items: end;
@@ -1016,8 +1034,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 45px;
-    left: 261px;
+    width: 66px;
+    left: 256px;
     top: 286px;
     display: flex;
     align-items: end;
@@ -1033,7 +1051,7 @@ ion-grid {
     font-weight: 500;
     position: absolute;
     width: 100px;
-    left: 206px;
+    left: 222px;
     top: 576px;
     display: flex;
     align-items: end;
@@ -1049,7 +1067,7 @@ ion-grid {
     font-weight: 500;
     position: absolute;
     width: 92px;
-    left: 214px;
+    left: 230px;
     top: 451px;
     display: flex;
     align-items: end;
@@ -1065,7 +1083,7 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     width: 70px;
-    left: 236px;
+    left: 230px;
     top: 524px;
     display: flex;
     align-items: end;
@@ -1080,7 +1098,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 48px;
+    width: 43px;
     left: 212px;
     top: 286px;
     display: flex;
@@ -1096,8 +1114,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 55px;
-    left: 132px;
+    width: 66px;
+    left: 117px;
     top: 308px;
     display: flex;
     align-items: end;
@@ -1112,8 +1130,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 45px;
-    left: 261px;
+    width: 66px;
+    left: 256px;
     top: 308px;
     display: flex;
     align-items: end;
@@ -1129,7 +1147,7 @@ ion-grid {
     font-weight: 500;
     position: absolute;
     width: 100px;
-    left: 206px;
+    left: 222px;
     top: 598px;
     display: flex;
     align-items: end;
@@ -1145,7 +1163,7 @@ ion-grid {
     font-weight: 500;
     position: absolute;
     width: 92px;
-    left: 214px;
+    left: 230px;
     top: 495px;
     display: flex;
     align-items: end;
@@ -1160,7 +1178,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 48px;
+    width: 43px;
     left: 212px;
     top: 308px;
     display: flex;
@@ -1176,8 +1194,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 50px;
-    left: 137px;
+    width: 66px;
+    left: 117px;
     top: 330px;
     display: flex;
     align-items: end;
@@ -1192,8 +1210,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 45px;
-    left: 261px;
+    width: 66px;
+    left: 256px;
     top: 330px;
     display: flex;
     align-items: end;
@@ -1209,7 +1227,7 @@ ion-grid {
     font-weight: 500;
     position: absolute;
     width: 100px;
-    left: 206px;
+    left: 222px;
     top: 620px;
     display: flex;
     align-items: end;
@@ -1224,7 +1242,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 48px;
+    width: 43px;
     left: 212px;
     top: 330px;
     display: flex;
@@ -1240,8 +1258,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 55px;
-    left: 132px;
+    width: 66px;
+    left: 117px;
     top: 352px;
     display: flex;
     align-items: end;
@@ -1256,8 +1274,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 45px;
-    left: 261px;
+    width: 66px;
+    left: 256px;
     top: 352px;
     display: flex;
     align-items: end;
@@ -1273,7 +1291,7 @@ ion-grid {
     font-weight: 500;
     position: absolute;
     width: 100px;
-    left: 206px;
+    left: 222px;
     top: 642px;
     display: flex;
     align-items: end;
@@ -1289,7 +1307,7 @@ ion-grid {
     font-weight: 500;
     position: absolute;
     width: 100px;
-    left: 206px;
+    left: 222px;
     top: 672px;
     display: flex;
     align-items: end;
@@ -1304,7 +1322,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 48px;
+    width: 43px;
     left: 212px;
     top: 352px;
     display: flex;
@@ -1320,8 +1338,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 55px;
-    left: 132px;
+    width: 66px;
+    left: 117px;
     top: 374px;
     display: flex;
     align-items: end;
@@ -1336,8 +1354,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 45px;
-    left: 261px;
+    width: 66px;
+    left: 256px;
     top: 374px;
     display: flex;
     align-items: end;
@@ -1352,7 +1370,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 48px;
+    width: 43px;
     left: 212px;
     top: 374px;
     display: flex;
@@ -1368,8 +1386,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 55px;
-    left: 132px;
+    width: 66px;
+    left: 117px;
     top: 396px;
     display: flex;
     align-items: end;
@@ -1384,8 +1402,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 45px;
-    left: 261px;
+    width: 66px;
+    left: 256px;
     top: 396px;
     display: flex;
     align-items: end;
@@ -1400,7 +1418,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 48px;
+    width: 43px;
     left: 212px;
     top: 396px;
     display: flex;
@@ -1416,8 +1434,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 55px;
-    left: 132px;
+    width: 66px;
+    left: 117px;
     top: 418px;
     display: flex;
     align-items: end;
@@ -1432,8 +1450,8 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    width: 45px;
-    left: 261px;
+    width: 66px;
+    left: 256px;
     top: 418px;
     display: flex;
     align-items: end;
@@ -1457,7 +1475,7 @@ ion-grid {
 }
 
 .suma {
-    color: #3c3c3c;
+    color: var(--verde-oscuro, #0b9a7a);
     text-align: left;
     font-family: "Inter-Bold", sans-serif;
     font-size: 13px;
@@ -1488,14 +1506,14 @@ ion-grid {
 }
 
 .comisi-n {
-    color: #3c3c3c;
+    color: var(--verde-oscuro, #0b9a7a);
     text-align: left;
     font-family: "Inter-Bold", sans-serif;
     font-size: 13px;
     line-height: 115%;
     font-weight: 700;
     position: absolute;
-    left: 201px;
+    left: 210px;
     top: 257px;
     display: flex;
     align-items: flex-end;
@@ -1503,14 +1521,14 @@ ion-grid {
 }
 
 .total {
-    color: #3c3c3c;
+    color: var(--verde-oscuro, #0b9a7a);
     text-align: left;
     font-family: "Inter-Bold", sans-serif;
     font-size: 13px;
     line-height: 115%;
     font-weight: 700;
     position: absolute;
-    left: 276px;
+    left: 292px;
     top: 257px;
     display: flex;
     align-items: flex-end;
@@ -1525,7 +1543,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 39px;
+    left: 20px;
     top: 308px;
     display: flex;
     align-items: flex-end;
@@ -1540,7 +1558,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 39px;
+    left: 20px;
     top: 598px;
     display: flex;
     align-items: flex-end;
@@ -1556,7 +1574,7 @@ ion-grid {
     font-weight: 500;
     position: absolute;
     width: 96px;
-    left: 39px;
+    left: 20px;
     top: 330px;
     display: flex;
     align-items: flex-end;
@@ -1572,7 +1590,7 @@ ion-grid {
     font-weight: 500;
     position: absolute;
     width: 96px;
-    left: 39px;
+    left: 20px;
     top: 352px;
     display: flex;
     align-items: flex-end;
@@ -1587,7 +1605,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 39px;
+    left: 20px;
     top: 642px;
     display: flex;
     align-items: flex-end;
@@ -1602,7 +1620,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 39px;
+    left: 20px;
     top: 374px;
     display: flex;
     align-items: flex-end;
@@ -1617,7 +1635,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 39px;
+    left: 20px;
     top: 396px;
     display: flex;
     align-items: flex-end;
@@ -1632,7 +1650,7 @@ ion-grid {
     line-height: 115%;
     font-weight: 500;
     position: absolute;
-    left: 39px;
+    left: 20px;
     top: 418px;
     display: flex;
     align-items: flex-end;
@@ -1757,7 +1775,7 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     width: 100px;
-    left: 42px;
+    left: 20px;
     top: 672px;
     display: flex;
     align-items: flex-end;
@@ -1815,7 +1833,7 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     left: 215px;
-    top: 1003px;
+    top: 1017px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -1826,7 +1844,7 @@ ion-grid {
     height: 24px;
     position: absolute;
     left: 185px;
-    top: 999px;
+    top: 1013px;
     overflow: visible;
 }
 
@@ -1846,7 +1864,7 @@ ion-grid {
     height: 263px;
     position: absolute;
     left: 0px;
-    top: 241px;
+    top: 297px;
     overflow-x: auto;
     overflow-y: hidden;
     background: var(--verde-claro, #e8f2ef);
@@ -2272,7 +2290,7 @@ ion-grid {
 
 .rectangle-500 {
     position: absolute;
-    top: 287px;
+    top: 359px;
 }
 
 .rectangle-501 {
@@ -2284,7 +2302,7 @@ ion-grid {
     position: absolute;
     display: grid;
     align-items: revert;
-    top: 497px;
+    top: 553px;
     left: -4px;
 }
 

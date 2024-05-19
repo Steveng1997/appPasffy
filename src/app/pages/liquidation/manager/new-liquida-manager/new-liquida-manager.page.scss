@@ -30,7 +30,7 @@ ion-grid {
 .rectangle-93 {
     background: white;
     width: -webkit-fill-available;
-    height: 3183px;
+    height: 3215px;
     position: absolute;
     left: 0px;
     top: 121px;
@@ -514,7 +514,7 @@ ion-grid {
     height: 245px;
     position: absolute;
     left: 0px;
-    top: 611px;
+    top: 643px;
     overflow-x: auto;
     overflow-y: hidden;
     background: var(--verde-claro, #e8f2ef);
@@ -959,7 +959,7 @@ ion-grid {
 
 .rectangle-200 {
     position: absolute;
-    top: 155px;
+    top: 187px;
 }
 
 .icon3 {
@@ -1518,6 +1518,40 @@ ion-grid {
     justify-content: flex-start;
 }
 
+.totalServic {
+    color: var(--negro, #3c3c3c);
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 21px;
+    top: 596px;
+    height: 1.19%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._1011 {
+    color: black;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 281px;
+    width: 16.93%;
+    top: 596px;
+    height: 1.19%;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    z-index: 4;
+}
+
 .total {
     color: var(--verde-oscuro, #0b9a7a);
     text-align: left;
@@ -1900,7 +1934,7 @@ ion-select::part(icon) {
     position: absolute;
     display: grid;
     align-items: revert;
-    top: 849px;
+    top: 881px;
     left: -4px;
 }
 
