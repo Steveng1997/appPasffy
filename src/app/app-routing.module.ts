@@ -19,10 +19,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/menu/menu.module').then(m => m.MenuPageModule)
   },
   {
-    path: 'setting',
-    loadChildren: () => import('./pages/setting/setting.module').then(m => m.SettingPageModule)
-  },
-  {
     path: 'manager',
     loadChildren: () => import('./pages/liquidation/manager/manager.module').then(m => m.ManagerPageModule)
   },
@@ -69,10 +65,17 @@ const routes: Routes = [
   {
     path: 'new-liquiationManager',
     loadChildren: () => import('./pages/liquidation/manager/new-liquida-manager/new-liquida-manager.module').then( m => m.NewLiquidaManagerPageModule)
+  },
+  {
+    path: 'therapist',
+    loadChildren: () => import('./pages/setting/therapist/therapist.module').then( m => m.TherapistPageModule)
+  },
+  {
+    path: 'manager',
+    loadChildren: () => import('./pages/setting/manager/manager.module').then( m => m.ManagerPageModule)
   }
-
-
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes)

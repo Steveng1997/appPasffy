@@ -22,7 +22,7 @@ export class MenuPage implements OnInit {
   }
 
   setting() {
-    this.router.navigate([`tabs/${this.id}/setting`])
+    this.router.navigate([`tabs/${this.id}/therapist`])
   }
 
   help() {

@@ -1,0 +1,52 @@
+<ion-content padding fullscreen>
+  <ion-grid fixed>
+
+    <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12">
+
+      <div class="encargadas">Encargadas</div>
+
+      <div class="frame-78">
+        <div>
+          <div class="rectangle-1052"></div>
+          <div class="nombre">Nombre</div>
+          <div class="user">User</div>
+          <div class="pass">Pass</div>
+          <div class="fijo-d-a">Fijo / Día</div>
+          <div class="bebida-casa2">Bebida Casa</div>
+          <div class="bebida-terap2">Bebida Terap</div>
+          <div class="tabaco2">Tabaco</div>
+          <div class="vitamina2">Vitamina</div>
+          <div class="otros2">Otros</div>
+        </div>
+
+        <div class="rectangle-1042" *ngFor="let manager of manager" (click)="editManager(manager)">
+          <div style="position: absolute; top: -41px">
+            <div class="luc-a">{{manager.nombre}}</div>
+            <div class="lu-12">{{manager.usuario}}</div>
+            <div class="_1">{{manager.pass}}</div>
+            <div class="_10037">{{manager.fijoDia}}€</div>
+            <div class="_10023">{{manager.bebida}}%</div>
+            <div class="_10022">{{manager.bebidaTerap}}%</div>
+            <div class="_10024">{{manager.tabaco}}%</div>
+            <div class="_10025">{{manager.vitamina}}%</div>
+            <div class="_10026">{{manager.otros}}%</div>
+          </div>
+        </div>
+      </div>
+
+      <svg (click)="back()" class="icon" width="12" height="24" viewBox="0 0 12 24" fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 0L1.04907e-06 12L12 24" stroke="#A6A6A6" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+      
+      <svg (click)="newManager()" class="group-83" width="30" height="30" viewBox="0 0 30 30" fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <circle cx="15" cy="15" r="15" fill="#00AF87" />
+      <path d="M20.7854 15.3313H9.21458M15 9.5459V21.1167" stroke="white" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+
+    </ion-col>
+  </ion-grid>
+</ion-content>

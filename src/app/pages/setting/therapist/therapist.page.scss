@@ -1,0 +1,347 @@
+.configuraci-n,
+.configuraci-n * {
+    box-sizing: border-box;
+}
+
+.configuraci-n {
+    background: #ffffff;
+    height: -webkit-fill-available;
+    position: relative;
+}
+
+ion-grid {
+    background: var(--verde-claro, #e8f2ef);
+    height: -webkit-fill-available;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.rectangle-148 {
+    background: var(--verde-claro, #e8f2ef);
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.terapeutas {
+    color: var(--verde, #1fb996);
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 30px;
+    line-height: 100%;
+    font-weight: 700;
+    position: absolute;
+    left: 19px;
+    top: 91px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.rectangle-106 {
+    position: absolute;
+    top: 10px;
+}
+
+// Table
+
+.frame-77 {
+    width: 355px;
+    height: 296px;
+    position: absolute;
+    left: 20px;
+    top: 141px;
+    overflow: scroll;
+}
+
+.rectangle-105 {
+    background: var(--verde-oscuro, #0b9a7a);
+    border-radius: 10px;
+    width: 784px;
+    height: 34px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.nombre {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 21px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.servicio {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 107px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.propina {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 195px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.bebida-casa {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 279px;
+    top: 7px;
+    width: 99px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.bebida-terap {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 398px;
+    top: 7px;
+    width: 128px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.tabaco {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 524px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.vitamina {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 605px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.otros {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 712px;
+    top: 7px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+// Column
+
+.rectangle-104 {
+    background: #ffffff;
+    border-radius: 15px;
+    min-width: 785px;
+    height: 54px;
+    position: relative;
+    left: calc(50% - 177.5px);
+    top: 41px;
+    margin-top: 2px;
+    display: inline-grid;
+    inline-size: auto;
+}
+
+.luc-a {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 20px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 27px;
+    top: 57px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._10013 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 20px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 114px;
+    top: 57px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._10014 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 20px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 200px;
+    top: 57px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._10015 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 20px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 302px;
+    top: 57px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._100 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 20px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 421px;
+    top: 57px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._1002 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 20px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 527px;
+    top: 57px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._1003 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 20px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 616px;
+    top: 57px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._1004 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 20px;
+    line-height: 125%;
+    font-weight: 400;
+    position: absolute;
+    left: 710px;
+    top: 57px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+// Icon
+
+.group-82 {
+    height: auto;
+    position: absolute;
+    left: 200px;
+    top: 91px;
+    overflow: visible;
+}
+
+.icon {
+    width: 3.2%;
+    height: 2.71%;
+    position: absolute;
+    right: 88.27%;
+    left: 8.53%;
+    bottom: 88.57%;
+    top: 8.71%;
+    transform: translate(-13px, -25px);
+    overflow: visible;
+}

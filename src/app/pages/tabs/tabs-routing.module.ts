@@ -16,8 +16,12 @@ const routes: Routes = [
         loadChildren: () => import('../menu/menu.module').then(m => m.MenuPageModule)
       },
       {
-        path: 'setting',
-        loadChildren: () => import('../setting/setting.module').then(m => m.SettingPageModule)
+        path: 'therapist',
+        loadChildren: () => import('../setting/therapist/therapist.module').then(m => m.TherapistPageModule)
+      },
+      {
+        path: 'manager',
+        loadChildren: () => import('../setting/manager/manager.module').then(m => m.ManagerPageModule)
       },
       {
         path: 'helps',
