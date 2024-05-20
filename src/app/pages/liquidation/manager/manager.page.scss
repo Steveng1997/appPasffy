@@ -1730,10 +1730,10 @@ ion-grid {
 
 .rectangle-109 {
     background: var(--verde-oscuro, #0b9a7a);
-    width: 143px;
+    width: 152px;
     height: 2px;
     position: absolute;
-    left: 182px;
+    left: 173px;
     top: 495px;
 }
 
@@ -1758,6 +1758,21 @@ ion-grid {
 .group-79 {
     position: absolute;
     inset: 0;
+}
+
+.cancel {
+    color: #7f7c7c;
+    text-align: left;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 700;
+    position: absolute;
+    left: 61px;
+    top: 1065px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 .eliminar {

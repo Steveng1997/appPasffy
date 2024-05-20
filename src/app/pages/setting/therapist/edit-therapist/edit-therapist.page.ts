@@ -43,19 +43,20 @@ export class EditTherapistPage implements OnInit {
   }
 
   liquidationTherapist: LiquidationTherapist = {
+    createdDate: "",
     currentDate: "",
     desdeFechaLiquidado: "",
     desdeHoraLiquidado: "",
     encargada: "",
+    formaPago: "",
     hastaFechaLiquidado: "",
     hastaHoraLiquidado: new Date().toTimeString().substring(0, 5),
-    createdDate: "",
     id: 0,
     idUnico: "",
     idTerapeuta: "",
     importe: 0,
     terapeuta: "",
-    tratamiento: 0
+    tratamiento: 0,
   }
 
   modelService: ModelService = {
@@ -94,15 +95,15 @@ export class EditTherapistPage implements OnInit {
   }
 
   async getTerapLiquidation(nombre) {
+    debugger
     await this.service.getTerapeutaLiqFalse(nombre).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         this.liquidationTherapist.tratamiento = rp.length
+        this.modelService.liquidadoTerapeuta = true
 
-        rp.map(item => {
-          this.service.updateLiquidacionTerap(item['id'], this.modelService).subscribe((dates) => { })
-        })
-
-        this.serviceLiquidationTherapist.settlementRecord(this.liquidationTherapist).subscribe((save) => { })
+        for (let i = 0; i < rp.length; i++) {
+          this.service.updateLiquidacionTerap(rp[i]['id'], this.modelService).subscribe((rp) => { })
+        }
       }
     })
   }
@@ -133,9 +134,9 @@ export class EditTherapistPage implements OnInit {
 
     this.serviceLiquidationTherapist.consultTherapist(nombre).subscribe(async (rp: any) => {
       if (rp.length > 0) {
-        untilYear = rp[0]['hastaFechaLiquidado'].toString().substring(2, 4)
-        untilMonth = rp[0]['hastaFechaLiquidado'].toString().substring(5, 7)
-        untilDay = rp[0]['hastaFechaLiquidado'].toString().substring(8, 10)
+        untilYear = rp[0]['hastaFechaLiquidado'].toString().substring(6, 8)
+        untilMonth = rp[0]['hastaFechaLiquidado'].toString().substring(3, 5)
+        untilDay = rp[0]['hastaFechaLiquidado'].toString().substring(0, 2)
         this.liquidationTherapist.desdeFechaLiquidado = `${untilYear}-${untilMonth}-${untilDay}`
         this.liquidationTherapist.desdeHoraLiquidado = rp[0]['hastaHoraLiquidado']
       } else {
@@ -204,17 +205,19 @@ export class EditTherapistPage implements OnInit {
         }).then(async (result) => {
           if (result.isConfirmed) {
             this.ionLoaderService.simpleLoader()
+            this.liquidationTherapist.currentDate = this.currentDate.toString()
+            this.liquidationTherapist.terapeuta = nombre
             this.dateCurrentDay()
             this.createIdUnique()
             await this.date(nombre)
-            this.liquidationTherapist.currentDate = this.currentDate.toString()
-            this.liquidationTherapist.terapeuta = nombre
-
             await this.getTerapLiquidation(nombre)
+
             this.serviceTherapist.deleteTerapeuta(id).subscribe(async (rp: any) => {
-              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1000 })
-              this.ionLoaderService.dismissLoader()
-              location.replace(`tabs/${this.iduser}/setting`);
+              this.serviceLiquidationTherapist.settlementRecord(this.liquidationTherapist).subscribe(async (rp) => {
+                this.ionLoaderService.dismissLoader()
+                location.replace(`tabs/${this.iduser}/setting`);
+                Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1000 })
+              })
             })
           }
         })
