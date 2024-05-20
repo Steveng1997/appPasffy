@@ -100,6 +100,7 @@ export class ManagerPage {
   totalTransaction: string
 
   sumCommission: string
+  totalServic: string
 
   // Total de todo
   totalSum: string
@@ -957,16 +958,15 @@ export class ManagerPage {
         }, 0)
       })
 
-      // let totalLiquidation = sumCommission - Number(receivedManager) + Number(this.regularization)
       let totalLiquidation = this.importe
       totalCommission = sumCommission + fixedTotalDay - Number(receivedManager)
-
+      let totalServic = sumCommission - Number(receivedManager)
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
 
       // this.validateNullData()
       await this.thousandPointEdit(totalLiquidation, service, totalTreatment, tip, totalTip, drink, drinkTherapist, totalDrink, totalDrinkTherap, tobacco,
         totalTobacco, vitamins, totalVitamin, others, totalOther, sumCommission, receivedManager, totalCash, totalBizum, totalCard, totalTransaction,
-        sumTherapist, fixedTotalDay)
+        sumTherapist, fixedTotalDay, totalServic)
 
       this.details = true
 
@@ -976,7 +976,7 @@ export class ManagerPage {
 
   async thousandPointEdit(totalLiquidation: number, service: number, totalTreatment: number, tip: number, totalTip: number, drink: number, drinkTherap: number, totalDrink: number,
     totalDrinkTherap: number, tobacco: number, totalTobacco: number, vitamins: number, totalVitamin: number, others: number, totalOther: number, sumCommission: number,
-    receivedManager: number, totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number, sumTherapist: number, fixedTotalDay: number) {
+    receivedManager: number, totalCash: number, totalBizum: number, totalCard: number, totalTransaction: number, sumTherapist: number, fixedTotalDay: number, totalServic: number) {
 
     if (totalLiquidation > 999) {
 
@@ -1728,6 +1728,31 @@ export class ManagerPage {
       this.totalFixedDay = integer[0].toString()
     } else {
       this.totalFixedDay = fixedTotalDay.toString()
+    }
+
+    if (totalServic > 999) {
+
+      const coma = totalServic.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? totalServic.toString().split(".") : totalServic.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalServic = integer[0].toString()
+    } else {
+      this.totalServic = totalServic.toString()
     }
   }
 
