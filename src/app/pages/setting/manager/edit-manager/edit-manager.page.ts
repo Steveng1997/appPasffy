@@ -29,6 +29,7 @@ export class EditManagerPage implements OnInit {
     desdeFechaLiquidado: "",
     desdeHoraLiquidado: "",
     encargada: "",
+    fixedDay: 0,
     hastaFechaLiquidado: "",
     hastaHoraLiquidado: new Date().toTimeString().substring(0, 5),
     createdDate: "",
@@ -36,7 +37,7 @@ export class EditManagerPage implements OnInit {
     idUnico: "",
     idEncargada: "",
     importe: 0,
-    tratamiento: 0
+    tratamiento: 0,
   }
 
   manager: ModelManager = {
@@ -96,12 +97,11 @@ export class EditManagerPage implements OnInit {
     await this.services.getManagerLiqFalse(nombre).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         this.liquidationManager.tratamiento = rp.length
+        this.modelService.liquidadoEncargada = true
 
-        rp.map(item => {
-          this.services.updateLiquidacionEncarg(item['id'], this.modelService).subscribe((dates) => { })
-        })
-
-        this.serviceLiquidationManager.settlementRecord(this.liquidationManager).subscribe((save) => { })
+        for (let i = 0; i < rp.length; i++) {
+          this.services.updateLiquidacionEncarg(rp[i]['id'], this.modelService).subscribe((rp) => { })
+        }
       }
     })
   }
@@ -201,17 +201,19 @@ export class EditManagerPage implements OnInit {
         }).then(async (result) => {
           if (result.isConfirmed) {
             this.ionLoaderService.simpleLoader()
+            this.liquidationManager.currentDate = this.currentDate.toString()
+            this.liquidationManager.encargada = nombre
             this.dateCurrentDay()
             this.createIdUnique()
             await this.date(nombre)
-            this.liquidationManager.currentDate = this.currentDate.toString()
-            this.liquidationManager.encargada = nombre
-
             await this.getManagerLiquidationFalse(nombre)
-            this.serviceManager.deleteManager(id).subscribe(async (resp: any) => {
-              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1000 })
-              this.ionLoaderService.dismissLoader()
-              location.replace(`tabs/${this.iduser}/setting`);
+
+            this.serviceManager.deleteManager(id).subscribe(async (rp: any) => {
+              this.serviceLiquidationManager.settlementRecord(this.liquidationManager).subscribe((rp) => {
+                Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1000 })
+                this.ionLoaderService.dismissLoader()
+                location.replace(`tabs/${this.iduser}/setting`);
+              })
             })
           }
         })

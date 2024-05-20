@@ -95,7 +95,6 @@ export class EditTherapistPage implements OnInit {
   }
 
   async getTerapLiquidation(nombre) {
-    debugger
     await this.service.getTerapeutaLiqFalse(nombre).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         this.liquidationTherapist.tratamiento = rp.length
@@ -134,9 +133,9 @@ export class EditTherapistPage implements OnInit {
 
     this.serviceLiquidationTherapist.consultTherapist(nombre).subscribe(async (rp: any) => {
       if (rp.length > 0) {
-        untilYear = rp[0]['hastaFechaLiquidado'].toString().substring(6, 8)
-        untilMonth = rp[0]['hastaFechaLiquidado'].toString().substring(3, 5)
-        untilDay = rp[0]['hastaFechaLiquidado'].toString().substring(0, 2)
+        untilYear = rp[0]['hastaFechaLiquidado'].toString().substring(2, 4)
+        untilMonth = rp[0]['hastaFechaLiquidado'].toString().substring(5, 7)
+        untilDay = rp[0]['hastaFechaLiquidado'].toString().substring(8, 10)
         this.liquidationTherapist.desdeFechaLiquidado = `${untilYear}-${untilMonth}-${untilDay}`
         this.liquidationTherapist.desdeHoraLiquidado = rp[0]['hastaHoraLiquidado']
       } else {
