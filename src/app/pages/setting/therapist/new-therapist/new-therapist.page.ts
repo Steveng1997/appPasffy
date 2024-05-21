@@ -84,7 +84,7 @@ export class NewTherapistPage implements OnInit {
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
                 this.resetTherapist()
                 this.ionLoaderService.dismissLoader()
-                location.replace(`tabs/${this.iduser}/setting`);
+                location.replace(`tabs/${this.iduser}/therapist`);
               })
             } else {
               this.ionLoaderService.dismissLoader()
@@ -95,7 +95,7 @@ export class NewTherapistPage implements OnInit {
             Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
             this.resetTherapist()
             this.ionLoaderService.dismissLoader()
-            location.replace(`tabs/${this.iduser}/setting`);
+            location.replace(`tabs/${this.iduser}/therapist`);
           })
         }
       })
@@ -106,7 +106,7 @@ export class NewTherapistPage implements OnInit {
 
   close() {
     this.resetTherapist()
-    this.router.navigate([`tabs/${this.iduser}/setting`])
+    this.router.navigate([`tabs/${this.iduser}/therapist`])
   }
 
   clean() {

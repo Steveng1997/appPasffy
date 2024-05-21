@@ -214,7 +214,7 @@ export class EditTherapistPage implements OnInit {
             this.serviceTherapist.deleteTerapeuta(id).subscribe(async (rp: any) => {
               this.serviceLiquidationTherapist.settlementRecord(this.liquidationTherapist).subscribe(async (rp) => {
                 this.ionLoaderService.dismissLoader()
-                location.replace(`tabs/${this.iduser}/setting`);
+                location.replace(`tabs/${this.iduser}/therapist`);
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1000 })
               })
             })
@@ -231,7 +231,7 @@ export class EditTherapistPage implements OnInit {
       this.serviceTherapist.updateTerapeutas(id, terapeuta).subscribe(async (res: any) => {
         this.ionLoaderService.dismissLoader()
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 1000 })
-        location.replace(`tabs/${this.iduser}/setting`);
+        location.replace(`tabs/${this.iduser}/therapist`);
       })
     } else {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'El campo del nombre se encuentra vacío', showConfirmButton: false, timer: 1000 })
@@ -239,6 +239,6 @@ export class EditTherapistPage implements OnInit {
   }
 
   close() {
-    this.router.navigate([`tabs/${this.iduser}/setting`])
+    this.router.navigate([`tabs/${this.iduser}/therapist`])
   }
 }

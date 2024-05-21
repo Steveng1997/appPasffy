@@ -14,6 +14,8 @@ import { ManagerService } from 'src/app/core/services/manager/manager.service';
 })
 export class ManagerPage implements OnInit {
 
+  page!: number
+
   id: number
   manager: any
 
@@ -34,6 +36,10 @@ export class ManagerPage implements OnInit {
     this.serviceManager.getUsuarios().subscribe((rp) => {
       this.manager = rp
     })
+  }
+
+  therapist() {
+    this.router.navigate([`tabs/${this.id}/therapist`])
   }
 
   editManager(manager: ModelManager) {

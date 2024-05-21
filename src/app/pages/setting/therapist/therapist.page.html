@@ -6,51 +6,60 @@
       <div class="configuraci-n">
         <div class="rectangle-148"></div>
 
-        <div class="rectangle-106">
-          
-          <div class="terapeutas">Terapeutas</div>
+        <div class="rectangle-92"></div>
+        <div class="therapist">Terapeuta</div>
 
-          <div class="frame-77">
-            <div>
-              <div class="rectangle-105"></div>
-              <div class="nombre">Nombre</div>
-              <div class="servicio">Servicio</div>
-              <div class="propina">Propina</div>
-              <div class="bebida-casa">Bebida Casa</div>
-              <div class="bebida-terap">Bebida Terap</div>
-              <div class="tabaco">Tabaco</div>
-              <div class="vitamina">Vitamina</div>
-              <div class="otros">Otros</div>
-            </div>
+        <div class="rectangle-18"></div>
+        <div class="rectangle-94"></div>
 
-            <div class="rectangle-104" *ngFor="let therap of therapist" (click)="editTherapist(therap)">
-              <div style="position: absolute; top: -41px">
-                <div class="luc-a">{{therap.nombre}}</div>
-                <div class="_10013">{{therap.servicio}}%</div>
-                <div class="_10014">{{therap.propina}}%</div>
-                <div class="_10015">{{therap.bebida}}%</div>
-                <div class="_100">{{therap.bebidaTerap}}%</div>
-                <div class="_1002">{{therap.tabaco}}%</div>
-                <div class="_1003">{{therap.vitamina}}%</div>
-                <div class="_1004">{{therap.otros}}%</div>
-              </div>
-            </div>
+        <div class="terapeuta">Terapeuta</div>
+        <div class="encargada" (click)="filterManager()">Encargada</div>
+
+        <div class="frame-77">
+          <div>
+            <div class="rectangle-105"></div>
+            <div class="nombre">Nombre</div>
+            <div class="servicio">Servicio</div>
+            <div class="propina">Propina</div>
+            <div class="bebida-casa">Bebida Casa</div>
+            <div class="bebida-terap">Bebida Terap</div>
+            <div class="tabaco">Tabaco</div>
+            <div class="vitamina">Vitamina</div>
+            <div class="otros">Otros</div>
           </div>
 
-          <svg (click)="newTherapist()" class="group-82" width="30" height="30" viewBox="0 0 30 30" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <circle cx="15" cy="15" r="15" fill="#00AF87" />
-            <path d="M20.7854 15.3313H9.21458M15 9.5459V21.1167" stroke="white" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
+          <div class="rectangle-104" *ngFor="let therap of therapist 
+            | paginate: { itemsPerPage: 8, currentPage: page }" (click)="
+            editTherapist(therap)">
+            <div style="position: absolute; top: -41px">
+              <div class="luc-a">{{therap.nombre}}</div>
+              <div class="_10013">{{therap.servicio}}%</div>
+              <div class="_10014">{{therap.propina}}%</div>
+              <div class="_10015">{{therap.bebida}}%</div>
+              <div class="_100">{{therap.bebidaTerap}}%</div>
+              <div class="_1002">{{therap.tabaco}}%</div>
+              <div class="_1003">{{therap.vitamina}}%</div>
+              <div class="_1004">{{therap.otros}}%</div>
+            </div>
+          </div>
         </div>
 
-        <svg (click)="back()" class="icon" width="12" height="24" viewBox="0 0 12 24" fill="none"
+        <pagination-controls class="paginator" previousLabel="" nextLabel=""
+        (pageChange)="page = $event"></pagination-controls>
+
+        <svg (click)="newTherapist()" class="group-82" width="30" height="30" viewBox="0 0 30 30" fill="none"
           xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 0L1.04907e-06 12L12 24" stroke="#A6A6A6" stroke-width="2" stroke-linecap="round"
+          <circle cx="15" cy="15" r="15" fill="#00AF87" />
+          <path d="M20.7854 15.3313H9.21458M15 9.5459V21.1167" stroke="white" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>
       </div>
+
+      <svg (click)="back()" class="icon" width="12" height="24" viewBox="0 0 12 24" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 0L1.04907e-06 12L12 24" stroke="#A6A6A6" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
 
     </ion-col>
   </ion-grid>

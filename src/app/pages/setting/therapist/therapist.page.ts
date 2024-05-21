@@ -13,6 +13,9 @@ import { TherapistService } from 'src/app/core/services/therapist/therapist.serv
   styleUrls: ['./therapist.page.scss'],
 })
 export class TherapistPage implements OnInit {
+
+  page!: number
+
   id: number
   therapist: any
   manager: any
@@ -35,7 +38,11 @@ export class TherapistPage implements OnInit {
       this.therapist = rp
     })
   }
-  
+
+  filterManager() {
+    this.router.navigate([`tabs/${this.id}/manager`])
+  }
+
   back() {
     this.router.navigate([`tabs/${this.id}/menu`])
   }

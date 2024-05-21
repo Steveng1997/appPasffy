@@ -212,7 +212,7 @@ export class EditManagerPage implements OnInit {
               this.serviceLiquidationManager.settlementRecord(this.liquidationManager).subscribe((rp) => {
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1000 })
                 this.ionLoaderService.dismissLoader()
-                location.replace(`tabs/${this.iduser}/setting`);
+                location.replace(`tabs/${this.iduser}/manager`);
               })
             })
           }
@@ -229,7 +229,7 @@ export class EditManagerPage implements OnInit {
       this.serviceManager.updateUser(id, encargada).subscribe((resp => {
         this.ionLoaderService.dismissLoader()
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 1000 })
-        location.replace(`tabs/${this.iduser}/setting`);
+        location.replace(`tabs/${this.iduser}/manager`);
       }))
     } else {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'El campo del nombre se encuentra vacío', showConfirmButton: false, timer: 1000 })
@@ -237,6 +237,6 @@ export class EditManagerPage implements OnInit {
   }
 
   close() {
-    this.router.navigate([`tabs/${this.iduser}/setting`])
+    this.router.navigate([`tabs/${this.iduser}/manager`])
   }
 }
