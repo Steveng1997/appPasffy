@@ -11,8 +11,9 @@ ion-grid {
 }
 
 .pop-up-editar-terapeuta {
-    height: 661px;
+    height: 529px;
     position: relative;
+    top: 31px;
 }
 
 .rectangle-123 {
@@ -26,15 +27,15 @@ ion-grid {
 }
 
 .nombre {
-    color: var(--verde, #1fb996);
+    color: var(--negro, #3c3c3c);
     text-align: left;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 33px;
-    top: 210px;
+    left: 32px;
+    top: 199px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -48,8 +49,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 38px;
-    top: 262px;
+    left: 268px;
+    top: 199px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -63,8 +64,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 121px;
-    top: 300px;
+    left: 185px;
+    top: 236px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -78,8 +79,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 273px;
-    top: 300px;
+    left: 67px;
+    top: 327px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -93,8 +94,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 121px;
-    top: 400px;
+    left: 185px;
+    top: 327px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -108,8 +109,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 273px;
-    top: 400px;
+    left: 301px;
+    top: 327px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -123,8 +124,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 121px;
-    top: 502px;
+    left: 67px;
+    top: 418px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -138,8 +139,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 273px;
-    top: 502px;
+    left: 185px;
+    top: 418px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -153,8 +154,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 273px;
-    top: 210px;
+    left: 301px;
+    top: 236px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -168,8 +169,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 38px;
-    top: 362px;
+    left: 133px;
+    top: 290px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -183,8 +184,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 38px;
-    top: 462px;
+    left: 31px;
+    top: 381px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -198,8 +199,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 189px;
-    top: 262px;
+    left: 16px;
+    top: 290px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -213,8 +214,8 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 189px;
-    top: 362px;
+    left: 268px;
+    top: 290px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -228,23 +229,23 @@ ion-grid {
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 189px;
-    top: 462px;
+    left: 159px;
+    top: 381px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
 }
 
 .servicio {
-    color: var(--verde, #1fb996);
+    color: var(--negro, #3c3c3c);
     text-align: left;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
     line-height: 100%;
     font-weight: 500;
     position: absolute;
-    left: 184px;
-    top: 210px;
+    left: 151px;
+    top: 199px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -304,11 +305,11 @@ ion-grid {
     border-style: solid;
     border-color: var(--verde, #1fb996);
     border-width: 1.5px;
-    width: 140px;
+    width: 95px;
     height: 50px;
     position: absolute;
-    left: 22px;
-    top: 193px;
+    left: 12px;
+    top: 219px;
     font-family: "Inter-Medium", sans-serif;
     font-size: 16px;
     justify-items: flex-end;
@@ -322,8 +323,8 @@ ion-grid {
     color: black;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
-    left: 91px;
-    width: 62px;
+    left: 20px;
+    width: 79px;
     --highlight-color-focused: var(--verde, #1fb996);
 }
 
@@ -332,11 +333,11 @@ ion-grid {
     border-style: solid;
     border-color: var(--verde, #1fb996);
     border-width: 1.5px;
-    width: 146px;
+    width: 95px;
     height: 50px;
     position: absolute;
-    left: 172px;
-    top: 193px;
+    left: 130px;
+    top: 219px;
     font-family: "Inter-Medium", sans-serif;
     font-size: 16px;
     justify-items: flex-end;
@@ -350,8 +351,8 @@ ion-grid {
     color: black;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
-    left: 244px;
-    width: 24px;
+    left: 156px;
+    width: 25px;
 }
 
 .rectangle-126 {
@@ -359,11 +360,11 @@ ion-grid {
     border-style: solid;
     border-color: var(--verde, #1fb996);
     border-width: 1.5px;
-    width: 143px;
+    width: 95px;
     height: 50px;
     position: absolute;
-    left: 23px;
-    top: 283px;
+    left: 246px;
+    top: 219px;
     font-family: "Inter-Medium", sans-serif;
     font-size: 16px;
     color: black;
@@ -374,8 +375,8 @@ ion-grid {
     color: black;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
-    left: 45px;
-    width: 70px;
+    left: 272px;
+    width: 25px;
 }
 
 .rectangle-128 {
@@ -383,11 +384,11 @@ ion-grid {
     border-style: solid;
     border-color: var(--verde, #1fb996);
     border-width: 1.5px;
-    width: 143px;
+    width: 95px;
     height: 50px;
     position: absolute;
-    left: 23px;
-    top: 383px;
+    left: 130px;
+    top: 310px;
     font-family: "Inter-Medium", sans-serif;
     font-size: 16px;
     justify-items: flex-end;
@@ -401,7 +402,7 @@ ion-grid {
     color: black;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
-    left: 45px;
+    left: 38px;
     width: 70px;
 }
 
@@ -410,11 +411,11 @@ ion-grid {
     border-style: solid;
     border-color: var(--verde, #1fb996);
     border-width: 1.5px;
-    width: 143px;
+    width: 95px;
     height: 50px;
     position: absolute;
-    left: 23px;
-    top: 483px;
+    left: 12px;
+    top: 401px;
     font-family: "Inter-Medium", sans-serif;
     font-size: 16px;
     justify-items: flex-end;
@@ -428,7 +429,7 @@ ion-grid {
     color: black;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
-    left: 45px;
+    left: 38px;
     width: 70px;
 }
 
@@ -437,11 +438,11 @@ ion-grid {
     border-style: solid;
     border-color: var(--verde, #1fb996);
     border-width: 1.5px;
-    width: 146px;
+    width: 95px;
     height: 50px;
     position: absolute;
-    left: 172px;
-    top: 283px;
+    left: 12px;
+    top: 310px;
     font-family: "Inter-Medium", sans-serif;
     font-size: 16px;
     justify-items: flex-end;
@@ -455,7 +456,7 @@ ion-grid {
     color: black;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
-    left: 194px;
+    left: 156px;
     width: 70px;
 }
 
@@ -464,11 +465,11 @@ ion-grid {
     border-style: solid;
     border-color: var(--verde, #1fb996);
     border-width: 1.5px;
-    width: 146px;
+    width: 95px;
     height: 50px;
     position: absolute;
-    left: 172px;
-    top: 383px;
+    left: 246px;
+    top: 310px;
     font-family: "Inter-Medium", sans-serif;
     font-size: 16px;
     justify-items: flex-end;
@@ -482,7 +483,7 @@ ion-grid {
     color: black;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
-    left: 194px;
+    left: 272px;
     width: 70px;
 }
 
@@ -491,11 +492,11 @@ ion-grid {
     border-style: solid;
     border-color: var(--verde, #1fb996);
     border-width: 1.5px;
-    width: 146px;
+    width: 95px;
     height: 50px;
     position: absolute;
-    left: 172px;
-    top: 483px;
+    left: 130px;
+    top: 401px;
     font-family: "Inter-Medium", sans-serif;
     font-size: 16px;
     justify-items: flex-end;
@@ -509,7 +510,7 @@ ion-grid {
     color: black;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
-    left: 194px;
+    left: 156px;
     width: 70px;
 }
 
@@ -521,13 +522,13 @@ ion-grid {
 .rectangle-77 {
     background: var(--verde, #1fb996);
     border-radius: 15px;
-    width: 47.79%;
+    width: 37.79%;
     height: 6.81%;
     position: absolute;
     right: 6.19%;
-    left: 46.02%;
+    left: 175px;
     bottom: 8.17%;
-    top: 85.02%;
+    top: 482px;
 }
 
 .group-99 {
@@ -551,7 +552,7 @@ ion-grid {
     font-weight: 700;
     position: absolute;
     left: 219px;
-    top: 575px;
+    top: 492px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -571,7 +572,7 @@ ion-grid {
     height: 19px;
     position: absolute;
     left: 194px;
-    top: 576px;
+    top: 491px;
     overflow: visible;
 }
 
@@ -589,7 +590,7 @@ ion-grid {
     font-weight: 500;
     position: absolute;
     left: 55px;
-    top: 576px;
+    top: 494px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -601,5 +602,5 @@ ion-grid {
     height: 1px;
     position: absolute;
     left: 55px;
-    top: 593px;
+    top: 512px;
 }
