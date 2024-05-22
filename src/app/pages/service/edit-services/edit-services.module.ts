@@ -15,4 +15,5 @@ import { EditServicesPage } from './edit-services.page';
   ],
   declarations: [EditServicesPage]
 })
+
 export class EditServicesPageModule {}

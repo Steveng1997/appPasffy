@@ -239,4 +239,29 @@ export class EditManagerPage implements OnInit {
   close() {
     this.router.navigate([`tabs/${this.iduser}/manager`])
   }
+
+  showKeyBoard(text: string) {
+    if (text === 'tabacco' || text === 'vitamin' || text === 'others') {
+      var screen = document.querySelector<HTMLElement>(".pop-up-editar-encargada")
+      var element_to_show = document.querySelector<HTMLElement>(".rectangle-140")
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 335) {
+        document.getElementById('overview').style.height = '4165px'
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1800,
+          behavior: "smooth"
+        })
+      }
+    }
+  }
+
+  hideKeyBoard(text: string) {
+    document.getElementById('overview').style.height = '623px'
+  }
 }

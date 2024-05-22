@@ -4,7 +4,7 @@
     <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12">
 
       <div class="nueva-encargada">
-        <div class="rectangle-133"></div>
+        <div class="rectangle-133" id="overview"></div>
         <div class="nombre">Nombre</div>
         <div class="contrase-a">Contraseña</div>
         <div class="usuario">Usuario</div>
@@ -68,19 +68,19 @@
 
             <div class="rectangle-138"></div>
             <ion-input type="number" class="rectangle-138" [(ngModel)]="manager.vitamina" name="vitamina"
-              id="vitamina"></ion-input>
+              id="vitamina" (ionFocus)="showKeyBoard('vitamin')" (ionBlur)="hideKeyBoard('vitamin')"></ion-input>
 
             <div class="rectangle-139"></div>
             <ion-input type="number" class="rectangle-139" [(ngModel)]="manager.bebida" name="bebida"
               id="bebida"></ion-input>
 
             <div class="rectangle-140"></div>
-            <ion-input type="number" class="rectangle-140" [(ngModel)]="manager.tabaco" name="tabaco"
-              id="tabaco"></ion-input>
+            <ion-input type="number" class="rectangle-140" [(ngModel)]="manager.tabaco" name="tabaco" id="tabaco"
+              (ionFocus)="showKeyBoard('tabacco')" (ionBlur)="hideKeyBoard('tabacco')"></ion-input>
 
             <div class="rectangle-141"></div>
             <ion-input type="number" class="rectangle-141" [(ngModel)]="manager.otros" name="otros"
-              id="otros"></ion-input>
+              id="otros" (ionFocus)="showKeyBoard('others')" (ionBlur)="hideKeyBoard('others')"></ion-input>
 
           </div>
 
