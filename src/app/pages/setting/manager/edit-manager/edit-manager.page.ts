@@ -237,14 +237,14 @@ export class EditManagerPage implements OnInit {
   }
 
   close() {
-    this.router.navigate([`tabs/${this.iduser}/manager`])
+    location.replace(`tabs/${this.iduser}/manager`)
   }
 
   showKeyBoard(text: string) {
     if (text === 'tabacco') {
       document.getElementById('overview').style.overflowY = 'auto'
       document.getElementById('overview').style.overflowX = 'hidden'
-      var screen = document.querySelector<HTMLElement>(".nueva-encargada")
+      var screen = document.querySelector<HTMLElement>(".editar-encargada")
       var element_to_show = document.getElementById('tabaco')
       var scrolling_parent = element_to_show.parentElement
 
@@ -264,7 +264,7 @@ export class EditManagerPage implements OnInit {
     if (text === 'vitamina') {
       document.getElementById('overview').style.overflowY = 'auto'
       document.getElementById('overview').style.overflowX = 'hidden'
-      var screen = document.querySelector<HTMLElement>(".nueva-encargada")
+      var screen = document.querySelector<HTMLElement>(".editar-encargada")
       var element_to_show = document.getElementById('vitamina')
       var scrolling_parent = element_to_show.parentElement
 
@@ -281,10 +281,10 @@ export class EditManagerPage implements OnInit {
       }
     }
 
-    if (text === 'otros') {
+    if (text === 'others') {
       document.getElementById('overview').style.overflowY = 'auto'
       document.getElementById('overview').style.overflowX = 'hidden'
-      var screen = document.querySelector<HTMLElement>(".nueva-encargada")
+      var screen = document.querySelector<HTMLElement>(".editar-encargada")
       var element_to_show = document.getElementById('otros')
       var scrolling_parent = element_to_show.parentElement
 

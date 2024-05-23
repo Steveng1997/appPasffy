@@ -120,7 +120,7 @@ export class NewManagerPage implements OnInit {
   close() {
     this.resetManager()
     document.getElementById('imgRol').style.display = 'block'
-    this.router.navigate([`tabs/${this.iduser}/manager`])
+    location.replace(`tabs/${this.iduser}/manager`)
   }
 
   clean() {
@@ -168,7 +168,7 @@ export class NewManagerPage implements OnInit {
       }
     }
 
-    if (text === 'otros') {
+    if (text === 'others') {
       document.getElementById('overview').style.overflowY = 'auto'
       document.getElementById('overview').style.overflowX = 'hidden'
       var screen = document.querySelector<HTMLElement>(".nueva-encargada")
