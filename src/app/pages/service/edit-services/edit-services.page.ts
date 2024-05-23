@@ -879,6 +879,7 @@ export class EditServicesPage implements OnInit {
 
         this.serviceManager.getByIdAndAdministrador(this.idUser).subscribe((datoAdministrador: any[]) => {
           if (datoAdministrador.length > 0) {
+            this.services.modifyBy = datoAdministrador[0]['nombre']
             this.buttonDelete = true
           } else {
             this.buttonDelete = false

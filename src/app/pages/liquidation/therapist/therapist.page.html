@@ -228,7 +228,7 @@
         </div>
 
         <div class="rectangle-1004" *ngFor="let services of (settledData ) | 
-        paginate: { itemsPerPage: 5, currentPage: page }" (click)="detail(services.idTerapeuta)">
+        paginate: { itemsPerPage: 5, currentPage: page }" (click)="goService(services.id)">
           <div style="position: relative; top: 0px">
 
             <div [ngClass]="{'color2':services.nota !== ''}" (click)="notes()"> </div>

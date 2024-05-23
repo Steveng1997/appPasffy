@@ -126,7 +126,8 @@ export class ManagerPage {
   }
 
   modelServices: ModelService = {
-    idEncargada: ""
+    idEncargada: "",
+    pantalla: ""
   }
 
   constructor(
@@ -287,6 +288,16 @@ export class ManagerPage {
   goTherapist() {
     this.selectedEncargada = ""
     this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
+  }
+
+  goService(id: number) {
+    this.services.getById(id).subscribe((rp: any) => {
+      if (rp.length > 0) {
+        this.modelServices.pantalla = 'liquidation-manager'
+        this.services.updateScreenById(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
+        this.router.navigate([`tabs/${this.id}/edit-services/${rp[0]['id']}`])
+      }
+    })
   }
 
   notes() {

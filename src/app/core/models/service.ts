@@ -30,6 +30,7 @@ export class ModelService {
     liquidadoEncargada?: boolean;
     liquidadoTerapeuta?: boolean;
     minuto?: number;
+    modifyBy?: string;
     nota?: string;
     numberEncarg?: string;
     numberTaxi?: string;

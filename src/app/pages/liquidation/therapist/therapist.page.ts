@@ -128,7 +128,8 @@ export class TherapistPage implements OnInit {
   }
 
   modelServices: ModelService = {
-    idTerapeuta: ""
+    idTerapeuta: "",
+    pantalla: ""
   }
 
   constructor(
@@ -301,6 +302,16 @@ export class TherapistPage implements OnInit {
 
   goManager() {
     this.router.navigate([`tabs/${this.id}/liquidation-manager`])
+  }
+
+  goService(id: number) {
+    this.services.getById(id).subscribe((rp: any) => {
+      if (rp.length > 0) {
+        this.modelServices.pantalla = 'liquidation-therapist'
+        this.services.updateScreenById(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
+        this.router.navigate([`tabs/${this.id}/edit-services/${rp[0]['id']}`])
+      }
+    })
   }
 
   notes() {

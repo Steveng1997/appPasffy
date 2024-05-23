@@ -1189,7 +1189,13 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   edit(id: number) {
-    this.router.navigate([`tabs/${this.id}/edit-services/${id}`])
+    this.service.getById(id).subscribe((rp: any) => {
+      if (rp.length > 0) {
+        this.modelServices.pantalla = 'new-liquiationManager'
+        this.service.updateScreenById(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
+        this.router.navigate([`tabs/${this.id}/edit-services/${rp[0]['id']}`])
+      }
+    })
   }
 
   notes() {
