@@ -241,27 +241,69 @@ export class EditManagerPage implements OnInit {
   }
 
   showKeyBoard(text: string) {
-    if (text === 'tabacco' || text === 'vitamin' || text === 'others') {
-      var screen = document.querySelector<HTMLElement>(".pop-up-editar-encargada")
-      var element_to_show = document.querySelector<HTMLElement>(".rectangle-140")
+    if (text === 'tabacco') {
+      document.getElementById('overview').style.overflowY = 'auto'
+      document.getElementById('overview').style.overflowX = 'hidden'
+      var screen = document.querySelector<HTMLElement>(".nueva-encargada")
+      var element_to_show = document.getElementById('tabaco')
       var scrolling_parent = element_to_show.parentElement
 
       var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
 
       var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
 
-      if (now_top > 335) {
-        document.getElementById('overview').style.height = '4165px'
+      if (now_top > 352) {
         var scroll_by = -(top - now_top)
         screen.scrollTo({
-          top: scroll_by - now_top + 1800,
+          top: scroll_by - now_top + 1100,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'vitamina') {
+      document.getElementById('overview').style.overflowY = 'auto'
+      document.getElementById('overview').style.overflowX = 'hidden'
+      var screen = document.querySelector<HTMLElement>(".nueva-encargada")
+      var element_to_show = document.getElementById('vitamina')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1100,
+          behavior: "smooth"
+        })
+      }
+    }
+
+    if (text === 'otros') {
+      document.getElementById('overview').style.overflowY = 'auto'
+      document.getElementById('overview').style.overflowX = 'hidden'
+      var screen = document.querySelector<HTMLElement>(".nueva-encargada")
+      var element_to_show = document.getElementById('otros')
+      var scrolling_parent = element_to_show.parentElement
+
+      var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
+
+      var now_top = parseInt(element_to_show.getBoundingClientRect().top.toString())
+
+      if (now_top > 352) {
+        var scroll_by = -(top - now_top)
+        screen.scrollTo({
+          top: scroll_by - now_top + 1100,
           behavior: "smooth"
         })
       }
     }
   }
 
-  hideKeyBoard(text: string) {
+  hideKeyBoard() {
+    document.getElementById('overview').style.overflow = 'visible'
     document.getElementById('overview').style.height = '623px'
   }
 }

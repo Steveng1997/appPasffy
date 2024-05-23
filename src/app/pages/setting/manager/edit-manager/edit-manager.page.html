@@ -3,8 +3,8 @@
 
     <ion-col size="12" size-lg="3" size-md="5" size-sm="6" size-xs="12" *ngFor="let manager of managers">
 
-      <div class="pop-up-editar-encargada">
-        <div class="rectangle-133" id="overview"></div>
+      <div class="pop-up-editar-encargada" id="overview">
+        <div class="rectangle-133"></div>
         <div class="nombre">Nombre</div>
         <div class="contrase-a">Contraseña</div>
         <div class="usuario">Usuario</div>
@@ -59,19 +59,19 @@
         <ion-input type="number" class="rectangle-137" name="bebidaTerap" [(ngModel)]="manager.bebidaTerap"></ion-input>
 
         <div class="rectangle-138"></div>
-        <ion-input type="number" class="rectangle-138" name="vitamina" [(ngModel)]="manager.vitamina"
-          (ionFocus)="showKeyBoard('vitamin')" (ionBlur)="hideKeyBoard('vitamin')"></ion-input>
+        <ion-input type="number" class="rectangle-138" name="vitamina" id="vitamina" [(ngModel)]="manager.vitamina"
+          (ionFocus)="showKeyBoard('vitamin')" (ionBlur)="hideKeyBoard()"></ion-input>
 
         <div class="rectangle-139"></div>
         <ion-input type="number" class="rectangle-139" name="bebida" [(ngModel)]="manager.bebida"></ion-input>
 
         <div class="rectangle-140"></div>
-        <ion-input type="number" class="rectangle-140" name="tabaco" [(ngModel)]="manager.tabaco"
-          (ionFocus)="showKeyBoard('tabacco')" (ionBlur)="hideKeyBoard('tabacco')"></ion-input>
+        <ion-input type="number" class="rectangle-140" name="tabaco" id="tabaco" [(ngModel)]="manager.tabaco"
+          (ionFocus)="showKeyBoard('tabacco')" (ionBlur)="hideKeyBoard()"></ion-input>
 
         <div class="rectangle-141"></div>
-        <ion-input type="number" class="rectangle-141" name="otros" [(ngModel)]="manager.otros"
-          (ionFocus)="showKeyBoard('others')" (ionBlur)="hideKeyBoard('others')"></ion-input>
+        <ion-input type="number" class="rectangle-141" name="otros" id="otros" [(ngModel)]="manager.otros"
+          (ionFocus)="showKeyBoard('others')" (ionBlur)="hideKeyBoard()"></ion-input>
 
         <div class="rectangle-77" (click)="update(manager.id, manager)"></div>
         <div class="group-992">
@@ -100,6 +100,7 @@
           </div>
         </div>
 
+        <div class="keyboard"></div>
       </div>
 
     </ion-col>

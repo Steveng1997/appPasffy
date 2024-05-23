@@ -192,6 +192,8 @@ export class NewPage implements OnInit {
   }
 
   showKeyBoard(text: string) {
+
+    debugger
     
     document.getElementById('overview').style.height = '4065px'
 
