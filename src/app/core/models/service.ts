@@ -8,6 +8,8 @@ export class ModelService {
     bizuTerap?: boolean;
     cierre?: boolean;
     cliente?: string;
+    createdBy?: string;
+    createdTime?: string;
     currentDate?: string;
     editar?: boolean;
     efectEncarg?: boolean;
@@ -30,6 +32,8 @@ export class ModelService {
     liquidadoEncargada?: boolean;
     liquidadoTerapeuta?: boolean;
     minuto?: number;
+    modifiedBy?: string;
+    modifiedTime?: string;
     modifyBy?: string;
     nota?: string;
     numberEncarg?: string;
