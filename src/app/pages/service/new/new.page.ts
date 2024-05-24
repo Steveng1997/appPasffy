@@ -73,6 +73,8 @@ export class NewPage implements OnInit {
     bizuTerap: false,
     cierre: false,
     cliente: "",
+    createdBy: "",
+    createdTime: "",
     currentDate: "",
     efectEncarg: false,
     efectDriverTaxi: false,
@@ -94,6 +96,8 @@ export class NewPage implements OnInit {
     liquidadoEncargada: false,
     liquidadoTerapeuta: false,
     minuto: 0,
+    modifiedBy: "",
+    modifiedTime: "",
     nota: "",
     numberEncarg: "",
     numberTaxi: "",
@@ -173,6 +177,7 @@ export class NewPage implements OnInit {
 
     if (this.idUser) {
       this.serviceManager.getById(this.idUser).subscribe((rp) => {
+        this.created(rp)
         if (rp[0]['rol'] == 'administrador') {
           this.getManager()
         } else {
@@ -191,10 +196,16 @@ export class NewPage implements OnInit {
     this.services.horaStart = this.horaStarted
   }
 
-  showKeyBoard(text: string) {
+  created(rp: any) {
+    this.services.createdBy = rp[0]['nombre']
 
-    debugger
-    
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    this.services.createdTime  = date + ' ' + time;
+  }
+
+  showKeyBoard(text: string) {    
     document.getElementById('overview').style.height = '4065px'
 
     if (text === 'date') {
@@ -888,7 +899,6 @@ export class NewPage implements OnInit {
         if (Number(this.services.servicio) > 0) {
           if (this.services.minuto != 0) {
             if (this.sumatoriaCobros == this.sumatoriaServicios) {
-              // Methods 
               this.createUniqueId()
               this.validateTheEmptyField()
               if (!this.expiredDateValidations()) return

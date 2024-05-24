@@ -60,6 +60,8 @@ export class EditServicesPage implements OnInit {
     bizuTerap: false,
     cierre: false,
     cliente: "",
+    createdBy: "",
+    createdTime: "",
     currentDate: "",
     editar: false,
     efectEncarg: false,
@@ -82,6 +84,8 @@ export class EditServicesPage implements OnInit {
     liquidadoEncargada: false,
     liquidadoTerapeuta: false,
     minuto: 0,
+    modifiedBy: "",
+    modifiedTime: "",
     nota: "",
     numberEncarg: "",
     numberTaxi: "",
@@ -879,7 +883,7 @@ export class EditServicesPage implements OnInit {
 
         this.serviceManager.getByIdAndAdministrador(this.idUser).subscribe((datoAdministrador: any[]) => {
           if (datoAdministrador.length > 0) {
-            this.services.modifyBy = datoAdministrador[0]['nombre']
+            this.modified(datoAdministrador)
             this.buttonDelete = true
           } else {
             this.buttonDelete = false
@@ -897,6 +901,15 @@ export class EditServicesPage implements OnInit {
         })
       }
     })
+  }
+
+  modified(rp: any) {
+    this.services.modifiedBy = rp[0]['nombre']
+
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    this.services.modifiedTime  = date + ' ' + time;
   }
 
   fullService() {
