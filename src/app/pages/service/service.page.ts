@@ -31,6 +31,7 @@ export class ServicePage implements OnInit {
   textSearch: boolean = false
   filter: boolean = false
   administratorRole: boolean = false
+  deletButton: boolean = false
   today: boolean = true
   notas: boolean = false
 
@@ -144,6 +145,7 @@ export class ServicePage implements OnInit {
   async ngOnInit() {
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.idUser = Number(params['id'])
+    this.deleteButton = false
     localStorage.clear();
     this.todaysDdate()
 
@@ -579,27 +581,10 @@ export class ServicePage implements OnInit {
     }
   }
 
-  async OK() {
-    this.filter = false
-
-    await this.serviceManager.getById(this.idUser).subscribe(async (rp) => {
-      if (rp[0]['rol'] == 'administrador') {
-        if (this.selectedTerapeuta != "" || this.selectedEncargada != "" ||
-          this.selectedDateStart || this.selectedDateEnd != "") {
-          this.deleteButton = true
-        } else {
-          this.deleteButton = false
-        }
-      } else {
-        this.deleteButton = false
-      }
-    })
-  }
-
-  filters = async () => {
-    this.serviceService.getServicio().subscribe(async (rp: any) => {
+  filters() {
+    this.serviceService.getServicio().subscribe((rp: any) => {
       this.servicio = rp
-      await this.calculateSumOfServices()
+      this.calculateSumOfServices()
     })
   }
 
@@ -667,6 +652,15 @@ export class ServicePage implements OnInit {
         this.servicio = valorTotal
         return accumulator + serv.totalServicio
       }, 0)
+    }
+
+    if (this.totalValor > 0) {
+      this.deleteButton = true
+      document.getElementById('trash2').style.stroke = 'red'
+    }
+    else {
+      this.deleteButton = false
+      document.getElementById('trash2').style.stroke = 'white'      
     }
 
     this.thousandPoint()
@@ -1705,54 +1699,56 @@ export class ServicePage implements OnInit {
   }
 
   deleteAll() {
-    this.serviceManager.getById(this.idUser).subscribe(async (rp) => {
-      if (rp[0]['rol'] == 'administrador') {
-        Swal.fire({
-          heightAuto: false,
-          position: 'top-end',
-          title: '¿Deseas eliminar el registro?',
-          text: "Una vez eliminados ya no se podrán recuperar",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si, Deseo eliminar!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              heightAuto: false,
-              position: 'top-end',
-              title: '¿Estas seguro de eliminar?',
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Si, Deseo eliminar!'
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.serviceTherapist.getTerapeuta(this.idService[0]['terapeuta']).subscribe((rp: any) => {
-                  this.serviceTherapist.updateHoraAndSalida(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
-                })
-
-                for (let i = 0; i < this.idService.length; i++) {
-                  console.log(this.idService)
-                  this.serviceService.deleteServicio(this.idService[i]['id']).subscribe((rp: any) => {
+    if (this.deleteButton == true) {
+      this.serviceManager.getById(this.idUser).subscribe(async (rp) => {
+        if (rp[0]['rol'] == 'administrador') {
+          Swal.fire({
+            heightAuto: false,
+            position: 'top-end',
+            title: '¿Deseas eliminar el registro?',
+            text: "Una vez eliminados ya no se podrán recuperar",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Deseo eliminar!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                heightAuto: false,
+                position: 'top-end',
+                title: '¿Estas seguro de eliminar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Deseo eliminar!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.serviceTherapist.getTerapeuta(this.idService[0]['terapeuta']).subscribe((rp: any) => {
+                    this.serviceTherapist.updateHoraAndSalida(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
                   })
-                }
 
-                this.getServices()
-                Swal.fire({ heightAuto: false, position: 'center', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1500 })
-              }
-            })
-          }
-        })
-      } else {
-        Swal.fire({
-          heightAuto: false, position: 'top-end', icon: 'error', title: '¡Oops...!', showConfirmButton: false, timer: 2500,
-          text: 'No tienes autorización para borrar, si deseas eliminar el servicio habla con el adminisitrador del sistema'
-        })
-      }
-    })
+                  for (let i = 0; i < this.idService.length; i++) {
+                    console.log(this.idService)
+                    this.serviceService.deleteServicio(this.idService[i]['id']).subscribe((rp: any) => {
+                    })
+                  }
+
+                  this.getServices()
+                  Swal.fire({ heightAuto: false, position: 'center', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1500 })
+                }
+              })
+            }
+          })
+        } else {
+          Swal.fire({
+            heightAuto: false, position: 'top-end', icon: 'error', title: '¡Oops...!', showConfirmButton: false, timer: 2500,
+            text: 'No tienes autorización para borrar, si deseas eliminar el servicio habla con el adminisitrador del sistema'
+          })
+        }
+      })
+    }
   }
 
   delete(id: number) {
