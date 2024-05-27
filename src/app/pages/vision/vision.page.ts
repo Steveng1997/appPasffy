@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment'
+import { Platform } from '@ionic/angular';
 
 // Service
 import { ManagerService } from 'src/app/core/services/manager/manager.service';
 import { TherapistService } from 'src/app/core/services/therapist/therapist.service';
 import { ServiceService } from 'src/app/core/services/service/service.service';
+import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.service';
 
 // Model 
 import { ModelTherapist } from 'src/app/core/models/therapist';
@@ -124,16 +126,21 @@ export class VisionPage implements OnInit {
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
+    private platform: Platform,
     public service: ServiceService,
     private serviceManager: ManagerService,
-    private serviceTherapist: TherapistService
+    private serviceTherapist: TherapistService,
+    private ionLoaderService: IonLoaderService
   ) { }
 
   ngOnInit() {
     let manager, element
-    let minute = 0, convertMinute = 0
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.idUser = Number(params['id'])
+
+    this.platformPause()
+
+    this.ionLoaderService.simpleLoader()
 
     this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
       this.user = rp[0]['nombre']
@@ -151,16 +158,35 @@ export class VisionPage implements OnInit {
     })
 
     this.getTherapist()
+  }
 
-    setTimeout(() => {
-      minute = this.therapist.filter(serv => serv.minuto > 0)
-      if (minute > 0) convertMinute = minute[0].minuto * 60000
-      if (convertMinute > 0) {
-        setTimeout(() => {
-          location.reload()
-        }, convertMinute);
-      }
-    }, 2000);
+  platformPause() {
+    this.platform.resume.subscribe(async () => {
+      let manager, element
+      const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
+      this.idUser = Number(params['id'])
+  
+      this.platformPause()
+  
+      this.ionLoaderService.simpleLoader()
+  
+      this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+        this.user = rp[0]['nombre']
+        this.servicesManager = rp
+        manager = rp
+        if (rp[0]['rol'] == 'administrador') {
+          this.getService()
+          this.getManagerall(element)
+          this.tableTherapist('array', 'date')
+        } else {
+          this.getServiceByManager(rp[0])
+          this.getManager(manager, element, 'array')
+          this.tableTherapistForManager(manager, 'array', 'date')
+        }
+      })
+  
+      this.getTherapist()
+    })
   }
 
   getManagerall(element) {
@@ -642,8 +668,18 @@ export class VisionPage implements OnInit {
 
   async getMinute(element) {
     if (element.length > 0) {
-      if (element?.horaEnd != "") {
-        await this.minuteDifference(element)
+      for (let u = 0; u < element.length; u++) {
+        if (element[u].horaEnd != "") {
+          await this.minuteDifference(element)
+          this.ionLoaderService.dismissLoader()
+        }
+        else {
+          if (element[u]['fechaEnd'] == "") {
+            this.diferenceMinutes = 0
+            this.updateHourAndExit(element, u)
+            this.ionLoaderService.dismissLoader()
+          }
+        }
       }
     }
   }
@@ -702,14 +738,22 @@ export class VisionPage implements OnInit {
       element[o]['fechaEnd'] = ''
       element[o]['horaEnd'] = ''
       element[o]['salida'] = ''
-      await this.serviceTherapist.updateHoraAndSalida(element[o]['nombre'], element[o]).subscribe(() => { })
+      await this.serviceTherapist.updateHoraAndSalida(element[o]['nombre'], element[o]).subscribe(() => {
+      })
     }
   }
 
   async updateMinute(element, o) {
+    let minute, convertMinute = 0
     if (this.diferenceMinutes > 0) {
       element[o]['minuto'] = this.diferenceMinutes
-      await this.serviceTherapist.updateMinute(element[o]['id'], element[o]).subscribe(() => { })
+      await this.serviceTherapist.updateMinute(element[o]['id'], element[o]).subscribe((rp: any) => {
+        minute = this.therapist.filter(serv => serv.minuto > 0)
+        if (minute.length > 0) convertMinute = minute[0].minuto * 60000
+        if (convertMinute > 0) {
+          this.ionLoaderService.dismissLoader()
+        }
+      })
     }
   }
 

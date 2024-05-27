@@ -1,6 +1,7 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Platform } from '@ionic/angular';
 
 // Excel
 import { Workbook } from 'exceljs';
@@ -133,6 +134,7 @@ export class ServicePage implements OnInit {
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
+    private platform: Platform,
     private ionLoaderService: IonLoaderService,
     private serviceService: ServiceService,
     private serviceManager: ManagerService,
@@ -160,6 +162,33 @@ export class ServicePage implements OnInit {
     await this.getTherapist()
     this.getServices()
     this.emptyTotals()
+    this.platformPause()
+  }
+
+  platformPause() {
+    this.platform.resume.subscribe(async () => {
+      const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
+      this.idUser = Number(params['id'])
+      localStorage.clear();
+      this.todaysDdate()
+
+      if (this.idUser) {
+        await this.serviceManager.getById(this.idUser).subscribe((rp) => {
+          if (rp[0]['rol'] == 'administrador') {
+            this.administratorRole = true
+            this.getManager()
+          } else {
+            this.manager = rp
+            this.selectedEncargada = this.manager[0].nombre
+          }
+        })
+      }
+
+      await this.getTherapist()
+      this.getServices()
+      this.emptyTotals()
+      this.platformPause()
+    })
   }
 
   emptyTotals() {
@@ -236,7 +265,7 @@ export class ServicePage implements OnInit {
           return service
         })
       } else {
-        this.serviceService.getByManagerOrder(rp[0]['nombre']).subscribe((rp: any) => {
+        this.serviceService.getEncargadaAndDate(this.dateStart, rp[0]['nombre']).subscribe((rp: any) => {
           this.servicio = rp
           service = rp
           if (rp.length != 0) {
@@ -572,7 +601,6 @@ export class ServicePage implements OnInit {
       this.servicio = rp
       await this.calculateSumOfServices()
     })
-    // await this.calculateSumOfServices()
   }
 
   calculateSumOfServices = async () => {
@@ -1674,6 +1702,57 @@ export class ServicePage implements OnInit {
     this.serviceModel.pantalla = 'services'
     this.serviceService.updateScreenById(this.idDetail, this.serviceModel).subscribe(async (rp: any) => { })
     this.router.navigate([`tabs/${this.idUser}/edit-services/${this.idDetail}`])
+  }
+
+  deleteAll() {
+    this.serviceManager.getById(this.idUser).subscribe(async (rp) => {
+      if (rp[0]['rol'] == 'administrador') {
+        Swal.fire({
+          heightAuto: false,
+          position: 'top-end',
+          title: '¿Deseas eliminar el registro?',
+          text: "Una vez eliminados ya no se podrán recuperar",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Deseo eliminar!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              heightAuto: false,
+              position: 'top-end',
+              title: '¿Estas seguro de eliminar?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Si, Deseo eliminar!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.serviceTherapist.getTerapeuta(this.idService[0]['terapeuta']).subscribe((rp: any) => {
+                  this.serviceTherapist.updateHoraAndSalida(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
+                })
+
+                for (let i = 0; i < this.idService.length; i++) {
+                  console.log(this.idService)
+                  this.serviceService.deleteServicio(this.idService[i]['id']).subscribe((rp: any) => {
+                  })
+                }
+
+                this.getServices()
+                Swal.fire({ heightAuto: false, position: 'center', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1500 })
+              }
+            })
+          }
+        })
+      } else {
+        Swal.fire({
+          heightAuto: false, position: 'top-end', icon: 'error', title: '¡Oops...!', showConfirmButton: false, timer: 2500,
+          text: 'No tienes autorización para borrar, si deseas eliminar el servicio habla con el adminisitrador del sistema'
+        })
+      }
+    })
   }
 
   delete(id: number) {

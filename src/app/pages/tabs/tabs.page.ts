@@ -27,7 +27,7 @@ export class TabsPage implements OnInit {
     const arr = param.split('/')
     const route = arr[arr.length - 1]
 
-    if(route == 'vision') {
+    if (route == 'vision') {
       document.getElementById('services').style.stroke = '#3C3C3C'
       document.getElementById('liquidation').style.stroke = '#3C3C3C'
       document.getElementById('closing').style.stroke = '#3C3C3C'
@@ -36,7 +36,7 @@ export class TabsPage implements OnInit {
   }
 
   services() {
-    this.router.navigate([`tabs/${this.id}/services`])
+    location.replace(`tabs/${this.id}/services`)
     document.getElementById('vision').style.stroke = '#3C3C3C'
     document.getElementById('liquidation').style.stroke = '#3C3C3C'
     document.getElementById('closing').style.stroke = '#3C3C3C'
@@ -48,7 +48,7 @@ export class TabsPage implements OnInit {
   }
 
   new() {
-    this.router.navigate([`tabs/${this.id}/new`])
+    location.replace(`tabs/${this.id}/new`)
     document.getElementById('vision').style.stroke = '#3C3C3C'
     document.getElementById('services').style.stroke = '#3C3C3C'
     document.getElementById('liquidation').style.stroke = '#3C3C3C'
@@ -56,8 +56,7 @@ export class TabsPage implements OnInit {
   }
 
   closing() {
-    // this.router.navigate([`tabs/${this.id}/closing`])
-    this.router.navigate([`tabs/${this.idUser}/menu`])
+    location.replace(`tabs/${this.id}/menu`)
     document.getElementById('vision').style.stroke = '#3C3C3C'
     document.getElementById('services').style.stroke = '#3C3C3C'
     document.getElementById('liquidation').style.stroke = '#3C3C3C'
@@ -65,7 +64,7 @@ export class TabsPage implements OnInit {
   }
 
   liquidation() {
-    this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
+    location.replace(`tabs/${this.id}/liquidation-therapist`)
     document.getElementById('vision').style.stroke = '#3C3C3C'
     document.getElementById('services').style.stroke = '#3C3C3C'
     document.getElementById('closing').style.stroke = '#3C3C3C'
