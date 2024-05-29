@@ -610,6 +610,16 @@ export class ServicePage implements OnInit {
     this.parmHourStart = `${this.dateStart} ${this.horaInicio}`
     this.parmHourEnd = `${this.dateEnd} ${this.horaFinal}`
 
+    let monthStart, dayStart, monthEnd, dayEnd
+
+    dayStart = this.dateStart.substring(8, 10)
+    monthStart = this.dateStart.substring(5, 7)
+
+    dayEnd = this.dateEnd.substring(8, 10)
+    monthEnd = this.dateEnd.substring(5, 7)
+
+    this.dateTodayCurrent = `${dayStart}-${monthStart} ${dayEnd}-${monthEnd}`
+
     const conditionBetweenHours = serv => {
       if (this.horaInicio === undefined && this.hourStart === undefined) return true
       if (this.horaInicio === undefined && serv.horaFinal <= this.horaFinal) return true
@@ -660,7 +670,7 @@ export class ServicePage implements OnInit {
     }
     else {
       this.deleteButton = false
-      document.getElementById('trash2').style.stroke = 'white'      
+      document.getElementById('trash2').style.stroke = 'white'
     }
 
     this.thousandPoint()
