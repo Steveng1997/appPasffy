@@ -874,7 +874,7 @@ export class ServicePage implements OnInit {
       this.therap = services.numberTerap
       this.therapist = services.numberTerap
       this.manag = services.numberEncarg
-      this.taxi = services.numberTaxi
+      this.taxi = services.taxi
       this.drinkHouse = services.bebidas
       this.drinkTherap = services.bebidaTerap
       this.tabacco = services.tabaco
