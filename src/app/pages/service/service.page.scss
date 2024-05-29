@@ -1334,7 +1334,7 @@ ion-select::part(placeholder) {
   margin-top: 32px;
   margin-bottom: -41px;
   width: 335px;
-  height: 420px;
+  height: 390px;
 }
 
 .dropdownTotal:hover .dropdownTotal-options {
@@ -1348,7 +1348,7 @@ ion-select::part(placeholder) {
   border-radius: 5px;
 }
 
-._min {
+._treatment {
   color: var(--negro, #3c3c3c);
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
@@ -1360,7 +1360,7 @@ ion-select::part(placeholder) {
   top: 15px;
 }
 
-.__2-min {
+._totalTreatment {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
@@ -1374,7 +1374,7 @@ ion-select::part(placeholder) {
   justify-items: end;
 }
 
-._total {
+._tip {
   color: var(--negro, #3c3c3c);
   text-align: left;
   font-family: "Inter-Medium", sans-serif;
@@ -1638,32 +1638,6 @@ ion-select::part(placeholder) {
 }
 
 ._05 {
-  color: var(--negro, #3c3c3c);
-  text-align: right;
-  font-family: "Inter-Medium", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 125%;
-  display: grid;
-  margin-right: 21px;
-  margin-top: 10px;
-  justify-content: end;
-  justify-items: end;
-}
-
-._bebida-terap {
-  color: var(--negro, #3c3c3c);
-  text-align: left;
-  font-family: "Inter-Medium", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 125%;
-  position: absolute;
-  left: 23px;
-  top: 375px;
-}
-
-._06 {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
