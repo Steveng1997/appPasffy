@@ -1351,10 +1351,10 @@ ion-select::part(placeholder) {
 ._min {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 15px;
@@ -1364,9 +1364,9 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 15px;
@@ -1377,10 +1377,10 @@ ion-select::part(placeholder) {
 ._total {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 45px;
@@ -1390,9 +1390,9 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
@@ -1403,10 +1403,10 @@ ion-select::part(placeholder) {
 ._pago {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 75px;
@@ -1416,9 +1416,9 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
@@ -1426,25 +1426,13 @@ ion-select::part(placeholder) {
   justify-items: end;
 }
 
-._cliente {
-  color: var(--negro, #3c3c3c);
-  text-align: left;
-  font-family: "Inter-Bold", sans-serif;
-  font-size: 16px;
-  line-height: 125%;
-  font-weight: 500;
-  position: absolute;
-  left: 23px;
-  top: 105px;
-}
-
 ._salida {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 135px;
@@ -1454,9 +1442,9 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
@@ -1467,10 +1455,10 @@ ion-select::part(placeholder) {
 ._tratamiento {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 165px;
@@ -1480,9 +1468,9 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
@@ -1493,10 +1481,10 @@ ion-select::part(placeholder) {
 ._a-casa {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 195px;
@@ -1506,9 +1494,9 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
@@ -1519,10 +1507,11 @@ ion-select::part(placeholder) {
 ._153 {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 225px;
@@ -1532,9 +1521,9 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
@@ -1545,10 +1534,10 @@ ion-select::part(placeholder) {
 ._a-terapeuta {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 255px;
@@ -1558,9 +1547,9 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
@@ -1571,10 +1560,10 @@ ion-select::part(placeholder) {
 ._a-encargada {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 285px;
@@ -1584,9 +1573,10 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
@@ -1597,10 +1587,10 @@ ion-select::part(placeholder) {
 .a-taxista {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 315px;
@@ -1610,9 +1600,9 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
@@ -1623,10 +1613,11 @@ ion-select::part(placeholder) {
 ._bebida-casa {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 345px;
@@ -1636,9 +1627,23 @@ ion-select::part(placeholder) {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
+  display: grid;
+  margin-right: 21px;
+  margin-top: 10px;
+  justify-content: end;
+  justify-items: end;
+}
+
+._05 {
+  color: var(--negro, #3c3c3c);
+  text-align: right;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
@@ -1649,41 +1654,39 @@ ion-select::part(placeholder) {
 ._bebida-terap {
   color: var(--negro, #3c3c3c);
   text-align: left;
-  font-family: "Inter-Bold", sans-serif;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   position: absolute;
   left: 23px;
   top: 375px;
-}
-
-._05 {
-  color: var(--negro, #3c3c3c);
-  text-align: right;
-  font-family: "Inter-Medium", sans-serif;
-  font-size: 16px;
-  line-height: 125%;
-  font-weight: 500;
-  display: grid;
-  margin-right: 21px;
-  margin-top: 10px;
-  justify-content: end;
-  justify-items: end;
 }
 
 ._06 {
   color: var(--negro, #3c3c3c);
   text-align: right;
   font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 125%;
-  font-weight: 500;
   display: grid;
   margin-right: 21px;
   margin-top: 10px;
   justify-content: end;
   justify-items: end;
+}
+
+._cliente {
+  color: var(--negro, #3c3c3c);
+  text-align: left;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  position: absolute;
+  left: 23px;
+  top: 105px;
 }
 
 // Detail
@@ -1697,21 +1700,11 @@ ion-select::part(placeholder) {
 }
 
 .POP-UP-DETAILS .overlap-group-wrapper {
-  // width: 367px;
-  // height: 641px;
-
   width: 336px;
   height: 641px;
 }
 
 .POP-UP-DETAILS .overlap-group {
-  // position: relative;
-  // height: 641px;
-  // top: 1px;
-  // background-color: #ffffff;
-  // border-radius: 49px 49px 0px 0px;
-  // box-shadow: 0px 0px 12px #00000040;
-
   position: relative;
   height: 595px;
   top: 17px;
