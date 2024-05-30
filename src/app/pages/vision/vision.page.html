@@ -105,7 +105,7 @@
 
             <div class="rectangle-192"
               *ngFor="let therapist of (servicesTherapist) | paginate: { itemsPerPage: 10, currentPage: pageTherapist }">
-              <div class="mar-a2">{{therapist.nombre}}</div>
+              <div class="mar-a2" (click)="selectTherap(therapist.nombre)">{{therapist.nombre}}</div>
               <div class="_152">{{therapist.sum}} €</div>
               <div class="_1">{{therapist.count}}</div>
             </div>

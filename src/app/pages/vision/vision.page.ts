@@ -165,11 +165,11 @@ export class VisionPage implements OnInit {
       let manager, element
       const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
       this.idUser = Number(params['id'])
-  
+
       this.platformPause()
-  
+
       this.ionLoaderService.simpleLoader()
-  
+
       this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
         this.user = rp[0]['nombre']
         this.servicesManager = rp
@@ -184,7 +184,7 @@ export class VisionPage implements OnInit {
           this.tableTherapistForManager(manager, 'array', 'date')
         }
       })
-  
+
       this.getTherapist()
     })
   }
@@ -1913,5 +1913,11 @@ export class VisionPage implements OnInit {
 
   menu() {
     this.router.navigate([`tabs/${this.idUser}/menu`])
+  }
+
+  selectTherap(name: string) {
+    localStorage.clear()
+    localStorage.setItem('terapeuta', name)
+    this.router.navigate([`tabs/${this.idUser}/services`])
   }
 }

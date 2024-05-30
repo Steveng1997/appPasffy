@@ -1701,6 +1701,20 @@ ion-select::part(placeholder) {
   white-space: nowrap;
 }
 
+.POP-UP-DETAILS  .dateDetail {
+  position: absolute;
+  font-size: 17px;
+  height: 31px;
+  top: 41px;
+  left: 107px;
+  font-family: "Inter-Medium", sans-serif;
+  font-weight: 400;
+  color: var(--verde, #1fb996);
+  letter-spacing: 0;
+  line-height: 31.2px;
+  white-space: nowrap;
+}
+
 .POP-UP-DETAILS .x-close {
   position: absolute;
   width: 27px;
@@ -2729,7 +2743,7 @@ ion-select::part(placeholder) {
   }
 
   .textSearch {
-    top: 254px;
+    top: 255px;
   }
 
   .icon2 {

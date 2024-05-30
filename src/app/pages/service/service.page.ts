@@ -106,6 +106,8 @@ export class ServicePage implements OnInit {
   therapisth: string
   house1: string
   house2: string
+  dateStart1: string
+  dateEnd1: string
   hourstart: string
   hourend: string
   therap: string
@@ -145,6 +147,12 @@ export class ServicePage implements OnInit {
   async ngOnInit() {
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.idUser = Number(params['id'])
+
+    if (localStorage.getItem('terapeuta') != undefined) {
+      this.selectedTerapeuta = localStorage.getItem('terapeuta')
+      this.filters()
+    }
+
     this.deleteButton = false
     localStorage.clear();
     this.todaysDdate()
@@ -172,6 +180,8 @@ export class ServicePage implements OnInit {
       const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
       this.idUser = Number(params['id'])
       localStorage.clear();
+      this.selectedTerapeuta = ""
+      this.filters()
       this.todaysDdate()
 
       if (this.idUser) {
@@ -582,6 +592,7 @@ export class ServicePage implements OnInit {
   }
 
   filters() {
+    debugger
     this.serviceService.getServicio().subscribe((rp: any) => {
       this.servicio = rp
       this.calculateSumOfServices()
@@ -871,7 +882,9 @@ export class ServicePage implements OnInit {
       this.minute = services.minuto
       this.total = services.totalServicio
       this.payment = services.formaPago
-      this.client = services.cliente
+
+      if (services.cliente != "") this.client = services.cliente
+      else this.client = 'N/A'
 
       if (services.salida != "") this.exit = services.salida
       else this.exit = 'N/A'
@@ -879,6 +892,8 @@ export class ServicePage implements OnInit {
       this.treatment = services.servicio
       this.house1 = services.numberPiso1
       this.house2 = services.numberPiso2
+      this.dateStart1 = services.fecha
+      this.dateEnd1 = services.fechaFin
       this.hourstart = services.horaStart
       this.hourend = services.horaEnd
       this.therap = services.numberTerap

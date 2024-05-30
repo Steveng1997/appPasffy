@@ -286,7 +286,8 @@
 <div class="POP-UP-DETAILS" *ngIf="details">
   <div class="overlap-group-wrapper">
     <div class="overlap-group">
-      <div class="emily">{{therapisth}}&nbsp;&nbsp; {{hourstart}} - {{hourend}}</div>
+      <div class="emily">{{therapisth}}</div>
+      <div class="dateDetail">{{dateStart1}} {{hourstart}} a {{hourend}} </div>
 
       <svg class="x-close_1" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
         (click)="closeDetail()">
@@ -294,7 +295,7 @@
           stroke-linejoin="round" />
       </svg>
 
-      <div class="text-wrapper">Min</div>
+      <div class="text-wrapper">Tiempo</div>
       <div class="div">{{minute}} min</div>
       <div class="text-wrapper-2">Total</div>
       <div class="text-wrapper-3">{{total}} €</div>
