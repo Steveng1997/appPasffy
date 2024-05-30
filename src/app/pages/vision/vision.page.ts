@@ -197,16 +197,20 @@ export class VisionPage implements OnInit {
         this.servicesManager = rp
 
         if (rp.length > 7 && rp.length < 10) {
-          let rectangle20 = 334
+          let rectangle20 = 334, overview = 1958
 
           for (let i = 8; i <= rp.length; i++) {
-            rectangle20 += 31.5
+            rectangle20 += 31.5, overview += 31
+
             document.getElementById('rectangle20').style.height = rectangle20.toString() + 'px'
+            document.getElementById('overview').style.height = overview.toString() + 'px'
           }
         }
 
-        if (rp.length == 10) {
-          document.getElementById('rectangle20').style.height = '430px'
+        if (rp.length >= 10) {
+          this.paginaterManager = true
+          document.getElementById('rectangle20').style.height = '445px'
+          document.getElementById('overview').style.height = '2068px'
         }
 
         rp.map(item => {
@@ -396,9 +400,8 @@ export class VisionPage implements OnInit {
         }
       }
 
-      if (rp.length == 10) {
+      if (rp.length >= 10) {
         this.paginaterMinute = true
-        this.paginaterManager = true
         this.paginaterTherapist = true
         document.getElementById('rectangle18').style.height = '468px'
         document.getElementById('currentDate').style.top = '536px'
