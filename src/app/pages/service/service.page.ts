@@ -150,10 +150,14 @@ export class ServicePage implements OnInit {
 
     if (localStorage.getItem('terapeuta') != undefined) {
       this.selectedTerapeuta = localStorage.getItem('terapeuta')
+      this.deleteButton = true
+      document.getElementById('trash2').style.stroke = 'red'
       this.filters()
+    } else {
+      this.deleteButton = false
+      document.getElementById('trash2').style.stroke = 'white'
     }
 
-    this.deleteButton = false
     localStorage.clear();
     this.todaysDdate()
 
@@ -181,7 +185,11 @@ export class ServicePage implements OnInit {
       this.idUser = Number(params['id'])
       localStorage.clear();
       this.selectedTerapeuta = ""
-      this.filters()
+      this.selectedEncargada = ""
+      this.selectedFormPago = ""
+      this.deleteButton = false
+      document.getElementById('trash2').style.stroke = 'white'
+      // this.filters()
       this.todaysDdate()
 
       if (this.idUser) {
@@ -592,7 +600,6 @@ export class ServicePage implements OnInit {
   }
 
   filters() {
-    debugger
     this.serviceService.getServicio().subscribe((rp: any) => {
       this.servicio = rp
       this.calculateSumOfServices()
@@ -673,15 +680,6 @@ export class ServicePage implements OnInit {
         this.servicio = valorTotal
         return accumulator + serv.totalServicio
       }, 0)
-    }
-
-    if (this.totalValor > 0) {
-      this.deleteButton = true
-      document.getElementById('trash2').style.stroke = 'red'
-    }
-    else {
-      this.deleteButton = false
-      document.getElementById('trash2').style.stroke = 'white'
     }
 
     this.thousandPoint()
@@ -845,8 +843,8 @@ export class ServicePage implements OnInit {
   emptyFilter() {
     this.selectedTerapeuta = ""
     this.selectedEncargada = ""
-    this.fechaInicio = ""
-    this.fechaFinal = ""
+    this.dateStart = ""
+    this.dateEnd = ""
     localStorage.clear();
     document.getElementById('bizum1').style.background = ""
     document.getElementById('cash1').style.background = ""
@@ -857,6 +855,21 @@ export class ServicePage implements OnInit {
   btnFilter() {
     if (this.filter == true) {
       this.filter = false
+      
+      if (this.selectedTerapeuta != undefined || this.selectedEncargada != undefined || this.selectedFormPago != undefined) {
+        if (this.selectedTerapeuta != "" || this.selectedEncargada != "" || this.selectedFormPago != "") {
+          this.deleteButton = true
+          document.getElementById('trash2').style.stroke = 'red'
+        } else {
+          this.deleteButton = false
+          document.getElementById('trash2').style.stroke = 'white'
+        }
+      }
+      else {
+        this.deleteButton = false
+        document.getElementById('trash2').style.stroke = 'white'
+      }
+
     } else {
       this.filter = true
       this.validateCheck()
