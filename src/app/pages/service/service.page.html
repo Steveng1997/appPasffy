@@ -88,6 +88,7 @@
         <div class="frame-76">
           <div>
             <div class="rectangle-95" id="rectangle95"></div>
+            <div class="date10">Fecha</div>
             <div class="encargada10">Encargada</div>
             <div class="terapeuta10">Terapeuta</div>
             <div class="tiempo10">Tiempo</div>
@@ -97,6 +98,7 @@
             <div class="propina10">Propina</div>
             <div class="pago10">Pago</div>
             <div class="cliente10">Cliente</div>
+            <div class="exit10">Salida</div>
             <div class="a-casa20">A casa</div>
             <div class="a-casa19">A casa</div>
             <div class="a-terapeuta10">A terapeuta</div>
@@ -114,6 +116,7 @@
             paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(services)">
             <div style="position: relative; top: 0px">
               <div [ngClass]="{'ellipse-18': services?.nota != ''}" (click)="notes()"></div>
+              <div class="date9">{{services.fecha}}</div>
               <div class="encargada9">{{services.encargada}}</div>
               <div class="terapeuta9">{{services.terapeuta}}</div>
               <div class="tiempo9">{{services.horaStart}} - {{services.horaEnd}}</div>
@@ -123,6 +126,7 @@
               <div class="propina9">{{services.propina}} €</div>
               <div class="pago9">{{services.formaPago}}</div>
               <div class="cliente9">{{services.cliente}}</div>
+              <div class="exit9">{{services.salida}}</div>
               <div class="a-casa18">{{services.numberPiso1}} €</div>
               <div class="a-casa9">{{services.numberPiso2}} €</div>
               <div class="a-terapeuta9">{{services.numberTerap}} €</div>

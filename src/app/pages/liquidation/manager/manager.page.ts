@@ -956,6 +956,9 @@ export class ManagerPage {
 
       let fixedTotalDay = this.fixedDay * this.numberDay
 
+      console.log(this.fixedDay)
+      console.log(this.numberDay)
+
       sumComision = Number(totalTreatment) + Number(totalTip) + Number(totalDrink) + Number(totalDrinkTherap) + Number(totalTobacco) + Number(totalVitamin) + Number(totalOther)
 
       if (sumComision != 0 || sumComision != undefined) {
@@ -1385,8 +1388,10 @@ export class ManagerPage {
 
       integer = [integer.toString().replace(/,/gi, "")]
       this.totalSum = integer[0].toString()
+      this.sumCommission = integer[0].toString()
     } else {
       this.totalSum = sumCommission.toString()
+      this.sumCommission = sumCommission.toString()
     }
 
     if (receivedManager > 999) {

@@ -203,176 +203,16 @@ ion-grid {
   top: 0px;
 }
 
-.taxi9 {
+.date9 {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 18px;
   line-height: 125%;
   font-weight: 400;
-  width: 80px;
+  width: 76px;
   position: absolute;
-  left: 2184px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.otros9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 80px;
-  position: absolute;
-  left: 2071px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.vitamina9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 80px;
-  position: absolute;
-  left: 1961px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.tabaco9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 80px;
-  position: absolute;
-  left: 1837px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.bebida-terap9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 80px;
-  position: absolute;
-  left: 1738px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.bebida-casa9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 80px;
-  position: absolute;
-  left: 1617px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.a-encargada9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 80px;
-  position: absolute;
-  left: 1497px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.a-terapeuta9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 87px;
-  position: absolute;
-  left: 1362px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.a-casa9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 80px;
-  position: absolute;
-  left: 1233px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.a-casa18 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 80px;
-  position: absolute;
-  left: 1111px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.cliente9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 117px;
-  position: absolute;
-  left: 975px;
+  left: 27px;
   top: 9px;
   display: flex;
   justify-content: start;
@@ -380,6 +220,123 @@ ion-grid {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.encargada9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 82px;
+  position: absolute;
+  left: 27px;
+  top: 9px;
+  display: flex;
+  justify-content: start;
+  justify-items: start;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.terapeuta9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 82px;
+  position: absolute;
+  left: 128px;
+  top: 9px;
+  display: flex;
+  justify-content: start;
+  justify-items: start;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.tiempo9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  position: absolute;
+  left: 220px;
+  top: 9px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.minuto9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 65px;
+  position: absolute;
+  left: 356px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.total9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 71px;
+  position: absolute;
+  left: 453px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.tratamiento9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 574px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.propina9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 683px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
 }
 
 .pago9 {
@@ -401,95 +358,16 @@ ion-grid {
   overflow: hidden;
 }
 
-.propina9 {
+.cliente9 {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 18px;
   line-height: 125%;
   font-weight: 400;
-  width: 80px;
+  width: 117px;
   position: absolute;
-  left: 683px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.tratamiento9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 80px;
-  position: absolute;
-  left: 574px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.total9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 70px;
-  position: absolute;
-  left: 453px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.minuto9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 72px;
-  position: absolute;
-  left: 356px;
-  top: 9px;
-  display: flex;
-  justify-content: end;
-  justify-items: end;
-}
-
-.tiempo9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  position: absolute;
-  left: 220px;
-  top: 9px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-}
-
-.terapeuta9 {
-  color: #3c3c3c;
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 18px;
-  line-height: 125%;
-  font-weight: 400;
-  width: 76px;
-  position: absolute;
-  left: 128px;
+  left: 975px;
   top: 9px;
   display: flex;
   justify-content: start;
@@ -499,16 +377,16 @@ ion-grid {
   overflow: hidden;
 }
 
-.encargada9 {
+.exit9 {
   color: #3c3c3c;
   text-align: left;
   font-family: "Inter-Regular", sans-serif;
   font-size: 18px;
   line-height: 125%;
   font-weight: 400;
-  width: 76px;
+  width: 117px;
   position: absolute;
-  left: 27px;
+  left: 975px;
   top: 9px;
   display: flex;
   justify-content: start;
@@ -516,6 +394,166 @@ ion-grid {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.a-casa18 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 1111px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.a-casa9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 1233px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.a-terapeuta9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 1362px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.a-encargada9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 1497px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.bebida-casa9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 1617px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.bebida-terap9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 1738px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.tabaco9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 1837px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.vitamina9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 1961px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.otros9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 2071px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
+}
+
+.taxi9 {
+  color: #3c3c3c;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 125%;
+  font-weight: 400;
+  width: 61px;
+  position: absolute;
+  left: 2184px;
+  top: 9px;
+  display: flex;
+  justify-content: end;
+  justify-items: end;
 }
 
 .ellipse-18 {
@@ -528,7 +566,7 @@ ion-grid {
   top: 63px;
 }
 
-.taxi10 {
+.date10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -536,14 +574,14 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 2233px;
+  left: 28px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.otros10 {
+.encargada10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -551,14 +589,14 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 2109px;
+  left: 28px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.vitamina10 {
+.terapeuta10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -566,14 +604,14 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 1975px;
+  left: 131px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.tabaco10 {
+.tiempo10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -581,87 +619,112 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 1862px;
+  left: 251px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.bebida-terap10 {
+.minutos {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 16px;
   line-height: 125%;
   font-weight: 700;
-  width: max-content;
   position: absolute;
-  left: 1721px;
+  left: 369px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.bebida-casa10 {
+.total10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 16px;
   line-height: 125%;
   font-weight: 700;
-  width: max-content;
   position: absolute;
-  left: 1604px;
+  left: 490px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.a-encargada10 {
+.tratamiento10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 16px;
   line-height: 125%;
   font-weight: 700;
-  width: max-content;
   position: absolute;
-  left: 1482px;
+  left: 567px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.a-terapeuta10 {
+.propina10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 16px;
   line-height: 125%;
   font-weight: 700;
-  width: max-content;
   position: absolute;
-  left: 1365px;
+  left: 707px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.a-casa19 {
+.pago10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 16px;
   line-height: 125%;
   font-weight: 700;
-  width: max-content;
   position: absolute;
-  left: 1265px;
+  left: 833px;
+  top: 7px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.cliente10 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 979px;
+  top: 7px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.exit10 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 125%;
+  font-weight: 700;
+  position: absolute;
+  left: 979px;
   top: 7px;
   display: flex;
   align-items: flex-end;
@@ -684,83 +747,87 @@ ion-grid {
   justify-content: flex-start;
 }
 
-.cliente10 {
+.a-casa19 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 16px;
   line-height: 125%;
   font-weight: 700;
+  width: max-content;
   position: absolute;
-  left: 979px;
+  left: 1265px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.pago10 {
+.a-terapeuta10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 16px;
   line-height: 125%;
   font-weight: 700;
+  width: max-content;
   position: absolute;
-  left: 833px;
+  left: 1365px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.propina10 {
+.a-encargada10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 16px;
   line-height: 125%;
   font-weight: 700;
+  width: max-content;
   position: absolute;
-  left: 707px;
+  left: 1482px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.tratamiento10 {
+.bebida-casa10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 16px;
   line-height: 125%;
   font-weight: 700;
+  width: max-content;
   position: absolute;
-  left: 567px;
+  left: 1604px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.total10 {
+.bebida-terap10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
   font-size: 16px;
   line-height: 125%;
   font-weight: 700;
+  width: max-content;
   position: absolute;
-  // left: 464px;
-  left: 490px;
+  left: 1721px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.minutos {
+.tabaco10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -768,14 +835,14 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 369px;
+  left: 1862px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.tiempo10 {
+.vitamina10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -783,14 +850,14 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 251px;
+  left: 1975px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.terapeuta10 {
+.otros10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -798,14 +865,14 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 131px;
+  left: 2109px;
   top: 7px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
 }
 
-.encargada10 {
+.taxi10 {
   color: #ffffff;
   text-align: left;
   font-family: "Inter-Bold", sans-serif;
@@ -813,7 +880,7 @@ ion-grid {
   line-height: 125%;
   font-weight: 700;
   position: absolute;
-  left: 28px;
+  left: 2233px;
   top: 7px;
   display: flex;
   align-items: flex-end;
@@ -1701,7 +1768,7 @@ ion-select::part(placeholder) {
   white-space: nowrap;
 }
 
-.POP-UP-DETAILS  .dateDetail {
+.POP-UP-DETAILS .dateDetail {
   position: absolute;
   font-size: 17px;
   height: 31px;
@@ -3036,169 +3103,185 @@ ion-select::part(placeholder) {
   }
 
   .rectangle-95 {
-    width: 2318px;
+    width: 2170px;
     left: 5px;
   }
 
+  .date10 {
+    left: 63px;
+  }
+
   .encargada10 {
-    left: 52px;
+    left: 140px;
   }
 
   .terapeuta10 {
-    left: 155px;
+    left: 241px;
   }
 
   .tiempo10 {
-    left: 275px;
-  }
-
-  .taxi10 {
-    left: 2257px;
-  }
-
-  .otros10 {
-    left: 2133px;
-  }
-
-  .vitamina10 {
-    left: 1999px;
-  }
-
-  .tabaco10 {
-    left: 1886px;
-  }
-
-  .bebida-terap10 {
-    left: 1745px;
-  }
-
-  .bebida-casa10 {
-    left: 1628px;
-  }
-
-  .a-encargada10 {
-    left: 1506px;
-  }
-
-  .a-terapeuta10 {
-    left: 1389px;
-  }
-
-  .a-casa19 {
-    left: 1289px;
-  }
-
-  .a-casa20 {
-    left: 1167px;
-  }
-
-  .cliente10 {
-    left: 1003px;
-  }
-
-  .pago10 {
-    left: 857px;
-  }
-
-  .propina10 {
-    left: 731px;
-  }
-
-  .tratamiento10 {
-    left: 591px;
-  }
-
-  .total10 {
-    left: 514px;
+    left: 366px;
   }
 
   .minutos {
-    left: 393px;
+    left: 469px;
+  }
+
+  .total10 {
+    left: 572px;
+  }
+
+  .tratamiento10 {
+    left: 632px;
+  }
+
+  .propina10 {
+    left: 741px;
+  }
+
+  .pago10 {
+    left: 819px;
+  }
+
+  .cliente10 {
+    left: 970px;
+  }
+
+  .exit10 {
+    left: 1107px;
+  }
+
+  .a-casa20 {
+    left: 1252px;
+  }
+
+  .a-casa19 {
+    left: 1330px;
+  }
+
+  .a-terapeuta10 {
+    left: 1400px;
+  }
+
+  .a-encargada10 {
+    left: 1507px;
+  }
+
+  .bebida-casa10 {
+    left: 1621px;
+  }
+
+  .bebida-terap10 {
+    left: 1733px;
+  }
+
+  .tabaco10 {
+    left: 1849px;
+  }
+
+  .vitamina10 {
+    left: 1916px;
+  }
+
+  .otros10 {
+    left: 2019px;
+  }
+
+  .taxi10 {
+    left: 2108px;
   }
 
   .rectangle-94 {
     left: 5px;
-    width: 2318px;
+    width: 2170px;
   }
 
   .ellipse-18 {
     top: 12px;
   }
 
-  .encargada9 {
+  .date9 {
     left: 46px;
   }
 
+  .encargada9 {
+    left: 135px;
+  }
+
   .terapeuta9 {
-    left: 149px;
+    left: 237px;
   }
 
   .tiempo9 {
-    left: 242px;
+    left: 337px;
   }
 
   .minuto9 {
-    left: 378px;
+    left: 462px;
   }
 
   .total9 {
-    left: 476px;
+    left: 545px;
   }
 
   .tratamiento9 {
-    left: 597px;
+    left: 638px;
   }
 
   .propina9 {
-    left: 705px;
+    left: 735px;
   }
 
   .pago9 {
-    left: 851px;
+    left: 813px;
   }
 
   .cliente9 {
-    left: 997px;
+    left: 965px;
+  }
+
+  .exit9 {
+    left: 1102px;
   }
 
   .a-casa18 {
-    left: 1133px;
+    left: 1237px;
   }
 
   .a-casa9 {
-    left: 1255px;
+    left: 1315px;
   }
 
   .a-terapeuta9 {
-    left: 1384px;
+    left: 1407px;
   }
 
   .a-encargada9 {
-    left: 1516px;
+    left: 1518px;
   }
 
   .bebida-casa9 {
-    left: 1636px;
+    left: 1631px;
   }
 
   .bebida-terap9 {
-    left: 1757px;
+    left: 1745px;
   }
 
   .tabaco9 {
-    left: 1856px;
+    left: 1837px;
   }
 
   .vitamina9 {
-    left: 1980px;
+    left: 1916px;
   }
 
   .otros9 {
-    left: 2090px;
+    left: 1995px;
   }
 
   .taxi9 {
-    left: 2203px;
+    left: 2073px;
   }
 
   .rectangle-117 {
