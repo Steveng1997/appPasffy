@@ -20,6 +20,7 @@ export class RegisterPage {
     activo: true,
     bebida: "",
     bebidaTerap: "",
+    company: "",
     fijoDia: "",
     id: 0,
     nombre: "",
@@ -64,6 +65,17 @@ export class RegisterPage {
     if (this.manager.vitamina == "") this.manager.vitamina = "0"
   }
 
+  createUniqueId() {
+    var d = new Date().getTime()
+    var uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = (d + Math.random() * 16) % 16 | 0
+      d = Math.floor(d / 16)
+      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16)
+    })
+
+    return this.manager.company = uuid
+  }
+
   save() {
     if (this.manager.nombre) {
       if (this.manager.usuario) {
@@ -73,6 +85,7 @@ export class RegisterPage {
             if (nameRegistro.length == 0) {
               this.manager.nombre = this.manager.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
               this.validateEmpty()
+              this.createUniqueId()
               this.serviceLogin.registerEncargada(this.manager).subscribe((resp: any) => {
                 this.resetTherapist()
                 this.ionLoaderService.dismissLoader()

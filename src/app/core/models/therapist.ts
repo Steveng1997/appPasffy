@@ -2,6 +2,7 @@ export class  ModelTherapist {
   activo?: boolean;
   bebida?: string;
   bebidaTerap?: string;
+  company?: string;
   fechaEnd?: string;
   horaEnd?: string;
   id?: number;

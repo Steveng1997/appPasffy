@@ -22,6 +22,7 @@ export class ManagerService {
   // Register
 
   registerEncargada(manager: ModelManager) {
+    debugger
     return this.http.post(`${this.API_URL}/registerEncargada`, manager);
   }
 

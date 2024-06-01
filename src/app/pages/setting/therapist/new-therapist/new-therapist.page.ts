@@ -8,6 +8,7 @@ import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.servi
 
 // Model
 import { ModelTherapist } from 'src/app/core/models/therapist';
+import { ManagerService } from 'src/app/core/services/manager/manager.service';
 
 @Component({
   selector: 'app-new-therapist',
@@ -22,6 +23,7 @@ export class NewTherapistPage implements OnInit {
     activo: true,
     bebida: "",
     bebidaTerap: "50",
+    company: "",
     fechaEnd: "",
     horaEnd: "",
     id: 0,
@@ -39,6 +41,7 @@ export class NewTherapistPage implements OnInit {
     public router: Router,
     private activeRoute: ActivatedRoute,
     private serviceTherapist: TherapistService,
+    private serviceManager: ManagerService,
     private ionLoaderService: IonLoaderService
   ) { }
 
@@ -73,6 +76,10 @@ export class NewTherapistPage implements OnInit {
       this.ionLoaderService.simpleLoader()
       this.therapist.nombre = this.therapist.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
       this.validate()
+
+      this.serviceManager.getById(Number(this.iduser)).subscribe((rp: any) => {
+        this.therapist.company = rp[0].company
+      })
 
       this.serviceTherapist.getTerapeuta(this.therapist.nombre).subscribe((rp: any) => {
         if (rp.length != 0) {

@@ -2,6 +2,7 @@ export class  ModelManager {
   activo?: boolean;
   bebida?: string;
   bebidaTerap?: string;
+  company?: string;
   fijoDia?: string;
   id?: number;
   nombre?: string;

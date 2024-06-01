@@ -29,7 +29,8 @@
             <div class="otros">Otros</div>
           </div>
 
-          <div class="rectangle-104" *ngFor="let manager of manager" (click)="editManager(manager)">
+          <div class="rectangle-104" *ngFor="let manager of manager | 
+          paginate: { itemsPerPage: 8, currentPage: page }" (click)="editManager(manager)">
             <div style="position: absolute; top: -41px">
               <div class="luc-a">{{manager.nombre}}</div>
               <div class="lu-12">{{manager.usuario}}</div>
@@ -49,7 +50,7 @@
 
         <svg (click)="newManager()" class="group-82" width="30" height="30" viewBox="0 0 30 30" fill="none"
           xmlns="http://www.w3.org/2000/svg">
-          <circle cx="15" cy="15" r="15" fill="#1fb996" style="stroke: white"/>
+          <circle cx="15" cy="15" r="15" fill="#1fb996" style="stroke: white" />
           <path d="M20.7854 15.3313H9.21458M15 9.5459V21.1167" stroke="white" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>

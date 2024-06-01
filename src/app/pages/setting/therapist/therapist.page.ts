@@ -15,7 +15,6 @@ import { TherapistService } from 'src/app/core/services/therapist/therapist.serv
 export class TherapistPage implements OnInit {
 
   page!: number
-
   id: number
   therapist: any
   manager: any

@@ -29,6 +29,7 @@ export class NewManagerPage implements OnInit {
     activo: true,
     bebida: "",
     bebidaTerap: "",
+    company: "",
     fijoDia: "",
     id: 0,
     nombre: "",
@@ -85,11 +86,18 @@ export class NewManagerPage implements OnInit {
         if (this.manager.pass != "") {
           this.ionLoaderService.simpleLoader()
 
+          this.serviceManager.getById(Number(this.iduser)).subscribe((rp: any) => {
+            debugger
+            this.manager.company = rp[0]['company']
+          })
+
           this.manager.nombre = this.manager.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
           this.validateValuesOfEmpty()
 
           this.serviceManager.getByUsuario(this.manager.usuario).subscribe((rp: any) => {
             if (rp.length == 0) {
+
+              console.log(this.manager)
 
               this.serviceManager.registerEncargada(this.manager).subscribe((rp) => {
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
