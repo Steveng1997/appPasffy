@@ -50,7 +50,13 @@ export class TherapistService {
     return this.http.get(`${this.API_Terapeuta}/orderMinutes`);
   }
 
-  // Update
+  getByCompany(company: string) {
+    return this.http.get(`${this.API_Terapeuta}/getCompany/${company}`);
+  }
+
+  orderByMinutesAndCompany(company: string) {
+    return this.http.get(`${this.API_Terapeuta}/orderMinutesAndCompany/${company}`);
+  }  
 
   // Update
 

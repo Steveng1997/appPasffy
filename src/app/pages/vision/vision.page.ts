@@ -143,21 +143,33 @@ export class VisionPage implements OnInit {
     this.ionLoaderService.simpleLoader()
 
     this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
-      this.user = rp[0]['nombre']
-      this.servicesManager = rp
-      manager = rp
-      if (rp[0]['rol'] == 'administrador') {
-        this.getService()
-        this.getManagerall(element)
-        this.tableTherapist('array', 'date')
-      } else {
-        this.getServiceByManager(rp[0])
-        this.getManager(manager, element, 'array')
-        this.tableTherapistForManager(manager, 'array', 'date')
-      }
-    })
+      this.serviceManager.getIdAndCompany(rp[0]['id'], rp[0]['company']).subscribe(async (rp: any) => {
+        this.user = rp[0]['nombre']
+        this.servicesManager = rp
+        manager = rp
 
-    this.getTherapist()
+        if (rp[0]['rol'] == 'superAdmin') {
+          this.getService()
+          this.getManagerall(element)
+          this.tableTherapist('array', 'date')
+          this.getTherapist()
+        }
+
+        else if (rp[0]['rol'] == 'administrador') {
+          this.getService()
+          this.getManagerallByCompany(manager[0]['company'])
+          this.tableTherapistCompany('array', 'date', manager[0]['company'])
+          this.getTherapistCompany(manager[0]['company'])
+        }
+
+        else if (rp[0]['rol'] == 'encargada') {
+          this.getServiceByManager(rp[0])
+          this.getManager(manager, element, 'array')
+          this.tableTherapistForManager(manager, 'array', 'date')
+          this.getTherapistCompany(manager[0]['company'])
+        }
+      })
+    })
   }
 
   platformPause() {
@@ -171,18 +183,32 @@ export class VisionPage implements OnInit {
       this.ionLoaderService.simpleLoader()
 
       this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
-        this.user = rp[0]['nombre']
-        this.servicesManager = rp
-        manager = rp
-        if (rp[0]['rol'] == 'administrador') {
-          this.getService()
-          this.getManagerall(element)
-          this.tableTherapist('array', 'date')
-        } else {
-          this.getServiceByManager(rp[0])
-          this.getManager(manager, element, 'array')
-          this.tableTherapistForManager(manager, 'array', 'date')
-        }
+        this.serviceManager.getIdAndCompany(rp[0]['id'], rp[0]['company']).subscribe(async (rp: any) => {
+          this.user = rp[0]['nombre']
+          this.servicesManager = rp
+          manager = rp
+
+          if (rp[0]['rol'] == 'superAdmin') {
+            this.getService()
+            this.getManagerall(element)
+            this.tableTherapist('array', 'date')
+            this.getTherapist()
+          }
+
+          else if (rp[0]['rol'] == 'administrador') {
+            this.getService()
+            this.getManagerallByCompany(manager[0]['company'])
+            this.tableTherapistCompany('array', 'date', manager[0]['company'])
+            this.getTherapistCompany(manager[0]['company'])
+          }
+
+          else if (rp[0]['rol'] == 'encargada') {
+            this.getServiceByManager(rp[0])
+            this.getManager(manager, element, 'array')
+            this.tableTherapistForManager(manager, 'array', 'date')
+            this.getTherapistCompany(manager[0]['company'])
+          }
+        })
       })
 
       this.getTherapist()
@@ -240,6 +266,88 @@ export class VisionPage implements OnInit {
       })
     } else {
       this.serviceManager.getUsuarios().subscribe((rp: any) => {
+        this.servicesManager = rp
+
+        rp.map(item => {
+          this.service.getManagerAndDates(item['nombre'], element).subscribe((rp: any) => {
+            this.managerCount = rp.length
+            item['count'] = this.managerCount
+
+            const servicios = rp.filter(serv => serv)
+            const sumatoria = servicios.reduce((accumulator, serv) => {
+              return accumulator + serv.totalServicio
+            }, 0)
+
+            item['sum'] = sumatoria
+
+            this.servicesManager.sort(function (a, b) {
+              if (a.sum > b.sum) {
+                return -1;
+              }
+              if (a.sum < b.sum) {
+                return 1;
+              }
+
+              return 0;
+            })
+
+          })
+        })
+      })
+    }
+  }
+
+  getManagerallByCompany(element) {
+    if (element == undefined) {
+
+      this.todaysDate()
+      this.serviceManager.getByCompany(element).subscribe((rp: any) => {
+        this.servicesManager = rp
+
+        if (rp.length > 7 && rp.length < 10) {
+          let rectangle20 = 334, overview = 1958
+
+          for (let i = 8; i <= rp.length; i++) {
+            rectangle20 += 31.5, overview += 31
+
+            document.getElementById('rectangle20').style.height = rectangle20.toString() + 'px'
+            document.getElementById('overview').style.height = overview.toString() + 'px'
+          }
+        }
+
+        if (rp.length >= 10) {
+          this.paginaterManager = true
+          document.getElementById('rectangle20').style.height = '445px'
+          document.getElementById('overview').style.height = '2068px'
+        }
+
+        rp.map(item => {
+          this.service.getManagerAndDates(item['nombre'], this.fechaDiaHoy).subscribe((rp: any) => {
+            this.managerCount = rp.length
+            item['count'] = this.managerCount
+
+            const servicios = rp.filter(serv => serv)
+            const sumatoria = servicios.reduce((accumulator, serv) => {
+              return accumulator + serv.totalServicio
+            }, 0)
+
+            item['sum'] = sumatoria
+
+            this.servicesManager.sort(function (a, b) {
+              if (a.sum > b.sum) {
+                return -1;
+              }
+              if (a.sum < b.sum) {
+                return 1;
+              }
+
+              return 0;
+            })
+          })
+        })
+      })
+    } else {
+      this.serviceManager.getByCompany(element).subscribe((rp: any) => {
         this.servicesManager = rp
 
         rp.map(item => {
@@ -418,6 +526,143 @@ export class VisionPage implements OnInit {
 
       await this.getMinute(therapit)
     })
+  }
+
+  async getTherapistCompany(element) {
+    let therapit
+    await this.serviceTherapist.orderByMinutesAndCompany(element).subscribe(async (rp: any) => {
+      therapit = rp
+      this.therapist = rp
+
+      if (rp.length > 7 && rp.length < 10) {
+        let rectangle18 = 372, currentDate = 439, stripeToday = 465, leftArrow = 471, rightArrow = 447, table2 = 1, table3 = 1,
+          table4 = 1, rectangle182 = 334, table5 = 15, overview = 1958
+
+        for (let i = 8; i <= rp.length; i++) {
+          rectangle18 += 31.5, currentDate += 31, stripeToday += 31, leftArrow += 32.4, rightArrow += 31, table2 += 31, table3 += 31,
+            table4 += 30, rectangle182 += 31.5, table5 += 63, overview += 63
+
+          document.getElementById('rectangle18').style.height = rectangle18.toString() + 'px'
+          document.getElementById('currentDate').style.top = currentDate.toString() + 'px'
+          document.getElementById('stripeToday').style.top = stripeToday.toString() + 'px'
+          document.getElementById('leftArrow').style.top = leftArrow.toString() + 'px'
+          document.getElementById('rightArrow').style.top = rightArrow.toString() + 'px'
+          document.getElementById('table2').style.top = table2.toString() + 'px'
+          document.getElementById('table3').style.top = table3.toString() + 'px'
+          document.getElementById('table4').style.top = table4.toString() + 'px'
+          document.getElementById('rectangle182').style.height = rectangle182.toString() + 'px'
+          document.getElementById('table5').style.top = table5.toString() + 'px'
+          document.getElementById('overview').style.height = overview.toString() + 'px'
+        }
+      }
+
+      if (rp.length >= 10) {
+        this.paginaterMinute = true
+        this.paginaterTherapist = true
+        document.getElementById('rectangle18').style.height = '468px'
+        document.getElementById('currentDate').style.top = '536px'
+        document.getElementById('stripeToday').style.top = '559.5px'
+        document.getElementById('leftArrow').style.top = '568px'
+        document.getElementById('rightArrow').style.top = '543px'
+        document.getElementById('table2').style.top = '96px'
+        document.getElementById('table3').style.top = '96px'
+        document.getElementById('table4').style.top = '95px'
+        document.getElementById('rectangle182').style.height = '429px'
+        document.getElementById('table5').style.top = '205px'
+        document.getElementById('overview').style.height = '2148px'
+      }
+
+      await this.getMinute(therapit)
+    })
+  }
+
+  tableTherapistCompany(text, dateCurent, element) {
+    this.existTherapist = true
+    this.message = false
+
+    if (text == 'array') {
+
+      let date = new Date(), day = 0, month = 0, year = 0, convertDay = '', convertMonth = '', dates = ''
+
+      day = date.getDate()
+      month = date.getMonth() + 1
+      year = date.getFullYear()
+
+      if (day > 0 && day < 10) {
+        convertDay = '0' + day
+        dates = `${year}-${month}-${convertDay}`
+      } else {
+        day = day
+        convertDay = day.toString()
+        dates = `${year}-${month}-${day}`
+      }
+
+      if (month > 0 && month < 10) {
+        convertMonth = '0' + month
+        dates = `${year}-${convertMonth}-${convertDay}`
+      } else {
+        month = month
+        dates = `${year}-${month}-${convertDay}`
+      }
+
+      this.serviceTherapist.getByCompany(element).subscribe((rp: any) => {
+        this.servicesTherapist = rp
+
+        rp.map(item => {
+          this.service.getTherapistAndDates(item['nombre'], dates).subscribe((rp: any) => {
+            this.therapistCount = rp.length
+            item['count'] = this.therapistCount
+
+            const servicios = rp.filter(serv => serv)
+            item['sum'] = servicios.reduce((accumulator, serv) => {
+              return accumulator + serv.totalServicio
+            }, 0)
+
+            this.servicesTherapist.sort(function (a, b) {
+              if (a.sum > b.sum) {
+                return -1;
+              }
+              if (a.sum < b.sum) {
+                return 1;
+              }
+
+              return 0;
+            })
+
+          })
+        })
+      })
+
+    } else {
+
+      this.serviceTherapist.getByCompany(element).subscribe((rp: any) => {
+        this.servicesTherapist = rp
+
+        rp.map(item => {
+          this.service.getTherapistAndDates(item['nombre'], dateCurent).subscribe((rp: any) => {
+            this.therapistCount = rp.length
+            item['count'] = this.therapistCount
+
+            const servicios = rp.filter(serv => serv)
+            item['sum'] = servicios.reduce((accumulator, serv) => {
+              return accumulator + serv.totalServicio
+            }, 0)
+
+            this.servicesTherapist.sort(function (a, b) {
+              if (a.sum > b.sum) {
+                return -1;
+              }
+              if (a.sum < b.sum) {
+                return 1;
+              }
+
+              return 0;
+            })
+
+          })
+        })
+      })
+    }
   }
 
   tableTherapist(text, dateCurent) {

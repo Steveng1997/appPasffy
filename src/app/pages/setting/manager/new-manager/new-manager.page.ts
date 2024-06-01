@@ -86,29 +86,26 @@ export class NewManagerPage implements OnInit {
         if (this.manager.pass != "") {
           this.ionLoaderService.simpleLoader()
 
-          this.serviceManager.getById(Number(this.iduser)).subscribe((rp: any) => {
-            debugger
-            this.manager.company = rp[0]['company']
-          })
-
           this.manager.nombre = this.manager.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
           this.validateValuesOfEmpty()
 
-          this.serviceManager.getByUsuario(this.manager.usuario).subscribe((rp: any) => {
-            if (rp.length == 0) {
+          this.serviceManager.getById(this.iduser).subscribe((rp: any) => {
+            this.manager.company = rp[0]['company']
 
-              console.log(this.manager)
+            this.serviceManager.getByUsuario(this.manager.usuario).subscribe((rp: any) => {
+              if (rp.length == 0) {
 
-              this.serviceManager.registerEncargada(this.manager).subscribe((rp) => {
-                Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
-                this.resetManager()
+                this.serviceManager.registerEncargada(this.manager).subscribe((rp) => {
+                  Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
+                  this.resetManager()
+                  this.ionLoaderService.dismissLoader()
+                  location.replace(`tabs/${this.iduser}/manager`);
+                })
+              } else {
+                Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'Ya existe este usuario', showConfirmButton: false, timer: 1000 })
                 this.ionLoaderService.dismissLoader()
-                location.replace(`tabs/${this.iduser}/manager`);
-              })
-            } else {
-              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'Ya existe este usuario', showConfirmButton: false, timer: 1000 })
-              this.ionLoaderService.dismissLoader()
-            }
+              }
+            })
           })
         } else {
           Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'El campo de la contraseña se encuentra vacío' })

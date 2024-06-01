@@ -22,7 +22,6 @@ export class ManagerService {
   // Register
 
   registerEncargada(manager: ModelManager) {
-    debugger
     return this.http.post(`${this.API_URL}/registerEncargada`, manager);
   }
 
@@ -56,6 +55,14 @@ export class ManagerService {
   getUsuarios() {
     return this.http.get(`${this.API_URL}/listaEncargada`);
   }
+
+  getIdAndCompany(id: number, company: string) {
+    return this.http.get(`${this.API_URL}/getIdCompany/${id}/${company}`)
+  }
+
+  getByCompany(company: string) {
+    return this.http.get(`${this.API_URL}/getCompany/${company}`)
+  }  
 
   // Update
 
