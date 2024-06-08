@@ -134,6 +134,7 @@ export class NewLiquidaManagerPage implements OnInit {
         this.modelLiquidation.encargada = this.manager[0].nombre
         this.serviceLiquidation.getByEncargada(this.modelLiquidation.encargada).subscribe(async (rp) => {
           this.liquidated = rp
+          this.calculateServices()
         })
       }
     })
@@ -1339,60 +1340,62 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   save() {
-    if (this.modelLiquidation.encargada != "") {
+    if (this.administratorRole == true) {
+      if (this.modelLiquidation.encargada != "") {
 
-      this.createUniqueId()
-      this.modelLiquidation.currentDate = this.currentDate.toString()
-      this.formatDate()
-      this.dateCurrentDay()
+        this.createUniqueId()
+        this.modelLiquidation.currentDate = this.currentDate.toString()
+        this.formatDate()
+        this.dateCurrentDay()
 
-      if (this.modelLiquidation.fixedDay == 0)
-        this.modelLiquidation.fixedDay = this.fixedDay
+        if (this.modelLiquidation.fixedDay == 0)
+          this.modelLiquidation.fixedDay = this.fixedDay
 
-      this.ionLoaderService.simpleLoader()
-      this.serviceLiquidation.getByEncargada(this.modelLiquidation.encargada).subscribe((rp: any) => {
+        this.ionLoaderService.simpleLoader()
+        this.serviceLiquidation.getByEncargada(this.modelLiquidation.encargada).subscribe((rp: any) => {
 
-        if (rp.length > 0) {
+          if (rp.length > 0) {
 
-          for (let o = 0; o < this.unliquidatedService.length; o++) {
-            this.modelLiquidation.tratamiento = this.unliquidatedService.length
-            this.modelServices.liquidadoEncargada = true
-            this.service.updateLiquidacionEncarg(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
+            for (let o = 0; o < this.unliquidatedService.length; o++) {
+              this.modelLiquidation.tratamiento = this.unliquidatedService.length
+              this.modelServices.liquidadoEncargada = true
+              this.service.updateLiquidacionEncarg(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
+            }
+
+            this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
+              document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
+              document.getElementById('overviewDates').style.height = '109px'
+              this.dates = false
+              this.selected = false
+              this.modelLiquidation.encargada = ""
+              this.ionLoaderService.dismissLoader()
+              location.replace(`tabs/${this.id}/liquidation-manager`)
+              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
+            })
           }
 
-          this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
-            document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
-            document.getElementById('overviewDates').style.height = '109px'
-            this.dates = false
-            this.selected = false
-            this.modelLiquidation.encargada = ""
-            this.ionLoaderService.dismissLoader()
-            location.replace(`tabs/${this.id}/liquidation-manager`)
-            Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
-          })
-        }
+          else if (rp.length == 0) {
 
-        else if (rp.length == 0) {
+            for (let o = 0; o < this.unliquidatedService.length; o++) {
+              this.modelLiquidation.tratamiento = this.unliquidatedService.length
+              this.service.updateLiquidacionEncarg(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
+            }
 
-          for (let o = 0; o < this.unliquidatedService.length; o++) {
-            this.modelLiquidation.tratamiento = this.unliquidatedService.length
-            this.service.updateLiquidacionEncarg(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
+            this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
+              document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
+              document.getElementById('overviewDates').style.height = '109px'
+              this.dates = false
+              this.selected = false
+              this.modelLiquidation.encargada = ""
+              this.ionLoaderService.dismissLoader()
+              location.replace(`tabs/${this.id}/liquidation-manager`)
+              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
+            })
           }
-
-          this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
-            document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
-            document.getElementById('overviewDates').style.height = '109px'
-            this.dates = false
-            this.selected = false
-            this.modelLiquidation.encargada = ""
-            this.ionLoaderService.dismissLoader()
-            location.replace(`tabs/${this.id}/liquidation-manager`)
-            Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
-          })
-        }
-      })
-    } else {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna encargada seleccionada', showConfirmButton: false, timer: 2500 })
+        })
+      } else {
+        Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna encargada seleccionada', showConfirmButton: false, timer: 2500 })
+      }
     }
   }
 }

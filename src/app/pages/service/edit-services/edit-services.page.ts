@@ -571,9 +571,6 @@ export class EditServicesPage implements OnInit {
   }
 
   expiredDateValidationsEdit() {
-    this.buttonEdit = document.getElementById('btnEdit') as HTMLButtonElement
-    this.buttonEdit.disabled = true;
-
     let currentHours, diferenceHour
     const splitDate = this.fechaActual.split('-')
     const selectDate = new Date(`${splitDate[1]}/${splitDate[2].slice(0, 2)}/${splitDate[0]}/${this.horaInicialServicio}`)
@@ -587,7 +584,6 @@ export class EditServicesPage implements OnInit {
 
     // const currentHours = currentDate.getHours()
     if (selectDate < currentDateWithoutHours || currentHours > 24) {
-      this.buttonEdit.disabled = false;
       Swal.fire({
         heightAuto: false,
         icon: 'error',
@@ -724,7 +720,6 @@ export class EditServicesPage implements OnInit {
       Boolean(this.editarService[0]['efectTerap']) == true && Boolean(this.editarService[0]['transTerap']) == true ||
       Boolean(this.editarService[0]['efectEncarg']) == true && Boolean(this.editarService[0]['transEncarg']) == true ||
       Boolean(this.editarService[0]['efectDriverTaxi']) == true && Boolean(this.editarService[0]['transDriverTaxi']) == true) {
-      this.buttonEdit.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
@@ -745,7 +740,6 @@ export class EditServicesPage implements OnInit {
       Boolean(this.editarService[0]['bizuTerap']) == true && Boolean(this.editarService[0]['transTerap']) == true ||
       Boolean(this.editarService[0]['bizuEncarg']) == true && Boolean(this.editarService[0]['transEncarg']) == true ||
       Boolean(this.editarService[0]['bizuDriverTaxi']) == true && Boolean(this.editarService[0]['transDriverTaxi']) == true) {
-      this.buttonEdit.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
@@ -766,7 +760,6 @@ export class EditServicesPage implements OnInit {
       Boolean(this.editarService[0]['tarjTerap']) == true && Boolean(this.editarService[0]['transTerap']) == true ||
       Boolean(this.editarService[0]['tarjEncarg']) == true && Boolean(this.editarService[0]['transEncarg']) == true ||
       Boolean(this.editarService[0]['tarjDriverTaxi']) == true && Boolean(this.editarService[0]['transDriverTaxi']) == true) {
-      this.buttonEdit.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
@@ -787,7 +780,6 @@ export class EditServicesPage implements OnInit {
       Boolean(this.editarService[0]['transTerap']) == true && Boolean(this.editarService[0]['tarjTerap']) == true ||
       Boolean(this.editarService[0]['transEncarg']) == true && Boolean(this.editarService[0]['tarjEncarg']) == true ||
       Boolean(this.editarService[0]['transDriverTaxi']) == true && Boolean(this.editarService[0]['tarjDriverTaxi']) == true) {
-      this.buttonEdit.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
@@ -799,35 +791,30 @@ export class EditServicesPage implements OnInit {
     if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['efectPiso1']) == false &&
       Boolean(this.editarService[0]['bizuPiso1']) == false && Boolean(this.editarService[0]['tarjPiso1']) == false &&
       Boolean(this.editarService[0]['transPiso1']) == false) {
-      this.buttonEdit.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 1' })
       return false
     }
     if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['efectPiso2']) == false &&
       Boolean(this.editarService[0]['bizuPiso2']) == false && Boolean(this.editarService[0]['tarjPiso2']) == false &&
       Boolean(this.editarService[0]['transPiso2']) == false) {
-      this.buttonEdit.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 2' })
       return false
     }
     if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['efectTerap']) == false &&
       Boolean(this.editarService[0]['bizuTerap']) == false && Boolean(this.editarService[0]['tarjTerap']) == false &&
       Boolean(this.editarService[0]['transTerap']) == false) {
-      this.buttonEdit.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para terapeuta' })
       return false
     }
     if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['efectEncarg']) == false &&
       Boolean(this.editarService[0]['bizuEncarg']) == false && Boolean(this.editarService[0]['tarjEncarg']) == false &&
       Boolean(this.editarService[0]['transEncarg']) == false) {
-      this.buttonEdit.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para encargada' })
       return false
     }
     if (Number(this.editarService[0]['numberTaxi']) > 0 && Boolean(this.editarService[0]['efectDriverTaxi']) == false &&
       Boolean(this.editarService[0]['bizuDriverTaxi']) == false && Boolean(this.editarService[0]['tarjDriverTaxi']) == false &&
       Boolean(this.editarService[0]['transDriverTaxi']) == false) {
-      this.buttonEdit.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para taxista' })
       return false
     }
@@ -1713,8 +1700,6 @@ export class EditServicesPage implements OnInit {
   }
 
   save(idServicio, serv: ModelService) {
-    this.buttonEdit = document.getElementById('btnEdit') as HTMLButtonElement
-    this.buttonEdit.disabled = true;
     if (this.restamosCobroEdit == 0) {
       if (serv.minuto != null) {
         this.ionLoaderService.simpleLoader()
@@ -1786,11 +1771,9 @@ export class EditServicesPage implements OnInit {
           }, 1000)
         })
       } else {
-        this.buttonEdit.disabled = false
         Swal.fire({ heightAuto: false, icon: 'error', title: 'Oops...', text: 'El campo minutos se encuentra vacio', showConfirmButton: false, timer: 2500 })
       }
     } else {
-      this.buttonEdit.disabled = false
       Swal.fire({ heightAuto: false, icon: 'error', title: 'Oops...', text: 'El total servicio no coincide con el total de cobros', showConfirmButton: false, timer: 2500 })
     }
   }

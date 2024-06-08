@@ -25,6 +25,7 @@ export class ManagerPage {
   filter: boolean = false
   today: boolean = true
   administratorRole: boolean = false
+  buttonDelete: boolean = false
 
   manager: any
   selectedEncargada: string
@@ -830,7 +831,6 @@ export class ManagerPage {
     if (this.details == true) {
       this.details = false
     } else {
-
       this.serviceLiquidation.getIdEncarg(id).subscribe(async (rp) => {
         this.nameTherapist = rp[0].encargada
         this.sinceDate = rp[0].desdeFechaLiquidado
@@ -1773,32 +1773,34 @@ export class ManagerPage {
   }
 
   delete() {
-    Swal.fire({
-      heightAuto: false,
-      title: '¿Deseas eliminar el registro?',
-      text: "Una vez eliminados ya no se podrán recuperar",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Deseo eliminar!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.modelServices.idEncargada = ""
-        this.modelServices.liquidadoEncargada = false
-        this.services.updateManagerSettlementManagerIdByManagerId(this.idManager, this.modelServices).subscribe(async (rp) => {
-          this.serviceLiquidation.deleteLiquidationManager(this.idDetail).subscribe(async (rp) => {
-            if (this.administratorRole == true) {
-              await this.getLiquidation()
-            }
-            else {
-              await this.consultLiquidationManager()
-            }
+    if (this.administratorRole == true) {
+      Swal.fire({
+        heightAuto: false,
+        title: '¿Deseas eliminar el registro?',
+        text: "Una vez eliminados ya no se podrán recuperar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Deseo eliminar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.modelServices.idEncargada = ""
+          this.modelServices.liquidadoEncargada = false
+          this.services.updateManagerSettlementManagerIdByManagerId(this.idManager, this.modelServices).subscribe(async (rp) => {
+            this.serviceLiquidation.deleteLiquidationManager(this.idDetail).subscribe(async (rp) => {
+              if (this.administratorRole == true) {
+                await this.getLiquidation()
+              }
+              else {
+                await this.consultLiquidationManager()
+              }
 
-            this.details = false
+              this.details = false
+            })
           })
-        })
-      }
-    })
+        }
+      })
+    }
   }
 }

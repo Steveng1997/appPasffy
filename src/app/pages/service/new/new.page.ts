@@ -202,10 +202,10 @@ export class NewPage implements OnInit {
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    this.services.createdTime  = date + ' ' + time;
+    this.services.createdTime = date + ' ' + time;
   }
 
-  showKeyBoard(text: string) {    
+  showKeyBoard(text: string) {
     document.getElementById('overview').style.height = '4065px'
 
     if (text === 'date') {
@@ -622,9 +622,6 @@ export class NewPage implements OnInit {
   }
 
   expiredDateValidations() {
-    this.buttonSave = document.getElementById('btnSave') as HTMLButtonElement
-    this.buttonSave.disabled = true
-
     let currentHours, diferenceHour
     const splitDate = this.fechaActual.split('-')
     const selectDate = new Date(`${splitDate[1]}/${splitDate[2].slice(0, 2)}/${splitDate[0]}/${this.horaInicialServicio}`)
@@ -638,7 +635,6 @@ export class NewPage implements OnInit {
 
     // const currentHours = currentDate.getHours()
     if (selectDate < currentDateWithoutHours || currentHours > 24) {
-      this.buttonSave.disabled = false
       Swal.fire({
         heightAuto: false,
         position: 'top-end',
@@ -892,8 +888,6 @@ export class NewPage implements OnInit {
   }
 
   saveService() {
-    this.buttonSave = document.getElementById('btnSave') as HTMLButtonElement
-    this.buttonSave.disabled = true;
     if (this.services.terapeuta != '') {
       if (this.services.encargada != '') {
         if (Number(this.services.servicio) > 0) {
@@ -974,23 +968,18 @@ export class NewPage implements OnInit {
               })
             }
             else {
-              this.buttonSave.disabled = false
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'El total servicio no coincide con el total de cobros', showConfirmButton: false, timer: 2500 })
             }
           } else {
-            this.buttonSave.disabled = false
             Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'El campo minutos se encuentra vacio', showConfirmButton: false, timer: 2500 })
           }
         } else {
-          this.buttonSave.disabled = false
           Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'El campo tratamiento se encuentra vacio', showConfirmButton: false, timer: 2500 })
         }
       } else {
-        this.buttonSave.disabled = false
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna encargada seleccionada', showConfirmButton: false, timer: 2500 })
       }
     } else {
-      this.buttonSave.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna terapeuta seleccionada', showConfirmButton: false, timer: 2500 })
     }
   }
@@ -1370,7 +1359,6 @@ export class NewPage implements OnInit {
       this.services.transPiso1 == true || this.services.efectPiso2 == true && this.services.transPiso2 == true ||
       this.services.efectTerap == true && this.services.transTerap == true || this.services.efectEncarg == true &&
       this.services.transEncarg == true || this.services.efectDriverTaxi == true && this.services.transDriverTaxi == true) {
-      this.buttonSave.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
@@ -1386,7 +1374,6 @@ export class NewPage implements OnInit {
       this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
       this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
       this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      this.buttonSave.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
@@ -1402,7 +1389,6 @@ export class NewPage implements OnInit {
       this.services.transPiso1 == true || this.services.tarjPiso2 == true && this.services.transPiso2 == true ||
       this.services.tarjTerap == true && this.services.transTerap == true || this.services.tarjEncarg == true &&
       this.services.transEncarg == true || this.services.tarjDriverTaxi == true && this.services.transDriverTaxi == true) {
-      this.buttonSave.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
@@ -1418,7 +1404,6 @@ export class NewPage implements OnInit {
       this.services.tarjPiso1 == true || this.services.transPiso2 == true && this.services.tarjPiso2 == true ||
       this.services.transTerap == true && this.services.tarjTerap == true || this.services.transEncarg == true &&
       this.services.tarjEncarg == true || this.services.transDriverTaxi == true && this.services.tarjDriverTaxi == true) {
-      this.buttonSave.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
@@ -1492,31 +1477,26 @@ export class NewPage implements OnInit {
   paymentMethodValidation() {
     if (Number(this.services.numberPiso1) > 0 && this.services.efectPiso1 == false && this.services.bizuPiso1 == false &&
       this.services.tarjPiso1 == false && this.services.transPiso1 == false) {
-      this.buttonSave.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 1' })
       return false
     }
     if (Number(this.services.numberPiso2) > 0 && this.services.efectPiso2 == false && this.services.bizuPiso2 == false &&
       this.services.tarjPiso2 == false && this.services.transPiso2 == false) {
-      this.buttonSave.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 2' })
       return false
     }
     if (Number(this.services.numberTerap) > 0 && this.services.efectTerap == false && this.services.bizuTerap == false &&
       this.services.tarjTerap == false && this.services.transTerap == false) {
-      this.buttonSave.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para terapeuta' })
       return false
     }
     if (Number(this.services.numberEncarg) > 0 && this.services.efectEncarg == false && this.services.bizuEncarg == false &&
       this.services.tarjEncarg == false && this.services.transEncarg == false) {
-      this.buttonSave.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para encargada' })
       return false
     }
     if (Number(this.services.numberTaxi) > 0 && this.services.efectDriverTaxi == false && this.services.bizuDriverTaxi == false &&
       this.services.tarjDriverTaxi == false && this.services.transDriverTaxi == false) {
-      this.buttonSave.disabled = false
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para taxista' })
       return false
     }
