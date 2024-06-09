@@ -216,6 +216,7 @@
           <div class="tiempo">Tiempo</div>
           <div class="minutos">Minutos</div>
           <div class="tratamiento3">Tratamiento</div>
+          <div class="cliente1">Cliente</div>
           <div class="salida1">Salida</div>
           <div class="_propina">Propina</div>
           <div class="_pago">Pago</div>
@@ -236,6 +237,7 @@
             <div class="tiempo2">{{services.horaStart + ' - ' + services.horaEnd}}</div>
             <div class="min">{{services.minuto + ' min'}}</div>
             <div class="_1000">{{services.servicio }} €</div>
+            <div class="cliente10">{{services.cliente }}</div>
             <div class="salida">{{services.salida}}</div>
             <div class="_10001"> {{services.propina}} €</div>
             <div class="_bizum">{{services.formaPago}}</div>
@@ -270,7 +272,7 @@
         <div class="_1003" *ngIf="terapeutaName?.propina == undefined">{{0 + ' %'}}</div>
         <div class="_03">{{totalTip}} €</div>
 
-        <div class="bebida-a-casa">Bebida a casa</div>
+        <div class="bebida-a-casa">Bebida casa</div>
         <div class="_06">{{totalValueDrink}} €</div>
         <div class="_50" *ngIf="terapeutaName?.bebida != undefined"> {{terapeutaName?.bebida + ' %'}}</div>
         <div class="_50" *ngIf="terapeutaName?.bebida == undefined">{{0 + ' %'}}</div>
@@ -313,30 +315,32 @@
         <div class="_2226">{{totalLiquidation}} €</div>
 
         <!-- Segunda Tabla -->
-        <div class="pagado-al-terapeuta">Pagado al terapeuta</div>
 
-        <!-- Raya -->
-        <div class="rectangle-110"></div>
+        <div class="rectangle-501">
+          <div class="pagado-al-terapeuta">Pagado al terapeuta</div>
+
+          <!-- Raya -->
+          <div class="rectangle-110"></div>
 
 
-        <div class="efectivo">Efectivo</div>
-        <div class="_2224">{{totalCash}} €</div>
+          <div class="efectivo">Efectivo</div>
+          <div class="_2224">{{totalCash}} €</div>
 
-        <div class="bizum">Bizum</div>
-        <div class="_04">{{totalBizum}} €</div>
+          <div class="bizum">Bizum</div>
+          <div class="_04">{{totalBizum}} €</div>
 
-        <div class="tarjeta">Tarjeta</div>
-        <div class="_09">{{totalCard}} €</div>
+          <div class="tarjeta">Tarjeta</div>
+          <div class="_09">{{totalCard}} €</div>
 
-        <div class="transferencia">Transferencia</div>
-        <div class="_013">{{totalTransaction}} €</div>
+          <div class="transferencia">Transferencia</div>
+          <div class="_013">{{totalTransaction}} €</div>
 
-        <!-- Raya -->
-        <div class="rectangle-111"></div>
+          <!-- Raya -->
+          <div class="rectangle-111"></div>
 
-        <div class="total-a-pagar2">Total a pagar</div>
-        <div class="_014">{{sumTherapist}} €</div>
-
+          <div class="total-a-pagar2">Total a pagar</div>
+          <div class="_014">{{sumTherapist}} €</div>
+        </div>
       </div>
 
       <svg class="x-close-1" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -344,19 +348,21 @@
         <path d="M20.25 6.75L6.75 20.25M6.75 6.75L20.25 20.25" stroke="#3C3C3C" stroke-width="2" stroke-linecap="round"
           stroke-linejoin="round" />
       </svg>
-
-
     </div>
 
-    <div class="rectangle-112" (click)="delete()"></div>
-    <div class="eliminar" (click)="delete()">Eliminar</div>
+    <div class="rectangle-401">
+      <div class="cancel" (click)="detail('null')">Cancelar</div>
 
-    <svg class="trash-03" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-      (click)="delete()">
-      <path
-        d="M9 3H15M3 6H21M19 6L18.2987 16.5193C18.1935 18.0975 18.1409 18.8867 17.8 19.485C17.4999 20.0118 17.0472 20.4353 16.5017 20.6997C15.882 21 15.0911 21 13.5093 21H10.4907C8.90891 21 8.11803 21 7.49834 20.6997C6.95276 20.4353 6.50009 20.0118 6.19998 19.485C5.85911 18.8867 5.8065 18.0975 5.70129 16.5193L5 6M10 10.5V15.5M14 10.5V15.5"
-        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    </svg>
+      <div class="rectangle-112" (click)="delete()"></div>
+      <div class="eliminar" (click)="delete()">Eliminar</div>
+
+      <svg class="trash-03" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        (click)="delete()">
+        <path
+          d="M9 3H15M3 6H21M19 6L18.2987 16.5193C18.1935 18.0975 18.1409 18.8867 17.8 19.485C17.4999 20.0118 17.0472 20.4353 16.5017 20.6997C15.882 21 15.0911 21 13.5093 21H10.4907C8.90891 21 8.11803 21 7.49834 20.6997C6.95276 20.4353 6.50009 20.0118 6.19998 19.485C5.85911 18.8867 5.8065 18.0975 5.70129 16.5193L5 6M10 10.5V15.5M14 10.5V15.5"
+          stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
 
   </div>
 </div>

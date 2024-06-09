@@ -119,10 +119,11 @@
               <div style="position: relative; top: 0px">
 
                 <div [ngClass]="{'color2':services.nota !== ''}" (click)="notes()"> </div>
-                <div class="luc-a9">{{services.fecha}}</div>
+                <div class="date9">{{services.fecha}}</div>
                 <div class="tiempo2">{{services.horaStart + ' - ' + services.horaEnd}}</div>
                 <div class="min">{{services.minuto + ' min'}}</div>
                 <div class="_1000">{{services.servicio }} €</div>
+                <div class="_1000">{{services.cliente }} €</div>
                 <div class="salida">{{services.salida}}</div>
                 <div class="_10001"> {{services.propina}} €</div>
                 <div class="_bizum">{{services.formaPago}}</div>
