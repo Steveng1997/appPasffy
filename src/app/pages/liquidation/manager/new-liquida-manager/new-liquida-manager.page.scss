@@ -75,7 +75,7 @@ ion-grid {
     line-height: 100%;
     font-weight: 700;
     position: absolute;
-    left: 61px;
+    left: 20px;
     top: 92px;
     display: flex;
     align-items: flex-end;
@@ -105,7 +105,7 @@ ion-grid {
     position: static;
 }
 
-.eliminar {
+.cancel {
     color: #7f7c7c;
     text-align: left;
     font-family: "Inter-Bold", sans-serif;
@@ -412,16 +412,12 @@ ion-grid {
 }
 
 .x-close {
-    width: 12.2%;
-    height: 3.98%;
+    width: 27px;
+    height: 27px;
     position: absolute;
-    right: 88.27%;
-    left: 21px;
-    bottom: 95.89%;
-    top: 54px;
-    transform: translate(-13px, -25px);
+    left: 312px;
+    top: 95px;
     overflow: visible;
-    z-index: 1;
 }
 
 .group-95 {
