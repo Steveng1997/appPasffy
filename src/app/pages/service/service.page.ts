@@ -34,6 +34,7 @@ export class ServicePage implements OnInit {
   deletButton: boolean = false
   today: boolean = true
   notas: boolean = false
+  buttonEmpty: boolean = false
 
   filterSearch: string
 
@@ -53,6 +54,7 @@ export class ServicePage implements OnInit {
   dateTodayCurrent: string
   dateStart: string
   dateEnd: string
+  dateCurrent: string
   fechaInicio: string
   fechaFinal: string
   horaInicio: string
@@ -151,11 +153,9 @@ export class ServicePage implements OnInit {
     if (localStorage.getItem('terapeuta') != undefined) {
       this.selectedTerapeuta = localStorage.getItem('terapeuta')
       this.deleteButton = true
-      document.getElementById('trash2').style.stroke = 'red'
       this.filters()
     } else {
       this.deleteButton = false
-      document.getElementById('trash2').style.stroke = 'white'
     }
 
     localStorage.clear();
@@ -188,8 +188,6 @@ export class ServicePage implements OnInit {
       this.selectedEncargada = ""
       this.selectedFormPago = ""
       this.deleteButton = false
-      document.getElementById('trash2').style.stroke = 'white'
-      // this.filters()
       this.todaysDdate()
 
       if (this.idUser) {
@@ -268,6 +266,7 @@ export class ServicePage implements OnInit {
 
     this.dateStart = currentDate
     this.dateEnd = currentDate
+    this.dateCurrent = currentDate
   }
 
   getServices = async () => {
@@ -637,6 +636,7 @@ export class ServicePage implements OnInit {
     monthEnd = this.dateEnd.substring(5, 7)
 
     this.dateTodayCurrent = `${dayStart}-${monthStart} ${dayEnd}-${monthEnd}`
+    if (this.dateTodayCurrent != '') this.today = true
 
     const conditionBetweenHours = serv => {
       if (this.horaInicio === undefined && this.hourStart === undefined) return true
@@ -843,8 +843,9 @@ export class ServicePage implements OnInit {
   emptyFilter() {
     this.selectedTerapeuta = ""
     this.selectedEncargada = ""
-    this.dateStart = ""
-    this.dateEnd = ""
+    this.dateStart = this.dateCurrent
+    this.dateEnd = this.dateCurrent
+    this.buttonEmpty = true
     localStorage.clear();
     document.getElementById('bizum1').style.background = ""
     document.getElementById('cash1').style.background = ""
@@ -855,24 +856,73 @@ export class ServicePage implements OnInit {
   btnFilter() {
     if (this.filter == true) {
       this.filter = false
-      
+
       if (this.selectedTerapeuta != undefined || this.selectedEncargada != undefined || this.selectedFormPago != undefined) {
         if (this.selectedTerapeuta != "" || this.selectedEncargada != "" || this.selectedFormPago != "") {
           this.deleteButton = true
-          document.getElementById('trash2').style.stroke = 'red'
         } else {
           this.deleteButton = false
-          document.getElementById('trash2').style.stroke = 'white'
         }
       }
       else {
         this.deleteButton = false
-        document.getElementById('trash2').style.stroke = 'white'
       }
 
+      if (this.dateStart == this.dateEnd) {
+        this.today = true
+        this.dateTodayCurrent = 'HOY'
+      }
+
+      if (this.buttonEmpty == true)
+        this.calculatedTotal()
+
     } else {
+      this.buttonEmpty = false
       this.filter = true
       this.validateCheck()
+    }
+  }
+
+  calculatedTotal() {
+    this.serviceService.getFechaHoy(this.dateCurrent).subscribe((rp: any) => {
+      if (rp.length > 0) {
+        this.servicio = rp
+        this.totalAll(rp)
+      } else {
+        this.serviceService.getEncargadaAndDate(this.dateCurrent, this.selectedEncargada).subscribe((rp: any) => {
+          this.servicio = rp
+          this.totalAll(rp)
+        }
+        )
+      }
+    })
+  }
+
+  totalAll(rp) {
+    const totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
+
+    if (totalValor > 999) {
+      const coma = totalValor.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? totalValor.toString().split(".") : totalValor.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.TotalValueLetter = integer[0].toString()
+    } else {
+      this.TotalValueLetter = totalValor.toString()
     }
   }
 

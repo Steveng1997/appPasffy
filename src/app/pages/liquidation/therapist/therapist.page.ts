@@ -268,6 +268,7 @@ export class TherapistPage implements OnInit {
     monthEnd = this.dateEnd.substring(5, 7)
 
     this.dateTodayCurrent = `${dayStart}-${monthStart} ${dayEnd}-${monthEnd}`
+    if (this.dateTodayCurrent != '') this.today = true
 
     const conditionBetweenHours = serv => {
       if (this.hourStart === undefined && this.hourStart === undefined) return true
@@ -299,8 +300,6 @@ export class TherapistPage implements OnInit {
       if (this.dateStart == this.dateEnd) {
         this.today = true
         this.dateTodayCurrent = 'HOY'
-      } else {
-        this.today = false
       }
 
       if (this.buttonEmpty == true)
