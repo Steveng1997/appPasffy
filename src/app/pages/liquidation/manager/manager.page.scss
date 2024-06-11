@@ -58,6 +58,44 @@ ion-grid {
     justify-content: flex-start;
 }
 
+.rectangle-119 {
+    background: var(--verde, #1fb996);
+    border-radius: 15px;
+    width: 104px;
+    height: 40px;
+    position: absolute;
+    left: calc(100% - 117px);
+    top: 48px;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.nueva {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 500;
+    position: absolute;
+    left: 288px;
+    top: 274px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.x-circle {
+    width: 29px;
+    height: 29px;
+    position: absolute;
+    left: 277.74px;
+    top: 268px;
+    transform: translate(-20.74px, 0px);
+    overflow: visible;
+}
+
 .rectangle-18 {
     background: var(--verde-claro, #e8f2ef);
     border-radius: 15px;
@@ -156,7 +194,7 @@ ion-grid {
 .rectangle-116 {
     background: var(--verde, #1fb996);
     border-radius: 15px;
-    width: 104px;
+    width: 132px;
     height: 40px;
     position: absolute;
     left: calc(50% - 159px);
@@ -166,7 +204,22 @@ ion-grid {
     border-style: solid;
 }
 
-.nueva {
+._total {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 16px;
+    line-height: 125%;
+    font-weight: 500;
+    position: absolute;
+    left: 277.74px;
+    top: 274px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+._10003 {
     color: #ffffff;
     text-align: left;
     font-family: "Inter-Medium", sans-serif;
@@ -179,16 +232,6 @@ ion-grid {
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
-}
-
-.x-circle {
-    width: 29px;
-    height: 29px;
-    position: absolute;
-    left: 277.74px;
-    top: 268px;
-    transform: translate(-20.74px, 0px);
-    overflow: visible;
 }
 
 .frame-77 {
@@ -234,6 +277,25 @@ ion-grid {
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
+}
+
+.lili9 {
+    color: #3c3c3c;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 18px;
+    line-height: 125%;
+    font-weight: 400;
+    width: 76px;
+    position: absolute;
+    left: 28px;
+    top: 9px;
+    display: flex;
+    justify-content: start;
+    justify-items: start;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 ._5-15-6-239 {
@@ -2041,25 +2103,6 @@ ion-grid {
 
 // Column
 
-.luc-a9 {
-    color: #3c3c3c;
-    text-align: left;
-    font-family: "Inter-Regular", sans-serif;
-    font-size: 16px;
-    line-height: 125%;
-    font-weight: 400;
-    width: 76px;
-    position: absolute;
-    left: 27px;
-    top: 9px;
-    display: flex;
-    justify-content: start;
-    justify-items: start;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
 .date9 {
     color: #3c3c3c;
     text-align: left;
@@ -2390,13 +2433,25 @@ ion-select::part(placeholder) {
     .x-circle {
         width: 10.67%;
         height: 6.07%;
-        top: 240px;
-        left: 46px;
+        top: 36px;
+        left: 269px;
         z-index: 1;
     }
 
     .nueva {
-        left: 66px;
+        left: 289px;
+        top: 60px;
+        z-index: 1;
+    }
+
+    ._total {
+        top: 264px;
+        left: 32px;
+        z-index: 1;
+    }
+
+    ._10003 {
+        left: 73px;
         top: 264px;
         z-index: 1;
     }
@@ -2428,8 +2483,8 @@ ion-select::part(placeholder) {
         left: 5px;
     }
 
-    .luc-a9 {
-        left: 27px;
+    .lili9 {
+        left: 28px;
     }
 
     .date9 {

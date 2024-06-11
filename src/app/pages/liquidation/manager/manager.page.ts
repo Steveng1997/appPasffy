@@ -26,6 +26,7 @@ export class ManagerPage {
   today: boolean = true
   administratorRole: boolean = false
   buttonDelete: boolean = false
+  buttonEmpty: boolean = false
 
   manager: any
   selectedEncargada: string
@@ -39,8 +40,6 @@ export class ManagerPage {
   dateEnd: string
   fechaInicio: string
   fechaFinal: string
-  horaInicio: string
-  horaFinal: string
   day: number
   month: string
   hourStart: string
@@ -108,6 +107,8 @@ export class ManagerPage {
   sumTherapist: string
   totalReceived: string
 
+  totalImport: string
+
   // --------------------------------
 
   liquidationManager: LiquidationManager = {
@@ -171,6 +172,7 @@ export class ManagerPage {
   async consultLiquidationManager() {
     this.serviceLiquidation.getByEncargada(this.liquidationManager.encargada).subscribe(async (rp) => {
       this.liquidated = rp
+      this.total(rp)
       this.liquidationManager.encargada = ""
     })
   }
@@ -212,22 +214,78 @@ export class ManagerPage {
     }
   }
 
-  filters = async () => {
-    this.serviceLiquidation.getLiquidacionesEncargada().subscribe(async (rp: any) => {
+  filters() {
+    this.serviceLiquidation.getLiquidacionesEncargada().subscribe((rp: any) => {
       this.liquidated = rp
+      this.calculateSumOfServices()
     })
+  }
+
+  calculateSumOfServices() {
+    const managerCondition = serv => {
+      return (this.selectedEncargada) ? serv.encargada === this.selectedEncargada : true
+    }
+
+    const conditionBetweenDates = serv => {
+      if (this.dateStart === undefined && this.dateEnd === undefined) return true
+      if (this.dateStart === undefined && serv.createdDate <= this.dateEnd) return true
+      if (this.dateEnd === undefined && serv.createdDate === this.dateStart) return true
+      if (serv.createdDate >= this.dateStart && serv.createdDate <= this.dateEnd) return true
+
+      return false
+    }
+
+    this.parmHourStart = `${this.dateStart} ${this.hourStart}`
+    this.parmHourEnd = `${this.dateEnd} ${this.hourEnd}`
+
+    let monthStart, dayStart, monthEnd, dayEnd
+
+    dayStart = this.dateStart.substring(8, 10)
+    monthStart = this.dateStart.substring(5, 7)
+
+    dayEnd = this.dateEnd.substring(8, 10)
+    monthEnd = this.dateEnd.substring(5, 7)
+
+    this.dateTodayCurrent = `${dayStart}-${monthStart} ${dayEnd}-${monthEnd}`
+
+    const conditionBetweenHours = serv => {
+      if (this.hourStart === undefined && this.hourStart === undefined) return true
+      if (this.hourStart === undefined && serv.hourEnd <= this.hourEnd) return true
+      if (this.hourEnd === undefined && serv.hourStart === this.hourStart) return true
+      if (`${serv.createdDate} ${serv.hourStart}` >= this.parmHourStart && `${serv.createdDate} ${serv.hourEnd}` <= this.parmHourEnd) return true
+
+      return false
+    }
+
+    if (Array.isArray(this.liquidated)) {
+      const servicios = this.liquidated.filter(serv => managerCondition(serv) && conditionBetweenDates(serv) && conditionBetweenHours(serv))
+      this.total(servicios)
+    }
   }
 
   emptyFilter() {
     this.selectedEncargada = ""
-    this.fechaInicio = ""
-    this.fechaFinal = ""
+    this.dateStart = this.CurrenDate
+    this.dateEnd = this.CurrenDate
+    this.buttonEmpty = true
   }
 
   btnFilter() {
     if (this.filter == true) {
       this.filter = false
+
+      if (this.dateStart == this.dateEnd) {
+        this.today = true
+        this.dateTodayCurrent = 'HOY'
+      } else {
+        this.today = false
+      }
+
+      if (this.buttonEmpty == true)
+        this.calculatedTotal()
+
     } else {
+      this.buttonEmpty = false
       this.filter = true
     }
   }
@@ -284,6 +342,20 @@ export class ManagerPage {
 
     this.dateStart = currentDate
     this.dateEnd = currentDate
+
+    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+      if (rp[0]['rol'] == 'administrador') {
+        this.serviceLiquidation.getDateCurrentDay(currentDate).subscribe((rp: any) => {
+          this.liquidated = rp
+          this.total(rp)
+        })
+      } else {
+        this.serviceLiquidation.getEncargadaAndDate(currentDate, rp[0]['nombre']).subscribe((rp: any) => {
+          this.liquidated = rp
+          this.total(rp)
+        })
+      }
+    })
   }
 
   goTherapist() {
@@ -307,6 +379,34 @@ export class ManagerPage {
 
   new() {
     this.router.navigate([`tabs/${this.id}/new-liquiationManager`])
+  }
+
+  total(rp) {
+    const imports = rp.map(({ importe }) => importe).reduce((acc, value) => acc + value, 0)
+
+    if (imports > 999) {
+      const coma = imports.toString().indexOf(".") !== -1 ? true : false;
+      const array = coma ? imports.toString().split(".") : imports.toString().split("");
+      let integer = coma ? array[0].split("") : array;
+      let subIndex = 1;
+
+      for (let i = integer.length - 1; i >= 0; i--) {
+
+        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
+
+          integer.splice(i, 0, ".");
+          subIndex++;
+
+        } else {
+          subIndex++;
+        }
+      }
+
+      integer = [integer.toString().replace(/,/gi, "")]
+      this.totalImport = integer[0].toString()
+    } else {
+      this.totalImport = imports.toString()
+    }
   }
 
   backArrow = async () => {
@@ -428,10 +528,12 @@ export class ManagerPage {
           if (rp[0]['rol'] == 'administrador') {
             this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
               this.liquidated = rp
+              this.total(rp)
             })
           } else {
             this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
               this.liquidated = rp
+              this.total(rp)
             })
           }
         })
@@ -539,10 +641,12 @@ export class ManagerPage {
 
             this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
               this.liquidated = rp
+              this.total(rp)
             })
           } else {
             this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
               this.liquidated = rp
+              this.total(rp)
             })
           }
         })
@@ -694,11 +798,13 @@ export class ManagerPage {
           if (rp[0]['rol'] == 'administrador') {
             this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
               this.liquidated = rp
+              this.total(rp)
             })
           } else {
 
             this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
               this.liquidated = rp
+              this.total(rp)
             })
           }
         })
@@ -809,11 +915,13 @@ export class ManagerPage {
 
             this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
               this.liquidated = rp
+              this.total(rp)
             })
           } else {
 
             this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
               this.liquidated = rp
+              this.total(rp)
             })
           }
         })
@@ -1772,6 +1880,22 @@ export class ManagerPage {
     }
   }
 
+  calculatedTotal() {
+    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+      if (rp[0]['rol'] == 'administrador') {
+        this.serviceLiquidation.getDateCurrentDay(this.dateStart).subscribe((rp: any) => {
+          this.liquidated = rp
+          this.total(rp)
+        })
+      } else {
+        this.serviceLiquidation.getEncargadaAndDate(this.dateStart, this.nameTherapist).subscribe((rp: any) => {
+          this.liquidated = rp
+          this.total(rp)
+        })
+      }
+    })
+  }
+
   delete() {
     if (this.administratorRole == true) {
       Swal.fire({
@@ -1796,6 +1920,7 @@ export class ManagerPage {
                 await this.consultLiquidationManager()
               }
 
+              this.calculatedTotal()
               this.details = false
             })
           })

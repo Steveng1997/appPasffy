@@ -86,17 +86,21 @@ export class LoginPage {
                 }
               })
             } else {
+              this.ionLoaderService.dismissLoader()
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Este usuario ya no esta trabajando con nosotros' })
             }
           } else {
+            this.ionLoaderService.dismissLoader()
             Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No existe este usuario en la base de datos' })
           }
         })
       }
       else {
+        this.ionLoaderService.dismissLoader()
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'El campo de la contraseña se encuentra vacío' })
       }
     } else {
+      this.ionLoaderService.dismissLoader()
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'El campo del usuario se encuentra vacío' })
     }
   }

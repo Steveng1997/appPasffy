@@ -7,6 +7,23 @@
         <div class="rectangle-92"></div>
         <div class="liquidaci-n">Liquidación</div>
 
+        <!-- <div class="rectangle-119"></div> -->
+
+        <div class="nueva" (click)="new()">Nueva</div>
+        <svg class="x-circle" width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"
+          (click)="new()">
+          <g clip-path="url(#clip0_1_546)">
+            <path
+              d="M25.631 20.5646L15.3786 20.4449M20.5647 15.3786L20.4449 25.6309M28.9486 29.1481C24.175 33.8115 16.5248 33.7222 11.8614 28.9486C7.19799 24.175 7.28733 16.5247 12.0609 11.8613C16.8346 7.19792 24.4848 7.28726 29.1482 12.0609C33.8116 16.8345 33.7223 24.4847 28.9486 29.1481Z"
+              stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </g>
+          <defs>
+            <clipPath id="clip0_1_546">
+              <rect width="29" height="29" fill="white" transform="translate(20.7441) rotate(45.6691)" />
+            </clipPath>
+          </defs>
+        </svg>
+
         <div class="containerLiquidation">
           <div class="rectangle-18"></div>
           <div class="rectangle-94"></div>
@@ -47,20 +64,8 @@
 
         <div class="rectangle-116"></div>
 
-        <div class="nueva" (click)="new()">Nueva</div>
-        <svg class="x-circle" width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg"
-          (click)="new()">
-          <g clip-path="url(#clip0_1_546)">
-            <path
-              d="M25.631 20.5646L15.3786 20.4449M20.5647 15.3786L20.4449 25.6309M28.9486 29.1481C24.175 33.8115 16.5248 33.7222 11.8614 28.9486C7.19799 24.175 7.28733 16.5247 12.0609 11.8613C16.8346 7.19792 24.4848 7.28726 29.1482 12.0609C33.8116 16.8345 33.7223 24.4847 28.9486 29.1481Z"
-              stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </g>
-          <defs>
-            <clipPath id="clip0_1_546">
-              <rect width="29" height="29" fill="white" transform="translate(20.7441) rotate(45.6691)" />
-            </clipPath>
-          </defs>
-        </svg>
+        <div class="_total">Total</div>
+        <div class="_10003">{{totalImport}} €</div>
 
 
         <div class="frame-77">
@@ -79,7 +84,7 @@
           | manager: selectedEncargada | dateLiquidation: dateStart:dateEnd ) | 
           paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(liquidation.idTerapeuta)">
             <div style="position: relative; top: 0px">
-              <div class="luc-a9">{{liquidation.encargada}}</div>
+              <div class="lili9">{{liquidation.encargada}}</div>
 
               <div class="laura9">{{liquidation.terapeuta}}</div>
 
