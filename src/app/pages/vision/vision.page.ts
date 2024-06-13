@@ -43,7 +43,6 @@ export class VisionPage implements OnInit {
   therapist: any
   horaEnd: string
   horaHoy: string
-  today: boolean = true
 
   // TOTALES
   totalVision: number
@@ -159,7 +158,7 @@ export class VisionPage implements OnInit {
         }
       })
     })
-    
+
     this.getTherapist()
   }
 
@@ -1458,10 +1457,9 @@ export class VisionPage implements OnInit {
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
 
         if (fechaEnd == fechaHoy) {
-          this.today = true
           this.dateTodayCurrent = 'HOY'
         } else {
-          this.today = false
+          this.dateTodayCurrent = `${this.day} de ${this.month}`
         }
 
         this.day = Number(convertDia)
@@ -1579,10 +1577,9 @@ export class VisionPage implements OnInit {
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
 
         if (fechaEnd == fechaHoy) {
-          this.today = true
           this.dateTodayCurrent = 'HOY'
         } else {
-          this.today = false
+          this.dateTodayCurrent = `${this.day} de ${this.month}`
         }
 
         this.day = Number(convertDia)
@@ -1744,10 +1741,9 @@ export class VisionPage implements OnInit {
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
 
         if (fechaEnd == fechaHoy) {
-          this.today = true
           this.dateTodayCurrent = 'HOY'
         } else {
-          this.today = false
+          this.dateTodayCurrent = `${this.day} de ${this.month}`
         }
 
         this.day = Number(convertDia)
@@ -1869,10 +1865,9 @@ export class VisionPage implements OnInit {
         fechaHoy = `${convertAño}-${mes}-${convertDia}`
 
         if (fechaEnd == fechaHoy) {
-          this.today = true
           this.dateTodayCurrent = 'HOY'
         } else {
-          this.today = false
+          this.dateTodayCurrent = `${this.day} de ${this.month}`
         }
 
         this.day = Number(convertDia)
