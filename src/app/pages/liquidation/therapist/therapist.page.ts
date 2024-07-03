@@ -77,6 +77,7 @@ export class TherapistPage implements OnInit {
   terapeutaName: any
 
   totalLiquidation: string
+  company: string
 
   // Sum
   totalService: string
@@ -163,6 +164,7 @@ export class TherapistPage implements OnInit {
 
   validitingUser() {
     this.serviceManager.getById(this.id).subscribe((rp) => {
+      this.company = rp[0].company
       if (rp[0]['rol'] == 'administrador') {
         this.administratorRole = true
         this.getManager()
@@ -170,7 +172,7 @@ export class TherapistPage implements OnInit {
         this.manager = rp
         this.administratorRole = false
         this.liquidationTherapist.encargada = this.manager[0].nombre
-        this.serviceLiquidation.consultManager(this.liquidationTherapist.encargada).subscribe(async (rp: any) => {
+        this.serviceLiquidation.consultManager(this.liquidationTherapist.encargada, rp[0].company).subscribe(async (rp: any) => {
           this.liquidated = rp
         })
       }
@@ -178,7 +180,7 @@ export class TherapistPage implements OnInit {
   }
 
   async consultLiquidationTherapistByManager() {
-    this.serviceLiquidation.consultManager(this.liquidationTherapist.encargada).subscribe(async (rp) => {
+    this.serviceLiquidation.consultManager(this.liquidationTherapist.encargada, this.company).subscribe(async (rp) => {
       this.liquidated = rp
       this.total(rp)
       this.liquidationTherapist.encargada = ""
@@ -189,20 +191,27 @@ export class TherapistPage implements OnInit {
   getLiquidation = async () => {
     this.dateTodayCurrent = 'HOY'
 
-    this.serviceLiquidation.consultTherapistSettlements().subscribe(async (rp: any) => {
-      this.liquidated = rp
+    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+      this.company = rp[0].company
+      this.serviceLiquidation.consultTherapistSettlements(rp[0].company).subscribe(async (rp: any) => {
+        this.liquidated = rp
+      })
     })
   }
 
   getTerapeuta() {
-    this.serviceTherapist.getAllTerapeuta().subscribe((datosTerapeuta: any) => {
-      this.terapeuta = datosTerapeuta
+    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+      this.serviceTherapist.getByCompany(rp[0].company).subscribe((datosTerapeuta: any) => {
+        this.terapeuta = datosTerapeuta
+      })
     })
   }
 
   getManager() {
-    this.serviceManager.getUsuarios().subscribe((datosEncargada: any) => {
-      this.manager = datosEncargada
+    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+      this.serviceManager.getByCompany(rp[0].company).subscribe((datosEncargada: any) => {
+        this.manager = datosEncargada
+      })
     })
   }
 
@@ -230,7 +239,7 @@ export class TherapistPage implements OnInit {
   }
 
   filters = async () => {
-    this.serviceLiquidation.consultTherapistSettlements().subscribe((rp: any) => {
+    this.serviceLiquidation.consultTherapistSettlements(this.company).subscribe((rp: any) => {
       this.liquidated = rp
       this.calculateSumOfServices()
     })
@@ -244,8 +253,6 @@ export class TherapistPage implements OnInit {
     const managerCondition = serv => {
       return (this.selectedEncargada) ? serv.encargada === this.selectedEncargada : true
     }
-
-    console.log(this.dateStart)
 
     const conditionBetweenDates = serv => {
       if (this.dateStart === undefined && this.dateEnd === undefined) return true
@@ -366,7 +373,7 @@ export class TherapistPage implements OnInit {
 
     this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
       if (rp[0]['rol'] == 'administrador') {
-        this.serviceLiquidation.getDateCurrentDay(currentDate).subscribe((rp: any) => {
+        this.serviceLiquidation.getDateCurrentDay(currentDate, rp[0]['company']).subscribe((rp: any) => {
           this.liquidated = rp
           this.total(rp)
         })
@@ -546,7 +553,7 @@ export class TherapistPage implements OnInit {
 
         this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
-            this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
+            this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
               this.liquidated = rp
               this.total(rp)
             })
@@ -659,7 +666,7 @@ export class TherapistPage implements OnInit {
         this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
-            this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
+            this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
               this.liquidated = rp
               this.total(rp)
             })
@@ -816,7 +823,7 @@ export class TherapistPage implements OnInit {
 
         this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
-            this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
+            this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
               this.liquidated = rp
               this.total(rp)
             })
@@ -933,7 +940,7 @@ export class TherapistPage implements OnInit {
         this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
-            this.serviceLiquidation.getDateCurrentDay(fechaActualmente).subscribe((rp: any) => {
+            this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
               this.liquidated = rp
               this.total(rp)
             })
@@ -1843,7 +1850,7 @@ export class TherapistPage implements OnInit {
   calculatedTotal() {
     this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
       if (rp[0]['rol'] == 'administrador') {
-        this.serviceLiquidation.getDateCurrentDay(this.dateStart).subscribe((rp: any) => {
+        this.serviceLiquidation.getDateCurrentDay(this.dateStart, this.company).subscribe((rp: any) => {
           this.liquidated = rp
           this.total(rp)
         })

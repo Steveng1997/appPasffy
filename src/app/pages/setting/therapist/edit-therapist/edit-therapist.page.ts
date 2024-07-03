@@ -24,6 +24,7 @@ export class EditTherapistPage implements OnInit {
   id: any
   iduser: number
   currentDate = new Date().getTime()
+  company: string
 
   therapistModel: ModelTherapist = {
     activo: true,
@@ -80,6 +81,7 @@ export class EditTherapistPage implements OnInit {
     this.iduser = param['id']
 
     this.serviceTherapist.getByIdTerapeuta(this.id).subscribe((rp) => {
+      this.company = rp[0].company
       return (this.therapist = rp)
     })
   }
@@ -131,7 +133,7 @@ export class EditTherapistPage implements OnInit {
       this.liquidationTherapist.hastaFechaLiquidado = `${fromDay}-${convertMonth}-${fromYears}`
     }
 
-    this.serviceLiquidationTherapist.consultTherapist(nombre).subscribe(async (rp: any) => {
+    this.serviceLiquidationTherapist.consultTherapist(nombre, this.company).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         untilYear = rp[0]['hastaFechaLiquidado'].toString().substring(2, 4)
         untilMonth = rp[0]['hastaFechaLiquidado'].toString().substring(5, 7)

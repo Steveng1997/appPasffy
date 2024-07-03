@@ -8,6 +8,7 @@ export class ModelService {
     bizuTerap?: boolean;
     cierre?: boolean;
     cliente?: string;
+    company?: string;
     createdBy?: string;
     createdTime?: string;
     currentDate?: string;

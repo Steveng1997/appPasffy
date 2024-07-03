@@ -73,6 +73,7 @@ export class NewPage implements OnInit {
     bizuTerap: false,
     cierre: false,
     cliente: "",
+    company: "",
     createdBy: "",
     createdTime: "",
     currentDate: "",
@@ -606,14 +607,19 @@ export class NewPage implements OnInit {
   }
 
   getTherapist() {
-    this.serviceTherapist.getAllTerapeuta().subscribe((datosTerapeuta: any) => {
-      this.terapeuta = datosTerapeuta
+    this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+      this.serviceTherapist.getByCompany(rp[0].company).subscribe((datosTerapeuta: any) => {
+        this.terapeuta = datosTerapeuta
+      })
     })
   }
 
   getManager() {
-    this.serviceManager.getUsuarios().subscribe((datosEncargada: any) => {
-      this.manager = datosEncargada
+    this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+      this.services.company = rp[0].company
+      this.serviceManager.getByCompany(rp[0].company).subscribe((datosEncargada: any) => {
+        this.manager = datosEncargada
+      })
     })
   }
 
@@ -952,7 +958,6 @@ export class NewPage implements OnInit {
               this.therapist.minuto = this.services.minuto
 
               this.serviceTherapist.update(this.services.terapeuta, this.therapist).subscribe((rp: any) => { })
-
               this.serviceServices.registerServicio(this.services).subscribe((rp: any) => {
                 if (rp) {
                   localStorage.removeItem('Efectivo')

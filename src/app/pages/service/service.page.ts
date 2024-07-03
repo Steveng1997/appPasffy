@@ -51,6 +51,7 @@ export class ServicePage implements OnInit {
   selectedEncargada: string
   selectedFormPago: string
 
+  company: string
   dateTodayCurrent: string
   dateStart: string
   dateEnd: string
@@ -273,8 +274,9 @@ export class ServicePage implements OnInit {
     let service
     this.dateTodayCurrent = 'HOY'
     this.serviceManager.getById(this.idUser).subscribe((rp) => {
+      this.company = rp[0].company
       if (rp[0]['rol'] == 'administrador') {
-        this.serviceService.getFechaHoy(this.dateStart).subscribe((rp: any) => {
+        this.serviceService.getFechaHoy(this.dateStart, this.company).subscribe((rp: any) => {
           this.servicio = rp
           service = rp
 
@@ -284,7 +286,7 @@ export class ServicePage implements OnInit {
           return service
         })
       } else {
-        this.serviceService.getEncargadaAndDate(this.dateStart, rp[0]['nombre']).subscribe((rp: any) => {
+        this.serviceService.getEncargadaAndDate(this.dateStart, rp[0]['nombre'], this.company).subscribe((rp: any) => {
           this.servicio = rp
           service = rp
           if (rp.length != 0) {
@@ -749,17 +751,21 @@ export class ServicePage implements OnInit {
 
   getTherapist = async () => {
     let therapit
-    this.serviceTherapist.getAllTerapeuta().subscribe((rp) => {
-      this.terapeuta = rp
-      therapit = rp
+    this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+      this.serviceTherapist.getByCompany(rp[0].company).subscribe((rp) => {
+        this.terapeuta = rp
+        therapit = rp
 
-      return therapit
+        return therapit
+      })
     })
   }
 
   getManager() {
-    this.serviceManager.getUsuarios().subscribe((datosEncargada) => {
-      this.manager = datosEncargada
+    this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+      this.serviceManager.getByCompany(rp[0].company).subscribe((datosEncargada) => {
+        this.manager = datosEncargada
+      })
     })
   }
 
@@ -884,12 +890,12 @@ export class ServicePage implements OnInit {
   }
 
   calculatedTotal() {
-    this.serviceService.getFechaHoy(this.dateCurrent).subscribe((rp: any) => {
+    this.serviceService.getFechaHoy(this.dateCurrent, this.company).subscribe((rp: any) => {
       if (rp.length > 0) {
         this.servicio = rp
         this.totalAll(rp)
       } else {
-        this.serviceService.getEncargadaAndDate(this.dateCurrent, this.selectedEncargada).subscribe((rp: any) => {
+        this.serviceService.getEncargadaAndDate(this.dateCurrent, this.selectedEncargada, this.company).subscribe((rp: any) => {
           this.servicio = rp
           this.totalAll(rp)
         }
@@ -981,22 +987,6 @@ export class ServicePage implements OnInit {
     } else {
       this.textSearch = false
     }
-  }
-
-  textsearch() {
-    this.filterSearch = this.filterSearch.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
-
-    serv => {
-      if (!this.filterSearch) return true
-      const criterio = this.filterSearch
-      return (serv.terapeuta.match(criterio)
-        || serv.encargada.match(criterio)
-        || serv.formaPago.match(criterio)
-        || serv.fecha.match(criterio)
-        || serv.cliente.match(criterio)) ? true : false
-    }
-
-    this.calculateSumOfServices()
   }
 
   exportExcel() {
@@ -1322,7 +1312,7 @@ export class ServicePage implements OnInit {
         this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
-            this.serviceService.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+            this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1334,7 +1324,7 @@ export class ServicePage implements OnInit {
             })
           } else {
 
-            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1448,7 +1438,7 @@ export class ServicePage implements OnInit {
         this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
-            this.serviceService.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+            this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1460,7 +1450,7 @@ export class ServicePage implements OnInit {
             })
           } else {
 
-            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1619,7 +1609,7 @@ export class ServicePage implements OnInit {
 
         this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
-            this.serviceService.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+            this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1631,7 +1621,7 @@ export class ServicePage implements OnInit {
             })
           } else {
 
-            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1748,7 +1738,7 @@ export class ServicePage implements OnInit {
         this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
-            this.serviceService.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+            this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
               } else {
@@ -1760,7 +1750,7 @@ export class ServicePage implements OnInit {
             })
           } else {
 
-            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1818,7 +1808,6 @@ export class ServicePage implements OnInit {
                   })
 
                   for (let i = 0; i < this.idService.length; i++) {
-                    console.log(this.idService)
                     this.serviceService.deleteServicio(this.idService[i]['id']).subscribe((rp: any) => {
                     })
                   }

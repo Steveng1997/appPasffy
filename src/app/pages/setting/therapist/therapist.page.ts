@@ -6,6 +6,7 @@ import { ModelTherapist } from 'src/app/core/models/therapist';
 
 // Services
 import { TherapistService } from 'src/app/core/services/therapist/therapist.service';
+import { ManagerService } from 'src/app/core/services/manager/manager.service';
 
 @Component({
   selector: 'app-therapist',
@@ -23,6 +24,7 @@ export class TherapistPage implements OnInit {
     public router: Router,
     private activatedRoute: ActivatedRoute,
     private serviceTherapist: TherapistService,
+    private serviceManager: ManagerService
   ) { }
 
   ngOnInit(): void {
@@ -33,8 +35,10 @@ export class TherapistPage implements OnInit {
   }
 
   getTherapist() {
-    this.serviceTherapist.getAllTerapeuta().subscribe((rp) => {
-      this.therapist = rp
+    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+      this.serviceTherapist.getByCompany(rp[0].company).subscribe((rp) => {
+        this.therapist = rp
+      })
     })
   }
 

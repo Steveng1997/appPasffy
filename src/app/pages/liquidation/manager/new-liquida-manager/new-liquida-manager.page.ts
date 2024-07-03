@@ -39,6 +39,7 @@ export class NewLiquidaManagerPage implements OnInit {
   terapeutaName: any
 
   totalLiquidation: string
+  company: string
 
   // Sum
   totalService: string
@@ -87,6 +88,7 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   modelLiquidation: LiquidationManager = {
+    company: "",
     currentDate: "",
     desdeFechaLiquidado: "",
     desdeHoraLiquidado: "",
@@ -141,14 +143,11 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   GetAllManagers() {
-    this.serviceManager.getUsuarios().subscribe((datosEncargada: any) => {
-      this.manager = datosEncargada
-    })
-  }
-
-  getManager() {
-    this.serviceManager.getUsuarios().subscribe((datosEncargada: any) => {
-      this.manager = datosEncargada
+    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+      this.modelLiquidation.company = rp[0].company
+      this.serviceManager.getByCompany(rp[0].company).subscribe((datosEncargada: any) => {
+        this.manager = datosEncargada
+      })
     })
   }
 
@@ -235,7 +234,7 @@ export class NewLiquidaManagerPage implements OnInit {
 
   async inputDateAndTime() {
     this.service.getByEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.encargada, this.modelLiquidation.desdeHoraLiquidado,
-      this.modelLiquidation.hastaHoraLiquidado, this.modelLiquidation.desdeFechaLiquidado, this.modelLiquidation.hastaFechaLiquidado).subscribe(async (rp: any) => {
+      this.modelLiquidation.hastaHoraLiquidado, this.modelLiquidation.desdeFechaLiquidado, this.modelLiquidation.hastaFechaLiquidado, this.modelLiquidation.company).subscribe(async (rp: any) => {
 
         if (rp.length > 0) {
           this.unliquidatedService = rp

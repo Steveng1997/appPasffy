@@ -79,32 +79,32 @@ export class NewTherapistPage implements OnInit {
 
       this.serviceManager.getById(Number(this.iduser)).subscribe((rp: any) => {
         this.therapist.company = rp[0].company
-      })
 
-      this.serviceTherapist.getTerapeuta(this.therapist.nombre).subscribe((rp: any) => {
-        if (rp.length != 0) {
+        this.serviceTherapist.getTerapeuta(this.therapist.nombre).subscribe((rp: any) => {
+          if (rp.length != 0) {
 
-          Swal.fire({ heightAuto: false, title: 'Ya hay una persona con ese nombre, desea agregar este nombre?', showDenyButton: true, confirmButtonText: 'Si', denyButtonText: `No` }).then((result) => {
+            Swal.fire({ heightAuto: false, title: 'Ya hay una persona con ese nombre, desea agregar este nombre?', showDenyButton: true, confirmButtonText: 'Si', denyButtonText: `No` }).then((result) => {
 
-            if (result.isConfirmed) {
-              this.serviceTherapist.save(this.therapist).subscribe((rp) => {
-                Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
-                this.resetTherapist()
+              if (result.isConfirmed) {
+                this.serviceTherapist.save(this.therapist).subscribe((rp) => {
+                  Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
+                  this.resetTherapist()
+                  this.ionLoaderService.dismissLoader()
+                  location.replace(`tabs/${this.iduser}/therapist`);
+                })
+              } else {
                 this.ionLoaderService.dismissLoader()
-                location.replace(`tabs/${this.iduser}/therapist`);
-              })
-            } else {
+              }
+            })
+          } else {
+            this.serviceTherapist.save(this.therapist).subscribe((rp) => {
+              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
+              this.resetTherapist()
               this.ionLoaderService.dismissLoader()
-            }
-          })
-        } else {
-          this.serviceTherapist.save(this.therapist).subscribe((rp) => {
-            Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
-            this.resetTherapist()
-            this.ionLoaderService.dismissLoader()
-            location.replace(`tabs/${this.iduser}/therapist`);
-          })
-        }
+              location.replace(`tabs/${this.iduser}/therapist`);
+            })
+          }
+        })
       })
     } else {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'El campo del nombre se encuentra vacío' })

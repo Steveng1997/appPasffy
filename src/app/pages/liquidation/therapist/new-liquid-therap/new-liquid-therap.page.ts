@@ -38,6 +38,7 @@ export class NewLiquidTherapPage implements OnInit {
   terapeutaName: any
 
   totalLiquidation: string
+  company: string
 
   // Sum
   totalService: string
@@ -78,6 +79,7 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   modelLiquidation: LiquidationTherapist = {
+    company: "",
     createdDate: "",
     currentDate: "",
     desdeFechaLiquidado: "",
@@ -127,7 +129,7 @@ export class NewLiquidTherapPage implements OnInit {
         this.manager = rp
         this.administratorRole = false
         this.modelLiquidation.encargada = this.manager[0].nombre
-        this.serviceLiquidation.consultManager(this.modelLiquidation.encargada).subscribe(async (rp) => {
+        this.serviceLiquidation.consultManager(this.modelLiquidation.encargada, rp[0]['company']).subscribe(async (rp) => {
           this.liquidated = rp
         })
       }
@@ -135,8 +137,10 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   getTherapist() {
-    this.serviceTherapist.getAllTerapeuta().subscribe((datosTerapeuta: any) => {
-      this.terapeuta = datosTerapeuta
+    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+      this.serviceTherapist.getByCompany(rp[0].company).subscribe((datosTerapeuta: any) => {
+        this.terapeuta = datosTerapeuta
+      })
     })
   }
 
@@ -173,7 +177,6 @@ export class NewLiquidTherapPage implements OnInit {
       }
     } else {
       document.getElementById('cash1').style.background = ""
-      console.log('aqui')
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago', showConfirmButton: false, timer: 2500 })
       localStorage.removeItem('Efectivo')
     }
@@ -218,8 +221,11 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   getManager() {
-    this.serviceManager.getUsuarios().subscribe((datosEncargada: any) => {
-      this.manager = datosEncargada
+    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+      this.modelLiquidation.company = rp[0].company
+      this.serviceManager.getByCompany(rp[0].company).subscribe((datosEncargada: any) => {
+        this.manager = datosEncargada
+      })
     })
   }
 
@@ -307,7 +313,7 @@ export class NewLiquidTherapPage implements OnInit {
   async inputDateAndTime() {
     this.service.getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.terapeuta,
       this.modelLiquidation.encargada, this.modelLiquidation.desdeHoraLiquidado, this.modelLiquidation.hastaHoraLiquidado,
-      this.modelLiquidation.desdeFechaLiquidado, this.modelLiquidation.hastaFechaLiquidado).subscribe(async (rp: any) => {
+      this.modelLiquidation.desdeFechaLiquidado, this.modelLiquidation.hastaFechaLiquidado, this.modelLiquidation.company).subscribe(async (rp: any) => {
 
         if (rp.length > 0) {
           this.unliquidatedService = rp

@@ -25,8 +25,8 @@ export class ServiceLiquidationTherapist {
 
   // Get
 
-  consultTherapistSettlements() {
-    return this.http.get(`${this.API_URL}/getByLiquidacionesTerapeuta`);
+  consultTherapistSettlements(company: string) {
+    return this.http.get(`${this.API_URL}/getByLiquidacionesTerapeuta/${company}`);
   }
 
   consultTherapistId(idTerapeuta: string) {
@@ -42,40 +42,16 @@ export class ServiceLiquidationTherapist {
     });
   }
 
-  consultManager(encargada: string) {
-    return this.http.get(`${this.API_URL}/getEncargada/${encargada}`);
+  consultManager(encargada: string, company: string) {
+    return this.http.get(`${this.API_URL}/getEncargada/${encargada}/${company}`);
   }
 
-  consultTherapist(therapist: string) {
-    return this.http.get(`${this.API_URL}/getTherapist/${therapist}`);
+  consultTherapist(therapist: string, company: string) {
+    return this.http.get(`${this.API_URL}/getTherapist/${therapist}/${company}`);
   }
 
-  getByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist(encargada: string, hastaHoraLiquidado1: string, hastaHoraLiquidado2: string, hastaFechaLiquidado1: string, hastaFechaLiquidado2: string) {
-    return this.http.get(`${this.API_URL}/getManagerFechaHoraInicioFechaHoraFinLiquidationTherapist`, {
-      params: {
-        encargada,
-        hastaFechaLiquidado1,
-        hastaHoraLiquidado1,
-        hastaFechaLiquidado2,
-        hastaHoraLiquidado2,
-      }
-    });
-  }
-
-  getWithDistinctByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist(encargada: string, hastaHoraLiquidado1: string, hastaHoraLiquidado2: string, hastaFechaLiquidado1: string, hastaFechaLiquidado2: string) {
-    return this.http.get(`${this.API_URL}/getDistinctByManagerFechaHoraInicioFechaHoraFinLiquidationTherapist`, {
-      params: {
-        encargada,
-        hastaFechaLiquidado1,
-        hastaHoraLiquidado1,
-        hastaFechaLiquidado2,
-        hastaHoraLiquidado2,
-      }
-    });
-  }
-
-  getDateCurrentDay(fechaHoy: string) {
-    return this.http.get(`${this.API_URL}/getDateCurrent/${fechaHoy}`);
+  getDateCurrentDay(fechaHoy: string, company: string) {
+    return this.http.get(`${this.API_URL}/getDateCurrent/${fechaHoy}/${company}`);
   }
 
   getEncargadaAndDate(createdDate: string, encargada: string) {

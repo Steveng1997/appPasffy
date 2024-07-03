@@ -56,7 +56,7 @@
         </svg> -->
 
         <ion-input *ngIf="textSearch" class="textSearch" type="text" name="search" [(ngModel)]="filterSearch"
-          (ngModelChange)="textsearch()"></ion-input>
+          (ngModelChange)="filters()"></ion-input>
 
         <svg class="icon2" width="25" height="23" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"
           (click)="btnFilter()">

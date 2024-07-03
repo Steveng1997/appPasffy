@@ -1325,7 +1325,6 @@ ion-select::part(placeholder) {
 .sc-ion-input-md-h[name=search] {
   position: relative;
   color: black;
-  text-transform: capitalize;
   height: 23px;
   --highlight-color-focused: var(--verde, #1fb996);
 }

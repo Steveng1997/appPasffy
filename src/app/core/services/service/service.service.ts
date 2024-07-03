@@ -10,14 +10,13 @@ import { ModelService } from '../../models/service';
 })
 
 export class ServiceService {
-  
+
   API_URL = 'https://brave-marvelous-marquis.glitch.me/api/servicio'
 
   constructor(
     public router: Router,
     private http: HttpClient
   ) { }
-
 
   // Register
 
@@ -484,10 +483,6 @@ export class ServiceService {
 
   updateScreenById(id: number, service: ModelService) {
     return this.http.put(`${this.API_URL}/updateScreenById/${id}`, service);
-  }
-
-  updateNote(id: number, service: ModelService) {
-    return this.http.put(`${this.API_URL}/updateNotes/${id}`, service);
   }
 
   // Delete

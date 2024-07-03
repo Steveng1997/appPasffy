@@ -40,6 +40,7 @@ export class VisionPage implements OnInit {
   totalServicio: number
   idUser: number
   user = ''
+  company = ''
   therapist: any
   horaEnd: string
   horaHoy: string
@@ -144,6 +145,7 @@ export class VisionPage implements OnInit {
     this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
       this.serviceManager.getIdAndCompany(rp[0]['id'], rp[0]['company']).subscribe(async (rp: any) => {
         this.user = rp[0]['nombre']
+        this.company = rp[0]['company']
         this.servicesManager = rp
         manager = rp
 
@@ -175,6 +177,7 @@ export class VisionPage implements OnInit {
       this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
         this.serviceManager.getIdAndCompany(rp[0]['id'], rp[0]['company']).subscribe(async (rp: any) => {
           this.user = rp[0]['nombre']
+          this.company = rp[0].company
           this.servicesManager = rp
           manager = rp
 
@@ -200,7 +203,7 @@ export class VisionPage implements OnInit {
     if (element == undefined) {
 
       this.todaysDate()
-      this.serviceManager.getUsuarios().subscribe((rp: any) => {
+      this.serviceManager.getByCompany(this.company).subscribe((rp: any) => {
         this.servicesManager = rp
 
         if (rp.length > 7 && rp.length < 10) {
@@ -221,7 +224,7 @@ export class VisionPage implements OnInit {
         }
 
         rp.map(item => {
-          this.service.getManagerAndDates(item['nombre'], this.fechaDiaHoy).subscribe((rp: any) => {
+          this.service.getManagerAndDates(item['nombre'], this.fechaDiaHoy, this.company).subscribe((rp: any) => {
             this.managerCount = rp.length
             item['count'] = this.managerCount
 
@@ -250,7 +253,7 @@ export class VisionPage implements OnInit {
         this.servicesManager = rp
 
         rp.map(item => {
-          this.service.getManagerAndDates(item['nombre'], element).subscribe((rp: any) => {
+          this.service.getManagerAndDates(item['nombre'], element, this.company).subscribe((rp: any) => {
             this.managerCount = rp.length
             item['count'] = this.managerCount
 
@@ -282,9 +285,18 @@ export class VisionPage implements OnInit {
     if (text == 'array') {
       this.todaysDate()
 
-      this.service.getManagerAndDates(element[0]['nombre'], this.fechaDiaHoy).subscribe((rp: any) => {
-        this.managerCount = rp.length
+      this.service.getManagerAndDates(element[0]['nombre'], this.fechaDiaHoy, this.company).subscribe((rp1: any) => {
+        this.managerCount = rp1.length
         this.servicesManager[0]['count'] = this.managerCount
+
+        const unicos = [];
+        const rp = rp1.reduce((acc, valor) => {
+          if (!unicos.includes(valor.institucion)) {
+            unicos.push(valor.institucion);
+            acc.push(valor);
+          }
+          return acc;
+        }, []);
 
         if (rp.length > 7 && rp.length < 10) {
           let rectangle20 = 334
@@ -330,9 +342,18 @@ export class VisionPage implements OnInit {
       })
     } else {
 
-      this.service.getManagerAndDates(element[0]['nombre'], dates).subscribe((rp: any) => {
-        this.managerCount = rp.length
+      this.service.getManagerAndDates(element[0]['nombre'], dates, this.company).subscribe((rp1: any) => {
+        this.managerCount = rp1.length
         this.servicesManager[0]['count'] = this.managerCount
+
+        const unicos = [];
+        const rp = rp1.reduce((acc, valor) => {
+          if (!unicos.includes(valor.institucion)) {
+            unicos.push(valor.institucion);
+            acc.push(valor);
+          }
+          return acc;
+        }, []);
 
         if (rp.length > 7 && rp.length < 10) {
           let rectangle20 = 334
@@ -381,49 +402,52 @@ export class VisionPage implements OnInit {
 
   async getTherapist() {
     let therapit
-    await this.serviceTherapist.getMinutes().subscribe(async (rp: any) => {
-      therapit = rp
-      this.therapist = rp
+    this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+      this.company = rp[0]['company']
+      await this.serviceTherapist.orderByMinutesAndCompany(this.company).subscribe(async (rp: any) => {
+        therapit = rp
+        this.therapist = rp
 
-      if (rp.length > 7 && rp.length < 10) {
-        let rectangle18 = 372, currentDate = 439, stripeToday = 465, leftArrow = 471, rightArrow = 447, table2 = 1, table3 = 1,
-          table4 = 1, rectangle182 = 334, table5 = 15, overview = 1958
+        if (rp.length > 7 && rp.length < 10) {
+          let rectangle18 = 372, currentDate = 439, stripeToday = 465, leftArrow = 471, rightArrow = 447, table2 = 1, table3 = 1,
+            table4 = 1, rectangle182 = 334, table5 = 15, overview = 1958
 
-        for (let i = 8; i <= rp.length; i++) {
-          rectangle18 += 31.5, currentDate += 31, stripeToday += 31, leftArrow += 32.4, rightArrow += 31, table2 += 31, table3 += 31,
-            table4 += 30, rectangle182 += 31.5, table5 += 63, overview += 63
+          for (let i = 8; i <= rp.length; i++) {
+            rectangle18 += 31.5, currentDate += 31, stripeToday += 31, leftArrow += 32.4, rightArrow += 31, table2 += 31, table3 += 31,
+              table4 += 30, rectangle182 += 31.5, table5 += 63, overview += 63
 
-          document.getElementById('rectangle18').style.height = rectangle18.toString() + 'px'
-          document.getElementById('currentDate').style.top = currentDate.toString() + 'px'
-          document.getElementById('stripeToday').style.top = stripeToday.toString() + 'px'
-          document.getElementById('leftArrow').style.top = leftArrow.toString() + 'px'
-          document.getElementById('rightArrow').style.top = rightArrow.toString() + 'px'
-          document.getElementById('table2').style.top = table2.toString() + 'px'
-          document.getElementById('table3').style.top = table3.toString() + 'px'
-          document.getElementById('table4').style.top = table4.toString() + 'px'
-          document.getElementById('rectangle182').style.height = rectangle182.toString() + 'px'
-          document.getElementById('table5').style.top = table5.toString() + 'px'
-          document.getElementById('overview').style.height = overview.toString() + 'px'
+            document.getElementById('rectangle18').style.height = rectangle18.toString() + 'px'
+            document.getElementById('currentDate').style.top = currentDate.toString() + 'px'
+            document.getElementById('stripeToday').style.top = stripeToday.toString() + 'px'
+            document.getElementById('leftArrow').style.top = leftArrow.toString() + 'px'
+            document.getElementById('rightArrow').style.top = rightArrow.toString() + 'px'
+            document.getElementById('table2').style.top = table2.toString() + 'px'
+            document.getElementById('table3').style.top = table3.toString() + 'px'
+            document.getElementById('table4').style.top = table4.toString() + 'px'
+            document.getElementById('rectangle182').style.height = rectangle182.toString() + 'px'
+            document.getElementById('table5').style.top = table5.toString() + 'px'
+            document.getElementById('overview').style.height = overview.toString() + 'px'
+          }
         }
-      }
 
-      if (rp.length >= 10) {
-        this.paginaterMinute = true
-        this.paginaterTherapist = true
-        document.getElementById('rectangle18').style.height = '468px'
-        document.getElementById('currentDate').style.top = '536px'
-        document.getElementById('stripeToday').style.top = '559.5px'
-        document.getElementById('leftArrow').style.top = '568px'
-        document.getElementById('rightArrow').style.top = '543px'
-        document.getElementById('table2').style.top = '96px'
-        document.getElementById('table3').style.top = '96px'
-        document.getElementById('table4').style.top = '95px'
-        document.getElementById('rectangle182').style.height = '429px'
-        document.getElementById('table5').style.top = '205px'
-        document.getElementById('overview').style.height = '2148px'
-      }
+        if (rp.length >= 10) {
+          this.paginaterMinute = true
+          this.paginaterTherapist = true
+          document.getElementById('rectangle18').style.height = '468px'
+          document.getElementById('currentDate').style.top = '536px'
+          document.getElementById('stripeToday').style.top = '559.5px'
+          document.getElementById('leftArrow').style.top = '568px'
+          document.getElementById('rightArrow').style.top = '543px'
+          document.getElementById('table2').style.top = '96px'
+          document.getElementById('table3').style.top = '96px'
+          document.getElementById('table4').style.top = '95px'
+          document.getElementById('rectangle182').style.height = '429px'
+          document.getElementById('table5').style.top = '205px'
+          document.getElementById('overview').style.height = '2148px'
+        }
 
-      await this.getMinute(therapit)
+        await this.getMinute(therapit)
+      })
     })
   }
 
@@ -456,11 +480,11 @@ export class VisionPage implements OnInit {
         dates = `${year}-${month}-${convertDay}`
       }
 
-      this.serviceTherapist.getAllTerapeuta().subscribe((rp: any) => {
+      this.serviceTherapist.getByCompany(this.company).subscribe((rp: any) => {
         this.servicesTherapist = rp
 
         rp.map(item => {
-          this.service.getTherapistAndDates(item['nombre'], dates).subscribe((rp: any) => {
+          this.service.getTherapistAndDates(item['nombre'], dates, this.company).subscribe((rp: any) => {
             this.therapistCount = rp.length
             item['count'] = this.therapistCount
 
@@ -486,11 +510,11 @@ export class VisionPage implements OnInit {
 
     } else {
 
-      this.serviceTherapist.getAllTerapeuta().subscribe((rp: any) => {
+      this.serviceTherapist.getByCompany(this.company).subscribe((rp: any) => {
         this.servicesTherapist = rp
 
         rp.map(item => {
-          this.service.getTherapistAndDates(item['nombre'], dateCurent).subscribe((rp: any) => {
+          this.service.getTherapistAndDates(item['nombre'], dateCurent, this.company).subscribe((rp: any) => {
             this.therapistCount = rp.length
             item['count'] = this.therapistCount
 
@@ -545,13 +569,13 @@ export class VisionPage implements OnInit {
         dates = `${year}-${month}-${convertDay}`
       }
 
-      this.service.getTherapistConsultingManagerAndDate(element[0]['nombre'], dates).subscribe(async (rp: any) => {
+      this.service.getTherapistConsultingManagerAndDate(element[0]['nombre'], dates, this.company).subscribe(async (rp: any) => {
         this.servicesTherapist = rp
 
         rp.map(item => {
           item['nombre'] = item['terapeuta']
 
-          this.service.getTherapistAndManagerAndDates(item['terapeuta'], element[0]['nombre'], dates).subscribe((rp: any) => {
+          this.service.getTherapistAndManagerAndDates(item['terapeuta'], element[0]['nombre'], dates, this.company).subscribe((rp: any) => {
             if (rp.length > 0) {
               this.existTherapist = true
 
@@ -584,13 +608,13 @@ export class VisionPage implements OnInit {
       })
 
     } else {
-      this.service.getTherapistConsultingManagerAndDate(element[0]['nombre'], dateCurrent).subscribe((rp: any) => {
+      this.service.getTherapistConsultingManagerAndDate(element[0]['nombre'], dateCurrent, this.company).subscribe((rp: any) => {
         this.servicesTherapist = rp
 
         rp.map(item => {
           item['nombre'] = item['terapeuta']
 
-          this.service.getTherapistAndManagerAndDates(item['terapeuta'], element[0]['nombre'], dateCurrent).subscribe((rp: any) => {
+          this.service.getTherapistAndManagerAndDates(item['terapeuta'], element[0]['nombre'], dateCurrent, this.company).subscribe((rp: any) => {
 
             if (rp.length > 0) {
               this.existTherapist = true
@@ -662,7 +686,7 @@ export class VisionPage implements OnInit {
   async getServiceByManager(manager: string) {
     this.todaysDate()
     this.dateTodayCurrent = 'HOY'
-    this.service.getEncargadaAndDate(this.fechaDiaHoy, manager['nombre']).subscribe((rp: any) => {
+    this.service.getEncargadaAndDate(this.fechaDiaHoy, manager['nombre'], this.company).subscribe((rp: any) => {
       this.vision = rp
 
       if (rp.length != 0) {
@@ -691,6 +715,8 @@ export class VisionPage implements OnInit {
           }
         }
       }
+    } else {
+      this.ionLoaderService.dismissLoader()
     }
   }
 
@@ -728,7 +754,7 @@ export class VisionPage implements OnInit {
     this.todaysDate()
     this.dateTodayCurrent = 'HOY'
 
-    this.service.getFechaHoy(this.fechaDiaHoy).subscribe((datoServicio: any) => {
+    this.service.getFechaHoy(this.fechaDiaHoy, this.company).subscribe((datoServicio: any) => {
       this.vision = datoServicio
 
       if (datoServicio.length != 0) {
@@ -736,10 +762,10 @@ export class VisionPage implements OnInit {
       } else {
         this.totalsAtZero()
       }
-
-      this.loading = false
-      this.tableVision = true
     })
+
+    this.loading = false
+    this.tableVision = true
   }
 
   async updateHourAndExit(element, o) {
@@ -1473,7 +1499,7 @@ export class VisionPage implements OnInit {
             await this.getManagerall(fechaActualmente)
             await this.tableTherapist('date', fechaActualmente)
 
-            this.service.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+            this.service.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
               this.vision = rp
               if (rp.length > 0) this.totalVisionSum()
               else this.totalsAtZero()
@@ -1483,7 +1509,7 @@ export class VisionPage implements OnInit {
             await this.getManager(rp, fechaActualmente, 'date')
             await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
 
-            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               this.vision = rp
 
               if (rp.length > 0) this.totalVisionSum()
@@ -1593,7 +1619,7 @@ export class VisionPage implements OnInit {
             await this.getManagerall(fechaActualmente)
             await this.tableTherapist('date', fechaActualmente)
 
-            this.service.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+            this.service.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
               this.vision = rp
               if (rp.length > 0) this.totalVisionSum()
               else this.totalsAtZero()
@@ -1603,7 +1629,7 @@ export class VisionPage implements OnInit {
             await this.getManager(rp, fechaActualmente, 'date')
             await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
 
-            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               this.vision = rp
 
               if (rp.length > 0) this.totalVisionSum()
@@ -1757,7 +1783,7 @@ export class VisionPage implements OnInit {
             await this.getManagerall(fechaActualmente)
             await this.tableTherapist('date', fechaActualmente)
 
-            this.service.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+            this.service.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
               this.vision = rp
 
               if (rp.length > 0) this.totalVisionSum()
@@ -1768,7 +1794,7 @@ export class VisionPage implements OnInit {
             await this.getManager(rp, fechaActualmente, 'date')
             await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
 
-            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               this.vision = rp
 
               if (rp.length > 0) this.totalVisionSum()
@@ -1881,7 +1907,7 @@ export class VisionPage implements OnInit {
             await this.getManagerall(fechaActualmente)
             await this.tableTherapist('date', fechaActualmente)
 
-            this.service.getFechaHoy(fechaActualmente).subscribe((rp: any) => {
+            this.service.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
               this.vision = rp
               if (rp.length > 0) this.totalVisionSum()
               else this.totalsAtZero()
@@ -1891,7 +1917,7 @@ export class VisionPage implements OnInit {
             await this.getManager(rp, fechaActualmente, 'date')
             await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
 
-            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre']).subscribe((rp: any) => {
+            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               this.vision = rp
 
               if (rp.length > 0) this.totalVisionSum()

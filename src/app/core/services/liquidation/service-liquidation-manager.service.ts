@@ -26,8 +26,8 @@ export class ServiceLiquidationManagerService {
 
   // Get
 
-  getLiquidacionesEncargada() {
-    return this.http.get(`${this.API_URL}/getByLiquidacionesEncargada`);
+  getLiquidacionesEncargada(company: string) {
+    return this.http.get(`${this.API_URL}/getByLiquidacionesEncargada/${company}`);
   }
 
   getIdEncarg(idEncargada: string) {
@@ -38,15 +38,16 @@ export class ServiceLiquidationManagerService {
     return this.http.get(`${this.API_URL}/getEncargada/${encargada}`);
   }
 
-  getDateCurrentDay(fechaHoy: string) {
-    return this.http.get(`${this.API_URL}/getDateCurrent/${fechaHoy}`);
+  getDateCurrentDay(fechaHoy: string, company: string) {
+    return this.http.get(`${this.API_URL}/getDateCurrent/${fechaHoy}/${company}`);
   }
 
-  getEncargadaAndDate(createdDate: string, encargada: string) {
+  getEncargadaAndDate(createdDate: string, encargada: string, company: string) {
     return this.http.get(`${this.API_URL}/getFechaHoyByManager`, {
       params: {
         createdDate,
-        encargada
+        encargada,
+        company
       }
     });
   }

@@ -25,6 +25,8 @@ export class EditServicesPage implements OnInit {
   fechaActual = ''
   horaStarted = new Date().toTimeString().substring(0, 5)
   fecha = ''
+  modifiedUser = ''
+  modifiedDate = ''
   horaInicialServicio: string
 
   idUser: number
@@ -700,6 +702,8 @@ export class EditServicesPage implements OnInit {
     if (month == 'Feb') month = "02"
     if (month == 'Jan') month = "01"
 
+    debugger
+
     this.editarService[0]['fechaFin'] = `${day}-${month}-${year}`
   }
 
@@ -891,12 +895,13 @@ export class EditServicesPage implements OnInit {
   }
 
   modified(rp: any) {
-    this.services.modifiedBy = rp[0]['nombre']
+
+    this.modifiedUser = rp[0]['nombre']
 
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    this.services.modifiedTime  = date + ' ' + time;
+    this.modifiedDate = date + ' ' + time;
   }
 
   fullService() {
@@ -1748,10 +1753,17 @@ export class EditServicesPage implements OnInit {
         this.managerAndTherapist()
         this.editValue()
 
+        serv.modifiedBy = this.modifiedUser
+        serv.modifiedTime = this.modifiedDate
+        serv.fechaFin = this.editarService[0]['fechaFin']
+        serv.horaEnd = this.editarService[0]['horaEnd']
+
         this.therapist.horaEnd = serv.horaEnd
         this.therapist.fechaEnd = serv.fechaFin
         this.therapist.salida = serv.salida
         this.therapist.minuto = serv.minuto
+
+        debugger
 
         this.serviceServices.getById(idServicio).subscribe((rp: any) => {
           this.services.pantalla = rp[0].pantalla
