@@ -122,6 +122,7 @@ export class NewLiquidTherapPage implements OnInit {
 
   validitingUser() {
     this.serviceManager.getById(this.id).subscribe((rp) => {
+      this.company = rp[0].company
       if (rp[0]['rol'] == 'administrador') {
         this.administratorRole = true
         this.getManager()
@@ -129,6 +130,7 @@ export class NewLiquidTherapPage implements OnInit {
         this.manager = rp
         this.administratorRole = false
         this.modelLiquidation.encargada = this.manager[0].nombre
+        this.modelLiquidation.company = this.company
         this.serviceLiquidation.consultManager(this.modelLiquidation.encargada, rp[0]['company']).subscribe(async (rp) => {
           this.liquidated = rp
         })
@@ -311,6 +313,8 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   async inputDateAndTime() {
+    debugger
+    console.log(this.modelLiquidation)
     this.service.getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.terapeuta,
       this.modelLiquidation.encargada, this.modelLiquidation.desdeHoraLiquidado, this.modelLiquidation.hastaHoraLiquidado,
       this.modelLiquidation.desdeFechaLiquidado, this.modelLiquidation.hastaFechaLiquidado, this.modelLiquidation.company).subscribe(async (rp: any) => {

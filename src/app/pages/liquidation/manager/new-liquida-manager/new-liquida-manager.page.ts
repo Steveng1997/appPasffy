@@ -127,6 +127,7 @@ export class NewLiquidaManagerPage implements OnInit {
 
   validitingUser() {
     this.serviceManager.getById(this.id).subscribe((rp) => {
+      this.company = rp[0].company
       if (rp[0]['rol'] == 'administrador') {
         this.administratorRole = true
         this.GetAllManagers()
@@ -134,6 +135,7 @@ export class NewLiquidaManagerPage implements OnInit {
         this.manager = rp
         this.administratorRole = false
         this.modelLiquidation.encargada = this.manager[0].nombre
+        this.modelLiquidation.company = this.company
         this.serviceLiquidation.getByEncargada(this.modelLiquidation.encargada).subscribe(async (rp) => {
           this.liquidated = rp
           this.calculateServices()
