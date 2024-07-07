@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
+    path: 'screen',
+    loadChildren: () => import('./pages/login/screen/screen.module').then(m => m.ScreenPageModule)
+  },
+  {
     path: 'register',
     loadChildren: () => import('./pages/login/register/register.module').then(m => m.RegisterPageModule)
   },
@@ -52,27 +56,27 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: () => import('./pages/login/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/login/register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'edit-services',
-    loadChildren: () => import('./pages/service/edit-services/edit-services.module').then( m => m.EditServicesPageModule)
+    loadChildren: () => import('./pages/service/edit-services/edit-services.module').then(m => m.EditServicesPageModule)
   },
   {
     path: 'new-liquiationTherapist',
-    loadChildren: () => import('./pages/liquidation/therapist/new-liquid-therap/new-liquid-therap.module').then( m => m.NewLiquidTherapPageModule)
+    loadChildren: () => import('./pages/liquidation/therapist/new-liquid-therap/new-liquid-therap.module').then(m => m.NewLiquidTherapPageModule)
   },
   {
     path: 'new-liquiationManager',
-    loadChildren: () => import('./pages/liquidation/manager/new-liquida-manager/new-liquida-manager.module').then( m => m.NewLiquidaManagerPageModule)
+    loadChildren: () => import('./pages/liquidation/manager/new-liquida-manager/new-liquida-manager.module').then(m => m.NewLiquidaManagerPageModule)
   },
   {
     path: 'therapist',
-    loadChildren: () => import('./pages/setting/therapist/therapist.module').then( m => m.TherapistPageModule)
+    loadChildren: () => import('./pages/setting/therapist/therapist.module').then(m => m.TherapistPageModule)
   },
   {
     path: 'manager',
-    loadChildren: () => import('./pages/setting/manager/manager.module').then( m => m.ManagerPageModule)
+    loadChildren: () => import('./pages/setting/manager/manager.module').then(m => m.ManagerPageModule)
   }
 ];
 

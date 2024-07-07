@@ -1,0 +1,28 @@
+.login,
+.login * {
+    box-sizing: border-box;
+}
+
+ion-grid {
+    background: #0B9B7A;
+    height: -webkit-fill-available;
+    position: absolute;
+    overflow: hidden;
+}
+
+.login,
+.login * {
+    box-sizing: border-box;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: -webkit-center;
+    height: 90%;
+}
+
+.icon {
+    width: 70%;
+}
