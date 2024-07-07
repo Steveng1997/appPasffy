@@ -157,6 +157,7 @@ export class ManagerPage {
 
   validitingUser() {
     this.serviceManager.getById(this.id).subscribe((rp) => {
+      this.company = rp[0].company
       if (rp[0]['rol'] == 'administrador') {
         this.administratorRole = true
         this.GetAllManagers()
@@ -183,6 +184,7 @@ export class ManagerPage {
     this.dateTodayCurrent = 'HOY'
 
     this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+      this.company = rp[0].company
       this.serviceLiquidation.getLiquidacionesEncargada(rp[0].company).subscribe(async (rp: any) => {
         this.liquidated = rp
       })
