@@ -1389,6 +1389,7 @@ export class VisionPage implements OnInit {
     diaHoy = fechHoy.getDate()
     mesHoy = fechHoy.getMonth() + 1
     añoHoy = fechHoy.getFullYear()
+    this.day = this.day - 1
 
     if (mesHoy > 0 && mesHoy < 10) {
       convertMesHoy = '0' + mesHoy
@@ -1655,6 +1656,7 @@ export class VisionPage implements OnInit {
     diaHoy = fechHoy.getDate()
     mesHoy = fechHoy.getMonth() + 1
     añoHoy = fechHoy.getFullYear()
+    this.day = this.day + 1
 
     if (mesHoy > 0 && mesHoy < 10) {
       convertMesHoy = '0' + mesHoy
