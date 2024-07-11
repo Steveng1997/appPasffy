@@ -1,172 +1,226 @@
-.login,
-.login * {
-    box-sizing: border-box;
+html:not(.hydrated) body {
+    display: flex;
 }
 
-ion-grid {
-    // background: var(--verde-claro, #e8f2ef);
-    background: white;
-    height: -webkit-fill-available;
-    position: absolute;
+.LOGIN {
+    background: #0B9B7A;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
     overflow: hidden;
 }
 
-.login,
-.login * {
-    box-sizing: border-box;
-}
-
-.login {
-    background: #ffffff;
-    height: 812px;
+.LOGIN .div {
+    background-color: #0B9B7A;
+    overflow-x: hidden;
+    width: 375px;
+    height: 1971px;
     position: relative;
-    overflow: hidden;
 }
 
-.rectangle-148 {
+.LOGIN .overlap {
+    // position: absolute;
+    // width: 371px;
+    // height: 364px;
+    // top: 160px;
+    // left: 20px;
+
+    position: absolute;
+    width: 371px;
+    height: 364px;
+    top: 60px;
+    left: 20px;
+}
+
+.LOGIN .group {
+    position: absolute;
+    width: 371px;
+    height: 364px;
+    top: 0;
+    left: 0;
+}
+
+.LOGIN .overlap-group {
+    position: relative;
     width: 335px;
-    height: 365px;
-    position: absolute;
-    left: calc(50% - 167.5px);
-    top: 223px;
-    overflow: visible;
-}
-
-.rectangle-87 {
-    background: var(--verde-oscuro, #0b9a7a);
+    height: 364px;
+    // background-color: #ffffff;
     border-radius: 15px;
-    width: 126px;
-    height: 44px;
-    position: absolute;
-    left: 48px;
-    top: 469px;
 }
 
-.rectangle-137 {
-    background: var(--verde-oscuro, #0b9a7a);
-    border-radius: 15px;
-    width: 126px;
-    height: 44px;
+.LOGIN .text-wrapper-3 {
     position: absolute;
-    left: 201px;
-    top: 469px;
-}
-
-.register {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Bold", sans-serif;
-    font-size: 15px;
-    line-height: 100%;
-    font-weight: 700;
-    position: absolute;
-    left: 228px;
-    top: 461px;
-    width: 86px;
-    height: 37px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
-.login2 {
-    color: #ffffff;
-    text-align: left;
-    font-family: "Inter-Bold", sans-serif;
-    font-size: 15px;
-    line-height: 100%;
-    font-weight: 700;
-    position: absolute;
-    left: 78px;
-    top: 461px;
-    width: 123px;
-    height: 37px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-}
-
-.image-1 {
-    width: 101px;
-    height: 109px;
-    position: absolute;
-    left: calc(50% - 50.5px);
-    top: 113px;
-    object-fit: cover;
-}
-
-.usuario {
-    color: var(--negro, #3c3c3c);
-    text-align: left;
+    height: 25px;
+    top: 28px;
+    left: 36px;
     font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 100%;
     font-weight: 500;
-    position: absolute;
-    left: 60px;
-    top: 278px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 25px;
+    white-space: nowrap;
 }
 
-.rectangle-149 {
+.LOGIN .text-wrapper-4 {
     border-radius: 15px;
     border-style: solid;
-    border-color: var(--verde, #1fb996);
-    border-width: 1.5px;
-    width: 278px;
-    height: 50px;
+    border-color: #ffffff;
+    border-width: 1px;
+    width: 284px;
+    height: 45px;
     position: absolute;
-    left: 49px;
-    top: 299px;
+    left: 22px;
+    top: 59px;
 }
 
-.sc-ion-input-md-h[name=user] {
+.LOGIN .input-1 {
+    height: 25px;
+    top: 58px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    position: absolute;
+    left: 34px;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.sc-ion-input-md-h[name=correo] {
     border-style: none;
-    color: black;
+    color: white;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
-    left: 61px;
-    width: 258px;
-    text-align: left;
+    width: 260px;
+    left: 132px;
+    top: 321px;
     --highlight-color-focused: var(--verde, #1fb996);
 }
 
-.contrase-a {
-    color: var(--negro, #3c3c3c);
-    text-align: left;
-    font-family: "Inter-Medium", sans-serif;
-    font-size: 15px;
-    line-height: 100%;
-    font-weight: 500;
-    position: absolute;
-    left: 60px;
-    top: 372px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+.sc-ion-input-md-h[name=correo] ::ng-deep input {
+    caret-color: black;
 }
 
-.rectangle-150 {
+.LOGIN .text-wrapper-5 {
+    position: absolute;
+    height: 25px;
+    top: 130px;
+    left: 36px;
+    font-family: "Inter-Medium", sans-serif;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 25px;
+    white-space: nowrap;
+}
+
+.LOGIN .text-wrapper-6 {
     border-radius: 15px;
     border-style: solid;
-    border-color: var(--verde, #1fb996);
-    border-width: 1.5px;
-    width: 278px;
-    height: 50px;
+    border-color: #ffffff;
+    border-width: 1px;
+    width: 284px;
+    height: 45px;
     position: absolute;
-    left: 49px;
-    top: 393px;
+    left: 22px;
+    top: 161px;
+}
+
+.LOGIN .input-2 {
+    height: 25px;
+    top: 161px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    position: absolute;
+    left: 34px;
+    letter-spacing: 0;
+    white-space: nowrap;
 }
 
 .sc-ion-input-md-h[name=pass] {
     border-style: none;
-    color: black;
+    color: white;
     font-family: "Inter-Medium", sans-serif;
     font-size: 15px;
-    left: 61px;
-    width: 258px;
-    text-align: left;
+    width: 260px;
+    left: 132px;
+    top: 161px;
     --highlight-color-focused: var(--verde, #1fb996);
+}
+
+.sc-ion-input-md-h[name=pass] ::ng-deep input {
+    caret-color: black;
+}
+
+.btnLogin {
+    position: absolute;
+    left: 22px;
+    top: 240px;
+    width: 284px;
+    height: 53px;
+    border-radius: 15px;
+    color: #0B9B7A;
+    font-family: "Inter-bold", sans-serif;
+    font-size: 25px;
+    line-height: 125%;
+    font-weight: 700;
+}
+
+.LOGIN .text-wrapper-7 {
+    position: absolute;
+    height: 25px;
+    top: 310px;
+    left: 22px;
+    font-family: "Inter-Medium", sans-serif;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 25px;
+    white-space: nowrap;
+}
+
+.LOGIN .text-wrapper-8 {
+    color: #ffffff;
+    position: absolute;
+    height: 25px;
+    top: 310px;
+    left: 208px;
+    font-size: 18px;
+    font-family: "Inter-bold", sans-serif;
+    letter-spacing: 0;
+    line-height: 125%;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.LOGIN .text-wrapper-9 {
+    color: #ffffff;
+    position: absolute;
+    height: 25px;
+    top: 343px;
+    left: 22px;
+    font-family: "Inter-bold", sans-serif;
+    line-height: 125%;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 25px;
+    white-space: nowrap;
+}
+
+.LOGIN .div4 {
+    position: absolute;
+    text-align: -webkit-center;
+    height: 90%;
+    top: 435px;
+}
+
+.LOGIN .div4 .icon {
+    width: 40%;
 }

@@ -313,7 +313,6 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   async inputDateAndTime() {
-    debugger
     console.log(this.modelLiquidation)
     this.service.getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.terapeuta,
       this.modelLiquidation.encargada, this.modelLiquidation.desdeHoraLiquidado, this.modelLiquidation.hastaHoraLiquidado,

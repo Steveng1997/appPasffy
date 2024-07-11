@@ -2,7 +2,7 @@ html:not(.hydrated) body {
     display: flex;
 }
 
-.REGISTER {
+.RECOVER {
     background: #0B9B7A;
     display: flex;
     flex-direction: row;
@@ -11,7 +11,7 @@ html:not(.hydrated) body {
     overflow: hidden;
 }
 
-.REGISTER .div {
+.RECOVER .div {
     background-color: #0B9B7A;
     overflow-x: hidden;
     width: 375px;
@@ -19,13 +19,7 @@ html:not(.hydrated) body {
     position: relative;
 }
 
-.REGISTER .overlap {
-    // position: absolute;
-    // width: 371px;
-    // height: 364px;
-    // top: 160px;
-    // left: 20px;
-
+.RECOVER .overlap {
     position: absolute;
     width: 371px;
     height: 364px;
@@ -33,7 +27,7 @@ html:not(.hydrated) body {
     left: 20px;
 }
 
-.REGISTER .group {
+.RECOVER .group {
     position: absolute;
     width: 371px;
     height: 364px;
@@ -41,7 +35,7 @@ html:not(.hydrated) body {
     left: 0;
 }
 
-.REGISTER .overlap-group {
+.RECOVER .overlap-group {
     position: relative;
     width: 335px;
     height: 364px;
@@ -49,7 +43,7 @@ html:not(.hydrated) body {
     border-radius: 15px;
 }
 
-.REGISTER .text-wrapper-3 {
+.RECOVER .text-wrapper-3 {
     position: absolute;
     height: 25px;
     top: 28px;
@@ -63,7 +57,7 @@ html:not(.hydrated) body {
     white-space: nowrap;
 }
 
-.REGISTER .text-wrapper-4 {
+.RECOVER .text-wrapper-4 {
     border-radius: 15px;
     border-style: solid;
     border-color: #ffffff;
@@ -75,7 +69,7 @@ html:not(.hydrated) body {
     top: 59px;
 }
 
-.REGISTER .input-1 {
+.RECOVER .input-1 {
     height: 25px;
     top: 58px;
     font-family: "Inter-Regular", Helvetica;
@@ -103,7 +97,7 @@ html:not(.hydrated) body {
     caret-color: black;
 }
 
-.REGISTER .text-wrapper-5 {
+.RECOVER .text-wrapper-5 {
     position: absolute;
     height: 25px;
     top: 130px;
@@ -117,7 +111,7 @@ html:not(.hydrated) body {
     white-space: nowrap;
 }
 
-.REGISTER .text-wrapper-6 {
+.RECOVER .text-wrapper-6 {
     border-radius: 15px;
     border-style: solid;
     border-color: #ffffff;
@@ -129,7 +123,7 @@ html:not(.hydrated) body {
     top: 161px;
 }
 
-.REGISTER .input-2 {
+.RECOVER .input-2 {
     height: 25px;
     top: 161px;
     font-family: "Inter-Regular", Helvetica;
@@ -171,41 +165,13 @@ html:not(.hydrated) body {
     font-weight: 700;
 }
 
-.REGISTER .text-wrapper-7 {
-    position: absolute;
-    height: 25px;
-    top: 310px;
-    left: 22px;
-    font-family: "Inter-Medium", sans-serif;
-    font-weight: 500;
-    color: #ffffff;
-    font-size: 18px;
-    letter-spacing: 0;
-    line-height: 25px;
-    white-space: nowrap;
-}
-
-.REGISTER .text-wrapper-8 {
-    color: #ffffff;
-    position: absolute;
-    height: 25px;
-    top: 310px;
-    left: 197px;
-    font-size: 18px;
-    font-family: "Inter-bold", sans-serif;
-    letter-spacing: 0;
-    line-height: 125%;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-.REGISTER .div4 {
+.RECOVER .div4 {
     position: absolute;
     text-align: -webkit-center;
     height: 90%;
     top: 435px;
 }
 
-.REGISTER .div4 .icon {
+.RECOVER .div4 .icon {
     width: 40%;
 }

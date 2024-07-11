@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="login.page.scss" />
+  <link rel="stylesheet" href="recover-pass.page.scss" />
 </head>
 
 <body>
-  <div class="LOGIN">
+  <div class="RECOVER">
     <div class="div">
       <div class="overlap">
         <div class="group">
@@ -21,11 +21,7 @@
             <div class="text-wrapper-6"></div>
             <ion-input class="input-2" type="password" [(ngModel)]="manager.pass" name="pass" id="pass"></ion-input>
 
-            <button class="btn btn-light btnLogin" (click)="onLogin()">Iniciar Sesión</button>
-
-            <div class="text-wrapper-7" (click)="register()">¿No tienes cuenta?</div>
-            <div class="text-wrapper-8" (click)="register()">Registrarse</div>
-            <div class="text-wrapper-9" (click)="recover()">He olvidado mi contraseña</div>
+            <button class="btn btn-light btnLogin" (click)="save()">Recuperar</button>
 
             <div class="div4">
               <ion-img src="./assets/pasffy.png" class="ion-align-self-end icon"></ion-img>

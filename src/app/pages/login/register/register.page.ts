@@ -40,20 +40,6 @@ export class RegisterPage {
     private ionLoaderService: IonLoaderService
   ) { }
 
-  resetTherapist() {
-    if (this.manager.nombre != '') this.manager.nombre = ''
-    if (this.manager.usuario != '') this.manager.usuario = ''
-    if (this.manager.pass != '') this.manager.pass = ''
-    if (Number(this.manager.fijoDia) > 0) this.manager.fijoDia = ''
-    if (Number(this.manager.servicio) > 0) this.manager.servicio = ''
-    if (Number(this.manager.bebida) > 0) this.manager.bebida = ''
-    if (Number(this.manager.bebidaTerap) > 0) this.manager.bebidaTerap = ''
-    if (Number(this.manager.tabaco) > 0) this.manager.tabaco = ''
-    if (Number(this.manager.vitamina) > 0) this.manager.vitamina = ''
-    if (Number(this.manager.propina) > 0) this.manager.propina = ''
-    if (Number(this.manager.otros) > 0) this.manager.otros = ''
-  }
-
   validateEmpty() {
     if (this.manager.bebida == "") this.manager.bebida = "0"
     if (this.manager.bebidaTerap == "") this.manager.bebidaTerap = "0"
@@ -87,9 +73,8 @@ export class RegisterPage {
               this.validateEmpty()
               this.createUniqueId()
               this.serviceLogin.registerEncargada(this.manager).subscribe((resp: any) => {
-                this.resetTherapist()
                 this.ionLoaderService.dismissLoader()
-                this.router.navigate([``])
+                this.login()
               })
             } else {
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'Ya existe este usuario', showConfirmButton: false, timer: 1000 })
@@ -108,12 +93,7 @@ export class RegisterPage {
     }
   }
 
-  clean() {
-    this.resetTherapist()
-  }
-
-  back() {
-    this.resetTherapist()
-    this.router.navigate([``])
+  login() {
+    location.replace(`` )
   }
 }

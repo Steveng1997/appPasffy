@@ -702,8 +702,6 @@ export class EditServicesPage implements OnInit {
     if (month == 'Feb') month = "02"
     if (month == 'Jan') month = "01"
 
-    debugger
-
     this.editarService[0]['fechaFin'] = `${day}-${month}-${year}`
   }
 
@@ -1762,8 +1760,6 @@ export class EditServicesPage implements OnInit {
         this.therapist.fechaEnd = serv.fechaFin
         this.therapist.salida = serv.salida
         this.therapist.minuto = serv.minuto
-
-        debugger
 
         this.serviceServices.getById(idServicio).subscribe((rp: any) => {
           this.services.pantalla = rp[0].pantalla

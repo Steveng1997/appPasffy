@@ -12,7 +12,6 @@ import { ModelManager } from '../../models/manager';
 export class ManagerService {
 
   API_URL = 'https://brave-marvelous-marquis.glitch.me/api/encargada'
-  length: number;
 
   constructor(
     public router: Router,
