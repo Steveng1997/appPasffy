@@ -20,16 +20,10 @@ html:not(.hydrated) body {
 }
 
 .REGISTER .overlap {
-    // position: absolute;
-    // width: 371px;
-    // height: 364px;
-    // top: 160px;
-    // left: 20px;
-
     position: absolute;
     width: 371px;
     height: 364px;
-    top: 60px;
+    top: 45px;
     left: 20px;
 }
 
@@ -55,7 +49,7 @@ html:not(.hydrated) body {
     top: 28px;
     left: 36px;
     font-family: "Inter-Medium", sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     color: #ffffff;
     font-size: 20px;
     letter-spacing: 0;
@@ -96,7 +90,8 @@ html:not(.hydrated) body {
     width: 260px;
     left: 132px;
     top: 321px;
-    --highlight-color-focused: var(--verde, #1fb996);
+    --highlight-color-focused: transparent;
+    --highlight-color: transparent;
 }
 
 .sc-ion-input-md-h[name=correo] ::ng-deep input {
@@ -109,7 +104,7 @@ html:not(.hydrated) body {
     top: 130px;
     left: 36px;
     font-family: "Inter-Medium", sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     color: #ffffff;
     font-size: 20px;
     letter-spacing: 0;
@@ -150,7 +145,8 @@ html:not(.hydrated) body {
     width: 260px;
     left: 132px;
     top: 161px;
-    --highlight-color-focused: var(--verde, #1fb996);
+    --highlight-color-focused: transparent;
+    --highlight-color: transparent;
 }
 
 .sc-ion-input-md-h[name=pass] ::ng-deep input {
@@ -177,7 +173,7 @@ html:not(.hydrated) body {
     top: 310px;
     left: 22px;
     font-family: "Inter-Medium", sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     color: #ffffff;
     font-size: 18px;
     letter-spacing: 0;
@@ -186,7 +182,7 @@ html:not(.hydrated) body {
 }
 
 .REGISTER .text-wrapper-8 {
-    color: #ffffff;
+    color: #f3f3f3;
     position: absolute;
     height: 25px;
     top: 310px;
@@ -195,7 +191,7 @@ html:not(.hydrated) body {
     font-family: "Inter-bold", sans-serif;
     letter-spacing: 0;
     line-height: 125%;
-    font-weight: 700;
+    font-weight: 500;
     white-space: nowrap;
 }
 
@@ -203,7 +199,8 @@ html:not(.hydrated) body {
     position: absolute;
     text-align: -webkit-center;
     height: 90%;
-    top: 435px;
+    top: 425px;
+    left: -10px;
 }
 
 .REGISTER .div4 .icon {
