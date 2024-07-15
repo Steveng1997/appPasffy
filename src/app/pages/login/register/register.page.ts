@@ -63,37 +63,32 @@ export class RegisterPage {
   }
 
   save() {
-    if (this.manager.nombre) {
-      if (this.manager.usuario) {
-        if (this.manager.pass) {
-          this.ionLoaderService.simpleLoader()
-          this.serviceLogin.getByUsuario(this.manager.usuario).subscribe((nameRegistro: any) => {
-            if (nameRegistro.length == 0) {
-              this.manager.nombre = this.manager.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
-              this.validateEmpty()
-              this.createUniqueId()
-              this.serviceLogin.registerEncargada(this.manager).subscribe((resp: any) => {
-                this.ionLoaderService.dismissLoader()
-                this.login()
-              })
-            } else {
-              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'Ya existe este usuario', showConfirmButton: false, timer: 1000 })
+    if (this.manager.usuario) {
+      if (this.manager.pass) {
+        this.ionLoaderService.simpleLoader()
+        this.serviceLogin.getByUsuario(this.manager.usuario).subscribe((nameRegistro: any) => {
+          if (nameRegistro.length == 0) {
+            this.manager.nombre = this.manager.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
+            this.validateEmpty()
+            this.createUniqueId()
+            this.serviceLogin.registerEncargada(this.manager).subscribe((resp: any) => {
               this.ionLoaderService.dismissLoader()
-            }
-          })
-        } else {
-          Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'El campo de la contraseña se encuentra vacío', showConfirmButton: false, timer: 1000 })
-        }
+              this.login()
+            })
+          } else {
+            Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'Ya existe este usuario', showConfirmButton: false, timer: 1000 })
+            this.ionLoaderService.dismissLoader()
+          }
+        })
       } else {
-        Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'El campo del usuario se encuentra vacío', showConfirmButton: false, timer: 1000 })
+        Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'El campo de la contraseña se encuentra vacío', showConfirmButton: false, timer: 1000 })
       }
-
     } else {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'El campo del nombre se encuentra vacío', showConfirmButton: false, timer: 1000 })
+      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'El campo del usuario se encuentra vacío', showConfirmButton: false, timer: 1000 })
     }
   }
 
   login() {
-    location.replace(`` )
+    location.replace(``)
   }
 }
