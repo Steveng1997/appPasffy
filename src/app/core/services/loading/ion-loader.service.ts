@@ -8,7 +8,8 @@ export class IonLoaderService {
 
   simpleLoader() {
     this.loadingController.create({
-      message: 'Loading...'
+      message: 'Loading...',
+      cssClass: 'custom-loader-class',
     }).then((response) => {
       response.present()
     })
@@ -25,23 +26,23 @@ export class IonLoaderService {
   autoLoader() {
     this.loadingController.create({
       message: 'Loading....',
-      duration: 2000
+      duration: 1000
     }).then((response) => {
       response.present()
       response.onDidDismiss().then((response) => {
         console.log('Loader dismissed', response)
       })
     })
-  }   
+  }
 
   customLoader() {
     this.loadingController.create({
       message: 'Loader with custom style',
       duration: 4000,
-      cssClass:'loader-css-class',
-      backdropDismiss:true
+      cssClass: 'loader-css-class',
+      backdropDismiss: true
     }).then((res) => {
       res.present()
     })
-  }   
+  }
 }

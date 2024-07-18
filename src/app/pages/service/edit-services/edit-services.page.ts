@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 
 // Model
@@ -157,7 +158,8 @@ export class EditServicesPage implements OnInit {
     private serviceTherapist: TherapistService,
     private serviceManager: ManagerService,
     private serviceServices: ServiceService,
-    private ionLoaderService: IonLoaderService
+    private ionLoaderService: IonLoaderService,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -855,6 +857,7 @@ export class EditServicesPage implements OnInit {
 
     this.serviceServices.getByEditar(this.id).subscribe((datosServicio: any) => {
       if (datosServicio.length > 0) {
+        this.services.pantalla = datosServicio[0].pantalla
         this.editarService = datosServicio
         this.fecha = datosServicio[0]['fecha']
         this.fechaActual = datosServicio[0]['fechaHoyInicio']
@@ -1772,17 +1775,17 @@ export class EditServicesPage implements OnInit {
 
         this.sortDateToEdit()
         this.serviceServices.updateServicio(idServicio, serv).subscribe((rp: any) => {
+          this.presentController('Actualizado correctamente!')
           setTimeout(() => {
             this.ionLoaderService.dismissLoader()
             location.replace(`tabs/${this.idUser}/${this.services.pantalla}`)
-            Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 2500 })
           }, 1000)
         })
       } else {
-        Swal.fire({ heightAuto: false, icon: 'error', title: 'Oops...', text: 'El campo minutos se encuentra vacio', showConfirmButton: false, timer: 2500 })
+        this.presentController('El campo minutos se encuentra vacio')
       }
     } else {
-      Swal.fire({ heightAuto: false, icon: 'error', title: 'Oops...', text: 'El total servicio no coincide con el total de cobros', showConfirmButton: false, timer: 2500 })
+      this.presentController('El total servicio no coincide con el total de cobros')
     }
   }
 
@@ -1800,6 +1803,7 @@ export class EditServicesPage implements OnInit {
             confirmButtonText: 'Si, Deseo eliminar!'
           }).then((result) => {
             if (result.isConfirmed) {
+              this.presentController('¡Eliminado Correctamente!')
               this.ionLoaderService.simpleLoader()
               let screen = this.services.pantalla
               this.serviceTherapist.getTerapeuta(datoEliminado[0]['terapeuta']).subscribe((rp: any) => {
@@ -1812,7 +1816,6 @@ export class EditServicesPage implements OnInit {
               this.serviceServices.deleteServicio(id).subscribe((rp: any) => {
                 this.ionLoaderService.dismissLoader()
                 location.replace(`tabs/${this.idUser}/${screen}`)
-                Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 2500 })
               })
             }
           })
@@ -1824,5 +1827,14 @@ export class EditServicesPage implements OnInit {
         text: 'No tienes autorización para borrar, si deseas eliminar el servicio habla con el adminisitrador del sistema'
       })
     }
+  }
+
+  async presentController(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      cssClass: 'custom-loader-class',
+    });
+    toast.present();
   }
 }

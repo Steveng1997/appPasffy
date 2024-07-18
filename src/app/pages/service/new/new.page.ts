@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import Swal from 'sweetalert2';
 
 // Model
@@ -168,7 +169,8 @@ export class NewPage implements OnInit {
     private serviceTherapist: TherapistService,
     private serviceManager: ManagerService,
     private serviceServices: ServiceService,
-    private ionLoaderService: IonLoaderService
+    private ionLoaderService: IonLoaderService,
+    private toastController: ToastController
   ) {
   }
 
@@ -960,6 +962,7 @@ export class NewPage implements OnInit {
               this.serviceTherapist.update(this.services.terapeuta, this.therapist).subscribe((rp: any) => { })
               this.serviceServices.registerServicio(this.services).subscribe((rp: any) => {
                 if (rp) {
+                  this.presentController('¡Insertado Correctamente!')
                   localStorage.removeItem('Efectivo')
                   localStorage.removeItem('Bizum')
                   localStorage.removeItem('Tarjeta')
@@ -967,7 +970,6 @@ export class NewPage implements OnInit {
                   setTimeout(() => {
                     this.ionLoaderService.dismissLoader()
                     location.replace(`tabs/${this.idUser}/vision`)
-                    Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1500 })
                   }, 1000)
                 }
               })
@@ -1529,5 +1531,14 @@ export class NewPage implements OnInit {
     localStorage.removeItem('Tarjeta')
     localStorage.removeItem('Trans')
     location.replace(`tabs/${this.idUser}/vision`);
+  }
+
+  async presentController(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      cssClass: 'custom-loader-class',
+    });
+    toast.present();
   }
 }
