@@ -643,15 +643,7 @@ export class NewPage implements OnInit {
 
     // const currentHours = currentDate.getHours()
     if (selectDate < currentDateWithoutHours || currentHours > 24) {
-      Swal.fire({
-        heightAuto: false,
-        position: 'top-end',
-        icon: 'error',
-        title: 'Oops...',
-        text: 'No se puede crear el servicio por la fecha.',
-        showConfirmButton: false,
-        timer: 2500,
-      });
+      this.presentController('No se puede crear el servicio por la fecha.')
       return false
     }
 
@@ -975,19 +967,19 @@ export class NewPage implements OnInit {
               })
             }
             else {
-              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'El total servicio no coincide con el total de cobros', showConfirmButton: false, timer: 2500 })
+              this.presentController('El total servicio no coincide con el total de cobros')
             }
           } else {
-            Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'El campo minutos se encuentra vacio', showConfirmButton: false, timer: 2500 })
+            this.presentController('El campo minutos se encuentra vacio')
           }
         } else {
-          Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'El campo tratamiento se encuentra vacio', showConfirmButton: false, timer: 2500 })
+          this.presentController('El campo tratamiento se encuentra vacio')
         }
       } else {
-        Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna encargada seleccionada', showConfirmButton: false, timer: 2500 })
+        this.presentController('No hay ninguna encargada seleccionada')
       }
     } else {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No hay ninguna terapeuta seleccionada', showConfirmButton: false, timer: 2500 })
+      this.presentController('No hay ninguna terapeuta seleccionada')
     }
   }
 
@@ -1366,7 +1358,7 @@ export class NewPage implements OnInit {
       this.services.transPiso1 == true || this.services.efectPiso2 == true && this.services.transPiso2 == true ||
       this.services.efectTerap == true && this.services.transTerap == true || this.services.efectEncarg == true &&
       this.services.transEncarg == true || this.services.efectDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
@@ -1381,7 +1373,7 @@ export class NewPage implements OnInit {
       this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
       this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
       this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
@@ -1396,7 +1388,7 @@ export class NewPage implements OnInit {
       this.services.transPiso1 == true || this.services.tarjPiso2 == true && this.services.transPiso2 == true ||
       this.services.tarjTerap == true && this.services.transTerap == true || this.services.tarjEncarg == true &&
       this.services.transEncarg == true || this.services.tarjDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
@@ -1411,7 +1403,7 @@ export class NewPage implements OnInit {
       this.services.tarjPiso1 == true || this.services.transPiso2 == true && this.services.tarjPiso2 == true ||
       this.services.transTerap == true && this.services.tarjTerap == true || this.services.transEncarg == true &&
       this.services.tarjEncarg == true || this.services.transDriverTaxi == true && this.services.tarjDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      this.presentController('Se escogio mas de una forma de pago')
       return false
     }
     return true
@@ -1430,7 +1422,7 @@ export class NewPage implements OnInit {
       this.services.transPiso1 == true || this.services.efectPiso2 == true && this.services.transPiso2 == true ||
       this.services.efectTerap == true && this.services.transTerap == true || this.services.efectEncarg == true &&
       this.services.transEncarg == true || this.services.efectDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
@@ -1445,7 +1437,7 @@ export class NewPage implements OnInit {
       this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
       this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
       this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
@@ -1460,7 +1452,7 @@ export class NewPage implements OnInit {
       this.services.transPiso1 == true || this.services.tarjPiso2 == true && this.services.transPiso2 == true ||
       this.services.tarjTerap == true && this.services.transTerap == true || this.services.tarjEncarg == true &&
       this.services.transEncarg == true || this.services.tarjDriverTaxi == true && this.services.transDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
@@ -1475,7 +1467,7 @@ export class NewPage implements OnInit {
       this.services.tarjPiso1 == true || this.services.transPiso2 == true && this.services.tarjPiso2 == true ||
       this.services.transTerap == true && this.services.tarjTerap == true || this.services.transEncarg == true &&
       this.services.tarjEncarg == true || this.services.transDriverTaxi == true && this.services.tarjDriverTaxi == true) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
+      this.presentController('Se escogio mas de una forma de pago')
       return false
     }
     return true
@@ -1484,27 +1476,27 @@ export class NewPage implements OnInit {
   paymentMethodValidation() {
     if (Number(this.services.numberPiso1) > 0 && this.services.efectPiso1 == false && this.services.bizuPiso1 == false &&
       this.services.tarjPiso1 == false && this.services.transPiso1 == false) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 1' })
+      this.presentController('No se escogio ninguna forma de pago para piso 1')
       return false
     }
     if (Number(this.services.numberPiso2) > 0 && this.services.efectPiso2 == false && this.services.bizuPiso2 == false &&
       this.services.tarjPiso2 == false && this.services.transPiso2 == false) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 2' })
+      this.presentController('No se escogio ninguna forma de pago para piso 2')
       return false
     }
     if (Number(this.services.numberTerap) > 0 && this.services.efectTerap == false && this.services.bizuTerap == false &&
       this.services.tarjTerap == false && this.services.transTerap == false) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para terapeuta' })
+      this.presentController('No se escogio ninguna forma de pago para terapeuta')
       return false
     }
     if (Number(this.services.numberEncarg) > 0 && this.services.efectEncarg == false && this.services.bizuEncarg == false &&
       this.services.tarjEncarg == false && this.services.transEncarg == false) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para encargada' })
+      this.presentController('No se escogio ninguna forma de pago para encargada')
       return false
     }
     if (Number(this.services.numberTaxi) > 0 && this.services.efectDriverTaxi == false && this.services.bizuDriverTaxi == false &&
       this.services.tarjDriverTaxi == false && this.services.transDriverTaxi == false) {
-      Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para taxista' })
+      this.presentController('No se escogio ninguna forma de pago para taxista')
       return false
     }
     return true
@@ -1536,7 +1528,8 @@ export class NewPage implements OnInit {
   async presentController(message: string) {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000,
+      duration: 4000,
+      position: 'top',
       cssClass: 'custom-loader-class',
     });
     toast.present();

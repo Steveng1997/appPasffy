@@ -61,6 +61,10 @@ export class ScreenPage implements OnInit {
       if (this.pass) {
         this.serviceLogin.getByUsuario(this.email).subscribe((resp: any) => {
           if (resp.length > 0) {
+
+            if (resp[0].expiration == true)
+              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Dentro de 15 dias se termina lo gratuito' })
+
             if (resp[0]['activo'] == true) {
               this.serviceLogin.getByUserAndPass(this.email, this.pass).subscribe((rp: any) => {
                 if (rp.length > 0) {
