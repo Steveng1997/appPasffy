@@ -78,7 +78,7 @@ export class EditManagerPage implements OnInit {
     const param = this.activeRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.iduser = param['id']
 
-    this.serviceManager.getById(this.id).subscribe((rp) => {
+    this.serviceManager.getId(this.id).subscribe((rp) => {
       return (this.managers = rp)
     })
   }
@@ -178,7 +178,7 @@ export class EditManagerPage implements OnInit {
   }
 
   delete(id: number, name: string) {
-    this.serviceManager.getById(id).subscribe((resp: any) => {
+    this.serviceManager.getId(id).subscribe((resp: any) => {
       if (resp) {
         Swal.fire({
           heightAuto: false,
@@ -198,7 +198,7 @@ export class EditManagerPage implements OnInit {
             await this.date(name)
             await this.getManagerLiquidationFalse(name)
 
-            this.serviceManager.deleteManager(id).subscribe(async (rp: any) => {
+            this.serviceManager.delete(id).subscribe(async (rp: any) => {
               this.serviceLiquidationManager.save(this.liquidationManager).subscribe((rp) => {
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1000 })
                 this.ionLoaderService.dismissLoader()
@@ -215,7 +215,7 @@ export class EditManagerPage implements OnInit {
     if (encargada.nombre != "") {
       this.ionLoaderService.simpleLoader()
       encargada.nombre = encargada.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
-      this.serviceManager.updateUser(id, encargada).subscribe((resp => {
+      this.serviceManager.update(id, encargada).subscribe((resp => {
         this.ionLoaderService.dismissLoader()
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 1000 })
         location.replace(`tabs/${this.iduser}/manager`);

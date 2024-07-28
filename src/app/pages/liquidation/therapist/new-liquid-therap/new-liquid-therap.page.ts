@@ -121,7 +121,7 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   validitingUser() {
-    this.serviceManager.getById(this.id).subscribe((rp) => {
+    this.serviceManager.getId(this.id).subscribe((rp) => {
       this.company = rp[0].company
       if (rp[0]['rol'] == 'administrador') {
         this.administratorRole = true
@@ -139,7 +139,7 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   getTherapist() {
-    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
       this.serviceTherapist.getByCompany(rp[0].company).subscribe((datosTerapeuta: any) => {
         this.terapeuta = datosTerapeuta
       })
@@ -223,9 +223,9 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   getManager() {
-    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
       this.modelLiquidation.company = rp[0].company
-      this.serviceManager.getByCompany(rp[0].company).subscribe((datosEncargada: any) => {
+      this.serviceManager.company(rp[0].company).subscribe((datosEncargada: any) => {
         this.manager = datosEncargada
       })
     })

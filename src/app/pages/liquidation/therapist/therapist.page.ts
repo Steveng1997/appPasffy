@@ -163,7 +163,7 @@ export class TherapistPage implements OnInit {
   }
 
   validitingUser() {
-    this.serviceManager.getById(this.id).subscribe((rp) => {
+    this.serviceManager.getId(this.id).subscribe((rp) => {
       this.company = rp[0].company
       if (rp[0]['rol'] == 'administrador') {
         this.administratorRole = true
@@ -191,7 +191,7 @@ export class TherapistPage implements OnInit {
   getLiquidation = async () => {
     this.dateTodayCurrent = 'HOY'
 
-    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
       this.company = rp[0].company
       this.serviceLiquidation.consultTherapistSettlements(rp[0].company).subscribe(async (rp: any) => {
         this.liquidated = rp
@@ -200,7 +200,7 @@ export class TherapistPage implements OnInit {
   }
 
   getTerapeuta() {
-    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
       this.serviceTherapist.getByCompany(rp[0].company).subscribe((datosTerapeuta: any) => {
         this.terapeuta = datosTerapeuta
       })
@@ -208,8 +208,8 @@ export class TherapistPage implements OnInit {
   }
 
   getManager() {
-    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
-      this.serviceManager.getByCompany(rp[0].company).subscribe((datosEncargada: any) => {
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
+      this.serviceManager.company(rp[0].company).subscribe((datosEncargada: any) => {
         this.manager = datosEncargada
       })
     })
@@ -371,7 +371,7 @@ export class TherapistPage implements OnInit {
     this.dateStart = currentDate
     this.dateEnd = currentDate
 
-    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
       if (rp[0]['rol'] == 'administrador') {
         this.serviceLiquidation.getDateCurrentDay(currentDate, rp[0]['company']).subscribe((rp: any) => {
           this.liquidated = rp
@@ -532,7 +532,7 @@ export class TherapistPage implements OnInit {
         this.dateStart = fechaActualmente
         this.dateEnd = fechaActualmente
 
-        this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
             this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
               this.liquidated = rp
@@ -644,7 +644,7 @@ export class TherapistPage implements OnInit {
         this.dateStart = fechaActualmente
         this.dateEnd = fechaActualmente
 
-        this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
             this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
@@ -802,7 +802,7 @@ export class TherapistPage implements OnInit {
         this.dateStart = fechaActualmente
         this.dateEnd = fechaActualmente
 
-        this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
             this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
               this.liquidated = rp
@@ -918,7 +918,7 @@ export class TherapistPage implements OnInit {
         this.dateStart = fechaActualmente
         this.dateEnd = fechaActualmente
 
-        this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
             this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
@@ -943,7 +943,7 @@ export class TherapistPage implements OnInit {
 
   // details
 
-  detail(id: string) {
+  detail(id: number) {
     if (this.details == true) {
       this.details = false
     } else {
@@ -963,8 +963,8 @@ export class TherapistPage implements OnInit {
     }
   }
 
-  async sumTotal(id: string) {
-    this.services.getByIdTerap(id).subscribe(async (rp: any) => {
+  async sumTotal(id: number) {
+    this.services.getById(id).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         this.settledData = rp
 
@@ -1250,7 +1250,7 @@ export class TherapistPage implements OnInit {
   }
 
   calculatedTotal() {
-    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
       if (rp[0]['rol'] == 'administrador') {
         this.serviceLiquidation.getDateCurrentDay(this.dateStart, this.company).subscribe((rp: any) => {
           this.liquidated = rp

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 // Models
 import { ModelManager } from '../../models/manager';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,52 +22,59 @@ export class ManagerService {
   // Register
 
   save(manager: ModelManager) {
-    return this.http.post(`${this.API_URL}`, manager);
+    return this.http.post(`${this.API_URL}/`, manager).pipe(
+      map(result => {
+        if (!result)
+          return false
+        else
+          return true
+      })
+    )
   }
 
   // Get
 
-  getUsuarios() {
+  getManager() {
     return this.http.get(`${this.API_URL}`);
   }
 
-  getById(id: number) {
+  getId(id: number) {
     return this.http.get(`${this.API_URL}/getId/${id}`);
   }
 
-  getByIdAndAdministrador(id: number) {
+  idAdmin(id: number) {
     return this.http.get(`${this.API_URL}/idAdmin/${id}`);
   }
 
-  getByUsuario(usuario: string) {
-    return this.http.get(`${this.API_URL}/email/${usuario}`);
+  email(email: string) {
+    return this.http.get(`${this.API_URL}/email/${email}`);
   }
 
-  getEncargada(nombre: string) {
-    return this.http.get(`${this.API_URL}/name/${nombre}`);
+  name(name: string) {
+    return this.http.get(`${this.API_URL}/name/${name}`);
   }
 
-  getByUserAndPass(email: string, password: string) {
+  getEmailWithPassword(email: string, password: string) {
     return this.http.get(`${this.API_URL}/getEmailWithPassword/${email}/${password}`);
   }
 
-  getIdAndCompany(id: number, company: string) {
+  getIdCompany(id: number, company: string) {
     return this.http.get(`${this.API_URL}/getIdCompany/${id}/${company}`)
   }
 
-  getByCompany(company: string) {
+  company(company: string) {
     return this.http.get(`${this.API_URL}/company/${company}`)
   }
 
   // Update
 
-  updateUser(id: number, manager: ModelManager) {
-    return this.http.put(`${this.API_URL}/updateEncargada/${id}`, manager);
+  update(id: number, manager: ModelManager) {
+    return this.http.put(`${this.API_URL}/${id}`, manager);
   }
 
   // Delete
 
-  deleteManager(id: number) {
+  delete(id: number) {
     return this.http.delete(`${this.API_URL}/${id}`);
   }
 }

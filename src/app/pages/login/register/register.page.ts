@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 // Services
-import { LoginService } from 'src/app/core/services/login/login.service';
 import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.service';
+import { ManagerService } from 'src/app/core/services/manager/manager.service';
 
 // Model
 import { ModelManager } from 'src/app/core/models/manager';
@@ -36,7 +36,7 @@ export class RegisterPage {
 
   constructor(
     public router: Router,
-    private serviceLogin: LoginService,
+    private serviceManager: ManagerService,
     private ionLoaderService: IonLoaderService
   ) { }
 
@@ -55,10 +55,10 @@ export class RegisterPage {
     if (this.manager.email) {
       if (this.manager.password) {
         this.ionLoaderService.simpleLoader()
-        this.serviceLogin.getByUsuario(this.manager.email).subscribe((rp: any) => {
+        this.serviceManager.email(this.manager.email).subscribe((rp: any) => {
           if (rp['manager'].length == 0) {
             this.createUniqueId()
-            this.serviceLogin.save(this.manager).subscribe((rp: any) => {
+            this.serviceManager.save(this.manager).subscribe((rp: any) => {
               this.ionLoaderService.dismissLoader()
               this.login()
             }, err => {

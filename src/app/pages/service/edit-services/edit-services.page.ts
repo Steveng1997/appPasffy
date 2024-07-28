@@ -170,7 +170,7 @@ export class EditServicesPage implements OnInit {
     this.idUser = param['id']
 
     if (this.idUser) {
-      this.serviceManager.getById(this.idUser).subscribe((rp) => {
+      this.serviceManager.getId(this.idUser).subscribe((rp) => {
         if (rp[0]['rol'] == 'administrador') {
           this.administratorRole = true
           this.getManager()
@@ -544,7 +544,7 @@ export class EditServicesPage implements OnInit {
   }
 
   getManager() {
-    this.serviceManager.getUsuarios().subscribe((datosEncargada: any) => {
+    this.serviceManager.getManager().subscribe((datosEncargada: any) => {
       this.manager = datosEncargada
     })
   }
@@ -873,7 +873,7 @@ export class EditServicesPage implements OnInit {
 
         this.collectionsValue()
 
-        this.serviceManager.getByIdAndAdministrador(this.idUser).subscribe((datoAdministrador: any[]) => {
+        this.serviceManager.idAdmin(this.idUser).subscribe((datoAdministrador: any[]) => {
           if (datoAdministrador.length > 0) {
             this.modified(datoAdministrador)
             this.buttonDelete = true
@@ -888,7 +888,7 @@ export class EditServicesPage implements OnInit {
         }, 200)
 
       } else {
-        this.serviceManager.getById(this.idUser).subscribe((datoUser: any[]) => {
+        this.serviceManager.getId(this.idUser).subscribe((datoUser: any[]) => {
           this.idUser = datoUser[0]
         })
       }

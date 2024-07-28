@@ -163,7 +163,7 @@ export class ServicePage implements OnInit {
     this.todaysDdate()
 
     if (this.idUser) {
-      await this.serviceManager.getById(this.idUser).subscribe((rp) => {
+      await this.serviceManager.getId(this.idUser).subscribe((rp) => {
         if (rp[0]['rol'] == 'administrador') {
           this.administratorRole = true
           this.getManager()
@@ -192,7 +192,7 @@ export class ServicePage implements OnInit {
       this.todaysDdate()
 
       if (this.idUser) {
-        await this.serviceManager.getById(this.idUser).subscribe((rp) => {
+        await this.serviceManager.getId(this.idUser).subscribe((rp) => {
           if (rp[0]['rol'] == 'administrador') {
             this.administratorRole = true
             this.getManager()
@@ -273,7 +273,7 @@ export class ServicePage implements OnInit {
   getServices = async () => {
     let service
     this.dateTodayCurrent = 'HOY'
-    this.serviceManager.getById(this.idUser).subscribe((rp) => {
+    this.serviceManager.getId(this.idUser).subscribe((rp) => {
       this.company = rp[0].company
       if (rp[0]['rol'] == 'administrador') {
         this.serviceService.getFechaHoy(this.dateStart, this.company).subscribe((rp: any) => {
@@ -473,7 +473,7 @@ export class ServicePage implements OnInit {
 
   getTherapist = async () => {
     let therapit
-    this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+    this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
       this.serviceTherapist.getByCompany(rp[0].company).subscribe((rp) => {
         this.terapeuta = rp
         therapit = rp
@@ -484,8 +484,8 @@ export class ServicePage implements OnInit {
   }
 
   getManager() {
-    this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
-      this.serviceManager.getByCompany(rp[0].company).subscribe((datosEncargada) => {
+    this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
+      this.serviceManager.company(rp[0].company).subscribe((datosEncargada) => {
         this.manager = datosEncargada
       })
     })
@@ -511,7 +511,7 @@ export class ServicePage implements OnInit {
   }
 
   async deleteService() {
-    this.serviceManager.getById(this.idUser).subscribe(async (rp) => {
+    this.serviceManager.getId(this.idUser).subscribe(async (rp) => {
       if (rp[0]['rol'] == 'administrador') {
         if (this.selectedTerapeuta != undefined || this.selectedEncargada != undefined ||
           this.selectedDateStart != undefined || this.selectedDateEnd != undefined) {
@@ -1012,7 +1012,7 @@ export class ServicePage implements OnInit {
         this.dateStart = fechaActualmente
         this.dateEnd = fechaActualmente
 
-        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
             this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
@@ -1138,7 +1138,7 @@ export class ServicePage implements OnInit {
         this.dateStart = fechaActualmente
         this.dateEnd = fechaActualmente
 
-        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
             this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
@@ -1310,7 +1310,7 @@ export class ServicePage implements OnInit {
         this.dateStart = fechaActualmente
         this.dateEnd = fechaActualmente
 
-        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
             this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
@@ -1438,7 +1438,7 @@ export class ServicePage implements OnInit {
         this.dateStart = fechaActualmente
         this.dateEnd = fechaActualmente
 
-        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
             this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
@@ -1481,7 +1481,7 @@ export class ServicePage implements OnInit {
 
   deleteAll() {
     if (this.deleteButton == true) {
-      this.serviceManager.getById(this.idUser).subscribe(async (rp) => {
+      this.serviceManager.getId(this.idUser).subscribe(async (rp) => {
         if (rp[0]['rol'] == 'administrador') {
           Swal.fire({
             heightAuto: false,
@@ -1532,7 +1532,7 @@ export class ServicePage implements OnInit {
   }
 
   delete(id: number) {
-    this.serviceManager.getById(this.idUser).subscribe(async (rp) => {
+    this.serviceManager.getId(this.idUser).subscribe(async (rp) => {
       if (rp[0]['rol'] == 'administrador') {
         Swal.fire({
           heightAuto: false,

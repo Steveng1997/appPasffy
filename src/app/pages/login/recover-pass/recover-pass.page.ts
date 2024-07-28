@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import { ModelManager } from 'src/app/core/models/manager';
 
 // Services
-import { LoginService } from 'src/app/core/services/login/login.service';
 import { ManagerService } from 'src/app/core/services/manager/manager.service';
 
 @Component({
@@ -23,7 +22,6 @@ export class RecoverPassPage implements OnInit {
   }
 
   constructor(public router: Router,
-    private serviceLogin: LoginService,
     private managerService: ManagerService
   ) { }
 
@@ -33,9 +31,9 @@ export class RecoverPassPage implements OnInit {
   recover() {
     if (this.email) {
       if (this.manager.password) {
-        this.serviceLogin.getByUsuario(this.email).subscribe((rp: any) => {
+        this.managerService.email(this.email).subscribe((rp: any) => {
           if (rp.length != 0) {
-            this.managerService.updateUser(Number(rp[0].id), this.manager).subscribe((resp: any) => {
+            this.managerService.update(Number(rp[0].id), this.manager).subscribe((resp: any) => {
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Se actualizo correctamente el password!', showConfirmButton: false, timer: 1500 })
               this.login()
             })
@@ -52,6 +50,6 @@ export class RecoverPassPage implements OnInit {
   }
 
   login() {
-    location.replace(`` )
-   }
+    location.replace(``)
+  }
 }

@@ -77,10 +77,10 @@ export class NewManagerPage implements OnInit {
 
           this.manager.name = this.manager.name.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
 
-          this.serviceManager.getById(this.iduser).subscribe((rp: any) => {
+          this.serviceManager.getId(this.iduser).subscribe((rp: any) => {
             this.manager.company = rp[0]['company']
 
-            this.serviceManager.getByUsuario(this.manager.email).subscribe((rp: any) => {
+            this.serviceManager.email(this.manager.email).subscribe((rp: any) => {
               if (rp.length == 0) {
 
                 this.serviceManager.save(this.manager).subscribe((rp) => {

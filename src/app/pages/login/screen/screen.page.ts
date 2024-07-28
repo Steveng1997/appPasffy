@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-// Model
-import { ModelManager } from 'src/app/core/models/manager';
-
 // Services
-import { LoginService } from 'src/app/core/services/login/login.service';
+import { ManagerService } from 'src/app/core/services/manager/manager.service';
 
 @Component({
   selector: 'app-screen',
@@ -21,7 +18,7 @@ export class ScreenPage implements OnInit {
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
-    private serviceLogin: LoginService
+    private serviceManager: ManagerService
   ) { }
 
   ngOnInit() {
@@ -35,14 +32,14 @@ export class ScreenPage implements OnInit {
   login() {
     if (this.email) {
       if (this.password) {
-        this.serviceLogin.getByUsuario(this.email).subscribe((rp: any) => {
+        this.serviceManager.email(this.email).subscribe((rp: any) => {
           if (rp['manager'].length > 0) {
 
             if (rp['manager'][0].expiration == true)
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Dentro de 15 dias se termina lo gratuito' })
 
             if (rp['manager'][0]['active'] == true) {
-              this.serviceLogin.getByUserAndPass(this.email, this.password).subscribe((rp: any) => {
+              this.serviceManager.getEmailWithPassword(this.email, this.password).subscribe((rp: any) => {
                 if (rp['manager'].length > 0) {
                   setTimeout(() => { location.replace(`tabs/${rp['manager'][0].id}/vision`) }, 1500);
                 } else {

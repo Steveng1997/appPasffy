@@ -77,7 +77,7 @@ export class NewTherapistPage implements OnInit {
       this.therapist.nombre = this.therapist.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
       this.validate()
 
-      this.serviceManager.getById(Number(this.iduser)).subscribe((rp: any) => {
+      this.serviceManager.getId(Number(this.iduser)).subscribe((rp: any) => {
         this.therapist.company = rp[0].company
 
         this.serviceTherapist.getTerapeuta(this.therapist.nombre).subscribe((rp: any) => {

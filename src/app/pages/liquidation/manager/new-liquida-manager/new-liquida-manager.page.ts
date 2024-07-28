@@ -126,7 +126,7 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   validitingUser() {
-    this.serviceManager.getById(this.id).subscribe((rp) => {
+    this.serviceManager.getId(this.id).subscribe((rp) => {
       this.company = rp[0].company
       if (rp[0]['rol'] == 'administrador') {
         this.administratorRole = true
@@ -145,9 +145,9 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   GetAllManagers() {
-    this.serviceManager.getById(this.id).subscribe(async (rp: any) => {
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
       this.modelLiquidation.company = rp[0].company
-      this.serviceManager.getByCompany(rp[0].company).subscribe((datosEncargada: any) => {
+      this.serviceManager.company(rp[0].company).subscribe((datosEncargada: any) => {
         this.manager = datosEncargada
       })
     })
@@ -327,7 +327,7 @@ export class NewLiquidaManagerPage implements OnInit {
     let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTherapist = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0, totalCommission = 0,
       sumCommission = 0, receivedManager = 0
 
-    await this.serviceManager.getEncargada(this.modelLiquidation.encargada).subscribe(async (rp) => {
+    await this.serviceManager.name(this.modelLiquidation.encargada).subscribe(async (rp) => {
       this.terapeutaName = rp[0]
       this.fijoDia = rp[0]['fijoDia']
       this.letterFixedDay = this.fijoDia.toString()
@@ -591,7 +591,7 @@ export class NewLiquidaManagerPage implements OnInit {
     this.modelLiquidation.fixedDay = Number(event.target.value)
 
     if (numberValue > 0) {
-      this.serviceManager.getEncargada(this.modelLiquidation.encargada).subscribe((resp: any) => {
+      this.serviceManager.name(this.modelLiquidation.encargada).subscribe((resp: any) => {
         this.fijoDia = resp[0]['fijoDia']
         this.letterFixedDay = this.fijoDia.toString()
         this.fixedTotalDay = numberValue * this.fijoDia

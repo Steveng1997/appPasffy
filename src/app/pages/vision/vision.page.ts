@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment'
 import { Platform } from '@ionic/angular';
-import dayjs from "dayjs";
+import dayjs from "dayjs";
 
 // Service
 import { ManagerService } from 'src/app/core/services/manager/manager.service';
@@ -40,7 +40,6 @@ export class VisionPage implements OnInit {
   fechaDiaHoy = dayjs().format("YYYY-MM-DD")
   totalServicio: number
   idUser: number
-  user = ''
   company = ''
   therapist: any
   horaEnd: string
@@ -143,9 +142,8 @@ export class VisionPage implements OnInit {
 
     this.ionLoaderService.simpleLoader()
 
-    this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
-      this.serviceManager.getIdAndCompany(rp['manager'][0].id, rp['manager'][0].company).subscribe(async (rp: any) => {
-        this.user = rp['manager'][0].name
+    this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
+      this.serviceManager.getIdCompany(rp['manager'].id, rp['manager'].company).subscribe(async (rp: any) => {
         this.company = rp['manager'][0].company
         this.servicesManager = rp['manager']
         manager = rp['manager']
@@ -175,9 +173,8 @@ export class VisionPage implements OnInit {
 
       this.ionLoaderService.simpleLoader()
 
-      this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
-        this.serviceManager.getIdAndCompany(rp['manager'][0].id, rp['manager'][0].company).subscribe(async (rp: any) => {
-          this.user = rp['manager'][0].name
+      this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
+        this.serviceManager.getIdCompany(rp['manager'][0].id, rp['manager'][0].company).subscribe(async (rp: any) => {
           this.company = rp['manager'][0].company
           this.servicesManager = rp['manager']
           manager = rp['manager']
@@ -204,7 +201,7 @@ export class VisionPage implements OnInit {
     if (element == undefined) {
 
       this.todaysDate()
-      this.serviceManager.getByCompany(this.company).subscribe((rp: any) => {
+      this.serviceManager.company(this.company).subscribe((rp: any) => {
         this.servicesManager = rp
 
         if (rp.length > 7 && rp.length < 10) {
@@ -250,7 +247,7 @@ export class VisionPage implements OnInit {
         })
       })
     } else {
-      this.serviceManager.getUsuarios().subscribe((rp: any) => {
+      this.serviceManager.getManager().subscribe((rp: any) => {
         this.servicesManager = rp
 
         rp.map(item => {
@@ -365,7 +362,7 @@ export class VisionPage implements OnInit {
 
   async getTherapist() {
     let therapit
-    this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+    this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
       this.company = rp[0]['company']
       await this.serviceTherapist.orderByMinutesAndCompany(this.company).subscribe(async (rp: any) => {
         therapit = rp
@@ -684,17 +681,7 @@ export class VisionPage implements OnInit {
   }
 
   async todaysDate() {
-    let convertDia
-    let currentDate = new Date()
-    let dia = currentDate.getDate()
-    let mes = currentDate.toJSON().substring(5, 7)
-    let month = ''
-    if (dia > 0 && dia < 10) {
-      convertDia = '0' + dia
-      this.fechaDiaHoy = `${currentDate.getFullYear()}-${mes}-${convertDia}`
-    } else {
-      this.fechaDiaHoy = `${currentDate.getFullYear()}-${mes}-${dia}`
-    }
+    let month = '', mes = this.fechaDiaHoy.substring(5, 7)
 
     if (mes == "12") month = 'Diciembre'
     if (mes == "11") month = 'Noviembre'
@@ -709,7 +696,9 @@ export class VisionPage implements OnInit {
     if (mes == "02") month = 'Febrero'
     if (mes == "01") month = 'Enero'
 
-    this.day = dia
+    debugger
+
+    this.day = Number(this.fechaDiaHoy.substring(8, 10))
     this.month = month
   }
 
@@ -1100,7 +1089,7 @@ export class VisionPage implements OnInit {
 
         fechaActualmente = `${convertAño}-${mes}-${convertDia}`
 
-        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
             await this.getManagerall(fechaActualmente)
@@ -1220,7 +1209,7 @@ export class VisionPage implements OnInit {
 
         fechaActualmente = `${convertAño}-${mes}-${convertDia}`
 
-        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
             await this.getManagerall(fechaActualmente)
@@ -1385,7 +1374,7 @@ export class VisionPage implements OnInit {
 
         fechaActualmente = `${convertAño}-${mes}-${convertDia}`
 
-        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
             await this.getManagerall(fechaActualmente)
@@ -1509,7 +1498,7 @@ export class VisionPage implements OnInit {
 
         fechaActualmente = `${convertAño}-${mes}-${convertDia}`
 
-        this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
+        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'administrador') {
 
             await this.getManagerall(fechaActualmente)
