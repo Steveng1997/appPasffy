@@ -92,7 +92,7 @@ export class VisionPage implements OnInit {
   totalTrasn: string
   totalTerape: string
   totalEncargada: string
-  totalOtr: string
+  totalDriverTaxist: string
   totalCollections: string
 
   // Table therapist
@@ -316,29 +316,10 @@ export class VisionPage implements OnInit {
           return accumulator + serv.totalServicio
         }, 0)
 
-        if (sumatoria > 999) {
-          const coma = sumatoria.toString().indexOf(".") !== -1 ? true : false;
-          const array = coma ? sumatoria.toString().split(".") : sumatoria.toString().split("");
-          let integer = coma ? array[0].split("") : array;
-          let subIndex = 1;
-
-          for (let i = integer.length - 1; i >= 0; i--) {
-
-            if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-              integer.splice(i, 0, ".");
-              subIndex++;
-
-            } else {
-              subIndex++;
-            }
-          }
-
-          integer = [integer.toString().replace(/,/gi, "")]
-          this.servicesManager[0]['sum'] = integer[0].toString()
-        } else {
+        if (sumatoria > 999)
+          this.servicesManager[0]['sum'] = (sumatoria / 1000).toFixed(3)
+        else
           this.servicesManager[0]['sum'] = sumatoria.toString()
-        }
       })
     } else {
 
@@ -373,29 +354,10 @@ export class VisionPage implements OnInit {
           return accumulator + serv.totalServicio
         }, 0)
 
-        if (sumatoria > 999) {
-          const coma = sumatoria.toString().indexOf(".") !== -1 ? true : false;
-          const array = coma ? sumatoria.toString().split(".") : sumatoria.toString().split("");
-          let integer = coma ? array[0].split("") : array;
-          let subIndex = 1;
-
-          for (let i = integer.length - 1; i >= 0; i--) {
-
-            if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-              integer.splice(i, 0, ".");
-              subIndex++;
-
-            } else {
-              subIndex++;
-            }
-          }
-
-          integer = [integer.toString().replace(/,/gi, "")]
-          this.servicesManager[0]['sum'] = integer[0].toString()
-        } else {
+        if (sumatoria > 999)
+          this.servicesManager[0]['sum'] = (sumatoria / 1000).toFixed(3)
+        else
           this.servicesManager[0]['sum'] = sumatoria.toString()
-        }
       })
     }
   }
@@ -679,7 +641,7 @@ export class VisionPage implements OnInit {
     this.totalTrasn = '0'
     this.totalTerape = '0'
     this.totalEncargada = '0'
-    this.totalOtr = '0'
+    this.totalDriverTaxist = '0'
     this.totalCollections = '0'
   }
 
@@ -847,7 +809,7 @@ export class VisionPage implements OnInit {
     if (this.totalTrasn == undefined) this.totalTrasn = '0'
     if (this.totalTerape == undefined) this.totalTerape = '0'
     if (this.totalEncargada == undefined) this.totalEncargada = '0'
-    if (this.totalOtr == undefined) this.totalOtr = '0'
+    if (this.totalDriverTaxist == undefined) this.totalDriverTaxist = '0'
     if (this.totalCollections == undefined) this.totalCollections = '0'
   }
 
@@ -859,254 +821,74 @@ export class VisionPage implements OnInit {
     const totalServ = this.vision.map(({ servicio }) => servicio).reduce((acc, value) => acc + value, 0)
     this.totalServicio = totalServ
 
-    if (this.totalServicio > 0) {
-
-      const coma = this.totalServicio.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalServicio.toString().split(".") : this.totalServicio.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalTreatment = integer[0].toString()
-    } else {
-      this.totalTreatment = totalServ.toString()
-    }
+    if (this.totalServicio > 999)
+      this.totalTreatment = (this.totalServicio / 1000).toFixed(3)
+    else
+      this.totalTreatment = this.totalServicio.toString()
 
     const totalValorBebida = this.vision.map(({ bebidas }) => bebidas).reduce((acc, value) => acc + value, 0)
     this.totalBebida = totalValorBebida
 
-    if (this.totalBebida > 0) {
-
-      const coma = this.totalBebida.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalBebida.toString().split(".") : this.totalBebida.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalDrinks = integer[0].toString()
-    } else {
-      this.totalDrinks = totalValorBebida.toString()
-    }
+    if (this.totalBebida > 999)
+      this.totalDrinks = (this.totalBebida / 1000).toFixed(3)
+    else
+      this.totalDrinks = this.totalBebida.toString()
 
     const totalValueDrinkTherapist = this.vision.map(({ bebidaTerap }) => bebidaTerap).reduce((acc, value) => acc + value, 0)
     this.totalBebidaTherapist = totalValueDrinkTherapist
 
-    if (this.totalBebidaTherapist > 0) {
-
-      const coma = this.totalBebidaTherapist.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalBebidaTherapist.toString().split(".") : this.totalBebidaTherapist.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalDrinksTherapist = integer[0].toString()
-    } else {
-      this.totalDrinksTherapist = totalValueDrinkTherapist.toString()
-    }
+    if (this.totalBebidaTherapist > 999)
+      this.totalDrinksTherapist = (this.totalBebidaTherapist / 1000).toFixed(3)
+    else
+      this.totalDrinksTherapist = this.totalBebidaTherapist.toString()
 
     const totalValorTab = this.vision.map(({ tabaco }) => tabaco).reduce((acc, value) => acc + value, 0)
     this.totalTobaccoo = totalValorTab
 
-    if (this.totalTobaccoo > 0) {
-
-      const coma = this.totalTobaccoo.toString().indexOf(".") !== -1 ? true : false;
-      const arrayNumero = coma ? this.totalTobaccoo.toString().split(".") : this.totalTobaccoo.toString().split("");
-      let integerPart = coma ? arrayNumero[0].split("") : arrayNumero;
-      let subIndex = 1;
-
-      for (let i = integerPart.length - 1; i >= 0; i--) {
-
-        if (integerPart[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integerPart.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integerPart = [integerPart.toString().replace(/,/gi, "")]
-      this.totalTobacco = integerPart[0].toString()
-    } else {
-      this.totalTobacco = totalValorTab.toString()
-    }
+    if (this.totalTobaccoo > 999)
+      this.totalTobacco = (this.totalTobaccoo / 1000).toFixed(3)
+    else
+      this.totalTobacco = this.totalTobaccoo.toString()
 
     const totalValorVitamina = this.vision.map(({ vitaminas }) => vitaminas).reduce((acc, value) => acc + value, 0)
     this.totalVitamina = totalValorVitamina
 
-    if (this.totalVitamina > 0) {
-
-      const coma = this.totalVitamina.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalVitamina.toString().split(".") : this.totalVitamina.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalVitamin = integer[0].toString()
-    } else {
-      this.totalVitamin = totalValorVitamina.toString()
-    }
+    if (this.totalVitamina > 999)
+      this.totalVitamin = (this.totalVitamina / 1000).toFixed(3)
+    else
+      this.totalVitamin = this.totalVitamina.toString()
 
     const totalValorProp = this.vision.map(({ propina }) => propina).reduce((acc, value) => acc + value, 0)
     this.totalTipa = totalValorProp
 
-    if (this.totalTipa > 0) {
-
-      const coma = this.totalTipa.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalTipa.toString().split(".") : this.totalTipa.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalTip = integer[0].toString()
-    } else {
-      this.totalTip = totalValorProp.toString()
-    }
+    if (this.totalTipa > 999)
+      this.totalTip = (this.totalTipa / 1000).toFixed(3)
+    else
+      this.totalTip = this.totalTipa.toString()
 
     const totalValueTaxi = this.vision.map(({ taxi }) => taxi).reduce((acc, value) => acc + value, 0)
     this.totalTaxita = totalValueTaxi
 
-    if (this.totalTaxita > 0) {
-
-      const coma = this.totalTaxita.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalTaxita.toString().split(".") : this.totalTaxita.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalTaxi = integer[0].toString()
-    } else {
-      this.totalTaxi = totalValueTaxi.toString()
-    }
+    if (this.totalTaxita > 999)
+      this.totalTaxi = (this.totalTaxita / 1000).toFixed(3)
+    else
+      this.totalTaxi = this.totalTaxita.toString()
 
     const totalValorOtroServicio = this.vision.map(({ otros }) => otros).reduce((acc, value) => acc + value, 0)
     this.totalOtros = totalValorOtroServicio
 
-    if (this.totalOtros > 0) {
-
-      const coma = this.totalOtros.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalOtros.toString().split(".") : this.totalOtros.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalOthers = integer[0].toString()
-    } else {
-      this.totalOthers = totalValorOtroServicio.toString()
-    }
+    if (this.totalOtros > 999)
+      this.totalOthers = (this.totalOtros / 1000).toFixed(3)
+    else
+      this.totalOthers = this.totalOtros.toString()
 
     this.totalVision = this.totalServicio + this.totalBebida + this.totalBebidaTherapist + this.totalTobaccoo + this.totalTaxita +
       this.totalVitamina + this.totalTipa + this.totalOtros
 
-    if (this.totalVision > 0) {
-
-      const coma = this.totalVision.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalVision.toString().split(".") : this.totalVision.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalVisions = integer[0].toString()
-    } else {
+    if (this.totalVision > 999)
+      this.totalVisions = (this.totalVision / 1000).toFixed(3)
+    else
       this.totalVisions = this.totalVision.toString()
-    }
 
     // total de las Formas de pagos
 
@@ -1118,28 +900,10 @@ export class VisionPage implements OnInit {
 
     this.totalEfectivo = efectPiso1 + efectPiso2
 
-    if (this.totalEfectivo > 0) {
-
-      const coma = this.totalEfectivo.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalEfectivo.toString().split(".") : this.totalEfectivo.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalEfectiv = integer[0].toString()
-    }
+    if (this.totalEfectivo > 999)
+      this.totalEfectiv = (this.totalEfectivo / 1000).toFixed(3)
+    else
+      this.totalEfectiv = this.totalEfectivo.toString()
 
     const totalPiso1Bizum = this.vision.map(({ valuePiso1Bizum }) => valuePiso1Bizum).reduce((acc, value) => acc + value, 0)
     bizumPiso1 = totalPiso1Bizum
@@ -1149,30 +913,10 @@ export class VisionPage implements OnInit {
 
     this.totalBizum = bizumPiso1 + bizumPiso2
 
-    if (this.totalBizum > 0) {
-
-      const coma = this.totalBizum.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalBizum.toString().split(".") : this.totalBizum.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalBizu = integer[0].toString()
-    } else {
+    if (this.totalBizum > 999)
+      this.totalBizu = (this.totalBizum / 1000).toFixed(3)
+    else
       this.totalBizu = this.totalBizum.toString()
-    }
 
     const totalPiso1Tarjeta = this.vision.map(({ valuePiso1Tarjeta }) => valuePiso1Tarjeta).reduce((acc, value) => acc + value, 0)
     tarjetaPiso1 = totalPiso1Tarjeta
@@ -1182,30 +926,10 @@ export class VisionPage implements OnInit {
 
     this.totalTarjeta = tarjetaPiso1 + tarjetaPiso2
 
-    if (this.totalTarjeta > 0) {
-
-      const coma = this.totalTarjeta.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalTarjeta.toString().split(".") : this.totalTarjeta.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalTarjet = integer[0].toString()
-    } else {
+    if (this.totalTarjeta > 999)
+      this.totalTarjet = (this.totalTarjeta / 1000).toFixed(3)
+    else
       this.totalTarjet = this.totalTarjeta.toString()
-    }
 
     const totalPiso1Transaccion = this.vision.map(({ valuePiso1Transaccion }) => valuePiso1Transaccion).reduce((acc, value) => acc + value, 0)
     transfPiso1 = totalPiso1Transaccion
@@ -1215,169 +939,50 @@ export class VisionPage implements OnInit {
 
     this.totalTrasnf = transfPiso1 + transfPiso2
 
-    if (this.totalTrasnf > 0) {
-
-      const coma = this.totalTrasnf.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalTrasnf.toString().split(".") : this.totalTrasnf.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalTrasn = integer[0].toString()
-    } else {
+    if (this.totalTrasnf > 999)
+      this.totalTrasn = (this.totalTrasnf / 1000).toFixed(3)
+    else
       this.totalTrasn = this.totalTrasnf.toString()
-    }
 
     const totalValorTerapeuta = this.vision.map(({ numberTerap }) => numberTerap).reduce((acc, value) => acc + value, 0)
     this.totalTerap = totalValorTerapeuta
 
-    if (this.totalTerap > 0) {
-
-      const coma = this.totalTerap.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalTerap.toString().split(".") : this.totalTerap.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalTerape = integer[0].toString()
-    } else {
+    if (this.totalTerap > 999)
+      this.totalTerape = (this.totalTerap / 1000).toFixed(3)
+    else
       this.totalTerape = this.totalTerap.toString()
-    }
 
     const totalValorEncargada = this.vision.map(({ numberEncarg }) => numberEncarg).reduce((acc, value) => acc + value, 0)
     this.totalEncarg = totalValorEncargada
 
-    if (this.totalEncarg > 0) {
-
-      const coma = this.totalEncarg.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalEncarg.toString().split(".") : this.totalEncarg.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalEncargada = integer[0].toString()
-    } else {
+    if (this.totalEncarg > 999)
+      this.totalEncargada = (this.totalEncarg / 1000).toFixed(3)
+    else
       this.totalEncargada = this.totalEncarg.toString()
-    }
 
     const totalValueTaxDriver = this.vision.map(({ numberTaxi }) => numberTaxi).reduce((acc, value) => acc + value, 0)
     this.totalDriverTaxi = totalValueTaxDriver
 
-    if (this.totalDriverTaxi > 0) {
 
-      const coma = this.totalDriverTaxi.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalDriverTaxi.toString().split(".") : this.totalDriverTaxi.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalOtr = integer[0].toString()
-    } else {
-      this.totalOtr = this.totalDriverTaxi.toString()
-    }
+    if (this.totalDriverTaxi > 999)
+      this.totalDriverTaxist = (this.totalDriverTaxi / 1000).toFixed(3)
+    else
+      this.totalDriverTaxist = this.totalDriverTaxi.toString()
 
     this.totalPisos = this.totalEfectivo + this.totalBizum + this.totalTarjeta + this.totalTrasnf
 
-    if (this.totalPisos > 0) {
-
-      const coma = this.totalPisos.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalPisos.toString().split(".") : this.totalPisos.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalPiso = integer[0].toString()
-    } else {
+    if (this.totalPisos > 999)
+      this.totalPiso = (this.totalPisos / 1000).toFixed(3)
+    else
       this.totalPiso = this.totalPisos.toString()
-    }
 
     this.totalCollection = this.totalEfectivo + this.totalBizum + this.totalTarjeta + this.totalTrasnf
       + this.totalTerap + this.totalEncarg + this.totalDriverTaxi
 
-    if (this.totalCollection > 0) {
-
-      const coma = this.totalCollection.toString().indexOf(".") !== -1 ? true : false;
-      const array = coma ? this.totalCollection.toString().split(".") : this.totalCollection.toString().split("");
-      let integer = coma ? array[0].split("") : array;
-      let subIndex = 1;
-
-      for (let i = integer.length - 1; i >= 0; i--) {
-
-        if (integer[i] !== "." && subIndex % 3 === 0 && i != 0) {
-
-          integer.splice(i, 0, ".");
-          subIndex++;
-
-        } else {
-          subIndex++;
-        }
-      }
-
-      integer = [integer.toString().replace(/,/gi, "")]
-      this.totalCollections = integer[0].toString()
-    } else {
+    if (this.totalCollection > 999)
+      this.totalCollections = (this.totalCollection / 1000).toFixed(3)
+    else
       this.totalCollections = this.totalCollection.toString()
-    }
 
     this.validateTheEmptyField()
   }
