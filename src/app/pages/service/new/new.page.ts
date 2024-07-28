@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import Swal from 'sweetalert2';
+import dayjs from "dayjs";
 
 // Model
 import { ModelTherapist } from 'src/app/core/models/therapist';
@@ -148,19 +149,19 @@ export class NewPage implements OnInit {
   }
 
   therapist: ModelTherapist = {
-    activo: true,
-    bebida: "",
-    fechaEnd: "",
-    horaEnd: "",
-    id: 0,
-    minuto: 0,
-    nombre: "",
-    otros: "",
-    propina: "",
-    salida: "",
-    servicio: "",
-    tabaco: "",
-    vitamina: "",
+    active: true,
+    company: "",
+    dateEnd: dayjs().format("YYYY-MM-DD HH:mm"),
+    drink: 0,
+    drinkTherapist: 0,
+    exit: "",
+    minutes: 0,
+    name: "",
+    others: 0,
+    service: 0,
+    tabacco: 0,
+    tip: 0,
+    vitamin: 0
   }
 
   constructor(
@@ -946,10 +947,9 @@ export class NewPage implements OnInit {
               this.sortedDate()
               this.services.editar = true
 
-              this.therapist.horaEnd = this.services.horaEnd
-              this.therapist.salida = this.services.salida
-              this.therapist.fechaEnd = this.services.fechaFin
-              this.therapist.minuto = this.services.minuto
+              this.therapist.dateEnd = `${this.services.fechaFin} ${this.services.horaEnd}`
+              this.therapist.exit = this.services.salida
+              this.therapist.minutes = this.services.minuto
 
               this.serviceTherapist.update3Item(this.services.terapeuta, this.therapist).subscribe((rp: any) => { })
               this.serviceServices.save(this.services).subscribe((rp: any) => {

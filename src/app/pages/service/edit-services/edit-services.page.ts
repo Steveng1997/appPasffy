@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import Swal from 'sweetalert2';
+import dayjs from "dayjs";
 
 // Model
 import { ModelTherapist } from 'src/app/core/models/therapist';
@@ -137,19 +138,19 @@ export class EditServicesPage implements OnInit {
   }
 
   therapist: ModelTherapist = {
-    activo: true,
-    bebida: "",
-    fechaEnd: "",
-    horaEnd: "",
-    id: 0,
-    minuto: 0,
-    nombre: "",
-    otros: "",
-    propina: "",
-    salida: "",
-    servicio: "",
-    tabaco: "",
-    vitamina: "",
+    active: true,
+    company: "",
+    dateEnd: dayjs().format("YYYY-MM-DD"),
+    drink: 0,
+    drinkTherapist: 0,
+    exit: "",
+    minutes: 0,
+    name: "",
+    others: 0,
+    service: 0,
+    tabacco: 0,
+    tip: 0,
+    vitamin: 0
   }
 
   constructor(
@@ -1759,10 +1760,9 @@ export class EditServicesPage implements OnInit {
         serv.fechaFin = this.editarService[0]['fechaFin']
         serv.horaEnd = this.editarService[0]['horaEnd']
 
-        this.therapist.horaEnd = serv.horaEnd
-        this.therapist.fechaEnd = serv.fechaFin
-        this.therapist.salida = serv.salida
-        this.therapist.minuto = serv.minuto
+        this.therapist.dateEnd = `${serv.fechaFin} ${serv.horaEnd}`
+        this.therapist.exit = serv.salida
+        this.therapist.minutes = serv.minuto
 
         this.serviceServices.getById(idServicio).subscribe((rp: any) => {
           this.services.pantalla = rp[0].pantalla

@@ -104,19 +104,19 @@ export class VisionPage implements OnInit {
   servicesManager = []
 
   therapistModel: ModelTherapist = {
-    activo: true,
-    bebida: "",
-    fechaEnd: "",
-    horaEnd: "",
-    id: 0,
-    minuto: 0,
-    nombre: "",
-    otros: "",
-    propina: "",
-    salida: "",
-    servicio: "",
-    tabaco: "",
-    vitamina: "",
+    active: true,
+    company: "",
+    dateEnd: dayjs().format("YYYY-MM-DD"),
+    drink: 0,
+    drinkTherapist: 0,
+    exit: "",
+    minutes: 0,
+    name: "",
+    others: 0,
+    service: 0,
+    tabacco: 0,
+    tip: 0,
+    vitamin: 0
   }
 
   serviceModel: ModelService = {

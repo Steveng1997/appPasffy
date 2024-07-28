@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
+import dayjs from "dayjs";
 
 // Model
 import { ModelTherapist } from 'src/app/core/models/therapist';
@@ -27,20 +28,19 @@ export class EditTherapistPage implements OnInit {
   company: string
 
   therapistModel: ModelTherapist = {
-    activo: true,
-    bebida: "",
-    bebidaTerap: "50",
-    fechaEnd: "",
-    horaEnd: "",
-    id: 0,
-    minuto: 0,
-    nombre: "",
-    otros: "",
-    propina: "100",
-    salida: "",
-    servicio: "50",
-    tabaco: "",
-    vitamina: "",
+    active: true,
+    company: "",
+    dateEnd: dayjs().format("YYYY-MM-DD"),
+    drink: 0,
+    drinkTherapist: 50,
+    exit: "",
+    minutes: 0,
+    name: "",
+    others: 0,
+    service: 50,
+    tabacco: 0,
+    tip: 100,
+    vitamin: 0
   }
 
   liquidationTherapist: LiquidationTherapist = {
@@ -84,16 +84,6 @@ export class EditTherapistPage implements OnInit {
       this.company = rp[0].company
       return (this.therapist = rp)
     })
-  }
-
-  validate() {
-    if (this.therapistModel.bebida == "") this.therapistModel.bebida = "0"
-    if (this.therapistModel.bebidaTerap == "") this.therapistModel.bebidaTerap = "0"
-    if (this.therapistModel.otros == "") this.therapistModel.otros = "0"
-    if (this.therapistModel.propina == "") this.therapistModel.propina = "0"
-    if (this.therapistModel.servicio == "") this.therapistModel.servicio = "0"
-    if (this.therapistModel.tabaco == "") this.therapistModel.tabaco = "0"
-    if (this.therapistModel.vitamina == "") this.therapistModel.vitamina = "0"
   }
 
   async getTerapLiquidation(nombre) {
@@ -227,9 +217,8 @@ export class EditTherapistPage implements OnInit {
   }
 
   async update(id: number, terapeuta) {
-    if (terapeuta.nombre != "") {
+    if (terapeuta.name != "") {
       this.ionLoaderService.simpleLoader()
-      this.validate()
       this.serviceTherapist.update(id, terapeuta).subscribe(async (res: any) => {
         this.ionLoaderService.dismissLoader()
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 1000 })

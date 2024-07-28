@@ -1,17 +1,16 @@
-export class  ModelTherapist {
-  activo?: boolean;
-  bebida?: string;
-  bebidaTerap?: string;
+export class ModelTherapist {
+  active?: boolean;
   company?: string;
-  fechaEnd?: string;
-  horaEnd?: string;
+  dateEnd?: string;
+  drink?: number;
+  drinkTherapist?: number;
+  exit?: string;
   id?: number;
-  minuto?: number;
-  nombre?: string;
-  otros?: string;
-  propina?: string;
-  salida?: string;
-  servicio?: string;
-  tabaco?: string;
-  vitamina?: string;
+  minutes?: number;
+  name?: string;
+  others?: number;
+  service?: number;
+  tabacco?: number;
+  tip?: number;
+  vitamin?: number;
 }

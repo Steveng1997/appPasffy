@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
+import dayjs from "dayjs";
 
 // Services
 import { TherapistService } from 'src/app/core/services/therapist/therapist.service';
@@ -20,21 +21,19 @@ export class NewTherapistPage implements OnInit {
   iduser: number
 
   therapist: ModelTherapist = {
-    activo: true,
-    bebida: "",
-    bebidaTerap: "50",
+    active: true,
     company: "",
-    fechaEnd: "",
-    horaEnd: "",
-    id: 0,
-    minuto: 0,
-    nombre: "",
-    otros: "",
-    propina: "50",
-    salida: "",
-    servicio: "50",
-    tabaco: "",
-    vitamina: "",
+    dateEnd: dayjs().format("YYYY-MM-DD"),
+    drink: 0,
+    drinkTherapist: 50,
+    exit: "",
+    minutes: 0,
+    name: "",
+    others: 0,
+    service: 50,
+    tabacco: 0,
+    tip: 50,
+    vitamin: 0
   }
 
   constructor(
@@ -50,37 +49,26 @@ export class NewTherapistPage implements OnInit {
     this.iduser = param['id']
   }
 
-  validate() {
-    if (this.therapist.bebida == "") this.therapist.bebida = "0"
-    if (this.therapist.bebidaTerap == "") this.therapist.bebidaTerap = "0"
-    if (this.therapist.otros == "") this.therapist.otros = "0"
-    if (this.therapist.propina == "") this.therapist.propina = "0"
-    if (this.therapist.servicio == "") this.therapist.servicio = "0"
-    if (this.therapist.tabaco == "") this.therapist.tabaco = "0"
-    if (this.therapist.vitamina == "") this.therapist.vitamina = "0"
-  }
-
   resetTherapist() {
-    if (this.therapist.nombre != '') this.therapist.nombre = ''
-    if (Number(this.therapist.servicio) > 0) this.therapist.servicio = "50"
-    if (Number(this.therapist.bebida) > 0) this.therapist.bebida = ""
-    if (Number(this.therapist.bebidaTerap) > 0) this.therapist.bebidaTerap = "50"
-    if (Number(this.therapist.tabaco) > 0) this.therapist.tabaco = ""
-    if (Number(this.therapist.vitamina) > 0) this.therapist.vitamina = ""
-    if (Number(this.therapist.propina) > 0) this.therapist.propina = "100"
-    if (Number(this.therapist.otros) > 0) this.therapist.otros = ""
+    if (this.therapist.name != '') this.therapist.name = ''
+    if (this.therapist.service > 0) this.therapist.service = 50
+    if (this.therapist.drink > 0) this.therapist.drink = 0
+    if (this.therapist.drinkTherapist > 0) this.therapist.drinkTherapist = 50
+    if (this.therapist.tabacco > 0) this.therapist.tabacco = 0
+    if (this.therapist.vitamin > 0) this.therapist.vitamin = 0
+    if (this.therapist.tip > 0) this.therapist.tip = 100
+    if (this.therapist.others > 0) this.therapist.others = 0
   }
 
   save() {
-    if (this.therapist.nombre != '') {
+    if (this.therapist.name != '') {
       this.ionLoaderService.simpleLoader()
-      this.therapist.nombre = this.therapist.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
-      this.validate()
+      this.therapist.name = this.therapist.name.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
 
       this.serviceManager.getId(Number(this.iduser)).subscribe((rp: any) => {
         this.therapist.company = rp[0].company
 
-        this.serviceTherapist.name(this.therapist.nombre).subscribe((rp: any) => {
+        this.serviceTherapist.name(this.therapist.name).subscribe((rp: any) => {
           if (rp.length != 0) {
 
             Swal.fire({ heightAuto: false, title: 'Ya hay una persona con ese nombre, desea agregar este nombre?', showDenyButton: true, confirmButtonText: 'Si', denyButtonText: `No` }).then((result) => {
