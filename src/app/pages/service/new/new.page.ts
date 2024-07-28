@@ -610,7 +610,7 @@ export class NewPage implements OnInit {
 
   getTherapist() {
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-      this.serviceTherapist.getByCompany(rp[0].company).subscribe((datosTerapeuta: any) => {
+      this.serviceTherapist.company(rp[0].company).subscribe((datosTerapeuta: any) => {
         this.terapeuta = datosTerapeuta
       })
     })
@@ -951,7 +951,7 @@ export class NewPage implements OnInit {
               this.therapist.fechaEnd = this.services.fechaFin
               this.therapist.minuto = this.services.minuto
 
-              this.serviceTherapist.update(this.services.terapeuta, this.therapist).subscribe((rp: any) => { })
+              this.serviceTherapist.update3Item(this.services.terapeuta, this.therapist).subscribe((rp: any) => { })
               this.serviceServices.save(this.services).subscribe((rp: any) => {
                 if (rp) {
                   this.presentController('¡Insertado Correctamente!')

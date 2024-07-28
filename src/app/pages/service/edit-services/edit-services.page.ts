@@ -550,7 +550,7 @@ export class EditServicesPage implements OnInit {
   }
 
   getTherapist() {
-    this.serviceTherapist.getAllTerapeuta().subscribe((datosTerapeuta: any) => {
+    this.serviceTherapist.getTherapist().subscribe((datosTerapeuta: any) => {
       this.terapeuta = datosTerapeuta
     })
   }
@@ -1767,11 +1767,11 @@ export class EditServicesPage implements OnInit {
         this.serviceServices.getById(idServicio).subscribe((rp: any) => {
           this.services.pantalla = rp[0].pantalla
           if (rp[0]['terapeuta'] != serv.terapeuta) {
-            this.serviceTherapist.updateHoraAndSalida(rp[0]['terapeuta'], this.therapist).subscribe((rp: any) => { });
+            this.serviceTherapist.updateItems(rp[0]['terapeuta'], this.therapist).subscribe((rp: any) => { });
           }
         });
 
-        this.serviceTherapist.update(this.editarService[0]['terapeuta'], this.therapist).subscribe((rp: any) => { })
+        this.serviceTherapist.update3Item(this.editarService[0]['terapeuta'], this.therapist).subscribe((rp: any) => { })
 
         this.sortDateToEdit()
         this.serviceServices.updateServicio(idServicio, serv).subscribe((rp: any) => {
@@ -1806,8 +1806,8 @@ export class EditServicesPage implements OnInit {
               this.presentController('¡Eliminado Correctamente!')
               this.ionLoaderService.simpleLoader()
               let screen = this.services.pantalla
-              this.serviceTherapist.getTerapeuta(datoEliminado[0]['terapeuta']).subscribe((rp: any) => {
-                this.serviceTherapist.updateHoraAndSalida(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
+              this.serviceTherapist.name(datoEliminado[0]['terapeuta']).subscribe((rp: any) => {
+                this.serviceTherapist.updateItems(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
               })
               localStorage.removeItem('Efectivo')
               localStorage.removeItem('Bizum')

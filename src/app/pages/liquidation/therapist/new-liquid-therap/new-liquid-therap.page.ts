@@ -140,7 +140,7 @@ export class NewLiquidTherapPage implements OnInit {
 
   getTherapist() {
     this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-      this.serviceTherapist.getByCompany(rp[0].company).subscribe((datosTerapeuta: any) => {
+      this.serviceTherapist.company(rp[0].company).subscribe((datosTerapeuta: any) => {
         this.terapeuta = datosTerapeuta
       })
     })
@@ -413,7 +413,7 @@ export class NewLiquidTherapPage implements OnInit {
     let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTherapist = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0, totalCommission = 0,
       sumCommission = 0, receivedTherapist = 0
 
-    await this.serviceTherapist.getTerapeuta(this.modelLiquidation.terapeuta).subscribe(async (rp) => {
+    await this.serviceTherapist.name(this.modelLiquidation.terapeuta).subscribe(async (rp) => {
       this.terapeutaName = rp[0]
 
       // Comision

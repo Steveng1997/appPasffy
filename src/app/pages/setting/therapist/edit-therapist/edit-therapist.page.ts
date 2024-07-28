@@ -80,7 +80,7 @@ export class EditTherapistPage implements OnInit {
     const param = this.activeRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.iduser = param['id']
 
-    this.serviceTherapist.getByIdTerapeuta(this.id).subscribe((rp) => {
+    this.serviceTherapist.getId(this.id).subscribe((rp) => {
       this.company = rp[0].company
       return (this.therapist = rp)
     })
@@ -193,7 +193,7 @@ export class EditTherapistPage implements OnInit {
   }
 
   async delete(id: number, nombre: string) {
-    this.serviceTherapist.getByIdTerapeuta(id).subscribe((rp: any) => {
+    this.serviceTherapist.getId(id).subscribe((rp: any) => {
       if (rp) {
         Swal.fire({
           heightAuto: false,
@@ -213,7 +213,7 @@ export class EditTherapistPage implements OnInit {
             await this.date(nombre)
             await this.getTerapLiquidation(nombre)
 
-            this.serviceTherapist.deleteTerapeuta(id).subscribe(async (rp: any) => {
+            this.serviceTherapist.delete(id).subscribe(async (rp: any) => {
               this.serviceLiquidationTherapist.save(this.liquidationTherapist).subscribe(async (rp) => {
                 this.ionLoaderService.dismissLoader()
                 location.replace(`tabs/${this.iduser}/therapist`);
@@ -230,7 +230,7 @@ export class EditTherapistPage implements OnInit {
     if (terapeuta.nombre != "") {
       this.ionLoaderService.simpleLoader()
       this.validate()
-      this.serviceTherapist.updateTerapeutas(id, terapeuta).subscribe(async (res: any) => {
+      this.serviceTherapist.update(id, terapeuta).subscribe(async (res: any) => {
         this.ionLoaderService.dismissLoader()
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 1000 })
         location.replace(`tabs/${this.iduser}/therapist`);

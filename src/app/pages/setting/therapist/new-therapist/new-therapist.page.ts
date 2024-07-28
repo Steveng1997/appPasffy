@@ -80,7 +80,7 @@ export class NewTherapistPage implements OnInit {
       this.serviceManager.getId(Number(this.iduser)).subscribe((rp: any) => {
         this.therapist.company = rp[0].company
 
-        this.serviceTherapist.getTerapeuta(this.therapist.nombre).subscribe((rp: any) => {
+        this.serviceTherapist.name(this.therapist.nombre).subscribe((rp: any) => {
           if (rp.length != 0) {
 
             Swal.fire({ heightAuto: false, title: 'Ya hay una persona con ese nombre, desea agregar este nombre?', showDenyButton: true, confirmButtonText: 'Si', denyButtonText: `No` }).then((result) => {

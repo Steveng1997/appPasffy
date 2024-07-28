@@ -474,7 +474,7 @@ export class ServicePage implements OnInit {
   getTherapist = async () => {
     let therapit
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-      this.serviceTherapist.getByCompany(rp[0].company).subscribe((rp) => {
+      this.serviceTherapist.company(rp[0].company).subscribe((rp) => {
         this.terapeuta = rp
         therapit = rp
 
@@ -539,8 +539,8 @@ export class ServicePage implements OnInit {
                 confirmButtonText: 'Si, Deseo eliminar!'
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.serviceTherapist.getTerapeuta(this.idService[0]['terapeuta']).subscribe((rp: any) => {
-                    this.serviceTherapist.updateHoraAndSalida(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
+                  this.serviceTherapist.name(this.idService[0]['terapeuta']).subscribe((rp: any) => {
+                    this.serviceTherapist.updateItems(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
                   })
 
                   for (let i = 0; i < this.idService.length; i++) {
@@ -1506,8 +1506,8 @@ export class ServicePage implements OnInit {
                 confirmButtonText: 'Si, Deseo eliminar!'
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.serviceTherapist.getTerapeuta(this.idService[0]['terapeuta']).subscribe((rp: any) => {
-                    this.serviceTherapist.updateHoraAndSalida(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
+                  this.serviceTherapist.name(this.idService[0]['terapeuta']).subscribe((rp: any) => {
+                    this.serviceTherapist.updateItems(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
                   })
 
                   for (let i = 0; i < this.idService.length; i++) {
@@ -1557,8 +1557,8 @@ export class ServicePage implements OnInit {
               confirmButtonText: 'Si, Deseo eliminar!'
             }).then((result) => {
               if (result.isConfirmed) {
-                this.serviceTherapist.getTerapeuta(this.idService[0]['terapeuta']).subscribe((rp: any) => {
-                  this.serviceTherapist.updateHoraAndSalida(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
+                this.serviceTherapist.name(this.idService[0]['terapeuta']).subscribe((rp: any) => {
+                  this.serviceTherapist.updateItems(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
                 })
 
                 for (let i = 0; i < this.idService.length; i++) {

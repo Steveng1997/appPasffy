@@ -36,7 +36,7 @@ export class TherapistPage implements OnInit {
 
   getTherapist() {
     this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-      this.serviceTherapist.getByCompany(rp[0].company).subscribe((rp) => {
+      this.serviceTherapist.company(rp[0].company).subscribe((rp) => {
         this.therapist = rp
       })
     })

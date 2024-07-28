@@ -364,7 +364,7 @@ export class VisionPage implements OnInit {
     let therapit
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
       this.company = rp[0]['company']
-      await this.serviceTherapist.orderByMinutesAndCompany(this.company).subscribe(async (rp: any) => {
+      await this.serviceTherapist.getByCompanyOrderByMinutes(this.company).subscribe(async (rp: any) => {
         therapit = rp
         this.therapist = rp
 
@@ -440,7 +440,7 @@ export class VisionPage implements OnInit {
         dates = `${year}-${month}-${convertDay}`
       }
 
-      this.serviceTherapist.getByCompany(this.company).subscribe((rp: any) => {
+      this.serviceTherapist.company(this.company).subscribe((rp: any) => {
         this.servicesTherapist = rp
 
         rp.map(item => {
@@ -470,7 +470,7 @@ export class VisionPage implements OnInit {
 
     } else {
 
-      this.serviceTherapist.getByCompany(this.company).subscribe((rp: any) => {
+      this.serviceTherapist.company(this.company).subscribe((rp: any) => {
         this.servicesTherapist = rp
 
         rp.map(item => {
@@ -726,7 +726,7 @@ export class VisionPage implements OnInit {
       element[o]['fechaEnd'] = ''
       element[o]['horaEnd'] = ''
       element[o]['salida'] = ''
-      await this.serviceTherapist.updateHoraAndSalida(element[o]['nombre'], element[o]).subscribe(() => {
+      await this.serviceTherapist.updateItems(element[o]['nombre'], element[o]).subscribe(() => {
       })
     }
   }
@@ -735,7 +735,7 @@ export class VisionPage implements OnInit {
     let minute, convertMinute = 0
     if (this.diferenceMinutes > 0) {
       element[o]['minuto'] = this.diferenceMinutes
-      await this.serviceTherapist.updateMinute(element[o]['id'], element[o]).subscribe((rp: any) => {
+      await this.serviceTherapist.updateMinutes(element[o]['id'], element[o]).subscribe((rp: any) => {
         minute = this.therapist.filter(serv => serv.minuto > 0)
         if (minute.length > 0) convertMinute = minute[0].minuto * 60000
         if (convertMinute > 0) {

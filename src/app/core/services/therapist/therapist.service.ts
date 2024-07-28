@@ -11,7 +11,7 @@ import { ModelTherapist } from '../../models/therapist';
 
 export class TherapistService {
 
-  API_Terapeuta = 'http://127.0.0.1:8000/api/therapist'
+  API_Therapist = 'http://127.0.0.1:8000/api/therapist'
 
   constructor(
     public router: Router,
@@ -21,64 +21,60 @@ export class TherapistService {
   // Register
 
   save(therapist: ModelTherapist) {
-    return this.http.post(`${this.API_Terapeuta}`, therapist);
+    return this.http.post(`${this.API_Therapist}`, therapist);
   }
 
   // Get
 
-  getByIdTerapeuta(id: number) {
-    return this.http.get(`${this.API_Terapeuta}/getId/${id}`);
+  getId(id: number) {
+    return this.http.get(`${this.API_Therapist}/getId/${id}`);
   }
 
-  getByNombre(nombre: string) {
-    return this.http.get(`${this.API_Terapeuta}/getNombre/${nombre}`);
+  name(name: string) {
+    return this.http.get(`${this.API_Therapist}/name/${name}`);
   }
 
-  getAllTerapeuta() {
-    return this.http.get(`${this.API_Terapeuta}/getByIdAsc`);
+  getTherapist() {
+    return this.http.get(`${this.API_Therapist}`);
   }
 
-  getAllTerapeutaByOrden() {
-    return this.http.get(`${this.API_Terapeuta}/getByHoraEndDesc`);
+  orderDateEndDesc() {
+    return this.http.get(`${this.API_Therapist}/orderDateEndDesc`);
   }
 
-  getTerapeuta(nombre: string) {
-    return this.http.get(`${this.API_Terapeuta}/getNombre/${nombre}`);
+  orderMinutes() {
+    return this.http.get(`${this.API_Therapist}/orderMinutes`);
   }
 
-  getMinutes() {
-    return this.http.get(`${this.API_Terapeuta}/orderMinutes`);
+  company(company: string) {
+    return this.http.get(`${this.API_Therapist}/company/${company}`);
   }
 
-  getByCompany(company: string) {
-    return this.http.get(`${this.API_Terapeuta}/getCompany/${company}`);
-  }
-
-  orderByMinutesAndCompany(company: string) {
-    return this.http.get(`${this.API_Terapeuta}/orderMinutesAndCompany/${company}`);
+  getByCompanyOrderByMinutes(company: string) {
+    return this.http.get(`${this.API_Therapist}/getByCompanyOrderByMinutes/${company}`);
   }  
 
   // Update
 
-  updateTerapeutas(id: number, therapist: ModelTherapist) {
-    return this.http.put(`${this.API_Terapeuta}/updateTherapistById/${id}`, therapist);
+  update(id: number, therapist: ModelTherapist) {
+    return this.http.put(`${this.API_Therapist}/${id}`, therapist);
   }
 
-  update(nombreTerap, therapist: ModelTherapist) {
-    return this.http.put(`${this.API_Terapeuta}/update4Item/${nombreTerap}`, therapist);
+  update3Item(name, therapist: ModelTherapist) {
+    return this.http.put(`${this.API_Therapist}/updateItem/${name}`, therapist);
   }
 
-  updateHoraAndSalida(nombreTerap: string, therapist: ModelTherapist) {
-    return this.http.put(`${this.API_Terapeuta}/updateByHoraAndSalida/${nombreTerap}`, therapist);
+  updateItems(name: string, therapist: ModelTherapist) {
+    return this.http.put(`${this.API_Therapist}/updateItems/${name}`, therapist);
   }
 
-  updateMinute(id: number, therapist: ModelTherapist) {
-    return this.http.put(`${this.API_Terapeuta}/updateMinutesWithId/${id}`, therapist);
+  updateMinutes(id: number, therapist: ModelTherapist) {
+    return this.http.put(`${this.API_Therapist}/minutes/${id}`, therapist);
   }
 
   // Delete
 
-  deleteTerapeuta(id: number) {
-    return this.http.delete(`${this.API_Terapeuta}/${id}`);
+  delete(id: number) {
+    return this.http.delete(`${this.API_Therapist}/${id}`);
   }
 }
