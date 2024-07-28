@@ -15,9 +15,8 @@ import { LoginService } from 'src/app/core/services/login/login.service';
 })
 export class ScreenPage implements OnInit {
 
-  dateTmp = ''
   email = ''
-  pass = ''
+  password = ''
 
   constructor(
     public router: Router,
@@ -26,50 +25,26 @@ export class ScreenPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    debugger
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.email = params['email']
-    this.pass = params['pass']
+    this.password = params['password']
     this.login()
-  }
-
-  dateTpm() {
-    let fecha = new Date(), dia = 0, mes = 0, año = 0, convertMes = '', convertDia = ''
-
-    dia = fecha.getDate()
-    mes = fecha.getMonth() + 1
-    año = fecha.getFullYear()
-
-    if (mes > 0 && mes < 10) {
-      convertMes = '0' + mes
-      this.dateTmp = `${dia}/${convertMes}/${año}`
-    } else {
-      convertMes = mes.toString()
-      this.dateTmp = `${dia}/${mes}/${año}`
-    }
-
-    if (dia > 0 && dia < 10) {
-      convertDia = '0' + dia
-      this.dateTmp = `${convertDia}/${convertMes}/${año}`
-    } else {
-      convertDia = dia.toString()
-      this.dateTmp = `${dia}/${convertMes}/${año}`
-    }
   }
 
   login() {
     if (this.email) {
-      if (this.pass) {
-        this.serviceLogin.getByUsuario(this.email).subscribe((resp: any) => {
-          if (resp.length > 0) {
+      if (this.password) {
+        this.serviceLogin.getByUsuario(this.email).subscribe((rp: any) => {
+          if (rp['manager'].length > 0) {
 
-            if (resp[0].expiration == true)
+            if (rp['manager'][0].expiration == true)
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Dentro de 15 dias se termina lo gratuito' })
 
-            if (resp[0]['activo'] == true) {
-              this.serviceLogin.getByUserAndPass(this.email, this.pass).subscribe((rp: any) => {
-                if (rp.length > 0) {
-                  this.dateTpm()
-                  setTimeout(() => { location.replace(`tabs/${resp[0].id}/vision`) }, 1500);
+            if (rp['manager'][0]['active'] == true) {
+              this.serviceLogin.getByUserAndPass(this.email, this.password).subscribe((rp: any) => {
+                if (rp['manager'].length > 0) {
+                  setTimeout(() => { location.replace(`tabs/${rp['manager'][0].id}/vision`) }, 1500);
                 } else {
                   setTimeout(() => {
                     this.router.navigate(['']);

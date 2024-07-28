@@ -952,7 +952,7 @@ export class NewPage implements OnInit {
               this.therapist.minuto = this.services.minuto
 
               this.serviceTherapist.update(this.services.terapeuta, this.therapist).subscribe((rp: any) => { })
-              this.serviceServices.registerServicio(this.services).subscribe((rp: any) => {
+              this.serviceServices.save(this.services).subscribe((rp: any) => {
                 if (rp) {
                   this.presentController('¡Insertado Correctamente!')
                   localStorage.removeItem('Efectivo')

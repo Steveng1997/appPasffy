@@ -11,7 +11,7 @@ import { ModelService } from '../../models/service';
 
 export class ServiceService {
 
-  API_URL = 'https://brave-marvelous-marquis.glitch.me/api/servicio'
+  API_URL = 'http://127.0.0.1:8000/api/service'
 
   constructor(
     public router: Router,
@@ -20,7 +20,7 @@ export class ServiceService {
 
   // Register
 
-  registerServicio(service: ModelService) {
+  save(service: ModelService) {
     return this.http.post(`${this.API_URL}/registerServicio`, service);
   }
 

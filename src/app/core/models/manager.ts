@@ -1,17 +1,18 @@
 export class  ModelManager {
-  activo?: boolean;
-  bebida?: string;
-  bebidaTerap?: string;
+  active?: boolean;
   company?: string;
-  fijoDia?: string;
+  drink?: number;
+  drinkTherapist?: number;
+  email?: string;
+  expiration?: boolean;
+  fixeDay?: number;
   id?: number;
-  nombre?: string;
-  otros?: string;
-  propina?: string;
-  pass?: string;
+  name?: string;
+  others?: number;
+  password?: string;
   rol?: string;
-  servicio?: string;
-  tabaco?: string;
-  usuario?: string;
-  vitamina?: string;
+  service?: number;
+  tabacco?: number;
+  tip?: number;
+  vitamin?: number;
 }

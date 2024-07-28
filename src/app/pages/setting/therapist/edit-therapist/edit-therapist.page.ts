@@ -214,7 +214,7 @@ export class EditTherapistPage implements OnInit {
             await this.getTerapLiquidation(nombre)
 
             this.serviceTherapist.deleteTerapeuta(id).subscribe(async (rp: any) => {
-              this.serviceLiquidationTherapist.settlementRecord(this.liquidationTherapist).subscribe(async (rp) => {
+              this.serviceLiquidationTherapist.save(this.liquidationTherapist).subscribe(async (rp) => {
                 this.ionLoaderService.dismissLoader()
                 location.replace(`tabs/${this.iduser}/therapist`);
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1000 })

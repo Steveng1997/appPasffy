@@ -11,7 +11,7 @@ import { LiquidationManager } from '../../models/liquidationManager';
 
 export class ServiceLiquidationManagerService {
 
-  API_URL = 'https://brave-marvelous-marquis.glitch.me/api/liqEncargada'
+  API_URL = 'http://127.0.0.1:8000/api/liquidationManager'
 
   constructor(
     public router: Router,
@@ -20,8 +20,8 @@ export class ServiceLiquidationManagerService {
 
   // Register
 
-  settlementRecord(liquidationManger: LiquidationManager) {
-    return this.http.post(`${this.API_URL}/registerLiqEncarg`, liquidationManger);
+  save(liquidationManger: LiquidationManager) {
+    return this.http.post(`${this.API_URL}`, liquidationManger);
   }
 
   // Get
@@ -65,6 +65,6 @@ export class ServiceLiquidationManagerService {
   // Delete
 
   deleteLiquidationManager(id: number) {
-    return this.http.delete(`${this.API_URL}/deleteLiquidationManagers/${id}`);
+    return this.http.delete(`${this.API_URL}/${id}`);
   }
 }

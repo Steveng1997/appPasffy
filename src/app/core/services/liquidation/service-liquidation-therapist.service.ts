@@ -10,7 +10,7 @@ import { LiquidationTherapist } from '../../models/liquidationTherapist';
 })
 export class ServiceLiquidationTherapist {
 
-  API_URL = 'https://brave-marvelous-marquis.glitch.me/api/liqTerapeuta'
+  API_URL = 'http://127.0.0.1:8000/api/liquidationTherapist'
 
   constructor(
     public router: Router,
@@ -19,8 +19,8 @@ export class ServiceLiquidationTherapist {
 
   // Register
 
-  settlementRecord(liquidationTherapist: LiquidationTherapist) {
-    return this.http.post(`${this.API_URL}/registerLiqTerap`, liquidationTherapist);
+  save(liquidationTherapist: LiquidationTherapist) {
+    return this.http.post(`${this.API_URL}`, liquidationTherapist);
   }
 
   // Get
@@ -80,6 +80,6 @@ export class ServiceLiquidationTherapist {
   // Delete
 
   deleteLiquidationTherapist(id: number) {
-    return this.http.delete(`${this.API_URL}/deleteLiquidationTherapists/${id}`);
+    return this.http.delete(`${this.API_URL}/${id}`);
   }
 }

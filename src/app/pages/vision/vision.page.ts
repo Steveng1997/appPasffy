@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment'
 import { Platform } from '@ionic/angular';
+import dayjs from "dayjs";
 
 // Service
 import { ManagerService } from 'src/app/core/services/manager/manager.service';
@@ -36,7 +37,7 @@ export class VisionPage implements OnInit {
   pageTherapist!: number
   pageManager!: number
 
-  fechaDiaHoy = ''
+  fechaDiaHoy = dayjs().format("YYYY-MM-DD")
   totalServicio: number
   idUser: number
   user = ''
@@ -143,18 +144,18 @@ export class VisionPage implements OnInit {
     this.ionLoaderService.simpleLoader()
 
     this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
-      this.serviceManager.getIdAndCompany(rp[0]['id'], rp[0]['company']).subscribe(async (rp: any) => {
-        this.user = rp[0]['nombre']
-        this.company = rp[0]['company']
-        this.servicesManager = rp
-        manager = rp
+      this.serviceManager.getIdAndCompany(rp['manager'][0].id, rp['manager'][0].company).subscribe(async (rp: any) => {
+        this.user = rp['manager'][0].name
+        this.company = rp['manager'][0].company
+        this.servicesManager = rp['manager']
+        manager = rp['manager']
 
-        if (rp[0]['rol'] == 'administrador') {
+        if (rp['manager'][0].rol == 'Administrador') {
           this.getService()
           this.getManagerall(element)
           this.tableTherapist('array', 'date')
         } else {
-          this.getServiceByManager(rp[0])
+          this.getServiceByManager(rp['manager'][0])
           this.getManager(manager, element, 'array')
           this.tableTherapistForManager(manager, 'array', 'date')
         }
@@ -175,20 +176,20 @@ export class VisionPage implements OnInit {
       this.ionLoaderService.simpleLoader()
 
       this.serviceManager.getById(this.idUser).subscribe(async (rp: any) => {
-        this.serviceManager.getIdAndCompany(rp[0]['id'], rp[0]['company']).subscribe(async (rp: any) => {
-          this.user = rp[0]['nombre']
-          this.company = rp[0].company
-          this.servicesManager = rp
-          manager = rp
+        this.serviceManager.getIdAndCompany(rp['manager'][0].id, rp['manager'][0].company).subscribe(async (rp: any) => {
+          this.user = rp['manager'][0].name
+          this.company = rp['manager'][0].company
+          this.servicesManager = rp['manager']
+          manager = rp['manager']
 
-          if (rp[0]['rol'] == 'administrador') {
+          if (rp['manager'][0].rol == 'Administrador') {
             this.getService()
             this.getManagerall(element)
             this.tableTherapist('array', 'date')
           }
 
           else {
-            this.getServiceByManager(rp[0])
+            this.getServiceByManager(rp['manager'][0])
             this.getManager(manager, element, 'array')
             this.tableTherapistForManager(manager, 'array', 'date')
           }

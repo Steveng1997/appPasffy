@@ -718,7 +718,7 @@ export class NewLiquidTherapPage implements OnInit {
                 this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
               }
 
-              this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
+              this.serviceLiquidation.save(this.modelLiquidation).subscribe(async (rp) => {
                 this.selected = false
                 this.dates = false
                 this.modelLiquidation.encargada = ""
@@ -737,7 +737,7 @@ export class NewLiquidTherapPage implements OnInit {
                 this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
               }
 
-              this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
+              this.serviceLiquidation.save(this.modelLiquidation).subscribe(async (rp) => {
                 this.selected = false
                 this.dates = false
                 this.modelLiquidation.encargada = ""

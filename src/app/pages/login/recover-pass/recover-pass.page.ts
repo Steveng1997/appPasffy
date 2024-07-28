@@ -16,10 +16,10 @@ import { ManagerService } from 'src/app/core/services/manager/manager.service';
 })
 export class RecoverPassPage implements OnInit {
 
-  correo = ""
+  email = ""
 
   manager: ModelManager = {
-    pass: "",
+    password: "",
   }
 
   constructor(public router: Router,
@@ -31,9 +31,9 @@ export class RecoverPassPage implements OnInit {
   }
 
   recover() {
-    if (this.correo) {
-      if (this.manager.pass) {
-        this.serviceLogin.getByUsuario(this.correo).subscribe((rp: any) => {
+    if (this.email) {
+      if (this.manager.password) {
+        this.serviceLogin.getByUsuario(this.email).subscribe((rp: any) => {
           if (rp.length != 0) {
             this.managerService.updateUser(Number(rp[0].id), this.manager).subscribe((resp: any) => {
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Se actualizo correctamente el password!', showConfirmButton: false, timer: 1500 })

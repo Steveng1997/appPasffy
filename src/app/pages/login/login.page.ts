@@ -17,26 +17,27 @@ export class LoginPage {
   amount: number = 0
 
   manager: ModelManager = {
-    activo: true,
-    bebida: "0",
-    bebidaTerap: "0",
-    fijoDia: "0",
-    id: 0,
-    nombre: "",
-    otros: "0",
-    pass: "",
-    propina: "0",
+    active: true,
+    company: "",
+    drink: 0,
+    drinkTherapist: 0,
+    email: "",
+    expiration: false,
+    fixeDay: 0,
+    name: "",
+    others: 0,
+    password: "",
     rol: "",
-    servicio: "0",
-    tabaco: "0",
-    usuario: "",
-    vitamina: "0"
+    service: 0,
+    tabacco: 0,
+    tip: 0,
+    vitamin: 0
   }
 
   constructor(public router: Router) { }
 
   onLogin() {
-    location.replace(`screen/${this.manager.pass}/${this.manager.usuario}`)
+    location.replace(`screen/${this.manager.password}/${this.manager.email}`)
   }
 
   register() {

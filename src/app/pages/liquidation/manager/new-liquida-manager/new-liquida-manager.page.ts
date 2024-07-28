@@ -704,7 +704,7 @@ export class NewLiquidaManagerPage implements OnInit {
               this.service.updateLiquidacionEncarg(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
             }
 
-            this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
+            this.serviceLiquidation.save(this.modelLiquidation).subscribe(async (rp) => {
               document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
               document.getElementById('overviewDates').style.height = '109px'
               this.dates = false
@@ -723,7 +723,7 @@ export class NewLiquidaManagerPage implements OnInit {
               this.service.updateLiquidacionEncarg(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
             }
 
-            this.serviceLiquidation.settlementRecord(this.modelLiquidation).subscribe(async (rp) => {
+            this.serviceLiquidation.save(this.modelLiquidation).subscribe(async (rp) => {
               document.getElementById('nuevaLiquidation').style.overflowY = 'hidden'
               document.getElementById('overviewDates').style.height = '109px'
               this.dates = false

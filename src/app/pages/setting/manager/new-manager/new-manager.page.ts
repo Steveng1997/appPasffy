@@ -26,21 +26,21 @@ export class NewManagerPage implements OnInit {
   currentDate = new Date().getTime()
 
   manager: ModelManager = {
-    activo: true,
-    bebida: "",
-    bebidaTerap: "",
+    active: true,
     company: "",
-    fijoDia: "",
-    id: 0,
-    nombre: "",
-    otros: "",
-    pass: "",
-    propina: "",
+    drink: 0,
+    drinkTherapist: 0,
+    email: "",
+    expiration: false,
+    fixeDay: 0,
+    name: "",
+    others: 0,
+    password: "",
     rol: "",
-    servicio: "",
-    tabaco: "",
-    usuario: "",
-    vitamina: ""
+    service: 0,
+    tabacco: 0,
+    tip: 0,
+    vitamin: 0
   }
 
   constructor(
@@ -55,47 +55,35 @@ export class NewManagerPage implements OnInit {
     this.iduser = param['id']
   }
 
-  validateValuesOfEmpty() {
-    if (this.manager.bebida == "") this.manager.bebida = "0"
-    if (this.manager.bebidaTerap == "") this.manager.bebidaTerap = "0"
-    if (this.manager.fijoDia == "") this.manager.fijoDia = "0"
-    if (this.manager.otros == "") this.manager.otros = "0"
-    if (this.manager.propina == "") this.manager.propina = "0"
-    if (this.manager.servicio == "") this.manager.servicio = "0"
-    if (this.manager.tabaco == "") this.manager.tabaco = "0"
-    if (this.manager.vitamina == "") this.manager.vitamina = "0"
-  }
-
   resetManager() {
-    if (this.manager.nombre != '') this.manager.nombre = ''
-    if (this.manager.usuario != '') this.manager.usuario = ''
-    if (this.manager.pass != '') this.manager.pass = ''
-    if (Number(this.manager.fijoDia) > 0) this.manager.fijoDia = ''
-    if (Number(this.manager.servicio) > 0) this.manager.servicio = ''
-    if (Number(this.manager.bebida) > 0) this.manager.bebida = ''
-    if (Number(this.manager.bebidaTerap) > 0) this.manager.bebidaTerap = ''
-    if (Number(this.manager.tabaco) > 0) this.manager.tabaco = ''
-    if (Number(this.manager.vitamina) > 0) this.manager.vitamina = ''
-    if (Number(this.manager.propina) > 0) this.manager.propina = ''
-    if (Number(this.manager.otros) > 0) this.manager.otros = ''
+    if (this.manager.name != '') this.manager.name = ''
+    if (this.manager.email != '') this.manager.email = ''
+    if (this.manager.password != '') this.manager.password = ''
+    if (this.manager.fixeDay > 0) this.manager.fixeDay = 0
+    if (this.manager.service > 0) this.manager.service = 0
+    if (this.manager.drink > 0) this.manager.drink = 0
+    if (this.manager.drinkTherapist > 0) this.manager.drinkTherapist = 0
+    if (this.manager.tabacco > 0) this.manager.tabacco = 0
+    if (this.manager.vitamin > 0) this.manager.vitamin = 0
+    if (this.manager.tip > 0) this.manager.tip = 0
+    if (this.manager.others > 0) this.manager.others = 0
   }
 
   save() {
-    if (this.manager.nombre != "") {
-      if (this.manager.usuario != "") {
-        if (this.manager.pass != "") {
+    if (this.manager.name != "") {
+      if (this.manager.email != "") {
+        if (this.manager.password != "") {
           this.ionLoaderService.simpleLoader()
 
-          this.manager.nombre = this.manager.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
-          this.validateValuesOfEmpty()
+          this.manager.name = this.manager.name.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
 
           this.serviceManager.getById(this.iduser).subscribe((rp: any) => {
             this.manager.company = rp[0]['company']
 
-            this.serviceManager.getByUsuario(this.manager.usuario).subscribe((rp: any) => {
+            this.serviceManager.getByUsuario(this.manager.email).subscribe((rp: any) => {
               if (rp.length == 0) {
 
-                this.serviceManager.registerEncargada(this.manager).subscribe((rp) => {
+                this.serviceManager.save(this.manager).subscribe((rp) => {
                   Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
                   this.resetManager()
                   this.ionLoaderService.dismissLoader()

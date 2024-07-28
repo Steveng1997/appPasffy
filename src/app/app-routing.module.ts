@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'screen/:pass/:email',
+    path: 'screen/:password/:email',
     loadChildren: () => import('./pages/login/screen/screen.module').then(m => m.ScreenPageModule)
   },
   {

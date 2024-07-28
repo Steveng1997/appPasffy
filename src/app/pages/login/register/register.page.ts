@@ -17,21 +17,21 @@ import { ModelManager } from 'src/app/core/models/manager';
 export class RegisterPage {
 
   manager: ModelManager = {
-    activo: true,
-    bebida: "",
-    bebidaTerap: "",
+    active: true,
     company: "",
-    fijoDia: "",
-    id: 0,
-    nombre: "",
-    otros: "",
-    pass: "",
-    propina: "",
-    rol: "administrador",
-    servicio: "",
-    tabaco: "",
-    usuario: "",
-    vitamina: ""
+    drink: 0,
+    drinkTherapist: 0,
+    email: "",
+    expiration: false,
+    fixeDay: 0,
+    name: "",
+    others: 0,
+    password: "",
+    rol: "Administrador",
+    service: 0,
+    tabacco: 0,
+    tip: 0,
+    vitamin: 0
   }
 
   constructor(
@@ -39,17 +39,6 @@ export class RegisterPage {
     private serviceLogin: LoginService,
     private ionLoaderService: IonLoaderService
   ) { }
-
-  validateEmpty() {
-    if (this.manager.bebida == "") this.manager.bebida = "0"
-    if (this.manager.bebidaTerap == "") this.manager.bebidaTerap = "0"
-    if (this.manager.fijoDia == "") this.manager.fijoDia = "0"
-    if (this.manager.otros == "") this.manager.otros = "0"
-    if (this.manager.propina == "") this.manager.propina = "0"
-    if (this.manager.servicio == "") this.manager.servicio = "0"
-    if (this.manager.tabaco == "") this.manager.tabaco = "0"
-    if (this.manager.vitamina == "") this.manager.vitamina = "0"
-  }
 
   createUniqueId() {
     var d = new Date().getTime()
@@ -63,18 +52,20 @@ export class RegisterPage {
   }
 
   save() {
-    if (this.manager.usuario) {
-      if (this.manager.pass) {
+    if (this.manager.email) {
+      if (this.manager.password) {
         this.ionLoaderService.simpleLoader()
-        this.serviceLogin.getByUsuario(this.manager.usuario).subscribe((nameRegistro: any) => {
-          if (nameRegistro.length == 0) {
-            this.manager.nombre = this.manager.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
-            this.validateEmpty()
+        this.serviceLogin.getByUsuario(this.manager.email).subscribe((rp: any) => {
+          if (rp['manager'].length == 0) {
             this.createUniqueId()
-            this.serviceLogin.registerEncargada(this.manager).subscribe((resp: any) => {
+            this.serviceLogin.save(this.manager).subscribe((rp: any) => {
               this.ionLoaderService.dismissLoader()
               this.login()
+            }, err => {
+              Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'La contraseña debe tener minimo 5 caracteres', showConfirmButton: false, timer: 1000 })
+              this.ionLoaderService.dismissLoader()
             })
+
           } else {
             Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'Ya existe este usuario', showConfirmButton: false, timer: 1000 })
             this.ionLoaderService.dismissLoader()

@@ -11,7 +11,7 @@ import { ModelTherapist } from '../../models/therapist';
 
 export class TherapistService {
 
-  API_Terapeuta = 'https://brave-marvelous-marquis.glitch.me/api/terapeuta'
+  API_Terapeuta = 'http://127.0.0.1:8000/api/therapist'
 
   constructor(
     public router: Router,
@@ -21,7 +21,7 @@ export class TherapistService {
   // Register
 
   save(therapist: ModelTherapist) {
-    return this.http.post(`${this.API_Terapeuta}/registerTerapeuta`, therapist);
+    return this.http.post(`${this.API_Terapeuta}`, therapist);
   }
 
   // Get
@@ -79,6 +79,6 @@ export class TherapistService {
   // Delete
 
   deleteTerapeuta(id: number) {
-    return this.http.delete(`${this.API_Terapeuta}/deleteTerapeuta/${id}`);
+    return this.http.delete(`${this.API_Terapeuta}/${id}`);
   }
 }

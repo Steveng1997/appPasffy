@@ -41,20 +41,21 @@ export class EditManagerPage implements OnInit {
   }
 
   manager: ModelManager = {
-    activo: true,
-    bebida: "",
-    bebidaTerap: "",
-    fijoDia: "",
-    id: 0,
-    nombre: "",
-    otros: "",
-    pass: "",
-    propina: "",
+    active: true,
+    company: "",
+    drink: 0,
+    drinkTherapist: 0,
+    email: "",
+    expiration: false,
+    fixeDay: 0,
+    name: "",
+    others: 0,
+    password: "",
     rol: "",
-    servicio: "",
-    tabaco: "",
-    usuario: "",
-    vitamina: ""
+    service: 0,
+    tabacco: 0,
+    tip: 0,
+    vitamin: 0
   }
 
   modelService: ModelService = {
@@ -80,17 +81,6 @@ export class EditManagerPage implements OnInit {
     this.serviceManager.getById(this.id).subscribe((rp) => {
       return (this.managers = rp)
     })
-  }
-
-  validate() {
-    if (this.manager.bebida == "") this.manager.bebida = "0"
-    if (this.manager.bebidaTerap == "") this.manager.bebidaTerap = "0"
-    if (this.manager.fijoDia == "") this.manager.fijoDia = "0"
-    if (this.manager.otros == "") this.manager.otros = "0"
-    if (this.manager.propina == "") this.manager.propina = "0"
-    if (this.manager.servicio == "") this.manager.servicio = "0"
-    if (this.manager.tabaco == "") this.manager.tabaco = "0"
-    if (this.manager.vitamina == "") this.manager.vitamina = "0"
   }
 
   async getManagerLiquidationFalse(nombre) {
@@ -187,7 +177,7 @@ export class EditManagerPage implements OnInit {
     }
   }
 
-  delete(id: number, nombre: string) {
+  delete(id: number, name: string) {
     this.serviceManager.getById(id).subscribe((resp: any) => {
       if (resp) {
         Swal.fire({
@@ -202,14 +192,14 @@ export class EditManagerPage implements OnInit {
           if (result.isConfirmed) {
             this.ionLoaderService.simpleLoader()
             this.liquidationManager.currentDate = this.currentDate.toString()
-            this.liquidationManager.encargada = nombre
+            this.liquidationManager.encargada = name
             this.dateCurrentDay()
             this.createIdUnique()
-            await this.date(nombre)
-            await this.getManagerLiquidationFalse(nombre)
+            await this.date(name)
+            await this.getManagerLiquidationFalse(name)
 
             this.serviceManager.deleteManager(id).subscribe(async (rp: any) => {
-              this.serviceLiquidationManager.settlementRecord(this.liquidationManager).subscribe((rp) => {
+              this.serviceLiquidationManager.save(this.liquidationManager).subscribe((rp) => {
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Eliminado Correctamente!', showConfirmButton: false, timer: 1000 })
                 this.ionLoaderService.dismissLoader()
                 location.replace(`tabs/${this.iduser}/manager`);
@@ -225,7 +215,6 @@ export class EditManagerPage implements OnInit {
     if (encargada.nombre != "") {
       this.ionLoaderService.simpleLoader()
       encargada.nombre = encargada.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
-      this.validate()
       this.serviceManager.updateUser(id, encargada).subscribe((resp => {
         this.ionLoaderService.dismissLoader()
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 1000 })

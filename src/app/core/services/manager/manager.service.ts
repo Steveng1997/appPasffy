@@ -11,7 +11,7 @@ import { ModelManager } from '../../models/manager';
 
 export class ManagerService {
 
-  API_URL = 'https://brave-marvelous-marquis.glitch.me/api/encargada'
+  API_URL = 'http://127.0.0.1:8000/api/manager'
 
   constructor(
     public router: Router,
@@ -20,14 +20,18 @@ export class ManagerService {
 
   // Register
 
-  registerEncargada(manager: ModelManager) {
-    return this.http.post(`${this.API_URL}/registerEncargada`, manager);
+  save(manager: ModelManager) {
+    return this.http.post(`${this.API_URL}`, manager);
   }
 
   // Get
 
+  getUsuarios() {
+    return this.http.get(`${this.API_URL}`);
+  }
+
   getById(id: number) {
-    return this.http.get(`${this.API_URL}/idEncargada/${id}`);
+    return this.http.get(`${this.API_URL}/getId/${id}`);
   }
 
   getByIdAndAdministrador(id: number) {
@@ -35,24 +39,15 @@ export class ManagerService {
   }
 
   getByUsuario(usuario: string) {
-    return this.http.get(`${this.API_URL}/usuarioEncargada/${usuario}`);
+    return this.http.get(`${this.API_URL}/email/${usuario}`);
   }
 
   getEncargada(nombre: string) {
-    return this.http.get(`${this.API_URL}/nombreEncargada/${nombre}`);
+    return this.http.get(`${this.API_URL}/name/${nombre}`);
   }
 
-  getByUserAndPass(usuario: string, pass: string) {
-    return this.http.get(`${this.API_URL}/usuarioAndpass`, {
-      params: {
-        usuario,
-        pass
-      }
-    });
-  }
-
-  getUsuarios() {
-    return this.http.get(`${this.API_URL}/listaEncargada`);
+  getByUserAndPass(email: string, password: string) {
+    return this.http.get(`${this.API_URL}/getEmailWithPassword/${email}/${password}`);
   }
 
   getIdAndCompany(id: number, company: string) {
@@ -60,8 +55,8 @@ export class ManagerService {
   }
 
   getByCompany(company: string) {
-    return this.http.get(`${this.API_URL}/getCompany/${company}`)
-  }  
+    return this.http.get(`${this.API_URL}/company/${company}`)
+  }
 
   // Update
 
@@ -72,6 +67,6 @@ export class ManagerService {
   // Delete
 
   deleteManager(id: number) {
-    return this.http.delete(`${this.API_URL}/deleteEncargada/${id}`);
+    return this.http.delete(`${this.API_URL}/${id}`);
   }
 }
