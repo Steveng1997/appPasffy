@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 // Model
 import { ModelTherapist } from '../../models/therapist';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,14 @@ export class TherapistService {
   // Register
 
   save(therapist: ModelTherapist) {
-    return this.http.post(`${this.API_Therapist}`, therapist);
+    return this.http.post(`${this.API_Therapist}/`, therapist).pipe(
+      map(result => {
+        if (!result)
+          return false
+        else
+          return true
+      })
+    )
   }
 
   // Get
@@ -51,8 +59,8 @@ export class TherapistService {
   }
 
   getByCompanyOrderByMinutes(company: string) {
-    return this.http.get(`${this.API_Therapist}/getByCompanyOrderByMinutes/${company}`);
-  }  
+    return this.http.get(`${this.API_Therapist}/companyMinutes/${company}`);
+  }
 
   // Update
 

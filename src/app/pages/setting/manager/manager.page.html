@@ -32,15 +32,15 @@
           <div class="rectangle-104" *ngFor="let manager of manager | 
           paginate: { itemsPerPage: 8, currentPage: page }" (click)="editManager(manager)">
             <div style="position: absolute; top: -41px">
-              <div class="luc-a">{{manager.nombre}}</div>
-              <div class="lu-12">{{manager.usuario}}</div>
-              <div class="_1">{{manager.pass}}</div>
-              <div class="_10037">{{manager.fijoDia}}€</div>
-              <div class="_10023">{{manager.bebida}}%</div>
-              <div class="_10022">{{manager.bebidaTerap}}%</div>
-              <div class="_10024">{{manager.tabaco}}%</div>
-              <div class="_10025">{{manager.vitamina}}%</div>
-              <div class="_10026">{{manager.otros}}%</div>
+              <div class="luc-a">{{manager.name}}</div>
+              <div class="lu-12">{{manager.email}}</div>
+              <div class="_1">{{manager.password}}</div>
+              <div class="_10037">{{manager.fixeDay}}€</div>
+              <div class="_10023">{{manager.drink}}%</div>
+              <div class="_10022">{{manager.drinkTherapist}}%</div>
+              <div class="_10024">{{manager.tabacco}}%</div>
+              <div class="_10025">{{manager.vitamin}}%</div>
+              <div class="_10026">{{manager.others}}%</div>
             </div>
           </div>
         </div>

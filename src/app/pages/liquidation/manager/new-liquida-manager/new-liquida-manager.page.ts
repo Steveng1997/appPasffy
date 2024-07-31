@@ -84,7 +84,7 @@ export class NewLiquidaManagerPage implements OnInit {
   letterFixedDay = ""
 
   modelServices: ModelService = {
-    idEncargada: ""
+    idManag: ""
   }
 
   modelLiquidation: LiquidationManager = {
@@ -574,7 +574,7 @@ export class NewLiquidaManagerPage implements OnInit {
   edit(id: number) {
     this.service.getById(id).subscribe((rp: any) => {
       if (rp.length > 0) {
-        this.modelServices.pantalla = 'new-liquiationManager'
+        this.modelServices.screen = 'new-liquiationManager'
         this.service.updateScreenById(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
         this.router.navigate([`tabs/${this.id}/edit-services/${rp[0]['id']}`])
       }
@@ -632,7 +632,7 @@ export class NewLiquidaManagerPage implements OnInit {
       return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16)
     })
 
-    this.modelServices.idEncargada = uuid
+    this.modelServices.idManag = uuid
     this.modelLiquidation.idUnico = uuid
     this.modelLiquidation.idEncargada = uuid
     return this.modelLiquidation.idUnico
@@ -700,7 +700,7 @@ export class NewLiquidaManagerPage implements OnInit {
 
             for (let o = 0; o < this.unliquidatedService.length; o++) {
               this.modelLiquidation.tratamiento = this.unliquidatedService.length
-              this.modelServices.liquidadoEncargada = true
+              this.modelServices.liquidatedManager = true
               this.service.updateLiquidacionEncarg(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
             }
 

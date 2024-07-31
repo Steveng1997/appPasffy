@@ -28,7 +28,6 @@ export class EditServicesPage implements OnInit {
   horaStarted = new Date().toTimeString().substring(0, 5)
   fecha = ''
   modifiedUser = ''
-  modifiedDate = ''
   horaInicialServicio: string
 
   idUser: number
@@ -55,86 +54,84 @@ export class EditServicesPage implements OnInit {
   validateTrans = false
 
   services: ModelService = {
-    bebidas: "",
-    bebidaTerap: "",
-    bizuEncarg: false,
+    bizuManager: false,
     bizuDriverTaxi: false,
-    bizuPiso1: false,
-    bizuPiso2: false,
-    bizuTerap: false,
-    cierre: false,
-    cliente: "",
+    bizuFloor1: false,
+    bizuFloor2: false,
+    bizuTherapist: false,
+    cardManager: false,
+    cardDriverTaxi: false,
+    cardFloor1: false,
+    cardFloor2: false,
+    cardTherapist: false,
+    cashManager: false,
+    cashDriverTaxi: false,
+    cashFloor1: false,
+    cashFloor2: false,
+    cashTherapist: false,
+    closing: false,
+    client: "",
+    company: "",
     createdBy: "",
-    createdTime: "",
-    currentDate: "",
-    editar: false,
-    efectEncarg: false,
-    efectDriverTaxi: false,
-    efectPiso1: false,
-    efectPiso2: false,
-    efectTerap: false,
-    encargada: "",
-    fecha: "",
-    fechaFin: "",
-    fechaHoyInicio: "",
-    formaPago: "",
-    horaEnd: "",
-    horaStart: "",
-    id: 0,
-    idCierre: "",
-    idEncargada: "",
-    idTerapeuta: "",
-    idUnico: "",
-    liquidadoEncargada: false,
-    liquidadoTerapeuta: false,
-    minuto: 0,
+    currentDate: 0,
+    dateStart: dayjs().format("YYYY-MM-DD HH:mm"),
+    dateEnd: dayjs().format("YYYY-MM-DD HH:mm"),
+    dateToday: dayjs().format("YYYY-MM-DD HH:mm"),
+    drink: 0,
+    drinkTherapist: 0,
+    edit: false,
+    exit: "",
+    idClosing: "",
+    idManag: "",
+    idTherap: "",
+    liquidatedManager: false,
+    liquidatedTherapist: false,
+    manager: "",
+    minutes: 0,
     modifiedBy: "",
-    modifiedTime: "",
-    nota: "",
-    numberEncarg: "",
-    numberTaxi: "",
-    numberPiso1: "",
-    numberPiso2: "",
-    numberTerap: "",
-    otros: "",
-    propina: "",
-    salida: "",
-    servicio: "",
-    tabaco: "",
-    tarjEncarg: false,
-    tarjDriverTaxi: false,
-    tarjPiso1: false,
-    tarjPiso2: false,
-    tarjTerap: false,
-    taxi: "",
-    terapeuta: "",
-    totalServicio: 0,
-    transEncarg: false,
-    transDriverTaxi: false,
-    transPiso1: false,
-    transPiso2: false,
-    transTerap: false,
-    valueBizuEncargada: 0,
+    note: "",
+    numberManager: 0,
+    numberTaxi: 0,
+    numberFloor1: 0,
+    numberFloor2: 0,
+    numberTherapist: 0,
+    others: 0,
+    payment: "",
+    screen: "",
+    service: 0,
+    tabacco: 0,
+    taxi: 0,
+    therapist: "",
+    tip: 0,
+    totalService: 0,
+    transactionManager: false,
+    transactionDriverTaxi: false,
+    transactionFloor1: false,
+    transactionFloor2: false,
+    transactionTherapist: false,
+    uniqueId: "",
+    valueBizuManager: 0,
+    valueBizuTherapist: 0,
     valueBizum: 0,
-    valueBizuTerapeuta: 0,
-    valueEfectEncargada: 0,
-    valueEfectivo: 0,
-    valueEfectTerapeuta: 0,
-    valuePiso1Bizum: 0,
-    valuePiso1Efectivo: 0,
-    valuePiso1Tarjeta: 0,
-    valuePiso1Transaccion: 0,
-    valuePiso2Bizum: 0,
-    valuePiso2Efectivo: 0,
-    valuePiso2Tarjeta: 0,
-    valuePiso2Transaccion: 0,
-    valueTarjeEncargada: 0,
-    valueTarjeta: 0,
-    valueTarjeTerapeuta: 0,
-    valueTrans: 0,
-    valueTransEncargada: 0,
-    valueTransTerapeuta: 0,
-    vitaminas: "",
+    valueEfectManager: 0,
+    valueEfectTherapist: 0,
+    valueCash: 0,
+    valueFloor1Bizum: 0,
+    valueFloor1Cash: 0,
+    valueFloor1Card: 0,
+    valueFloor1Transaction: 0,
+    valueFloor2Bizum: 0,
+    valueFloor2Cash: 0,
+    valueFloor2Card: 0,
+    valueFloor2Transaction: 0,
+    valueCardManager: 0,
+    valueCardTherapist: 0,
+    valueCard: 0,
+    valueTransaction: 0,
+    valueTransactionManager: 0,
+    valueTransactionTherapist: 0,
+    vitamin: 0,
+    updated_at: dayjs().format("YYYY-MM-DD HH:mm"),
   }
 
   therapist: ModelTherapist = {
@@ -177,7 +174,7 @@ export class EditServicesPage implements OnInit {
           this.getManager()
         } else {
           this.manager = rp
-          this.services.encargada = this.manager[0].nombre
+          this.services.manager = this.manager[0].nombre
         }
       })
     }
@@ -572,7 +569,7 @@ export class EditServicesPage implements OnInit {
     }
 
     this.editarService[0]['formaPago'] = formPago.join(',')
-    this.services.formaPago = formPago.join(',')
+    this.services.payment = formPago.join(',')
   }
 
   expiredDateValidationsEdit() {
@@ -631,8 +628,8 @@ export class EditServicesPage implements OnInit {
       }
     }
 
-    if (Number(this.services.minuto) > 0) {
-      let sumarsesion = Number(this.services.minuto), horas = 0, minutos = 0, convertHora = ''
+    if (Number(this.services.minutes) > 0) {
+      let sumarsesion = Number(this.services.minutes), horas = 0, minutos = 0, convertHora = ''
 
       // Create date by Date and Hour
       const splitDate = this.fechaActual.toString().split('-')
@@ -710,80 +707,80 @@ export class EditServicesPage implements OnInit {
 
   validationsFormOfPayment() {
     // Efectivo
-    if (Boolean(this.editarService[0]['efectPiso1']) == true && Boolean(this.editarService[0]['bizuPiso1']) == true ||
-      Boolean(this.editarService[0]['efectPiso2']) == true && Boolean(this.editarService[0]['bizuPiso2']) == true ||
-      Boolean(this.editarService[0]['efectTerap']) == true && Boolean(this.editarService[0]['bizuTerap']) == true ||
-      Boolean(this.editarService[0]['efectEncarg']) == true && Boolean(this.editarService[0]['bizuEncarg']) == true ||
+    if (Boolean(this.editarService[0]['cashFloor1']) == true && Boolean(this.editarService[0]['bizuFloor1']) == true ||
+      Boolean(this.editarService[0]['cashFloor2']) == true && Boolean(this.editarService[0]['bizuFloor2']) == true ||
+      Boolean(this.editarService[0]['cashTherapist']) == true && Boolean(this.editarService[0]['bizuTherapist']) == true ||
+      Boolean(this.editarService[0]['cashManager']) == true && Boolean(this.editarService[0]['bizuManager']) == true ||
       Boolean(this.editarService[0]['efectDriverTaxi']) == true && Boolean(this.editarService[0]['bizuDriverTaxi']) == true ||
-      Boolean(this.editarService[0]['efectPiso1']) == true && Boolean(this.editarService[0]['tarjPiso1']) == true ||
-      Boolean(this.editarService[0]['efectPiso2']) == true && Boolean(this.editarService[0]['tarjPiso2']) == true ||
-      Boolean(this.editarService[0]['efectTerap']) == true && Boolean(this.editarService[0]['tarjTerap']) == true ||
-      Boolean(this.editarService[0]['efectEncarg']) == true && Boolean(this.editarService[0]['tarjEncarg']) == true ||
+      Boolean(this.editarService[0]['cashFloor1']) == true && Boolean(this.editarService[0]['cardFloor1']) == true ||
+      Boolean(this.editarService[0]['cashFloor2']) == true && Boolean(this.editarService[0]['cardFloor2']) == true ||
+      Boolean(this.editarService[0]['cashTherapist']) == true && Boolean(this.editarService[0]['cardTherapist']) == true ||
+      Boolean(this.editarService[0]['cashManager']) == true && Boolean(this.editarService[0]['cardManager']) == true ||
       Boolean(this.editarService[0]['efectDriverTaxi']) == true && Boolean(this.editarService[0]['tarjDriverTaxi']) == true ||
-      Boolean(this.editarService[0]['efectPiso1']) == true && Boolean(this.editarService[0]['transPiso1']) == true ||
-      Boolean(this.editarService[0]['efectPiso2']) == true && Boolean(this.editarService[0]['transPiso2']) == true ||
-      Boolean(this.editarService[0]['efectTerap']) == true && Boolean(this.editarService[0]['transTerap']) == true ||
-      Boolean(this.editarService[0]['efectEncarg']) == true && Boolean(this.editarService[0]['transEncarg']) == true ||
+      Boolean(this.editarService[0]['cashFloor1']) == true && Boolean(this.editarService[0]['transactionFloor1']) == true ||
+      Boolean(this.editarService[0]['cashFloor2']) == true && Boolean(this.editarService[0]['transactionFloor2']) == true ||
+      Boolean(this.editarService[0]['cashTherapist']) == true && Boolean(this.editarService[0]['transactionTherapist']) == true ||
+      Boolean(this.editarService[0]['cashManager']) == true && Boolean(this.editarService[0]['transactionManager']) == true ||
       Boolean(this.editarService[0]['efectDriverTaxi']) == true && Boolean(this.editarService[0]['transDriverTaxi']) == true) {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
 
     // Bizum
-    if (Boolean(this.editarService[0]['bizuPiso1']) == true && Boolean(this.editarService[0]['efectPiso1']) == true ||
-      Boolean(this.editarService[0]['bizuPiso2']) == true && Boolean(this.editarService[0]['efectPiso2']) == true ||
-      Boolean(this.editarService[0]['bizuTerap']) == true && Boolean(this.editarService[0]['efectTerap']) == true ||
-      Boolean(this.editarService[0]['bizuEncarg']) == true && Boolean(this.editarService[0]['efectEncarg']) == true ||
+    if (Boolean(this.editarService[0]['bizuFloor1']) == true && Boolean(this.editarService[0]['cashFloor1']) == true ||
+      Boolean(this.editarService[0]['bizuFloor2']) == true && Boolean(this.editarService[0]['cashFloor2']) == true ||
+      Boolean(this.editarService[0]['bizuTherapist']) == true && Boolean(this.editarService[0]['cashTherapist']) == true ||
+      Boolean(this.editarService[0]['bizuManager']) == true && Boolean(this.editarService[0]['cashManager']) == true ||
       Boolean(this.editarService[0]['bizuDriverTaxi']) == true && Boolean(this.editarService[0]['efectDriverTaxi']) == true ||
-      Boolean(this.editarService[0]['bizuPiso1']) == true && Boolean(this.editarService[0]['tarjPiso1']) == true ||
-      Boolean(this.editarService[0]['bizuPiso2']) == true && Boolean(this.editarService[0]['tarjPiso2']) == true ||
-      Boolean(this.editarService[0]['bizuTerap']) == true && Boolean(this.editarService[0]['tarjTerap']) == true ||
-      Boolean(this.editarService[0]['bizuEncarg']) == true && Boolean(this.editarService[0]['tarjEncarg']) == true ||
+      Boolean(this.editarService[0]['bizuFloor1']) == true && Boolean(this.editarService[0]['cardFloor1']) == true ||
+      Boolean(this.editarService[0]['bizuFloor2']) == true && Boolean(this.editarService[0]['cardFloor2']) == true ||
+      Boolean(this.editarService[0]['bizuTherapist']) == true && Boolean(this.editarService[0]['cardTherapist']) == true ||
+      Boolean(this.editarService[0]['bizuManager']) == true && Boolean(this.editarService[0]['cardManager']) == true ||
       Boolean(this.editarService[0]['bizuDriverTaxi']) == true && Boolean(this.editarService[0]['tarjDriverTaxi']) == true ||
-      Boolean(this.editarService[0]['bizuPiso1']) == true && Boolean(this.editarService[0]['transPiso1']) == true ||
-      Boolean(this.editarService[0]['bizuPiso2']) == true && Boolean(this.editarService[0]['transPiso2']) == true ||
-      Boolean(this.editarService[0]['bizuTerap']) == true && Boolean(this.editarService[0]['transTerap']) == true ||
-      Boolean(this.editarService[0]['bizuEncarg']) == true && Boolean(this.editarService[0]['transEncarg']) == true ||
+      Boolean(this.editarService[0]['bizuFloor1']) == true && Boolean(this.editarService[0]['transactionFloor1']) == true ||
+      Boolean(this.editarService[0]['bizuFloor2']) == true && Boolean(this.editarService[0]['transactionFloor2']) == true ||
+      Boolean(this.editarService[0]['bizuTherapist']) == true && Boolean(this.editarService[0]['transactionTherapist']) == true ||
+      Boolean(this.editarService[0]['bizuManager']) == true && Boolean(this.editarService[0]['transactionManager']) == true ||
       Boolean(this.editarService[0]['bizuDriverTaxi']) == true && Boolean(this.editarService[0]['transDriverTaxi']) == true) {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
 
     // Tarjeta
-    if (Boolean(this.editarService[0]['tarjPiso1']) == true && Boolean(this.editarService[0]['efectPiso1']) == true ||
-      Boolean(this.editarService[0]['tarjPiso2']) == true && Boolean(this.editarService[0]['efectPiso2']) == true ||
-      Boolean(this.editarService[0]['tarjTerap']) == true && Boolean(this.editarService[0]['efectTerap']) == true ||
-      Boolean(this.editarService[0]['tarjEncarg']) == true && Boolean(this.editarService[0]['efectEncarg']) == true ||
+    if (Boolean(this.editarService[0]['cardFloor1']) == true && Boolean(this.editarService[0]['cashFloor1']) == true ||
+      Boolean(this.editarService[0]['cardFloor2']) == true && Boolean(this.editarService[0]['cashFloor2']) == true ||
+      Boolean(this.editarService[0]['cardTherapist']) == true && Boolean(this.editarService[0]['cashTherapist']) == true ||
+      Boolean(this.editarService[0]['cardManager']) == true && Boolean(this.editarService[0]['cashManager']) == true ||
       Boolean(this.editarService[0]['tarjDriverTaxi']) == true && Boolean(this.editarService[0]['efectDriverTaxi']) == true ||
-      Boolean(this.editarService[0]['tarjPiso1']) == true && Boolean(this.editarService[0]['bizuPiso1']) == true ||
-      Boolean(this.editarService[0]['tarjPiso2']) == true && Boolean(this.editarService[0]['bizuPiso2']) == true ||
-      Boolean(this.editarService[0]['tarjTerap']) == true && Boolean(this.editarService[0]['bizuTerap']) == true ||
-      Boolean(this.editarService[0]['tarjEncarg']) == true && Boolean(this.editarService[0]['bizuEncarg']) == true ||
+      Boolean(this.editarService[0]['cardFloor1']) == true && Boolean(this.editarService[0]['bizuFloor1']) == true ||
+      Boolean(this.editarService[0]['cardFloor2']) == true && Boolean(this.editarService[0]['bizuFloor2']) == true ||
+      Boolean(this.editarService[0]['cardTherapist']) == true && Boolean(this.editarService[0]['bizuTherapist']) == true ||
+      Boolean(this.editarService[0]['cardManager']) == true && Boolean(this.editarService[0]['bizuManager']) == true ||
       Boolean(this.editarService[0]['tarjDriverTaxi']) == true && Boolean(this.editarService[0]['bizuDriverTaxi']) == true ||
-      Boolean(this.editarService[0]['tarjPiso1']) == true && Boolean(this.editarService[0]['transPiso1']) == true ||
-      Boolean(this.editarService[0]['tarjPiso2']) == true && Boolean(this.editarService[0]['transPiso2']) == true ||
-      Boolean(this.editarService[0]['tarjTerap']) == true && Boolean(this.editarService[0]['transTerap']) == true ||
-      Boolean(this.editarService[0]['tarjEncarg']) == true && Boolean(this.editarService[0]['transEncarg']) == true ||
+      Boolean(this.editarService[0]['cardFloor1']) == true && Boolean(this.editarService[0]['transactionFloor1']) == true ||
+      Boolean(this.editarService[0]['cardFloor2']) == true && Boolean(this.editarService[0]['transactionFloor2']) == true ||
+      Boolean(this.editarService[0]['cardTherapist']) == true && Boolean(this.editarService[0]['transactionTherapist']) == true ||
+      Boolean(this.editarService[0]['cardManager']) == true && Boolean(this.editarService[0]['transactionManager']) == true ||
       Boolean(this.editarService[0]['tarjDriverTaxi']) == true && Boolean(this.editarService[0]['transDriverTaxi']) == true) {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
     }
 
     // Trans
-    if (Boolean(this.editarService[0]['transPiso1']) == true && Boolean(this.editarService[0]['efectPiso1']) == true ||
-      Boolean(this.editarService[0]['transPiso2']) == true && Boolean(this.editarService[0]['efectPiso2']) == true ||
-      Boolean(this.editarService[0]['transTerap']) == true && Boolean(this.editarService[0]['efectTerap']) == true ||
-      Boolean(this.editarService[0]['transEncarg']) == true && Boolean(this.editarService[0]['efectEncarg']) == true ||
+    if (Boolean(this.editarService[0]['transactionFloor1']) == true && Boolean(this.editarService[0]['cashFloor1']) == true ||
+      Boolean(this.editarService[0]['transactionFloor2']) == true && Boolean(this.editarService[0]['cashFloor2']) == true ||
+      Boolean(this.editarService[0]['transactionTherapist']) == true && Boolean(this.editarService[0]['cashTherapist']) == true ||
+      Boolean(this.editarService[0]['transactionManager']) == true && Boolean(this.editarService[0]['cashManager']) == true ||
       Boolean(this.editarService[0]['transDriverTaxi']) == true && Boolean(this.editarService[0]['efectDriverTaxi']) == true ||
-      Boolean(this.editarService[0]['transPiso1']) == true && Boolean(this.editarService[0]['bizuPiso1']) == true ||
-      Boolean(this.editarService[0]['transPiso2']) == true && Boolean(this.editarService[0]['bizuPiso2']) == true ||
-      Boolean(this.editarService[0]['transTerap']) == true && Boolean(this.editarService[0]['bizuTerap']) == true ||
-      Boolean(this.editarService[0]['transEncarg']) == true && Boolean(this.editarService[0]['bizuEncarg']) == true ||
+      Boolean(this.editarService[0]['transactionFloor1']) == true && Boolean(this.editarService[0]['bizuFloor1']) == true ||
+      Boolean(this.editarService[0]['transactionFloor2']) == true && Boolean(this.editarService[0]['bizuFloor2']) == true ||
+      Boolean(this.editarService[0]['transactionTherapist']) == true && Boolean(this.editarService[0]['bizuTherapist']) == true ||
+      Boolean(this.editarService[0]['transactionManager']) == true && Boolean(this.editarService[0]['bizuManager']) == true ||
       Boolean(this.editarService[0]['transDriverTaxi']) == true && Boolean(this.editarService[0]['bizuDriverTaxi']) == true ||
-      Boolean(this.editarService[0]['transPiso1']) == true && Boolean(this.editarService[0]['tarjPiso1']) == true ||
-      Boolean(this.editarService[0]['transPiso2']) == true && Boolean(this.editarService[0]['tarjPiso2']) == true ||
-      Boolean(this.editarService[0]['transTerap']) == true && Boolean(this.editarService[0]['tarjTerap']) == true ||
-      Boolean(this.editarService[0]['transEncarg']) == true && Boolean(this.editarService[0]['tarjEncarg']) == true ||
+      Boolean(this.editarService[0]['transactionFloor1']) == true && Boolean(this.editarService[0]['cardFloor1']) == true ||
+      Boolean(this.editarService[0]['transactionFloor2']) == true && Boolean(this.editarService[0]['cardFloor2']) == true ||
+      Boolean(this.editarService[0]['transactionTherapist']) == true && Boolean(this.editarService[0]['cardTherapist']) == true ||
+      Boolean(this.editarService[0]['transactionManager']) == true && Boolean(this.editarService[0]['cardManager']) == true ||
       Boolean(this.editarService[0]['transDriverTaxi']) == true && Boolean(this.editarService[0]['tarjDriverTaxi']) == true) {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'Se escogio mas de una forma de pago' })
       return false
@@ -793,27 +790,27 @@ export class EditServicesPage implements OnInit {
 
   validationsToSelectAPaymentMethod() {
 
-    if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['efectPiso1']) == false &&
-      Boolean(this.editarService[0]['bizuPiso1']) == false && Boolean(this.editarService[0]['tarjPiso1']) == false &&
-      Boolean(this.editarService[0]['transPiso1']) == false) {
+    if (Number(this.editarService[0]['numberFloor1']) > 0 && Boolean(this.editarService[0]['cashFloor1']) == false &&
+      Boolean(this.editarService[0]['bizuFloor1']) == false && Boolean(this.editarService[0]['cardFloor1']) == false &&
+      Boolean(this.editarService[0]['transactionFloor1']) == false) {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 1' })
       return false
     }
-    if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['efectPiso2']) == false &&
-      Boolean(this.editarService[0]['bizuPiso2']) == false && Boolean(this.editarService[0]['tarjPiso2']) == false &&
-      Boolean(this.editarService[0]['transPiso2']) == false) {
+    if (Number(this.editarService[0]['numberFloor2']) > 0 && Boolean(this.editarService[0]['cashFloor2']) == false &&
+      Boolean(this.editarService[0]['bizuFloor2']) == false && Boolean(this.editarService[0]['cardFloor2']) == false &&
+      Boolean(this.editarService[0]['transactionFloor2']) == false) {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para piso 2' })
       return false
     }
-    if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['efectTerap']) == false &&
-      Boolean(this.editarService[0]['bizuTerap']) == false && Boolean(this.editarService[0]['tarjTerap']) == false &&
-      Boolean(this.editarService[0]['transTerap']) == false) {
+    if (Number(this.editarService[0]['numberTherapist']) > 0 && Boolean(this.editarService[0]['cashTherapist']) == false &&
+      Boolean(this.editarService[0]['bizuTherapist']) == false && Boolean(this.editarService[0]['cardTherapist']) == false &&
+      Boolean(this.editarService[0]['transactionTherapist']) == false) {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para terapeuta' })
       return false
     }
-    if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['efectEncarg']) == false &&
-      Boolean(this.editarService[0]['bizuEncarg']) == false && Boolean(this.editarService[0]['tarjEncarg']) == false &&
-      Boolean(this.editarService[0]['transEncarg']) == false) {
+    if (Number(this.editarService[0]['numberManager']) > 0 && Boolean(this.editarService[0]['cashManager']) == false &&
+      Boolean(this.editarService[0]['bizuManager']) == false && Boolean(this.editarService[0]['cardManager']) == false &&
+      Boolean(this.editarService[0]['transactionManager']) == false) {
       Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', title: 'Oops...', text: 'No se escogio ninguna forma de pago para encargada' })
       return false
     }
@@ -836,41 +833,24 @@ export class EditServicesPage implements OnInit {
     this.editarService[0]['fecha'] = `${dia}-${mes}-${año}`
   }
 
-  SetTheValuesToEmpty() {
-    if (this.editarService[0]['servicio'] == '0') this.editarService[0]['servicio'] = ''
-    if (this.editarService[0]['bebidas'] == '0') this.editarService[0]['bebidas'] = ''
-    if (this.editarService[0]['bebidaTerap'] == '0') this.editarService[0]['bebidaTerap'] = ''
-    if (this.editarService[0]['tabaco'] == '0') this.editarService[0]['tabaco'] = ''
-    if (this.editarService[0]['taxi'] == '0') this.editarService[0]['taxi'] = ''
-    if (this.editarService[0]['vitaminas'] == '0') this.editarService[0]['vitaminas'] = ''
-    if (this.editarService[0]['propina'] == '0') this.editarService[0]['propina'] = ''
-    if (this.editarService[0]['otros'] == '0') this.editarService[0]['otros'] = ''
-    if (this.editarService[0]['numberPiso1'] == '0') this.editarService[0]['numberPiso1'] = ''
-    if (this.editarService[0]['numberPiso2'] == '0') this.editarService[0]['numberPiso2'] = ''
-    if (this.editarService[0]['numberTerap'] == '0') this.editarService[0]['numberTerap'] = ''
-    if (this.editarService[0]['numberEncarg'] == '0') this.editarService[0]['numberEncarg'] = ''
-    if (this.editarService[0]['numberTaxi'] == '0') this.editarService[0]['numberTaxi'] = ''
-  }
-
   editForm() {
     let fecha = new Date(), dia = '', mes = '', año = 0
     año = fecha.getFullYear()
 
     this.serviceServices.getByEditar(this.id).subscribe((datosServicio: any) => {
       if (datosServicio.length > 0) {
-        this.services.pantalla = datosServicio[0].pantalla
+        this.services.screen = datosServicio[0].screen
         this.editarService = datosServicio
         this.fecha = datosServicio[0]['fecha']
         this.fechaActual = datosServicio[0]['fechaHoyInicio']
-        this.SetTheValuesToEmpty()
 
         this.hourStartTerapeuta = datosServicio[0]['horaStart']
         this.horaEndTerapeuta = datosServicio[0]['horaEnd']
 
         // Fechas
-        dia = this.editarService[0].fecha.substring(0, 2)
-        mes = this.editarService[0].fecha.substring(3, 5)
-        this.editarService[0].fecha = `${año}-${mes}-${dia}`
+        // dia = this.editarService[0].fecha.substring(0, 2)
+        // mes = this.editarService[0].fecha.substring(3, 5)
+        // this.editarService[0].fecha = `${año}-${mes}-${dia}`
 
         this.collectionsValue()
 
@@ -899,133 +879,128 @@ export class EditServicesPage implements OnInit {
   modified(rp: any) {
 
     this.modifiedUser = rp[0]['nombre']
-
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    this.modifiedDate = date + ' ' + time;
   }
 
   fullService() {
     let piso1 = 0, piso2 = 0, terap = 0, encargada = 0, otros = 0
 
-    if (Number(this.editarService[0]['numberPiso1']) === 0) {
+    if (Number(this.editarService[0]['numberFloor1']) == 0) {
       piso1 = 0
-      this.editarService[0]['numberPiso1'] = "0"
+      this.editarService[0]['numberFloor1'] = 0
     } else {
-      piso1 = Number(this.editarService[0]['numberPiso1'])
+      piso1 = Number(this.editarService[0]['numberFloor1'])
     }
 
-    if (Number(this.editarService[0]['numberPiso2']) == 0) {
+    if (Number(this.editarService[0]['numberFloor2']) == 0) {
       piso2 = 0
-      this.editarService[0]['numberPiso2'] = "0"
+      this.editarService[0]['numberFloor2'] = 0
     } else {
-      piso2 = Number(this.editarService[0]['numberPiso2'])
+      piso2 = Number(this.editarService[0]['numberFloor2'])
     }
 
-    if (Number(this.editarService[0]['numberTerap']) == 0) {
+    if (Number(this.editarService[0]['numberTherapist']) == 0) {
       terap = 0
-      this.editarService[0]['numberTerap'] = "0"
+      this.editarService[0]['numberTherapist'] = 0
     } else {
-      terap = Number(this.editarService[0]['numberTerap'])
+      terap = Number(this.editarService[0]['numberTherapist'])
     }
 
-    if (Number(this.editarService[0]['numberEncarg']) == 0) {
+    if (Number(this.editarService[0]['numberManager']) == 0) {
       encargada = 0
-      this.editarService[0]['numberEncarg'] = "0"
+      this.editarService[0]['numberManager'] = 0
     } else {
-      encargada = Number(this.editarService[0]['numberEncarg'])
+      encargada = Number(this.editarService[0]['numberManager'])
     }
 
     if (Number(this.editarService[0]['numberTaxi']) == 0) {
       otros = 0
-      this.editarService[0]['numberTaxi'] = "0"
+      this.editarService[0]['numberTaxi'] = 0
     } else {
       otros = Number(this.editarService[0]['numberTaxi'])
     }
 
     this.servicioTotal = Number(piso1 + piso2 + terap + encargada + otros)
 
-    if (Number(this.editarService[0]['servicio']) == 0) {
+    if (Number(this.editarService[0]['service']) == 0) {
       otros = 0
-      this.editarService[0]['servicio'] = "0"
+      this.editarService[0]['service'] = 0
     } else {
-      otros = Number(this.editarService[0]['servicio'])
+      otros = Number(this.editarService[0]['service'])
     }
 
-    if (Number(this.editarService[0]['bebidas']) == 0) {
+    if (Number(this.editarService[0]['drink']) == 0) {
       otros = 0
-      this.editarService[0]['bebidas'] = "0"
+      this.editarService[0]['drink'] = 0
     } else {
-      otros = Number(this.editarService[0]['bebidas'])
+      otros = Number(this.editarService[0]['drink'])
     }
 
-    if (Number(this.editarService[0]['bebidaTerap']) == 0) {
+    if (Number(this.editarService[0]['drinkTherapist']) == 0) {
       otros = 0
-      this.editarService[0]['bebidaTerap'] = "0"
+      this.editarService[0]['drinkTherapist'] = 0
     } else {
-      otros = Number(this.editarService[0]['bebidaTerap'])
+      otros = Number(this.editarService[0]['drinkTherapist'])
     }
 
-    if (Number(this.editarService[0]['tabaco']) == 0) {
+    if (Number(this.editarService[0]['tabacco']) == 0) {
       otros = 0
-      this.editarService[0]['tabaco'] = "0"
+      this.editarService[0]['tabacco'] = 0
     } else {
-      otros = Number(this.editarService[0]['tabaco'])
+      otros = Number(this.editarService[0]['tabacco'])
     }
 
     if (Number(this.editarService[0]['taxi']) == 0) {
       otros = 0
-      this.editarService[0]['taxi'] = "0"
+      this.editarService[0]['taxi'] = 0
     } else {
       otros = Number(this.editarService[0]['taxi'])
     }
 
-    if (Number(this.editarService[0]['vitaminas']) == 0) {
+    if (Number(this.editarService[0]['vitamin']) == 0) {
       otros = 0
-      this.editarService[0]['vitaminas'] = "0"
+      this.editarService[0]['vitamin'] = 0
     } else {
-      otros = Number(this.editarService[0]['vitaminas'])
+      otros = Number(this.editarService[0]['vitamin'])
     }
 
-    if (Number(this.editarService[0]['propina']) == 0) {
+    if (Number(this.editarService[0]['tip']) == 0) {
       otros = 0
-      this.editarService[0]['propina'] = "0"
+      this.editarService[0]['tip'] = 0
     } else {
-      otros = Number(this.editarService[0]['propina'])
+      otros = Number(this.editarService[0]['tip'])
     }
 
-    if (Number(this.editarService[0]['otros']) == 0) {
+    if (Number(this.editarService[0]['others']) == 0) {
       otros = 0
-      this.editarService[0]['otros'] = "0"
+      this.editarService[0]['others'] = 0
     } else {
-      otros = Number(this.editarService[0]['otros'])
+      otros = Number(this.editarService[0]['others'])
     }
   }
 
   serviceValue() {
     let servicioEdit = 0, bebidaEdit = 0, bebidaTerapEdit = 0, tabacoEdit = 0, taxiEdit = 0, vitaminasEdit = 0, propinaEdit = 0, otrosEdit = 0, sumatoriaEdit = 0
 
-    if (Number(this.editarService[0]['servicio']) > 0) {
-      servicioEdit = Number(this.editarService[0]['servicio'])
+    if (Number(this.editarService[0]['service']) > 0) {
+      servicioEdit = Number(this.editarService[0]['service'])
     } else {
       servicioEdit = 0
     }
 
-    if (Number(this.editarService[0]['bebidas']) > 0) {
-      bebidaEdit = Number(this.editarService[0]['bebidas'])
+    if (Number(this.editarService[0]['drink']) > 0) {
+      bebidaEdit = Number(this.editarService[0]['drink'])
     } else {
       bebidaEdit = 0
     }
 
-    if (Number(this.editarService[0]['bebidaTerap']) > 0) {
-      bebidaTerapEdit = Number(this.editarService[0]['bebidaTerap'])
+    if (Number(this.editarService[0]['drinkTherapist']) > 0) {
+      bebidaTerapEdit = Number(this.editarService[0]['drinkTherapist'])
     } else {
       bebidaTerapEdit = 0
     }
 
-    if (Number(this.editarService[0]['tabaco']) > 0) {
-      tabacoEdit = Number(this.editarService[0]['tabaco'])
+    if (Number(this.editarService[0]['tabacco']) > 0) {
+      tabacoEdit = Number(this.editarService[0]['tabacco'])
     } else {
       tabacoEdit = 0
     }
@@ -1036,20 +1011,20 @@ export class EditServicesPage implements OnInit {
       taxiEdit = 0
     }
 
-    if (Number(this.editarService[0]['vitaminas']) > 0) {
-      vitaminasEdit = Number(this.editarService[0]['vitaminas'])
+    if (Number(this.editarService[0]['vitamin']) > 0) {
+      vitaminasEdit = Number(this.editarService[0]['vitamin'])
     } else {
       vitaminasEdit = 0
     }
 
-    if (Number(this.editarService[0]['propina']) > 0) {
-      propinaEdit = Number(this.editarService[0]['propina'])
+    if (Number(this.editarService[0]['tip']) > 0) {
+      propinaEdit = Number(this.editarService[0]['tip'])
     } else {
       propinaEdit = 0
     }
 
-    if (Number(this.editarService[0]['otros']) > 0) {
-      otrosEdit = Number(this.editarService[0]['otros'])
+    if (Number(this.editarService[0]['others']) > 0) {
+      otrosEdit = Number(this.editarService[0]['others'])
     } else {
       otrosEdit = 0
     }
@@ -1058,22 +1033,22 @@ export class EditServicesPage implements OnInit {
     this.editarService[0]['totalServicio'] = sumatoriaEdit
     this.restamosCobroEdit = sumatoriaEdit
 
-    const restamosEdit = Number(this.editarService[0]['numberPiso1']) + Number(this.editarService[0]['numberPiso2']) + Number(this.editarService[0]['numberTerap']) +
-      Number(this.editarService[0]['numberEncarg']) + Number(this.editarService[0]['numberTaxi'])
+    const restamosEdit = Number(this.editarService[0]['numberFloor1']) + Number(this.editarService[0]['numberFloor2']) + Number(this.editarService[0]['numberTherapist']) +
+      Number(this.editarService[0]['numberManager']) + Number(this.editarService[0]['numberTaxi'])
 
-    if (Number(this.editarService[0]['numberPiso1']) > 0) {
+    if (Number(this.editarService[0]['numberFloor1']) > 0) {
       this.restamosCobroEdit = sumatoriaEdit - restamosEdit
     }
 
-    if (Number(this.editarService[0]['numberPiso2']) > 0) {
+    if (Number(this.editarService[0]['numberFloor2']) > 0) {
       this.restamosCobroEdit = sumatoriaEdit - restamosEdit
     }
 
-    if (Number(this.editarService[0]['numberTerap']) > 0) {
+    if (Number(this.editarService[0]['numberTherapist']) > 0) {
       this.restamosCobroEdit = sumatoriaEdit - restamosEdit
     }
 
-    if (Number(this.editarService[0]['numberEncarg']) > 0) {
+    if (Number(this.editarService[0]['numberManager']) > 0) {
       this.restamosCobroEdit = sumatoriaEdit - restamosEdit
     }
 
@@ -1085,26 +1060,26 @@ export class EditServicesPage implements OnInit {
   collectionsValue() {
     let valuepiso1Edit = 0, valuepiso2Edit = 0, valueterapeutaEdit = 0, valueEncargEdit = 0, valueotrosEdit = 0, restamosEdit = 0, resultadoEdit = 0
 
-    if (Number(this.editarService[0]['numberPiso1']) > 0) {
-      valuepiso1Edit = Number(this.editarService[0]['numberPiso1'])
+    if (Number(this.editarService[0]['numberFloor1']) > 0) {
+      valuepiso1Edit = Number(this.editarService[0]['numberFloor1'])
     } else {
       valuepiso1Edit = 0
     }
 
-    if (Number(this.editarService[0]['numberPiso2']) > 0) {
-      valuepiso2Edit = Number(this.editarService[0]['numberPiso2'])
+    if (Number(this.editarService[0]['numberFloor2']) > 0) {
+      valuepiso2Edit = Number(this.editarService[0]['numberFloor2'])
     } else {
       valuepiso2Edit = 0
     }
 
-    if (Number(this.editarService[0]['numberTerap']) > 0) {
-      valueterapeutaEdit = Number(this.editarService[0]['numberTerap'])
+    if (Number(this.editarService[0]['numberTherapist']) > 0) {
+      valueterapeutaEdit = Number(this.editarService[0]['numberTherapist'])
     } else {
       valueterapeutaEdit = 0
     }
 
-    if (Number(this.editarService[0]['numberEncarg']) > 0) {
-      valueEncargEdit = Number(this.editarService[0]['numberEncarg'])
+    if (Number(this.editarService[0]['numberManager']) > 0) {
+      valueEncargEdit = Number(this.editarService[0]['numberManager'])
     } else {
       valueEncargEdit = 0
     }
@@ -1129,90 +1104,90 @@ export class EditServicesPage implements OnInit {
   validateCheck() {
 
     // Cash
-    if (Boolean(this.editarService[0]['efectPiso1']) === true) {
+    if (Boolean(this.editarService[0]['cashFloor1']) === true) {
       document.getElementById("cashHouse1").style.background = '#1fb996'
-      this.services.efectPiso1 = true
+      this.services.cashFloor1 = true
     }
 
-    if (Boolean(this.editarService[0]['efectPiso2']) === true) {
+    if (Boolean(this.editarService[0]['cashFloor2']) === true) {
       document.getElementById('cashHouse2').style.background = '#1fb996'
-      this.services.efectPiso2 = true
+      this.services.cashFloor2 = true
     }
 
-    if (Boolean(this.editarService[0]['efectTerap']) === true) {
+    if (Boolean(this.editarService[0]['cashTherapist']) === true) {
       document.getElementById('cashTherapist').style.background = '#1fb996'
-      this.services.efectTerap = true
+      this.services.cashTherapist = true
     }
 
-    if (Boolean(this.editarService[0]['efectEncarg']) === true) {
+    if (Boolean(this.editarService[0]['cashManager']) === true) {
       document.getElementById('cashManager').style.background = '#1fb996'
-      this.services.efectEncarg = true
+      this.services.cashManager = true
     }
 
     // Bizum
 
-    if (Boolean(this.editarService[0].bizuPiso1) == true) {
+    if (Boolean(this.editarService[0].bizuFloor1) == true) {
       document.getElementById('bizumHouse1').style.background = '#1fb996'
-      this.services.bizuPiso1 = true
+      this.services.bizuFloor1 = true
     }
 
-    if (Boolean(this.editarService[0].bizuPiso2) == true) {
+    if (Boolean(this.editarService[0].bizuFloor2) == true) {
       document.getElementById('bizumHouse2').style.background = '#1fb996'
-      this.services.bizuPiso2 = true
+      this.services.bizuFloor2 = true
     }
 
-    if (Boolean(this.editarService[0].bizuTerap) == true) {
+    if (Boolean(this.editarService[0].bizuTherapist) == true) {
       document.getElementById('bizumTherapist').style.background = '#1fb996'
-      this.services.bizuTerap = true
+      this.services.bizuTherapist = true
     }
 
-    if (Boolean(this.editarService[0].bizuEncarg) == true) {
+    if (Boolean(this.editarService[0].bizuManager) == true) {
       document.getElementById('bizumManager').style.background = '#1fb996'
-      this.services.bizuEncarg = true
+      this.services.bizuManager = true
     }
 
     // Card 
 
-    if (Boolean(this.editarService[0].tarjPiso1) == true) {
+    if (Boolean(this.editarService[0].cardFloor1) == true) {
       document.getElementById('cardHouse1').style.background = '#1fb996'
-      this.services.tarjPiso1 = true
+      this.services.cardFloor1 = true
     }
 
-    if (Boolean(this.editarService[0].tarjPiso2) == true) {
+    if (Boolean(this.editarService[0].cardFloor2) == true) {
       document.getElementById('cardHouse2').style.background = '#1fb996'
-      this.services.tarjPiso2 = true
+      this.services.cardFloor2 = true
     }
 
-    if (Boolean(this.editarService[0].tarjTerap) == true) {
+    if (Boolean(this.editarService[0].cardTherapist) == true) {
       document.getElementById('cardTherapist').style.background = '#1fb996'
-      this.services.tarjTerap = true
+      this.services.cardTherapist = true
     }
 
-    if (Boolean(this.editarService[0].tarjEncarg) == true) {
+    if (Boolean(this.editarService[0].cardManager) == true) {
       document.getElementById('cardManager').style.background = '#1fb996'
-      this.services.tarjEncarg = true
+      this.services.cardManager = true
     }
 
     // Trans
 
-    if (Boolean(this.editarService[0].transPiso1) == true) {
+    if (Boolean(this.editarService[0].transactionFloor1) == true) {
       document.getElementById('transHouse1').style.background = '#1fb996'
-      this.services.transPiso1 = true
+      this.services.transactionFloor1 = true
     }
 
-    if (Boolean(this.editarService[0].transPiso2) == true) {
+    if (Boolean(this.editarService[0].transactionFloor2) == true) {
       document.getElementById('transHouse2').style.background = '#1fb996'
-      this.services.transPiso2 = true
+      this.services.transactionFloor2 = true
     }
 
-    if (Boolean(this.editarService[0].transTerap) == true) {
+    if (Boolean(this.editarService[0].transactionTherapist) == true) {
       document.getElementById('transTherapist').style.background = '#1fb996'
-      this.services.transTerap = true
+      this.services.transactionTherapist = true
     }
 
-    if (Boolean(this.editarService[0].transEncarg) == true) {
+    if (Boolean(this.editarService[0].transactionManager) == true) {
       document.getElementById('transManager').style.background = '#1fb996'
-      this.services.transEncarg = true
+      this.services.transactionManager = true
     }
   }
 
@@ -1222,28 +1197,28 @@ export class EditServicesPage implements OnInit {
 
     if (event) {
 
-      if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['efectPiso1']) === true) {
-        piso1 = Number(this.editarService[0]['numberPiso1'])
-        this.editarService[0]['valuePiso1Efectivo'] = Number(this.editarService[0]['numberPiso1'])
+      if (Number(this.editarService[0]['numberFloor1']) > 0 && Boolean(this.editarService[0]['cashFloor1']) === true) {
+        piso1 = Number(this.editarService[0]['numberFloor1'])
+        this.editarService[0]['valueFloor1Cash'] = Number(this.editarService[0]['numberFloor1'])
       } else {
         piso1 = 0
       }
 
-      if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['efectPiso2']) === true) {
-        piso2 = Number(this.editarService[0]['numberPiso2'])
-        this.editarService[0]['valuePiso2Efectivo'] = Number(this.editarService[0]['numberPiso2'])
+      if (Number(this.editarService[0]['numberFloor2']) > 0 && Boolean(this.editarService[0]['cashFloor2']) === true) {
+        piso2 = Number(this.editarService[0]['numberFloor2'])
+        this.editarService[0]['valueFloor2Cash'] = Number(this.editarService[0]['numberFloor2'])
       } else {
         piso2 = 0
       }
 
-      if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['efectTerap']) === true) {
-        terap = Number(this.editarService[0]['numberTerap'])
+      if (Number(this.editarService[0]['numberTherapist']) > 0 && Boolean(this.editarService[0]['cashTherapist']) === true) {
+        terap = Number(this.editarService[0]['numberTherapist'])
       } else {
         terap = 0
       }
 
-      if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['efectEncarg']) === true) {
-        encarg = Number(this.editarService[0]['numberEncarg'])
+      if (Number(this.editarService[0]['numberManager']) > 0 && Boolean(this.editarService[0]['cashManager']) === true) {
+        encarg = Number(this.editarService[0]['numberManager'])
       } else {
         encarg = 0
       }
@@ -1268,28 +1243,28 @@ export class EditServicesPage implements OnInit {
     if (!this.validationsFormOfPayment()) return
     if (event) {
 
-      if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['bizuPiso1']) === true) {
-        piso1 = Number(this.editarService[0]['numberPiso1'])
-        this.editarService[0]['valuePiso1Bizum'] = Number(this.editarService[0]['numberPiso1'])
+      if (Number(this.editarService[0]['numberFloor1']) > 0 && Boolean(this.editarService[0]['bizuFloor1']) === true) {
+        piso1 = Number(this.editarService[0]['numberFloor1'])
+        this.editarService[0]['valueFloor1Bizum'] = Number(this.editarService[0]['numberFloor1'])
       } else {
         piso1 = 0
       }
 
-      if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['bizuPiso2']) === true) {
-        piso2 = Number(this.editarService[0]['numberPiso2'])
-        this.editarService[0]['valuePiso2Bizum'] = Number(this.editarService[0]['numberPiso2'])
+      if (Number(this.editarService[0]['numberFloor2']) > 0 && Boolean(this.editarService[0]['bizuFloor2']) === true) {
+        piso2 = Number(this.editarService[0]['numberFloor2'])
+        this.editarService[0]['valueFloor2Bizum'] = Number(this.editarService[0]['numberFloor2'])
       } else {
         piso2 = 0
       }
 
-      if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['bizuTerap']) === true) {
-        terap = Number(this.editarService[0]['numberTerap'])
+      if (Number(this.editarService[0]['numberTherapist']) > 0 && Boolean(this.editarService[0]['bizuTherapist']) === true) {
+        terap = Number(this.editarService[0]['numberTherapist'])
       } else {
         terap = 0
       }
 
-      if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['bizuEncarg']) === true) {
-        encarg = Number(this.editarService[0]['numberEncarg'])
+      if (Number(this.editarService[0]['numberManager']) > 0 && Boolean(this.editarService[0]['bizuManager']) === true) {
+        encarg = Number(this.editarService[0]['numberManager'])
       } else {
         encarg = 0
       }
@@ -1313,28 +1288,28 @@ export class EditServicesPage implements OnInit {
     if (!this.validationsFormOfPayment()) return
     if (event) {
 
-      if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['tarjPiso1']) === true) {
-        piso1 = Number(this.editarService[0]['numberPiso1'])
-        this.editarService[0]['valuePiso1Tarjeta'] = Number(this.editarService[0]['numberPiso1'])
+      if (Number(this.editarService[0]['numberFloor1']) > 0 && Boolean(this.editarService[0]['cardFloor1']) === true) {
+        piso1 = Number(this.editarService[0]['numberFloor1'])
+        this.editarService[0]['valueFloor1Card'] = Number(this.editarService[0]['numberFloor1'])
       } else {
         piso1 = 0
       }
 
-      if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['tarjPiso2']) === true) {
-        piso2 = Number(this.editarService[0]['numberPiso2'])
-        this.editarService[0]['valuePiso2Tarjeta'] = Number(this.editarService[0]['numberPiso2'])
+      if (Number(this.editarService[0]['numberFloor2']) > 0 && Boolean(this.editarService[0]['cardFloor2']) === true) {
+        piso2 = Number(this.editarService[0]['numberFloor2'])
+        this.editarService[0]['valueFloor2Card'] = Number(this.editarService[0]['numberFloor2'])
       } else {
         piso2 = 0
       }
 
-      if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['tarjTerap']) === true) {
-        terap = Number(this.editarService[0]['numberTerap'])
+      if (Number(this.editarService[0]['numberTherapist']) > 0 && Boolean(this.editarService[0]['cardTherapist']) === true) {
+        terap = Number(this.editarService[0]['numberTherapist'])
       } else {
         terap = 0
       }
 
-      if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['tarjEncarg']) === true) {
-        encarg = Number(this.editarService[0]['numberEncarg'])
+      if (Number(this.editarService[0]['numberManager']) > 0 && Boolean(this.editarService[0]['cardManager']) === true) {
+        encarg = Number(this.editarService[0]['numberManager'])
       } else {
         encarg = 0
       }
@@ -1358,28 +1333,28 @@ export class EditServicesPage implements OnInit {
     if (!this.validationsFormOfPayment()) return
     if (event) {
 
-      if (Number(this.editarService[0]['numberPiso1']) > 0 && Boolean(this.editarService[0]['transPiso1']) === true) {
-        piso1 = Number(this.editarService[0]['numberPiso1'])
-        this.editarService[0]['valuePiso1Transaccion'] = Number(this.editarService[0]['numberPiso1'])
+      if (Number(this.editarService[0]['numberFloor1']) > 0 && Boolean(this.editarService[0]['transactionFloor1']) === true) {
+        piso1 = Number(this.editarService[0]['numberFloor1'])
+        this.editarService[0]['valueFloor1Transaction'] = Number(this.editarService[0]['numberFloor1'])
       } else {
         piso1 = 0
       }
 
-      if (Number(this.editarService[0]['numberPiso2']) > 0 && Boolean(this.editarService[0]['transPiso2']) === true) {
-        piso2 = Number(this.editarService[0]['numberPiso2'])
-        this.editarService[0]['valuePiso2Transaccion'] = Number(this.editarService[0]['numberPiso2'])
+      if (Number(this.editarService[0]['numberFloor2']) > 0 && Boolean(this.editarService[0]['transactionFloor2']) === true) {
+        piso2 = Number(this.editarService[0]['numberFloor2'])
+        this.editarService[0]['valueFloor2Transaction'] = Number(this.editarService[0]['numberFloor2'])
       } else {
         piso2 = 0
       }
 
-      if (Number(this.editarService[0]['numberTerap']) > 0 && Boolean(this.editarService[0]['transTerap']) === true) {
-        terap = Number(this.editarService[0]['numberTerap'])
+      if (Number(this.editarService[0]['numberTherapist']) > 0 && Boolean(this.editarService[0]['transactionTherapist']) === true) {
+        terap = Number(this.editarService[0]['numberTherapist'])
       } else {
         terap = 0
       }
 
-      if (Number(this.editarService[0]['numberEncarg']) > 0 && Boolean(this.editarService[0]['transEncarg']) === true) {
-        encarg = Number(this.editarService[0]['numberEncarg'])
+      if (Number(this.editarService[0]['numberManager']) > 0 && Boolean(this.editarService[0]['transactionManager']) === true) {
+        encarg = Number(this.editarService[0]['numberManager'])
       } else {
         encarg = 0
       }
@@ -1398,79 +1373,79 @@ export class EditServicesPage implements OnInit {
   }
 
   editValue() {
-    if (Boolean(this.editarService[0]['efectPiso1']) == true) this.editarService[0]['valuePiso1Efectivo'] = Number(this.editarService[0]['numberPiso1'])
-    else this.editarService[0]['valuePiso1Efectivo'] = 0
+    if (Boolean(this.editarService[0]['cashFloor1']) == true) this.editarService[0]['valueFloor1Cash'] = Number(this.editarService[0]['numberFloor1'])
+    else this.editarService[0]['valueFloor1Cash'] = 0
 
-    if (Boolean(this.editarService[0]['efectPiso2']) == true) this.editarService[0]['valuePiso2Efectivo'] = Number(this.editarService[0]['numberPiso2'])
-    else this.editarService[0]['valuePiso2Efectivo'] = 0
+    if (Boolean(this.editarService[0]['cashFloor2']) == true) this.editarService[0]['valueFloor2Cash'] = Number(this.editarService[0]['numberFloor2'])
+    else this.editarService[0]['valueFloor2Cash'] = 0
 
-    if (Boolean(this.editarService[0]['bizuPiso1']) == true) this.editarService[0]['valuePiso1Bizum'] = Number(this.editarService[0]['numberPiso1'])
-    else this.editarService[0]['valuePiso1Bizum'] = 0
+    if (Boolean(this.editarService[0]['bizuFloor1']) == true) this.editarService[0]['valueFloor1Bizum'] = Number(this.editarService[0]['numberFloor1'])
+    else this.editarService[0]['valueFloor1Bizum'] = 0
 
-    if (Boolean(this.editarService[0]['bizuPiso2']) == true) this.editarService[0]['valuePiso2Bizum'] = Number(this.editarService[0]['numberPiso2'])
-    else this.editarService[0]['valuePiso2Bizum'] = 0
+    if (Boolean(this.editarService[0]['bizuFloor2']) == true) this.editarService[0]['valueFloor2Bizum'] = Number(this.editarService[0]['numberFloor2'])
+    else this.editarService[0]['valueFloor2Bizum'] = 0
 
-    if (Boolean(this.editarService[0]['tarjPiso1']) == true) this.editarService[0]['valuePiso1Tarjeta'] = Number(this.editarService[0]['numberPiso1'])
-    else this.editarService[0]['valuePiso1Tarjeta'] = 0
+    if (Boolean(this.editarService[0]['cardFloor1']) == true) this.editarService[0]['valueFloor1Card'] = Number(this.editarService[0]['numberFloor1'])
+    else this.editarService[0]['valueFloor1Card'] = 0
 
-    if (Boolean(this.editarService[0]['tarjPiso2']) == true) this.editarService[0]['valuePiso2Tarjeta'] = Number(this.editarService[0]['numberPiso2'])
-    else this.editarService[0]['valuePiso2Tarjeta'] = 0
+    if (Boolean(this.editarService[0]['cardFloor2']) == true) this.editarService[0]['valueFloor2Card'] = Number(this.editarService[0]['numberFloor2'])
+    else this.editarService[0]['valueFloor2Card'] = 0
 
-    if (Boolean(this.editarService[0]['transPiso1']) == true) this.editarService[0]['valuePiso1Transaccion'] = Number(this.editarService[0]['numberPiso1'])
-    else this.editarService[0]['valuePiso1Transaccion'] = 0
+    if (Boolean(this.editarService[0]['transactionFloor1']) == true) this.editarService[0]['valueFloor1Transaction'] = Number(this.editarService[0]['numberFloor1'])
+    else this.editarService[0]['valueFloor1Transaction'] = 0
 
-    if (Boolean(this.editarService[0]['transPiso2']) == true) this.editarService[0]['valuePiso2Transaccion'] = Number(this.editarService[0]['numberPiso2'])
-    else this.editarService[0]['valuePiso2Transaccion'] = 0
+    if (Boolean(this.editarService[0]['transactionFloor2']) == true) this.editarService[0]['valueFloor2Transaction'] = Number(this.editarService[0]['numberFloor2'])
+    else this.editarService[0]['valueFloor2Transaction'] = 0
   }
 
   managerAndTherapist() {
 
-    if (Boolean(this.editarService[0]['efectTerap']) == true && Number(this.editarService[0]['numberTerap']) > 0) {
-      this.editarService[0]['valueEfectTerapeuta'] = Number(this.editarService[0]['numberTerap'])
+    if (Boolean(this.editarService[0]['cashTherapist']) == true && Number(this.editarService[0]['numberTherapist']) > 0) {
+      this.editarService[0]['valueEfectTerapeuta'] = Number(this.editarService[0]['numberTherapist'])
     } else {
       this.editarService[0]['valueEfectTerapeuta'] = 0
     }
 
-    if (Boolean(this.editarService[0]['bizuTerap']) == true && Number(this.editarService[0]['numberTerap']) > 0) {
-      this.editarService[0]['valueBizuTerapeuta'] = Number(this.editarService[0]['numberTerap'])
+    if (Boolean(this.editarService[0]['bizuTherapist']) == true && Number(this.editarService[0]['numberTherapist']) > 0) {
+      this.editarService[0]['valueBizuTerapeuta'] = Number(this.editarService[0]['numberTherapist'])
     } else {
       this.editarService[0]['valueBizuTerapeuta'] = 0
     }
 
-    if (Boolean(this.editarService[0]['tarjTerap']) == true && Number(this.editarService[0]['numberTerap']) > 0) {
-      this.editarService[0]['valueTarjeTerapeuta'] = Number(this.editarService[0]['numberTerap'])
+    if (Boolean(this.editarService[0]['cardTherapist']) == true && Number(this.editarService[0]['numberTherapist']) > 0) {
+      this.editarService[0]['valueTarjeTerapeuta'] = Number(this.editarService[0]['numberTherapist'])
     } else {
       this.editarService[0]['valueTarjeTerapeuta'] = 0
     }
 
-    if (Boolean(this.editarService[0]['transTerap']) == true && Number(this.editarService[0]['numberTerap']) > 0) {
-      this.editarService[0]['valueTransTerapeuta'] = Number(this.editarService[0]['numberTerap'])
+    if (Boolean(this.editarService[0]['transactionTherapist']) == true && Number(this.editarService[0]['numberTherapist']) > 0) {
+      this.editarService[0]['valueTransTerapeuta'] = Number(this.editarService[0]['numberTherapist'])
     } else {
       this.editarService[0]['valueTransTerapeuta'] = 0
     }
 
     // Encargada
 
-    if (Boolean(this.editarService[0]['efectEncarg']) == true && Number(this.editarService[0]['numberEncarg']) > 0) {
-      this.editarService[0]['valueEfectEncargada'] = Number(this.editarService[0]['numberEncarg'])
+    if (Boolean(this.editarService[0]['cashManager']) == true && Number(this.editarService[0]['numberManager']) > 0) {
+      this.editarService[0]['valueEfectEncargada'] = Number(this.editarService[0]['numberManager'])
     } else {
       this.editarService[0]['valueEfectEncargada'] = 0
     }
 
-    if (Boolean(this.editarService[0]['bizuEncarg']) == true && Number(this.editarService[0]['numberEncarg']) > 0) {
-      this.editarService[0]['valueBizuEncargada'] = Number(this.editarService[0]['numberEncarg'])
+    if (Boolean(this.editarService[0]['bizuManager']) == true && Number(this.editarService[0]['numberManager']) > 0) {
+      this.editarService[0]['valueBizuEncargada'] = Number(this.editarService[0]['numberManager'])
     } else {
       this.editarService[0]['valueBizuEncargada'] = 0
     }
 
-    if (Boolean(this.editarService[0]['tarjEncarg']) == true && Number(this.editarService[0]['numberEncarg']) > 0) {
-      this.editarService[0]['valueTarjeEncargada'] = Number(this.editarService[0]['numberEncarg'])
+    if (Boolean(this.editarService[0]['cardManager']) == true && Number(this.editarService[0]['numberManager']) > 0) {
+      this.editarService[0]['valueTarjeEncargada'] = Number(this.editarService[0]['numberManager'])
     } else {
       this.editarService[0]['valueTarjeEncargada'] = 0
     }
 
-    if (Boolean(this.editarService[0]['transEncarg']) == true && Number(this.editarService[0]['numberEncarg']) > 0) {
-      this.editarService[0]['valueTransEncargada'] = Number(this.editarService[0]['numberEncarg'])
+    if (Boolean(this.editarService[0]['transactionManager']) == true && Number(this.editarService[0]['numberManager']) > 0) {
+      this.editarService[0]['valueTransEncargada'] = Number(this.editarService[0]['numberManager'])
     } else {
       this.editarService[0]['valueTransEncargada'] = 0
     }
@@ -1479,12 +1454,12 @@ export class EditServicesPage implements OnInit {
   bizumFloor1() {
     if (document.getElementById('bizumHouse1').style.background == "") {
       document.getElementById('bizumHouse1').style.background = '#1fb996'
-      this.services.bizuPiso1 = true
-      this.editarService[0].bizuPiso1 = true
+      this.services.bizuFloor1 = true
+      this.editarService[0].bizuFloor1 = true
     } else {
       document.getElementById('bizumHouse1').style.background = ""
-      this.services.bizuPiso1 = false
-      this.editarService[0].bizuPiso1 = false
+      this.services.bizuFloor1 = false
+      this.editarService[0].bizuFloor1 = false
     }
 
     this.validationsFormOfPayment()
@@ -1493,12 +1468,12 @@ export class EditServicesPage implements OnInit {
   cardFloor1() {
     if (document.getElementById('cardHouse1').style.background == "") {
       document.getElementById('cardHouse1').style.background = '#1fb996'
-      this.services.tarjPiso1 = true
-      this.editarService[0].tarjPiso1 = true
+      this.services.cardFloor1 = true
+      this.editarService[0].cardFloor1 = true
     } else {
       document.getElementById('cardHouse1').style.background = ""
-      this.services.tarjPiso1 = false
-      this.editarService[0].tarjPiso1 = false
+      this.services.cardFloor1 = false
+      this.editarService[0].cardFloor1 = false
     }
 
     this.validationsFormOfPayment()
@@ -1507,12 +1482,12 @@ export class EditServicesPage implements OnInit {
   transFloor1() {
     if (document.getElementById('transHouse1').style.background == "") {
       document.getElementById('transHouse1').style.background = '#1fb996'
-      this.services.transPiso1 = true
-      this.editarService[0].transPiso1 = true
+      this.services.transactionFloor1 = true
+      this.editarService[0].transactionFloor1 = true
     } else {
       document.getElementById('transHouse1').style.background = ""
-      this.services.transPiso1 = false
-      this.editarService[0].transPiso1 = false
+      this.services.transactionFloor1 = false
+      this.editarService[0].transactionFloor1 = false
     }
 
     this.validationsFormOfPayment()
@@ -1521,12 +1496,12 @@ export class EditServicesPage implements OnInit {
   cashFloor1() {
     if (document.getElementById('cashHouse1').style.background == "") {
       document.getElementById('cashHouse1').style.background = '#1fb996'
-      this.services.efectPiso1 = true
-      this.editarService[0].efectPiso1 = true
+      this.services.cashFloor1 = true
+      this.editarService[0].cashFloor1 = true
     } else {
       document.getElementById('cashHouse1').style.background = ""
-      this.services.efectPiso1 = false
-      this.editarService[0].efectPiso1 = false
+      this.services.cashFloor1 = false
+      this.editarService[0].cashFloor1 = false
     }
 
     this.validationsFormOfPayment()
@@ -1535,12 +1510,12 @@ export class EditServicesPage implements OnInit {
   bizumFloor2() {
     if (document.getElementById('bizumHouse2').style.background == "") {
       document.getElementById('bizumHouse2').style.background = '#1fb996'
-      this.services.bizuPiso2 = true
-      this.editarService[0].bizuPiso2 = true
+      this.services.bizuFloor2 = true
+      this.editarService[0].bizuFloor2 = true
     } else {
       document.getElementById('bizumHouse2').style.background = ""
-      this.services.bizuPiso2 = false
-      this.editarService[0].bizuPiso2 = false
+      this.services.bizuFloor2 = false
+      this.editarService[0].bizuFloor2 = false
     }
 
     this.validationsFormOfPayment()
@@ -1549,12 +1524,12 @@ export class EditServicesPage implements OnInit {
   cardFloor2() {
     if (document.getElementById('cardHouse2').style.background == "") {
       document.getElementById('cardHouse2').style.background = '#1fb996'
-      this.services.tarjPiso2 = true
-      this.editarService[0].tarjPiso2 = true
+      this.services.cardFloor2 = true
+      this.editarService[0].cardFloor2 = true
     } else {
       document.getElementById('cardHouse2').style.background = ""
-      this.services.tarjPiso2 = false
-      this.editarService[0].tarjPiso2 = true
+      this.services.cardFloor2 = false
+      this.editarService[0].cardFloor2 = true
     }
 
     this.validationsFormOfPayment()
@@ -1563,12 +1538,12 @@ export class EditServicesPage implements OnInit {
   transFloor2() {
     if (document.getElementById('transHouse2').style.background == "") {
       document.getElementById('transHouse2').style.background = '#1fb996'
-      this.services.transPiso2 = true
-      this.editarService[0].transPiso2 = true
+      this.services.transactionFloor2 = true
+      this.editarService[0].transactionFloor2 = true
     } else {
       document.getElementById('transHouse2').style.background = ""
-      this.services.transPiso2 = false
-      this.editarService[0].transPiso2 = false
+      this.services.transactionFloor2 = false
+      this.editarService[0].transactionFloor2 = false
     }
 
     this.validationsFormOfPayment()
@@ -1577,12 +1552,12 @@ export class EditServicesPage implements OnInit {
   cashFloor2() {
     if (document.getElementById('cashHouse2').style.background == "") {
       document.getElementById('cashHouse2').style.background = '#1fb996'
-      this.services.efectPiso2 = true
-      this.editarService[0].efectPiso2 = true
+      this.services.cashFloor2 = true
+      this.editarService[0].cashFloor2 = true
     } else {
       document.getElementById('cashHouse2').style.background = ""
-      this.services.efectPiso2 = false
-      this.editarService[0].efectPiso2 = false
+      this.services.cashFloor2 = false
+      this.editarService[0].cashFloor2 = false
     }
 
     this.validationsFormOfPayment()
@@ -1591,12 +1566,12 @@ export class EditServicesPage implements OnInit {
   bizumTherapist() {
     if (document.getElementById('bizumTherapist').style.background == "") {
       document.getElementById('bizumTherapist').style.background = '#1fb996'
-      this.services.bizuTerap = true
-      this.editarService[0].bizuTerap = true
+      this.services.bizuTherapist = true
+      this.editarService[0].bizuTherapist = true
     } else {
       document.getElementById('bizumTherapist').style.background = ""
-      this.services.bizuTerap = false
-      this.editarService[0].bizuTerap = false
+      this.services.bizuTherapist = false
+      this.editarService[0].bizuTherapist = false
     }
 
     this.validationsFormOfPayment()
@@ -1605,12 +1580,12 @@ export class EditServicesPage implements OnInit {
   cardTherapist() {
     if (document.getElementById('cardTherapist').style.background == "") {
       document.getElementById('cardTherapist').style.background = '#1fb996'
-      this.services.tarjTerap = true
-      this.editarService[0].tarjTerap = false
+      this.services.cardTherapist = true
+      this.editarService[0].cardTherapist = false
     } else {
       document.getElementById('cardTherapist').style.background = ""
-      this.services.tarjTerap = false
-      this.editarService[0].tarjTerap = false
+      this.services.cardTherapist = false
+      this.editarService[0].cardTherapist = false
     }
 
     this.validationsFormOfPayment()
@@ -1619,12 +1594,12 @@ export class EditServicesPage implements OnInit {
   transTherapist() {
     if (document.getElementById('transTherapist').style.background == "") {
       document.getElementById('transTherapist').style.background = '#1fb996'
-      this.services.transTerap = true
-      this.editarService[0].transTerap = true
+      this.services.transactionTherapist = true
+      this.editarService[0].transactionTherapist = true
     } else {
       document.getElementById('transTherapist').style.background = ""
-      this.services.transTerap = false
-      this.editarService[0].transTerap = false
+      this.services.transactionTherapist = false
+      this.editarService[0].transactionTherapist = false
     }
 
     this.validationsFormOfPayment()
@@ -1633,12 +1608,12 @@ export class EditServicesPage implements OnInit {
   cashTherapist() {
     if (document.getElementById('cashTherapist').style.background == "") {
       document.getElementById('cashTherapist').style.background = '#1fb996'
-      this.services.efectTerap = true
-      this.editarService[0].efectTerap = true
+      this.services.cashTherapist = true
+      this.editarService[0].cashTherapist = true
     } else {
       document.getElementById('cashTherapist').style.background = ""
-      this.services.efectTerap = false
-      this.editarService[0].efectTerap = false
+      this.services.cashTherapist = false
+      this.editarService[0].cashTherapist = false
     }
 
     this.validationsFormOfPayment()
@@ -1647,12 +1622,12 @@ export class EditServicesPage implements OnInit {
   bizumManager() {
     if (document.getElementById('bizumManager').style.background == "") {
       document.getElementById('bizumManager').style.background = '#1fb996'
-      this.services.bizuEncarg = true
-      this.editarService[0].bizuEncarg = true
+      this.services.bizuManager = true
+      this.editarService[0].bizuManager = true
     } else {
       document.getElementById('bizumManager').style.background = ""
-      this.services.bizuEncarg = false
-      this.editarService[0].bizuEncarg = true
+      this.services.bizuManager = false
+      this.editarService[0].bizuManager = true
     }
 
     this.validationsFormOfPayment()
@@ -1661,12 +1636,12 @@ export class EditServicesPage implements OnInit {
   cardManager() {
     if (document.getElementById('cardManager').style.background == "") {
       document.getElementById('cardManager').style.background = '#1fb996'
-      this.services.tarjEncarg = true
-      this.editarService[0].tarjEncarg = true
+      this.services.cardManager = true
+      this.editarService[0].cardManager = true
     } else {
       document.getElementById('cardManager').style.background = ""
-      this.services.tarjEncarg = false
-      this.editarService[0].tarjEncarg = false
+      this.services.cardManager = false
+      this.editarService[0].cardManager = false
     }
 
     this.validationsFormOfPayment()
@@ -1675,12 +1650,12 @@ export class EditServicesPage implements OnInit {
   transManager() {
     if (document.getElementById('transManager').style.background == "") {
       document.getElementById('transManager').style.background = '#1fb996'
-      this.services.transEncarg = true
-      this.editarService[0].transEncarg = true
+      this.services.transactionManager = true
+      this.editarService[0].transactionManager = true
     } else {
       document.getElementById('transManager').style.background = ""
-      this.services.transEncarg = false
-      this.editarService[0].transEncarg = false
+      this.services.transactionManager = false
+      this.editarService[0].transactionManager = false
     }
 
     this.validationsFormOfPayment()
@@ -1689,12 +1664,12 @@ export class EditServicesPage implements OnInit {
   cashManager() {
     if (document.getElementById('cashManager').style.background == "") {
       document.getElementById('cashManager').style.background = '#1fb996'
-      this.services.efectEncarg = true
-      this.editarService[0].efectEncarg = true
+      this.services.cashManager = true
+      this.editarService[0].cashManager = true
     } else {
       document.getElementById('cashManager').style.background = ""
-      this.services.efectEncarg = false
-      this.editarService[0].efectEncarg = false
+      this.services.cashManager = false
+      this.editarService[0].cashManager = false
     }
 
     this.validationsFormOfPayment()
@@ -1708,15 +1683,15 @@ export class EditServicesPage implements OnInit {
 
   save(idServicio, serv: ModelService) {
     if (this.restamosCobroEdit == 0) {
-      if (serv.minuto != null) {
+      if (serv.minutes != null) {
         this.ionLoaderService.simpleLoader()
         if (!this.expiredDateValidationsEdit()) return
         if (!this.validationsToSelectAPaymentMethod()) return
         if (!this.validationsFormOfPayment()) return
         this.fullService()
 
-        if (Boolean(this.editarService[0]['efectPiso1']) == true || Boolean(this.editarService[0]['efectPiso2']) == true ||
-          Boolean(this.editarService[0]['efectTerap']) == true || Boolean(this.editarService[0]['efectEncarg']) == true ||
+        if (Boolean(this.editarService[0]['cashFloor1']) == true || Boolean(this.editarService[0]['cashFloor2']) == true ||
+          Boolean(this.editarService[0]['cashTherapist']) == true || Boolean(this.editarService[0]['cashManager']) == true ||
           Boolean(this.editarService[0]['efectDriverTaxi']) == true) {
           this.validateEfect = true
           this.efectCheckToggle(this.validateEfect)
@@ -1724,8 +1699,8 @@ export class EditServicesPage implements OnInit {
           localStorage.removeItem('Efectivo')
         }
 
-        if (Boolean(this.editarService[0]['bizuPiso1']) == true || Boolean(this.editarService[0]['bizuPiso2']) == true ||
-          Boolean(this.editarService[0]['bizuTerap']) == true || Boolean(this.editarService[0]['bizuEncarg']) == true ||
+        if (Boolean(this.editarService[0]['bizuFloor1']) == true || Boolean(this.editarService[0]['bizuFloor2']) == true ||
+          Boolean(this.editarService[0]['bizuTherapist']) == true || Boolean(this.editarService[0]['bizuManager']) == true ||
           Boolean(this.editarService[0]['bizuDriverTaxi']) == true) {
           this.validateBizum = true
           this.bizumCheckToggle(this.validateBizum)
@@ -1733,8 +1708,8 @@ export class EditServicesPage implements OnInit {
           localStorage.removeItem('Bizum')
         }
 
-        if (Boolean(this.editarService[0]['tarjPiso1']) == true || Boolean(this.editarService[0]['tarjPiso2']) == true ||
-          Boolean(this.editarService[0]['tarjTerap']) == true || Boolean(this.editarService[0]['tarjEncarg']) == true ||
+        if (Boolean(this.editarService[0]['cardFloor1']) == true || Boolean(this.editarService[0]['cardFloor2']) == true ||
+          Boolean(this.editarService[0]['cardTherapist']) == true || Boolean(this.editarService[0]['cardManager']) == true ||
           Boolean(this.editarService[0]['tarjDriverTaxi']) == true) {
           this.validateTarjeta = true
           this.tarjCheckToggle(this.validateTarjeta)
@@ -1742,8 +1717,8 @@ export class EditServicesPage implements OnInit {
           localStorage.removeItem('Tarjeta')
         }
 
-        if (Boolean(this.editarService[0]['transPiso1']) == true || Boolean(this.editarService[0]['transPiso2']) == true ||
-          Boolean(this.editarService[0]['transTerap']) == true || Boolean(this.editarService[0]['transEncarg']) == true ||
+        if (Boolean(this.editarService[0]['transactionFloor1']) == true || Boolean(this.editarService[0]['transactionFloor2']) == true ||
+          Boolean(this.editarService[0]['transactionTherapist']) == true || Boolean(this.editarService[0]['transactionManager']) == true ||
           Boolean(this.editarService[0]['transDriverTaxi']) == true) {
           this.validateTrans = true
           this.transCheckToggle(this.validateTrans)
@@ -1756,29 +1731,28 @@ export class EditServicesPage implements OnInit {
         this.editValue()
 
         serv.modifiedBy = this.modifiedUser
-        serv.modifiedTime = this.modifiedDate
-        serv.fechaFin = this.editarService[0]['fechaFin']
-        serv.horaEnd = this.editarService[0]['horaEnd']
+        // serv.fechaFin = this.editarService[0]['fechaFin']
+        // serv.horaEnd = this.editarService[0]['horaEnd']
 
-        this.therapist.dateEnd = `${serv.fechaFin} ${serv.horaEnd}`
-        this.therapist.exit = serv.salida
-        this.therapist.minutes = serv.minuto
+        // this.therapist.dateEnd = `${serv.fechaFin} ${serv.horaEnd}`
+        this.therapist.exit = serv.exit
+        this.therapist.minutes = serv.minutes
 
         this.serviceServices.getById(idServicio).subscribe((rp: any) => {
-          this.services.pantalla = rp[0].pantalla
-          if (rp[0]['terapeuta'] != serv.terapeuta) {
-            this.serviceTherapist.updateItems(rp[0]['terapeuta'], this.therapist).subscribe((rp: any) => { });
+          this.services.screen = rp[0].pantalla
+          if (rp[0]['therapist'] != serv.therapist) {
+            this.serviceTherapist.updateItems(rp[0]['therapist'], this.therapist).subscribe((rp: any) => { });
           }
         });
 
-        this.serviceTherapist.update3Item(this.editarService[0]['terapeuta'], this.therapist).subscribe((rp: any) => { })
+        this.serviceTherapist.update3Item(this.editarService[0]['therapist'], this.therapist).subscribe((rp: any) => { })
 
         this.sortDateToEdit()
         this.serviceServices.updateServicio(idServicio, serv).subscribe((rp: any) => {
           this.presentController('Actualizado correctamente!')
           setTimeout(() => {
             this.ionLoaderService.dismissLoader()
-            location.replace(`tabs/${this.idUser}/${this.services.pantalla}`)
+            location.replace(`tabs/${this.idUser}/${this.services.screen}`)
           }, 1000)
         })
       } else {
@@ -1789,7 +1763,7 @@ export class EditServicesPage implements OnInit {
     }
   }
 
-  delete(id) {
+  delete(id: number) {
     if (this.administratorRole == true) {
       this.serviceServices.getById(id).subscribe((datoEliminado) => {
         if (datoEliminado) {
@@ -1805,15 +1779,15 @@ export class EditServicesPage implements OnInit {
             if (result.isConfirmed) {
               this.presentController('¡Eliminado Correctamente!')
               this.ionLoaderService.simpleLoader()
-              let screen = this.services.pantalla
-              this.serviceTherapist.name(datoEliminado[0]['terapeuta']).subscribe((rp: any) => {
+              let screen = this.services.screen
+              this.serviceTherapist.name(datoEliminado[0]['therapist']).subscribe((rp: any) => {
                 this.serviceTherapist.updateItems(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
               })
               localStorage.removeItem('Efectivo')
               localStorage.removeItem('Bizum')
               localStorage.removeItem('Tarjeta')
               localStorage.removeItem('Trans')
-              this.serviceServices.deleteServicio(id).subscribe((rp: any) => {
+              this.serviceServices.delete(id).subscribe((rp: any) => {
                 this.ionLoaderService.dismissLoader()
                 location.replace(`tabs/${this.idUser}/${screen}`)
               })
@@ -1833,7 +1807,8 @@ export class EditServicesPage implements OnInit {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000,
-      cssClass: 'custom-loader-class',
+      position: 'middle',
+      cssClass:'toast-class',
     });
     toast.present();
   }

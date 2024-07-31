@@ -23,9 +23,12 @@ import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.servi
 export class NewPage implements OnInit {
   hourStartTerapeuta = ''
   horaEndTerapeuta = ''
+  hourEnd = ''
+  hourStart = ''
 
-  fechaActual = ''
-  horaStarted = new Date().toTimeString().substring(0, 5)
+  dateToday = dayjs().format("YYYY-MM-DD")
+  fechaActual = dayjs().format("YYYY-MM-DD HH:mm")
+  horaStarted = dayjs().format("HH:mm")
   dateConvertion = new Date()
   fechaHoyInicio = ''
   currentDate = new Date().getTime()
@@ -37,11 +40,6 @@ export class NewPage implements OnInit {
   fechaLast = []
   manager: any
   administratorRole: boolean = false
-
-  chageDate = ''
-  formaPago: string = ''
-  salidaTrabajador = ''
-
   horaInicialServicio: string
   servicioTotal = 0
 
@@ -66,86 +64,83 @@ export class NewPage implements OnInit {
   buttonSave: any
 
   services: ModelService = {
-    bebidas: "",
-    bebidaTerap: "",
-    bizuEncarg: false,
+    bizuManager: false,
     bizuDriverTaxi: false,
-    bizuPiso1: false,
-    bizuPiso2: false,
-    bizuTerap: false,
-    cierre: false,
-    cliente: "",
+    bizuFloor1: false,
+    bizuFloor2: false,
+    bizuTherapist: false,
+    cardManager: false,
+    cardDriverTaxi: false,
+    cardFloor1: false,
+    cardFloor2: false,
+    cardTherapist: false,
+    cashManager: false,
+    cashDriverTaxi: false,
+    cashFloor1: false,
+    cashFloor2: false,
+    cashTherapist: false,
+    closing: false,
+    client: "",
     company: "",
     createdBy: "",
-    createdTime: "",
-    currentDate: "",
-    efectEncarg: false,
-    efectDriverTaxi: false,
-    efectPiso1: false,
-    efectPiso2: false,
-    efectTerap: false,
-    encargada: "",
-    fecha: "",
-    fechaFin: "",
-    fechaHoyInicio: "",
-    formaPago: "",
-    horaEnd: "",
-    horaStart: "",
-    id: 0,
-    idCierre: "",
-    idEncargada: "",
-    idTerapeuta: "",
-    idUnico: "",
-    liquidadoEncargada: false,
-    liquidadoTerapeuta: false,
-    minuto: 0,
+    currentDate: 0,
+    dateStart: dayjs().format("YYYY-MM-DD HH:mm"),
+    dateEnd: dayjs().format("YYYY-MM-DD HH:mm"),
+    dateToday: dayjs().format("YYYY-MM-DD HH:mm"),
+    drink: 0,
+    drinkTherapist: 0,
+    edit: false,
+    exit: "",
+    idClosing: "",
+    idManag: "",
+    idTherap: "",
+    liquidatedManager: false,
+    liquidatedTherapist: false,
+    manager: "",
+    minutes: 0,
     modifiedBy: "",
-    modifiedTime: "",
-    nota: "",
-    numberEncarg: "",
-    numberTaxi: "",
-    numberPiso1: "",
-    numberPiso2: "",
-    numberTerap: "",
-    otros: "",
-    propina: "",
-    salida: "",
-    servicio: "",
-    tabaco: "",
-    tarjEncarg: false,
-    tarjDriverTaxi: false,
-    tarjPiso1: false,
-    tarjPiso2: false,
-    tarjTerap: false,
-    taxi: "",
-    terapeuta: "",
-    totalServicio: 0,
-    transEncarg: false,
-    transDriverTaxi: false,
-    transPiso1: false,
-    transPiso2: false,
-    transTerap: false,
-    valueBizuEncargada: 0,
+    note: "",
+    numberManager: 0,
+    numberTaxi: 0,
+    numberFloor1: 0,
+    numberFloor2: 0,
+    numberTherapist: 0,
+    others: 0,
+    payment: "",
+    screen: "",
+    service: 0,
+    tabacco: 0,
+    taxi: 0,
+    therapist: "",
+    tip: 0,
+    totalService: 0,
+    transactionManager: false,
+    transactionDriverTaxi: false,
+    transactionFloor1: false,
+    transactionFloor2: false,
+    transactionTherapist: false,
+    uniqueId: "",
+    valueBizuManager: 0,
+    valueBizuTherapist: 0,
     valueBizum: 0,
-    valueBizuTerapeuta: 0,
-    valueEfectEncargada: 0,
-    valueEfectivo: 0,
-    valueEfectTerapeuta: 0,
-    valuePiso1Bizum: 0,
-    valuePiso1Efectivo: 0,
-    valuePiso1Tarjeta: 0,
-    valuePiso1Transaccion: 0,
-    valuePiso2Bizum: 0,
-    valuePiso2Efectivo: 0,
-    valuePiso2Tarjeta: 0,
-    valuePiso2Transaccion: 0,
-    valueTarjeEncargada: 0,
-    valueTarjeta: 0,
-    valueTarjeTerapeuta: 0,
-    valueTrans: 0,
-    valueTransEncargada: 0,
-    valueTransTerapeuta: 0,
-    vitaminas: "",
+    valueEfectManager: 0,
+    valueEfectTherapist: 0,
+    valueCash: 0,
+    valueFloor1Bizum: 0,
+    valueFloor1Cash: 0,
+    valueFloor1Card: 0,
+    valueFloor1Transaction: 0,
+    valueFloor2Bizum: 0,
+    valueFloor2Cash: 0,
+    valueFloor2Card: 0,
+    valueFloor2Transaction: 0,
+    valueCardManager: 0,
+    valueCardTherapist: 0,
+    valueCard: 0,
+    valueTransaction: 0,
+    valueTransactionManager: 0,
+    valueTransactionTherapist: 0,
+    vitamin: 0
   }
 
   therapist: ModelTherapist = {
@@ -181,32 +176,28 @@ export class NewPage implements OnInit {
 
     if (this.idUser) {
       this.serviceManager.getId(this.idUser).subscribe((rp) => {
-        this.created(rp)
-        if (rp[0]['rol'] == 'administrador') {
+        this.created(rp['manager'])
+        if (rp['manager'].rol == 'Administrador') {
+          this.administratorRole = true
           this.getManager()
         } else {
+          this.administratorRole = false
           this.manager = rp
-          this.services.encargada = this.manager[0].nombre
+          this.services.manager = this.manager[0].nombre
         }
       })
     }
 
     this.getTherapist()
     this.getManager()
-    this.date()
 
     this.horaInicialServicio = this.horaStarted
-    this.services.horaEnd = this.horaStarted
-    this.services.horaStart = this.horaStarted
+    this.hourEnd = this.horaStarted
+    this.hourStart = this.horaStarted
   }
 
   created(rp: any) {
-    this.services.createdBy = rp[0]['nombre']
-
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    this.services.createdTime = date + ' ' + time;
+    this.services.createdBy = rp.name
   }
 
   showKeyBoard(text: string) {
@@ -285,12 +276,12 @@ export class NewPage implements OnInit {
       }
     }
 
-    if (text === 'tobacco') {
+    if (text === 'tabacco') {
       document.getElementById('box-tobacco').style.boxShadow = '0px 0px 0px 2px var(--verde, #1fb996)'
       document.getElementById('box-tobacco').style.borderColor = '0px 0px 0px 2px var(--verde, #1fb996)'
 
       var screen = document.querySelector<HTMLElement>(".nuevo-servicio")
-      var element_to_show = document.getElementById('tobacco')
+      var element_to_show = document.getElementById('tabacco')
       var scrolling_parent = element_to_show.parentElement
 
       var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
@@ -565,45 +556,8 @@ export class NewPage implements OnInit {
     }
   }
 
-  date() {
-    let fecha = new Date(), dia = 0, mes = 0, año = 0, convertMes = '', convertDia = ''
-
-    dia = fecha.getDate()
-    mes = fecha.getMonth() + 1
-    año = fecha.getFullYear()
-
-    if (mes > 0 && mes < 10) {
-      convertMes = '0' + mes
-      this.fechaActual = `${año}-${convertMes}-${dia}`
-    } else {
-      convertMes = mes.toString()
-      this.fechaActual = `${año}-${mes}-${dia}`
-    }
-
-    if (dia > 0 && dia < 10) {
-      convertDia = '0' + dia
-      this.fechaActual = `${año}-${convertMes}-${convertDia}`
-    } else {
-      convertDia = dia.toString()
-      this.fechaActual = `${año}-${convertMes}-${dia}`
-    }
-  }
-
-  sortedDate() {
-    let dia = '', mes = '', año = '', currentDate = new Date()
-
-    dia = this.fechaActual.substring(8, 10)
-    mes = this.fechaActual.substring(5, 7)
-    año = this.fechaActual.substring(2, 4)
-
-    this.fechaActual = `${dia}-${mes}-${año}`
-    this.services.fecha = this.fechaActual
-
-    this.services.fechaHoyInicio = `${currentDate.getFullYear()}-${mes}-${dia}`
-  }
-
   getLastDate() {
-    this.serviceServices.getServicio().subscribe((datoLastDate: any) => {
+    this.serviceServices.getService().subscribe((datoLastDate: any) => {
       if (datoLastDate.length > 0) this.fechaLast[0] = datoLastDate[0]
       else this.fechaLast = datoLastDate['00:00']
     })
@@ -611,43 +565,36 @@ export class NewPage implements OnInit {
 
   getTherapist() {
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-      this.serviceTherapist.company(rp[0].company).subscribe((datosTerapeuta: any) => {
-        this.terapeuta = datosTerapeuta
+      this.serviceTherapist.company(rp['manager'].company).subscribe((rp: any) => {
+        this.terapeuta = rp['therapist']
       })
     })
   }
 
   getManager() {
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-      this.services.company = rp[0].company
-      this.serviceManager.company(rp[0].company).subscribe((datosEncargada: any) => {
-        this.manager = datosEncargada
+      this.services.company = rp['manager'].company
+      this.serviceManager.company(this.services.company).subscribe((rp: any) => {
+        this.manager = rp['manager']
       })
     })
   }
 
-  changeFecha(event) {
-    this.chageDate = event.target.value.substring(5, 10)
-  }
-
   expiredDateValidations() {
     let currentHours, diferenceHour
-    const splitDate = this.fechaActual.split('-')
-    const selectDate = new Date(`${splitDate[1]}/${splitDate[2].slice(0, 2)}/${splitDate[0]}/${this.horaInicialServicio}`)
+    let dateToday = dayjs().format("DD-MM-YY")
+    const splitDate = dateToday.split('-')
+    const selectDate = new Date(`${splitDate[1]}/${splitDate[0]}/${splitDate[2]}/${this.horaInicialServicio}`)
     const currentDate = new Date()
     const currentDateWithoutHours = new Date(`${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()}`)
-
     diferenceHour = (currentDate.getTime() - selectDate.getTime()) / 1000
     diferenceHour /= (60 * 60)
-
     currentHours = Math.abs(Math.round(diferenceHour))
 
-    // const currentHours = currentDate.getHours()
-    if (selectDate < currentDateWithoutHours || currentHours > 24) {
+    if (selectDate < currentDateWithoutHours || currentHours > 24 && this.administratorRole == false) {
       this.presentController('No se puede crear el servicio por la fecha.')
       return false
     }
-
     return true
   }
 
@@ -659,50 +606,35 @@ export class NewPage implements OnInit {
       return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16)
     })
 
-    this.services.idUnico = uuid
+    this.services.uniqueId = uuid
     this.idUnico = uuid
     return this.idUnico
   }
 
   convertZero() {
-    this.services.numberPiso1 = "0"
-    this.services.numberPiso2 = "0"
-    this.services.numberEncarg = "0"
-    this.services.numberTerap = "0"
-    this.services.numberTaxi = "0"
-    this.services.servicio = "0"
-    this.services.bebidas = "0"
-    this.services.bebidaTerap = "0"
-    this.services.tabaco = "0"
-    this.services.taxi = "0"
-    this.services.vitaminas = "0"
-    this.services.propina = "0"
-    this.services.otros = "0"
-    this.services.totalServicio = 0
-  }
-
-  validateTheEmptyField() {
-    if (this.services.bebidas == "") this.services.bebidas = "0"
-    if (this.services.bebidaTerap == "") this.services.bebidaTerap = "0"
-    if (this.services.numberEncarg == "") this.services.numberEncarg = "0"
-    if (this.services.numberTaxi == "") this.services.numberTaxi = "0"
-    if (this.services.numberPiso1 == "") this.services.numberPiso1 = "0"
-    if (this.services.numberPiso2 == "") this.services.numberPiso2 = "0"
-    if (this.services.numberTerap == "") this.services.numberTerap = "0"
-    if (this.services.otros == "") this.services.otros = "0"
-    if (this.services.propina == "") this.services.propina = "0"
-    if (this.services.tabaco == "") this.services.tabaco = "0"
-    if (this.services.taxi == "") this.services.taxi = "0"
-    if (this.services.vitaminas == "") this.services.vitaminas = "0"
+    this.services.numberFloor1 = 0
+    this.services.numberFloor2 = 0
+    this.services.numberManager = 0
+    this.services.numberTherapist = 0
+    this.services.numberTaxi = 0
+    this.services.service = 0
+    this.services.drink = 0
+    this.services.drinkTherapist = 0
+    this.services.tabacco = 0
+    this.services.taxi = 0
+    this.services.vitamin = 0
+    this.services.tip = 0
+    this.services.others = 0
+    this.services.totalService = 0
   }
 
   bizumFloor1() {
     if (document.getElementById('bizumHouse1').style.background == "") {
       document.getElementById('bizumHouse1').style.background = '#1fb996'
-      this.services.bizuPiso1 = true
+      this.services.bizuFloor1 = true
     } else {
       document.getElementById('bizumHouse1').style.background = ""
-      this.services.bizuPiso1 = false
+      this.services.bizuFloor1 = false
     }
 
     this.validatePayment()
@@ -711,10 +643,10 @@ export class NewPage implements OnInit {
   cardFloor1() {
     if (document.getElementById('cardHouse1').style.background == "") {
       document.getElementById('cardHouse1').style.background = '#1fb996'
-      this.services.tarjPiso1 = true
+      this.services.cardFloor1 = true
     } else {
       document.getElementById('cardHouse1').style.background = ""
-      this.services.tarjPiso1 = false
+      this.services.cardFloor1 = false
     }
 
     this.validatePayment()
@@ -723,10 +655,10 @@ export class NewPage implements OnInit {
   transFloor1() {
     if (document.getElementById('transHouse1').style.background == "") {
       document.getElementById('transHouse1').style.background = '#1fb996'
-      this.services.transPiso1 = true
+      this.services.transactionFloor1 = true
     } else {
       document.getElementById('transHouse1').style.background = ""
-      this.services.transPiso1 = false
+      this.services.transactionFloor1 = false
     }
 
     this.validatePayment()
@@ -735,10 +667,10 @@ export class NewPage implements OnInit {
   cashFloor1() {
     if (document.getElementById('cashHouse1').style.background == "") {
       document.getElementById('cashHouse1').style.background = '#1fb996'
-      this.services.efectPiso1 = true
+      this.services.cashFloor1 = true
     } else {
       document.getElementById('cashHouse1').style.background = ""
-      this.services.efectPiso1 = false
+      this.services.cashFloor1 = false
     }
 
     this.validatePayment()
@@ -747,10 +679,10 @@ export class NewPage implements OnInit {
   bizumFloor2() {
     if (document.getElementById('bizumHouse2').style.background == "") {
       document.getElementById('bizumHouse2').style.background = '#1fb996'
-      this.services.bizuPiso2 = true
+      this.services.bizuFloor2 = true
     } else {
       document.getElementById('bizumHouse2').style.background = ""
-      this.services.bizuPiso2 = false
+      this.services.bizuFloor2 = false
     }
 
     this.validatePayment()
@@ -759,10 +691,10 @@ export class NewPage implements OnInit {
   cardFloor2() {
     if (document.getElementById('cardHouse2').style.background == "") {
       document.getElementById('cardHouse2').style.background = '#1fb996'
-      this.services.tarjPiso2 = true
+      this.services.cardFloor2 = true
     } else {
       document.getElementById('cardHouse2').style.background = ""
-      this.services.tarjPiso2 = false
+      this.services.cardFloor2 = false
     }
 
     this.validatePayment()
@@ -771,10 +703,10 @@ export class NewPage implements OnInit {
   transFloor2() {
     if (document.getElementById('transHouse2').style.background == "") {
       document.getElementById('transHouse2').style.background = '#1fb996'
-      this.services.transPiso2 = true
+      this.services.transactionFloor2 = true
     } else {
       document.getElementById('transHouse2').style.background = ""
-      this.services.transPiso2 = false
+      this.services.transactionFloor2 = false
     }
 
     this.validatePayment()
@@ -783,10 +715,10 @@ export class NewPage implements OnInit {
   cashFloor2() {
     if (document.getElementById('cashHouse2').style.background == "") {
       document.getElementById('cashHouse2').style.background = '#1fb996'
-      this.services.efectPiso2 = true
+      this.services.cashFloor2 = true
     } else {
       document.getElementById('cashHouse2').style.background = ""
-      this.services.efectPiso2 = false
+      this.services.cashFloor2 = false
     }
 
     this.validatePayment()
@@ -795,10 +727,10 @@ export class NewPage implements OnInit {
   bizumTherapist() {
     if (document.getElementById('bizumTherapist').style.background == "") {
       document.getElementById('bizumTherapist').style.background = '#1fb996'
-      this.services.bizuTerap = true
+      this.services.bizuTherapist = true
     } else {
       document.getElementById('bizumTherapist').style.background = ""
-      this.services.bizuTerap = false
+      this.services.bizuTherapist = false
     }
 
     this.validatePayment()
@@ -807,10 +739,10 @@ export class NewPage implements OnInit {
   cardTherapist() {
     if (document.getElementById('cardTherapist').style.background == "") {
       document.getElementById('cardTherapist').style.background = '#1fb996'
-      this.services.tarjTerap = true
+      this.services.cardTherapist = true
     } else {
       document.getElementById('cardTherapist').style.background = ""
-      this.services.tarjTerap = false
+      this.services.cardTherapist = false
     }
 
     this.validatePayment()
@@ -819,10 +751,10 @@ export class NewPage implements OnInit {
   transTherapist() {
     if (document.getElementById('transTherapist').style.background == "") {
       document.getElementById('transTherapist').style.background = '#1fb996'
-      this.services.transTerap = true
+      this.services.transactionTherapist = true
     } else {
       document.getElementById('transTherapist').style.background = ""
-      this.services.transTerap = false
+      this.services.transactionTherapist = false
     }
 
     this.validatePayment()
@@ -831,10 +763,10 @@ export class NewPage implements OnInit {
   cashTherapist() {
     if (document.getElementById('cashTherapist').style.background == "") {
       document.getElementById('cashTherapist').style.background = '#1fb996'
-      this.services.efectTerap = true
+      this.services.cashTherapist = true
     } else {
       document.getElementById('cashTherapist').style.background = ""
-      this.services.efectTerap = false
+      this.services.cashTherapist = false
     }
 
     this.validatePayment()
@@ -843,10 +775,10 @@ export class NewPage implements OnInit {
   bizumManager() {
     if (document.getElementById('bizumManager').style.background == "") {
       document.getElementById('bizumManager').style.background = '#1fb996'
-      this.services.bizuEncarg = true
+      this.services.bizuManager = true
     } else {
       document.getElementById('bizumManager').style.background = ""
-      this.services.bizuEncarg = false
+      this.services.bizuManager = false
     }
 
     this.validatePayment()
@@ -855,10 +787,10 @@ export class NewPage implements OnInit {
   cardManager() {
     if (document.getElementById('cardManager').style.background == "") {
       document.getElementById('cardManager').style.background = '#1fb996'
-      this.services.tarjEncarg = true
+      this.services.cardManager = true
     } else {
       document.getElementById('cardManager').style.background = ""
-      this.services.tarjEncarg = false
+      this.services.cardManager = false
     }
 
     this.validatePayment()
@@ -867,10 +799,10 @@ export class NewPage implements OnInit {
   transManager() {
     if (document.getElementById('transManager').style.background == "") {
       document.getElementById('transManager').style.background = '#1fb996'
-      this.services.transEncarg = true
+      this.services.transactionManager = true
     } else {
       document.getElementById('transManager').style.background = ""
-      this.services.transEncarg = false
+      this.services.transactionManager = false
     }
 
     this.validatePayment()
@@ -879,23 +811,22 @@ export class NewPage implements OnInit {
   cashManager() {
     if (document.getElementById('cashManager').style.background == "") {
       document.getElementById('cashManager').style.background = '#1fb996'
-      this.services.efectEncarg = true
+      this.services.cashManager = true
     } else {
       document.getElementById('cashManager').style.background = ""
-      this.services.efectEncarg = false
+      this.services.cashManager = false
     }
 
     this.validatePayment()
   }
 
   saveService() {
-    if (this.services.terapeuta != '') {
-      if (this.services.encargada != '') {
-        if (Number(this.services.servicio) > 0) {
-          if (this.services.minuto != 0) {
+    if (this.services.therapist != '') {
+      if (this.services.manager != '') {
+        if (Number(this.services.service) > 0) {
+          if (this.services.minutes != 0) {
             if (this.sumatoriaCobros == this.sumatoriaServicios) {
               this.createUniqueId()
-              this.validateTheEmptyField()
               if (!this.expiredDateValidations()) return
               if (!this.paymentMethodValidation()) return
               if (!this.validatePaymentMethod()) return
@@ -903,17 +834,17 @@ export class NewPage implements OnInit {
 
               this.ionLoaderService.simpleLoader()
 
-              if (this.services.efectPiso1 == true || this.services.efectPiso2 == true ||
-                this.services.efectTerap == true || this.services.efectEncarg == true ||
-                this.services.efectDriverTaxi == true) {
+              if (this.services.cashFloor1 == true || this.services.cashFloor2 == true ||
+                this.services.cashTherapist == true || this.services.cashManager == true ||
+                this.services.cashDriverTaxi == true) {
                 this.validateEfect = true
                 this.efectCheckToggle(this.validateEfect)
               } else {
                 localStorage.removeItem('Efectivo')
               }
 
-              if (this.services.bizuPiso1 == true || this.services.bizuPiso2 == true ||
-                this.services.bizuTerap == true || this.services.bizuEncarg == true ||
+              if (this.services.bizuFloor1 == true || this.services.bizuFloor2 == true ||
+                this.services.bizuTherapist == true || this.services.bizuManager == true ||
                 this.services.bizuDriverTaxi == true) {
                 this.validateBizum = true
                 this.bizumCheckToggle(this.validateBizum)
@@ -921,18 +852,18 @@ export class NewPage implements OnInit {
                 localStorage.removeItem('Bizum')
               }
 
-              if (this.services.tarjPiso1 == true || this.services.tarjPiso2 == true ||
-                this.services.tarjTerap == true || this.services.tarjEncarg == true ||
-                this.services.tarjDriverTaxi == true) {
+              if (this.services.cardFloor1 == true || this.services.cardFloor2 == true ||
+                this.services.cardTherapist == true || this.services.cardManager == true ||
+                this.services.cardDriverTaxi == true) {
                 this.validateTarjeta = true
                 this.tarjCheckToggle(this.validateTarjeta)
               } else {
                 localStorage.removeItem('Tarjeta')
               }
 
-              if (this.services.transPiso1 == true || this.services.transPiso2 == true ||
-                this.services.transTerap == true || this.services.transEncarg == true ||
-                this.services.transDriverTaxi == true) {
+              if (this.services.transactionFloor1 == true || this.services.transactionFloor2 == true ||
+                this.services.transactionTherapist == true || this.services.transactionManager == true ||
+                this.services.transactionDriverTaxi == true) {
                 this.validateTrans = true
                 this.transCheckToggle(this.validateTrans)
               } else {
@@ -942,16 +873,14 @@ export class NewPage implements OnInit {
               this.wayToPay()
               this.managerAndTherapist()
 
-              this.services.currentDate = this.currentDate.toString()
+              this.services.currentDate = this.currentDate
+              this.services.edit = true
 
-              this.sortedDate()
-              this.services.editar = true
+              this.therapist.dateEnd = this.services.dateEnd
+              this.therapist.exit = this.services.exit
+              this.therapist.minutes = this.services.minutes
 
-              this.therapist.dateEnd = `${this.services.fechaFin} ${this.services.horaEnd}`
-              this.therapist.exit = this.services.salida
-              this.therapist.minutes = this.services.minuto
-
-              this.serviceTherapist.update3Item(this.services.terapeuta, this.therapist).subscribe((rp: any) => { })
+              this.serviceTherapist.update3Item(this.services.therapist, this.therapist).subscribe((rp: any) => { })
               this.serviceServices.save(this.services).subscribe((rp: any) => {
                 if (rp) {
                   this.presentController('¡Insertado Correctamente!')
@@ -984,8 +913,8 @@ export class NewPage implements OnInit {
   }
 
   sumService() {
-    this.services.totalServicio = Number(this.services.numberPiso1) + Number(this.services.numberPiso2) +
-      Number(this.services.numberTerap) + Number(this.services.numberEncarg) + Number(this.services.numberTaxi)
+    this.services.totalService = Number(this.services.numberFloor1) + Number(this.services.numberFloor2) +
+      Number(this.services.numberTherapist) + Number(this.services.numberManager) + Number(this.services.numberTaxi)
   }
 
   efectCheckToggle(event: any) {
@@ -994,40 +923,40 @@ export class NewPage implements OnInit {
 
     if (event) {
 
-      if (Number(this.services.numberPiso1) > 0 && this.services.efectPiso1 == true) {
-        piso1 = Number(this.services.numberPiso1)
-        this.services.valuePiso1Efectivo = Number(this.services.numberPiso1)
+      if (Number(this.services.numberFloor1) > 0 && this.services.cashFloor1 == true) {
+        piso1 = Number(this.services.numberFloor1)
+        this.services.valueFloor1Cash = Number(this.services.numberFloor1)
       } else {
         piso1 = 0
       }
 
-      if (Number(this.services.numberPiso2) > 0 && this.services.efectPiso2 == true) {
-        piso2 = Number(this.services.numberPiso2)
-        this.services.valuePiso2Efectivo = Number(this.services.numberPiso2)
+      if (Number(this.services.numberFloor2) > 0 && this.services.cashFloor2 == true) {
+        piso2 = Number(this.services.numberFloor2)
+        this.services.valueFloor2Cash = Number(this.services.numberFloor2)
       } else {
         piso2 = 0
       }
 
-      if (Number(this.services.numberTerap) > 0 && this.services.efectTerap == true) {
-        terap = Number(this.services.numberTerap)
+      if (Number(this.services.numberTherapist) > 0 && this.services.cashTherapist == true) {
+        terap = Number(this.services.numberTherapist)
       } else {
         terap = 0
       }
 
-      if (Number(this.services.numberEncarg) > 0 && this.services.efectEncarg == true) {
-        terap = Number(this.services.numberEncarg)
+      if (Number(this.services.numberManager) > 0 && this.services.cashManager == true) {
+        terap = Number(this.services.numberManager)
       } else {
         encarg = 0
       }
 
-      if (Number(this.services.numberTaxi) > 0 && this.services.efectDriverTaxi == true) {
+      if (Number(this.services.numberTaxi) > 0 && this.services.cashDriverTaxi == true) {
         otroservic = Number(this.services.numberTaxi)
       } else {
         otroservic = 0
       }
 
       suma = piso1 + piso2 + terap + encarg + otroservic
-      this.services.valueEfectivo = suma
+      this.services.valueCash = suma
       localStorage.setItem('Efectivo', 'Efectivo')
       return
     }
@@ -1039,28 +968,28 @@ export class NewPage implements OnInit {
 
     if (event) {
 
-      if (Number(this.services.numberPiso1) > 0 && this.services.bizuPiso1 == true) {
-        piso1 = Number(this.services.numberPiso1)
-        this.services.valuePiso1Bizum = Number(this.services.numberPiso1)
+      if (Number(this.services.numberFloor1) > 0 && this.services.bizuFloor1 == true) {
+        piso1 = Number(this.services.numberFloor1)
+        this.services.valueFloor1Bizum = Number(this.services.numberFloor1)
       } else {
         piso1 = 0
       }
 
-      if (Number(this.services.numberPiso2) > 0 && this.services.bizuPiso2 == true) {
-        piso2 = Number(this.services.numberPiso2)
-        this.services.valuePiso2Bizum = Number(this.services.numberPiso2)
+      if (Number(this.services.numberFloor2) > 0 && this.services.bizuFloor2 == true) {
+        piso2 = Number(this.services.numberFloor2)
+        this.services.valueFloor2Bizum = Number(this.services.numberFloor2)
       } else {
         piso2 = 0
       }
 
-      if (Number(this.services.numberTerap) > 0 && this.services.bizuTerap == true) {
-        terap = Number(this.services.numberTerap)
+      if (Number(this.services.numberTherapist) > 0 && this.services.bizuTherapist == true) {
+        terap = Number(this.services.numberTherapist)
       } else {
         terap = 0
       }
 
-      if (Number(this.services.numberEncarg) > 0 && this.services.bizuEncarg == true) {
-        terap = Number(this.services.numberEncarg)
+      if (Number(this.services.numberManager) > 0 && this.services.bizuManager == true) {
+        terap = Number(this.services.numberManager)
       } else {
         encarg = 0
       }
@@ -1084,40 +1013,40 @@ export class NewPage implements OnInit {
 
     if (event) {
 
-      if (Number(this.services.numberPiso1) > 0 && this.services.tarjPiso1 == true) {
-        piso1 = Number(this.services.numberPiso1)
-        this.services.valuePiso1Tarjeta = Number(this.services.numberPiso1)
+      if (Number(this.services.numberFloor1) > 0 && this.services.cardFloor1 == true) {
+        piso1 = Number(this.services.numberFloor1)
+        this.services.valueFloor1Card = Number(this.services.numberFloor1)
       } else {
         piso1 = 0
       }
 
-      if (Number(this.services.numberPiso2) > 0 && this.services.tarjPiso2 == true) {
-        piso2 = Number(this.services.numberPiso2)
-        this.services.valuePiso2Tarjeta = Number(this.services.numberPiso2)
+      if (Number(this.services.numberFloor2) > 0 && this.services.cardFloor2 == true) {
+        piso2 = Number(this.services.numberFloor2)
+        this.services.valueFloor2Card = Number(this.services.numberFloor2)
       } else {
         piso2 = 0
       }
 
-      if (Number(this.services.numberTerap) > 0 && this.services.tarjTerap == true) {
-        terap = Number(this.services.numberTerap)
+      if (Number(this.services.numberTherapist) > 0 && this.services.cardTherapist == true) {
+        terap = Number(this.services.numberTherapist)
       } else {
         terap = 0
       }
 
-      if (Number(this.services.numberEncarg) > 0 && this.services.tarjEncarg == true) {
-        terap = Number(this.services.numberEncarg)
+      if (Number(this.services.numberManager) > 0 && this.services.cardManager == true) {
+        terap = Number(this.services.numberManager)
       } else {
         encarg = 0
       }
 
-      if (Number(this.services.numberTaxi) > 0 && this.services.tarjDriverTaxi == true) {
+      if (Number(this.services.numberTaxi) > 0 && this.services.cardDriverTaxi == true) {
         otroservic = Number(this.services.numberTaxi)
       } else {
         otroservic = 0
       }
 
       suma = piso1 + piso2 + terap + encarg + otroservic
-      this.services.valueTarjeta = suma
+      this.services.valueCard = suma
       localStorage.setItem('Tarjeta', 'Tarjeta')
       return
     }
@@ -1129,40 +1058,40 @@ export class NewPage implements OnInit {
     if (!this.validatePaymentMethod()) return
 
     if (event) {
-      if (Number(this.services.numberPiso1) > 0 && this.services.transPiso1 == true) {
-        piso1 = Number(this.services.numberPiso1)
-        this.services.valuePiso1Transaccion = Number(this.services.numberPiso1)
+      if (Number(this.services.numberFloor1) > 0 && this.services.transactionFloor1 == true) {
+        piso1 = Number(this.services.numberFloor1)
+        this.services.valueFloor1Transaction = Number(this.services.numberFloor1)
       } else {
         piso1 = 0
       }
 
-      if (Number(this.services.numberPiso2) > 0 && this.services.transPiso2 == true) {
-        piso2 = Number(this.services.numberPiso2)
-        this.services.valuePiso2Transaccion = Number(this.services.numberPiso2)
+      if (Number(this.services.numberFloor2) > 0 && this.services.transactionFloor2 == true) {
+        piso2 = Number(this.services.numberFloor2)
+        this.services.valueFloor2Transaction = Number(this.services.numberFloor2)
       } else {
         piso2 = 0
       }
 
-      if (Number(this.services.numberTerap) > 0 && this.services.transTerap == true) {
-        terap = Number(this.services.numberTerap)
+      if (Number(this.services.numberTherapist) > 0 && this.services.transactionTherapist == true) {
+        terap = Number(this.services.numberTherapist)
       } else {
         terap = 0
       }
 
-      if (Number(this.services.numberEncarg) > 0 && this.services.transEncarg == true) {
-        terap = Number(this.services.numberEncarg)
+      if (Number(this.services.numberManager) > 0 && this.services.transactionManager == true) {
+        terap = Number(this.services.numberManager)
       } else {
         encarg = 0
       }
 
-      if (Number(this.services.numberTaxi) > 0 && this.services.transDriverTaxi == true) {
+      if (Number(this.services.numberTaxi) > 0 && this.services.transactionDriverTaxi == true) {
         otroservic = Number(this.services.numberTaxi)
       } else {
         otroservic = 0
       }
 
       suma = piso1 + piso2 + terap + encarg + otroservic
-      this.services.valueTrans = suma
+      this.services.valueTransaction = suma
       localStorage.setItem('Trans', 'Trans')
       return
     }
@@ -1183,15 +1112,14 @@ export class NewPage implements OnInit {
       formPago.push('Trans')
     }
 
-    this.services.formaPago = formPago.join(',')
+    this.services.payment = formPago.join(',')
   }
 
   startTime(event: any) {
-    this.services.horaEnd = event.target.value.toString()
     this.horaInicialServicio = event.target.value.toString()
 
-    if (Number(this.services.minuto) > 0) {
-      let sumarsesion = Number(this.services.minuto), horas = 0, minutos = 0, convertHora = ''
+    if (Number(this.services.minutes) > 0) {
+      let sumarsesion = Number(this.services.minutes), horas = 0, minutos = 0, convertHora = ''
 
       // Create date by Date and Hour
       const splitDate = this.fechaActual.toString().split('-')
@@ -1203,41 +1131,29 @@ export class NewPage implements OnInit {
 
       horas = defineDate.getHours()
       minutos = defineDate.getMinutes()
-
-      if (horas > 0 && horas < 10) {
-        convertHora = '0' + horas
-        let hora = convertHora
-        let minutes = minutos
-        this.services.horaEnd = hora + ':' + (Number(minutes) < 10 ? '0' : '') + minutes
-      } else {
-        let minutes = minutos
-        this.services.horaEnd = horas + ':' + (Number(minutes) < 10 ? '0' : '') + minutes
-      }
     }
   }
 
   chosenDate(event: any) {
-    this.fechaActual = event.target.value
+    this.dateToday = event.target.value
   }
 
   minutes(event: any) {
-    this.services.minuto = Number(event.value)
-    let sumarsesion = Number(event.value), horas = 0, minutos = 0, convertHora = '', day = '', month = '', year = ''
+    this.services.minutes = Number(event.value)
+    let sumarsesion = Number(event.value), day = '', month = '', year = '', hour = '', minutes = 0, dateToday = ''
     if (event === null) sumarsesion = 0
 
-    // Create date by Date and Hour
-    const splitDate = this.fechaActual.toString().split('-')
-    const splitHour = this.horaInicialServicio.split(':')
+    dateToday = this.dateToday + ' ' + this.horaInicialServicio
 
-    let defineDate = new Date(Number(splitDate[0]), (Number(splitDate[1]) - 1), Number(splitDate[2]), Number(splitHour[0]), Number(splitHour[1]))
+    let defineDate = new Date(dateToday)
     defineDate.setMinutes(defineDate.getMinutes() + sumarsesion)
-
-    let datesEnd = new Date(Number(splitDate[0]), (Number(splitDate[1]) - 1), Number(splitDate[2]), Number(splitHour[0]), Number(splitHour[1]))
+    let datesEnd = new Date(dateToday)
     datesEnd.setMinutes(datesEnd.getMinutes() + sumarsesion)
 
     day = datesEnd.toString().substring(8, 10)
     month = datesEnd.toString().substring(4, 7)
-    year = datesEnd.toString().substring(13, 15)
+    year = datesEnd.toString().substring(11, 15)
+    hour = datesEnd.toString().substring(16, 21)
 
     if (month == 'Dec') month = "12"
     if (month == 'Nov') month = "11"
@@ -1252,55 +1168,45 @@ export class NewPage implements OnInit {
     if (month == 'Feb') month = "02"
     if (month == 'Jan') month = "01"
 
-    this.services.fechaFin = `${day}-${month}-${year}`
-
-    horas = defineDate.getHours()
-    minutos = defineDate.getMinutes()
-
-    if (horas >= 0 && horas < 10) {
-      convertHora = '0' + horas
-      let hora = convertHora
-      let minutes = minutos
-      this.services.horaEnd = hora + ':' + (Number(minutes) < 10 ? '0' : '') + minutes
-    } else {
-      let minutes = minutos
-      this.services.horaEnd = horas + ':' + (Number(minutes) < 10 ? '0' : '') + minutes
-    }
+    this.services.dateEnd = `${year}-${month}-${day} ${hour}`
+    this.fechaActual = `${year}-${month}-${day} ${hour}`
+    this.hourEnd = hour
+    this.services.dateStart = this.fechaActual
   }
 
   serviceValue() {
 
     let restamos = 0
 
-    this.sumatoriaServicios = Number(this.services.servicio) + Number(this.services.propina) + Number(this.services.taxi) +
-      Number(this.services.bebidas) + Number(this.services.bebidaTerap) + Number(this.services.tabaco) +
-      Number(this.services.vitaminas) + Number(this.services.otros)
+    this.sumatoriaServicios = Number(this.services.service) + Number(this.services.tip) + Number(this.services.taxi) +
+      Number(this.services.drink) + Number(this.services.drinkTherapist) + Number(this.services.tabacco) +
+      Number(this.services.vitamin) + Number(this.services.others)
 
-    restamos = Number(this.services.numberPiso1) + Number(this.services.numberPiso2) + Number(this.services.numberTerap) +
-      Number(this.services.numberEncarg) + Number(this.services.numberTaxi)
+    restamos = Number(this.services.numberFloor1) + Number(this.services.numberFloor2) + Number(this.services.numberTherapist) +
+      Number(this.services.numberManager) + Number(this.services.numberTaxi)
 
-    if (Number(this.services.numberPiso1) > 0 || this.services.numberPiso1 != '') {
+    if (Number(this.services.numberFloor1) > 0) {
       this.restamosCobro = this.sumatoriaServicios - restamos
     }
 
-    if (Number(this.services.numberPiso2) > 0 || this.services.numberPiso2 != '') {
+    if (Number(this.services.numberFloor2) > 0) {
       this.restamosCobro = this.sumatoriaServicios - restamos
     }
 
-    if (Number(this.services.numberTerap) > 0 || this.services.numberTerap != '') {
+    if (Number(this.services.numberTherapist) > 0) {
       this.restamosCobro = this.sumatoriaServicios - restamos
     }
 
-    if (Number(this.services.numberEncarg) > 0 || this.services.numberEncarg != '') {
+    if (Number(this.services.numberManager) > 0) {
       this.restamosCobro = this.sumatoriaServicios - restamos
     }
 
-    if (Number(this.services.numberTaxi) > 0 || this.services.numberTaxi != '') {
+    if (Number(this.services.numberTaxi) > 0) {
       this.restamosCobro = this.sumatoriaServicios - restamos
     }
 
     if (this.sumatoriaServicios != 0) {
-      this.services.numberPiso1 = this.sumatoriaServicios.toString()
+      this.services.numberFloor1 = this.sumatoriaServicios
       this.collectionsValue()
     }
   }
@@ -1308,101 +1214,86 @@ export class NewPage implements OnInit {
   collectionsValue() {
     let resultado = 0
 
-    this.sumatoriaCobros = Number(this.services.numberPiso1) + Number(this.services.numberPiso2) +
-      Number(this.services.numberTerap) + Number(this.services.numberEncarg) + Number(this.services.numberTaxi)
+    this.sumatoriaCobros = Number(this.services.numberFloor1) + Number(this.services.numberFloor2) +
+      Number(this.services.numberTherapist) + Number(this.services.numberManager) + Number(this.services.numberTaxi)
 
     resultado = this.sumatoriaServicios - this.sumatoriaCobros
     this.restamosCobro = resultado
   }
 
-  therapists(event: any) {
-    this.getLastDate()
-
-    this.serviceServices.getTerapeutaByDesc(event).subscribe((rp: any) => {
-      if (rp.length > 0) {
-        this.hourStartTerapeuta = rp[0]['horaStart']
-        this.horaEndTerapeuta = rp[0]['horaEnd']
-      }
-      else {
-        this.hourStartTerapeuta = ''
-        this.horaEndTerapeuta = ''
-      }
-    })
-  }
-
   managerAndTherapist() {
 
     // Terapeuta
-    if (this.services.efectTerap == true && Number(this.services.numberTerap) > 0) this.services.valueEfectTerapeuta = Number(this.services.numberTerap)
-    if (this.services.bizuTerap == true && Number(this.services.numberTerap) > 0) this.services.valueBizuTerapeuta = Number(this.services.numberTerap)
-    if (this.services.tarjTerap == true && Number(this.services.numberTerap) > 0) this.services.valueTarjeTerapeuta = Number(this.services.numberTerap)
-    if (this.services.transTerap == true && Number(this.services.numberTerap) > 0) this.services.valueTransTerapeuta = Number(this.services.numberTerap)
+    if (this.services.cashTherapist == true && Number(this.services.numberTherapist) > 0) this.services.valueEfectTherapist = Number(this.services.numberTherapist)
+    if (this.services.bizuTherapist == true && Number(this.services.numberTherapist) > 0) this.services.valueBizuTherapist = Number(this.services.numberTherapist)
+    if (this.services.cardTherapist == true && Number(this.services.numberTherapist) > 0) this.services.valueCardTherapist = Number(this.services.numberTherapist)
+    if (this.services.transactionTherapist == true && Number(this.services.numberTherapist) > 0) this.services.valueTransactionTherapist = Number(this.services.numberTherapist)
 
     // Encargada
-    if (this.services.efectEncarg == true && Number(this.services.numberEncarg) > 0) this.services.valueEfectEncargada = Number(this.services.numberEncarg)
-    if (this.services.bizuEncarg == true && Number(this.services.numberEncarg) > 0) this.services.valueBizuEncargada = Number(this.services.numberEncarg)
-    if (this.services.tarjEncarg == true && Number(this.services.numberEncarg) > 0) this.services.valueTarjeEncargada = Number(this.services.numberEncarg)
-    if (this.services.transEncarg == true && Number(this.services.numberEncarg) > 0) this.services.valueTransEncargada = Number(this.services.numberEncarg)
+    if (this.services.cashManager == true && Number(this.services.numberManager) > 0) this.services.valueEfectManager = Number(this.services.numberManager)
+    if (this.services.bizuManager == true && Number(this.services.numberManager) > 0) this.services.valueBizuManager = Number(this.services.numberManager)
+    if (this.services.cardManager == true && Number(this.services.numberManager) > 0) this.services.valueCardManager = Number(this.services.numberManager)
+    if (this.services.transactionManager == true && Number(this.services.numberManager) > 0) this.services.valueTransactionManager = Number(this.services.numberManager)
   }
 
   validatePaymentMethod() {
 
     // Efectivo
-    if (this.services.efectPiso1 == true && this.services.bizuPiso1 == true || this.services.efectPiso2 == true &&
-      this.services.bizuPiso2 == true || this.services.efectTerap == true && this.services.bizuTerap == true ||
-      this.services.efectEncarg == true && this.services.bizuEncarg == true || this.services.efectDriverTaxi == true &&
-      this.services.bizuDriverTaxi == true || this.services.efectPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.efectPiso2 == true && this.services.tarjPiso2 == true || this.services.efectTerap == true &&
-      this.services.tarjTerap == true || this.services.efectEncarg == true && this.services.tarjEncarg == true ||
-      this.services.efectDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.efectPiso1 == true &&
-      this.services.transPiso1 == true || this.services.efectPiso2 == true && this.services.transPiso2 == true ||
-      this.services.efectTerap == true && this.services.transTerap == true || this.services.efectEncarg == true &&
-      this.services.transEncarg == true || this.services.efectDriverTaxi == true && this.services.transDriverTaxi == true) {
+    if (this.services.cashFloor1 == true && this.services.bizuFloor1 == true || this.services.cashFloor2 == true &&
+      this.services.bizuFloor2 == true || this.services.cashTherapist == true && this.services.bizuTherapist == true ||
+      this.services.cashManager == true && this.services.bizuManager == true || this.services.cashDriverTaxi == true &&
+      this.services.bizuDriverTaxi == true || this.services.cashFloor1 == true && this.services.cardFloor1 == true ||
+      this.services.cashFloor2 == true && this.services.cardFloor2 == true || this.services.cashTherapist == true &&
+      this.services.cardTherapist == true || this.services.cashManager == true && this.services.cardManager == true ||
+      this.services.cashDriverTaxi == true && this.services.cardDriverTaxi == true || this.services.cashFloor1 == true &&
+      this.services.transactionFloor1 == true || this.services.cashFloor2 == true && this.services.transactionFloor2 == true ||
+      this.services.cashTherapist == true && this.services.transactionTherapist == true || this.services.cashManager == true &&
+      this.services.transactionManager == true || this.services.cashDriverTaxi == true && this.services.transactionDriverTaxi == true) {
       this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
     // Bizum
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
+    if (this.services.bizuFloor1 == true && this.services.cashFloor1 == true || this.services.bizuFloor2 == true &&
+      this.services.cashFloor2 == true || this.services.bizuTherapist == true && this.services.cashTherapist == true ||
+      this.services.bizuManager == true && this.services.cashManager == true || this.services.bizuDriverTaxi == true &&
+      this.services.cashDriverTaxi == true || this.services.bizuFloor1 == true && this.services.cardFloor1 == true ||
+      this.services.bizuFloor2 == true && this.services.cardFloor2 == true || this.services.bizuTherapist == true &&
+      this.services.cardTherapist == true || this.services.bizuManager == true && this.services.cardManager == true ||
+      this.services.bizuDriverTaxi == true && this.services.cardDriverTaxi == true || this.services.bizuFloor1 == true &&
+      this.services.transactionFloor1 == true || this.services.bizuFloor2 == true && this.services.transactionFloor2 == true ||
+      this.services.bizuTherapist == true && this.services.transactionTherapist == true || this.services.bizuManager == true &&
+      this.services.transactionManager == true || this.services.bizuDriverTaxi == true && this.services.transactionDriverTaxi == true) {
       this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
     // Tarjeta
-    if (this.services.tarjPiso1 == true && this.services.efectPiso1 == true || this.services.tarjPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.tarjTerap == true && this.services.efectTerap == true ||
-      this.services.tarjEncarg == true && this.services.efectEncarg == true || this.services.tarjDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.tarjPiso1 == true && this.services.bizuPiso1 == true ||
-      this.services.tarjPiso2 == true && this.services.bizuPiso2 == true || this.services.tarjTerap == true &&
-      this.services.bizuTerap == true || this.services.tarjEncarg == true && this.services.bizuEncarg == true ||
-      this.services.tarjDriverTaxi == true && this.services.bizuDriverTaxi == true || this.services.tarjPiso1 == true &&
-      this.services.transPiso1 == true || this.services.tarjPiso2 == true && this.services.transPiso2 == true ||
-      this.services.tarjTerap == true && this.services.transTerap == true || this.services.tarjEncarg == true &&
-      this.services.transEncarg == true || this.services.tarjDriverTaxi == true && this.services.transDriverTaxi == true) {
+    if (this.services.cardFloor1 == true && this.services.cashFloor1 == true || this.services.cardFloor2 == true &&
+      this.services.cashFloor2 == true || this.services.cardTherapist == true && this.services.cashTherapist == true ||
+      this.services.cardManager == true && this.services.cashManager == true || this.services.cardDriverTaxi == true &&
+      this.services.cashDriverTaxi == true || this.services.cardFloor1 == true && this.services.bizuFloor1 == true ||
+      this.services.cardFloor2 == true && this.services.bizuFloor2 == true || this.services.cardTherapist == true &&
+      this.services.bizuTherapist == true || this.services.cardManager == true && this.services.bizuManager == true ||
+      this.services.cardDriverTaxi == true && this.services.bizuDriverTaxi == true || this.services.cardFloor1 == true &&
+      this.services.transactionFloor1 == true || this.services.cardFloor2 == true && this.services.transactionFloor2 == true ||
+      this.services.cardTherapist == true && this.services.transactionTherapist == true || this.services.cardManager == true &&
+      this.services.transactionManager == true || this.services.cardDriverTaxi == true && this.services.transactionDriverTaxi == true) {
       this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
     // Trans
-    if (this.services.transPiso1 == true && this.services.efectPiso1 == true || this.services.transPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.transTerap == true && this.services.efectTerap == true ||
-      this.services.transEncarg == true && this.services.efectEncarg == true || this.services.transDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.transPiso1 == true && this.services.bizuPiso1 == true ||
-      this.services.transPiso2 == true && this.services.bizuPiso2 == true || this.services.transTerap == true &&
-      this.services.bizuTerap == true || this.services.transEncarg == true && this.services.bizuEncarg == true ||
-      this.services.transDriverTaxi == true && this.services.bizuDriverTaxi == true || this.services.transPiso1 == true &&
-      this.services.tarjPiso1 == true || this.services.transPiso2 == true && this.services.tarjPiso2 == true ||
-      this.services.transTerap == true && this.services.tarjTerap == true || this.services.transEncarg == true &&
-      this.services.tarjEncarg == true || this.services.transDriverTaxi == true && this.services.tarjDriverTaxi == true) {
+    if (this.services.transactionFloor1 == true && this.services.cashFloor1 == true || this.services.transactionFloor2 == true &&
+      this.services.cashFloor2 == true || this.services.transactionTherapist == true && this.services.cashTherapist == true ||
+      this.services.transactionManager == true && this.services.cashManager == true || this.services.transactionDriverTaxi == true &&
+      this.services.cashDriverTaxi == true || this.services.transactionFloor1 == true && this.services.bizuFloor1 == true ||
+      this.services.transactionFloor2 == true && this.services.bizuFloor2 == true || this.services.transactionTherapist == true &&
+      this.services.bizuTherapist == true || this.services.transactionManager == true && this.services.bizuManager == true ||
+      this.services.transactionDriverTaxi == true && this.services.bizuDriverTaxi == true || this.services.transactionFloor1 == true &&
+      this.services.cardFloor1 == true || this.services.transactionFloor2 == true && this.services.cardFloor2 == true ||
+      this.services.transactionTherapist == true && this.services.cardTherapist == true || this.services.transactionManager == true &&
+      this.services.cardManager == true || this.services.transactionDriverTaxi == true && this.services.cardDriverTaxi == true) {
       this.presentController('Se escogio mas de una forma de pago')
       return false
     }
@@ -1412,61 +1303,61 @@ export class NewPage implements OnInit {
   validatePayment() {
 
     // Efectivo
-    if (this.services.efectPiso1 == true && this.services.bizuPiso1 == true || this.services.efectPiso2 == true &&
-      this.services.bizuPiso2 == true || this.services.efectTerap == true && this.services.bizuTerap == true ||
-      this.services.efectEncarg == true && this.services.bizuEncarg == true || this.services.efectDriverTaxi == true &&
-      this.services.bizuDriverTaxi == true || this.services.efectPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.efectPiso2 == true && this.services.tarjPiso2 == true || this.services.efectTerap == true &&
-      this.services.tarjTerap == true || this.services.efectEncarg == true && this.services.tarjEncarg == true ||
-      this.services.efectDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.efectPiso1 == true &&
-      this.services.transPiso1 == true || this.services.efectPiso2 == true && this.services.transPiso2 == true ||
-      this.services.efectTerap == true && this.services.transTerap == true || this.services.efectEncarg == true &&
-      this.services.transEncarg == true || this.services.efectDriverTaxi == true && this.services.transDriverTaxi == true) {
+    if (this.services.cashFloor1 == true && this.services.bizuFloor1 == true || this.services.cashFloor2 == true &&
+      this.services.bizuFloor2 == true || this.services.cashTherapist == true && this.services.bizuTherapist == true ||
+      this.services.cashManager == true && this.services.bizuManager == true || this.services.cashDriverTaxi == true &&
+      this.services.bizuDriverTaxi == true || this.services.cashFloor1 == true && this.services.cardFloor1 == true ||
+      this.services.cashFloor2 == true && this.services.cardFloor2 == true || this.services.cashTherapist == true &&
+      this.services.cardTherapist == true || this.services.cashManager == true && this.services.cardManager == true ||
+      this.services.cashDriverTaxi == true && this.services.cardDriverTaxi == true || this.services.cashFloor1 == true &&
+      this.services.transactionFloor1 == true || this.services.cashFloor2 == true && this.services.transactionFloor2 == true ||
+      this.services.cashTherapist == true && this.services.transactionTherapist == true || this.services.cashManager == true &&
+      this.services.transactionManager == true || this.services.cashDriverTaxi == true && this.services.transactionDriverTaxi == true) {
       this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
     // Bizum
-    if (this.services.bizuPiso1 == true && this.services.efectPiso1 == true || this.services.bizuPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.bizuTerap == true && this.services.efectTerap == true ||
-      this.services.bizuEncarg == true && this.services.efectEncarg == true || this.services.bizuDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.bizuPiso1 == true && this.services.tarjPiso1 == true ||
-      this.services.bizuPiso2 == true && this.services.tarjPiso2 == true || this.services.bizuTerap == true &&
-      this.services.tarjTerap == true || this.services.bizuEncarg == true && this.services.tarjEncarg == true ||
-      this.services.bizuDriverTaxi == true && this.services.tarjDriverTaxi == true || this.services.bizuPiso1 == true &&
-      this.services.transPiso1 == true || this.services.bizuPiso2 == true && this.services.transPiso2 == true ||
-      this.services.bizuTerap == true && this.services.transTerap == true || this.services.bizuEncarg == true &&
-      this.services.transEncarg == true || this.services.bizuDriverTaxi == true && this.services.transDriverTaxi == true) {
+    if (this.services.bizuFloor1 == true && this.services.cashFloor1 == true || this.services.bizuFloor2 == true &&
+      this.services.cashFloor2 == true || this.services.bizuTherapist == true && this.services.cashTherapist == true ||
+      this.services.bizuManager == true && this.services.cashManager == true || this.services.bizuDriverTaxi == true &&
+      this.services.cashDriverTaxi == true || this.services.bizuFloor1 == true && this.services.cardFloor1 == true ||
+      this.services.bizuFloor2 == true && this.services.cardFloor2 == true || this.services.bizuTherapist == true &&
+      this.services.cardTherapist == true || this.services.bizuManager == true && this.services.cardManager == true ||
+      this.services.bizuDriverTaxi == true && this.services.cardDriverTaxi == true || this.services.bizuFloor1 == true &&
+      this.services.transactionFloor1 == true || this.services.bizuFloor2 == true && this.services.transactionFloor2 == true ||
+      this.services.bizuTherapist == true && this.services.transactionTherapist == true || this.services.bizuManager == true &&
+      this.services.transactionManager == true || this.services.bizuDriverTaxi == true && this.services.transactionDriverTaxi == true) {
       this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
     // Tarjeta
-    if (this.services.tarjPiso1 == true && this.services.efectPiso1 == true || this.services.tarjPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.tarjTerap == true && this.services.efectTerap == true ||
-      this.services.tarjEncarg == true && this.services.efectEncarg == true || this.services.tarjDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.tarjPiso1 == true && this.services.bizuPiso1 == true ||
-      this.services.tarjPiso2 == true && this.services.bizuPiso2 == true || this.services.tarjTerap == true &&
-      this.services.bizuTerap == true || this.services.tarjEncarg == true && this.services.bizuEncarg == true ||
-      this.services.tarjDriverTaxi == true && this.services.bizuDriverTaxi == true || this.services.tarjPiso1 == true &&
-      this.services.transPiso1 == true || this.services.tarjPiso2 == true && this.services.transPiso2 == true ||
-      this.services.tarjTerap == true && this.services.transTerap == true || this.services.tarjEncarg == true &&
-      this.services.transEncarg == true || this.services.tarjDriverTaxi == true && this.services.transDriverTaxi == true) {
+    if (this.services.cardFloor1 == true && this.services.cashFloor1 == true || this.services.cardFloor2 == true &&
+      this.services.cashFloor2 == true || this.services.cardTherapist == true && this.services.cashTherapist == true ||
+      this.services.cardManager == true && this.services.cashManager == true || this.services.cardDriverTaxi == true &&
+      this.services.cashDriverTaxi == true || this.services.cardFloor1 == true && this.services.bizuFloor1 == true ||
+      this.services.cardFloor2 == true && this.services.bizuFloor2 == true || this.services.cardTherapist == true &&
+      this.services.bizuTherapist == true || this.services.cardManager == true && this.services.bizuManager == true ||
+      this.services.cardDriverTaxi == true && this.services.bizuDriverTaxi == true || this.services.cardFloor1 == true &&
+      this.services.transactionFloor1 == true || this.services.cardFloor2 == true && this.services.transactionFloor2 == true ||
+      this.services.cardTherapist == true && this.services.transactionTherapist == true || this.services.cardManager == true &&
+      this.services.transactionManager == true || this.services.cardDriverTaxi == true && this.services.transactionDriverTaxi == true) {
       this.presentController('Se escogio mas de una forma de pago')
       return false
     }
 
     // Trans
-    if (this.services.transPiso1 == true && this.services.efectPiso1 == true || this.services.transPiso2 == true &&
-      this.services.efectPiso2 == true || this.services.transTerap == true && this.services.efectTerap == true ||
-      this.services.transEncarg == true && this.services.efectEncarg == true || this.services.transDriverTaxi == true &&
-      this.services.efectDriverTaxi == true || this.services.transPiso1 == true && this.services.bizuPiso1 == true ||
-      this.services.transPiso2 == true && this.services.bizuPiso2 == true || this.services.transTerap == true &&
-      this.services.bizuTerap == true || this.services.transEncarg == true && this.services.bizuEncarg == true ||
-      this.services.transDriverTaxi == true && this.services.bizuDriverTaxi == true || this.services.transPiso1 == true &&
-      this.services.tarjPiso1 == true || this.services.transPiso2 == true && this.services.tarjPiso2 == true ||
-      this.services.transTerap == true && this.services.tarjTerap == true || this.services.transEncarg == true &&
-      this.services.tarjEncarg == true || this.services.transDriverTaxi == true && this.services.tarjDriverTaxi == true) {
+    if (this.services.transactionFloor1 == true && this.services.cashFloor1 == true || this.services.transactionFloor2 == true &&
+      this.services.cashFloor2 == true || this.services.transactionTherapist == true && this.services.cashTherapist == true ||
+      this.services.transactionManager == true && this.services.cashManager == true || this.services.transactionDriverTaxi == true &&
+      this.services.cashDriverTaxi == true || this.services.transactionFloor1 == true && this.services.bizuFloor1 == true ||
+      this.services.transactionFloor2 == true && this.services.bizuFloor2 == true || this.services.transactionTherapist == true &&
+      this.services.bizuTherapist == true || this.services.transactionManager == true && this.services.bizuManager == true ||
+      this.services.transactionDriverTaxi == true && this.services.bizuDriverTaxi == true || this.services.transactionFloor1 == true &&
+      this.services.cardFloor1 == true || this.services.transactionFloor2 == true && this.services.cardFloor2 == true ||
+      this.services.transactionTherapist == true && this.services.cardTherapist == true || this.services.transactionManager == true &&
+      this.services.cardManager == true || this.services.transactionDriverTaxi == true && this.services.cardDriverTaxi == true) {
       this.presentController('Se escogio mas de una forma de pago')
       return false
     }
@@ -1474,28 +1365,28 @@ export class NewPage implements OnInit {
   }
 
   paymentMethodValidation() {
-    if (Number(this.services.numberPiso1) > 0 && this.services.efectPiso1 == false && this.services.bizuPiso1 == false &&
-      this.services.tarjPiso1 == false && this.services.transPiso1 == false) {
+    if (Number(this.services.numberFloor1) > 0 && this.services.cashFloor1 == false && this.services.bizuFloor1 == false &&
+      this.services.cardFloor1 == false && this.services.transactionFloor1 == false) {
       this.presentController('No se escogio ninguna forma de pago para piso 1')
       return false
     }
-    if (Number(this.services.numberPiso2) > 0 && this.services.efectPiso2 == false && this.services.bizuPiso2 == false &&
-      this.services.tarjPiso2 == false && this.services.transPiso2 == false) {
+    if (Number(this.services.numberFloor2) > 0 && this.services.cashFloor2 == false && this.services.bizuFloor2 == false &&
+      this.services.cardFloor2 == false && this.services.transactionFloor2 == false) {
       this.presentController('No se escogio ninguna forma de pago para piso 2')
       return false
     }
-    if (Number(this.services.numberTerap) > 0 && this.services.efectTerap == false && this.services.bizuTerap == false &&
-      this.services.tarjTerap == false && this.services.transTerap == false) {
+    if (Number(this.services.numberTherapist) > 0 && this.services.cashTherapist == false && this.services.bizuTherapist == false &&
+      this.services.cardTherapist == false && this.services.transactionTherapist == false) {
       this.presentController('No se escogio ninguna forma de pago para terapeuta')
       return false
     }
-    if (Number(this.services.numberEncarg) > 0 && this.services.efectEncarg == false && this.services.bizuEncarg == false &&
-      this.services.tarjEncarg == false && this.services.transEncarg == false) {
+    if (Number(this.services.numberManager) > 0 && this.services.cashManager == false && this.services.bizuManager == false &&
+      this.services.cardManager == false && this.services.transactionManager == false) {
       this.presentController('No se escogio ninguna forma de pago para encargada')
       return false
     }
-    if (Number(this.services.numberTaxi) > 0 && this.services.efectDriverTaxi == false && this.services.bizuDriverTaxi == false &&
-      this.services.tarjDriverTaxi == false && this.services.transDriverTaxi == false) {
+    if (Number(this.services.numberTaxi) > 0 && this.services.cashDriverTaxi == false && this.services.bizuDriverTaxi == false &&
+      this.services.cardDriverTaxi == false && this.services.transactionDriverTaxi == false) {
       this.presentController('No se escogio ninguna forma de pago para taxista')
       return false
     }
@@ -1505,10 +1396,10 @@ export class NewPage implements OnInit {
   selectTerap(name: string) {
     this.getLastDate()
 
-    this.serviceServices.getTerapeutaByDesc(name).subscribe((rp: any) => {
-      if (rp.length > 0) {
-        this.hourStartTerapeuta = rp[0]['horaStart']
-        this.horaEndTerapeuta = rp[0]['horaEnd']
+    this.serviceServices.getByTherapistIdDesc(name).subscribe((rp: any) => {
+      if (rp['service'].length > 0) {
+        this.hourStartTerapeuta = rp['service'][0]['dateStart'].substring(11, 16)
+        this.horaEndTerapeuta = rp['service'][0]['dateEnd'].substring(11, 16)
       }
       else {
         this.hourStartTerapeuta = ''
@@ -1529,8 +1420,8 @@ export class NewPage implements OnInit {
     const toast = await this.toastController.create({
       message: message,
       duration: 4000,
-      position: 'top',
-      cssClass: 'custom-loader-class',
+      position: 'middle',
+      cssClass: 'toast-class',
     });
     toast.present();
   }

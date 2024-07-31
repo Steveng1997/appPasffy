@@ -409,7 +409,7 @@ ion-grid {
     color: black;
 }
 
-.sc-ion-input-md-h[name=pass] {
+.sc-ion-input-md-h[name=password] {
     border-style: none;
     color: black;
     font-family: "Inter-Medium", sans-serif;
@@ -421,7 +421,7 @@ ion-grid {
     --highlight-color-valid: transparent;
 }
 
-.sc-ion-input-md-h[name=pass] ::ng-deep input {
+.sc-ion-input-md-h[name=password] ::ng-deep input {
     caret-color: black;
 }
 
@@ -443,7 +443,7 @@ ion-grid {
     color: black;
 }
 
-.sc-ion-input-md-h[name=user] {
+.sc-ion-input-md-h[name=email] {
     border-style: none;
     color: black;
     font-family: "Inter-Medium", sans-serif;
@@ -455,7 +455,7 @@ ion-grid {
     --highlight-color-valid: transparent;
 }
 
-.sc-ion-input-md-h[name=user] ::ng-deep input {
+.sc-ion-input-md-h[name=email] ::ng-deep input {
     caret-color: black;
 }
 
@@ -477,7 +477,7 @@ ion-grid {
     color: black;
 }
 
-.sc-ion-input-md-h[name=fijoDia] {
+.sc-ion-input-md-h[name=fixeDay] {
     border-style: none;
     color: black;
     font-family: "Inter-Medium", sans-serif;
@@ -489,7 +489,7 @@ ion-grid {
     --highlight-color-valid: transparent;
 }
 
-.sc-ion-input-md-h[name=fijoDia] ::ng-deep input {
+.sc-ion-input-md-h[name=fixeDay] ::ng-deep input {
     caret-color: black;
 }
 
@@ -511,7 +511,7 @@ ion-grid {
     color: black;
 }
 
-.sc-ion-input-md-h[name=servicio] {
+.sc-ion-input-md-h[name=service] {
     border-style: none;
     color: black;
     font-family: "Inter-Medium", sans-serif;
@@ -523,7 +523,7 @@ ion-grid {
     --highlight-color-valid: transparent;
 }
 
-.sc-ion-input-md-h[name=servicio] ::ng-deep input {
+.sc-ion-input-md-h[name=service] ::ng-deep input {
     caret-color: black;
 }
 
@@ -563,7 +563,7 @@ ion-grid {
     color: black;
 }
 
-.sc-ion-input-md-h[name=propina] {
+.sc-ion-input-md-h[name=tip] {
     border-style: none;
     color: black;
     font-family: "Inter-Medium", sans-serif;
@@ -575,7 +575,7 @@ ion-grid {
     --highlight-color-valid: transparent;
 }
 
-.sc-ion-input-md-h[name=propina] ::ng-deep input {
+.sc-ion-input-md-h[name=tip] ::ng-deep input {
     caret-color: black;
 }
 
@@ -597,7 +597,7 @@ ion-grid {
     color: black;
 }
 
-.sc-ion-input-md-h[name=bebidaTerap] {
+.sc-ion-input-md-h[name=drinkTherapist] {
     border-style: none;
     color: black;
     font-family: "Inter-Medium", sans-serif;
@@ -609,7 +609,7 @@ ion-grid {
     --highlight-color-valid: transparent;
 }
 
-.sc-ion-input-md-h[name=bebidaTerap] ::ng-deep input {
+.sc-ion-input-md-h[name=drinkTherapist] ::ng-deep input {
     caret-color: black;
 }
 
@@ -631,7 +631,7 @@ ion-grid {
     color: black;
 }
 
-.sc-ion-input-md-h[name=vitamina] {
+.sc-ion-input-md-h[name=vitamin] {
     border-style: none;
     color: black;
     font-family: "Inter-Medium", sans-serif;
@@ -643,7 +643,7 @@ ion-grid {
     --highlight-color-valid: transparent;
 }
 
-.sc-ion-input-md-h[name=vitamina] ::ng-deep input {
+.sc-ion-input-md-h[name=vitamin] ::ng-deep input {
     caret-color: black;
 }
 
@@ -665,7 +665,7 @@ ion-grid {
     color: black;
 }
 
-.sc-ion-input-md-h[name=bebida] {
+.sc-ion-input-md-h[name=drink] {
     border-style: none;
     color: black;
     font-family: "Inter-Medium", sans-serif;
@@ -677,7 +677,7 @@ ion-grid {
     --highlight-color-valid: transparent;
 }
 
-.sc-ion-input-md-h[name=bebida] ::ng-deep input {
+.sc-ion-input-md-h[name=drink] ::ng-deep input {
     caret-color: black;
 }
 
@@ -699,7 +699,7 @@ ion-grid {
     color: black;
 }
 
-.sc-ion-input-md-h[name=tabaco] {
+.sc-ion-input-md-h[name=tabacco] {
     border-style: none;
     color: black;
     font-family: "Inter-Medium", sans-serif;
@@ -711,7 +711,7 @@ ion-grid {
     --highlight-color-valid: transparent;
 }
 
-.sc-ion-input-md-h[name=tabaco] ::ng-deep input {
+.sc-ion-input-md-h[name=tabacco] ::ng-deep input {
     caret-color: black;
 }
 
@@ -733,7 +733,7 @@ ion-grid {
     color: black;
 }
 
-.sc-ion-input-md-h[name=otros] {
+.sc-ion-input-md-h[name=others] {
     border-style: none;
     color: black;
     font-family: "Inter-Medium", sans-serif;
@@ -745,7 +745,7 @@ ion-grid {
     --highlight-color-valid: transparent;
 }
 
-.sc-ion-input-md-h[name=otros] ::ng-deep input {
+.sc-ion-input-md-h[name=others] ::ng-deep input {
     caret-color: black;
 }
 

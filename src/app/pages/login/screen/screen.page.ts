@@ -22,7 +22,6 @@ export class ScreenPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    debugger
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.email = params['email']
     this.password = params['password']

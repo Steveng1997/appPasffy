@@ -21,7 +21,7 @@ export class ServiceService {
   // Register
 
   save(service: ModelService) {
-    return this.http.post(`${this.API_URL}/registerServicio`, service);
+    return this.http.post(`${this.API_URL}/`, service);
   }
 
   // Get
@@ -46,8 +46,8 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getIdCierre/${idCierre}`);
   }
 
-  getServicio() {
-    return this.http.get(`${this.API_URL}/getServicios`);
+  getService() {
+    return this.http.get(`${this.API_URL}`);
   }
 
   getByLiquidTerapFalse() {
@@ -86,8 +86,8 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getByTerapeutaAsc/${terapeuta}`);
   }
 
-  getTerapeutaByDesc(terapeuta: string) {
-    return this.http.get(`${this.API_URL}/getByTerapeutaDesc/${terapeuta}`);
+  getByTherapistIdDesc(therapist: string) {
+    return this.http.get(`${this.API_URL}/therapistIdDesc/${therapist}`);
   }
 
   getTerapeuta(terapeuta: string) {
@@ -98,14 +98,8 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getByEncargada/${encargada}`);
   }
 
-  getEncargadaAndDate(fechaHoyInicio: string, encargada: string, company: string) {
-    return this.http.get(`${this.API_URL}/getFechaHoyByManager`, {
-      params: {
-        fechaHoyInicio,
-        encargada,
-        company
-      }
-    });
+  getByTodayDateAndManagerAndCompanyCurrentDateDesc(dateToday: string, manager: string, company: string) {
+    return this.http.get(`${this.API_URL}/todayDateAndManagerAndCompanyCurrentDateDesc/${dateToday}/${manager}/${company}`);
   }
 
   getTerapeutaEncargada(terapeuta: string, encargada: string) {
@@ -213,8 +207,8 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getByEncargadaFechaDesc/${encargada}`);
   }
 
-  getFechaHoy(fechaHoy: string, company: string) {
-    return this.http.get(`${this.API_URL}/getByFechaHoy/${fechaHoy}/${company}`);
+  getByDateDayAndCompantCurrentDateDesc(dateToday: string, company: string) {
+    return this.http.get(`${this.API_URL}/dateDayAndCompantCurrentDateDesc/${dateToday}/${company}`);
   }
 
   getIdDescendente(idUnico: string) {
@@ -330,20 +324,20 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getPaymenForm/${formaPago}`);
   }
 
-  getTherapistAndDates(terapeuta: string, fechaHoyInicio: string, company: string) {
-    return this.http.get(`${this.API_URL}/getTherapistAndDate/${terapeuta}/${fechaHoyInicio}/${company}`);
+  getByTodayDateAndTherapistAndCompany(dateToday: string, therapist: string, company: string) {
+    return this.http.get(`${this.API_URL}/todayDateAndTherapistAndCompany/${dateToday}/${therapist}/${company}`);
   }
 
-  getManagerAndDates(encargada: string, fechaHoyInicio: string, company: string) {
-    return this.http.get(`${this.API_URL}/getManagerAndDate/${encargada}/${fechaHoyInicio}/${company}`);
+  getByTodayDateAndManagerAndCompany(dateToday: string, manager: string, company: string) {
+    return this.http.get(`${this.API_URL}/todayDateAndManagerAndCompany/${dateToday}/${manager}/${company}`);
   }
 
-  getTherapistConsultingManagerAndDate(encargada: string, fechaHoyInicio: string, company: string) {
-    return this.http.get(`${this.API_URL}/getTherapistConsultManagerAndDate/${encargada}/${fechaHoyInicio}/${company}`);
+  getByTodayDateAndManagerAndCompanyDistinctTherapist(dateToday: string, manager: string, company: string) {
+    return this.http.get(`${this.API_URL}/todayDateAndManagerAndCompanyDistinctTherapist/${dateToday}/${manager}/${company}`);
   }
 
-  getTherapistAndManagerAndDates(terapeuta: string, encargada: string, fechaHoyInicio: string, company: string) {
-    return this.http.get(`${this.API_URL}/getTherapistAndManagerAndDate/${terapeuta}/${encargada}/${fechaHoyInicio}/${company}`);
+  getByTodayDateAndTherapistAndManagerAndCompany(dateToday: string, therapist: string, manager: string, company: string) {
+    return this.http.get(`${this.API_URL}/todayDateAndTherapistAndManagerAndCompany/${dateToday}/${therapist}/${manager}/${company}`);
   }
 
   // closing
@@ -494,7 +488,7 @@ export class ServiceService {
 
   // Delete
 
-  deleteServicio(id: number) {
-    return this.http.delete(`${this.API_URL}/EliminarServicio/${id}`);
+  delete(id: number) {
+    return this.http.delete(`${this.API_URL}/${id}`);
   }
 }

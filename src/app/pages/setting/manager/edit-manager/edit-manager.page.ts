@@ -21,7 +21,7 @@ import { ServiceService } from 'src/app/core/services/service/service.service';
 export class EditManagerPage implements OnInit {
   id: any
   iduser: number
-  managers: any
+  managers = [];
   currentDate = new Date().getTime()
 
   liquidationManager: LiquidationManager = {
@@ -59,7 +59,7 @@ export class EditManagerPage implements OnInit {
   }
 
   modelService: ModelService = {
-    idEncargada: ""
+    idManag: ""
   }
 
   constructor(
@@ -79,15 +79,15 @@ export class EditManagerPage implements OnInit {
     this.iduser = param['id']
 
     this.serviceManager.getId(this.id).subscribe((rp) => {
-      return (this.managers = rp)
+      this.managers = [rp['manager']]
     })
   }
 
-  async getManagerLiquidationFalse(nombre) {
-    await this.services.getManagerLiqFalse(nombre).subscribe(async (rp: any) => {
+  async getManagerLiquidationFalse(name) {
+    await this.services.getManagerLiqFalse(name).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         this.liquidationManager.tratamiento = rp.length
-        this.modelService.liquidadoEncargada = true
+        this.modelService.liquidatedManager = true
 
         for (let i = 0; i < rp.length; i++) {
           this.services.updateLiquidacionEncarg(rp[i]['id'], this.modelService).subscribe((rp) => { })
@@ -96,7 +96,7 @@ export class EditManagerPage implements OnInit {
     })
   }
 
-  async date(nombre: string) {
+  async date(name: string) {
     let fecha = new Date(), añoHasta = 0, mesHasta = 0, diaHasta = 0, convertMes = '', convertDia = '',
       añoDesde = "", mesDesde = "", diaDesde = ""
 
@@ -119,7 +119,7 @@ export class EditManagerPage implements OnInit {
       this.liquidationManager.hastaFechaLiquidado = `${añoHasta}-${convertMes}-${diaHasta}`
     }
 
-    this.serviceLiquidationManager.getByEncargada(nombre).subscribe(async (rp: any) => {
+    this.serviceLiquidationManager.getByEncargada(name).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         añoDesde = rp[0]['desdeFechaLiquidado'].toString().substring(2, 4)
         mesDesde = rp[0]['desdeFechaLiquidado'].toString().substring(5, 7)
@@ -127,7 +127,7 @@ export class EditManagerPage implements OnInit {
         this.liquidationManager.desdeFechaLiquidado = `${añoDesde}-${mesDesde}-${diaDesde}`
         this.liquidationManager.desdeHoraLiquidado = rp[0]['hastaHoraLiquidado']
       } else {
-        this.services.getManagerLiqFalse(nombre).subscribe(async (rp: any) => {
+        this.services.getManagerLiqFalse(name).subscribe(async (rp: any) => {
           if (rp.length > 0) {
             añoDesde = rp[0]['fechaHoyInicio'].substring(0, 4)
             mesDesde = rp[0]['fechaHoyInicio'].substring(5, 7)
@@ -148,7 +148,7 @@ export class EditManagerPage implements OnInit {
       return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16)
     })
 
-    this.modelService.idEncargada = uuid
+    this.modelService.idManag = uuid
     this.liquidationManager.idUnico = uuid
     this.liquidationManager.idEncargada = uuid
     return this.liquidationManager.idUnico
@@ -211,11 +211,11 @@ export class EditManagerPage implements OnInit {
     })
   }
 
-  update(id: number, encargada) {
-    if (encargada.nombre != "") {
+  update(id: number, manager) {
+    if (manager.name != "") {
       this.ionLoaderService.simpleLoader()
-      encargada.nombre = encargada.nombre.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
-      this.serviceManager.update(id, encargada).subscribe((resp => {
+      manager.name = manager.name.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
+      this.serviceManager.update(id, manager).subscribe((resp => {
         this.ionLoaderService.dismissLoader()
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 1000 })
         location.replace(`tabs/${this.iduser}/manager`);
@@ -234,7 +234,7 @@ export class EditManagerPage implements OnInit {
       document.getElementById('overview').style.overflowY = 'auto'
       document.getElementById('overview').style.overflowX = 'hidden'
       var screen = document.querySelector<HTMLElement>(".editar-encargada")
-      var element_to_show = document.getElementById('tabaco')
+      var element_to_show = document.getElementById('tabacco')
       var scrolling_parent = element_to_show.parentElement
 
       var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
@@ -250,11 +250,11 @@ export class EditManagerPage implements OnInit {
       }
     }
 
-    if (text === 'vitamina') {
+    if (text === 'vitamin') {
       document.getElementById('overview').style.overflowY = 'auto'
       document.getElementById('overview').style.overflowX = 'hidden'
       var screen = document.querySelector<HTMLElement>(".editar-encargada")
-      var element_to_show = document.getElementById('vitamina')
+      var element_to_show = document.getElementById('vitamin')
       var scrolling_parent = element_to_show.parentElement
 
       var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
@@ -274,7 +274,7 @@ export class EditManagerPage implements OnInit {
       document.getElementById('overview').style.overflowY = 'auto'
       document.getElementById('overview').style.overflowX = 'hidden'
       var screen = document.querySelector<HTMLElement>(".editar-encargada")
-      var element_to_show = document.getElementById('otros')
+      var element_to_show = document.getElementById('others')
       var scrolling_parent = element_to_show.parentElement
 
       var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())

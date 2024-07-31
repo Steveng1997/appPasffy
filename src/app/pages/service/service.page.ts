@@ -47,7 +47,7 @@ export class ServicePage implements OnInit {
   selectedTerapeuta: string
 
   // Encargada
-  manager: any
+  manager = []
   selectedEncargada: string
   selectedFormPago: string
 
@@ -62,6 +62,7 @@ export class ServicePage implements OnInit {
   horaFinal: string
   day: number
   month: string
+  nameMonth: string
   hourStart: string
   hourEnd: string
   parmHourStart: string
@@ -95,7 +96,7 @@ export class ServicePage implements OnInit {
   private _workbook!: Workbook;
 
   serviceModel: ModelService = {
-    pantalla: ""
+    screen: ""
   }
 
   date: string
@@ -110,7 +111,6 @@ export class ServicePage implements OnInit {
   house1: string
   house2: string
   dateStart1: string
-  dateEnd1: string
   hourstart: string
   hourend: string
   therap: string
@@ -164,12 +164,12 @@ export class ServicePage implements OnInit {
 
     if (this.idUser) {
       await this.serviceManager.getId(this.idUser).subscribe((rp) => {
-        if (rp[0]['rol'] == 'administrador') {
+        if (rp['manager'].rol == 'Administrador') {
           this.administratorRole = true
           this.getManager()
         } else {
-          this.manager = rp
-          this.selectedEncargada = this.manager[0].nombre
+          this.manager = [rp['manager']]
+          this.selectedEncargada = this.manager[0]['name']
         }
       })
     }
@@ -193,12 +193,12 @@ export class ServicePage implements OnInit {
 
       if (this.idUser) {
         await this.serviceManager.getId(this.idUser).subscribe((rp) => {
-          if (rp[0]['rol'] == 'administrador') {
+          if (rp[0]['rol'] == 'Administrador') {
             this.administratorRole = true
             this.getManager()
           } else {
-            this.manager = rp
-            this.selectedEncargada = this.manager[0].nombre
+            this.manager = [rp['manager']]
+            this.selectedEncargada = this.manager[0]['name']
           }
         })
       }
@@ -274,22 +274,22 @@ export class ServicePage implements OnInit {
     let service
     this.dateTodayCurrent = 'HOY'
     this.serviceManager.getId(this.idUser).subscribe((rp) => {
-      this.company = rp[0].company
-      if (rp[0]['rol'] == 'administrador') {
-        this.serviceService.getFechaHoy(this.dateStart, this.company).subscribe((rp: any) => {
-          this.servicio = rp
-          service = rp
+      this.company = rp['manager'].company
+      if (rp['manager'].rol == 'Administrador') {
+        this.serviceService.getByDateDayAndCompantCurrentDateDesc(this.dateStart, this.company).subscribe((rp: any) => {
+          this.servicio = rp['service']
+          service = rp['service']
 
-          if (rp.length != 0) {
+          if (rp['service'].length != 0) {
             this.totalSumOfServices(service)
           }
           return service
         })
       } else {
-        this.serviceService.getEncargadaAndDate(this.dateStart, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-          this.servicio = rp
-          service = rp
-          if (rp.length != 0) {
+        this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(this.dateStart, rp['manager'].name, this.company).subscribe((rp: any) => {
+          this.servicio = rp['service']
+          service = rp['service']
+          if (rp['service'].length != 0) {
             this.totalSumOfServices(service)
           }
           return service
@@ -299,70 +299,70 @@ export class ServicePage implements OnInit {
   }
 
   pointThousandTable(i: number) {
-    if (this.servicio[i].numberPiso1 > 999)
-      this.servicio[i].numberPiso1 = (this.totalValor / 1000).toFixed(3)
+    if (this.servicio[i].numberFloor1 > 999)
+      this.servicio[i].numberFloor1 = (this.servicio[i].numberFloor1 / 1000).toFixed(3)
     else
-      this.servicio[i].numberPiso1 = this.totalValor.toString()
+      this.servicio[i].numberFloor1 = this.servicio[i].numberFloor1.toString()
 
-    if (this.servicio[i].numberPiso2 > 999)
-      this.servicio[i].numberPiso2 = (this.servicio[i].numberPiso2 / 1000).toFixed(3)
+    if (this.servicio[i].numberFloor2 > 999)
+      this.servicio[i].numberFloor2 = (this.servicio[i].numberFloor2 / 1000).toFixed(3)
     else
-      this.servicio[i].numberPiso2 = this.servicio[i].numberPiso2.toString()
+      this.servicio[i].numberFloor2 = this.servicio[i].numberFloor2.toString()
 
-    if (this.servicio[i].numberTerap > 999)
-      this.servicio[i].numberTerap = (this.servicio[i].numberTerap / 1000).toFixed(3)
+    if (this.servicio[i].numberTherapist > 999)
+      this.servicio[i].numberTherapist = (this.servicio[i].numberTherapist / 1000).toFixed(3)
     else
-      this.servicio[i].numberTerap = this.servicio[i].numberTerap.toString()
+      this.servicio[i].numberTherapist = this.servicio[i].numberTherapist.toString()
 
-    if (this.servicio[i].numberEncarg > 999)
-      this.servicio[i].numberEncarg = (this.servicio[i].numberEncarg / 1000).toFixed(3)
+    if (this.servicio[i].numberManager > 999)
+      this.servicio[i].numberManager = (this.servicio[i].numberManager / 1000).toFixed(3)
     else
-      this.servicio[i].numberEncarg = this.servicio[i].numberEncarg.toString()
+      this.servicio[i].numberManager = this.servicio[i].numberManager.toString()
 
     if (this.servicio[i].numberTaxi > 999)
       this.servicio[i].numberTaxi = (this.servicio[i].numberTaxi / 1000).toFixed(3)
     else
       this.servicio[i].numberTaxi = this.servicio[i].numberTaxi.toString()
 
-    if (this.servicio[i].bebidas > 999)
-      this.servicio[i].bebidas = (this.servicio[i].bebidas / 1000).toFixed(3)
+    if (this.servicio[i].drink > 999)
+      this.servicio[i].drink = (this.servicio[i].drink / 1000).toFixed(3)
     else
-      this.servicio[i].bebidas = this.servicio[i].bebidas.toString()
+      this.servicio[i].drink = this.servicio[i].drink.toString()
 
-    if (this.servicio[i].tabaco > 999)
-      this.servicio[i].tabaco = (this.servicio[i].tabaco / 1000).toFixed(3)
+    if (this.servicio[i].tabacco > 999)
+      this.servicio[i].tabacco = (this.servicio[i].tabacco / 1000).toFixed(3)
     else
-      this.servicio[i].tabaco = this.servicio[i].tabaco.toString()
+      this.servicio[i].tabacco = this.servicio[i].tabacco.toString()
 
-    if (this.servicio[i].vitaminas > 999)
-      this.servicio[i].vitaminas = (this.servicio[i].vitaminas / 1000).toFixed(3)
+    if (this.servicio[i].vitamin > 999)
+      this.servicio[i].vitamin = (this.servicio[i].vitamin / 1000).toFixed(3)
     else
-      this.servicio[i].vitaminas = this.servicio[i].vitaminas.toString()
+      this.servicio[i].vitamin = this.servicio[i].vitamin.toString()
 
-    if (this.servicio[i].propina > 999)
-      this.servicio[i].propina = (this.servicio[i].propina / 1000).toFixed(3)
+    if (this.servicio[i].tip > 999)
+      this.servicio[i].tip = (this.servicio[i].tip / 1000).toFixed(3)
     else
-      this.servicio[i].propina = this.servicio[i].propina.toString()
+      this.servicio[i].tip = this.servicio[i].tip.toString()
 
-    if (this.servicio[i].otros > 999)
-      this.servicio[i].otros = (this.servicio[i].otros / 1000).toFixed(3)
+    if (this.servicio[i].others > 999)
+      this.servicio[i].others = (this.servicio[i].others / 1000).toFixed(3)
     else
-      this.servicio[i].otros = this.servicio[i].otros.toString()
+      this.servicio[i].others = this.servicio[i].others.toString()
 
-    if (this.servicio[i].totalServicio > 999)
-      this.servicio[i].totalServicio = (this.servicio[i].totalServicio / 1000).toFixed(3)
+    if (this.servicio[i].totalService > 999)
+      this.servicio[i].totalService = (this.servicio[i].totalService / 1000).toFixed(3)
     else
-      this.servicio[i].totalServicio = this.servicio[i].totalServicio.toString()
+      this.servicio[i].totalService = this.servicio[i].totalService.toString()
 
-    if (this.servicio[i].servicio > 999)
-      this.servicio[i].servicio = (this.servicio[i].servicio / 1000).toFixed(3)
+    if (this.servicio[i].service > 999)
+      this.servicio[i].service = (this.servicio[i].service / 1000).toFixed(3)
     else
-      this.servicio[i].servicio = this.servicio[i].servicio.toString()
+      this.servicio[i].service = this.servicio[i].service.toString()
   }
 
   filters() {
-    this.serviceService.getServicio().subscribe((rp: any) => {
-      this.servicio = rp
+    this.serviceService.getService().subscribe((rp: any) => {
+      this.servicio = rp['service']
       this.calculateSumOfServices()
     })
   }
@@ -370,18 +370,18 @@ export class ServicePage implements OnInit {
   calculateSumOfServices = async () => {
 
     const therapistCondition = serv => {
-      return (this.selectedTerapeuta) ? serv.terapeuta === this.selectedTerapeuta : true
+      return (this.selectedTerapeuta) ? serv.therapist === this.selectedTerapeuta : true
     }
 
     const managerCondition = serv => {
-      return (this.selectedEncargada) ? serv.encargada === this.selectedEncargada : true
+      return (this.selectedEncargada) ? serv.manager === this.selectedEncargada : true
     }
 
     const conditionBetweenDates = serv => {
       if (this.dateStart === undefined && this.dateEnd === undefined) return true
-      if (this.dateStart === undefined && serv.fechaHoyInicio <= this.dateEnd) return true
-      if (this.dateEnd === undefined && serv.fechaHoyInicio === this.dateStart) return true
-      if (serv.fechaHoyInicio >= this.dateStart && serv.fechaHoyInicio <= this.dateEnd) return true
+      if (this.dateStart === undefined && serv.dateToday <= this.dateEnd) return true
+      if (this.dateEnd === undefined && serv.dateToday === this.dateStart) return true
+      if (serv.dateToday >= this.dateStart && serv.dateToday <= this.dateEnd) return true
 
       return false
     }
@@ -404,7 +404,7 @@ export class ServicePage implements OnInit {
       if (this.horaInicio === undefined && this.hourStart === undefined) return true
       if (this.horaInicio === undefined && serv.horaFinal <= this.horaFinal) return true
       if (this.horaFinal === undefined && serv.horaInicio === this.horaInicio) return true
-      if (`${serv.fechaHoyInicio} ${serv.hourStart}` >= this.parmHourStart && `${serv.fechaHoyInicio} ${serv.hourEnd}` <= this.parmHourEnd) return true
+      if (`${serv.dateToday.substring(0, 10)} ${serv.hourStart.substring(11, 16)}` >= this.parmHourStart && `${serv.dateToday.substring(0, 10)} ${serv.hourEnd.substring(11, 16)}` <= this.parmHourEnd) return true
 
       return false
     }
@@ -412,15 +412,15 @@ export class ServicePage implements OnInit {
     const searchCondition = serv => {
       if (!this.filterSearch) return true
       const criterio = this.filterSearch
-      return (serv.terapeuta.match(criterio)
-        || serv.encargada.match(criterio)
-        || serv.formaPago.match(criterio)
-        || serv.fecha.match(criterio)
-        || serv.cliente.match(criterio)) ? true : false
+      return (serv.therapist.match(criterio)
+        || serv.manager.match(criterio)
+        || serv.payment.match(criterio)
+        || serv.dateStart.match(criterio).substring(0, 10)
+        || serv.client.match(criterio)) ? true : false
     }
 
     const wayToPay = serv => {
-      return (this.selectedFormPago) ? serv.formaPago.indexOf(this.selectedFormPago) > -1 : true
+      return (this.selectedFormPago) ? serv.payment.indexOf(this.selectedFormPago) > -1 : true
     }
 
     // Filter by Servicio
@@ -430,7 +430,7 @@ export class ServicePage implements OnInit {
         && managerCondition(serv) && searchCondition(serv) && conditionBetweenDates(serv)
         && conditionBetweenHours(serv) && wayToPay(serv))
       this.totalServicio = servicios.reduce((accumulator, serv) => {
-        return accumulator + serv.servicio
+        return accumulator + serv.service
       }, 0)
 
       // Filter by Valor Total
@@ -440,7 +440,7 @@ export class ServicePage implements OnInit {
       this.totalValor = valorTotal.reduce((accumulator, serv) => {
         this.idService = valorTotal
         this.servicio = valorTotal
-        return accumulator + serv.totalServicio
+        return accumulator + serv.totalService
       }, 0)
     }
 
@@ -461,12 +461,16 @@ export class ServicePage implements OnInit {
   }
 
   totalSumOfServices(element) {
-    const totalServ = element.map(({ servicio }) => servicio).reduce((acc, value) => acc + value, 0)
+    const totalServ = element.map(({ service }) => service).reduce((acc, value) => acc + value, 0)
     this.idService = element
     this.totalServicio = totalServ
 
-    const totalvalors = element.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
+    const totalvalors = element.map(({ totalService }) => totalService).reduce((acc, value) => acc + value, 0)
     this.totalValor = totalvalors
+
+    for (let i = 0; i < element.length; i++) {
+      this.pointThousandTable(i)
+    }
 
     this.thousandPoint()
   }
@@ -474,9 +478,9 @@ export class ServicePage implements OnInit {
   getTherapist = async () => {
     let therapit
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-      this.serviceTherapist.company(rp[0].company).subscribe((rp) => {
-        this.terapeuta = rp
-        therapit = rp
+      this.serviceTherapist.company(rp['manager'].company).subscribe((rp) => {
+        this.terapeuta = rp['therapist']
+        therapit = rp['therapist']
 
         return therapit
       })
@@ -485,8 +489,8 @@ export class ServicePage implements OnInit {
 
   getManager() {
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-      this.serviceManager.company(rp[0].company).subscribe((datosEncargada) => {
-        this.manager = datosEncargada
+      this.serviceManager.company(rp['manager'].company).subscribe((rp) => {
+        this.manager = rp['manager']
       })
     })
   }
@@ -498,7 +502,7 @@ export class ServicePage implements OnInit {
 
   updateNote() {
     this.serviceService.updateNote(this.idDetail, this.serviceModel).subscribe(async (rp: any) => {
-      this.serviceService.getServicio().subscribe(async (rp: any) => {
+      this.serviceService.getService().subscribe(async (rp: any) => {
         this.servicio = rp
         this.notas = false
       })
@@ -512,7 +516,7 @@ export class ServicePage implements OnInit {
 
   async deleteService() {
     this.serviceManager.getId(this.idUser).subscribe(async (rp) => {
-      if (rp[0]['rol'] == 'administrador') {
+      if (rp[0]['rol'] == 'Administrador') {
         if (this.selectedTerapeuta != undefined || this.selectedEncargada != undefined ||
           this.selectedDateStart != undefined || this.selectedDateEnd != undefined) {
           Swal.fire({
@@ -544,7 +548,7 @@ export class ServicePage implements OnInit {
                   })
 
                   for (let i = 0; i < this.idService.length; i++) {
-                    this.serviceService.deleteServicio(this.idService[i]['id']).subscribe((rp: any) => {
+                    this.serviceService.delete(this.idService[i]['id']).subscribe((rp: any) => {
                     })
                   }
 
@@ -612,12 +616,12 @@ export class ServicePage implements OnInit {
   }
 
   calculatedTotal() {
-    this.serviceService.getFechaHoy(this.dateCurrent, this.company).subscribe((rp: any) => {
+    this.serviceService.getByDateDayAndCompantCurrentDateDesc(this.dateCurrent, this.company).subscribe((rp: any) => {
       if (rp.length > 0) {
         this.servicio = rp
         this.totalAll(rp)
       } else {
-        this.serviceService.getEncargadaAndDate(this.dateCurrent, this.selectedEncargada, this.company).subscribe((rp: any) => {
+        this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(this.dateCurrent, this.selectedEncargada, this.company).subscribe((rp: any) => {
           this.servicio = rp
           this.totalAll(rp)
         }
@@ -627,6 +631,7 @@ export class ServicePage implements OnInit {
   }
 
   totalAll(rp) {
+    debugger
     const totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
 
     if (this.totalValor > 999)
@@ -644,41 +649,46 @@ export class ServicePage implements OnInit {
   }
 
   detail(services: any) {
-    this.idDetail = services.id
+    let day = '', month = '', year = '', dateToday
 
-    this.serviceModel.nota = services.nota
-    this.ajustDate(services.fechaHoyInicio)
+    this.idDetail = services.id
+    this.serviceModel.note = services.note
+    this.ajustDate(services.dateToday)
 
     if (this.details == false && this.notas == false) {
       this.details = true
-      this.minute = services.minuto
-      this.total = services.totalServicio
-      this.payment = services.formaPago
+      this.minute = services.minutes
+      this.total = services.totalService
+      this.payment = services.payment
 
-      if (services.cliente != "") this.client = services.cliente
+      if (services.client != "") this.client = services.client
       else this.client = 'N/A'
 
-      if (services.salida != "") this.exit = services.salida
+      if (services.exit != "") this.exit = services.exit
       else this.exit = 'N/A'
 
-      this.treatment = services.servicio
-      this.house1 = services.numberPiso1
-      this.house2 = services.numberPiso2
-      this.dateStart1 = services.fecha
-      this.dateEnd1 = services.fechaFin
-      this.hourstart = services.horaStart
-      this.hourend = services.horaEnd
+      this.treatment = services.service
+      this.house1 = services.numberFloor1
+      this.house2 = services.numberFloor2
+
+      day = this.dateStart.substring(8, 10)
+      month = this.dateStart.substring(5, 7)
+      year = this.dateStart.substring(2, 4)
+      dateToday = `${day}-${month}-${year}`
+      this.dateStart1 = dateToday
+      this.hourstart = services.dateStart.substring(11, 16)
+      this.hourend = services.dateEnd.substring(11, 16)
       this.therap = services.numberTerap
-      this.therapist = services.numberTerap
-      this.manag = services.numberEncarg
+      this.therapist = services.numberTherapist
+      this.manag = services.numberManager
       this.taxi = services.taxi
-      this.drinkHouse = services.bebidas
-      this.drinkTherap = services.bebidaTerap
-      this.tabacco = services.tabaco
-      this.vitamin = services.vitaminas
-      this.tip = services.propina
-      this.others = services.otros
-      this.therapisth = services.terapeuta
+      this.drinkHouse = services.drink
+      this.drinkTherap = services.drinkTherapist
+      this.tabacco = services.tabacco
+      this.vitamin = services.vitamin
+      this.tip = services.tip
+      this.others = services.others
+      this.therapisth = services.therapist
     } else {
       this.details = false
     }
@@ -1013,9 +1023,9 @@ export class ServicePage implements OnInit {
         this.dateEnd = fechaActualmente
 
         this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-          if (rp[0]['rol'] == 'administrador') {
+          if (rp[0]['rol'] == 'Administrador') {
 
-            this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
+            this.serviceService.getByDateDayAndCompantCurrentDateDesc(fechaActualmente, this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1027,7 +1037,7 @@ export class ServicePage implements OnInit {
             })
           } else {
 
-            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
+            this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1139,9 +1149,9 @@ export class ServicePage implements OnInit {
         this.dateEnd = fechaActualmente
 
         this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-          if (rp[0]['rol'] == 'administrador') {
+          if (rp['manager'].rol == 'Administrador') {
 
-            this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
+            this.serviceService.getByDateDayAndCompantCurrentDateDesc(fechaActualmente, this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1153,7 +1163,7 @@ export class ServicePage implements OnInit {
             })
           } else {
 
-            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
+            this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1311,8 +1321,8 @@ export class ServicePage implements OnInit {
         this.dateEnd = fechaActualmente
 
         this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-          if (rp[0]['rol'] == 'administrador') {
-            this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
+          if (rp[0]['rol'] == 'Administrador') {
+            this.serviceService.getByDateDayAndCompantCurrentDateDesc(fechaActualmente, this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1324,7 +1334,7 @@ export class ServicePage implements OnInit {
             })
           } else {
 
-            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
+            this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1439,9 +1449,9 @@ export class ServicePage implements OnInit {
         this.dateEnd = fechaActualmente
 
         this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-          if (rp[0]['rol'] == 'administrador') {
+          if (rp[0]['rol'] == 'Administrador') {
 
-            this.serviceService.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
+            this.serviceService.getByDateDayAndCompantCurrentDateDesc(fechaActualmente, this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
               } else {
@@ -1453,7 +1463,7 @@ export class ServicePage implements OnInit {
             })
           } else {
 
-            this.serviceService.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
+            this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               if (rp.length > 0) {
                 this.servicio = rp
                 this.totalValor = rp.map(({ totalServicio }) => totalServicio).reduce((acc, value) => acc + value, 0)
@@ -1473,8 +1483,75 @@ export class ServicePage implements OnInit {
     return false
   }
 
+  months(month: string) {
+
+    let numberMonth = ''
+
+    if (month == 'Dec') {
+      this.month = '12'
+      numberMonth = '0' + this.month
+      this.month = numberMonth.toString()
+      this.nameMonth = 'Diciembre'
+    }
+
+    if (month == 'Nov') {
+      this.month = '11'
+      this.nameMonth = 'Noviembre'
+    }
+
+    if (month == 'Oct') {
+      this.month = '10'
+      this.nameMonth = 'Octubre'
+    }
+
+    if (month == 'Sep') {
+      this.month = '09'
+      this.nameMonth = 'Septiembre'
+    }
+
+    if (month == 'Aug') {
+      this.month = '08'
+      this.nameMonth = 'Agosto'
+    }
+
+    if (month == 'Jul') {
+      this.month = '07'
+      this.nameMonth = 'Julio'
+    }
+
+    if (month == 'Jun') {
+      this.month = '06'
+      this.nameMonth = 'Junio'
+    }
+
+    if (month == 'May') {
+      this.month = '05'
+      this.nameMonth = 'Mayo'
+    }
+
+    if (month == 'Apr') {
+      this.month = '04'
+      this.nameMonth = 'Abril'
+    }
+
+    if (month == 'Mar') {
+      this.month = '03'
+      this.nameMonth = 'Marzo'
+    }
+
+    if (month == 'Feb') {
+      this.month = '02'
+      this.nameMonth = 'Febrero'
+    }
+
+    if (month == 'Jan') {
+      this.month = '01'
+      this.nameMonth = 'Enero'
+    }
+  }
+
   edit() {
-    this.serviceModel.pantalla = 'services'
+    this.serviceModel.screen = 'services'
     this.serviceService.updateScreenById(this.idDetail, this.serviceModel).subscribe(async (rp: any) => { })
     this.router.navigate([`tabs/${this.idUser}/edit-services/${this.idDetail}`])
   }
@@ -1482,7 +1559,7 @@ export class ServicePage implements OnInit {
   deleteAll() {
     if (this.deleteButton == true) {
       this.serviceManager.getId(this.idUser).subscribe(async (rp) => {
-        if (rp[0]['rol'] == 'administrador') {
+        if (rp['manager'].rol == 'Administrador') {
           Swal.fire({
             heightAuto: false,
             position: 'top-end',
@@ -1506,12 +1583,12 @@ export class ServicePage implements OnInit {
                 confirmButtonText: 'Si, Deseo eliminar!'
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.serviceTherapist.name(this.idService[0]['terapeuta']).subscribe((rp: any) => {
-                    this.serviceTherapist.updateItems(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
+                  this.serviceTherapist.name(this.idService[0]['therapist']).subscribe((rp: any) => {
+                    this.serviceTherapist.updateItems(rp['therapist'][0].name, rp['therapist'][0]).subscribe((rp: any) => { })
                   })
 
                   for (let i = 0; i < this.idService.length; i++) {
-                    this.serviceService.deleteServicio(this.idService[i]['id']).subscribe((rp: any) => {
+                    this.serviceService.delete(this.idService[i]['id']).subscribe((rp: any) => {
                     })
                   }
 
@@ -1533,7 +1610,7 @@ export class ServicePage implements OnInit {
 
   delete(id: number) {
     this.serviceManager.getId(this.idUser).subscribe(async (rp) => {
-      if (rp[0]['rol'] == 'administrador') {
+      if (rp[0]['rol'] == 'Administrador') {
         Swal.fire({
           heightAuto: false,
           position: 'top-end',
@@ -1562,7 +1639,7 @@ export class ServicePage implements OnInit {
                 })
 
                 for (let i = 0; i < this.idService.length; i++) {
-                  this.serviceService.deleteServicio(id).subscribe((rp: any) => {
+                  this.serviceService.delete(id).subscribe((rp: any) => {
                   })
                 }
 
@@ -1586,40 +1663,40 @@ export class ServicePage implements OnInit {
     if (this.totals == false) {
       this.totals = true
 
-      const totalTreatment = this.servicio.map(({ servicio }) => servicio).reduce((acc, value) => acc + value, 0)
+      const totalTreatment = this.servicio.map(({ service }) => service).reduce((acc, value) => acc + value, 0)
       let treatment = totalTreatment
 
-      const totalHouse1 = this.servicio.map(({ numberPiso1 }) => numberPiso1).reduce((acc, value) => acc + value, 0)
+      const totalHouse1 = this.servicio.map(({ numberFloor1 }) => numberFloor1).reduce((acc, value) => acc + value, 0)
       let house1 = totalHouse1
 
-      const totalHouse2 = this.servicio.map(({ numberPiso2 }) => numberPiso2).reduce((acc, value) => acc + value, 0)
+      const totalHouse2 = this.servicio.map(({ numberFloor2 }) => numberFloor2).reduce((acc, value) => acc + value, 0)
       let house2 = totalHouse2
 
-      const totalTherapist = this.servicio.map(({ numberTerap }) => numberTerap).reduce((acc, value) => acc + value, 0)
+      const totalTherapist = this.servicio.map(({ numberTherapist }) => numberTherapist).reduce((acc, value) => acc + value, 0)
       let therapist = totalTherapist
 
-      const totalManager = this.servicio.map(({ numberEncarg }) => numberEncarg).reduce((acc, value) => acc + value, 0)
+      const totalManager = this.servicio.map(({ numberManager }) => numberManager).reduce((acc, value) => acc + value, 0)
       let manager = totalManager
 
       const totalTaxi = this.servicio.map(({ taxi }) => taxi).reduce((acc, value) => acc + value, 0)
       let taxi = totalTaxi
 
-      const totalDrinkHouse = this.servicio.map(({ bebidas }) => bebidas).reduce((acc, value) => acc + value, 0)
+      const totalDrinkHouse = this.servicio.map(({ drink }) => drink).reduce((acc, value) => acc + value, 0)
       let drinkHouse = totalDrinkHouse
 
-      const totalDrinkTherap = this.servicio.map(({ bebidaTerap }) => bebidaTerap).reduce((acc, value) => acc + value, 0)
+      const totalDrinkTherap = this.servicio.map(({ drinkTherapist }) => drinkTherapist).reduce((acc, value) => acc + value, 0)
       let drinkTherap = totalDrinkTherap
 
-      const totalTobacco = this.servicio.map(({ tabaco }) => tabaco).reduce((acc, value) => acc + value, 0)
+      const totalTobacco = this.servicio.map(({ tabacco }) => tabacco).reduce((acc, value) => acc + value, 0)
       let tobacco = totalTobacco
 
-      const totalVitamin = this.servicio.map(({ vitaminas }) => vitaminas).reduce((acc, value) => acc + value, 0)
+      const totalVitamin = this.servicio.map(({ vitamin }) => vitamin).reduce((acc, value) => acc + value, 0)
       let vitamin = totalVitamin
 
-      const totalTip = this.servicio.map(({ propina }) => propina).reduce((acc, value) => acc + value, 0)
+      const totalTip = this.servicio.map(({ tip }) => tip).reduce((acc, value) => acc + value, 0)
       let tip = totalTip
 
-      const totalOthers = this.servicio.map(({ otros }) => otros).reduce((acc, value) => acc + value, 0)
+      const totalOthers = this.servicio.map(({ others }) => others).reduce((acc, value) => acc + value, 0)
       let others = totalOthers
 
       this.thousandPointTotal(treatment, house1, house2, therapist, manager, taxi, drinkHouse, drinkTherap, tobacco, vitamin, tip, others)
@@ -1690,45 +1767,4 @@ export class ServicePage implements OnInit {
     else
       this.totalOthers = others.toString()
   }
-
-  // @HostListener('touchstart', ['$event'])
-  // handleTouch(event) {
-  //   var pageY = event.targetTouches[0].pageY
-  //   var clientY = event.targetTouches[0].clientY
-  //   var screenY = event.targetTouches[0].screenY
-  //   var id = event.target.id
-  //   console.log(screenY)
-
-  //   if (screenY > 100) {
-  //     if (this.defaultTouch == false) {
-  //       document.getElementById('rectangle95').style.position = 'fixed'
-  //       document.getElementById('rectangle95').style.top = '1px'
-  //       document.getElementById('rectangle95').style.zIndex = '1'
-  //       this.defaultTouch = true
-
-  //       if (id == 'rectangle95' || id == 'frame' || id == 'detail' && screenY > 500) {
-  //         document.getElementById('rectangle95').style.position = 'fixed'
-  //         document.getElementById('rectangle95').style.top = '318px'
-  //         document.getElementById('rectangle95').style.zIndex = '1'
-  //         this.defaultTouch = true
-  //       }
-  //     }
-  //   }
-
-  //   if (screenY < 450) {
-  //     if (this.defaultTouch == true) {
-  //       if (id == 'rectangle95' || id == 'frame' || id == 'detail' && screenY < 900) {
-  //         document.getElementById('rectangle95').style.position = 'absolute'
-  //         document.getElementById('rectangle95').style.top = '0px'
-  //         document.getElementById('rectangle95').style.zIndex = '0'
-  //         this.defaultTouch = false
-  //       } else {
-  //         document.getElementById('rectangle95').style.position = 'absolute'
-  //         document.getElementById('rectangle95').style.top = '0px'
-  //         document.getElementById('rectangle95').style.zIndex = '0'
-  //         this.defaultTouch = false
-  //       }
-  //     }
-  //   }
-  // }
 }

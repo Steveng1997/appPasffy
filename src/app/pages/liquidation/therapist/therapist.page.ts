@@ -132,8 +132,8 @@ export class TherapistPage implements OnInit {
   }
 
   modelServices: ModelService = {
-    idTerapeuta: "",
-    pantalla: ""
+    idTherap: "",
+    screen: ""
   }
 
   constructor(
@@ -393,7 +393,7 @@ export class TherapistPage implements OnInit {
   goService(id: number) {
     this.services.getById(id).subscribe((rp: any) => {
       if (rp.length > 0) {
-        this.modelServices.pantalla = 'liquidation-therapist'
+        this.modelServices.screen = 'liquidation-therapist'
         this.services.updateScreenById(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
         this.router.navigate([`tabs/${this.id}/edit-services/${rp[0]['id']}`])
       }
@@ -1277,8 +1277,8 @@ export class TherapistPage implements OnInit {
       confirmButtonText: 'Si, Deseo eliminar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.modelServices.idTerapeuta = ""
-        this.modelServices.liquidadoTerapeuta = false
+        this.modelServices.idTherap = ""
+        this.modelServices.liquidatedTherapist = false
         this.services.updateTherapistSettlementTherapistIdByTherapistId(this.idTherapist, this.modelServices).subscribe(async (rp) => {
           this.serviceLiquidation.deleteLiquidationTherapist(this.idDetail).subscribe(async (rp) => {
             if (this.administratorRole == true) {

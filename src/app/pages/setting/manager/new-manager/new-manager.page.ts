@@ -78,16 +78,19 @@ export class NewManagerPage implements OnInit {
           this.manager.name = this.manager.name.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
 
           this.serviceManager.getId(this.iduser).subscribe((rp: any) => {
-            this.manager.company = rp[0]['company']
+            this.manager.company = rp['manager'].company
 
             this.serviceManager.email(this.manager.email).subscribe((rp: any) => {
-              if (rp.length == 0) {
+              if (rp['manager'].length == 0) {
 
                 this.serviceManager.save(this.manager).subscribe((rp) => {
                   Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Insertado Correctamente!', showConfirmButton: false, timer: 1000 })
                   this.resetManager()
                   this.ionLoaderService.dismissLoader()
                   location.replace(`tabs/${this.iduser}/manager`);
+                }, err => {
+                  Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'La contraseña debe tener minimo 5 caracteres', showConfirmButton: false, timer: 1000 })
+                  this.ionLoaderService.dismissLoader()
                 })
               } else {
                 Swal.fire({ heightAuto: false, position: 'top-end', icon: 'error', text: 'Ya existe este usuario', showConfirmButton: false, timer: 1000 })
@@ -125,7 +128,7 @@ export class NewManagerPage implements OnInit {
       document.getElementById('overview').style.overflowY = 'auto'
       document.getElementById('overview').style.overflowX = 'hidden'
       var screen = document.querySelector<HTMLElement>(".nueva-encargada")
-      var element_to_show = document.getElementById('tabaco')
+      var element_to_show = document.getElementById('tabacco')
       var scrolling_parent = element_to_show.parentElement
 
       var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
@@ -145,7 +148,7 @@ export class NewManagerPage implements OnInit {
       document.getElementById('overview').style.overflowY = 'auto'
       document.getElementById('overview').style.overflowX = 'hidden'
       var screen = document.querySelector<HTMLElement>(".nueva-encargada")
-      var element_to_show = document.getElementById('vitamina')
+      var element_to_show = document.getElementById('vitamin')
       var scrolling_parent = element_to_show.parentElement
 
       var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())
@@ -165,7 +168,7 @@ export class NewManagerPage implements OnInit {
       document.getElementById('overview').style.overflowY = 'auto'
       document.getElementById('overview').style.overflowX = 'hidden'
       var screen = document.querySelector<HTMLElement>(".nueva-encargada")
-      var element_to_show = document.getElementById('otros')
+      var element_to_show = document.getElementById('others')
       var scrolling_parent = element_to_show.parentElement
 
       var top = parseInt(scrolling_parent.getBoundingClientRect().top.toString())

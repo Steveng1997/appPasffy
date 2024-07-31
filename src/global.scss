@@ -13,8 +13,28 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-.custom-loader-class{
+ion-backdrop {
+    background-color: transparent;
+}
+
+ion-toast {
+    width: -webkit-fill-available;
+}
+
+.custom-loader-class {
+    --background: transparent;
+    --spinner-color: var(--verde, #1fb996);
+}
+
+.loading-wrapper.sc-ion-loading-md {
+    box-shadow: 0 16px 20px transparent;
+}
+
+.toast-class {
+    top: -9%;
     --background: var(--verde, #1fb996);
     --spinner-color: #FFFFFF;
     color: #FFFFFF;
+    font-size: 20px;
+    text-align: center;
 }

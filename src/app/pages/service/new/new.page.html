@@ -13,10 +13,10 @@
         <div class="rectangle-38"></div>
 
         <div class="cliente">Cliente</div>
-        <ion-input type="text" class="cliente" id="cliente" name="cliente" [(ngModel)]="services.cliente"></ion-input>
+        <ion-input type="text" class="cliente" id="client" name="client" [(ngModel)]="services.client"></ion-input>
 
         <div class="lugar-salida">Salida</div>
-        <ion-input type="text" class="lugar-salida" id="salida" name="salida" [(ngModel)]="services.salida"></ion-input>
+        <ion-input type="text" class="lugar-salida" id="exit" name="exit" [(ngModel)]="services.exit"></ion-input>
 
         <div class="group-67">
           <div class="rectangle-40" id="box-date"></div>
@@ -25,11 +25,11 @@
 
           <div class="fecha">Fecha</div>
           <ion-input type="date" class="fecha" id="date" name="date" (change)="chosenDate($event)"
-            (ionFocus)="showKeyBoard('date')" (ionBlur)="hideKeyBoard('date')" [value]="fechaActual"></ion-input>
+            (ionFocus)="showKeyBoard('date')" (ionBlur)="hideKeyBoard('date')" [value]="dateToday"></ion-input>
 
           <div class="hora-de-inicio">Hora de Inicio</div>
           <ion-input type="time" class="hora-de-inicio" id="time" name="time" (change)="startTime($event)"
-            (ionFocus)="showKeyBoard('time')" (ionBlur)="hideKeyBoard('time')" [(ngModel)]="services.horaStart"
+            (ionFocus)="showKeyBoard('time')" (ionBlur)="hideKeyBoard('time')" [(ngModel)]="hourStart"
             [value]="horaStarted"></ion-input>
 
           <div class="duraci-n-min">Duración (min):</div>
@@ -40,7 +40,7 @@
 
         <ion-textarea class="rectangle-77" labelPlacement="floating" (ionFocus)="showKeyBoard('notes')"
           (ionBlur)="hideKeyBoard('notes')" style="min-height: -webkit-fill-available; overflow: scroll; color: black"
-          [(ngModel)]="services.nota">
+          [(ngModel)]="services.note">
           <div slot="label" class="notas">Notas: <ion-text color="danger"></ion-text></div>
         </ion-textarea>
 
@@ -53,7 +53,7 @@
         <div class="group-68">
           <div class="rectangle-43"></div>
           <div class="hora-fin">Hora fin:</div>
-          <div class="text-hora-fin">{{services.horaEnd}}</div>
+          <div class="text-hora-fin">{{hourEnd}}</div>
         </div>
 
         <div class="group-69">
@@ -77,7 +77,7 @@
 
         <div class="group-28">
           <div class="rectangle-45" id="box-treatment"></div>
-          <ion-input type="number" class="rectangle-45" id="treatment" name="treatment" [(ngModel)]="services.servicio"
+          <ion-input type="number" class="rectangle-45" id="treatment" name="treatment" [(ngModel)]="services.service"
             (ionFocus)="showKeyBoard('treatment')" (ionBlur)="hideKeyBoard('treatment')"
             (ngModelChange)="serviceValue()"></ion-input>
 
@@ -87,33 +87,33 @@
             (ngModelChange)="serviceValue()"></ion-input>
 
           <div class="rectangle-52" id="box-tobacco"></div>
-          <ion-input type="number" class="rectangle-52" id="tobacco" name="tobacco" [(ngModel)]="services.tabaco"
-            (ionFocus)="showKeyBoard('tobacco')" (ionBlur)="hideKeyBoard('tobacco')"
+          <ion-input type="number" class="rectangle-52" id="tobacco" name="tabacco" [(ngModel)]="services.tabacco"
+            (ionFocus)="showKeyBoard('tabacco')" (ionBlur)="hideKeyBoard('tabacco')"
             (ngModelChange)="serviceValue()"></ion-input>
 
           <div class="rectangle-54" id="box-drinkHouse"></div>
-          <ion-input type="number" class="rectangle-54" id="drinkHouse" name="drinkHouse" [(ngModel)]="services.bebidas"
+          <ion-input type="number" class="rectangle-54" id="drinkHouse" name="drinkHouse" [(ngModel)]="services.drink"
             (ionFocus)="showKeyBoard('drinkHouse')" (ionBlur)="hideKeyBoard('drinkHouse')"
             (ngModelChange)="serviceValue()"></ion-input>
 
           <div class="rectangle-49" id="box-tip"></div>
-          <ion-input type="number" class="rectangle-49" id="tip" name="tip" [(ngModel)]="services.propina"
+          <ion-input type="number" class="rectangle-49" id="tip" name="tip" [(ngModel)]="services.tip"
             (ionFocus)="showKeyBoard('tip')" (ionBlur)="hideKeyBoard('tip')"
             (ngModelChange)="serviceValue()"></ion-input>
 
           <div class="rectangle-51" id="box-vitamins"></div>
-          <ion-input type="number" class="rectangle-51" id="vitamins" name="vitamins" [(ngModel)]="services.vitaminas"
+          <ion-input type="number" class="rectangle-51" id="vitamins" name="vitamins" [(ngModel)]="services.vitamin"
             (ionFocus)="showKeyBoard('vitamins')" (ionBlur)="hideKeyBoard('vitamins')"
             (ngModelChange)="serviceValue()"></ion-input>
 
           <div class="rectangle-53" id="box-others"></div>
-          <ion-input type="number" class="rectangle-53" id="others" name="others" [(ngModel)]="services.otros"
+          <ion-input type="number" class="rectangle-53" id="others" name="others" [(ngModel)]="services.others"
             (ionFocus)="showKeyBoard('others')" (ionBlur)="hideKeyBoard('others')"
             (ngModelChange)="serviceValue()"></ion-input>
 
           <div class="rectangle-55" id="box-drinkTherapist"></div>
           <ion-input type="number" class="rectangle-55" id="drinkTherapist" name="drinkTherapist"
-            [(ngModel)]="services.bebidaTerap" (ngModelChange)="serviceValue()"
+            [(ngModel)]="services.drinkTherapist" (ngModelChange)="serviceValue()"
             (ionFocus)="showKeyBoard('drinkTherapist')" (ionBlur)="hideKeyBoard('drinkTherapist')"></ion-input>
 
           <div class="tratamiento">Tratamiento</div>
@@ -142,9 +142,9 @@
           </svg>
 
           <ion-select class="encargada2" style="display: grid; min-height: -webkit-fill-available" label="Encargada"
-            [(ngModel)]="services.encargada">
+            [(ngModel)]="services.manager">
             <ion-select-option *ngFor="let manager of manager"
-              [value]="manager.name">{{manager.nombre}}</ion-select-option>
+              [value]="manager.name">{{manager.name}}</ion-select-option>
           </ion-select>
 
         </div>
@@ -155,22 +155,22 @@
         <div class="rectangle-58"></div>
 
         <div class="rectangle-94"></div>
-        <ion-input type="number" class="rectangle-94" id="house1" name="house1" [(ngModel)]="services.numberPiso1"
+        <ion-input type="number" class="rectangle-94" id="house1" name="house1" [(ngModel)]="services.numberFloor1"
           (ionFocus)="showKeyBoard('house1')" (ionBlur)="hideKeyBoard('house1')"
           (ngModelChange)="collectionsValue()"></ion-input>
 
         <div class="rectangle-95"></div>
-        <ion-input type="number" class="rectangle-95" id="house2" name="house2" [(ngModel)]="services.numberPiso2"
+        <ion-input type="number" class="rectangle-95" id="house2" name="house2" [(ngModel)]="services.numberFloor2"
           (ionFocus)="showKeyBoard('house2')" (ionBlur)="hideKeyBoard('house2')"
           (ngModelChange)="collectionsValue()"></ion-input>
 
         <div class="rectangle-97"></div>
-        <ion-input type="number" class="rectangle-97" id="therapist" name="therapist" [(ngModel)]="services.numberTerap"
+        <ion-input type="number" class="rectangle-97" id="therapist" name="therapist" [(ngModel)]="services.numberTherapist"
           (ionFocus)="showKeyBoard('therapist')" (ionBlur)="hideKeyBoard('therapist')"
           (ngModelChange)="collectionsValue()"></ion-input>
 
         <div class="rectangle-96"></div>
-        <ion-input type="number" class="rectangle-96" id="manager" name="manager" [(ngModel)]="services.numberEncarg"
+        <ion-input type="number" class="rectangle-96" id="manager" name="manager" [(ngModel)]="services.numberManager"
           (ionFocus)="showKeyBoard('manager')" (ionBlur)="hideKeyBoard('manager')"
           (ngModelChange)="collectionsValue()"></ion-input>
 
@@ -320,9 +320,9 @@
           </svg>
 
           <ion-select class="terapeuta2" style="display: grid; min-height: -webkit-fill-available" label="Terapeuta"
-            [(ngModel)]="services.terapeuta" (ngModelChange)="selectTerap(services.terapeuta)">
+            [(ngModel)]="services.therapist" (ngModelChange)="selectTerap(services.therapist)">
             <ion-select-option *ngFor="let therapist of terapeuta"
-              [value]="therapist.name">{{therapist.nombre}}</ion-select-option>
+              [value]="therapist.name">{{therapist.name}}</ion-select-option>
           </ion-select>
         </div>
 

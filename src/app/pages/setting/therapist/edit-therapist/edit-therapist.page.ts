@@ -21,7 +21,7 @@ import { ServiceLiquidationTherapist } from 'src/app/core/services/liquidation/s
 })
 
 export class EditTherapistPage implements OnInit {
-  therapist: any
+  therapist = [];
   id: any
   iduser: number
   currentDate = new Date().getTime()
@@ -61,7 +61,7 @@ export class EditTherapistPage implements OnInit {
   }
 
   modelService: ModelService = {
-    idTerapeuta: "",
+    idTherap: "",
   }
 
   constructor(
@@ -81,8 +81,8 @@ export class EditTherapistPage implements OnInit {
     this.iduser = param['id']
 
     this.serviceTherapist.getId(this.id).subscribe((rp) => {
-      this.company = rp[0].company
-      return (this.therapist = rp)
+      this.company = rp['therapist'].company
+      this.therapist = [rp['therapist']]
     })
   }
 
@@ -90,7 +90,7 @@ export class EditTherapistPage implements OnInit {
     await this.service.getTerapeutaLiqFalse(nombre).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         this.liquidationTherapist.tratamiento = rp.length
-        this.modelService.liquidadoTerapeuta = true
+        this.modelService.liquidatedTherapist = true
 
         for (let i = 0; i < rp.length; i++) {
           this.service.updateLiquidacionTerap(rp[i]['id'], this.modelService).subscribe((rp) => { })
@@ -152,10 +152,9 @@ export class EditTherapistPage implements OnInit {
       return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16)
     })
 
-    this.modelService.idTerapeuta = uuid
+    this.modelService.idTherap = uuid
     this.liquidationTherapist.idUnico = uuid
     this.liquidationTherapist.idTerapeuta = uuid
-    this.modelService.idTerapeuta = uuid
     return this.liquidationTherapist.idUnico
   }
 
@@ -182,7 +181,7 @@ export class EditTherapistPage implements OnInit {
     }
   }
 
-  async delete(id: number, nombre: string) {
+  async delete(id: number, name: string) {
     this.serviceTherapist.getId(id).subscribe((rp: any) => {
       if (rp) {
         Swal.fire({
@@ -197,11 +196,11 @@ export class EditTherapistPage implements OnInit {
           if (result.isConfirmed) {
             this.ionLoaderService.simpleLoader()
             this.liquidationTherapist.currentDate = this.currentDate.toString()
-            this.liquidationTherapist.terapeuta = nombre
+            this.liquidationTherapist.terapeuta = name
             this.dateCurrentDay()
             this.createIdUnique()
-            await this.date(nombre)
-            await this.getTerapLiquidation(nombre)
+            await this.date(name)
+            await this.getTerapLiquidation(name)
 
             this.serviceTherapist.delete(id).subscribe(async (rp: any) => {
               this.serviceLiquidationTherapist.save(this.liquidationTherapist).subscribe(async (rp) => {
@@ -216,10 +215,10 @@ export class EditTherapistPage implements OnInit {
     })
   }
 
-  async update(id: number, terapeuta) {
-    if (terapeuta.name != "") {
+  async update(id: number, therapist) {
+    if (therapist.name != "") {
       this.ionLoaderService.simpleLoader()
-      this.serviceTherapist.update(id, terapeuta).subscribe(async (res: any) => {
+      this.serviceTherapist.update(id, therapist).subscribe(async (res: any) => {
         this.ionLoaderService.dismissLoader()
         Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: '¡Editado Correctamente!', showConfirmButton: false, timer: 1000 })
         location.replace(`tabs/${this.iduser}/therapist`);

@@ -26,28 +26,28 @@
         <div class="establecer-los-de-comisi-n">Establecer los (%) de comisión</div>
 
         <div class="rectangle-125"></div>
-        <ion-input type="text" class="rectangle-125" name="name" [(ngModel)]="therap.nombre"></ion-input>
+        <ion-input type="text" class="rectangle-125" name="name" [(ngModel)]="therap.name"></ion-input>
 
         <div class="rectangle-133"></div>
-        <ion-input type="number" class="rectangle-133" name="servicio" [(ngModel)]="therap.servicio"></ion-input>
+        <ion-input type="number" class="rectangle-133" name="service" [(ngModel)]="therap.service"></ion-input>
 
         <div class="rectangle-126"></div>
-        <ion-input type="number" class="rectangle-126" name="propina" [(ngModel)]="therap.propina"></ion-input>
+        <ion-input type="number" class="rectangle-126" name="tip" [(ngModel)]="therap.tip"></ion-input>
 
         <div class="rectangle-128"></div>
-        <ion-input type="number" class="rectangle-128" name="bebidaTerap" [(ngModel)]="therap.bebidaTerap"></ion-input>
+        <ion-input type="number" class="rectangle-128" name="bebidaTerap" [(ngModel)]="therap.drinkTherapist"></ion-input>
 
         <div class="rectangle-130"></div>
-        <ion-input type="number" class="rectangle-130" name="vitamina" [(ngModel)]="therap.vitamina"></ion-input>
+        <ion-input type="number" class="rectangle-130" name="vitamin" [(ngModel)]="therap.vitamin"></ion-input>
 
         <div class="rectangle-127"></div>
-        <ion-input type="number" class="rectangle-127" name="bebida" [(ngModel)]="therap.bebida"></ion-input>
+        <ion-input type="number" class="rectangle-127" name="drink" [(ngModel)]="therap.drink"></ion-input>
 
         <div class="rectangle-129"></div>
-        <ion-input type="number" class="rectangle-129" name="tabaco" [(ngModel)]="therap.tabaco"></ion-input>
+        <ion-input type="number" class="rectangle-129" name="tabaco" [(ngModel)]="therap.tabacco"></ion-input>
 
         <div class="rectangle-131"></div>
-        <ion-input type="number" class="rectangle-131" name="otros" [(ngModel)]="therap.otros"></ion-input>
+        <ion-input type="number" class="rectangle-131" name="others" [(ngModel)]="therap.others"></ion-input>
 
         <div class="rectangle-77" (click)="update(therap.id, therap)"></div>
         <div class="group-99">
@@ -63,7 +63,7 @@
           </svg>
         </div>
 
-        <div class="limpiar" (click)="delete(therap.id, therap.nombre)">Eliminar</div>
+        <div class="limpiar" (click)="delete(therap.id, therap.name)">Eliminar</div>
         <div class="rectangle-132"></div>
         <svg (click)="close()" class="x-close" width="27" height="27" viewBox="0 0 27 27" fill="none"
           xmlns="http://www.w3.org/2000/svg">

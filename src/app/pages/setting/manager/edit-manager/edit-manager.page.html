@@ -36,41 +36,41 @@
         <div class="establecer-los-de-comisi-n">Establecer los (%) de comisión</div>
 
         <div class="rectangle-135"></div>
-        <ion-input type="text" class="rectangle-135" name="name" [(ngModel)]="manager.nombre">
+        <ion-input type="text" class="rectangle-135" name="name" [(ngModel)]="manager.name">
         </ion-input>
 
         <div class="rectangle-144"></div>
-        <ion-input type="text" class="rectangle-144" name="pass" [(ngModel)]="manager.pass">
+        <ion-input type="text" class="rectangle-144" name="password" [(ngModel)]="manager.password">
         </ion-input>
 
         <div class="rectangle-143"></div>
-        <ion-input type="text" class="rectangle-143" name="user" [(ngModel)]="manager.usuario"></ion-input>
+        <ion-input type="text" class="rectangle-143" name="email" [(ngModel)]="manager.email"></ion-input>
 
         <div class="rectangle-145"></div>
-        <ion-input type="number" class="rectangle-145" name="fijoDia" [(ngModel)]="manager.fijoDia"></ion-input>
+        <ion-input type="number" class="rectangle-145" name="fixeDay" [(ngModel)]="manager.fixeDay"></ion-input>
 
         <div class="rectangle-147"></div>
-        <ion-input type="number" class="rectangle-147" name="servicio" [(ngModel)]="manager.servicio"></ion-input>
+        <ion-input type="number" class="rectangle-147" name="service" [(ngModel)]="manager.service"></ion-input>
 
         <div class="rectangle-136"></div>
-        <ion-input type="number" class="rectangle-136" name="propina" [(ngModel)]="manager.propina"></ion-input>
+        <ion-input type="number" class="rectangle-136" name="tip" [(ngModel)]="manager.tip"></ion-input>
 
         <div class="rectangle-137"></div>
-        <ion-input type="number" class="rectangle-137" name="bebidaTerap" [(ngModel)]="manager.bebidaTerap"></ion-input>
+        <ion-input type="number" class="rectangle-137" name="drinkTherapist" [(ngModel)]="manager.drinkTherapist"></ion-input>
 
         <div class="rectangle-138"></div>
-        <ion-input type="number" class="rectangle-138" name="vitamina" id="vitamina" [(ngModel)]="manager.vitamina"
-          (ionFocus)="showKeyBoard('vitamina')" (ionBlur)="hideKeyBoard()"></ion-input>
+        <ion-input type="number" class="rectangle-138" name="vitamin" id="vitamina" [(ngModel)]="manager.vitamin"
+          (ionFocus)="showKeyBoard('vitamin')" (ionBlur)="hideKeyBoard()"></ion-input>
 
         <div class="rectangle-139"></div>
-        <ion-input type="number" class="rectangle-139" name="bebida" [(ngModel)]="manager.bebida"></ion-input>
+        <ion-input type="number" class="rectangle-139" name="drink" [(ngModel)]="manager.drink"></ion-input>
 
         <div class="rectangle-140"></div>
-        <ion-input type="number" class="rectangle-140" name="tabaco" id="tabaco" [(ngModel)]="manager.tabaco"
+        <ion-input type="number" class="rectangle-140" name="tabacco" id="tabacco" [(ngModel)]="manager.tabacco"
           (ionFocus)="showKeyBoard('tabacco')" (ionBlur)="hideKeyBoard()"></ion-input>
 
         <div class="rectangle-141"></div>
-        <ion-input type="number" class="rectangle-141" [(ngModel)]="manager.otros" name="otros" id="otros"
+        <ion-input type="number" class="rectangle-141" [(ngModel)]="manager.others" name="others" id="others"
           (ionFocus)="showKeyBoard('others')" (ionBlur)="hideKeyBoard()"></ion-input>
 
         <div class="rectangle-77" (click)="update(manager.id, manager)"></div>
@@ -94,8 +94,8 @@
           <div class="rol">Rol</div>
           <div class="rectangle-146">
             <ion-select class="rectangle-146 rol1" name="rol" [(ngModel)]="manager.rol" #rol="ngModel">
-              <ion-select-option value="administrador">Administrador</ion-select-option>
-              <ion-select-option value="encargada">Encargada</ion-select-option>
+              <ion-select-option value="Administrador">Administrador</ion-select-option>
+              <ion-select-option value="Encargada">Encargada</ion-select-option>
             </ion-select>
           </div>
         </div>

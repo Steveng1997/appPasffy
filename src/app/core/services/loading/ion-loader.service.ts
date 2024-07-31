@@ -8,8 +8,8 @@ export class IonLoaderService {
 
   simpleLoader() {
     this.loadingController.create({
-      message: 'Loading...',
-      cssClass: 'custom-loader-class',
+      // message: 'Loading...',
+      cssClass: 'custom-loader-class'
     }).then((response) => {
       response.present()
     })

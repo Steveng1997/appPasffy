@@ -37,13 +37,16 @@ export class VisionPage implements OnInit {
   pageTherapist!: number
   pageManager!: number
 
-  fechaDiaHoy = dayjs().format("YYYY-MM-DD")
+  dateToday = dayjs().format("YYYY-MM-DD")
   totalServicio: number
   idUser: number
   company = ''
   therapist: any
   horaEnd: string
   horaHoy: string
+  day: number
+  nameMonth: string
+  month: string
 
   // TOTALES
   totalVision: number
@@ -67,12 +70,7 @@ export class VisionPage implements OnInit {
   totalPisos: number
 
   // Conteo fecha
-  count: number = 0
   dateTodayCurrent: string
-  day: number
-  month: string
-  atrasCount: number = 0
-  siguienteCount: number = 0
   fechaFormat = new Date()
 
   // string Number
@@ -120,7 +118,7 @@ export class VisionPage implements OnInit {
   }
 
   serviceModel: ModelService = {
-    pantalla: ""
+    screen: ""
   }
 
   constructor(
@@ -202,12 +200,12 @@ export class VisionPage implements OnInit {
 
       this.todaysDate()
       this.serviceManager.company(this.company).subscribe((rp: any) => {
-        this.servicesManager = rp
+        this.servicesManager = rp['manager']
 
-        if (rp.length > 7 && rp.length < 10) {
+        if (rp['manager'].length > 7 && rp['manager'].length < 10) {
           let rectangle20 = 334, overview = 1958
 
-          for (let i = 8; i <= rp.length; i++) {
+          for (let i = 8; i <= rp['manager'].length; i++) {
             rectangle20 += 31.5, overview += 31
 
             document.getElementById('rectangle20').style.height = rectangle20.toString() + 'px'
@@ -215,20 +213,20 @@ export class VisionPage implements OnInit {
           }
         }
 
-        if (rp.length >= 10) {
+        if (rp['manager'].length >= 10) {
           this.paginaterManager = true
           document.getElementById('rectangle20').style.height = '445px'
           document.getElementById('overview').style.height = '2068px'
         }
 
-        rp.map(item => {
-          this.service.getManagerAndDates(item['nombre'], this.fechaDiaHoy, this.company).subscribe((rp: any) => {
-            this.managerCount = rp.length
+        rp['manager'].map(item => {
+          this.service.getByTodayDateAndManagerAndCompany(this.dateToday, item.name, this.company).subscribe((rp: any) => {
+            this.managerCount = rp['service'].length
             item['count'] = this.managerCount
 
-            const servicios = rp.filter(serv => serv)
+            const servicios = rp['service'].filter(serv => serv)
             const sumatoria = servicios.reduce((accumulator, serv) => {
-              return accumulator + serv.totalServicio
+              return accumulator + serv.totalService
             }, 0)
 
             item['sum'] = sumatoria
@@ -248,16 +246,16 @@ export class VisionPage implements OnInit {
       })
     } else {
       this.serviceManager.getManager().subscribe((rp: any) => {
-        this.servicesManager = rp
+        this.servicesManager = rp['manager']
 
-        rp.map(item => {
-          this.service.getManagerAndDates(item['nombre'], element, this.company).subscribe((rp: any) => {
-            this.managerCount = rp.length
+        rp['manager'].map(item => {
+          this.service.getByTodayDateAndManagerAndCompany(element, item.name, this.company).subscribe((rp: any) => {
+            this.managerCount = rp['service'].length
             item['count'] = this.managerCount
 
-            const servicios = rp.filter(serv => serv)
+            const servicios = rp['service'].filter(serv => serv)
             const sumatoria = servicios.reduce((accumulator, serv) => {
-              return accumulator + serv.totalServicio
+              return accumulator + serv.totalService
             }, 0)
 
             item['sum'] = sumatoria
@@ -283,12 +281,12 @@ export class VisionPage implements OnInit {
     if (text == 'array') {
       this.todaysDate()
 
-      this.service.getManagerAndDates(element[0]['nombre'], this.fechaDiaHoy, this.company).subscribe((rp1: any) => {
-        this.managerCount = rp1.length
+      this.service.getByTodayDateAndManagerAndCompany(this.dateToday, element[0]['name'], this.company).subscribe((rp1: any) => {
+        this.managerCount = rp1['service'].length
         this.servicesManager[0]['count'] = this.managerCount
 
         const unicos = [];
-        const rp = rp1.reduce((acc, valor) => {
+        const rp = rp1['service'].reduce((acc, valor) => {
           if (!unicos.includes(valor.institucion)) {
             unicos.push(valor.institucion);
             acc.push(valor);
@@ -311,7 +309,7 @@ export class VisionPage implements OnInit {
 
         const servicios = rp.filter(serv => serv)
         const sumatoria = servicios.reduce((accumulator, serv) => {
-          return accumulator + serv.totalServicio
+          return accumulator + serv.totalService
         }, 0)
 
         if (sumatoria > 999)
@@ -321,7 +319,7 @@ export class VisionPage implements OnInit {
       })
     } else {
 
-      this.service.getManagerAndDates(element[0]['nombre'], dates, this.company).subscribe((rp1: any) => {
+      this.service.getByTodayDateAndManagerAndCompany(dates, element[0]['name'], this.company).subscribe((rp1: any) => {
         this.managerCount = rp1.length
         this.servicesManager[0]['count'] = this.managerCount
 
@@ -349,7 +347,7 @@ export class VisionPage implements OnInit {
 
         const servicios = rp.filter(serv => serv)
         const sumatoria = servicios.reduce((accumulator, serv) => {
-          return accumulator + serv.totalServicio
+          return accumulator + serv.totalService
         }, 0)
 
         if (sumatoria > 999)
@@ -363,16 +361,17 @@ export class VisionPage implements OnInit {
   async getTherapist() {
     let therapit
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-      this.company = rp[0]['company']
-      await this.serviceTherapist.getByCompanyOrderByMinutes(this.company).subscribe(async (rp: any) => {
-        therapit = rp
-        this.therapist = rp
+      this.company = rp['manager'].company
 
-        if (rp.length > 7 && rp.length < 10) {
+      await this.serviceTherapist.getByCompanyOrderByMinutes(this.company).subscribe(async (rp: any) => {
+        therapit = rp['therapist']
+        this.therapist = rp['therapist']
+
+        if (rp['therapist'].length > 7 && rp['therapist'].length < 10) {
           let rectangle18 = 372, currentDate = 439, stripeToday = 465, leftArrow = 471, rightArrow = 447, table2 = 1, table3 = 1,
             table4 = 1, rectangle182 = 334, table5 = 15, overview = 1958
 
-          for (let i = 8; i <= rp.length; i++) {
+          for (let i = 8; i <= rp['therapist'].length; i++) {
             rectangle18 += 31.5, currentDate += 31, stripeToday += 31, leftArrow += 32.4, rightArrow += 31, table2 += 31, table3 += 31,
               table4 += 30, rectangle182 += 31.5, table5 += 63, overview += 63
 
@@ -390,7 +389,7 @@ export class VisionPage implements OnInit {
           }
         }
 
-        if (rp.length >= 10) {
+        if (rp['therapist'].length >= 10) {
           this.paginaterMinute = true
           this.paginaterTherapist = true
           document.getElementById('rectangle18').style.height = '468px'
@@ -441,16 +440,16 @@ export class VisionPage implements OnInit {
       }
 
       this.serviceTherapist.company(this.company).subscribe((rp: any) => {
-        this.servicesTherapist = rp
+        this.servicesTherapist = rp['therapist']
 
-        rp.map(item => {
-          this.service.getTherapistAndDates(item['nombre'], dates, this.company).subscribe((rp: any) => {
-            this.therapistCount = rp.length
+        rp['therapist'].map(item => {
+          this.service.getByTodayDateAndTherapistAndCompany(dates, item['name'], this.company).subscribe((rp: any) => {
+            this.therapistCount = rp['service'].length
             item['count'] = this.therapistCount
 
-            const servicios = rp.filter(serv => serv)
+            const servicios = rp['service'].filter(serv => serv)
             item['sum'] = servicios.reduce((accumulator, serv) => {
-              return accumulator + serv.totalServicio
+              return accumulator + serv.totalService
             }, 0)
 
             this.servicesTherapist.sort(function (a, b) {
@@ -471,16 +470,16 @@ export class VisionPage implements OnInit {
     } else {
 
       this.serviceTherapist.company(this.company).subscribe((rp: any) => {
-        this.servicesTherapist = rp
+        this.servicesTherapist = rp['therapist']
 
-        rp.map(item => {
-          this.service.getTherapistAndDates(item['nombre'], dateCurent, this.company).subscribe((rp: any) => {
-            this.therapistCount = rp.length
+        rp['therapist'].map(item => {
+          this.service.getByTodayDateAndTherapistAndCompany(dateCurent, item['name'], this.company).subscribe((rp: any) => {
+            this.therapistCount = rp['service'].length
             item['count'] = this.therapistCount
 
-            const servicios = rp.filter(serv => serv)
+            const servicios = rp['service'].filter(serv => serv)
             item['sum'] = servicios.reduce((accumulator, serv) => {
-              return accumulator + serv.totalServicio
+              return accumulator + serv.totalService
             }, 0)
 
             this.servicesTherapist.sort(function (a, b) {
@@ -529,22 +528,22 @@ export class VisionPage implements OnInit {
         dates = `${year}-${month}-${convertDay}`
       }
 
-      this.service.getTherapistConsultingManagerAndDate(element[0]['nombre'], dates, this.company).subscribe(async (rp: any) => {
-        this.servicesTherapist = rp
+      this.service.getByTodayDateAndManagerAndCompanyDistinctTherapist(dates, element[0]['name'], this.company).subscribe(async (rp: any) => {
+        this.servicesTherapist = rp['service']
 
-        rp.map(item => {
-          item['nombre'] = item['terapeuta']
+        rp['service'].map(item => {
+          item['name'] = item['therapist']
 
-          this.service.getTherapistAndManagerAndDates(item['terapeuta'], element[0]['nombre'], dates, this.company).subscribe((rp: any) => {
-            if (rp.length > 0) {
+          this.service.getByTodayDateAndTherapistAndManagerAndCompany(dates, item['therapist'], element[0]['name'], this.company).subscribe((rp: any) => {
+            if (rp['service'].length > 0) {
               this.existTherapist = true
 
-              this.therapistCount = rp.length
+              this.therapistCount = rp['service'].length
               item['count'] = this.therapistCount
 
-              const servicios = rp.filter(serv => serv)
+              const servicios = rp['service'].filter(serv => serv)
               const sumatoria = servicios.reduce((accumulator, serv) => {
-                return accumulator + serv.totalServicio
+                return accumulator + serv.totalService
               }, 0)
 
               item['sum'] = sumatoria
@@ -568,13 +567,13 @@ export class VisionPage implements OnInit {
       })
 
     } else {
-      this.service.getTherapistConsultingManagerAndDate(element[0]['nombre'], dateCurrent, this.company).subscribe((rp: any) => {
+      this.service.getByTodayDateAndManagerAndCompanyDistinctTherapist(dateCurrent, element[0]['name'], this.company).subscribe((rp: any) => {
         this.servicesTherapist = rp
 
         rp.map(item => {
-          item['nombre'] = item['terapeuta']
+          item['name'] = item['therapist']
 
-          this.service.getTherapistAndManagerAndDates(item['terapeuta'], element[0]['nombre'], dateCurrent, this.company).subscribe((rp: any) => {
+          this.service.getByTodayDateAndTherapistAndManagerAndCompany(dateCurrent, item['therapist'], element[0]['name'], this.company).subscribe((rp: any) => {
 
             if (rp.length > 0) {
               this.existTherapist = true
@@ -583,7 +582,7 @@ export class VisionPage implements OnInit {
 
               const servicios = rp.filter(serv => serv)
               const sumatoria = servicios.reduce((accumulator, serv) => {
-                return accumulator + serv.totalServicio
+                return accumulator + serv.totalService
               }, 0)
 
               item['sum'] = sumatoria
@@ -646,10 +645,10 @@ export class VisionPage implements OnInit {
   async getServiceByManager(manager: string) {
     this.todaysDate()
     this.dateTodayCurrent = 'HOY'
-    this.service.getEncargadaAndDate(this.fechaDiaHoy, manager['nombre'], this.company).subscribe((rp: any) => {
-      this.vision = rp
+    this.service.getByTodayDateAndManagerAndCompanyCurrentDateDesc(this.dateToday, manager['name'], this.company).subscribe((rp: any) => {
+      this.vision = rp['service']
 
-      if (rp.length != 0) {
+      if (rp['service'].length != 0) {
         this.totalVisionSum()
       } else {
         this.totalsAtZero()
@@ -681,7 +680,7 @@ export class VisionPage implements OnInit {
   }
 
   async todaysDate() {
-    let month = '', mes = this.fechaDiaHoy.substring(5, 7)
+    let month = '', mes = this.dateToday.substring(5, 7)
 
     if (mes == "12") month = 'Diciembre'
     if (mes == "11") month = 'Noviembre'
@@ -695,21 +694,16 @@ export class VisionPage implements OnInit {
     if (mes == "03") month = 'Marzo'
     if (mes == "02") month = 'Febrero'
     if (mes == "01") month = 'Enero'
-
-    debugger
-
-    this.day = Number(this.fechaDiaHoy.substring(8, 10))
-    this.month = month
   }
 
   async getService() {
     this.todaysDate()
     this.dateTodayCurrent = 'HOY'
 
-    this.service.getFechaHoy(this.fechaDiaHoy, this.company).subscribe((datoServicio: any) => {
-      this.vision = datoServicio
+    this.service.getByDateDayAndCompantCurrentDateDesc(this.dateToday, this.company).subscribe((rp: any) => {
+      this.vision = rp['service']
 
-      if (datoServicio.length != 0) {
+      if (rp['service'].length != 0) {
         this.totalVisionSum()
       } else {
         this.totalsAtZero()
@@ -722,22 +716,22 @@ export class VisionPage implements OnInit {
 
   async updateHourAndExit(element, o) {
     if (this.diferenceMinutes <= 0) {
-      element[o]['minuto'] = 0
-      element[o]['fechaEnd'] = ''
-      element[o]['horaEnd'] = ''
-      element[o]['salida'] = ''
-      await this.serviceTherapist.updateItems(element[o]['nombre'], element[o]).subscribe(() => {
+      element[o]['minutes'] = 0
+      element[o]['dateEnd'] = ''
+      element[o]['exit'] = ''
+      await this.serviceTherapist.updateItems(element[o]['name'], element[o]).subscribe(() => {
       })
     }
   }
 
   async updateMinute(element, o) {
     let minute, convertMinute = 0
+
     if (this.diferenceMinutes > 0) {
-      element[o]['minuto'] = this.diferenceMinutes
+      element[o]['minutes'] = this.diferenceMinutes
       await this.serviceTherapist.updateMinutes(element[o]['id'], element[o]).subscribe((rp: any) => {
-        minute = this.therapist.filter(serv => serv.minuto > 0)
-        if (minute.length > 0) convertMinute = minute[0].minuto * 60000
+        minute = this.therapist.filter(serv => serv.minutes > 0)
+        if (minute.length > 0) convertMinute = minute[0].minutes * 60000
         if (convertMinute > 0) {
           this.ionLoaderService.dismissLoader()
         }
@@ -749,29 +743,10 @@ export class VisionPage implements OnInit {
 
     for (let o = 0; o < element.length; o++) {
 
-      if (element[o]['fechaEnd'] != "") {
-        let date = new Date(), day = 0, convertDay = '', month = 0, year = 0, hour = new Date().toTimeString().substring(0, 8), dayEnd = '', monthEnd = '', yearEnd = ''
-
-        dayEnd = element[o]['fechaEnd'].substring(0, 2)
-        monthEnd = element[o]['fechaEnd'].substring(3, 5)
-        yearEnd = element[o]['fechaEnd'].substring(6, 9)
-        yearEnd = + '20' + yearEnd
-
-        var date1 = moment(`${yearEnd}-${monthEnd}-${dayEnd} ${element[o]['horaEnd']}`, "YYYY-MM-DD HH:mm")
-
-        // Date 2
-
-        day = date.getDate()
-        month = date.getMonth() + 1
-        year = date.getFullYear()
-
-        if (day > 0 && day < 10) {
-          convertDay = '0' + day
-          var date2 = moment(`${year}-${month}-${convertDay} ${hour}`, "YYYY-MM-DD HH:mm")
-        } else {
-          day = day
-          var date2 = moment(`${year}-${month}-${day} ${hour}`, "YYYY-MM-DD HH:mm:ss")
-        }
+      if (element[o]['dateEnd'] != null) {
+        var date1 = moment(`${element[o]['dateEnd'].substring(0, 10)} ${element[o]['dateEnd'].substring(11, 16)}`, "YYYY-MM-DD HH:mm")
+        var dateToday2 = dayjs().format("YYYY-MM-DD HH:mm")
+        var date2 = moment(`${dateToday2.substring(0, 10)} ${dateToday2.substring(11, 16)}`, "YYYY-MM-DD HH:mm:ss")
 
         this.diferenceMinutes = date1.diff(date2, 'minute')
 
@@ -808,7 +783,7 @@ export class VisionPage implements OnInit {
     let efectPiso1 = 0, efectPiso2 = 0, bizumPiso1 = 0, bizumPiso2 = 0, tarjetaPiso1 = 0, tarjetaPiso2 = 0,
       transfPiso1 = 0, transfPiso2 = 0
 
-    const totalServ = this.vision.map(({ servicio }) => servicio).reduce((acc, value) => acc + value, 0)
+    const totalServ = this.vision.map(({ service }) => service).reduce((acc, value) => acc + value, 0)
     this.totalServicio = totalServ
 
     if (this.totalServicio > 999)
@@ -816,7 +791,7 @@ export class VisionPage implements OnInit {
     else
       this.totalTreatment = this.totalServicio.toString()
 
-    const totalValorBebida = this.vision.map(({ bebidas }) => bebidas).reduce((acc, value) => acc + value, 0)
+    const totalValorBebida = this.vision.map(({ drink }) => drink).reduce((acc, value) => acc + value, 0)
     this.totalBebida = totalValorBebida
 
     if (this.totalBebida > 999)
@@ -824,7 +799,7 @@ export class VisionPage implements OnInit {
     else
       this.totalDrinks = this.totalBebida.toString()
 
-    const totalValueDrinkTherapist = this.vision.map(({ bebidaTerap }) => bebidaTerap).reduce((acc, value) => acc + value, 0)
+    const totalValueDrinkTherapist = this.vision.map(({ drinkTherapist }) => drinkTherapist).reduce((acc, value) => acc + value, 0)
     this.totalBebidaTherapist = totalValueDrinkTherapist
 
     if (this.totalBebidaTherapist > 999)
@@ -832,7 +807,7 @@ export class VisionPage implements OnInit {
     else
       this.totalDrinksTherapist = this.totalBebidaTherapist.toString()
 
-    const totalValorTab = this.vision.map(({ tabaco }) => tabaco).reduce((acc, value) => acc + value, 0)
+    const totalValorTab = this.vision.map(({ tabacco }) => tabacco).reduce((acc, value) => acc + value, 0)
     this.totalTobaccoo = totalValorTab
 
     if (this.totalTobaccoo > 999)
@@ -840,7 +815,7 @@ export class VisionPage implements OnInit {
     else
       this.totalTobacco = this.totalTobaccoo.toString()
 
-    const totalValorVitamina = this.vision.map(({ vitaminas }) => vitaminas).reduce((acc, value) => acc + value, 0)
+    const totalValorVitamina = this.vision.map(({ vitamin }) => vitamin).reduce((acc, value) => acc + value, 0)
     this.totalVitamina = totalValorVitamina
 
     if (this.totalVitamina > 999)
@@ -848,7 +823,7 @@ export class VisionPage implements OnInit {
     else
       this.totalVitamin = this.totalVitamina.toString()
 
-    const totalValorProp = this.vision.map(({ propina }) => propina).reduce((acc, value) => acc + value, 0)
+    const totalValorProp = this.vision.map(({ tip }) => tip).reduce((acc, value) => acc + value, 0)
     this.totalTipa = totalValorProp
 
     if (this.totalTipa > 999)
@@ -864,7 +839,7 @@ export class VisionPage implements OnInit {
     else
       this.totalTaxi = this.totalTaxita.toString()
 
-    const totalValorOtroServicio = this.vision.map(({ otros }) => otros).reduce((acc, value) => acc + value, 0)
+    const totalValorOtroServicio = this.vision.map(({ others }) => others).reduce((acc, value) => acc + value, 0)
     this.totalOtros = totalValorOtroServicio
 
     if (this.totalOtros > 999)
@@ -882,10 +857,10 @@ export class VisionPage implements OnInit {
 
     // total de las Formas de pagos
 
-    const totalPiso1Efect = this.vision.map(({ valuePiso1Efectivo }) => valuePiso1Efectivo).reduce((acc, value) => acc + value, 0)
+    const totalPiso1Efect = this.vision.map(({ valueFloor1Cash }) => valueFloor1Cash).reduce((acc, value) => acc + value, 0)
     efectPiso1 = totalPiso1Efect
 
-    const totalPiso2Efect = this.vision.map(({ valuePiso2Efectivo }) => valuePiso2Efectivo).reduce((acc, value) => acc + value, 0)
+    const totalPiso2Efect = this.vision.map(({ valueFloor2Cash }) => valueFloor2Cash).reduce((acc, value) => acc + value, 0)
     efectPiso2 = totalPiso2Efect
 
     this.totalEfectivo = efectPiso1 + efectPiso2
@@ -895,10 +870,10 @@ export class VisionPage implements OnInit {
     else
       this.totalEfectiv = this.totalEfectivo.toString()
 
-    const totalPiso1Bizum = this.vision.map(({ valuePiso1Bizum }) => valuePiso1Bizum).reduce((acc, value) => acc + value, 0)
+    const totalPiso1Bizum = this.vision.map(({ valueFloor1Bizum }) => valueFloor1Bizum).reduce((acc, value) => acc + value, 0)
     bizumPiso1 = totalPiso1Bizum
 
-    const totalPiso2Bizum = this.vision.map(({ valuePiso2Bizum }) => valuePiso2Bizum).reduce((acc, value) => acc + value, 0)
+    const totalPiso2Bizum = this.vision.map(({ valueFloor2Bizum }) => valueFloor2Bizum).reduce((acc, value) => acc + value, 0)
     bizumPiso2 = totalPiso2Bizum
 
     this.totalBizum = bizumPiso1 + bizumPiso2
@@ -908,10 +883,10 @@ export class VisionPage implements OnInit {
     else
       this.totalBizu = this.totalBizum.toString()
 
-    const totalPiso1Tarjeta = this.vision.map(({ valuePiso1Tarjeta }) => valuePiso1Tarjeta).reduce((acc, value) => acc + value, 0)
+    const totalPiso1Tarjeta = this.vision.map(({ valueFloor1Card }) => valueFloor1Card).reduce((acc, value) => acc + value, 0)
     tarjetaPiso1 = totalPiso1Tarjeta
 
-    const totalPiso2Tarjeta = this.vision.map(({ valuePiso2Tarjeta }) => valuePiso2Tarjeta).reduce((acc, value) => acc + value, 0)
+    const totalPiso2Tarjeta = this.vision.map(({ valueFloor2Card }) => valueFloor2Card).reduce((acc, value) => acc + value, 0)
     tarjetaPiso2 = totalPiso2Tarjeta
 
     this.totalTarjeta = tarjetaPiso1 + tarjetaPiso2
@@ -921,10 +896,10 @@ export class VisionPage implements OnInit {
     else
       this.totalTarjet = this.totalTarjeta.toString()
 
-    const totalPiso1Transaccion = this.vision.map(({ valuePiso1Transaccion }) => valuePiso1Transaccion).reduce((acc, value) => acc + value, 0)
+    const totalPiso1Transaccion = this.vision.map(({ valueFloor1Transaction }) => valueFloor1Transaction).reduce((acc, value) => acc + value, 0)
     transfPiso1 = totalPiso1Transaccion
 
-    const totalPiso2Transaccion = this.vision.map(({ valuePiso2Transaccion }) => valuePiso2Transaccion).reduce((acc, value) => acc + value, 0)
+    const totalPiso2Transaccion = this.vision.map(({ valueFloor2Transaction }) => valueFloor2Transaction).reduce((acc, value) => acc + value, 0)
     transfPiso2 = totalPiso2Transaccion
 
     this.totalTrasnf = transfPiso1 + transfPiso2
@@ -934,7 +909,7 @@ export class VisionPage implements OnInit {
     else
       this.totalTrasn = this.totalTrasnf.toString()
 
-    const totalValorTerapeuta = this.vision.map(({ numberTerap }) => numberTerap).reduce((acc, value) => acc + value, 0)
+    const totalValorTerapeuta = this.vision.map(({ numberTherapist }) => numberTherapist).reduce((acc, value) => acc + value, 0)
     this.totalTerap = totalValorTerapeuta
 
     if (this.totalTerap > 999)
@@ -942,7 +917,7 @@ export class VisionPage implements OnInit {
     else
       this.totalTerape = this.totalTerap.toString()
 
-    const totalValorEncargada = this.vision.map(({ numberEncarg }) => numberEncarg).reduce((acc, value) => acc + value, 0)
+    const totalValorEncargada = this.vision.map(({ numberManager }) => numberManager).reduce((acc, value) => acc + value, 0)
     this.totalEncarg = totalValorEncargada
 
     if (this.totalEncarg > 999)
@@ -978,562 +953,184 @@ export class VisionPage implements OnInit {
   }
 
   backArrow = async () => {
-    let fechHoy = new Date(), fechaEnd = '', convertDiaHoy = '', diaHoy = 0, mesHoy = 0,
-      añoHoy = 0, convertMesHoy = ''
+    let fechaEnd = '', diaHoy = 0, mesHoy = 0, añoHoy = 0, monthEnd = '', nameMonth = '', fechaHoy = '', fechaActualmente = ''
 
-    diaHoy = fechHoy.getDate()
-    mesHoy = fechHoy.getMonth() + 1
-    añoHoy = fechHoy.getFullYear()
-    this.day = this.day - 1
+    diaHoy = Number(this.dateToday.substring(8, 10))
+    mesHoy = Number(this.dateToday.substring(5, 7))
+    añoHoy = Number(this.dateToday.substring(0, 4))
 
-    if (mesHoy > 0 && mesHoy < 10) {
-      convertMesHoy = '0' + mesHoy
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
-    } else {
-      convertMesHoy = mesHoy.toString()
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
-    }
+    if (mesHoy > 0 && mesHoy < 10) monthEnd = "0" + mesHoy
+    fechaEnd = `${añoHoy}-${monthEnd}-${diaHoy}`
 
-    if (diaHoy > 0 && diaHoy < 10) {
-      convertDiaHoy = '0' + diaHoy
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${convertDiaHoy}`
-    } else {
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
-    }
+    this.fechaFormat.setDate(this.fechaFormat.getDate() - 1)
+    let day = this.fechaFormat.toString().substring(8, 10)
+    let month = this.fechaFormat.toString().substring(4, 7)
+    let year = this.fechaFormat.toString().substring(11, 15)
+    this.day = Number(day)
+    this.months(month)
 
-    if (this.siguienteCount > 0) {
-      this.siguienteCount = 0
-      this.count = 0
-      this.count++
-      let convertmes = '', convertDia = '', convertAño = '', fechaHoy = '', mes = '', month = '',
-        fechaActualmente = '', convertionAño
+    fechaHoy = `${añoHoy}-${this.month}-${this.day}`
 
-      for (let i = 0; i < this.count; i++) {
+    if (fechaEnd == fechaHoy) this.dateTodayCurrent = 'HOY'
+    else this.dateTodayCurrent = `${this.day} de ${this.nameMonth}`
 
-        this.fechaFormat.setDate(this.fechaFormat.getDate() - this.count)
-        convertDia = this.fechaFormat.toString().substring(8, 10)
-        convertmes = this.fechaFormat.toString().substring(4, 7)
-        convertAño = this.fechaFormat.toString().substring(11, 15)
-        convertionAño = this.fechaFormat.toString().substring(13, 15)
+    fechaActualmente = `${añoHoy}-${this.month}-${this.day}`
 
-        if (convertmes == 'Dec') {
-          mes = "12"
-          month = 'Diciembre'
-        }
+    this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
+      if (rp['manager'].rol == 'Administrador') {
 
-        if (convertmes == 'Nov') {
-          mes = "11"
-          month = 'Noviembre'
-        }
+        await this.getManagerall(fechaActualmente)
+        await this.tableTherapist('date', fechaActualmente)
 
-        if (convertmes == 'Oct') {
-          mes = "10"
-          month = 'Octubre'
-        }
+        this.service.getByDateDayAndCompantCurrentDateDesc(fechaActualmente, this.company).subscribe((rp: any) => {
+          this.vision = rp['service']
 
-        if (convertmes == 'Sep') {
-          mes = "09"
-          month = 'Septiembre'
-        }
-
-        if (convertmes == 'Aug') {
-          mes = "08"
-          month = 'Agosto'
-        }
-
-        if (convertmes == 'Jul') {
-          mes = "07"
-          month = 'Julio'
-        }
-
-        if (convertmes == 'Jun') {
-          mes = "06"
-          month = 'Junio'
-        }
-
-        if (convertmes == 'May') {
-          mes = "05"
-          month = 'Mayo'
-        }
-
-        if (convertmes == 'Apr') {
-          mes = "04"
-          month = 'Abril'
-        }
-
-        if (convertmes == 'Mar') {
-          mes = "03"
-          month = 'Marzo'
-        }
-
-        if (convertmes == 'Feb') {
-          mes = "02"
-          month = 'Febrero'
-        }
-
-        if (convertmes == 'Jan') {
-          mes = "01"
-          month = 'Enero'
-        }
-
-        fechaHoy = `${convertAño}-${mes}-${convertDia}`
-
-        if (fechaEnd == fechaHoy) {
-          this.dateTodayCurrent = 'HOY'
-        } else {
-          this.dateTodayCurrent = `${this.day} de ${this.month}`
-        }
-
-        this.day = Number(convertDia)
-        this.month = month
-
-        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
-
-        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-          if (rp[0]['rol'] == 'administrador') {
-
-            await this.getManagerall(fechaActualmente)
-            await this.tableTherapist('date', fechaActualmente)
-
-            this.service.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
-              this.vision = rp
-              if (rp.length > 0) this.totalVisionSum()
-              else this.totalsAtZero()
-            })
-          } else {
-
-            await this.getManager(rp, fechaActualmente, 'date')
-            await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
-
-            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-              this.vision = rp
-
-              if (rp.length > 0) this.totalVisionSum()
-              else this.totalsAtZero()
-            })
-          }
+          if (rp['service'].length > 0) this.totalVisionSum()
+          else this.totalsAtZero()
         })
+      } else {
 
-        this.atrasCount = this.count
+        await this.getManager(rp, fechaActualmente, 'date')
+        await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
 
-        return true
-      }
-    } else {
-      this.atrasCount = 0
-      this.siguienteCount = 0
-      this.count = 0
-      this.count++
-      let convertmes = '', convertDia = '', convertAño = '', mes = '', month = '', fechaHoy = '',
-        convertFecha = '', fechaActualmente = '', convertionAño
+        this.service.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp[0]['name'], this.company).subscribe((rp: any) => {
+          this.vision = rp
 
-      for (let i = 0; i < this.count; i++) {
-
-        this.fechaFormat.setDate(this.fechaFormat.getDate() - this.count)
-        convertFecha = this.fechaFormat.toString()
-        this.fechaFormat = new Date(convertFecha)
-        convertDia = this.fechaFormat.toString().substring(8, 10)
-        convertmes = this.fechaFormat.toString().substring(4, 7)
-        convertAño = this.fechaFormat.toString().substring(11, 15)
-        convertionAño = this.fechaFormat.toString().substring(13, 15)
-
-        if (convertmes == 'Dec') {
-          mes = "12"
-          month = 'Diciembre'
-        }
-
-        if (convertmes == 'Nov') {
-          mes = "11"
-          month = 'Noviembre'
-        }
-
-        if (convertmes == 'Oct') {
-          mes = "10"
-          month = 'Octubre'
-        }
-
-        if (convertmes == 'Sep') {
-          mes = "09"
-          month = 'Septiembre'
-        }
-
-        if (convertmes == 'Aug') {
-          mes = "08"
-          month = 'Agosto'
-        }
-
-        if (convertmes == 'Jul') {
-          mes = "07"
-          month = 'Julio'
-        }
-
-        if (convertmes == 'Jun') {
-          mes = "06"
-          month = 'Junio'
-        }
-
-        if (convertmes == 'May') {
-          mes = "05"
-          month = 'Mayo'
-        }
-
-        if (convertmes == 'Apr') {
-          mes = "04"
-          month = 'Abril'
-        }
-
-        if (convertmes == 'Mar') {
-          mes = "03"
-          month = 'Marzo'
-        }
-
-        if (convertmes == 'Feb') {
-          mes = "02"
-          month = 'Febrero'
-        }
-
-        if (convertmes == 'Jan') {
-          mes = "01"
-          month = 'Enero'
-        }
-
-        fechaHoy = `${convertAño}-${mes}-${convertDia}`
-
-        if (fechaEnd == fechaHoy) {
-          this.dateTodayCurrent = 'HOY'
-        } else {
-          this.dateTodayCurrent = `${this.day} de ${this.month}`
-        }
-
-        this.day = Number(convertDia)
-        this.month = month
-
-        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
-
-        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-          if (rp[0]['rol'] == 'administrador') {
-
-            await this.getManagerall(fechaActualmente)
-            await this.tableTherapist('date', fechaActualmente)
-
-            this.service.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
-              this.vision = rp
-              if (rp.length > 0) this.totalVisionSum()
-              else this.totalsAtZero()
-            })
-          } else {
-
-            await this.getManager(rp, fechaActualmente, 'date')
-            await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
-
-            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-              this.vision = rp
-
-              if (rp.length > 0) this.totalVisionSum()
-              else this.totalsAtZero()
-            })
-          }
+          if (rp.length > 0) this.totalVisionSum()
+          else this.totalsAtZero()
         })
-
-        this.atrasCount = this.count
-
-        return true
       }
-    }
+
+      return true
+    })
+
     return false
   }
 
   nextArrow = async () => {
-    let fechaDia = new Date(), mesDelDia = 0, convertMess = '', messs = '', convertimosMes = 0
-    mesDelDia = fechaDia.getMonth() + 1
+    let fechaEnd = '', diaHoy = 0, mesHoy = 0, añoHoy = 0, monthEnd = '', fechaHoy = '', fechaActualmente = ''
 
-    let fechHoy = new Date(), fechaEnd = '', convertDiaHoy = '', diaHoy = 0, mesHoy = 0, añoHoy = 0, convertMesHoy = ''
+    diaHoy = Number(this.dateToday.substring(8, 10))
+    mesHoy = Number(this.dateToday.substring(5, 7))
+    añoHoy = Number(this.dateToday.substring(0, 4))
 
-    diaHoy = fechHoy.getDate()
-    mesHoy = fechHoy.getMonth() + 1
-    añoHoy = fechHoy.getFullYear()
-    this.day = this.day + 1
+    if (mesHoy > 0 && mesHoy < 10) monthEnd = "0" + mesHoy
+    fechaEnd = `${añoHoy}-${monthEnd}-${diaHoy}`
 
-    if (mesHoy > 0 && mesHoy < 10) {
-      convertMesHoy = '0' + mesHoy
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
-    } else {
-      convertMesHoy = mesHoy.toString()
-      fechaEnd = `${añoHoy}-${mesHoy}-${diaHoy}`
-    }
+    this.fechaFormat.setDate(this.fechaFormat.getDate() + 1)
+    let day = this.fechaFormat.toString().substring(8, 10)
+    let month = this.fechaFormat.toString().substring(4, 7)
+    let year = this.fechaFormat.toString().substring(11, 15)
+    this.day = Number(day)
+    this.months(month)
 
-    if (diaHoy > 0 && diaHoy < 10) {
-      convertDiaHoy = '0' + diaHoy
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${convertDiaHoy}`
-    } else {
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
-    }
+    fechaHoy = `${year}-${this.month}-${this.day}`
 
-    if (this.atrasCount > 0) {
-      this.atrasCount = 0
-      this.count = 0
-      this.count++
-      convertMess = this.fechaFormat.toString().substring(4, 7)
-      if (convertMess == 'Dec') messs = "12"
-      if (convertMess == 'Nov') messs = "11"
-      if (convertMess == 'Oct') messs = "10"
-      if (convertMess == 'Sep') messs = "09"
-      if (convertMess == 'Aug') messs = "08"
-      if (convertMess == 'Jul') messs = "07"
-      if (convertMess == 'Jun') messs = "06"
-      if (convertMess == 'May') messs = "05"
-      if (convertMess == 'Apr') messs = "04"
-      if (convertMess == 'Mar') messs = "03"
-      if (convertMess == 'Feb') messs = "02"
-      if (convertMess == 'Jan') messs = "01"
+    if (fechaEnd == fechaHoy) this.dateTodayCurrent = 'HOY'
+    else this.dateTodayCurrent = `${this.day} de ${this.nameMonth}`
 
-      convertimosMes = Number(messs)
-      this.atrasCount = 0
-      this.count = 0
-      this.count++
+    fechaActualmente = `${year}-${this.month}-${this.day}`
 
-      let convertmes = '', convertDia = '', convertAño = '', mes = '', month = '', fechaHoy = '',
-        fechaActualmente = '', convertionAño = ''
+    this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
+      if (rp['manager'].rol == 'Administrador') {
 
-      for (let i = 0; i < this.count; i++) {
-        this.fechaFormat.setDate(this.fechaFormat.getDate() + this.count)
-        convertDia = this.fechaFormat.toString().substring(8, 10)
-        convertmes = this.fechaFormat.toString().substring(4, 7)
-        convertAño = this.fechaFormat.toString().substring(11, 15)
-        convertionAño = this.fechaFormat.toString().substring(13, 15)
+        await this.getManagerall(fechaActualmente)
+        await this.tableTherapist('date', fechaActualmente)
 
-        if (convertmes == 'Dec') {
-          mes = "12"
-          month = 'Diciembre'
-        }
+        this.service.getByDateDayAndCompantCurrentDateDesc(fechaActualmente, this.company).subscribe((rp: any) => {
+          this.vision = rp['service']
 
-        if (convertmes == 'Nov') {
-          mes = "11"
-          month = 'Noviembre'
-        }
-
-        if (convertmes == 'Oct') {
-          mes = "10"
-          month = 'Octubre'
-        }
-
-        if (convertmes == 'Sep') {
-          mes = "09"
-          month = 'Septiembre'
-        }
-
-        if (convertmes == 'Aug') {
-          mes = "08"
-          month = 'Agosto'
-        }
-
-        if (convertmes == 'Jul') {
-          mes = "07"
-          month = 'Julio'
-        }
-
-        if (convertmes == 'Jun') {
-          mes = "06"
-          month = 'Junio'
-        }
-
-        if (convertmes == 'May') {
-          mes = "05"
-          month = 'Mayo'
-        }
-
-        if (convertmes == 'Apr') {
-          mes = "04"
-          month = 'Abril'
-        }
-
-        if (convertmes == 'Mar') {
-          mes = "03"
-          month = 'Marzo'
-        }
-
-        if (convertmes == 'Feb') {
-          mes = "02"
-          month = 'Febrero'
-        }
-
-        if (convertmes == 'Jan') {
-          mes = "01"
-          month = 'Enero'
-        }
-
-        fechaHoy = `${convertAño}-${mes}-${convertDia}`
-
-        if (fechaEnd == fechaHoy) {
-          this.dateTodayCurrent = 'HOY'
-        } else {
-          this.dateTodayCurrent = `${this.day} de ${this.month}`
-        }
-
-        this.day = Number(convertDia)
-        this.month = month
-
-        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
-
-        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-          if (rp[0]['rol'] == 'administrador') {
-
-            await this.getManagerall(fechaActualmente)
-            await this.tableTherapist('date', fechaActualmente)
-
-            this.service.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
-              this.vision = rp
-
-              if (rp.length > 0) this.totalVisionSum()
-              else this.totalsAtZero()
-            })
-          } else {
-
-            await this.getManager(rp, fechaActualmente, 'date')
-            await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
-
-            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-              this.vision = rp
-
-              if (rp.length > 0) this.totalVisionSum()
-              else this.totalsAtZero()
-            })
-          }
+          if (rp['service'].length > 0) this.totalVisionSum()
+          else this.totalsAtZero()
         })
+      } else {
 
-        this.atrasCount = 0
-        this.count = 0
-        return true
-      }
-    }
+        await this.getManager(rp, fechaActualmente, 'date')
+        await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
 
-    else {
-      this.atrasCount = 0
-      this.siguienteCount = 0
-      this.count = 0
-      this.count++
-      let convertmes = '', convertDia = '', convertAño = '', mes = '', month = '', fechaHoy = '',
-        convertFecha = '', fechaActualmente = '', convertionAño
+        this.service.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp[0]['name'], this.company).subscribe((rp: any) => {
+          this.vision = rp
 
-      for (let i = 0; i < this.count; i++) {
-
-        this.fechaFormat.setDate(this.fechaFormat.getDate() + this.count)
-        convertFecha = this.fechaFormat.toString()
-        this.fechaFormat = new Date(convertFecha)
-
-        convertDia = this.fechaFormat.toString().substring(8, 10)
-        convertmes = this.fechaFormat.toString().substring(4, 7)
-        convertAño = this.fechaFormat.toString().substring(11, 15)
-        convertionAño = this.fechaFormat.toString().substring(13, 15)
-
-        if (convertmes == 'Dec') {
-          mes = "12"
-          month = 'Diciembre'
-        }
-
-        if (convertmes == 'Nov') {
-          mes = "11"
-          month = 'Noviembre'
-        }
-
-        if (convertmes == 'Oct') {
-          mes = "10"
-          month = 'Octubre'
-        }
-
-        if (convertmes == 'Sep') {
-          mes = "09"
-          month = 'Septiembre'
-        }
-
-        if (convertmes == 'Aug') {
-          mes = "08"
-          month = 'Agosto'
-        }
-
-        if (convertmes == 'Jul') {
-          mes = "07"
-          month = 'Julio'
-        }
-
-        if (convertmes == 'Jun') {
-          mes = "06"
-          month = 'Junio'
-        }
-
-        if (convertmes == 'May') {
-          mes = "05"
-          month = 'Mayo'
-        }
-
-        if (convertmes == 'Apr') {
-          mes = "04"
-          month = 'Abril'
-        }
-
-        if (convertmes == 'Mar') {
-          mes = "03"
-          month = 'Marzo'
-        }
-
-        if (convertmes == 'Feb') {
-          mes = "02"
-          month = 'Febrero'
-        }
-
-        if (convertmes == 'Jan') {
-          mes = "01"
-          month = 'Enero'
-        }
-
-        fechaHoy = `${convertAño}-${mes}-${convertDia}`
-
-        if (fechaEnd == fechaHoy) {
-          this.dateTodayCurrent = 'HOY'
-        } else {
-          this.dateTodayCurrent = `${this.day} de ${this.month}`
-        }
-
-        this.day = Number(convertDia)
-        this.month = month
-
-        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
-
-        this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-          if (rp[0]['rol'] == 'administrador') {
-
-            await this.getManagerall(fechaActualmente)
-            await this.tableTherapist('date', fechaActualmente)
-
-            this.service.getFechaHoy(fechaActualmente, this.company).subscribe((rp: any) => {
-              this.vision = rp
-              if (rp.length > 0) this.totalVisionSum()
-              else this.totalsAtZero()
-            })
-          } else {
-
-            await this.getManager(rp, fechaActualmente, 'date')
-            await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
-
-            this.service.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-              this.vision = rp
-
-              if (rp.length > 0) this.totalVisionSum()
-              else this.totalsAtZero()
-            })
-          }
+          if (rp.length > 0) this.totalVisionSum()
+          else this.totalsAtZero()
         })
-
-        this.siguienteCount = this.count
-        return true
       }
-    }
+      return true
+    })
     return false
   }
 
-  async editByName(nombre: string) {
-    this.service.getTerapeutaWithCurrentDate(nombre).subscribe((rp: any) => {
+  months(month: string) {
+
+    let numberMonth = ''
+
+    if (month == 'Dec') {
+      this.month = '12'
+      numberMonth = '0' + this.month
+      this.month = numberMonth.toString()
+      this.nameMonth = 'Diciembre'
+    }
+
+    if (month == 'Nov') {
+      this.month = '11'
+      this.nameMonth = 'Noviembre'
+    }
+
+    if (month == 'Oct') {
+      this.month = '10'
+      this.nameMonth = 'Octubre'
+    }
+
+    if (month == 'Sep') {
+      this.month = '09'
+      this.nameMonth = 'Septiembre'
+    }
+
+    if (month == 'Aug') {
+      this.month = '08'
+      this.nameMonth = 'Agosto'
+    }
+
+    if (month == 'Jul') {
+      this.month = '07'
+      this.nameMonth = 'Julio'
+    }
+
+    if (month == 'Jun') {
+      this.month = '06'
+      this.nameMonth = 'Junio'
+    }
+
+    if (month == 'May') {
+      this.month = '05'
+      this.nameMonth = 'Mayo'
+    }
+
+    if (month == 'Apr') {
+      this.month = '04'
+      this.nameMonth = 'Abril'
+    }
+
+    if (month == 'Mar') {
+      this.month = '03'
+      this.nameMonth = 'Marzo'
+    }
+
+    if (month == 'Feb') {
+      this.month = '02'
+      this.nameMonth = 'Febrero'
+    }
+
+    if (month == 'Jan') {
+      this.month = '01'
+      this.nameMonth = 'Enero'
+    }
+  }
+
+  async editByName(name: string) {
+    this.service.getTerapeutaWithCurrentDate(name).subscribe((rp: any) => {
       if (rp.length > 0) {
-        this.serviceModel.pantalla = 'vision'
+        this.serviceModel.screen = 'vision'
         this.service.updateScreenById(rp[0]['id'], this.serviceModel).subscribe(async (rp: any) => { })
         this.router.navigate([`tabs/${this.idUser}/edit-services/${rp[0]['id']}`])
       }

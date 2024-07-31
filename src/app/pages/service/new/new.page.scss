@@ -128,7 +128,7 @@ ion-grid {
   justify-content: flex-start;
 }
 
-.sc-ion-input-md-h[name=cliente] {
+.sc-ion-input-md-h[name=client] {
   border-style: none;
   color: white;
   font-family: "Inter-Medium", sans-serif;
@@ -139,7 +139,7 @@ ion-grid {
   --highlight-color-focused: var(--verde, #1fb996);
 }
 
-.sc-ion-input-md-h[name=cliente] ::ng-deep input {
+.sc-ion-input-md-h[name=client] ::ng-deep input {
   caret-color: black;
 }
 
@@ -158,7 +158,7 @@ ion-grid {
   justify-content: flex-start;
 }
 
-.sc-ion-input-md-h[name=salida] {
+.sc-ion-input-md-h[name=exit] {
   border-style: none;
   color: white;
   font-family: "Inter-Medium", sans-serif;
@@ -169,7 +169,7 @@ ion-grid {
   --highlight-color-focused: var(--verde, #1fb996);
 }
 
-.sc-ion-input-md-h[name=salida] ::ng-deep input {
+.sc-ion-input-md-h[name=exit] ::ng-deep input {
   caret-color: black;
 }
 
@@ -655,7 +655,7 @@ ion-grid {
   height: 1.83%;
 }
 
-.sc-ion-input-md-h[name=tobacco] {
+.sc-ion-input-md-h[name=tabacco] {
   border-style: none;
   color: black;
   font-family: "Inter-Medium", sans-serif;
@@ -669,7 +669,7 @@ ion-grid {
   --highlight-color-valid: transparent
 }
 
-.sc-ion-input-md-h[name=tobacco] ::ng-deep input {
+.sc-ion-input-md-h[name=tabacco] ::ng-deep input {
   caret-color: black;
 }
 

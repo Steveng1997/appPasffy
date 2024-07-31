@@ -66,10 +66,10 @@ export class NewTherapistPage implements OnInit {
       this.therapist.name = this.therapist.name.replace(/(^\w{1})|(\s+\w{1})/g, letra => letra.toUpperCase())
 
       this.serviceManager.getId(Number(this.iduser)).subscribe((rp: any) => {
-        this.therapist.company = rp[0].company
+        this.therapist.company = rp['manager'].company
 
         this.serviceTherapist.name(this.therapist.name).subscribe((rp: any) => {
-          if (rp.length != 0) {
+          if (rp['therapist'].length != 0) {
 
             Swal.fire({ heightAuto: false, title: 'Ya hay una persona con ese nombre, desea agregar este nombre?', showDenyButton: true, confirmButtonText: 'Si', denyButtonText: `No` }).then((result) => {
 

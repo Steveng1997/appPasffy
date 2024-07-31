@@ -30,17 +30,42 @@ export class TabsPage implements OnInit {
     if (route == 'vision') {
       document.getElementById('services').style.stroke = '#3C3C3C'
       document.getElementById('liquidation').style.stroke = '#3C3C3C'
-      document.getElementById('closing').style.stroke = '#3C3C3C'
+      document.getElementById('menu').style.stroke = '#3C3C3C'
       document.getElementById('vision').style.stroke = '#00AF87'
     }
+
+    if (route == 'services') {
+      document.getElementById('services').style.stroke = '#00AF87'
+      document.getElementById('liquidation').style.stroke = '#3C3C3C'
+      document.getElementById('menu').style.stroke = '#3C3C3C'
+      document.getElementById('vision').style.stroke = '#3C3C3C'
+    }
+
+    if (route == 'new') {
+      document.getElementById('services').style.stroke = '#3C3C3C'
+      document.getElementById('liquidation').style.stroke = '#3C3C3C'
+      document.getElementById('menu').style.stroke = '#3C3C3C'
+      document.getElementById('vision').style.stroke = '#3C3C3C'
+    }
+
+    if (route == 'liquidation-therapist') {
+      document.getElementById('services').style.stroke = '#3C3C3C'
+      document.getElementById('liquidation').style.stroke = '#00AF87'
+      document.getElementById('menu').style.stroke = '#3C3C3C'
+      document.getElementById('vision').style.stroke = '#3C3C3C'
+    }
+
+    if (route == 'menu') {
+      document.getElementById('services').style.stroke = '#3C3C3C'
+      document.getElementById('liquidation').style.stroke = '#3C3C3C'
+      document.getElementById('menu').style.stroke = '#00AF87'
+      document.getElementById('vision').style.stroke = '#3C3C3C'
+    }
+
   }
 
   services() {
     location.replace(`tabs/${this.id}/services`)
-    document.getElementById('vision').style.stroke = '#3C3C3C'
-    document.getElementById('liquidation').style.stroke = '#3C3C3C'
-    document.getElementById('closing').style.stroke = '#3C3C3C'
-    document.getElementById('services').style.stroke = '#00AF87'
   }
 
   vision() {
@@ -49,25 +74,13 @@ export class TabsPage implements OnInit {
 
   new() {
     location.replace(`tabs/${this.id}/new`)
-    document.getElementById('vision').style.stroke = '#3C3C3C'
-    document.getElementById('services').style.stroke = '#3C3C3C'
-    document.getElementById('liquidation').style.stroke = '#3C3C3C'
-    document.getElementById('closing').style.stroke = '#3C3C3C'
   }
 
-  closing() {
+  menu() {
     location.replace(`tabs/${this.id}/menu`)
-    document.getElementById('vision').style.stroke = '#3C3C3C'
-    document.getElementById('services').style.stroke = '#3C3C3C'
-    document.getElementById('liquidation').style.stroke = '#3C3C3C'
-    document.getElementById('closing').style.stroke = '#00AF87'
   }
 
   liquidation() {
     location.replace(`tabs/${this.id}/liquidation-therapist`)
-    document.getElementById('vision').style.stroke = '#3C3C3C'
-    document.getElementById('services').style.stroke = '#3C3C3C'
-    document.getElementById('closing').style.stroke = '#3C3C3C'
-    document.getElementById('liquidation').style.stroke = '#00AF87'
   }
 }

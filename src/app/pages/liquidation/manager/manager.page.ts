@@ -130,8 +130,8 @@ export class ManagerPage {
   }
 
   modelServices: ModelService = {
-    idEncargada: "",
-    pantalla: ""
+    idManag: "",
+    screen: ""
   }
 
   constructor(
@@ -373,7 +373,7 @@ export class ManagerPage {
   goService(id: number) {
     this.services.getById(id).subscribe((rp: any) => {
       if (rp.length > 0) {
-        this.modelServices.pantalla = 'liquidation-manager'
+        this.modelServices.screen = 'liquidation-manager'
         this.services.updateScreenById(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
         this.router.navigate([`tabs/${this.id}/edit-services/${rp[0]['id']}`])
       }
@@ -1282,8 +1282,8 @@ export class ManagerPage {
         confirmButtonText: 'Si, Deseo eliminar!'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.modelServices.idEncargada = ""
-          this.modelServices.liquidadoEncargada = false
+          this.modelServices.idManag = ""
+          this.modelServices.liquidatedManager = false
           this.services.updateManagerSettlementManagerIdByManagerId(this.idManager, this.modelServices).subscribe(async (rp) => {
             this.serviceLiquidation.deleteLiquidationManager(this.idDetail).subscribe(async (rp) => {
               if (this.administratorRole == true) {

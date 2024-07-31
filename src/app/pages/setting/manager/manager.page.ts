@@ -34,8 +34,8 @@ export class ManagerPage implements OnInit {
 
   getManager() {
     this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-      this.serviceManager.company(rp[0].company).subscribe((rp) => {
-        this.manager = rp
+      this.serviceManager.company(rp['manager'].company).subscribe((rp) => {
+        this.manager = rp['manager']
       })
     })
   }
