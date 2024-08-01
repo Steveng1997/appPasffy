@@ -663,7 +663,7 @@ export class VisionPage implements OnInit {
     if (element.length > 0) {
       for (let u = 0; u < element.length; u++) {
         if (element[u].horaEnd != "") {
-          await this.minuteDifference(element)
+          this.minuteDifference(element)
           this.ionLoaderService.dismissLoader()
         }
         else {
@@ -969,12 +969,12 @@ export class VisionPage implements OnInit {
     this.day = Number(day)
     this.months(month)
 
-    fechaHoy = `${añoHoy}-${this.month}-${this.day}`
+    fechaHoy = `${year}-${this.month}-${this.day}`
 
     if (fechaEnd == fechaHoy) this.dateTodayCurrent = 'HOY'
     else this.dateTodayCurrent = `${this.day} de ${this.nameMonth}`
 
-    fechaActualmente = `${añoHoy}-${this.month}-${this.day}`
+    fechaActualmente = `${year}-${this.month}-${this.day}`
 
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
       if (rp['manager'].rol == 'Administrador') {
@@ -1062,12 +1062,8 @@ export class VisionPage implements OnInit {
 
   months(month: string) {
 
-    let numberMonth = ''
-
     if (month == 'Dec') {
       this.month = '12'
-      numberMonth = '0' + this.month
-      this.month = numberMonth.toString()
       this.nameMonth = 'Diciembre'
     }
 

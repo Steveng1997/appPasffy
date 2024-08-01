@@ -13,7 +13,7 @@ export class TherapistPipe implements PipeTransform {
     }
 
     if (items) {
-      return items.filter((item, index) => item.therapist === param)
+      return  Object.values(items).filter((item) => item.therapist === param)
     }
   }
 }

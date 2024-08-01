@@ -21,7 +21,7 @@ import { ServiceService } from 'src/app/core/services/service/service.service';
 export class EditManagerPage implements OnInit {
   id: any
   iduser: number
-  managers = [];
+  managers = []
   currentDate = new Date().getTime()
 
   liquidationManager: LiquidationManager = {

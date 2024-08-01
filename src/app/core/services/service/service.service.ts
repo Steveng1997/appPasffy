@@ -424,6 +424,9 @@ export class ServiceService {
     });
   }
 
+  getCompany(company: string) {
+    return this.http.get(`${this.API_URL}/company/${company}`);
+  }
   // Update
 
   updateServicio(id: number, service: ModelService) {
