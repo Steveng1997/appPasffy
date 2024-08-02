@@ -79,21 +79,17 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   modelLiquidation: LiquidationTherapist = {
+    amount: 0,
     company: "",
-    createdDate: "",
-    currentDate: "",
-    desdeFechaLiquidado: "",
-    desdeHoraLiquidado: "",
-    encargada: "",
-    formaPago: "",
-    hastaFechaLiquidado: "",
-    hastaHoraLiquidado: new Date().toTimeString().substring(0, 5),
-    id: 0,
-    idUnico: "",
-    idTerapeuta: "",
-    importe: 0,
-    terapeuta: "",
-    tratamiento: 0,
+    currentDate: 0,
+    dateStart: "",
+    dateEnd: "",
+    manager: "",
+    payment: "",
+    therapist: "",
+    treatment: 0,
+    uniqueId: "",
+    idTherap: ""
   }
 
   constructor(
@@ -123,15 +119,15 @@ export class NewLiquidTherapPage implements OnInit {
   validitingUser() {
     this.serviceManager.getId(this.id).subscribe((rp) => {
       this.company = rp[0].company
-      if (rp[0]['rol'] == 'administrador') {
+      if (rp[0]['rol'] == 'Administrador') {
         this.administratorRole = true
         this.getManager()
       } else {
         this.manager = rp
         this.administratorRole = false
-        this.modelLiquidation.encargada = this.manager[0].nombre
+        this.modelLiquidation.manager = this.manager[0].nombre
         this.modelLiquidation.company = this.company
-        this.serviceLiquidation.consultManager(this.modelLiquidation.encargada, rp[0]['company']).subscribe(async (rp) => {
+        this.serviceLiquidation.getByManagerAndCompany(this.modelLiquidation.manager, rp[0]['company']).subscribe(async (rp) => {
           this.liquidated = rp
         })
       }
@@ -152,10 +148,10 @@ export class NewLiquidTherapPage implements OnInit {
     if (localStorage.length == 1) {
       if (document.getElementById('bizum1').style.background == "") {
         document.getElementById('bizum1').style.background = '#1fb996'
-        this.modelLiquidation.formaPago = 'Bizum'
+        this.modelLiquidation.payment = 'Bizum'
       } else {
         document.getElementById('bizum1').style.background = ""
-        this.modelLiquidation.formaPago = ''
+        this.modelLiquidation.payment = ''
         localStorage.removeItem('Bizum')
       }
     } else {
@@ -171,10 +167,10 @@ export class NewLiquidTherapPage implements OnInit {
     if (localStorage.length == 1) {
       if (document.getElementById('cash1').style.background == "") {
         document.getElementById('cash1').style.background = '#1fb996'
-        this.modelLiquidation.formaPago = 'Efectivo'
+        this.modelLiquidation.payment = 'Efectivo'
       } else {
         document.getElementById('cash1').style.background = ""
-        this.modelLiquidation.formaPago = ''
+        this.modelLiquidation.payment = ''
         localStorage.removeItem('Efectivo')
       }
     } else {
@@ -190,10 +186,10 @@ export class NewLiquidTherapPage implements OnInit {
     if (localStorage.length == 1) {
       if (document.getElementById('card1').style.background == "") {
         document.getElementById('card1').style.background = '#1fb996'
-        this.modelLiquidation.formaPago = 'Tarjeta'
+        this.modelLiquidation.payment = 'Tarjeta'
       } else {
         document.getElementById('card1').style.background = ""
-        this.modelLiquidation.formaPago = ''
+        this.modelLiquidation.payment = ''
         localStorage.removeItem('Tarjeta')
       }
     } else {
@@ -209,10 +205,10 @@ export class NewLiquidTherapPage implements OnInit {
     if (localStorage.length == 1) {
       if (document.getElementById('transaction1').style.background == "") {
         document.getElementById('transaction1').style.background = '#1fb996'
-        this.modelLiquidation.formaPago = 'Trans'
+        this.modelLiquidation.payment = 'Trans'
       } else {
         document.getElementById('transaction1').style.background = ""
-        this.modelLiquidation.formaPago = ''
+        this.modelLiquidation.payment = ''
         localStorage.removeItem('Trans')
       }
     } else {
@@ -241,14 +237,14 @@ export class NewLiquidTherapPage implements OnInit {
     let fromMonth = '', fromDay = '', fromYear = '', convertMonth = '', convertDay = '',
       untilMonth = 0, untilDay = 0, untilYear = 0, currentDate = new Date()
 
-    await this.serviceLiquidation.consultTherapistAndManager(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe(async (rp: any) => {
+    await this.serviceLiquidation.getByManagerAndTherapist(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe(async (rp: any) => {
       if (rp.length > 0) {
-        fromDay = rp[0]['hastaFechaLiquidado'].substring(0, 2)
-        fromMonth = rp[0]['hastaFechaLiquidado'].substring(3, 5)
-        fromYear = rp[0]['hastaFechaLiquidado'].substring(6, 8)
+        fromDay = rp[0]['dateEnd'].substring(0, 2)
+        fromMonth = rp[0]['dateEnd'].substring(3, 5)
+        fromYear = rp[0]['dateEnd'].substring(6, 8)
 
-        this.modelLiquidation.desdeFechaLiquidado = `${'20' + fromYear}-${fromMonth}-${fromDay}`
-        this.modelLiquidation.desdeHoraLiquidado = rp[0]['hastaHoraLiquidado']
+        this.modelLiquidation.dateStart = `${'20' + fromYear}-${fromMonth}-${fromDay}`
+        this.modelLiquidation.dateStart = rp[0]['dateEnd']
         await this.inputDateAndTime()
       } else {
         await this.dateDoesNotExist()
@@ -261,39 +257,39 @@ export class NewLiquidTherapPage implements OnInit {
 
     if (untilMonth > 0 && untilMonth < 10) {
       convertMonth = '0' + untilMonth
-      this.modelLiquidation.hastaFechaLiquidado = `${untilYear}-${convertMonth}-${untilDay}`
+      this.modelLiquidation.dateEnd = `${untilYear}-${convertMonth}-${untilDay}`
     } else {
       convertMonth = untilMonth.toString()
-      this.modelLiquidation.hastaFechaLiquidado = `${untilYear}-${convertMonth}-${untilDay}`
+      this.modelLiquidation.dateEnd = `${untilYear}-${convertMonth}-${untilDay}`
     }
 
     if (untilDay > 0 && untilDay < 10) {
       convertDay = '0' + untilDay
-      this.modelLiquidation.hastaFechaLiquidado = `${untilYear}-${convertMonth}-${convertDay}`
+      this.modelLiquidation.dateEnd = `${untilYear}-${convertMonth}-${convertDay}`
     } else {
-      this.modelLiquidation.hastaFechaLiquidado = `${untilYear}-${convertMonth}-${untilDay}`
+      this.modelLiquidation.dateEnd = `${untilYear}-${convertMonth}-${untilDay}`
     }
   }
 
   async dateDoesNotExist() {
     let año = "", mes = "", dia = ""
 
-    await this.service.getTerapeutaFechaAsc(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe(async (rp) => {
+    await this.service.getTerapeutaFechaAsc(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe(async (rp) => {
       año = rp[0]['fechaHoyInicio'].substring(0, 4)
       mes = rp[0]['fechaHoyInicio'].substring(5, 7)
       dia = rp[0]['fechaHoyInicio'].substring(8, 10)
-      this.modelLiquidation.desdeFechaLiquidado = `${año}-${mes}-${dia}`
-      this.modelLiquidation.desdeHoraLiquidado = rp[0]['horaStart']
+      this.modelLiquidation.dateStart = `${año}-${mes}-${dia}`
+      this.modelLiquidation.dateStart = rp[0]['horaStart']
       await this.inputDateAndTime()
     })
   }
 
   calculateServices() {
-    if (this.modelLiquidation.encargada != "" && this.modelLiquidation.terapeuta != "") {
+    if (this.modelLiquidation.manager != "" && this.modelLiquidation.therapist != "") {
       this.getThoseThatNotLiquidated()
       this.ionLoaderService.simpleLoader()
 
-      this.service.getByTerapeutaAndEncargada(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe(async (resp: any) => {
+      this.service.getByTerapeutaAndEncargada(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe(async (resp: any) => {
         if (resp.length > 0) {
           this.dates = false
           this.ionLoaderService.dismissLoader()
@@ -313,9 +309,9 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   async inputDateAndTime() {
-    this.service.getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.terapeuta,
-      this.modelLiquidation.encargada, this.modelLiquidation.desdeHoraLiquidado, this.modelLiquidation.hastaHoraLiquidado,
-      this.modelLiquidation.desdeFechaLiquidado, this.modelLiquidation.hastaFechaLiquidado, this.modelLiquidation.company).subscribe(async (rp: any) => {
+    this.service.getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.therapist,
+      this.modelLiquidation.manager, this.modelLiquidation.dateStart, this.modelLiquidation.dateEnd,
+      this.modelLiquidation.dateStart, this.modelLiquidation.dateEnd, this.modelLiquidation.company).subscribe(async (rp: any) => {
 
         if (rp.length > 0) {
           this.unliquidatedService = rp
@@ -412,7 +408,7 @@ export class NewLiquidTherapPage implements OnInit {
     let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTherapist = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0, totalCommission = 0,
       sumCommission = 0, receivedTherapist = 0
 
-    await this.serviceTherapist.name(this.modelLiquidation.terapeuta).subscribe(async (rp) => {
+    await this.serviceTherapist.name(this.modelLiquidation.therapist).subscribe(async (rp) => {
       this.terapeutaName = rp[0]
 
       // Comision
@@ -446,7 +442,7 @@ export class NewLiquidTherapPage implements OnInit {
       })
 
       let totalLiquidation = Math.ceil(sumCommission) - Number(receivedTherapist)
-      this.modelLiquidation.importe = totalLiquidation
+      this.modelLiquidation.amount = totalLiquidation
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
       this.ionLoaderService.dismissLoader()
@@ -618,7 +614,7 @@ export class NewLiquidTherapPage implements OnInit {
     this.service.getById(id).subscribe((rp: any) => {
       if (rp.length > 0) {
         this.modelServices.screen = 'new-liquiationTherapist'
-        this.service.updateScreenById(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
+        this.service.updateScreen(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
         this.router.navigate([`tabs/${this.id}/edit-services/${rp[0]['id']}`])
       }
     })
@@ -633,8 +629,8 @@ export class NewLiquidTherapPage implements OnInit {
     document.getElementById('overviewDates').style.height = '165px'
     this.dates = false
     this.selected = false
-    this.modelLiquidation.encargada = ""
-    this.modelLiquidation.terapeuta = ""
+    this.modelLiquidation.manager = ""
+    this.modelLiquidation.therapist = ""
     this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
   }
 
@@ -647,32 +643,9 @@ export class NewLiquidTherapPage implements OnInit {
     })
 
     this.modelServices.idTherap = uuid
-    this.modelLiquidation.idUnico = uuid
-    this.modelLiquidation.idTerapeuta = uuid
-    return this.modelLiquidation.idUnico
-  }
-
-  dateCurrentDay() {
-    let date = new Date(), day = 0, month = 0, year = 0, convertMonth = '', convertDay = ''
-
-    day = date.getDate()
-    month = date.getMonth() + 1
-    year = date.getFullYear()
-
-    if (month > 0 && month < 10) {
-      convertMonth = '0' + month
-      this.modelLiquidation.createdDate = `${year}-${convertMonth}-${day}`
-    } else {
-      convertMonth = month.toString()
-      this.modelLiquidation.createdDate = `${year}-${month}-${day}`
-    }
-
-    if (day > 0 && day < 10) {
-      convertDay = '0' + day
-      this.modelLiquidation.createdDate = `${year}-${convertMonth}-${convertDay}`
-    } else {
-      this.modelLiquidation.createdDate = `${year}-${convertMonth}-${day}`
-    }
+    this.modelLiquidation.uniqueId = uuid
+    this.modelLiquidation.idTherap = uuid
+    return this.modelLiquidation.uniqueId
   }
 
   formatDate() {
@@ -680,39 +653,38 @@ export class NewLiquidTherapPage implements OnInit {
 
     // From 
 
-    fromDay = this.modelLiquidation.desdeFechaLiquidado.substring(8, 10)
-    fromMonth = this.modelLiquidation.desdeFechaLiquidado.substring(5, 7)
-    fromYear = this.modelLiquidation.desdeFechaLiquidado.substring(2, 4)
+    fromDay = this.modelLiquidation.dateStart.substring(8, 10)
+    fromMonth = this.modelLiquidation.dateStart.substring(5, 7)
+    fromYear = this.modelLiquidation.dateStart.substring(2, 4)
 
-    this.modelLiquidation.desdeFechaLiquidado = `${fromDay}-${fromMonth}-${fromYear}`
+    this.modelLiquidation.dateStart = `${fromDay}-${fromMonth}-${fromYear}`
 
     // Until
 
-    untilDay = this.modelLiquidation.hastaFechaLiquidado.substring(8, 10)
-    untilMonth = this.modelLiquidation.hastaFechaLiquidado.substring(5, 7)
-    untilYear = this.modelLiquidation.hastaFechaLiquidado.substring(2, 4)
+    untilDay = this.modelLiquidation.dateEnd.substring(8, 10)
+    untilMonth = this.modelLiquidation.dateEnd.substring(5, 7)
+    untilYear = this.modelLiquidation.dateEnd.substring(2, 4)
 
-    this.modelLiquidation.hastaFechaLiquidado = `${untilDay}-${untilMonth}-${untilYear}`
+    this.modelLiquidation.dateEnd = `${untilDay}-${untilMonth}-${untilYear}`
   }
 
   save() {
-    if (this.modelLiquidation.terapeuta != "") {
-      if (this.modelLiquidation.encargada != "") {
-        if (this.modelLiquidation.formaPago != "") {
+    if (this.modelLiquidation.therapist != "") {
+      if (this.modelLiquidation.manager != "") {
+        if (this.modelLiquidation.payment != "") {
 
           this.createUniqueId()
-          this.modelLiquidation.currentDate = this.currentDate.toString()
+          this.modelLiquidation.currentDate = this.currentDate
           this.formatDate()
-          this.dateCurrentDay()
 
           this.ionLoaderService.simpleLoader()
 
-          this.serviceLiquidation.consultTherapistAndManager(this.modelLiquidation.terapeuta, this.modelLiquidation.encargada).subscribe((rp: any) => {
+          this.serviceLiquidation.getByManagerAndTherapist(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe((rp: any) => {
 
             if (rp.length > 0) {
 
               for (let o = 0; o < this.unliquidatedService.length; o++) {
-                this.modelLiquidation.tratamiento = this.unliquidatedService.length
+                this.modelLiquidation.treatment = this.unliquidatedService.length
                 this.modelServices.liquidatedTherapist = true
                 this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
               }
@@ -720,8 +692,8 @@ export class NewLiquidTherapPage implements OnInit {
               this.serviceLiquidation.save(this.modelLiquidation).subscribe(async (rp) => {
                 this.selected = false
                 this.dates = false
-                this.modelLiquidation.encargada = ""
-                this.modelLiquidation.terapeuta = ""
+                this.modelLiquidation.manager = ""
+                this.modelLiquidation.therapist = ""
                 localStorage.clear()
                 this.ionLoaderService.dismissLoader()
                 location.replace(`tabs/${this.id}/liquidation-therapist`)
@@ -732,15 +704,15 @@ export class NewLiquidTherapPage implements OnInit {
             else if (rp.length == 0) {
 
               for (let o = 0; o < this.unliquidatedService.length; o++) {
-                this.modelLiquidation.tratamiento = this.unliquidatedService.length
+                this.modelLiquidation.treatment = this.unliquidatedService.length
                 this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
               }
 
               this.serviceLiquidation.save(this.modelLiquidation).subscribe(async (rp) => {
                 this.selected = false
                 this.dates = false
-                this.modelLiquidation.encargada = ""
-                this.modelLiquidation.terapeuta = ""
+                this.modelLiquidation.manager = ""
+                this.modelLiquidation.therapist = ""
                 localStorage.clear()
                 this.ionLoaderService.dismissLoader()
                 location.replace(`tabs/${this.id}/liquidation-therapist`)

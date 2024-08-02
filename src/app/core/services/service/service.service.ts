@@ -42,10 +42,6 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getManagerOrderCurrentDate/${encargada}`);
   }
 
-  getByCierre(idCierre: string) {
-    return this.http.get(`${this.API_URL}/getIdCierre/${idCierre}`);
-  }
-
   getService() {
     return this.http.get(`${this.API_URL}`);
   }
@@ -62,10 +58,6 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getIdTerapeuta/${idTerap}`);
   }
 
-  getByIdCierreDistinct(idCierre: string) {
-    return this.http.get(`${this.API_URL}/getIdCierreDistinct/${idCierre}`);
-  }
-
   getByIdEncarg(idEncargada: string) {
     return this.http.get(`${this.API_URL}/getIdEncargada/${idEncargada}`);
   }
@@ -78,8 +70,8 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getId/${id}`);
   }
 
-  getByEditar(id: number) {
-    return this.http.get(`${this.API_URL}/getIdEditar/${id}`);
+  getByIdEditTrue(id: number) {
+    return this.http.get(`${this.API_URL}/idEditTrue/${id}`);
   }
 
   getTerapeutaByAsc(terapeuta: string) {
@@ -187,12 +179,12 @@ export class ServiceService {
     });
   }
 
-  getEncargadaFechaDescByLiqTrue(encargada: string) {
-    return this.http.get(`${this.API_URL}/getByEncargadaByLiqTrue/${encargada}`);
+  getByManagerAndLiquidatedManagerCurrentDateDesc(manager: string) {
+    return this.http.get(`${this.API_URL}/managerAndLiquidatedManagerCurrentDateDesc/${manager}`);
   }
 
-  getTerapeutaWithCurrentDate(terapeuta: string) {
-    return this.http.get(`${this.API_URL}/getByTerapeutaWithCurrentDate/${terapeuta}`);
+  getByTherapistCurrentDateDesc(therapist: string) {
+    return this.http.get(`${this.API_URL}/therapistCurrentDateDesc/${therapist}`);
   }
 
   getEncargFechaDesc(encargada: string) {
@@ -312,8 +304,8 @@ export class ServiceService {
     });
   }
 
-  getTerapeutaLiqFalse(terapeuta: string) {
-    return this.http.get(`${this.API_URL}/getByTerapeutaLiquidatedZero/${terapeuta}`);
+  getByTherapistNotLiquidatedTherapist(therapist: string) {
+    return this.http.get(`${this.API_URL}/therapistNotLiquidatedTherapist/${therapist}`);
   }
 
   getManagerLiqFalse(encargada: string) {
@@ -340,97 +332,13 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/todayDateAndTherapistAndManagerAndCompany/${dateToday}/${therapist}/${manager}/${company}`);
   }
 
-  // closing
-
-  getManagerClosing(encargada: string) {
-    return this.http.get(`${this.API_URL}/getEncargadaClosing/${encargada}`);
-  }
-
-  getByClosingFalse() {
-    return this.http.get(`${this.API_URL}/getClosingByFalse`);
-  }
-
-  getWithDistinctByManagerFechaHoraInicioFechaHoraFinClosing(encargada: string, horaStart: string, horaEnd: string, fecha: string, fechaFin: string) {
-    return this.http.get(`${this.API_URL}/getDistinctManagerFechaHoraInicioFechaHoraFinClosing`, {
-      params: {
-        encargada,
-        fecha,
-        horaStart,
-        fechaFin,
-        horaEnd,
-      }
-    });
-  }
-
-  getByManagerFechaHoraInicioFechaHoraFinClosing(encargada: string, horaStart: string, horaEnd: string, fecha: string, fechaFin: string) {
-    return this.http.get(`${this.API_URL}/getManagerFechaHoraInicioFechaHoraFinClosing`, {
-      params: {
-        encargada,
-        fecha,
-        horaStart,
-        fechaFin,
-        horaEnd,
-      }
-    });
-  }
-
-  getServicesByNumberTerap(encargada: string, horaStart: string, horaEnd: string, fecha: string, fechaFin: string) {
-    return this.http.get(`${this.API_URL}/getServicesNumberTerap`, {
-      params: {
-        encargada,
-        fecha,
-        horaStart,
-        fechaFin,
-        horaEnd,
-      }
-    });
-  }
-
-  getWithDistinctServicesByNumberTerap(encargada: string, horaStart: string, horaEnd: string, fecha: string, fechaFin: string) {
-    return this.http.get(`${this.API_URL}/getDistinctServicesByNumberTerap`, {
-      params: {
-        encargada,
-        fecha,
-        horaStart,
-        fechaFin,
-        horaEnd,
-      }
-    });
-  }
-
-  getByTherapistFechaHoraInicioFechaHoraFinClosing(terapeuta: string, encargada: string, horaStart: string, horaEnd: string, fecha: string, fechaFin: string) {
-    return this.http.get(`${this.API_URL}/getTherapistAndManagerFechaHoraInicioFechaHoraFinClosing`, {
-      params: {
-        terapeuta,
-        encargada,
-        fecha,
-        horaStart,
-        fechaFin,
-        horaEnd
-      }
-    });
-  }
-
-  getByTherapistFechaHoraInicioFechaHoraFinClosingTrue(terapeuta: string, encargada: string, horaStart: string, horaEnd: string, fecha: string, fechaFin: string) {
-    return this.http.get(`${this.API_URL}/getTherapistAndManagerFechaHoraInicioFechaHoraFinClosingTrue`, {
-      params: {
-        terapeuta,
-        encargada,
-        fecha,
-        horaStart,
-        fechaFin,
-        horaEnd
-      }
-    });
-  }
-
   getCompany(company: string) {
     return this.http.get(`${this.API_URL}/company/${company}`);
   }
   // Update
 
-  updateServicio(id: number, service: ModelService) {
-    return this.http.put(`${this.API_URL}/updateByServicio/${id}`, service);
+  update(id: number, service: ModelService) {
+    return this.http.put(`${this.API_URL}/${id}`, service);
   }
 
   updateAllServicio(id: number, service: ModelService) {
@@ -477,16 +385,12 @@ export class ServiceService {
     return this.http.put(`${this.API_URL}/updatesManagerSettlementManagerIdByManagerId/${idEncargada}`, service);
   }
 
-  updateClosingByIdClosing(idCierre: string, service: ModelService) {
-    return this.http.put(`${this.API_URL}/updateClosingIdClosing/${idCierre}`, service);
+  updateScreen(id: number, service: ModelService) {
+    return this.http.put(`${this.API_URL}/screen/${id}`, service);
   }
 
-  updateScreenById(id: number, service: ModelService) {
-    return this.http.put(`${this.API_URL}/updateScreenById/${id}`, service);
-  }
-
-  updateNote(id: number, service: ModelService) {
-    return this.http.put(`${this.API_URL}/updateScreenById/${id}`, service);
+  updateNotes(id: number, service: ModelService) {
+    return this.http.put(`${this.API_URL}/note/${id}`, service);
   }
 
   // Delete

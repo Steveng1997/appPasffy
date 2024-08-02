@@ -21,29 +21,26 @@ import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.servi
 })
 
 export class EditServicesPage implements OnInit {
-  hourStartTerapeuta = ''
-  horaEndTerapeuta = ''
+  hourStart = ''
+  hourEnd = ''
 
+  dateToday = dayjs().format("YYYY-MM-DD")
   fechaActual = ''
   horaStarted = new Date().toTimeString().substring(0, 5)
-  fecha = ''
   modifiedUser = ''
   horaInicialServicio: string
 
   idUser: number
   id: number
-  manager: any
+  manager = []
   terapeuta: any
-
-  fechaLast = []
   administratorRole: boolean = false
 
   restamosCobroEdit = 0
-  sumatoriaCobrosEdit = 0
+  sumatoriaCobrosEdit = ''
+  sumatoriaServices = ''
   idEditar: number
   editarService: ModelService[]
-
-  terapEdit: any
   buttonEdit: any
   buttonDelete = false
 
@@ -110,6 +107,7 @@ export class EditServicesPage implements OnInit {
     transactionFloor2: false,
     transactionTherapist: false,
     uniqueId: "",
+    updated_at: dayjs().format("YYYY-MM-DD"),
     valueBizuManager: 0,
     valueBizuTherapist: 0,
     valueBizum: 0,
@@ -130,24 +128,13 @@ export class EditServicesPage implements OnInit {
     valueTransaction: 0,
     valueTransactionManager: 0,
     valueTransactionTherapist: 0,
-    vitamin: 0,
-    updated_at: dayjs().format("YYYY-MM-DD HH:mm"),
+    vitamin: 0
   }
 
   therapist: ModelTherapist = {
-    active: true,
-    company: "",
     dateEnd: dayjs().format("YYYY-MM-DD"),
-    drink: 0,
-    drinkTherapist: 0,
     exit: "",
     minutes: 0,
-    name: "",
-    others: 0,
-    service: 0,
-    tabacco: 0,
-    tip: 0,
-    vitamin: 0
   }
 
   constructor(
@@ -169,12 +156,14 @@ export class EditServicesPage implements OnInit {
 
     if (this.idUser) {
       this.serviceManager.getId(this.idUser).subscribe((rp) => {
-        if (rp[0]['rol'] == 'administrador') {
+        debugger
+        this.modifiedUser = rp['manager'].name
+        if (rp['manager'].rol == 'Administrador') {
           this.administratorRole = true
           this.getManager()
         } else {
-          this.manager = rp
-          this.services.manager = this.manager[0].nombre
+          this.manager = [rp['manager']]
+          this.services.manager = this.manager['name']
         }
       })
     }
@@ -542,14 +531,14 @@ export class EditServicesPage implements OnInit {
   }
 
   getManager() {
-    this.serviceManager.getManager().subscribe((datosEncargada: any) => {
-      this.manager = datosEncargada
+    this.serviceManager.getManager().subscribe((rp: any) => {
+      this.manager = rp['manager']
     })
   }
 
   getTherapist() {
-    this.serviceTherapist.getTherapist().subscribe((datosTerapeuta: any) => {
-      this.terapeuta = datosTerapeuta
+    this.serviceTherapist.getTherapist().subscribe((rp: any) => {
+      this.terapeuta = rp['therapist']
     })
   }
 
@@ -590,7 +579,7 @@ export class EditServicesPage implements OnInit {
         heightAuto: false,
         icon: 'error',
         title: 'Oops...',
-        text: 'No se puede crear el servicio por la fecha.',
+        text: 'No se puede editar el servicio por la fecha.',
         showConfirmButton: false,
         timer: 2500,
       });
@@ -654,40 +643,25 @@ export class EditServicesPage implements OnInit {
   }
 
   chosenDate(event: any) {
-    this.editarService[0]['fechaHoyInicio'] = event.target.value
+    this.editarService[0]['dateToday'] = event.target.value
     this.fechaActual = event.target.value
   }
 
   minutes(event: any) {
-    let sumarsesion = Number(event.value), horas = 0, minutos = 0, convertHora = '', day = '', month = '', year = ''
+    let sumarsesion = Number(event.value), day = '', month = '', year = '', hour = '', dateToday = ''
+    if (event === null) sumarsesion = 0
 
-    if (event.value === null) sumarsesion = 0
+    dateToday = this.dateToday + ' ' + this.editarService[0].dateEnd.substring(11, 16)
 
-    const splitDate = this.fechaActual.toString().split('-')
-    const splitHour = this.editarService[0]['horaStart'].split(':')
-
-    let defineDate = new Date(Number(splitDate[0]), (Number(splitDate[1]) - 1), Number(splitDate[2]), Number(splitHour[0]), Number(splitHour[1]))
+    let defineDate = new Date(dateToday)
     defineDate.setMinutes(defineDate.getMinutes() + sumarsesion)
-
-    horas = defineDate.getHours()
-    minutos = defineDate.getMinutes()
-
-    if (horas > 0 && horas < 10) {
-      convertHora = '0' + horas
-      let hora = convertHora
-      let minutes = minutos
-      this.editarService[0]['horaEnd'] = hora + ':' + (Number(minutes) < 10 ? '0' : '') + minutes
-    } else {
-      let minutes = minutos
-      this.editarService[0]['horaEnd'] = horas + ':' + (Number(minutes) < 10 ? '0' : '') + minutes
-    }
-
-    let datesEnd = new Date(Number(splitDate[0]), (Number(splitDate[1]) - 1), Number(splitDate[2]), Number(splitHour[0]), Number(splitHour[1]))
-    datesEnd.setMinutes(datesEnd.getMinutes() + sumarsesion).toString().substring(4, 15)
+    let datesEnd = new Date(dateToday)
+    datesEnd.setMinutes(datesEnd.getMinutes() + sumarsesion)
 
     day = datesEnd.toString().substring(8, 10)
     month = datesEnd.toString().substring(4, 7)
-    year = datesEnd.toString().substring(13, 15)
+    year = datesEnd.toString().substring(11, 15)
+    hour = datesEnd.toString().substring(16, 21)
 
     if (month == 'Dec') month = "12"
     if (month == 'Nov') month = "11"
@@ -702,7 +676,7 @@ export class EditServicesPage implements OnInit {
     if (month == 'Feb') month = "02"
     if (month == 'Jan') month = "01"
 
-    this.editarService[0]['fechaFin'] = `${day}-${month}-${year}`
+    this.editarService[0]['dateEnd'] = `${year}-${month}-${day} ${hour}`
   }
 
   validationsFormOfPayment() {
@@ -826,37 +800,34 @@ export class EditServicesPage implements OnInit {
   sortDateToEdit() {
     let dia = '', mes = '', año = ''
 
-    dia = this.editarService[0]['fecha'].substring(8, 10)
-    mes = this.editarService[0]['fecha'].substring(5, 7)
-    año = this.editarService[0]['fecha'].substring(2, 4)
+    dia = this.editarService[0]['dateStart'].substring(8, 10)
+    mes = this.editarService[0]['dateStart'].substring(5, 7)
+    año = this.editarService[0]['dateStart'].substring(0, 4)
 
-    this.editarService[0]['fecha'] = `${dia}-${mes}-${año}`
+    this.editarService[0]['dateStart'] = `${año}-${mes}-${dia} ${this.editarService[0]['dateEnd'].substring(11, 16)}`
   }
 
   editForm() {
-    let fecha = new Date(), dia = '', mes = '', año = 0
-    año = fecha.getFullYear()
+    let day = '', month = '', year = ''
 
-    this.serviceServices.getByEditar(this.id).subscribe((datosServicio: any) => {
-      if (datosServicio.length > 0) {
-        this.services.screen = datosServicio[0].screen
-        this.editarService = datosServicio
-        this.fecha = datosServicio[0]['fecha']
-        this.fechaActual = datosServicio[0]['fechaHoyInicio']
+    this.serviceServices.getByIdEditTrue(this.id).subscribe((rp: any) => {
+      if (rp['service'].length > 0) {
+        this.services.screen = rp['service'][0].screen
+        this.editarService = rp['service']
+        this.fechaActual = rp['service'][0]['dateToday'].substring(0, 10)
 
-        this.hourStartTerapeuta = datosServicio[0]['horaStart']
-        this.horaEndTerapeuta = datosServicio[0]['horaEnd']
+        this.hourStart = rp['service'][0]['dateStart'].substring(11, 16)
+        this.hourEnd = rp['service'][0]['dateEnd'].substring(11, 16)
 
-        // Fechas
-        // dia = this.editarService[0].fecha.substring(0, 2)
-        // mes = this.editarService[0].fecha.substring(3, 5)
-        // this.editarService[0].fecha = `${año}-${mes}-${dia}`
+        day = this.editarService[0].dateStart.substring(8, 10)
+        month = this.editarService[0].dateStart.substring(5, 7)
+        year = this.editarService[0].dateStart.substring(0, 4)
+        this.editarService[0].dateStart = `${year}-${month}-${day}`
 
         this.collectionsValue()
 
-        this.serviceManager.idAdmin(this.idUser).subscribe((datoAdministrador: any[]) => {
-          if (datoAdministrador.length > 0) {
-            this.modified(datoAdministrador)
+        this.serviceManager.idAdmin(this.idUser).subscribe((rp: any[]) => {
+          if (rp['manager'].length > 0) {
             this.buttonDelete = true
           } else {
             this.buttonDelete = false
@@ -874,11 +845,6 @@ export class EditServicesPage implements OnInit {
         })
       }
     })
-  }
-
-  modified(rp: any) {
-
-    this.modifiedUser = rp[0]['nombre']
   }
 
   fullService() {
@@ -1060,66 +1026,79 @@ export class EditServicesPage implements OnInit {
   collectionsValue() {
     let valuepiso1Edit = 0, valuepiso2Edit = 0, valueterapeutaEdit = 0, valueEncargEdit = 0, valueotrosEdit = 0, restamosEdit = 0, resultadoEdit = 0
 
-    if (Number(this.editarService[0]['numberFloor1']) > 0) {
-      valuepiso1Edit = Number(this.editarService[0]['numberFloor1'])
+    if (this.editarService[0].numberFloor1 > 0) {
+      valuepiso1Edit = Number(this.editarService[0].numberFloor1)
     } else {
       valuepiso1Edit = 0
     }
 
-    if (Number(this.editarService[0]['numberFloor2']) > 0) {
-      valuepiso2Edit = Number(this.editarService[0]['numberFloor2'])
+    if (this.editarService[0].numberFloor2 > 0) {
+      valuepiso2Edit = Number(this.editarService[0].numberFloor2)
     } else {
       valuepiso2Edit = 0
     }
 
-    if (Number(this.editarService[0]['numberTherapist']) > 0) {
-      valueterapeutaEdit = Number(this.editarService[0]['numberTherapist'])
+    if (this.editarService[0].numberTherapist > 0) {
+      valueterapeutaEdit = Number(this.editarService[0].numberTherapist)
     } else {
       valueterapeutaEdit = 0
     }
 
-    if (Number(this.editarService[0]['numberManager']) > 0) {
-      valueEncargEdit = Number(this.editarService[0]['numberManager'])
+    if (this.editarService[0].numberManager > 0) {
+      valueEncargEdit = Number(this.editarService[0].numberManager)
     } else {
       valueEncargEdit = 0
     }
 
-    if (Number(this.editarService[0]['numberTaxi']) > 0) {
-      valueotrosEdit = Number(this.editarService[0]['numberTaxi'])
+    if (this.editarService[0].numberTaxi > 0) {
+      valueotrosEdit = Number(this.editarService[0].numberTaxi)
     } else {
       valueotrosEdit = 0
     }
 
-    if (this.editarService[0]['totalServicio'] > 0) {
-      resultadoEdit = Number(this.editarService[0]['totalServicio']) - valuepiso1Edit
+    if (this.editarService[0].totalService > 0) {
+      resultadoEdit = Number(this.editarService[0].totalService) - valuepiso1Edit
+
+      const totalService = this.editarService[0].totalService
+
+      if (this.editarService[0].totalService > 999)
+        this.sumatoriaServices = (totalService / 1000).toFixed(3)
+      else
+        this.sumatoriaServices = totalService.toString()
     }
 
-    this.sumatoriaCobrosEdit = valuepiso1Edit + valuepiso2Edit + valueterapeutaEdit + valueEncargEdit + valueotrosEdit
+    const sumCobros = valuepiso1Edit + valuepiso2Edit + valueterapeutaEdit + valueEncargEdit + valueotrosEdit
+    this.sumatoriaCobrosEdit = sumCobros.toString()
+
+    if (sumCobros > 999)
+      this.sumatoriaCobrosEdit = (sumCobros / 1000).toFixed(3)
+    else
+      this.sumatoriaCobrosEdit = sumCobros.toString()
 
     restamosEdit = valuepiso1Edit + valuepiso2Edit + valueterapeutaEdit + valueEncargEdit + valueotrosEdit
-    resultadoEdit = this.sumatoriaCobrosEdit - restamosEdit
+    resultadoEdit = sumCobros - restamosEdit
     this.restamosCobroEdit = resultadoEdit
   }
 
   validateCheck() {
 
     // Cash
-    if (Boolean(this.editarService[0]['cashFloor1']) === true) {
+    if (Boolean(this.editarService[0].cashFloor1) === true) {
       document.getElementById("cashHouse1").style.background = '#1fb996'
       this.services.cashFloor1 = true
     }
 
-    if (Boolean(this.editarService[0]['cashFloor2']) === true) {
+    if (Boolean(this.editarService[0].cashFloor2) === true) {
       document.getElementById('cashHouse2').style.background = '#1fb996'
       this.services.cashFloor2 = true
     }
 
-    if (Boolean(this.editarService[0]['cashTherapist']) === true) {
+    if (Boolean(this.editarService[0].cashTherapist) === true) {
       document.getElementById('cashTherapist').style.background = '#1fb996'
       this.services.cashTherapist = true
     }
 
-    if (Boolean(this.editarService[0]['cashManager']) === true) {
+    if (Boolean(this.editarService[0].cashManager) === true) {
       document.getElementById('cashManager').style.background = '#1fb996'
       this.services.cashManager = true
     }
@@ -1731,24 +1710,21 @@ export class EditServicesPage implements OnInit {
         this.editValue()
 
         serv.modifiedBy = this.modifiedUser
-        // serv.fechaFin = this.editarService[0]['fechaFin']
-        // serv.horaEnd = this.editarService[0]['horaEnd']
-
-        // this.therapist.dateEnd = `${serv.fechaFin} ${serv.horaEnd}`
+        this.therapist.dateEnd = serv.dateEnd
         this.therapist.exit = serv.exit
         this.therapist.minutes = serv.minutes
 
         this.serviceServices.getById(idServicio).subscribe((rp: any) => {
-          this.services.screen = rp[0].pantalla
-          if (rp[0]['therapist'] != serv.therapist) {
-            this.serviceTherapist.updateItems(rp[0]['therapist'], this.therapist).subscribe((rp: any) => { });
+          this.services.screen = rp['service'].screen
+          if (rp['service']['therapist'] != serv.therapist) {
+            this.serviceTherapist.updateItems(rp['service']['therapist'], this.therapist).subscribe((rp: any) => { });
           }
         });
 
         this.serviceTherapist.update3Item(this.editarService[0]['therapist'], this.therapist).subscribe((rp: any) => { })
 
         this.sortDateToEdit()
-        this.serviceServices.updateServicio(idServicio, serv).subscribe((rp: any) => {
+        this.serviceServices.update(idServicio, serv).subscribe((rp: any) => {
           this.presentController('Actualizado correctamente!')
           setTimeout(() => {
             this.ionLoaderService.dismissLoader()
@@ -1781,7 +1757,7 @@ export class EditServicesPage implements OnInit {
               this.ionLoaderService.simpleLoader()
               let screen = this.services.screen
               this.serviceTherapist.name(datoEliminado[0]['therapist']).subscribe((rp: any) => {
-                this.serviceTherapist.updateItems(rp[0].nombre, rp[0]).subscribe((rp: any) => { })
+                this.serviceTherapist.updateItems(rp[0].name, rp[0]).subscribe((rp: any) => { })
               })
               localStorage.removeItem('Efectivo')
               localStorage.removeItem('Bizum')
@@ -1808,7 +1784,7 @@ export class EditServicesPage implements OnInit {
       message: message,
       duration: 2000,
       position: 'middle',
-      cssClass:'toast-class',
+      cssClass: 'toast-class',
     });
     toast.present();
   }

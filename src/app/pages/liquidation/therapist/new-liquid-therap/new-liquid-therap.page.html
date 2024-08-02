@@ -23,7 +23,7 @@
               stroke-linejoin="round" />
           </svg>
 
-          <ion-select [(ngModel)]="modelLiquidation.terapeuta" class="terapeuta"
+          <ion-select [(ngModel)]="modelLiquidation.therapist" class="terapeuta"
             style="display: grid; min-height: -webkit-fill-available" label="Terapeuta"
             (ngModelChange)="calculateServices()">
             <ion-select-option *ngFor="let therapist of terapeuta"
@@ -39,7 +39,7 @@
               stroke-linejoin="round" />
           </svg>
 
-          <ion-select [(ngModel)]="modelLiquidation.encargada" class="encargada"
+          <ion-select [(ngModel)]="modelLiquidation.manager" class="encargada"
             style="display: grid; min-height: -webkit-fill-available" label="Encargada"
             (ngModelChange)="calculateServices()">
             <ion-select-option *ngFor="let managers of manager"
@@ -55,7 +55,7 @@
               stroke-linejoin="round" />
           </svg>
 
-          <ion-select [(ngModel)]="modelLiquidation.encargada" class="encargada"
+          <ion-select [(ngModel)]="modelLiquidation.manager" class="encargada"
             style="display: grid; min-height: -webkit-fill-available" label="Encargada">
             <ion-select-option *ngFor="let managers of manager"
               [value]="managers.nombre">{{managers.nombre}}</ion-select-option>
@@ -66,28 +66,28 @@
 
         <div class="component-3" *ngIf="selected">
           <ion-input type="date" class="inicial" id="sinceDate" name="sinceDate" (change)="inputDateAndTime()"
-            [(ngModel)]="modelLiquidation.desdeFechaLiquidado"
-            [value]="modelLiquidation.desdeFechaLiquidado"></ion-input>
+            [(ngModel)]="modelLiquidation.dateStart"
+            [value]="modelLiquidation.dateStart"></ion-input>
         </div>
 
         <div class="component-9" *ngIf="selected">
           <ion-input type="time" min="18:00" max="21:00" step="3600" class="_5-34-p-m" id="sinceTime" name="sinceTime"
-            (change)=" inputDateAndTime()" [(ngModel)]="modelLiquidation.desdeHoraLiquidado"
-            [value]="modelLiquidation.desdeHoraLiquidado"></ion-input>
+            (change)=" inputDateAndTime()" [(ngModel)]="modelLiquidation.dateStart"
+            [value]="modelLiquidation.dateStart"></ion-input>
         </div>
 
         <div class="final1" *ngIf="selected">Final</div>
 
         <div class="component-8" *ngIf="selected">
           <ion-input type="date" class="final" id="toDate" name="toDate" (change)="inputDateAndTime()"
-            [(ngModel)]="modelLiquidation.hastaFechaLiquidado"
-            [value]="modelLiquidation.hastaFechaLiquidado"></ion-input>
+            [(ngModel)]="modelLiquidation.dateEnd"
+            [value]="modelLiquidation.dateEnd"></ion-input>
         </div>
 
         <div class="component-10" *ngIf="selected">
           <ion-input type="time" min="18:00" max="21:00" step="3600" class="_7-12-p-m" id="untilTime" name="untilTime"
-            (change)="inputDateAndTime()" [(ngModel)]="modelLiquidation.hastaHoraLiquidado"
-            [value]="modelLiquidation.hastaHoraLiquidado"></ion-input>
+            (change)="inputDateAndTime()" [(ngModel)]="modelLiquidation.dateEnd"
+            [value]="modelLiquidation.dateEnd"></ion-input>
         </div>
 
         <div *ngIf="dates">
@@ -229,28 +229,28 @@
                 <div class="group-52">
                   <div class="rectangle-41" id="bizum1"></div>
                   <ion-input type="submit" class="rectangle-41" id="Bizum" name="bizum"
-                    [(ngModel)]="modelLiquidation.formaPago" (click)="bizum()"></ion-input>
+                    [(ngModel)]="modelLiquidation.payment" (click)="bizum()"></ion-input>
                   <div class="bizum2">Bizum</div>
                 </div>
 
                 <div class="group-53">
                   <div class="rectangle-37" id="cash1"></div>
                   <ion-input type="submit" class="rectangle-37" id="cash" name="cash"
-                    [(ngModel)]="modelLiquidation.formaPago" (click)="cash()"></ion-input>
+                    [(ngModel)]="modelLiquidation.payment" (click)="cash()"></ion-input>
                   <div class="efectivo2">Efectivo</div>
                 </div>
 
                 <div class="group-54">
                   <div class="rectangle-39" id="card1"></div>
                   <ion-input type="submit" class="rectangle-39" id="card" name="card"
-                    [(ngModel)]="modelLiquidation.formaPago" (click)="card()"></ion-input>
+                    [(ngModel)]="modelLiquidation.payment" (click)="card()"></ion-input>
                   <div class="tarjeta2">Tarjeta</div>
                 </div>
 
                 <div class="group-55">
                   <div class="rectangle-40" id="transaction1"></div>
                   <ion-input type="submit" class="rectangle-40" id="transaction" name="transaction"
-                    [(ngModel)]="modelLiquidation.formaPago" (click)="transaction()"></ion-input>
+                    [(ngModel)]="modelLiquidation.payment" (click)="transaction()"></ion-input>
                   <div class="transferencia2">Transferencia</div>
                 </div>
               </div>

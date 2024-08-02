@@ -32,18 +32,18 @@
           <div class="rectangle-42" id="box-duration"></div>
 
           <div class="fecha">Fecha</div>
-          <!-- <ion-input type="date" class="fecha" id="date" name="date" (change)="chosenDate($event)"
-            [(ngModel)]="edServ.fecha" (ionFocus)="showKeyBoard('date')" (ionBlur)="hideKeyBoard('date')"></ion-input>
+          <ion-input type="date" class="fecha" id="date" name="date" (change)="chosenDate($event)"
+            [(ngModel)]="edServ.dateStart" (ionFocus)="showKeyBoard('date')"
+            (ionBlur)="hideKeyBoard('date')"></ion-input>
 
           <div class="hora-de-inicio">Hora de Inicio</div>
           <ion-input type="time" class="hora-de-inicio" id="time" name="time" (change)="startTime($event)"
-            (ionFocus)="showKeyBoard('time')" (ionBlur)="hideKeyBoard('time')" [(ngModel)]="edServ.horaStart"
-            [value]="horaStarted"></ion-input>
+            (ionFocus)="showKeyBoard('time')" (ionBlur)="hideKeyBoard('time')" [value]="hourStart"></ion-input>
 
           <div class="duraci-n-min">Duración (min):</div>
-          <ion-input type="number" class="duraci-n-min" id="duration" name="duration" [(ngModel)]="edServ.minuto"
+          <ion-input type="number" class="duraci-n-min" id="duration" name="duration" [(ngModel)]="edServ.minutes"
             (ionFocus)="showKeyBoard('duration')" (ionBlur)="hideKeyBoard('duration')"
-            (change)="minutes($event.target)"></ion-input> -->
+            (change)="minutes($event.target)"></ion-input>
         </div>
 
         <ion-textarea class="rectangle-77" labelPlacement="floating" (ionFocus)="showKeyBoard('notes')"
@@ -58,16 +58,16 @@
         <div class="terapeuta">Terapeuta</div>
         <div class="encargada">Encargada</div>
 
-        <!-- <div class="group-68">
+        <div class="group-68">
           <div class="rectangle-43"></div>
           <div class="hora-fin">Hora fin:</div>
-          <div class="text-hora-fin">{{edServ.horaEnd}}</div>
-        </div> -->
+          <div class="text-hora-fin">{{edServ.dateEnd.substring(11, 16)}}</div>
+        </div>
 
         <div class="group-69">
           <div class="tiempo">Tiempo</div>
           <div class="ltimo-servicio">Último servicio:</div>
-          <div class="ultimo-servicio">{{hourStartTerapeuta + '-' + horaEndTerapeuta}}</div>
+          <div class="ultimo-servicio">{{hourStart + '-' + hourEnd}}</div>
         </div>
         <div class="group-70">
           <div class="servicios">Servicios</div>
@@ -177,16 +177,16 @@
           (ngModelChange)="collectionsValue()"></ion-input>
 
         <div class="rectangle-97"></div>
-        <ion-input type="number" class="rectangle-97" id="therapist" name="therapist" [(ngModel)]="edServ.numberTherapist"
-          (ionFocus)="showKeyBoard('therapist')" (ionBlur)="hideKeyBoard('therapist')"
-          (ngModelChange)="collectionsValue()"></ion-input>
+        <ion-input type="number" class="rectangle-97" id="therapist" name="therapist"
+          [(ngModel)]="edServ.numberTherapist" (ionFocus)="showKeyBoard('therapist')"
+          (ionBlur)="hideKeyBoard('therapist')" (ngModelChange)="collectionsValue()"></ion-input>
 
         <div class="rectangle-96"></div>
         <ion-input type="number" class="rectangle-96" id="manager" name="manager" [(ngModel)]="edServ.numberManager"
           (ionFocus)="showKeyBoard('manager')" (ionBlur)="hideKeyBoard('manager')"
           (ngModelChange)="collectionsValue()"></ion-input>
 
-        <div class="_4500">{{edServ.totalService}} €</div>
+        <div class="_4500">{{sumatoriaServices}} €</div>
         <div class="_45002">{{sumatoriaCobrosEdit}} €</div>
         <div class="div9">€</div>
         <div class="div10">€</div>
@@ -326,7 +326,6 @@
 
         <div class="component-6">
           <div class="rectangle-4"></div>
-          <!-- <div class="terapeuta2">Terapeuta</div> -->
           <svg class="icon2" width="19" height="9" viewBox="0 0 19 9" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M-4.76837e-07 -8.30516e-07L9.5 9L19 0" stroke="white" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round" />

@@ -1140,7 +1140,7 @@ export class NewPage implements OnInit {
 
   minutes(event: any) {
     this.services.minutes = Number(event.value)
-    let sumarsesion = Number(event.value), day = '', month = '', year = '', hour = '', minutes = 0, dateToday = ''
+    let sumarsesion = Number(event.value), day = '', month = '', year = '', hour = '', dateToday = ''
     if (event === null) sumarsesion = 0
 
     dateToday = this.dateToday + ' ' + this.horaInicialServicio

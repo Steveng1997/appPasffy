@@ -575,7 +575,7 @@ export class NewLiquidaManagerPage implements OnInit {
     this.service.getById(id).subscribe((rp: any) => {
       if (rp.length > 0) {
         this.modelServices.screen = 'new-liquiationManager'
-        this.service.updateScreenById(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
+        this.service.updateScreen(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
         this.router.navigate([`tabs/${this.id}/edit-services/${rp[0]['id']}`])
       }
     })

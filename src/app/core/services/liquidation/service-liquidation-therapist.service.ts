@@ -25,61 +25,51 @@ export class ServiceLiquidationTherapist {
 
   // Get
 
-  consultTherapistSettlements(company: string) {
-    return this.http.get(`${this.API_URL}/getByLiquidacionesTerapeuta/${company}`);
+  getByCompany(company: string) {
+    return this.http.get(`${this.API_URL}/company/${company}`);
   }
 
-  consultTherapistId(idTerapeuta: number) {
-    return this.http.get(`${this.API_URL}/getByIdTerap/${idTerapeuta}`);
+  getByIdTherapist(idTherap: number) {
+    return this.http.get(`${this.API_URL}/getIdTherap/${idTherap}`);
   }
 
-  consultTherapistAndManager(terapeuta: string, encargada: string) {
-    return this.http.get(`${this.API_URL}/getTerapeutaAndEncargada`, {
-      params: {
-        terapeuta,
-        encargada
-      }
-    });
+  getByManagerAndTherapist(therapist: string, manager: string) {
+    return this.http.get(`${this.API_URL}/managerAndTherap/${therapist}/${manager}`);
   }
 
-  consultManager(encargada: string, company: string) {
-    return this.http.get(`${this.API_URL}/getEncargada/${encargada}/${company}`);
+  getByManagerAndCompany(manager: string, company: string) {
+    return this.http.get(`${this.API_URL}/managerAndCompany/${manager}/${company}`);
   }
 
-  consultTherapist(therapist: string, company: string) {
-    return this.http.get(`${this.API_URL}/getTherapist/${therapist}/${company}`);
+  getByTherapAndCompany(therapist: string, company: string) {
+    return this.http.get(`${this.API_URL}/therapAndCompany/${therapist}/${company}`);
   }
 
-  getDateCurrentDay(fechaHoy: string, company: string) {
-    return this.http.get(`${this.API_URL}/getDateCurrent/${fechaHoy}/${company}`);
+  getDateCurrentDay(created_at: string, company: string) {
+    return this.http.get(`${this.API_URL}/dateCurrentDay/${created_at}/${company}`);
   }
 
-  getEncargadaAndDate(createdDate: string, encargada: string) {
-    return this.http.get(`${this.API_URL}/getFechaHoyByManager`, {
-      params: {
-        createdDate,
-        encargada
-      }
-    });
+  getTodayDateAndManager(created_at: string, manager: string, company: string) {
+    return this.http.get(`${this.API_URL}/todayDateManager/${created_at}/${manager}}/${company}`);
   }
 
   // Update
 
-  update(id: number, liquidationTherapist: LiquidationTherapist) {
-    return this.http.put(`${this.API_URL}/updateTherapistById/${id}`, liquidationTherapist);
+  updateByTherapist(therapist: string, liquidationTherapist: LiquidationTherapist) {
+    return this.http.put(`${this.API_URL}/updateByTherapist/${therapist}`, liquidationTherapist);
   }
 
-  updateById(idTerapeuta, liquidationTherapist: LiquidationTherapist) {
-    return this.http.put(`${this.API_URL}/updateIdAndImporte/${idTerapeuta}`, liquidationTherapist);
+  updateAmount(idTherap, liquidationTherapist: LiquidationTherapist) {
+    return this.http.put(`${this.API_URL}/updateAmount/${idTherap}`, liquidationTherapist);
   }
 
-  updateTerapImporteId(id: number, liquidationTherapist: LiquidationTherapist) {
-    return this.http.put(`${this.API_URL}/updateByTerapByImporteById/${id}`, liquidationTherapist);
+  updateAmountById(id: number, liquidationTherapist: LiquidationTherapist) {
+    return this.http.put(`${this.API_URL}/updateAmountById/${id}`, liquidationTherapist);
   }
 
   // Delete
 
-  deleteLiquidationTherapist(id: number) {
+  delete(id: number) {
     return this.http.delete(`${this.API_URL}/${id}`);
   }
 }

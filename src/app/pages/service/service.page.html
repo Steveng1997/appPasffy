@@ -111,7 +111,7 @@
             paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(services)">
             <div style="position: relative; top: 0px">
               <div [ngClass]="{'ellipse-18': services?.note != null}" (click)="notes()"></div>
-              <div class="date9">{{services.dateStart.substring(0, 10)}}</div>
+              <div class="date9">{{services.date}}</div>
               <div class="encargada9">{{services.manager}}</div>
               <div class="terapeuta9">{{services.therapist}}</div>
               <div class="tiempo9">{{services.dateStart.substring(11, 16)}} - {{services.dateEnd.substring(11, 16)}}</div>

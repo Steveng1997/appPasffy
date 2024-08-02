@@ -374,7 +374,7 @@ export class ManagerPage {
     this.services.getById(id).subscribe((rp: any) => {
       if (rp.length > 0) {
         this.modelServices.screen = 'liquidation-manager'
-        this.services.updateScreenById(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
+        this.services.updateScreen(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
         this.router.navigate([`tabs/${this.id}/edit-services/${rp[0]['id']}`])
       }
     })

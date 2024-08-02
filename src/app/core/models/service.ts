@@ -56,6 +56,7 @@ export class ModelService {
   transactionFloor2?: boolean;
   transactionTherapist?: boolean;
   uniqueId?: string;
+  updated_at?: string;
   valueBizuManager?: number;
   valueBizuTherapist?: number;
   valueBizum?: number;
@@ -77,5 +78,4 @@ export class ModelService {
   valueTransactionManager?: number;
   valueTransactionTherapist?: number;
   vitamin?: number;
-  updated_at?: string;
 }

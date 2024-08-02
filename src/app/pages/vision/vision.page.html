@@ -17,7 +17,7 @@
             *ngFor="let vision of (therapist) | paginate: { itemsPerPage: 10, currentPage: page }">
 
             <div class="steven" (click)="editByName(vision.name)">{{vision.name}}</div>
-            <div class="_fin">{{vision.fechaEnd}}</div>
+            <div *ngIf="vision.dateEnd != null" class="_fin">{{vision.dateEnd.substring(11, 16)}}</div>
             <div *ngIf="vision.minutes != '' || vision.minutes != 0" class="_0">{{vision.minutes}}</div>
 
             <div *ngIf="vision.exit != null">
@@ -27,7 +27,7 @@
             </div>
 
             <div class="ellipse-17">
-              <div [ngClass]="{'ellipse-172': vision?.dateEnd != null, 'ellipse-172-1': vision?.dateEnd == null}">
+              <div [ngClass]="{'ellipse-172': vision.dateEnd != null, 'ellipse-172-1': vision.dateEnd == null}">
               </div>
             </div>
           </div>

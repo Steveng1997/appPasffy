@@ -84,21 +84,19 @@
           | manager: selectedEncargada | dateLiquidation: dateStart:dateEnd ) | 
           paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(liquidation.idTerapeuta)">
             <div style="position: relative; top: 0px">
-              <div class="lili9">{{liquidation.encargada}}</div>
+              <div class="lili9">{{liquidation.manager}}</div>
 
-              <div class="laura9">{{liquidation.terapeuta}}</div>
+              <div class="laura9">{{liquidation.therapist}}</div>
 
-              <div class="_5-15-6-239">{{liquidation.importe + ' €'}}</div>
+              <div class="_5-15-6-239">{{liquidation.amount + ' €'}}</div>
 
-              <div class="_22-01-24-23-25"> {{liquidation.desdeFechaLiquidado + ' - ' +
-                liquidation.desdeHoraLiquidado}} </div>
+              <div class="_22-01-24-23-25"> {{liquidation.date + ' - ' + liquidation.hourStart}} </div>
 
-              <div class="_22-01-24-23-2517">{{liquidation.hastaFechaLiquidado + ' - '
-                + liquidation.hastaHoraLiquidado}}</div>
+              <div class="_22-01-24-23-2517">{{liquidation.date2 + ' - ' + liquidation.hourEnd}}</div>
 
-              <div class="_tarjeta"> {{liquidation.formaPago}} </div>
+              <div class="_tarjeta"> {{liquidation.payment}} </div>
 
-              <div class="_1">{{liquidation.tratamiento}}</div>
+              <div class="_1">{{liquidation.treatment}}</div>
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@ export class NewTherapistPage implements OnInit {
   therapist: ModelTherapist = {
     active: true,
     company: "",
-    dateEnd: dayjs().format("YYYY-MM-DD"),
+    dateEnd: "",
     drink: 0,
     drinkTherapist: 50,
     exit: "",

@@ -13,7 +13,7 @@ export class ManagerPipe implements PipeTransform {
     }
 
     if (items) {
-      return items.filter((item, index) => item.manager === param);
+      return Object.values(items).filter((item, index) => item.manager === param);
     }
   }
 }

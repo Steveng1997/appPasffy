@@ -14,7 +14,7 @@ export class PaymentMethodPipe implements PipeTransform {
     }
 
     if (items) {
-      return items.filter((item, index) => item.payment.indexOf(param) > -1);
+      return Object.values(items).filter((item, index) => item.payment.indexOf(param) > -1);
     }
   }
 }

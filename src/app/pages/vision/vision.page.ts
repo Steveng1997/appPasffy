@@ -135,9 +135,7 @@ export class VisionPage implements OnInit {
     let manager, element
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.idUser = Number(params['id'])
-
     this.platformPause()
-
     this.ionLoaderService.simpleLoader()
 
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
@@ -166,9 +164,6 @@ export class VisionPage implements OnInit {
       let manager, element
       const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
       this.idUser = Number(params['id'])
-
-      this.platformPause()
-
       this.ionLoaderService.simpleLoader()
 
       this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
@@ -319,12 +314,12 @@ export class VisionPage implements OnInit {
       })
     } else {
 
-      this.service.getByTodayDateAndManagerAndCompany(dates, element[0]['name'], this.company).subscribe((rp1: any) => {
-        this.managerCount = rp1.length
+      this.service.getByTodayDateAndManagerAndCompany(dates, element['manager'].name, this.company).subscribe((rp1: any) => {
+        this.managerCount = rp1['service'].length
         this.servicesManager[0]['count'] = this.managerCount
 
         const unicos = [];
-        const rp = rp1.reduce((acc, valor) => {
+        const rp = rp1['service'].reduce((acc, valor) => {
           if (!unicos.includes(valor.institucion)) {
             unicos.push(valor.institucion);
             acc.push(valor);
@@ -359,12 +354,12 @@ export class VisionPage implements OnInit {
   }
 
   async getTherapist() {
-    let therapit
+    let therapist
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
       this.company = rp['manager'].company
 
       await this.serviceTherapist.getByCompanyOrderByMinutes(this.company).subscribe(async (rp: any) => {
-        therapit = rp['therapist']
+        therapist = rp['therapist']
         this.therapist = rp['therapist']
 
         if (rp['therapist'].length > 7 && rp['therapist'].length < 10) {
@@ -405,7 +400,7 @@ export class VisionPage implements OnInit {
           document.getElementById('overview').style.height = '2148px'
         }
 
-        await this.getMinute(therapit)
+        await this.getMinute(therapist)
       })
     })
   }
@@ -528,7 +523,7 @@ export class VisionPage implements OnInit {
         dates = `${year}-${month}-${convertDay}`
       }
 
-      this.service.getByTodayDateAndManagerAndCompanyDistinctTherapist(dates, element[0]['name'], this.company).subscribe(async (rp: any) => {
+      this.service.getByTodayDateAndManagerAndCompanyDistinctTherapist(dates, element[0].name, this.company).subscribe(async (rp: any) => {
         this.servicesTherapist = rp['service']
 
         rp['service'].map(item => {
@@ -567,20 +562,20 @@ export class VisionPage implements OnInit {
       })
 
     } else {
-      this.service.getByTodayDateAndManagerAndCompanyDistinctTherapist(dateCurrent, element[0]['name'], this.company).subscribe((rp: any) => {
-        this.servicesTherapist = rp
+      this.service.getByTodayDateAndManagerAndCompanyDistinctTherapist(dateCurrent, element['manager'].name, this.company).subscribe((rp: any) => {
+        this.servicesTherapist = rp['service']
 
-        rp.map(item => {
+        rp['service'].map(item => {
           item['name'] = item['therapist']
 
-          this.service.getByTodayDateAndTherapistAndManagerAndCompany(dateCurrent, item['therapist'], element[0]['name'], this.company).subscribe((rp: any) => {
+          this.service.getByTodayDateAndTherapistAndManagerAndCompany(dateCurrent, item['therapist'], element['manager'].name, this.company).subscribe((rp: any) => {
 
-            if (rp.length > 0) {
+            if (rp['service'].length > 0) {
               this.existTherapist = true
-              this.therapistCount = rp.length
+              this.therapistCount = rp['service'].length
               item['count'] = this.therapistCount
 
-              const servicios = rp.filter(serv => serv)
+              const servicios = rp['service'].filter(serv => serv)
               const sumatoria = servicios.reduce((accumulator, serv) => {
                 return accumulator + serv.totalService
               }, 0)
@@ -662,18 +657,18 @@ export class VisionPage implements OnInit {
   async getMinute(element) {
     if (element.length > 0) {
       for (let u = 0; u < element.length; u++) {
-        if (element[u].horaEnd != "") {
+        if (element[u].dateEnd != null) {
+          debugger
           this.minuteDifference(element)
-          this.ionLoaderService.dismissLoader()
         }
         else {
-          if (element[u]['fechaEnd'] == "") {
+          if (element[u].dateEnd == null) {
             this.diferenceMinutes = 0
             this.updateHourAndExit(element, u)
-            this.ionLoaderService.dismissLoader()
           }
         }
       }
+      this.ionLoaderService.dismissLoader()
     } else {
       this.ionLoaderService.dismissLoader()
     }
@@ -717,8 +712,8 @@ export class VisionPage implements OnInit {
   async updateHourAndExit(element, o) {
     if (this.diferenceMinutes <= 0) {
       element[o]['minutes'] = 0
-      element[o]['dateEnd'] = ''
-      element[o]['exit'] = ''
+      element[o]['dateEnd'] = null
+      element[o]['exit'] = null
       await this.serviceTherapist.updateItems(element[o]['name'], element[o]).subscribe(() => {
       })
     }
@@ -993,10 +988,10 @@ export class VisionPage implements OnInit {
         await this.getManager(rp, fechaActualmente, 'date')
         await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
 
-        this.service.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp[0]['name'], this.company).subscribe((rp: any) => {
-          this.vision = rp
+        this.service.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp['manager'].name, this.company).subscribe((rp: any) => {
+          this.vision = rp['service']
 
-          if (rp.length > 0) this.totalVisionSum()
+          if (rp['service'].length > 0) this.totalVisionSum()
           else this.totalsAtZero()
         })
       }
@@ -1048,10 +1043,10 @@ export class VisionPage implements OnInit {
         await this.getManager(rp, fechaActualmente, 'date')
         await this.tableTherapistForManager(rp, 'arrow', fechaActualmente)
 
-        this.service.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp[0]['name'], this.company).subscribe((rp: any) => {
-          this.vision = rp
+        this.service.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp['manager'].name, this.company).subscribe((rp: any) => {
+          this.vision = rp['service']
 
-          if (rp.length > 0) this.totalVisionSum()
+          if (rp['service'].length > 0) this.totalVisionSum()
           else this.totalsAtZero()
         })
       }
@@ -1124,11 +1119,12 @@ export class VisionPage implements OnInit {
   }
 
   async editByName(name: string) {
-    this.service.getTerapeutaWithCurrentDate(name).subscribe((rp: any) => {
-      if (rp.length > 0) {
+    debugger
+    this.service.getByTherapistCurrentDateDesc(name).subscribe((rp: any) => {
+      if (rp['service'].length > 0) {
         this.serviceModel.screen = 'vision'
-        this.service.updateScreenById(rp[0]['id'], this.serviceModel).subscribe(async (rp: any) => { })
-        this.router.navigate([`tabs/${this.idUser}/edit-services/${rp[0]['id']}`])
+        this.service.updateScreen(rp['service'][0].id, this.serviceModel).subscribe(async (rp: any) => { })
+        this.router.navigate([`tabs/${this.idUser}/edit-services/${rp['service'][0].id}`])
       }
     })
   }

@@ -30,7 +30,7 @@ export class EditTherapistPage implements OnInit {
   therapistModel: ModelTherapist = {
     active: true,
     company: "",
-    dateEnd: dayjs().format("YYYY-MM-DD"),
+    dateEnd: '',
     drink: 0,
     drinkTherapist: 50,
     exit: "",
@@ -40,24 +40,20 @@ export class EditTherapistPage implements OnInit {
     service: 50,
     tabacco: 0,
     tip: 100,
+    updated_at: dayjs().format("YYYY-MM-DD"),
     vitamin: 0
   }
 
   liquidationTherapist: LiquidationTherapist = {
-    createdDate: "",
-    currentDate: "",
-    desdeFechaLiquidado: "",
-    desdeHoraLiquidado: "",
-    encargada: "",
-    formaPago: "",
-    hastaFechaLiquidado: "",
-    hastaHoraLiquidado: new Date().toTimeString().substring(0, 5),
-    id: 0,
-    idUnico: "",
-    idTerapeuta: "",
-    importe: 0,
-    terapeuta: "",
-    tratamiento: 0,
+    amount: 0,
+    company: "",
+    currentDate: 0,
+    dateStart: "",
+    dateEnd: dayjs().format("YYYY-MM-DD HH:mm"),
+    therapist: "",
+    treatment: 0,
+    uniqueId: "",
+    idTherap: ""
   }
 
   modelService: ModelService = {
@@ -87,9 +83,9 @@ export class EditTherapistPage implements OnInit {
   }
 
   async getTerapLiquidation(nombre) {
-    await this.service.getTerapeutaLiqFalse(nombre).subscribe(async (rp: any) => {
+    await this.service.getByTherapistNotLiquidatedTherapist(nombre).subscribe(async (rp: any) => {
       if (rp.length > 0) {
-        this.liquidationTherapist.tratamiento = rp.length
+        this.liquidationTherapist.treatment = rp.length
         this.modelService.liquidatedTherapist = true
 
         for (let i = 0; i < rp.length; i++) {
@@ -100,44 +96,26 @@ export class EditTherapistPage implements OnInit {
   }
 
   async date(nombre: string) {
-    let fromYear = 0, fromYears = '', fromMonth = 0, fromDay = 0, convertMonth = '',
-      convertDay = '', untilYear = "", untilMonth = "", untilDay = "", currentDate = new Date()
+    let untilYear = "", untilMonth = "", untilDay = "", currentDate = new Date()
 
-    fromDay = currentDate.getDate()
-    fromMonth = currentDate.getMonth() + 1
-    fromYear = currentDate.getFullYear()
-    fromYears = fromYear.toString().slice(2, 4)
-
-    if (fromMonth > 0 && fromMonth < 10) {
-      convertMonth = '0' + fromMonth
-      this.liquidationTherapist.hastaFechaLiquidado = `${fromDay}-${convertMonth}-${fromYears}`
-    } else {
-      convertMonth = fromMonth.toString()
-      this.liquidationTherapist.hastaFechaLiquidado = `${fromDay}-${convertMonth}-${fromYears}`
-    }
-
-    if (fromDay > 0 && fromDay < 10) {
-      convertDay = '0' + fromDay
-      this.liquidationTherapist.hastaFechaLiquidado = `${convertDay}-${convertMonth}-${fromYears}`
-    } else {
-      this.liquidationTherapist.hastaFechaLiquidado = `${fromDay}-${convertMonth}-${fromYears}`
-    }
-
-    this.serviceLiquidationTherapist.consultTherapist(nombre, this.company).subscribe(async (rp: any) => {
-      if (rp.length > 0) {
-        untilYear = rp[0]['hastaFechaLiquidado'].toString().substring(2, 4)
-        untilMonth = rp[0]['hastaFechaLiquidado'].toString().substring(5, 7)
-        untilDay = rp[0]['hastaFechaLiquidado'].toString().substring(8, 10)
-        this.liquidationTherapist.desdeFechaLiquidado = `${untilYear}-${untilMonth}-${untilDay}`
-        this.liquidationTherapist.desdeHoraLiquidado = rp[0]['hastaHoraLiquidado']
+    this.serviceLiquidationTherapist.getByTherapAndCompany(nombre, this.company).subscribe(async (rp: any) => {
+      if (rp['liquidTherapist'].length > 0) {
+        untilYear = rp['liquidTherapist'][0].dateEnd.toString().substring(2, 4)
+        untilMonth = rp['liquidTherapist'][0].dateEnd.toString().substring(5, 7)
+        untilDay = rp['liquidTherapist'][0].dateEnd.toString().substring(8, 10)
+        this.liquidationTherapist.dateStart = `${untilYear}-${untilMonth}-${untilDay}`
+        this.liquidationTherapist.dateStart = rp['liquidTherapist'][0].dateEnd
       } else {
-        this.service.getTerapeutaLiqFalse(nombre).subscribe(async (rp: any) => {
-          if (rp.length > 0) {
-            untilYear = rp[0]['fechaHoyInicio'].substring(0, 4)
-            untilMonth = rp[0]['fechaHoyInicio'].substring(5, 7)
-            untilDay = rp[0]['fechaHoyInicio'].substring(8, 10)
-            this.liquidationTherapist.desdeFechaLiquidado = `${untilYear}-${untilMonth}-${untilDay}`
-            this.liquidationTherapist.desdeHoraLiquidado = rp[0]['horaStart']
+        this.service.getByTherapistNotLiquidatedTherapist(nombre).subscribe(async (rp: any) => {
+          if (rp['service'].length > 0) {
+            untilYear = rp['service'][0]['dateToday'].substring(0, 4)
+            untilMonth = rp['service'][0]['dateToday'].substring(5, 7)
+            untilDay = rp['service'][0]['dateToday'].substring(8, 10)
+            this.liquidationTherapist.dateStart = `${untilYear}-${untilMonth}-${untilDay}`
+            this.liquidationTherapist.dateStart = rp['liquidTherapist'][0].dateEnd
+          }
+          else {
+            this.liquidationTherapist.dateStart = dayjs().format("YYYY-MM-DD HH:mm")
           }
         })
       }
@@ -153,32 +131,9 @@ export class EditTherapistPage implements OnInit {
     })
 
     this.modelService.idTherap = uuid
-    this.liquidationTherapist.idUnico = uuid
-    this.liquidationTherapist.idTerapeuta = uuid
-    return this.liquidationTherapist.idUnico
-  }
-
-  async dateCurrentDay() {
-    let date = new Date(), day = 0, month = 0, year = 0, convertMonth = '', convertDay = ''
-
-    day = date.getDate()
-    month = date.getMonth() + 1
-    year = date.getFullYear()
-
-    if (month > 0 && month < 10) {
-      convertMonth = '0' + month
-      this.liquidationTherapist.createdDate = `${year}-${convertMonth}-${day}`
-    } else {
-      convertMonth = month.toString()
-      this.liquidationTherapist.createdDate = `${year}-${month}-${day}`
-    }
-
-    if (day > 0 && day < 10) {
-      convertDay = '0' + day
-      this.liquidationTherapist.createdDate = `${year}-${convertMonth}-${convertDay}`
-    } else {
-      this.liquidationTherapist.createdDate = `${year}-${convertMonth}-${day}`
-    }
+    this.liquidationTherapist.uniqueId = uuid
+    this.liquidationTherapist.idTherap = uuid
+    return this.liquidationTherapist.uniqueId
   }
 
   async delete(id: number, name: string) {
@@ -195,14 +150,17 @@ export class EditTherapistPage implements OnInit {
         }).then(async (result) => {
           if (result.isConfirmed) {
             this.ionLoaderService.simpleLoader()
-            this.liquidationTherapist.currentDate = this.currentDate.toString()
-            this.liquidationTherapist.terapeuta = name
-            this.dateCurrentDay()
+            this.liquidationTherapist.currentDate = this.currentDate
+            this.liquidationTherapist.therapist = name
+            this.liquidationTherapist.company = this.company
             this.createIdUnique()
             await this.date(name)
             await this.getTerapLiquidation(name)
 
             this.serviceTherapist.delete(id).subscribe(async (rp: any) => {
+
+              debugger
+              console.log(this.liquidationTherapist)
               this.serviceLiquidationTherapist.save(this.liquidationTherapist).subscribe(async (rp) => {
                 this.ionLoaderService.dismissLoader()
                 location.replace(`tabs/${this.iduser}/therapist`);

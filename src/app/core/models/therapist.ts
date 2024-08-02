@@ -12,5 +12,6 @@ export class ModelTherapist {
   service?: number;
   tabacco?: number;
   tip?: number;
+  updated_at?: string;
   vitamin?: number;
 }

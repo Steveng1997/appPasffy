@@ -14,9 +14,9 @@ export class DateLiquidationPipe implements PipeTransform {
 
     if (items) {
       if (paramFechaInicial === undefined && paramFechaFinal === undefined) return
-      if (paramFechaInicial === undefined) return items.filter((item, index) => item.createdDate <= paramFechaFinal)
-      if (paramFechaFinal === undefined) return items.filter((item, index) => item.createdDate === paramFechaInicial)
-      return items.filter((item, index) => item.createdDate >= paramFechaInicial && item.createdDate <= paramFechaFinal)
+      if (paramFechaInicial === undefined) return items.filter((item) => item.created_at.substring(0, 10) <= paramFechaFinal)
+      if (paramFechaFinal === undefined) return items.filter((item) => item.created_at.substring(0, 10) === paramFechaInicial)
+      return Object.values(items).filter((item) => item.created_at.substring(0, 10) >= paramFechaInicial && item.created_at.substring(0, 10) <= paramFechaFinal)
     }
   }
 }

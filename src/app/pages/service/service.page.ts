@@ -37,7 +37,7 @@ export class ServicePage implements OnInit {
   notas: boolean = false
   buttonEmpty: boolean = false
   dateToday = dayjs().format("YYYY-MM-DD")
-
+  dates = ''
   filterSearch: string
 
   idService: any
@@ -224,7 +224,7 @@ export class ServicePage implements OnInit {
   }
 
   getServices = async () => {
-    let service
+    let service, day = '', month = '', year = ''
     this.dateTodayCurrent = 'HOY'
     this.serviceManager.getId(this.idUser).subscribe((rp) => {
       this.company = rp['manager'].company
@@ -232,6 +232,13 @@ export class ServicePage implements OnInit {
         this.serviceService.getByDateDayAndCompantCurrentDateDesc(this.dateStart, this.company).subscribe((rp: any) => {
           this.servicio = rp['service']
           service = rp['service']
+
+          for (let i = 0; i < this.servicio.length; i++) {
+            day = this.servicio[i].dateStart.substring(8, 10)
+            month = this.servicio[i].dateStart.substring(5, 7)
+            year = this.servicio[i].dateStart.substring(2, 4)
+            this.servicio[i].date = `${day}-${month}-${year}`
+          }
 
           if (rp['service'].length != 0) {
             this.totalSumOfServices(service)
@@ -242,6 +249,14 @@ export class ServicePage implements OnInit {
         this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(this.dateStart, rp['manager'].name, this.company).subscribe((rp: any) => {
           this.servicio = rp['service']
           service = rp['service']
+
+          for (let i = 0; i < this.servicio.length; i++) {
+            day = this.servicio[i].dateStart.substring(8, 10)
+            month = this.servicio[i].dateStart.substring(5, 7)
+            year = this.servicio[i].dateStart.substring(2, 4)
+            this.servicio[i].date = `${day}-${month}-${year}`
+          }
+
           if (rp['service'].length != 0) {
             this.totalSumOfServices(service)
           }
@@ -373,7 +388,6 @@ export class ServicePage implements OnInit {
     }
 
     const wayToPay = serv => {
-      debugger
       return (this.selectedFormPago) ? serv.payment.indexOf(this.selectedFormPago) > -1 : true
     }
 
@@ -455,7 +469,7 @@ export class ServicePage implements OnInit {
   }
 
   updateNote() {
-    this.serviceService.updateNote(this.idDetail, this.serviceModel).subscribe(async (rp: any) => {
+    this.serviceService.updateNotes(this.idDetail, this.serviceModel).subscribe(async (rp: any) => {
       this.serviceService.getService().subscribe(async (rp: any) => {
         this.servicio = rp['service']
         this.notas = false
@@ -792,7 +806,6 @@ export class ServicePage implements OnInit {
   }
 
   card() {
-    debugger
     if (document.getElementById('card1').style.background == "") {
       document.getElementById('card1').style.background = '#1fb996'
       this.selectedFormPago = 'Tarjeta'
@@ -861,14 +874,12 @@ export class ServicePage implements OnInit {
   }
 
   backArrow = async () => {
-    let fechaEnd = '', diaHoy = 0, mesHoy = 0, añoHoy = 0, monthEnd = '', nameMonth = '', fechaHoy = '', fechaActualmente = ''
+    let fechaEnd = '', diaHoy = '', mesHoy = '', añoHoy = '', monthEnd = '', nameMonth = '', fechaHoy = '', fechaActualmente = ''
 
-    diaHoy = Number(this.dateToday.substring(8, 10))
-    mesHoy = Number(this.dateToday.substring(5, 7))
-    añoHoy = Number(this.dateToday.substring(0, 4))
-
-    if (mesHoy > 0 && mesHoy < 10) monthEnd = "0" + mesHoy
-    fechaEnd = `${añoHoy}-${monthEnd}-${diaHoy}`
+    diaHoy = this.dateToday.substring(8, 10)
+    mesHoy = this.dateToday.substring(5, 7)
+    añoHoy = this.dateToday.substring(0, 4)
+    fechaEnd = `${añoHoy}-${mesHoy}-${diaHoy}`
 
     this.fechaFormat.setDate(this.fechaFormat.getDate() - 1)
     let day = this.fechaFormat.toString().substring(8, 10)
@@ -900,6 +911,13 @@ export class ServicePage implements OnInit {
           if (rp['service'].length > 0) {
             this.servicio = rp['service']
 
+            for (let i = 0; i < this.servicio.length; i++) {
+              day = this.servicio[i].dateStart.substring(8, 10)
+              month = this.servicio[i].dateStart.substring(5, 7)
+              year = this.servicio[i].dateStart.substring(2, 4)
+              this.servicio[i].date = `${day}-${month}-${year}`
+            }
+
             this.totalValor = rp['service'].map(({ totalService }) => totalService).reduce((acc, value) => acc + value, 0)
             this.thousandPoint()
           } else {
@@ -909,9 +927,17 @@ export class ServicePage implements OnInit {
         })
       } else {
 
-        this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp[0]['name'], this.company).subscribe((rp: any) => {
+        this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp['manager'].name, this.company).subscribe((rp: any) => {
           if (rp['service'].length > 0) {
             this.servicio = rp['service']
+
+            for (let i = 0; i < this.servicio.length; i++) {
+              day = this.servicio[i].dateStart.substring(8, 10)
+              month = this.servicio[i].dateStart.substring(5, 7)
+              year = this.servicio[i].dateStart.substring(2, 4)
+              this.servicio[i].date = `${day}-${month}-${year}`
+            }
+
             this.totalValor = rp['service'].map(({ totalService }) => totalService).reduce((acc, value) => acc + value, 0)
             this.thousandPoint()
           } else {
@@ -928,14 +954,12 @@ export class ServicePage implements OnInit {
   }
 
   nextArrow = async () => {
-    let fechaEnd = '', diaHoy = 0, mesHoy = 0, añoHoy = 0, monthEnd = '', fechaHoy = '', fechaActualmente = ''
+    let fechaEnd = '', diaHoy = '', mesHoy = '', añoHoy = '', monthEnd = '', fechaHoy = '', fechaActualmente = ''
 
-    diaHoy = Number(this.dateToday.substring(8, 10))
-    mesHoy = Number(this.dateToday.substring(5, 7))
-    añoHoy = Number(this.dateToday.substring(0, 4))
-
-    if (mesHoy > 0 && mesHoy < 10) monthEnd = "0" + mesHoy
-    fechaEnd = `${añoHoy}-${monthEnd}-${diaHoy}`
+    diaHoy = this.dateToday.substring(8, 10)
+    mesHoy = this.dateToday.substring(5, 7)
+    añoHoy = this.dateToday.substring(0, 4)
+    fechaEnd = `${añoHoy}-${mesHoy}-${diaHoy}`
 
     this.fechaFormat.setDate(this.fechaFormat.getDate() + 1)
     let day = this.fechaFormat.toString().substring(8, 10)
@@ -966,6 +990,14 @@ export class ServicePage implements OnInit {
         this.serviceService.getByDateDayAndCompantCurrentDateDesc(fechaActualmente, this.company).subscribe((rp: any) => {
           if (rp['service'].length > 0) {
             this.servicio = rp['service']
+
+            for (let i = 0; i < this.servicio.length; i++) {
+              day = this.servicio[i].dateStart.substring(8, 10)
+              month = this.servicio[i].dateStart.substring(5, 7)
+              year = this.servicio[i].dateStart.substring(2, 4)
+              this.servicio[i].date = `${day}-${month}-${year}`
+            }
+
             this.totalValor = rp['service'].map(({ totalService }) => totalService).reduce((acc, value) => acc + value, 0)
             this.thousandPoint()
           } else {
@@ -975,9 +1007,17 @@ export class ServicePage implements OnInit {
         })
       } else {
 
-        this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp[0]['name'], this.company).subscribe((rp: any) => {
+        this.serviceService.getByTodayDateAndManagerAndCompanyCurrentDateDesc(fechaActualmente, rp['manager'].name, this.company).subscribe((rp: any) => {
           if (rp['service'].length > 0) {
             this.servicio = rp['service']
+
+            for (let i = 0; i < this.servicio.length; i++) {
+              day = this.servicio[i].dateStart.substring(8, 10)
+              month = this.servicio[i].dateStart.substring(5, 7)
+              year = this.servicio[i].dateStart.substring(2, 4)
+              this.servicio[i].date = `${day}-${month}-${year}`
+            }
+
             this.totalValor = rp['service'].map(({ totalService }) => totalService).reduce((acc, value) => acc + value, 0)
             this.thousandPoint()
           } else {
@@ -1056,7 +1096,7 @@ export class ServicePage implements OnInit {
 
   edit() {
     this.serviceModel.screen = 'services'
-    this.serviceService.updateScreenById(this.idDetail, this.serviceModel).subscribe(async (rp: any) => { })
+    this.serviceService.updateScreen(this.idDetail, this.serviceModel).subscribe(async (rp: any) => { })
     this.router.navigate([`tabs/${this.idUser}/edit-services/${this.idDetail}`])
   }
 
