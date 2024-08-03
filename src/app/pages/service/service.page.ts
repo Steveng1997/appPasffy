@@ -412,6 +412,15 @@ export class ServicePage implements OnInit {
       }, 0)
     }
 
+    let day = '', month = '', year = ''
+
+    for (let i = 0; i < this.servicio.length; i++) {
+      day = this.servicio[i].dateStart.substring(8, 10)
+      month = this.servicio[i].dateStart.substring(5, 7)
+      year = this.servicio[i].dateStart.substring(2, 4)
+      this.servicio[i].date = `${day}-${month}-${year}`
+    }
+
     this.thousandPoint()
   }
 

@@ -132,10 +132,10 @@ export class VisionPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.platformPause()
     let manager, element
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.idUser = Number(params['id'])
-    this.platformPause()
     this.ionLoaderService.simpleLoader()
 
     this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
@@ -153,40 +153,17 @@ export class VisionPage implements OnInit {
           this.getManager(manager, element, 'array')
           this.tableTherapistForManager(manager, 'array', 'date')
         }
+
+        this.getTherapist()
       })
     })
-
-    this.getTherapist()
   }
 
   platformPause() {
     this.platform.resume.subscribe(async () => {
-      let manager, element
       const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
       this.idUser = Number(params['id'])
-      this.ionLoaderService.simpleLoader()
-
-      this.serviceManager.getId(this.idUser).subscribe(async (rp: any) => {
-        this.serviceManager.getIdCompany(rp['manager'][0].id, rp['manager'][0].company).subscribe(async (rp: any) => {
-          this.company = rp['manager'][0].company
-          this.servicesManager = rp['manager']
-          manager = rp['manager']
-
-          if (rp['manager'][0].rol == 'Administrador') {
-            this.getService()
-            this.getManagerall(element)
-            this.tableTherapist('array', 'date')
-          }
-
-          else {
-            this.getServiceByManager(rp['manager'][0])
-            this.getManager(manager, element, 'array')
-            this.tableTherapistForManager(manager, 'array', 'date')
-          }
-        })
-      })
-
-      this.getTherapist()
+      location.replace(`tabs/${this.idUser}/vision`)
     })
   }
 

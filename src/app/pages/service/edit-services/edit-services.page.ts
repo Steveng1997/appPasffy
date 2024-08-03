@@ -108,7 +108,7 @@ export class EditServicesPage implements OnInit {
     transactionFloor2: false,
     transactionTherapist: false,
     uniqueId: "",
-    updated_at: dayjs().format("YYYY-MM-DD HH:mm"),
+    updated_at: "",
     valueBizuManager: 0,
     valueBizuTherapist: 0,
     valueBizum: 0,
@@ -813,7 +813,11 @@ export class EditServicesPage implements OnInit {
         month = this.editarService[0].dateStart.substring(5, 7)
         year = this.editarService[0].dateStart.substring(0, 4)
         this.dateStart = `${year}-${month}-${day}`
-        
+
+        this.services.updated_at = dayjs().format("YYYY-MM-DD HH:mm:s")
+        console.log(this.services)
+        debugger
+
         this.collectionsValue()
 
         this.serviceManager.idAdmin(this.idUser).subscribe((rp: any[]) => {
