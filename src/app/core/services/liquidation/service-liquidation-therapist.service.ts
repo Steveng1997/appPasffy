@@ -29,7 +29,7 @@ export class ServiceLiquidationTherapist {
     return this.http.get(`${this.API_URL}/company/${company}`);
   }
 
-  getByIdTherapist(idTherap: number) {
+  getByIdTherapist(idTherap: string) {
     return this.http.get(`${this.API_URL}/getIdTherap/${idTherap}`);
   }
 

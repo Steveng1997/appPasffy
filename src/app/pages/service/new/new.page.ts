@@ -1171,7 +1171,6 @@ export class NewPage implements OnInit {
     this.services.dateEnd = `${year}-${month}-${day} ${hour}`
     this.fechaActual = `${year}-${month}-${day} ${hour}`
     this.hourEnd = hour
-    this.services.dateStart = this.fechaActual
   }
 
   serviceValue() {

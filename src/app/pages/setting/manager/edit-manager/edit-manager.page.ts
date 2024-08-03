@@ -90,7 +90,7 @@ export class EditManagerPage implements OnInit {
         this.modelService.liquidatedManager = true
 
         for (let i = 0; i < rp.length; i++) {
-          this.services.updateLiquidacionEncarg(rp[i]['id'], this.modelService).subscribe((rp) => { })
+          this.services.updateLiquidatedManager(rp[i]['id'], this.modelService).subscribe((rp) => { })
         }
       }
     })

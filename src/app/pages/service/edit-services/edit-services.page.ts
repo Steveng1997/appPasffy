@@ -23,6 +23,7 @@ import { IonLoaderService } from 'src/app/core/services/loading/ion-loader.servi
 export class EditServicesPage implements OnInit {
   hourStart = ''
   hourEnd = ''
+  dateStart = ''
 
   dateToday = dayjs().format("YYYY-MM-DD")
   fechaActual = ''
@@ -107,7 +108,7 @@ export class EditServicesPage implements OnInit {
     transactionFloor2: false,
     transactionTherapist: false,
     uniqueId: "",
-    updated_at: dayjs().format("YYYY-MM-DD"),
+    updated_at: dayjs().format("YYYY-MM-DD HH:mm"),
     valueBizuManager: 0,
     valueBizuTherapist: 0,
     valueBizum: 0,
@@ -156,7 +157,6 @@ export class EditServicesPage implements OnInit {
 
     if (this.idUser) {
       this.serviceManager.getId(this.idUser).subscribe((rp) => {
-        debugger
         this.modifiedUser = rp['manager'].name
         if (rp['manager'].rol == 'Administrador') {
           this.administratorRole = true
@@ -797,16 +797,6 @@ export class EditServicesPage implements OnInit {
     return true
   }
 
-  sortDateToEdit() {
-    let dia = '', mes = '', año = ''
-
-    dia = this.editarService[0]['dateStart'].substring(8, 10)
-    mes = this.editarService[0]['dateStart'].substring(5, 7)
-    año = this.editarService[0]['dateStart'].substring(0, 4)
-
-    this.editarService[0]['dateStart'] = `${año}-${mes}-${dia} ${this.editarService[0]['dateEnd'].substring(11, 16)}`
-  }
-
   editForm() {
     let day = '', month = '', year = ''
 
@@ -822,8 +812,8 @@ export class EditServicesPage implements OnInit {
         day = this.editarService[0].dateStart.substring(8, 10)
         month = this.editarService[0].dateStart.substring(5, 7)
         year = this.editarService[0].dateStart.substring(0, 4)
-        this.editarService[0].dateStart = `${year}-${month}-${day}`
-
+        this.dateStart = `${year}-${month}-${day}`
+        
         this.collectionsValue()
 
         this.serviceManager.idAdmin(this.idUser).subscribe((rp: any[]) => {
@@ -1656,7 +1646,7 @@ export class EditServicesPage implements OnInit {
 
   back() {
     this.serviceServices.getById(this.id).subscribe((rp: any) => {
-      location.replace(`tabs/${this.idUser}/${rp[0].pantalla}`)
+      location.replace(`tabs/${this.idUser}/${rp['service'].screen}`)
     })
   }
 
@@ -1722,8 +1712,6 @@ export class EditServicesPage implements OnInit {
         });
 
         this.serviceTherapist.update3Item(this.editarService[0]['therapist'], this.therapist).subscribe((rp: any) => { })
-
-        this.sortDateToEdit()
         this.serviceServices.update(idServicio, serv).subscribe((rp: any) => {
           this.presentController('Actualizado correctamente!')
           setTimeout(() => {

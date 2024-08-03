@@ -89,7 +89,7 @@ export class EditTherapistPage implements OnInit {
         this.modelService.liquidatedTherapist = true
 
         for (let i = 0; i < rp.length; i++) {
-          this.service.updateLiquidacionTerap(rp[i]['id'], this.modelService).subscribe((rp) => { })
+          this.service.updateLiquidatedTherapist(rp[i]['id'], this.modelService).subscribe((rp) => { })
         }
       }
     })
@@ -158,9 +158,6 @@ export class EditTherapistPage implements OnInit {
             await this.getTerapLiquidation(name)
 
             this.serviceTherapist.delete(id).subscribe(async (rp: any) => {
-
-              debugger
-              console.log(this.liquidationTherapist)
               this.serviceLiquidationTherapist.save(this.liquidationTherapist).subscribe(async (rp) => {
                 this.ionLoaderService.dismissLoader()
                 location.replace(`tabs/${this.iduser}/therapist`);

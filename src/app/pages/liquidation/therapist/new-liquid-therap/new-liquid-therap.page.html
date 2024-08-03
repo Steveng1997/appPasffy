@@ -27,10 +27,11 @@
             style="display: grid; min-height: -webkit-fill-available" label="Terapeuta"
             (ngModelChange)="calculateServices()">
             <ion-select-option *ngFor="let therapist of terapeuta"
-              [value]="therapist.name">{{therapist.nombre}}</ion-select-option>
+              [value]="therapist.name">{{therapist.name}}</ion-select-option>
           </ion-select>
         </div>
 
+        <!-- Administrator -->
         <div class="component-82" *ngIf="administratorRole">
           <div class="rectangle-34"></div>
 
@@ -43,10 +44,11 @@
             style="display: grid; min-height: -webkit-fill-available" label="Encargada"
             (ngModelChange)="calculateServices()">
             <ion-select-option *ngFor="let managers of manager"
-              [value]="managers.nombre">{{managers.nombre}}</ion-select-option>
+              [value]="managers.name">{{managers.name}}</ion-select-option>
           </ion-select>
         </div>
 
+        <!-- Manager -->
         <div class="component-82" *ngIf="!administratorRole">
           <div class="rectangle-34"></div>
 
@@ -58,36 +60,32 @@
           <ion-select [(ngModel)]="modelLiquidation.manager" class="encargada"
             style="display: grid; min-height: -webkit-fill-available" label="Encargada">
             <ion-select-option *ngFor="let managers of manager"
-              [value]="managers.nombre">{{managers.nombre}}</ion-select-option>
+              [value]="managers.name">{{managers.name}}</ion-select-option>
           </ion-select>
         </div>
 
         <div class="inicial1" *ngIf="selected">Inicial</div>
 
         <div class="component-3" *ngIf="selected">
-          <ion-input type="date" class="inicial" id="sinceDate" name="sinceDate" (change)="inputDateAndTime()"
-            [(ngModel)]="modelLiquidation.dateStart"
-            [value]="modelLiquidation.dateStart"></ion-input>
+          <ion-input type="date" class="inicial" id="sinceDate" name="sinceDate"
+            (change)="inputDateAndTime(true, 'start')" [(ngModel)]="dateStart"></ion-input>
         </div>
 
         <div class="component-9" *ngIf="selected">
           <ion-input type="time" min="18:00" max="21:00" step="3600" class="_5-34-p-m" id="sinceTime" name="sinceTime"
-            (change)=" inputDateAndTime()" [(ngModel)]="modelLiquidation.dateStart"
-            [value]="modelLiquidation.dateStart"></ion-input>
+            (change)=" inputDateAndTime(true, 'start')" [(ngModel)]="hourStart"></ion-input>
         </div>
 
         <div class="final1" *ngIf="selected">Final</div>
 
         <div class="component-8" *ngIf="selected">
-          <ion-input type="date" class="final" id="toDate" name="toDate" (change)="inputDateAndTime()"
-            [(ngModel)]="modelLiquidation.dateEnd"
-            [value]="modelLiquidation.dateEnd"></ion-input>
+          <ion-input type="date" class="final" id="toDate" name="toDate" (change)="inputDateAndTime(true, 'end')"
+            [(ngModel)]="dateEnd"></ion-input>
         </div>
 
         <div class="component-10" *ngIf="selected">
           <ion-input type="time" min="18:00" max="21:00" step="3600" class="_7-12-p-m" id="untilTime" name="untilTime"
-            (change)="inputDateAndTime()" [(ngModel)]="modelLiquidation.dateEnd"
-            [value]="modelLiquidation.dateEnd"></ion-input>
+            (change)="inputDateAndTime(true, 'end')" [(ngModel)]="hourEnd"></ion-input>
         </div>
 
         <div *ngIf="dates">
@@ -120,21 +118,22 @@
             paginate: { itemsPerPage: 5, currentPage: page }" (click)="edit(services.id)">
                 <div style="position: relative; top: 0px">
 
-                  <div [ngClass]="{'color2':services.nota !== ''}" (click)="notes()"> </div>
-                  <div class="date9">{{services.fecha}}</div>
-                  <div class="tiempo2">{{services.horaStart + ' - ' + services.horaEnd}}</div>
-                  <div class="min">{{services.minuto + ' min'}}</div>
-                  <div class="_1000">{{services.servicio }} €</div>
-                  <div class="cliente10">{{services.cliente }} €</div>
-                  <div class="salida">{{services.salida}}</div>
-                  <div class="_10001"> {{services.propina}} €</div>
-                  <div class="_bizum">{{services.formaPago}}</div>
+                  <div [ngClass]="{'color2':services.note !== ''}" (click)="notes()"> </div>
+                  <div class="date9">{{services.dateStart.substring(0, 10)}}</div>
+                  <div class="tiempo2">{{services.dateStart.substring(11, 16) + ' - ' + services.dateEnd.substring(11,
+                    16)}}</div>
+                  <div class="min">{{services.minutes + ' min'}}</div>
+                  <div class="_1000">{{services.service }} €</div>
+                  <div class="cliente10">{{services.client }} €</div>
+                  <div class="salida">{{services.exit}}</div>
+                  <div class="_10001"> {{services.tip}} €</div>
+                  <div class="_bizum">{{services.payment}}</div>
                   <div class="a-terapeuta9">{{services.numberTerap}} €</div>
-                  <div class="bebida-casa9">{{services.bebidas}} €</div>
+                  <div class="bebida-casa9">{{services.drink}} €</div>
                   <div class="bebida-terap9">{{services.bebidaTerap}} €</div>
-                  <div class="tabaco9">{{services.tabaco}} €</div>
-                  <div class="vitamina9">{{services.vitaminas}} €</div>
-                  <div class="otros9">{{services.otros}} €</div>
+                  <div class="tabaco9">{{services.tabacco}} €</div>
+                  <div class="vitamina9">{{services.vitamin}} €</div>
+                  <div class="otros9">{{services.others}} €</div>
                 </div>
               </div>
             </div>

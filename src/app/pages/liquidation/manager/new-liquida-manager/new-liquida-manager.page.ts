@@ -154,7 +154,7 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   async getThoseThatNotLiquidated() {
-    this.service.getByLiquidManagerFalse().subscribe(async (datoServicio) => {
+    this.service.getByLiquidateManagerFalse().subscribe(async (datoServicio) => {
       this.unliquidatedService = datoServicio
     })
   }
@@ -701,7 +701,7 @@ export class NewLiquidaManagerPage implements OnInit {
             for (let o = 0; o < this.unliquidatedService.length; o++) {
               this.modelLiquidation.tratamiento = this.unliquidatedService.length
               this.modelServices.liquidatedManager = true
-              this.service.updateLiquidacionEncarg(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
+              this.service.updateLiquidatedManager(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
             }
 
             this.serviceLiquidation.save(this.modelLiquidation).subscribe(async (rp) => {
@@ -720,7 +720,7 @@ export class NewLiquidaManagerPage implements OnInit {
 
             for (let o = 0; o < this.unliquidatedService.length; o++) {
               this.modelLiquidation.tratamiento = this.unliquidatedService.length
-              this.service.updateLiquidacionEncarg(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
+              this.service.updateLiquidatedManager(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
             }
 
             this.serviceLiquidation.save(this.modelLiquidation).subscribe(async (rp) => {

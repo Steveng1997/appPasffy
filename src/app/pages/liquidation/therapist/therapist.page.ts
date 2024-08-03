@@ -33,7 +33,7 @@ export class TherapistPage implements OnInit {
   terapeuta: any
   selectedTerapeuta: string
 
-  manager: any
+  manager = []
   selectedEncargada: string
   selectedFormPago: string
 
@@ -41,6 +41,7 @@ export class TherapistPage implements OnInit {
   liquidated: any
 
   CurrenDate = dayjs().format("YYYY-MM-DD")
+  dateToday = dayjs().format("YYYY-MM-DD")
   dateTodayCurrent: string
   dateStart: string
   dateEnd: string
@@ -50,6 +51,7 @@ export class TherapistPage implements OnInit {
   horaFinal: string
   day: number
   month: string
+  nameMonth: string
   hourStart: string
   hourEnd: string
   parmHourStart: string
@@ -166,9 +168,10 @@ export class TherapistPage implements OnInit {
         this.administratorRole = true
         this.getManager()
       } else {
-        this.manager = rp['manager']
+        this.manager = [rp['manager']]
         this.administratorRole = false
-        this.liquidationTherapist.manager = this.manager.name
+        this.selectedEncargada = rp['manager'].name
+        this.liquidationTherapist.manager = this.manager[0].name
         this.serviceLiquidation.getByManagerAndCompany(this.liquidationTherapist.manager, rp['manager'].company).subscribe(async (rp: any) => {
           this.liquidated = rp['liquidTherapist']
         })
@@ -309,57 +312,15 @@ export class TherapistPage implements OnInit {
   }
 
   todaysDdate() {
-    let date = new Date(), day = 0, month = 0, year = 0, convertMonth = '', convertDay = '', currentDate
+    let currentDate = ''
+    let day = this.dateToday.substring(8, 10)
+    let month = this.dateToday.substring(5, 7)
+    let year = this.dateToday.substring(0, 4)
+    let dateToday = `${year}-${month}-${day}`
 
-    day = date.getDate()
-    month = date.getMonth() + 1
-    year = date.getFullYear()
-
-    if (month > 0 && month < 10) {
-      convertMonth = '0' + month
-      currentDate = `${year}-${convertMonth}-${day}`
-      this.day = day
-    } else {
-      convertMonth = month.toString()
-      currentDate = `${year}-${convertMonth}-${day}`
-      this.day = day
-    }
-
-    if (day > 0 && day < 10) {
-      convertDay = '0' + day
-      currentDate = `${year}-${convertMonth}-${convertDay}`
-      this.day = day
-    } else {
-      currentDate = `${year}-${convertMonth}-${day}`
-      this.day = day
-    }
-
-    if (convertMonth == '12') this.month = 'Diciembre'
-
-    if (convertMonth == '11') this.month = 'Noviembre'
-
-    if (convertMonth == '10') this.month = 'Octubre'
-
-    if (convertMonth == '09') this.month = 'Septiembre'
-
-    if (convertMonth == '08') this.month = 'Agosto'
-
-    if (convertMonth == '07') this.month = 'Julio'
-
-    if (convertMonth == '06') this.month = 'Junio'
-
-    if (convertMonth == '05') this.month = 'Mayo'
-
-    if (convertMonth == '04') this.month = 'Abril'
-
-    if (convertMonth == '03') this.month = 'Marzo'
-
-    if (convertMonth == '02') this.month = 'Febrero'
-
-    if (convertMonth == '01') this.month = 'Enero'
-
-    this.dateStart = currentDate
-    this.dateEnd = currentDate
+    this.dateStart = dateToday
+    this.dateEnd = dateToday
+    currentDate = dateToday
 
     this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
       if (rp['manager'].rol == 'Administrador') {
@@ -401,7 +362,7 @@ export class TherapistPage implements OnInit {
   total(rp) {
     let imports = 0
 
-    if (rp['liquidTherapist'].length > 0)
+    if (rp.length > 0)
       imports = rp.map(({ amount }) => amount).reduce((acc, value) => acc + value, 0)
 
     if (imports > 999)
@@ -413,687 +374,310 @@ export class TherapistPage implements OnInit {
   }
 
   backArrow = async () => {
-    let fechHoy = new Date(), fechaEnd = '', convertDiaHoy = '', diaHoy = 0, mesHoy = 0,
-      añoHoy = 0, convertMesHoy = ''
+    let fechaEnd = '', diaHoy = '', mesHoy = '', añoHoy = '', monthEnd = '', nameMonth = '', fechaHoy = '', fechaActualmente = ''
 
-    this.details = false
-    diaHoy = fechHoy.getDate()
-    mesHoy = fechHoy.getMonth() + 1
-    añoHoy = fechHoy.getFullYear()
+    diaHoy = this.dateToday.substring(8, 10)
+    mesHoy = this.dateToday.substring(5, 7)
+    añoHoy = this.dateToday.substring(0, 4)
+    fechaEnd = `${añoHoy}-${mesHoy}-${diaHoy}`
 
-    if (mesHoy > 0 && mesHoy < 10) {
-      convertMesHoy = '0' + mesHoy
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
+    this.fechaFormat.setDate(this.fechaFormat.getDate() - 1)
+    let day = this.fechaFormat.toString().substring(8, 10)
+    let monthName = this.fechaFormat.toString().substring(4, 7)
+    let year = this.fechaFormat.toString().substring(11, 15)
+
+    this.day = Number(day)
+    this.months(monthName)
+    let month = this.month
+
+    fechaHoy = `${añoHoy}-${month}-${day}`
+
+    if (fechaEnd == fechaHoy) {
+      this.today = true
+      this.dateTodayCurrent = 'HOY'
     } else {
-      convertMesHoy = mesHoy.toString()
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
+      this.today = false
     }
 
-    if (diaHoy > 0 && diaHoy < 10) {
-      convertDiaHoy = '0' + diaHoy
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${convertDiaHoy}`
-    } else {
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
-    }
+    this.month = this.nameMonth
+    fechaActualmente = `${year}-${month}-${this.day}`
+    this.dateStart = fechaActualmente
+    this.dateEnd = fechaEnd
 
-    if (this.siguienteCount > 0) {
-      this.siguienteCount = 0
-      this.count = 0
-      this.count++
-      let convertmes = '', convertDia = '', convertAño = '', fechaHoy = '', mes = '', month = '',
-        fechaActualmente = '', convertionAño
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
+      if (rp['manager'].rol == 'Administrador') {
 
-      for (let i = 0; i < this.count; i++) {
+        this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
+          if (rp['liquidTherapist'].length > 0) {
 
-        this.fechaFormat.setDate(this.fechaFormat.getDate() - this.count)
-        convertDia = this.fechaFormat.toString().substring(8, 10)
-        convertmes = this.fechaFormat.toString().substring(4, 7)
-        convertAño = this.fechaFormat.toString().substring(11, 15)
-        convertionAño = this.fechaFormat.toString().substring(13, 15)
+            for (let i = 0; i < rp['liquidTherapist'].length; i++) {
+              rp['liquidTherapist'][i].hourStart = rp['liquidTherapist'][i].dateStart.substring(11, 16)
+              day = rp['liquidTherapist'][i].dateStart.substring(8, 10)
+              month = rp['liquidTherapist'][i].dateStart.substring(5, 7)
+              year = rp['liquidTherapist'][i].dateStart.substring(2, 4)
+              rp['liquidTherapist'][i].date = `${day}-${month}-${year}`
 
-        if (convertmes == 'Dec') {
-          mes = "12"
-          month = 'Diciembre'
-        }
+              rp['liquidTherapist'][i].hourEnd = rp['liquidTherapist'][i].dateEnd.substring(11, 16)
+              day = rp['liquidTherapist'][i].dateEnd.substring(8, 10)
+              month = rp['liquidTherapist'][i].dateEnd.substring(5, 7)
+              year = rp['liquidTherapist'][i].dateEnd.substring(2, 4)
+              rp['liquidTherapist'][i].date2 = `${day}-${month}-${year}`
+            }
 
-        if (convertmes == 'Nov') {
-          mes = "11"
-          month = 'Noviembre'
-        }
-
-        if (convertmes == 'Oct') {
-          mes = "10"
-          month = 'Octubre'
-        }
-
-        if (convertmes == 'Sep') {
-          mes = "09"
-          month = 'Septiembre'
-        }
-
-        if (convertmes == 'Aug') {
-          mes = "08"
-          month = 'Agosto'
-        }
-
-        if (convertmes == 'Jul') {
-          mes = "07"
-          month = 'Julio'
-        }
-
-        if (convertmes == 'Jun') {
-          mes = "06"
-          month = 'Junio'
-        }
-
-        if (convertmes == 'May') {
-          mes = "05"
-          month = 'Mayo'
-        }
-
-        if (convertmes == 'Apr') {
-          mes = "04"
-          month = 'Abril'
-        }
-
-        if (convertmes == 'Mar') {
-          mes = "03"
-          month = 'Marzo'
-        }
-
-        if (convertmes == 'Feb') {
-          mes = "02"
-          month = 'Febrero'
-        }
-
-        if (convertmes == 'Jan') {
-          mes = "01"
-          month = 'Enero'
-        }
-
-        fechaHoy = `${convertAño}-${mes}-${convertDia}`
-
-        if (fechaEnd == fechaHoy) {
-          this.today = true
-          this.dateTodayCurrent = 'HOY'
-        } else {
-          this.today = false
-        }
-
-        this.day = Number(convertDia)
-        this.month = month
-
-        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
-        this.dateStart = fechaActualmente
-        debugger
-        this.dateEnd = fechaActualmente
-
-        this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-          let day = '', month = '', year = ''
-
-          if (rp[0]['rol'] == 'Administrador') {
-            this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
-
-              for (let i = 0; i < rp['liquidTherapist'].length; i++) {
-                rp['liquidTherapist'][i].hourStart = rp['liquidTherapist'][i].dateStart.substring(11, 16)
-                day = rp['liquidTherapist'][i].dateStart.substring(8, 10)
-                month = rp['liquidTherapist'][i].dateStart.substring(5, 7)
-                year = rp['liquidTherapist'][i].dateStart.substring(2, 4)
-                rp['liquidTherapist'][i].date = `${day}-${month}-${year}`
-
-                rp['liquidTherapist'][i].hourEnd = rp['liquidTherapist'][i].dateEnd.substring(11, 16)
-                day = rp['liquidTherapist'][i].dateEnd.substring(8, 10)
-                month = rp['liquidTherapist'][i].dateEnd.substring(5, 7)
-                year = rp['liquidTherapist'][i].dateEnd.substring(2, 4)
-                rp['liquidTherapist'][i].date2 = `${day}-${month}-${year}`
-              }
-
-              this.liquidated = rp
-
-              this.total(rp)
-            })
-          } else {
-            this.serviceLiquidation.getTodayDateAndManager(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-
-              for (let i = 0; i < rp['liquidTherapist'].length; i++) {
-                rp['liquidTherapist'][i].hourStart = rp['liquidTherapist'][i].dateStart.substring(11, 16)
-                day = rp['liquidTherapist'][i].dateStart.substring(8, 10)
-                month = rp['liquidTherapist'][i].dateStart.substring(5, 7)
-                year = rp['liquidTherapist'][i].dateStart.substring(2, 4)
-                rp['liquidTherapist'][i].date = `${day}-${month}-${year}`
-
-                rp['liquidTherapist'][i].hourEnd = rp['liquidTherapist'][i].dateEnd.substring(11, 16)
-                day = rp['liquidTherapist'][i].dateEnd.substring(8, 10)
-                month = rp['liquidTherapist'][i].dateEnd.substring(5, 7)
-                year = rp['liquidTherapist'][i].dateEnd.substring(2, 4)
-                rp['liquidTherapist'][i].date2 = `${day}-${month}-${year}`
-              }
-
-              this.liquidated = rp
-              this.total(rp)
-            })
+            this.liquidated = rp
+            this.total(rp)
           }
         })
+      } else {
+        this.serviceLiquidation.getTodayDateAndManager(fechaActualmente, rp['manager'].name, this.company).subscribe((rp: any) => {
+          if (rp['liquidTherapist'].length > 0) {
 
-        this.atrasCount = this.count
+            for (let i = 0; i < rp['liquidTherapist'].length; i++) {
+              rp['liquidTherapist'][i].hourStart = rp['liquidTherapist'][i].dateStart.substring(11, 16)
+              day = rp['liquidTherapist'][i].dateStart.substring(8, 10)
+              month = rp['liquidTherapist'][i].dateStart.substring(5, 7)
+              year = rp['liquidTherapist'][i].dateStart.substring(2, 4)
+              rp['liquidTherapist'][i].date = `${day}-${month}-${year}`
 
-        return true
-      }
-    } else {
-      this.atrasCount = 0
-      this.siguienteCount = 0
-      this.count = 0
-      this.count++
-      let convertmes = '', convertDia = '', convertAño = '', mes = '', month = '', fechaHoy = '',
-        convertFecha = '', fechaActualmente = '', convertionAño
+              rp['liquidTherapist'][i].hourEnd = rp['liquidTherapist'][i].dateEnd.substring(11, 16)
+              day = rp['liquidTherapist'][i].dateEnd.substring(8, 10)
+              month = rp['liquidTherapist'][i].dateEnd.substring(5, 7)
+              year = rp['liquidTherapist'][i].dateEnd.substring(2, 4)
+              rp['liquidTherapist'][i].date2 = `${day}-${month}-${year}`
+            }
 
-      for (let i = 0; i < this.count; i++) {
-
-        this.fechaFormat.setDate(this.fechaFormat.getDate() - this.count)
-        convertFecha = this.fechaFormat.toString()
-        this.fechaFormat = new Date(convertFecha)
-        convertDia = this.fechaFormat.toString().substring(8, 10)
-        convertmes = this.fechaFormat.toString().substring(4, 7)
-        convertAño = this.fechaFormat.toString().substring(11, 15)
-        convertionAño = this.fechaFormat.toString().substring(13, 15)
-
-        if (convertmes == 'Dec') {
-          mes = "12"
-          month = 'Diciembre'
-        }
-
-        if (convertmes == 'Nov') {
-          mes = "11"
-          month = 'Noviembre'
-        }
-
-        if (convertmes == 'Oct') {
-          mes = "10"
-          month = 'Octubre'
-        }
-
-        if (convertmes == 'Sep') {
-          mes = "09"
-          month = 'Septiembre'
-        }
-
-        if (convertmes == 'Aug') {
-          mes = "08"
-          month = 'Agosto'
-        }
-
-        if (convertmes == 'Jul') {
-          mes = "07"
-          month = 'Julio'
-        }
-
-        if (convertmes == 'Jun') {
-          mes = "06"
-          month = 'Junio'
-        }
-
-        if (convertmes == 'May') {
-          mes = "05"
-          month = 'Mayo'
-        }
-
-        if (convertmes == 'Apr') {
-          mes = "04"
-          month = 'Abril'
-        }
-
-        if (convertmes == 'Mar') {
-          mes = "03"
-          month = 'Marzo'
-        }
-
-        if (convertmes == 'Feb') {
-          mes = "02"
-          month = 'Febrero'
-        }
-
-        if (convertmes == 'Jan') {
-          mes = "01"
-          month = 'Enero'
-        }
-
-        fechaHoy = `${convertAño}-${mes}-${convertDia}`
-
-        if (fechaEnd == fechaHoy) {
-          this.today = true
-          this.dateTodayCurrent = 'HOY'
-        } else {
-          this.today = false
-        }
-
-        this.day = Number(convertDia)
-        this.month = month
-
-        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
-        this.dateStart = fechaActualmente
-        debugger
-        this.dateEnd = fechaActualmente
-
-        this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-          let day = '', month = '', year = ''
-
-          if (rp['manager'].rol == 'Administrador') {
-
-            this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
-
-              for (let i = 0; i < rp['liquidTherapist'].length; i++) {
-                rp['liquidTherapist'][i].hourStart = rp['liquidTherapist'][i].dateStart.substring(11, 16)
-                day = rp['liquidTherapist'][i].dateStart.substring(8, 10)
-                month = rp['liquidTherapist'][i].dateStart.substring(5, 7)
-                year = rp['liquidTherapist'][i].dateStart.substring(2, 4)
-                rp['liquidTherapist'][i].date = `${day}-${month}-${year}`
-
-                rp['liquidTherapist'][i].hourEnd = rp['liquidTherapist'][i].dateEnd.substring(11, 16)
-                day = rp['liquidTherapist'][i].dateEnd.substring(8, 10)
-                month = rp['liquidTherapist'][i].dateEnd.substring(5, 7)
-                year = rp['liquidTherapist'][i].dateEnd.substring(2, 4)
-                rp['liquidTherapist'][i].date2 = `${day}-${month}-${year}`
-              }
-
-              this.liquidated = rp
-              this.total(rp)
-            })
-          } else {
-            this.serviceLiquidation.getTodayDateAndManager(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-
-              for (let i = 0; i < rp['liquidTherapist'].length; i++) {
-                rp['liquidTherapist'][i].hourStart = rp['liquidTherapist'][i].dateStart.substring(11, 16)
-                day = rp['liquidTherapist'][i].dateStart.substring(8, 10)
-                month = rp['liquidTherapist'][i].dateStart.substring(5, 7)
-                year = rp['liquidTherapist'][i].dateStart.substring(2, 4)
-                rp['liquidTherapist'][i].date = `${day}-${month}-${year}`
-
-                rp['liquidTherapist'][i].hourEnd = rp['liquidTherapist'][i].dateEnd.substring(11, 16)
-                day = rp['liquidTherapist'][i].dateEnd.substring(8, 10)
-                month = rp['liquidTherapist'][i].dateEnd.substring(5, 7)
-                year = rp['liquidTherapist'][i].dateEnd.substring(2, 4)
-                rp['liquidTherapist'][i].date2 = `${day}-${month}-${year}`
-              }
-
-              this.liquidated = rp
-              this.total(rp)
-            })
+            this.liquidated = rp
+            this.total(rp)
           }
         })
-
-        this.atrasCount = this.count
-
-        return true
       }
-    }
+
+      return true
+    })
+
     return false
   }
 
   nextArrow = async () => {
-    let fechaDia = new Date(), mesDelDia = 0, convertMess = '', messs = '', convertimosMes = 0
-    mesDelDia = fechaDia.getMonth() + 1
+    let fechaEnd = '', diaHoy = '', mesHoy = '', añoHoy = '', monthEnd = '', fechaHoy = '', fechaActualmente = ''
 
-    let fechHoy = new Date(), fechaEnd = '', convertDiaHoy = '', diaHoy = 0, mesHoy = 0, añoHoy = 0, convertMesHoy = ''
+    diaHoy = this.dateToday.substring(8, 10)
+    mesHoy = this.dateToday.substring(5, 7)
+    añoHoy = this.dateToday.substring(0, 4)
+    fechaEnd = `${añoHoy}-${mesHoy}-${diaHoy}`
 
-    this.details = false
-    diaHoy = fechHoy.getDate()
-    mesHoy = fechHoy.getMonth() + 1
-    añoHoy = fechHoy.getFullYear()
+    this.fechaFormat.setDate(this.fechaFormat.getDate() + 1)
+    let day = this.fechaFormat.toString().substring(8, 10)
+    let monthName = this.fechaFormat.toString().substring(4, 7)
+    let year = this.fechaFormat.toString().substring(11, 15)
 
-    if (mesHoy > 0 && mesHoy < 10) {
-      convertMesHoy = '0' + mesHoy
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
+    this.day = Number(day)
+    this.months(monthName)
+    let month = this.month
+
+    fechaHoy = `${year}-${month}-${day}`
+
+    if (fechaEnd == fechaHoy) {
+      this.today = true
+      this.dateTodayCurrent = 'HOY'
     } else {
-      convertMesHoy = mesHoy.toString()
-      fechaEnd = `${añoHoy}-${mesHoy}-${diaHoy}`
+      this.today = false
     }
 
-    if (diaHoy > 0 && diaHoy < 10) {
-      convertDiaHoy = '0' + diaHoy
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${convertDiaHoy}`
-    } else {
-      fechaEnd = `${añoHoy}-${convertMesHoy}-${diaHoy}`
-    }
+    this.month = this.nameMonth
+    fechaActualmente = `${year}-${month}-${day}`
+    this.dateStart = fechaActualmente
+    this.dateEnd = fechaEnd
 
-    if (this.atrasCount > 0) {
-      this.atrasCount = 0
-      this.count = 0
-      this.count++
-      convertMess = this.fechaFormat.toString().substring(4, 7)
-      if (convertMess == 'Dec') messs = "12"
-      if (convertMess == 'Nov') messs = "11"
-      if (convertMess == 'Oct') messs = "10"
-      if (convertMess == 'Sep') messs = "09"
-      if (convertMess == 'Aug') messs = "08"
-      if (convertMess == 'Jul') messs = "07"
-      if (convertMess == 'Jun') messs = "06"
-      if (convertMess == 'May') messs = "05"
-      if (convertMess == 'Apr') messs = "04"
-      if (convertMess == 'Mar') messs = "03"
-      if (convertMess == 'Feb') messs = "02"
-      if (convertMess == 'Jan') messs = "01"
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
+      if (rp['manager'].rol == 'Administrador') {
 
-      convertimosMes = Number(messs)
-      this.atrasCount = 0
-      this.count = 0
-      this.count++
-
-      let convertmes = '', convertDia = '', convertAño = '', mes = '', month = '', fechaHoy = '',
-        fechaActualmente = '', convertionAño = ''
-
-      for (let i = 0; i < this.count; i++) {
-        this.fechaFormat.setDate(this.fechaFormat.getDate() + this.count)
-        convertDia = this.fechaFormat.toString().substring(8, 10)
-        convertmes = this.fechaFormat.toString().substring(4, 7)
-        convertAño = this.fechaFormat.toString().substring(11, 15)
-        convertionAño = this.fechaFormat.toString().substring(13, 15)
-
-        if (convertmes == 'Dec') {
-          mes = "12"
-          month = 'Diciembre'
-        }
-
-        if (convertmes == 'Nov') {
-          mes = "11"
-          month = 'Noviembre'
-        }
-
-        if (convertmes == 'Oct') {
-          mes = "10"
-          month = 'Octubre'
-        }
-
-        if (convertmes == 'Sep') {
-          mes = "09"
-          month = 'Septiembre'
-        }
-
-        if (convertmes == 'Aug') {
-          mes = "08"
-          month = 'Agosto'
-        }
-
-        if (convertmes == 'Jul') {
-          mes = "07"
-          month = 'Julio'
-        }
-
-        if (convertmes == 'Jun') {
-          mes = "06"
-          month = 'Junio'
-        }
-
-        if (convertmes == 'May') {
-          mes = "05"
-          month = 'Mayo'
-        }
-
-        if (convertmes == 'Apr') {
-          mes = "04"
-          month = 'Abril'
-        }
-
-        if (convertmes == 'Mar') {
-          mes = "03"
-          month = 'Marzo'
-        }
-
-        if (convertmes == 'Feb') {
-          mes = "02"
-          month = 'Febrero'
-        }
-
-        if (convertmes == 'Jan') {
-          mes = "01"
-          month = 'Enero'
-        }
-
-        fechaHoy = `${convertAño}-${mes}-${convertDia}`
-
-        if (fechaEnd == fechaHoy) {
-          this.today = true
-          this.dateTodayCurrent = 'HOY'
-        } else {
-          this.today = false
-        }
-
-        this.day = Number(convertDia)
-        this.month = month
-
-        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
-        this.dateStart = fechaActualmente
-        this.dateEnd = fechaActualmente
-
-        this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-          if (rp[0]['rol'] == 'Administrador') {
-            this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
-              this.liquidated = rp
-              this.total(rp)
-            })
-          } else {
-
-            this.serviceLiquidation.getTodayDateAndManager(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-              this.liquidated = rp
-              this.total(rp)
-            })
+        this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
+          if (rp['liquidTherapist'].length > 0) {
+            this.liquidated = rp['liquidTherapist']
+            this.total(rp['liquidTherapist'])
           }
         })
-
-        this.atrasCount = 0
-        this.count = 0
-        return true
-      }
-    }
-
-    else {
-      this.atrasCount = 0
-      this.siguienteCount = 0
-      this.count = 0
-      this.count++
-      let convertmes = '', convertDia = '', convertAño = '', mes = '', month = '', fechaHoy = '',
-        convertFecha = '', fechaActualmente = '', convertionAño
-
-      for (let i = 0; i < this.count; i++) {
-
-        this.fechaFormat.setDate(this.fechaFormat.getDate() + this.count)
-        convertFecha = this.fechaFormat.toString()
-        this.fechaFormat = new Date(convertFecha)
-
-        convertDia = this.fechaFormat.toString().substring(8, 10)
-        convertmes = this.fechaFormat.toString().substring(4, 7)
-        convertAño = this.fechaFormat.toString().substring(11, 15)
-        convertionAño = this.fechaFormat.toString().substring(13, 15)
-
-        if (convertmes == 'Dec') {
-          mes = "12"
-          month = 'Diciembre'
-        }
-
-        if (convertmes == 'Nov') {
-          mes = "11"
-          month = 'Noviembre'
-        }
-
-        if (convertmes == 'Oct') {
-          mes = "10"
-          month = 'Octubre'
-        }
-
-        if (convertmes == 'Sep') {
-          mes = "09"
-          month = 'Septiembre'
-        }
-
-        if (convertmes == 'Aug') {
-          mes = "08"
-          month = 'Agosto'
-        }
-
-        if (convertmes == 'Jul') {
-          mes = "07"
-          month = 'Julio'
-        }
-
-        if (convertmes == 'Jun') {
-          mes = "06"
-          month = 'Junio'
-        }
-
-        if (convertmes == 'May') {
-          mes = "05"
-          month = 'Mayo'
-        }
-
-        if (convertmes == 'Apr') {
-          mes = "04"
-          month = 'Abril'
-        }
-
-        if (convertmes == 'Mar') {
-          mes = "03"
-          month = 'Marzo'
-        }
-
-        if (convertmes == 'Feb') {
-          mes = "02"
-          month = 'Febrero'
-        }
-
-        if (convertmes == 'Jan') {
-          mes = "01"
-          month = 'Enero'
-        }
-
-        fechaHoy = `${convertAño}-${mes}-${convertDia}`
-
-        if (fechaEnd == fechaHoy) {
-          this.today = true
-          this.dateTodayCurrent = 'HOY'
-        } else {
-          this.today = false
-        }
-
-        this.day = Number(convertDia)
-        this.month = month
-
-        fechaActualmente = `${convertAño}-${mes}-${convertDia}`
-        this.dateStart = fechaActualmente
-        this.dateEnd = fechaActualmente
-
-        this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-          if (rp[0]['rol'] == 'Administrador') {
-
-            this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
-              this.liquidated = rp
-              this.total(rp)
-            })
-          } else {
-
-            this.serviceLiquidation.getTodayDateAndManager(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-              this.liquidated = rp
-              this.total(rp)
-            })
-          }
+      } else {
+        this.serviceLiquidation.getTodayDateAndManager(fechaActualmente, rp['manager'].name, this.company).subscribe((rp: any) => {
+          this.liquidated = rp['liquidTherapist']
+          this.total(rp['liquidTherapist'])
         })
-
-        this.siguienteCount = this.count
-        return true
       }
-    }
+      return true
+    })
     return false
+  }
+
+  months(month: string) {
+
+    if (month == 'Dec') {
+      this.month = '12'
+      this.nameMonth = 'Diciembre'
+    }
+
+    if (month == 'Nov') {
+      this.month = '11'
+      this.nameMonth = 'Noviembre'
+    }
+
+    if (month == 'Oct') {
+      this.month = '10'
+      this.nameMonth = 'Octubre'
+    }
+
+    if (month == 'Sep') {
+      this.month = '09'
+      this.nameMonth = 'Septiembre'
+    }
+
+    if (month == 'Aug') {
+      this.month = '08'
+      this.nameMonth = 'Agosto'
+    }
+
+    if (month == 'Jul') {
+      this.month = '07'
+      this.nameMonth = 'Julio'
+    }
+
+    if (month == 'Jun') {
+      this.month = '06'
+      this.nameMonth = 'Junio'
+    }
+
+    if (month == 'May') {
+      this.month = '05'
+      this.nameMonth = 'Mayo'
+    }
+
+    if (month == 'Apr') {
+      this.month = '04'
+      this.nameMonth = 'Abril'
+    }
+
+    if (month == 'Mar') {
+      this.month = '03'
+      this.nameMonth = 'Marzo'
+    }
+
+    if (month == 'Feb') {
+      this.month = '02'
+      this.nameMonth = 'Febrero'
+    }
+
+    if (month == 'Jan') {
+      this.month = '01'
+      this.nameMonth = 'Enero'
+    }
   }
 
   // details
 
-  detail(id: number) {
+  detail(id: string) {
     if (this.details == true) {
       this.details = false
     } else {
 
       this.serviceLiquidation.getByIdTherapist(id).subscribe(async (rp) => {
-        this.nameTherapist = rp[0].terapeuta
-        this.sinceDate = rp[0].desdeFechaLiquidado
-        this.sinceTime = rp[0].desdeHoraLiquidado
-        this.toDate = rp[0].hastaFechaLiquidado
-        this.untilTime = rp[0].hastaHoraLiquidado
-        this.payment = rp[0].formaPago
-        this.idDetail = rp[0].id
-        this.idTherapist = rp[0].idTerapeuta
+        this.nameTherapist = rp['liquidTherapist'][0].therapist
+        this.sinceDate = rp['liquidTherapist'][0].dateStart.substring(0, 10)
+        this.sinceTime = rp['liquidTherapist'][0].dateStart.substring(11, 16)
+        this.toDate = rp['liquidTherapist'][0].dateEnd.substring(0, 10)
+        this.untilTime = rp['liquidTherapist'][0].dateEnd.substring(11, 16)
+        this.payment = rp['liquidTherapist'][0].payment
+        this.idDetail = rp['liquidTherapist'][0].id
+        this.idTherapist = rp['liquidTherapist'][0].idTherap
 
         await this.sumTotal(id)
       })
     }
   }
 
-  async sumTotal(id: number) {
-    this.services.getById(id).subscribe(async (rp: any) => {
-      if (rp.length > 0) {
-        this.settledData = rp
+  async sumTotal(id: string) {
+    let day = '', month = '', year = ''
+
+    this.services.getByIdTherapist(id).subscribe(async (rp: any) => {
+      if (rp.status == 200) {
+        for (let i = 0; i < rp['service'].length; i++) {
+          rp['service'][i].hourStart = rp['service'][i].dateStart.substring(11, 16)
+          day = rp['service'][i].dateStart.substring(8, 10)
+          month = rp['service'][i].dateStart.substring(5, 7)
+          year = rp['service'][i].dateStart.substring(2, 4)
+          rp['service'][i].date = `${day}-${month}-${year}`
+
+          rp['service'][i].hourEnd = rp['service'][i].dateEnd.substring(11, 16)
+          day = rp['service'][i].dateEnd.substring(8, 10)
+          month = rp['service'][i].dateEnd.substring(5, 7)
+          year = rp['service'][i].dateEnd.substring(2, 4)
+        }
+
+        this.settledData = rp['service']
 
         // Filter by servicio
-        const servicios = rp.filter(serv => serv)
-        let service = servicios.reduce((accumulator, serv) => {
-          return accumulator + serv.servicio
+        const servicios = rp['service'].filter(serv => serv)
+        const service = servicios.reduce((accumulator, serv) => {
+          return accumulator + serv.service
         }, 0)
 
         // Filter by Propina
-        const propinas = rp.filter(serv => serv)
+        const propinas = rp['service'].filter(serv => serv)
         let tip = propinas.reduce((accumulator, serv) => {
-          return accumulator + serv.propina
+          return accumulator + serv.tip
         }, 0)
 
         // Filter by Bebida
-        const bebida = rp.filter(serv => serv)
+        const bebida = rp['service'].filter(serv => serv)
         let drink = bebida.reduce((accumulator, serv) => {
-          return accumulator + serv.bebidas
+          return accumulator + serv.drink
         }, 0)
 
         // Filter by Bebida
-        const drinkTherap = rp.filter(serv => serv)
+        const drinkTherap = rp['service'].filter(serv => serv)
         let drinkTherapist = drinkTherap.reduce((accumulator, serv) => {
-          return accumulator + serv.bebidaTerap
+          return accumulator + serv.drinkTherapist
         }, 0)
 
         // Filter by Tabaco
-        const tabac = rp.filter(serv => serv)
+        const tabac = rp['service'].filter(serv => serv)
         let tobacco = tabac.reduce((accumulator, serv) => {
-          return accumulator + serv.tabaco
+          return accumulator + serv.tabacco
         }, 0)
 
         // Filter by Vitamina
-        const vitamina = rp.filter(serv => serv)
+        const vitamina = rp['service'].filter(serv => serv)
         let vitamins = vitamina.reduce((accumulator, serv) => {
-          return accumulator + serv.vitaminas
+          return accumulator + serv.vitamin
         }, 0)
 
         // Filter by Vitamina
-        const otroServicio = rp.filter(serv => serv)
+        const otroServicio = rp['service'].filter(serv => serv)
         let others = otroServicio.reduce((accumulator, serv) => {
-          return accumulator + serv.otros
+          return accumulator + serv.others
         }, 0)
 
         // Filter by totalCash
-        const totalCashs = rp.filter(serv => serv)
+        const totalCashs = rp['service'].filter(serv => serv)
         let totalCash = totalCashs.reduce((accumulator, serv) => {
-          return accumulator + serv.valueEfectTerapeuta
+          return accumulator + serv.valueCash
         }, 0)
 
         // Filter by totalBizum
-        const totalBizums = rp.filter(serv => serv)
+        const totalBizums = rp['service'].filter(serv => serv)
         let totalBizum = totalBizums.reduce((accumulator, serv) => {
-          return accumulator + serv.valueBizuTerapeuta
+          return accumulator + serv.valueBizuTherapist
         }, 0)
 
         // Filter by totalCard
-        const totalCards = rp.filter(serv => serv)
+        const totalCards = rp['service'].filter(serv => serv)
         let totalCard = totalCards.reduce((accumulator, serv) => {
-          return accumulator + serv.valueTarjeTerapeuta
+          return accumulator + serv.valueCardTherapist
         }, 0)
 
         // Filter by totalTransaction
-        const totalTransactions = rp.filter(serv => serv)
+        const totalTransactions = rp['service'].filter(serv => serv)
         let totalTransaction = totalTransactions.reduce((accumulator, serv) => {
-          return accumulator + serv.valueTransTerapeuta
+          return accumulator + serv.valueTransactionTherapist
         }, 0)
 
         this.comission(service, tip, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
@@ -1110,17 +694,17 @@ export class TherapistPage implements OnInit {
     let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTherapist = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0, totalCommission = 0,
       sumCommission = 0, receivedTherapist = 0
 
-    this.serviceTherapist.name(element[0]['terapeuta']).subscribe(async (rp: any) => {
-      this.terapeutaName = rp[0]
+    this.serviceTherapist.name(element['service'][0].therapist).subscribe(async (rp: any) => {
+      this.terapeutaName = rp['therapist']
 
       // Comision
-      comisiServicio = service / 100 * rp[0]?.servicio
-      comiPropina = tip / 100 * rp[0]?.propina
-      comiBebida = drink / 100 * rp[0]?.bebida
-      comiBebidaTherapist = drinkTherapist / 100 * rp[0]?.bebidaTerap
-      comiTabaco = tobacco / 100 * rp[0]?.tabaco
-      comiVitamina = vitamins / 100 * rp[0]?.vitamina
-      comiOtros = others / 100 * rp[0]?.otros
+      comisiServicio = service / 100 * rp['therapist'][0]?.service
+      comiPropina = tip / 100 * rp['therapist'][0]?.tip
+      comiBebida = drink / 100 * rp['therapist'][0]?.drink
+      comiBebidaTherapist = drinkTherapist / 100 * rp['therapist'][0]?.drinkTherapist
+      comiTabaco = tobacco / 100 * rp['therapist'][0]?.tabacco
+      comiVitamina = vitamins / 100 * rp['therapist'][0]?.vitamin
+      comiOtros = others / 100 * rp['therapist'][0]?.others
 
       // Conversion decimal
       let totalTreatment = Number(comisiServicio.toFixed(1))
@@ -1137,10 +721,10 @@ export class TherapistPage implements OnInit {
         sumCommission = Number(sumComision.toFixed(1))
       }
 
-      element.map(item => {
+      element['service'].map(item => {
         const numbTerap = this.settledData.filter(serv => serv)
         receivedTherapist = numbTerap.reduce((accumulator, serv) => {
-          return accumulator + serv.numberTerap
+          return accumulator + serv.numberTherapist
         }, 0)
       })
 
@@ -1249,40 +833,40 @@ export class TherapistPage implements OnInit {
 
     for (let o = 0; o < this.settledData?.length; o++) {
 
-      if (this.settledData[o]?.servicio > 999)
-        this.settledData[o]['servicio'] = (this.settledData[o]?.servicio / 1000).toFixed(3)
+      if (this.settledData[o]?.service > 999)
+        this.settledData[o]['service'] = (this.settledData[o]?.service / 1000).toFixed(3)
       else
-        this.settledData[o]['servicio'] = this.settledData[o]?.servicio.toString()
+        this.settledData[o]['service'] = this.settledData[o]?.service.toString()
 
-      if (this.settledData[o]?.propina > 999)
-        this.settledData[o]['propina'] = (this.settledData[o]?.propina / 1000).toFixed(3)
+      if (this.settledData[o]?.tip > 999)
+        this.settledData[o]['tip'] = (this.settledData[o]?.tip / 1000).toFixed(3)
       else
-        this.settledData[o]['propina'] = this.settledData[o]?.propina.toString()
+        this.settledData[o]['tip'] = this.settledData[o]?.tip.toString()
 
-      if (this.settledData[o]?.numberTerap > 999)
-        this.settledData[o]['numberTerap'] = (this.settledData[o]?.numberTerap / 1000).toFixed(3)
+      if (this.settledData[o]?.numberTherapist > 999)
+        this.settledData[o]['numberTherapist'] = (this.settledData[o]?.numberTherapist / 1000).toFixed(3)
       else
-        this.settledData[o]['numberTerap'] = this.settledData[o]?.numberTerap.toString()
+        this.settledData[o]['numberTherapist'] = this.settledData[o]?.numberTherapist.toString()
 
-      if (this.settledData[o]?.bebidas > 999)
-        this.settledData[o]['bebidas'] = (this.settledData[o]?.bebidas / 1000).toFixed(3)
+      if (this.settledData[o]?.drink > 999)
+        this.settledData[o]['drink'] = (this.settledData[o]?.drink / 1000).toFixed(3)
       else
-        this.settledData[o]['bebidas'] = this.settledData[o]?.bebidas.toString()
+        this.settledData[o]['drink'] = this.settledData[o]?.drink.toString()
 
-      if (this.settledData[o]?.tabaco > 999)
-        this.settledData[o]['tabaco'] = (this.settledData[o]?.tabaco / 1000).toFixed(3)
+      if (this.settledData[o]?.tabacco > 999)
+        this.settledData[o]['tabacco'] = (this.settledData[o]?.tabacco / 1000).toFixed(3)
       else
-        this.settledData[o]['tabaco'] = this.settledData[o]?.tabaco.toString()
+        this.settledData[o]['tabacco'] = this.settledData[o]?.tabacco.toString()
 
-      if (this.settledData[o]?.vitaminas > 999)
-        this.settledData[o]['vitaminas'] = (this.settledData[o]?.vitaminas / 1000).toFixed(3)
+      if (this.settledData[o]?.vitamin > 999)
+        this.settledData[o]['vitamin'] = (this.settledData[o]?.vitamin / 1000).toFixed(3)
       else
-        this.settledData[o]['vitaminas'] = this.settledData[o]?.vitaminas.toString()
+        this.settledData[o]['vitamin'] = this.settledData[o]?.vitamin.toString()
 
-      if (this.settledData[o]?.otros > 999)
-        this.settledData[o]['otros'] = (this.settledData[o]?.otros / 1000).toFixed(3)
+      if (this.settledData[o]?.others > 999)
+        this.settledData[o]['others'] = (this.settledData[o]?.others / 1000).toFixed(3)
       else
-        this.settledData[o]['otros'] = this.settledData[o]?.otros.toString()
+        this.settledData[o]['others'] = this.settledData[o]?.others.toString()
     }
 
     if (totalCash > 999)
@@ -1341,7 +925,7 @@ export class TherapistPage implements OnInit {
       if (result.isConfirmed) {
         this.modelServices.idTherap = ""
         this.modelServices.liquidatedTherapist = false
-        this.services.updateTherapistSettlementTherapistIdByTherapistId(this.idTherapist, this.modelServices).subscribe(async (rp) => {
+        this.services.updateLiquidatedTherapistByIdTherap(this.idTherapist, this.modelServices).subscribe(async (rp) => {
           this.serviceLiquidation.delete(this.idDetail).subscribe(async (rp) => {
             if (this.administratorRole == true) {
               await this.getLiquidation()

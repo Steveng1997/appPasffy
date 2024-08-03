@@ -658,7 +658,6 @@ export class VisionPage implements OnInit {
     if (element.length > 0) {
       for (let u = 0; u < element.length; u++) {
         if (element[u].dateEnd != null) {
-          debugger
           this.minuteDifference(element)
         }
         else {
@@ -1119,7 +1118,6 @@ export class VisionPage implements OnInit {
   }
 
   async editByName(name: string) {
-    debugger
     this.service.getByTherapistCurrentDateDesc(name).subscribe((rp: any) => {
       if (rp['service'].length > 0) {
         this.serviceModel.screen = 'vision'

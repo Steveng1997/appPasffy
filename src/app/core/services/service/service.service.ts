@@ -30,8 +30,8 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getByCierreTrue`);
   }
 
-  getByTerapeutaAndEncargada(terapeuta: string, encargada: string) {
-    return this.http.get(`${this.API_URL}/getTerapeutaAndEncargada/${terapeuta}/${encargada}`);
+  getByTherapistAndManagerNotLiquidatedTherapist(terapeuta: string, encargada: string) {
+    return this.http.get(`${this.API_URL}/therapistAndManagerNotLiquidatedTherapist/${terapeuta}/${encargada}`);
   }
 
   getByEncargada(encargada: string) {
@@ -46,16 +46,16 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}`);
   }
 
-  getByLiquidTerapFalse() {
-    return this.http.get(`${this.API_URL}/getByLiquidacionTerapeutaFalse`);
+  getByLiquidateTherapistFalse() {
+    return this.http.get(`${this.API_URL}/liquidateTherapistFalse`);
   }
 
-  getByLiquidManagerFalse() {
-    return this.http.get(`${this.API_URL}/getByLiquidacionManagerFalse`);
+  getByLiquidateManagerFalse() {
+    return this.http.get(`${this.API_URL}/liquidateManagerFalse`);
   }
 
-  getByIdTerap(idTerap: string) {
-    return this.http.get(`${this.API_URL}/getIdTerapeuta/${idTerap}`);
+  getByIdTherapist(idTherap: string) {
+    return this.http.get(`${this.API_URL}/idTherapist/${idTherap}`);
   }
 
   getByIdEncarg(idEncargada: string) {
@@ -135,22 +135,12 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getByEncargadaNoCierre/${encargada}`);
   }
 
-  getTerapeutaFechaAsc(terapeuta: string, encargada: string) {
-    return this.http.get(`${this.API_URL}/getByTerapFechaAsc`, {
-      params: {
-        terapeuta,
-        encargada
-      }
-    });
+  getByTherapistAndManagerAndNotLiquidatedTherapistCurrentDateAsc(therapist: string, manager: string) {
+    return this.http.get(`${this.API_URL}/therapistAndManagerAndNotLiquidatedTherapistCurrentDateAsc/${therapist}/${manager}`);
   }
 
-  getTerapeutaFechaAscByLiqTrue(terapeuta: string, encargada: string) {
-    return this.http.get(`${this.API_URL}/getByTerapFechaAscByLiquidadoTrue`, {
-      params: {
-        terapeuta,
-        encargada
-      }
-    });
+  getByTherapistAndManagerAndLiquidatedTherapistCurrentDateAsc(therapist: string, manager: string) {
+    return this.http.get(`${this.API_URL}/therapistAndManagerAndLiquidatedTherapistCurrentDateAsc/${therapist}/${manager}`);
   }
 
   getEncargadaFechaAscByLiqTrue(encargada: string) {
@@ -211,18 +201,8 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/getTerapeutaEncargadaFechaHoraInicio/${terapeuta}/${encargada}/${fecha}/${horaStart}`);
   }
 
-  getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin(terapeuta: string, encargada: string, horaStart: string, horaEnd: string, fecha: string, fechaFin: string, company: string) {
-    return this.http.get(`${this.API_URL}/getTerapeutaEncargadaFechaHoraInicioFechaHoraFin`, {
-      params: {
-        terapeuta,
-        encargada,
-        fecha,
-        horaStart,
-        fechaFin,
-        horaEnd,
-        company
-      }
-    });
+  getByTherapistAndManagerAndCompany(therapist: string, manager: string, dateStart: string, dateEnd: string, company: string) {
+    return this.http.get(`${this.API_URL}/therapistAndManagerAndCompany/${therapist}/${manager}/${dateStart}/${dateEnd}/${company}`);
   }
 
   getByEncargadaFechaHoraInicioFechaHoraFin(encargada: string, horaStart: string, horaEnd: string, fecha: string, fechaFin: string, company: string) {
@@ -361,12 +341,12 @@ export class ServiceService {
     return this.http.put(`${this.API_URL}/updateByWithValueNumberPiso2/${id}/${idUnico}`, service);
   }
 
-  updateLiquidacionTerap(id: number, service: ModelService) {
-    return this.http.put(`${this.API_URL}/updateByLiquidacionTerap/${id}`, service);
+  updateLiquidatedTherapist(id: number, service: ModelService) {
+    return this.http.put(`${this.API_URL}/liquidatedTherapist/${id}`, service);
   }
 
-  updateLiquidacionEncarg(id: number, service: ModelService) {
-    return this.http.put(`${this.API_URL}/updateByLiquidacionEncarg/${id}`, service);;
+  updateLiquidatedManager(id: number, service: ModelService) {
+    return this.http.put(`${this.API_URL}/liquidatedManager/${id}`, service);;
   }
 
   updateCierre(id: number, service: ModelService) {
@@ -377,12 +357,12 @@ export class ServiceService {
     return this.http.put(`${this.API_URL}/updateByValuePisos/${id}/${idUnico}`, service);
   }
 
-  updateTherapistSettlementTherapistIdByTherapistId(idTerapeuta: string, service: ModelService) {
-    return this.http.put(`${this.API_URL}/updatesTherapistSettlementTherapistIdByTherapistId/${idTerapeuta}`, service);
+  updateLiquidatedTherapistByIdTherap(idTherap: string, service: ModelService) {
+    return this.http.put(`${this.API_URL}/liquidatedTherapistByIdTherap/${idTherap}`, service);
   }
 
-  updateManagerSettlementManagerIdByManagerId(idEncargada: string, service: ModelService) {
-    return this.http.put(`${this.API_URL}/updatesManagerSettlementManagerIdByManagerId/${idEncargada}`, service);
+  updateLiquidatedManagerByIdManager(idManag: string, service: ModelService) {
+    return this.http.put(`${this.API_URL}/liquidatedManagerByIdManager/${idManag}`, service);
   }
 
   updateScreen(id: number, service: ModelService) {

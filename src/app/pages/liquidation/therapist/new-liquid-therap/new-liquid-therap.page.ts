@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import dayjs from "dayjs";
 
 // Models
 import { LiquidationTherapist } from 'src/app/core/models/liquidationTherapist';
@@ -29,7 +30,7 @@ export class NewLiquidTherapPage implements OnInit {
 
   terapeuta: any
   unliquidatedService: any
-  manager: any
+  manager = []
 
   id: number
   liquidated: any
@@ -72,6 +73,10 @@ export class NewLiquidTherapPage implements OnInit {
   totalReceived: string
 
   currentDate = new Date().getTime()
+  dateStart: string
+  dateEnd: string
+  hourStart: string
+  hourEnd: string
 
   modelServices: ModelService = {
     idTherap: "",
@@ -118,26 +123,35 @@ export class NewLiquidTherapPage implements OnInit {
 
   validitingUser() {
     this.serviceManager.getId(this.id).subscribe((rp) => {
-      this.company = rp[0].company
-      if (rp[0]['rol'] == 'Administrador') {
+      this.company = rp['manager'].company
+      if (rp['manager'].rol == 'Administrador') {
         this.administratorRole = true
         this.getManager()
       } else {
-        this.manager = rp
         this.administratorRole = false
-        this.modelLiquidation.manager = this.manager[0].nombre
+        this.manager = [rp['manager']]
+        this.modelLiquidation.manager = rp['manager'].name
         this.modelLiquidation.company = this.company
-        this.serviceLiquidation.getByManagerAndCompany(this.modelLiquidation.manager, rp[0]['company']).subscribe(async (rp) => {
-          this.liquidated = rp
+        this.serviceLiquidation.getByManagerAndCompany(this.modelLiquidation.manager, rp['manager'].company).subscribe(async (rp) => {
+          this.liquidated = rp['liquidTherapist']
         })
       }
     })
   }
 
+  getManager() {
+    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
+      this.modelLiquidation.company = rp['manager'].company
+      this.serviceManager.company(rp['manager'].company).subscribe((rp: any) => {
+        this.manager = rp['manager']
+      })
+    })
+  }
+
   getTherapist() {
     this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-      this.serviceTherapist.company(rp[0].company).subscribe((datosTerapeuta: any) => {
-        this.terapeuta = datosTerapeuta
+      this.serviceTherapist.company(rp['manager'].company).subscribe((rp: any) => {
+        this.terapeuta = rp['therapist']
       })
     })
   }
@@ -218,69 +232,42 @@ export class NewLiquidTherapPage implements OnInit {
     }
   }
 
-  getManager() {
-    this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-      this.modelLiquidation.company = rp[0].company
-      this.serviceManager.company(rp[0].company).subscribe((datosEncargada: any) => {
-        this.manager = datosEncargada
-      })
-    })
-  }
-
   async getThoseThatNotLiquidated() {
-    this.service.getByLiquidTerapFalse().subscribe(async (datoServicio) => {
-      this.unliquidatedService = datoServicio
+    this.service.getByLiquidateTherapistFalse().subscribe(async (rp) => {
+      this.unliquidatedService = rp['service']
     })
   }
 
   async dateExists() {
-    let fromMonth = '', fromDay = '', fromYear = '', convertMonth = '', convertDay = '',
-      untilMonth = 0, untilDay = 0, untilYear = 0, currentDate = new Date()
+    let fromMonth = '', fromDay = '', fromYear = ''
 
     await this.serviceLiquidation.getByManagerAndTherapist(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe(async (rp: any) => {
-      if (rp.length > 0) {
+      if (rp['liquidTherapist'].length > 0) {
         fromDay = rp[0]['dateEnd'].substring(0, 2)
         fromMonth = rp[0]['dateEnd'].substring(3, 5)
         fromYear = rp[0]['dateEnd'].substring(6, 8)
 
         this.modelLiquidation.dateStart = `${'20' + fromYear}-${fromMonth}-${fromDay}`
         this.modelLiquidation.dateStart = rp[0]['dateEnd']
-        await this.inputDateAndTime()
+        await this.inputDateAndTime(false, null)
       } else {
         await this.dateDoesNotExist()
       }
     })
 
-    untilDay = currentDate.getDate()
-    untilMonth = currentDate.getMonth() + 1
-    untilYear = currentDate.getFullYear()
-
-    if (untilMonth > 0 && untilMonth < 10) {
-      convertMonth = '0' + untilMonth
-      this.modelLiquidation.dateEnd = `${untilYear}-${convertMonth}-${untilDay}`
-    } else {
-      convertMonth = untilMonth.toString()
-      this.modelLiquidation.dateEnd = `${untilYear}-${convertMonth}-${untilDay}`
-    }
-
-    if (untilDay > 0 && untilDay < 10) {
-      convertDay = '0' + untilDay
-      this.modelLiquidation.dateEnd = `${untilYear}-${convertMonth}-${convertDay}`
-    } else {
-      this.modelLiquidation.dateEnd = `${untilYear}-${convertMonth}-${untilDay}`
-    }
+    this.modelLiquidation.dateEnd = dayjs().format("YYYY-MM-DD hh:mm")
   }
 
   async dateDoesNotExist() {
-    let año = "", mes = "", dia = ""
+    let año = "", mes = "", dia = "", hour = ""
 
-    await this.service.getTerapeutaFechaAsc(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe(async (rp) => {
-      año = rp[0]['fechaHoyInicio'].substring(0, 4)
-      mes = rp[0]['fechaHoyInicio'].substring(5, 7)
-      dia = rp[0]['fechaHoyInicio'].substring(8, 10)
-      this.modelLiquidation.dateStart = `${año}-${mes}-${dia}`
-      this.modelLiquidation.dateStart = rp[0]['horaStart']
-      await this.inputDateAndTime()
+    await this.service.getByTherapistAndManagerAndNotLiquidatedTherapistCurrentDateAsc(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe(async (rp) => {
+      año = rp['service'][0].dateToday.substring(0, 4)
+      mes = rp['service'][0].dateToday.substring(5, 7)
+      dia = rp['service'][0].dateToday.substring(8, 10)
+      hour = rp['service'][0].dateToday.substring(11, 16)
+      this.modelLiquidation.dateStart = `${año}-${mes}-${dia} ${hour}`
+      await this.inputDateAndTime(false, null)
     })
   }
 
@@ -289,8 +276,8 @@ export class NewLiquidTherapPage implements OnInit {
       this.getThoseThatNotLiquidated()
       this.ionLoaderService.simpleLoader()
 
-      this.service.getByTerapeutaAndEncargada(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe(async (resp: any) => {
-        if (resp.length > 0) {
+      this.service.getByTherapistAndManagerNotLiquidatedTherapist(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe(async (rp: any) => {
+        if (rp['service'].length > 0) {
           this.dates = false
           this.ionLoaderService.dismissLoader()
           await this.dateExists()
@@ -308,92 +295,103 @@ export class NewLiquidTherapPage implements OnInit {
     }
   }
 
-  async inputDateAndTime() {
-    this.service.getByTerapeutaEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.therapist,
-      this.modelLiquidation.manager, this.modelLiquidation.dateStart, this.modelLiquidation.dateEnd,
-      this.modelLiquidation.dateStart, this.modelLiquidation.dateEnd, this.modelLiquidation.company).subscribe(async (rp: any) => {
+  async inputDateAndTime(event, date) {
+    if (event == true) {
+      if (date == 'start')
+        this.modelLiquidation.dateStart = `${this.dateStart} ${this.hourStart}`
+      else
+        this.modelLiquidation.dateEnd = `${this.dateEnd} ${this.hourEnd}`
+    }
 
-        if (rp.length > 0) {
-          this.unliquidatedService = rp
+    this.dateStart = this.modelLiquidation.dateStart.substring(0, 10)
+    this.dateEnd = this.modelLiquidation.dateEnd.substring(0, 10)
+    this.hourStart = this.modelLiquidation.dateStart.substring(11, 16)
+    this.hourEnd = this.modelLiquidation.dateEnd.substring(11, 16)
+
+    this.service.getByTherapistAndManagerAndCompany(this.modelLiquidation.therapist,
+      this.modelLiquidation.manager, this.modelLiquidation.dateStart, this.modelLiquidation.dateEnd, this.modelLiquidation.company).subscribe(async (rp: any) => {
+
+        if (rp['service'].length > 0) {
+          this.unliquidatedService = rp['service']
 
           // Filter by servicio
-          const servicios = rp.filter(serv => serv)
+          const servicios = rp['service'].filter(serv => serv)
           let service = servicios.reduce((accumulator, serv) => {
-            return accumulator + serv.servicio
+            return accumulator + serv.service
           }, 0)
 
           // Filter by Propina
-          const propinas = rp.filter(serv => serv)
+          const propinas = rp['service'].filter(serv => serv)
           let tip = propinas.reduce((accumulator, serv) => {
-            return accumulator + serv.propina
+            return accumulator + serv.tip
           }, 0)
 
           // Filter by Pago
-          const terapeuta = rp.filter(serv => serv)
+          const terapeuta = rp['service'].filter(serv => serv)
           let therapistValue = terapeuta.reduce((accumulator, serv) => {
-            return accumulator + serv.numberTerap
+            return accumulator + serv.numberTherapist
           }, 0)
 
           // Filter by Bebida
-          const bebida = rp.filter(serv => serv)
+          const bebida = rp['service'].filter(serv => serv)
           let drink = bebida.reduce((accumulator, serv) => {
-            return accumulator + serv.bebidas
+            return accumulator + serv.drink
           }, 0)
 
           // Filter by Bebida
-          const drinkTherap = rp.filter(serv => serv)
+          const drinkTherap = rp['service'].filter(serv => serv)
           let drinkTherapist = drinkTherap.reduce((accumulator, serv) => {
-            return accumulator + serv.bebidaTerap
+            return accumulator + serv.drinkTherapist
           }, 0)
 
           // Filter by Tabaco
-          const tabac = rp.filter(serv => serv)
+          const tabac = rp['service'].filter(serv => serv)
           let tobacco = tabac.reduce((accumulator, serv) => {
-            return accumulator + serv.tabaco
+            return accumulator + serv.tabacco
           }, 0)
 
           // Filter by Vitamina
-          const vitamina = rp.filter(serv => serv)
+          const vitamina = rp['service'].filter(serv => serv)
           let vitamins = vitamina.reduce((accumulator, serv) => {
-            return accumulator + serv.vitaminas
+            return accumulator + serv.vitamin
           }, 0)
 
           // Filter by Vitamina
-          const otroServicio = rp.filter(serv => serv)
+          const otroServicio = rp['service'].filter(serv => serv)
           let others = otroServicio.reduce((accumulator, serv) => {
-            return accumulator + serv.otros
+            return accumulator + serv.others
           }, 0)
 
           // Filter by totalCash
-          const totalCashs = rp.filter(serv => serv)
+          const totalCashs = rp['service'].filter(serv => serv)
           let totalCash = totalCashs.reduce((accumulator, serv) => {
-            return accumulator + serv.valueEfectTerapeuta
+            return accumulator + serv.valueCash
           }, 0)
 
           // Filter by totalBizum
-          const totalBizums = rp.filter(serv => serv)
+          const totalBizums = rp['service'].filter(serv => serv)
           let totalBizum = totalBizums.reduce((accumulator, serv) => {
-            return accumulator + serv.valueBizuTerapeuta
+            return accumulator + serv.valueBizuTherapist
           }, 0)
 
           // Filter by totalCard
-          const totalCards = rp.filter(serv => serv)
+          const totalCards = rp['service'].filter(serv => serv)
           let totalCard = totalCards.reduce((accumulator, serv) => {
-            return accumulator + serv.valueTarjeTerapeuta
+            return accumulator + serv.valueCardTherapist
           }, 0)
 
           // Filter by totalTransaction
-          const totalTransactions = rp.filter(serv => serv)
+          const totalTransactions = rp['service'].filter(serv => serv)
           let totalTransaction = totalTransactions.reduce((accumulator, serv) => {
-            return accumulator + serv.valueTransTerapeuta
+            return accumulator + serv.valueTransactionTherapist
           }, 0)
 
           this.comission(service, tip, therapistValue, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
 
         } else {
-          this.unliquidatedService = rp
+          this.unliquidatedService = rp['service']
           this.ionLoaderService.dismissLoader()
-          this.dates = true
+          this.dates = false
           this.selected = true
           document.getElementById('overviewDates').style.height = '326px'
           document.getElementById('nuevaLiquidation').style.overflowY = 'auto'
@@ -409,16 +407,16 @@ export class NewLiquidTherapPage implements OnInit {
       sumCommission = 0, receivedTherapist = 0
 
     await this.serviceTherapist.name(this.modelLiquidation.therapist).subscribe(async (rp) => {
-      this.terapeutaName = rp[0]
+      this.terapeutaName = rp['therapist'][0]
 
       // Comision
-      comisiServicio = service / 100 * rp[0]?.servicio
-      comiPropina = tip / 100 * rp[0]?.propina
-      comiBebida = drink / 100 * rp[0]?.bebida
-      comiBebidaTherapist = drinkTherapist / 100 * rp[0]?.bebidaTerap
-      comiTabaco = tobacco / 100 * rp[0]?.tabaco
-      comiVitamina = vitamins / 100 * rp[0]?.vitamina
-      comiOtros = others / 100 * rp[0]?.otros
+      comisiServicio = service / 100 * rp['therapist'][0]?.service
+      comiPropina = tip / 100 * rp['therapist'][0]?.tip
+      comiBebida = drink / 100 * rp['therapist'][0]?.drink
+      comiBebidaTherapist = drinkTherapist / 100 * rp['therapist'][0]?.drinkTherapist
+      comiTabaco = tobacco / 100 * rp['therapist'][0]?.tabacco
+      comiVitamina = vitamins / 100 * rp['therapist'][0]?.vitamin
+      comiOtros = others / 100 * rp['therapist'][0]?.others
 
       let totalTreatment = Number(comisiServicio.toFixed(1))
       let totalTip = Number(comiPropina.toFixed(1))
@@ -434,10 +432,10 @@ export class NewLiquidTherapPage implements OnInit {
         sumCommission = Number(sumComision.toFixed(1))
       }
 
-      element.map(item => {
+      element['service'].map(item => {
         const numbTerap = this.unliquidatedService.filter(serv => serv)
         receivedTherapist = numbTerap.reduce((accumulator, serv) => {
-          return accumulator + serv.numberTerap
+          return accumulator + serv.numberTherapist
         }, 0)
       })
 
@@ -547,41 +545,40 @@ export class NewLiquidTherapPage implements OnInit {
       this.totalReceived = receivedTherapist.toString()
 
     for (let o = 0; o < this.unliquidatedService?.length; o++) {
-
-      if (this.unliquidatedService[o]?.servicio > 999)
-        this.unliquidatedService[o]['servicio'] = (this.unliquidatedService[o]?.servicio / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.service > 999)
+        this.unliquidatedService[o]['service'] = (this.unliquidatedService[o]?.service / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['servicio'] = this.unliquidatedService[o]?.servicio.toString()
+        this.unliquidatedService[o]['service'] = this.unliquidatedService[o]?.service.toString()
 
-      if (this.unliquidatedService[o]?.propina > 999)
-        this.unliquidatedService[o]['propina'] = (this.unliquidatedService[o]?.propina / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.tip > 999)
+        this.unliquidatedService[o]['tip'] = (this.unliquidatedService[o]?.tip / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['propina'] = this.unliquidatedService[o]?.propina.toString()
+        this.unliquidatedService[o]['tip'] = this.unliquidatedService[o]?.tip.toString()
 
-      if (this.unliquidatedService[o]?.numberTerap > 999)
-        this.unliquidatedService[o]['numberTerap'] = (this.unliquidatedService[o]?.numberTerap / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.numberTherapist > 999)
+        this.unliquidatedService[o]['numberTherapist'] = (this.unliquidatedService[o]?.numberTherapist / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['numberTerap'] = this.unliquidatedService[o]?.numberTerap.toString()
+        this.unliquidatedService[o]['numberTherapist'] = this.unliquidatedService[o]?.numberTherapist.toString()
 
-      if (this.unliquidatedService[o]?.bebidas > 999)
-        this.unliquidatedService[o]['bebidas'] = (this.unliquidatedService[o]?.bebidas / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.drink > 999)
+        this.unliquidatedService[o]['drink'] = (this.unliquidatedService[o]?.drink / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['bebidas'] = this.unliquidatedService[o]?.bebidas.toString()
+        this.unliquidatedService[o]['drink'] = this.unliquidatedService[o]?.drink.toString()
 
-      if (this.unliquidatedService[o]?.tabaco > 999)
-        this.unliquidatedService[o]['tabaco'] = (this.unliquidatedService[o]?.tabaco / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.tabacco > 999)
+        this.unliquidatedService[o]['tabacco'] = (this.unliquidatedService[o]?.tabacco / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['tabaco'] = this.unliquidatedService[o]?.tabaco.toString()
+        this.unliquidatedService[o]['tabacco'] = this.unliquidatedService[o]?.tabacco.toString()
 
-      if (this.unliquidatedService[o]?.vitaminas > 999)
-        this.unliquidatedService[o]['vitaminas'] = (this.unliquidatedService[o]?.vitaminas / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.vitamin > 999)
+        this.unliquidatedService[o]['vitamin'] = (this.unliquidatedService[o]?.vitamin / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['vitaminas'] = this.unliquidatedService[o]?.vitaminas.toString()
+        this.unliquidatedService[o]['vitamin'] = this.unliquidatedService[o]?.vitamin.toString()
 
-      if (this.unliquidatedService[o]?.otros > 999)
-        this.unliquidatedService[o]['otros'] = (this.unliquidatedService[o]?.otros / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.others > 999)
+        this.unliquidatedService[o]['others'] = (this.unliquidatedService[o]?.others / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['otros'] = this.unliquidatedService[o]?.otros.toString()
+        this.unliquidatedService[o]['others'] = this.unliquidatedService[o]?.others.toString()
     }
 
     if (totalCash > 999)
@@ -612,10 +609,10 @@ export class NewLiquidTherapPage implements OnInit {
 
   edit(id: number) {
     this.service.getById(id).subscribe((rp: any) => {
-      if (rp.length > 0) {
+      if (rp.status == 200) {
         this.modelServices.screen = 'new-liquiationTherapist'
-        this.service.updateScreen(rp[0]['id'], this.modelServices).subscribe(async (rp: any) => { })
-        this.router.navigate([`tabs/${this.id}/edit-services/${rp[0]['id']}`])
+        this.service.updateScreen(rp['service'].id, this.modelServices).subscribe(async (rp: any) => { })
+        this.router.navigate([`tabs/${this.id}/edit-services/${rp['service'].id}`])
       }
     })
   }
@@ -629,7 +626,10 @@ export class NewLiquidTherapPage implements OnInit {
     document.getElementById('overviewDates').style.height = '165px'
     this.dates = false
     this.selected = false
-    this.modelLiquidation.manager = ""
+
+    if (this.administratorRole == true)
+      this.modelLiquidation.manager = ""
+
     this.modelLiquidation.therapist = ""
     this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
   }
@@ -648,26 +648,6 @@ export class NewLiquidTherapPage implements OnInit {
     return this.modelLiquidation.uniqueId
   }
 
-  formatDate() {
-    let fromDay = '', fromMonth = '', fromYear = '', untilDay = '', untilMonth = '', untilYear = ''
-
-    // From 
-
-    fromDay = this.modelLiquidation.dateStart.substring(8, 10)
-    fromMonth = this.modelLiquidation.dateStart.substring(5, 7)
-    fromYear = this.modelLiquidation.dateStart.substring(2, 4)
-
-    this.modelLiquidation.dateStart = `${fromDay}-${fromMonth}-${fromYear}`
-
-    // Until
-
-    untilDay = this.modelLiquidation.dateEnd.substring(8, 10)
-    untilMonth = this.modelLiquidation.dateEnd.substring(5, 7)
-    untilYear = this.modelLiquidation.dateEnd.substring(2, 4)
-
-    this.modelLiquidation.dateEnd = `${untilDay}-${untilMonth}-${untilYear}`
-  }
-
   save() {
     if (this.modelLiquidation.therapist != "") {
       if (this.modelLiquidation.manager != "") {
@@ -675,24 +655,25 @@ export class NewLiquidTherapPage implements OnInit {
 
           this.createUniqueId()
           this.modelLiquidation.currentDate = this.currentDate
-          this.formatDate()
-
           this.ionLoaderService.simpleLoader()
 
           this.serviceLiquidation.getByManagerAndTherapist(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe((rp: any) => {
 
-            if (rp.length > 0) {
+            if (rp['liquidTherapist'].length > 0) {
 
               for (let o = 0; o < this.unliquidatedService.length; o++) {
                 this.modelLiquidation.treatment = this.unliquidatedService.length
                 this.modelServices.liquidatedTherapist = true
-                this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
+                this.service.updateLiquidatedTherapist(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
               }
 
               this.serviceLiquidation.save(this.modelLiquidation).subscribe(async (rp) => {
                 this.selected = false
                 this.dates = false
-                this.modelLiquidation.manager = ""
+
+                if (this.administratorRole == true)
+                  this.modelLiquidation.manager = ""
+
                 this.modelLiquidation.therapist = ""
                 localStorage.clear()
                 this.ionLoaderService.dismissLoader()
@@ -701,17 +682,20 @@ export class NewLiquidTherapPage implements OnInit {
               })
             }
 
-            else if (rp.length == 0) {
+            else if (rp['liquidTherapist'].length == 0) {
 
               for (let o = 0; o < this.unliquidatedService.length; o++) {
                 this.modelLiquidation.treatment = this.unliquidatedService.length
-                this.service.updateLiquidacionTerap(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
+                this.service.updateLiquidatedTherapist(this.unliquidatedService[o].id, this.modelServices).subscribe((rp) => { })
               }
 
               this.serviceLiquidation.save(this.modelLiquidation).subscribe(async (rp) => {
                 this.selected = false
                 this.dates = false
-                this.modelLiquidation.manager = ""
+
+                if (this.administratorRole == true)
+                  this.modelLiquidation.manager = ""
+
                 this.modelLiquidation.therapist = ""
                 localStorage.clear()
                 this.ionLoaderService.dismissLoader()

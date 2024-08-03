@@ -1284,8 +1284,8 @@ export class ManagerPage {
         if (result.isConfirmed) {
           this.modelServices.idManag = ""
           this.modelServices.liquidatedManager = false
-          this.services.updateManagerSettlementManagerIdByManagerId(this.idManager, this.modelServices).subscribe(async (rp) => {
-            this.serviceLiquidation.deleteLiquidationManager(this.idDetail).subscribe(async (rp) => {
+          this.services.updateLiquidatedManagerByIdManager(this.idManager, this.modelServices).subscribe(async (rp) => {
+            this.serviceLiquidation.delete(this.idDetail).subscribe(async (rp) => {
               if (this.administratorRole == true) {
                 await this.getLiquidation()
               }

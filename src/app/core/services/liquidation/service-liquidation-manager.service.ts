@@ -64,7 +64,7 @@ export class ServiceLiquidationManagerService {
 
   // Delete
 
-  deleteLiquidationManager(id: number) {
+  delete(id: number) {
     return this.http.delete(`${this.API_URL}/${id}`);
   }
 }
