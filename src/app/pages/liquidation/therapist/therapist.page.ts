@@ -34,7 +34,7 @@ export class TherapistPage implements OnInit {
   selectedTerapeuta: string
 
   manager = []
-  selectedEncargada: string
+  selectManager: string
   selectedFormPago: string
 
   id: number
@@ -148,7 +148,7 @@ export class TherapistPage implements OnInit {
   async ngOnInit() {
     const params = this.activatedRoute.snapshot['_routerState']['_root']['children'][0]['value']['params'];
     this.id = Number(params['id'])
-    this.selectedEncargada = ""
+    this.selectManager = ""
     this.selectedTerapeuta = ""
     this.selectedFormPago = ""
     this.todaysDdate()
@@ -170,7 +170,7 @@ export class TherapistPage implements OnInit {
       } else {
         this.manager = [rp['manager']]
         this.administratorRole = false
-        this.selectedEncargada = rp['manager'].name
+        this.selectManager = rp['manager'].name
         this.liquidationTherapist.manager = this.manager[0].name
         this.serviceLiquidation.getByManagerAndCompany(this.liquidationTherapist.manager, rp['manager'].company).subscribe(async (rp: any) => {
           this.liquidated = rp['liquidTherapist']
@@ -244,7 +244,7 @@ export class TherapistPage implements OnInit {
     }
 
     const managerCondition = serv => {
-      return (this.selectedEncargada) ? serv.encargada === this.selectedEncargada : true
+      return (this.selectManager) ? serv.encargada === this.selectManager : true
     }
 
     const conditionBetweenDates = serv => {
@@ -295,7 +295,6 @@ export class TherapistPage implements OnInit {
       this.liquidated[i].date2 = `${day}-${month}-${year}`
     }
 
-
     if (Array.isArray(this.liquidated)) {
       const servicios = this.liquidated.filter(serv => therapistCondition(serv) && managerCondition(serv) && conditionBetweenDates(serv) && conditionBetweenHours(serv))
       this.total(servicios)
@@ -304,7 +303,7 @@ export class TherapistPage implements OnInit {
 
   emptyFilter() {
     this.selectedTerapeuta = ""
-    this.selectedEncargada = ""
+    this.selectManager = ""
     this.dateStart = this.CurrenDate
     this.dateEnd = this.CurrenDate
     this.buttonEmpty = true

@@ -26,20 +26,8 @@ export class ServiceService {
 
   // Get
 
-  geyByCurrentDesc() {
-    return this.http.get(`${this.API_URL}/getByCierreTrue`);
-  }
-
-  getByTherapistAndManagerNotLiquidatedTherapist(terapeuta: string, encargada: string) {
-    return this.http.get(`${this.API_URL}/therapistAndManagerNotLiquidatedTherapist/${terapeuta}/${encargada}`);
-  }
-
-  getByEncargada(encargada: string) {
-    return this.http.get(`${this.API_URL}/getEncargada/${encargada}`);
-  }
-
-  getByManagerOrder(encargada: string) {
-    return this.http.get(`${this.API_URL}/getManagerOrderCurrentDate/${encargada}`);
+  getByTherapistAndManagerNotLiquidatedTherapist(therapist: string, manager: string) {
+    return this.http.get(`${this.API_URL}/therapistAndManagerNotLiquidatedTherapist/${therapist}/${manager}`);
   }
 
   getService() {
@@ -58,12 +46,8 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/idTherapist/${idTherap}`);
   }
 
-  getByIdEncarg(idEncargada: string) {
-    return this.http.get(`${this.API_URL}/getIdEncargada/${idEncargada}`);
-  }
-
-  geyByCierreFalse() {
-    return this.http.get(`${this.API_URL}/getCierreFalse`);
+  getByIdManager(idManag: string) {
+    return this.http.get(`${this.API_URL}/idManager/${idManag}`);
   }
 
   getById(id: number) {
@@ -74,65 +58,12 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/idEditTrue/${id}`);
   }
 
-  getTerapeutaByAsc(terapeuta: string) {
-    return this.http.get(`${this.API_URL}/getByTerapeutaAsc/${terapeuta}`);
-  }
-
   getByTherapistIdDesc(therapist: string) {
     return this.http.get(`${this.API_URL}/therapistIdDesc/${therapist}`);
   }
 
-  getTerapeuta(terapeuta: string) {
-    return this.http.get(`${this.API_URL}/getByTerapeuta/${terapeuta}`);
-  }
-
-  getEncargada(encargada: string) {
-    return this.http.get(`${this.API_URL}/getByEncargada/${encargada}`);
-  }
-
   getByTodayDateAndManagerAndCompanyCurrentDateDesc(dateToday: string, manager: string, company: string) {
     return this.http.get(`${this.API_URL}/todayDateAndManagerAndCompanyCurrentDateDesc/${dateToday}/${manager}/${company}`);
-  }
-
-  getTerapeutaEncargada(terapeuta: string, encargada: string) {
-    return this.http.get(`${this.API_URL}/getTerapeuAndEncar`, {
-      params: {
-        terapeuta,
-        encargada
-      }
-    });
-  }
-
-  getEncargadaAndLiquidacion(encargada: string) {
-    return this.http.get(`${this.API_URL}/getEncargadaLiquidacionFalse/${encargada}`);
-  }
-
-  getEncargadaNoLiquidadaTerap(encargada: string) {
-    return this.http.get(`${this.API_URL}/getEncargadaLiquidadoTerpFalse/${encargada}`);
-  }
-
-  getEncargadaNoLiquidada(encargada: string) {
-    return this.http.get(`${this.API_URL}/getEncargNoLiquid/${encargada}`);
-  }
-
-  getEncargadaNoLiquidadaByFechaDesc(encargada: string) {
-    return this.http.get(`${this.API_URL}/getEncargNoLiquidByFechaDesc/${encargada}`);
-  }
-
-  getTerapNoLiquidadaByFechaDesc(encargada: string) {
-    return this.http.get(`${this.API_URL}/getTerapgNoLiquidByFechaDesc/${encargada}`);
-  }
-
-  getEncargadaNoLiquidadaByFechaAsc(encargada: string) {
-    return this.http.get(`${this.API_URL}/getNoEncargNoLiquidByFechaAsc/${encargada}`);
-  }
-
-  getTerapNoLiquidadaByFechaAsc(encargada: string) {
-    return this.http.get(`${this.API_URL}/getNoTerapNoLiquidByFechaAsc/${encargada}`);
-  }
-
-  getEncargadaNoCierre(encargada: string) {
-    return this.http.get(`${this.API_URL}/getByEncargadaNoCierre/${encargada}`);
   }
 
   getByTherapistAndManagerAndNotLiquidatedTherapistCurrentDateAsc(therapist: string, manager: string) {
@@ -143,32 +74,6 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/therapistAndManagerAndLiquidatedTherapistCurrentDateAsc/${therapist}/${manager}`);
   }
 
-  getEncargadaFechaAscByLiqTrue(encargada: string) {
-    return this.http.get(`${this.API_URL}/getEncargFechaAscByLiqTrue/${encargada}`);
-  }
-
-  getEncargFechaAsc(encargada: string) {
-    return this.http.get(`${this.API_URL}/getEncargFechaAscByLiqFalse/${encargada}`);
-  }
-
-  getTerapeutaFechaDesc(terapeuta: string, encargada: string) {
-    return this.http.get(`${this.API_URL}/getTerapeutaAndEncargadaFechaDesc`, {
-      params: {
-        terapeuta,
-        encargada
-      }
-    });
-  }
-
-  getTerapeutaFechaDescByLiqTrue(terapeuta: string, encargada: string) {
-    return this.http.get(`${this.API_URL}/getTerapeutaAndEncargadaFechaDescLiqTrue`, {
-      params: {
-        terapeuta,
-        encargada
-      }
-    });
-  }
-
   getByManagerAndLiquidatedManagerCurrentDateDesc(manager: string) {
     return this.http.get(`${this.API_URL}/managerAndLiquidatedManagerCurrentDateDesc/${manager}`);
   }
@@ -177,24 +82,20 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/therapistCurrentDateDesc/${therapist}`);
   }
 
-  getEncargFechaDesc(encargada: string) {
-    return this.http.get(`${this.API_URL}/getByEncargFechaDesc/${encargada}`);
+  getByManagerAndNotLiquidatedManagerCurrentDateAsc(manager: string) {
+    return this.http.get(`${this.API_URL}/managerAndNotLiquidatedManagerCurrentDateAsc/${manager}`);
   }
 
-  getEncargadaFechaAsc(encargada: string) {
-    return this.http.get(`${this.API_URL}/getByEncargadaFechaAsc/${encargada}`);
-  }
-
-  getEncargadaFechaDesc(encargada: string) {
-    return this.http.get(`${this.API_URL}/getByEncargadaFechaDesc/${encargada}`);
+  getByManagerAndNotLiquidatedManager(manager: string) {
+    return this.http.get(`${this.API_URL}/managerAndNotLiquidatedManager/${manager}`);
   }
 
   getByDateDayAndCompantCurrentDateDesc(dateToday: string, company: string) {
     return this.http.get(`${this.API_URL}/dateDayAndCompantCurrentDateDesc/${dateToday}/${company}`);
   }
 
-  getIdDescendente(idUnico: string) {
-    return this.http.get(`${this.API_URL}/getByIdDesc/${idUnico}`);
+  getByUniqueIdDesc(uniqueId: string) {
+    return this.http.get(`${this.API_URL}/uniqueIdDesc/${uniqueId}`);
   }
 
   getbYTerapeutaEncargadaFechaHoraInicio(terapeuta: string, encargada: string, fecha: string, horaStart: string) {
@@ -205,95 +106,20 @@ export class ServiceService {
     return this.http.get(`${this.API_URL}/therapistAndManagerAndCompany/${therapist}/${manager}/${dateStart}/${dateEnd}/${company}`);
   }
 
-  getByEncargadaFechaHoraInicioFechaHoraFin(encargada: string, horaStart: string, horaEnd: string, fecha: string, fechaFin: string, company: string) {
-    return this.http.get(`${this.API_URL}/getEncargadaFechaHoraInicioFechaHoraFin`, {
-      params: {
-        encargada,
-        fecha,
-        horaStart,
-        fechaFin,
-        horaEnd,
-        company
-      }
-    });
-  }
-
-  getManagerWithDate(encargada: string, fecha: string) {
-    return this.http.get(`${this.API_URL}/getManagerWithDate`, {
-      params: {
-        encargada,
-        fecha
-      }
-    });
-  }
-
-  getTherapistWithDate(terapeuta: string, fecha: string) {
-    return this.http.get(`${this.API_URL}/getTherapistWithDate`, {
-      params: {
-        terapeuta,
-        fecha
-      }
-    });
-  }
-
-  getManagerpaymentForm(encargada: string, fecha: string) {
-    return this.http.get(`${this.API_URL}/getManagerpaymentForm`, {
-      params: {
-        encargada,
-        fecha
-      }
-    });
-  }
-
-  getTherapistpaymentForm(terapeuta: string, fecha: string) {
-    return this.http.get(`${this.API_URL}/getTherapistpaymentForm`, {
-      params: {
-        terapeuta,
-        fecha
-      }
-    });
-  }
-
-
-  getManagerAndDate(encargada: string, fecha: string, fechaFin: string) {
-    return this.http.get(`${this.API_URL}/getManagerAndDate`, {
-      params: {
-        encargada,
-        fecha,
-        fechaFin
-      }
-    });
-  }
-
-  getpaymentFormAndDate(formaPago: string, fecha: string, fechaFin: string) {
-    return this.http.get(`${this.API_URL}/getpaymentFormAndDate`, {
-      params: {
-        formaPago,
-        fecha,
-        fechaFin
-      }
-    });
-  }
-
-  getFechaAndId(id: number, fechaHoyInicio: string) {
-    return this.http.get(`${this.API_URL}/getFechaWithId`, {
-      params: {
-        id,
-        fechaHoyInicio
-      }
-    });
+  getByManagerAndDateStartAndDateEndAndCompany(manager: string, dateStart: string, dateEnd: string, company: string) {
+    return this.http.get(`${this.API_URL}/managerAndDateStartAndDateEndAndCompany/${manager}/${dateStart}/${dateEnd}/${company}`);
   }
 
   getByTherapistNotLiquidatedTherapist(therapist: string) {
     return this.http.get(`${this.API_URL}/therapistNotLiquidatedTherapist/${therapist}`);
   }
 
-  getManagerLiqFalse(encargada: string) {
-    return this.http.get(`${this.API_URL}/getByManagerLiquidatedZero/${encargada}`);
+  getByManagerNotLiquidatedManager(manager: string) {
+    return this.http.get(`${this.API_URL}/managerNotLiquidatedManager/${manager}`);
   }
 
-  getPaymentForm(formaPago: string) {
-    return this.http.get(`${this.API_URL}/getPaymenForm/${formaPago}`);
+  getLikePayment(payment: string) {
+    return this.http.get(`${this.API_URL}/getLikePayment/${payment}`);
   }
 
   getByTodayDateAndTherapistAndCompany(dateToday: string, therapist: string, company: string) {

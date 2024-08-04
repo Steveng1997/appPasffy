@@ -81,7 +81,7 @@
           </div>
 
           <div class="rectangle-104" *ngFor="let liquidation of (liquidated | therapist: selectedTerapeuta  
-          | manager: selectedEncargada | dateLiquidation: dateStart:dateEnd ) | 
+          | manager: selectManager | dateLiquidation: dateStart:dateEnd ) | 
           paginate: { itemsPerPage: 12, currentPage: page }" (click)="detail(liquidation.idTherap)">
             <div style="position: relative; top: 0px">
               <div class="lili9">{{liquidation.manager}}</div>
@@ -137,7 +137,7 @@
   <div class="component-7">
     <div class="rectangle-34"></div>
     <ion-select class="seleccionar_1" style="display: grid; min-height: -webkit-fill-available" placeholder="Selecciona"
-      [(ngModel)]="selectedEncargada" (ngModelChange)="filters()">
+      [(ngModel)]="selectManager" (ngModelChange)="filters()">
       <ion-select-option *ngFor="let manager of manager">{{manager.name}}</ion-select-option>
     </ion-select>
   </div>

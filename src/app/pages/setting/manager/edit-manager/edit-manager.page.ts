@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
+import dayjs from "dayjs";
 
 // Model
 import { ModelManager } from 'src/app/core/models/manager';
@@ -23,21 +24,20 @@ export class EditManagerPage implements OnInit {
   iduser: number
   managers = []
   currentDate = new Date().getTime()
+  company: string
 
   liquidationManager: LiquidationManager = {
-    currentDate: "",
-    desdeFechaLiquidado: "",
-    desdeHoraLiquidado: "",
-    encargada: "",
-    fixedDay: 0,
-    hastaFechaLiquidado: "",
-    hastaHoraLiquidado: new Date().toTimeString().substring(0, 5),
-    createdDate: "",
+    amount: 0,
+    company: "",
+    currentDate: 0,
+    dateStart: "",
+    dateEnd: dayjs().format("YYYY-MM-DD HH:mm"),
+    fixeDay: 0,
     id: 0,
-    idUnico: "",
-    idEncargada: "",
-    importe: 0,
-    tratamiento: 0,
+    idManag: "",
+    manager: "",
+    treatment: 0,
+    uniqueId: ""
   }
 
   manager: ModelManager = {
@@ -79,14 +79,15 @@ export class EditManagerPage implements OnInit {
     this.iduser = param['id']
 
     this.serviceManager.getId(this.id).subscribe((rp) => {
+      this.company = rp['manager'].company
       this.managers = [rp['manager']]
     })
   }
 
   async getManagerLiquidationFalse(name) {
-    await this.services.getManagerLiqFalse(name).subscribe(async (rp: any) => {
+    await this.services.getByManagerNotLiquidatedManager(name).subscribe(async (rp: any) => {
       if (rp.length > 0) {
-        this.liquidationManager.tratamiento = rp.length
+        this.liquidationManager.treatment = rp.length
         this.modelService.liquidatedManager = true
 
         for (let i = 0; i < rp.length; i++) {
@@ -97,43 +98,25 @@ export class EditManagerPage implements OnInit {
   }
 
   async date(name: string) {
-    let fecha = new Date(), añoHasta = 0, mesHasta = 0, diaHasta = 0, convertMes = '', convertDia = '',
-      añoDesde = "", mesDesde = "", diaDesde = ""
+    let untilYear = "", untilMonth = "", untilDay = ""
 
-    diaHasta = fecha.getDate()
-    mesHasta = fecha.getMonth() + 1
-    añoHasta = fecha.getFullYear()
-
-    if (mesHasta > 0 && mesHasta < 10) {
-      convertMes = '0' + mesHasta
-      this.liquidationManager.hastaFechaLiquidado = `${añoHasta}-${convertMes}-${diaHasta}`
-    } else {
-      convertMes = mesHasta.toString()
-      this.liquidationManager.hastaFechaLiquidado = `${añoHasta}-${convertMes}-${diaHasta}`
-    }
-
-    if (diaHasta > 0 && diaHasta < 10) {
-      convertDia = '0' + diaHasta
-      this.liquidationManager.hastaFechaLiquidado = `${añoHasta}-${convertMes}-${convertDia}`
-    } else {
-      this.liquidationManager.hastaFechaLiquidado = `${añoHasta}-${convertMes}-${diaHasta}`
-    }
-
-    this.serviceLiquidationManager.getByEncargada(name).subscribe(async (rp: any) => {
+    this.serviceLiquidationManager.getByManager(name).subscribe(async (rp: any) => {
       if (rp.length > 0) {
-        añoDesde = rp[0]['desdeFechaLiquidado'].toString().substring(2, 4)
-        mesDesde = rp[0]['desdeFechaLiquidado'].toString().substring(5, 7)
-        diaDesde = rp[0]['desdeFechaLiquidado'].toString().substring(8, 10)
-        this.liquidationManager.desdeFechaLiquidado = `${añoDesde}-${mesDesde}-${diaDesde}`
-        this.liquidationManager.desdeHoraLiquidado = rp[0]['hastaHoraLiquidado']
+        untilYear = rp['liquidTherapist'][0].dateEnd.toString().substring(2, 4)
+        untilMonth = rp['liquidTherapist'][0].dateEnd.toString().substring(5, 7)
+        untilDay = rp['liquidTherapist'][0].dateEnd.toString().substring(8, 10)
+        this.liquidationManager.dateStart = `${untilYear}-${untilMonth}-${untilDay}`
+        this.liquidationManager.dateStart = rp['liquidTherapist'][0].dateEnd
       } else {
-        this.services.getManagerLiqFalse(name).subscribe(async (rp: any) => {
+        this.services.getByManagerNotLiquidatedManager(name).subscribe(async (rp: any) => {
           if (rp.length > 0) {
-            añoDesde = rp[0]['fechaHoyInicio'].substring(0, 4)
-            mesDesde = rp[0]['fechaHoyInicio'].substring(5, 7)
-            diaDesde = rp[0]['fechaHoyInicio'].substring(8, 10)
-            this.liquidationManager.desdeFechaLiquidado = `${añoDesde}-${mesDesde}-${diaDesde}`
-            this.liquidationManager.desdeHoraLiquidado = rp[0]['horaStart']
+            untilYear = rp['service'][0]['dateToday'].substring(0, 4)
+            untilMonth = rp['service'][0]['dateToday'].substring(5, 7)
+            untilDay = rp['service'][0]['dateToday'].substring(8, 10)
+            this.liquidationManager.dateStart = `${untilYear}-${untilMonth}-${untilDay}`
+            this.liquidationManager.dateStart = rp['liquidTherapist'][0].dateEnd
+          } else {
+            this.liquidationManager.dateStart = dayjs().format("YYYY-MM-DD HH:mm")
           }
         })
       }
@@ -149,32 +132,9 @@ export class EditManagerPage implements OnInit {
     })
 
     this.modelService.idManag = uuid
-    this.liquidationManager.idUnico = uuid
-    this.liquidationManager.idEncargada = uuid
-    return this.liquidationManager.idUnico
-  }
-
-  dateCurrentDay() {
-    let date = new Date(), day = 0, month = 0, year = 0, convertMonth = '', convertDay = ''
-
-    day = date.getDate()
-    month = date.getMonth() + 1
-    year = date.getFullYear()
-
-    if (month > 0 && month < 10) {
-      convertMonth = '0' + month
-      this.liquidationManager.createdDate = `${year}-${convertMonth}-${day}`
-    } else {
-      convertMonth = month.toString()
-      this.liquidationManager.createdDate = `${year}-${month}-${day}`
-    }
-
-    if (day > 0 && day < 10) {
-      convertDay = '0' + day
-      this.liquidationManager.createdDate = `${year}-${convertMonth}-${convertDay}`
-    } else {
-      this.liquidationManager.createdDate = `${year}-${convertMonth}-${day}`
-    }
+    this.liquidationManager.uniqueId = uuid
+    this.liquidationManager.idManag = uuid
+    return this.liquidationManager.uniqueId
   }
 
   delete(id: number, name: string) {
@@ -191,9 +151,9 @@ export class EditManagerPage implements OnInit {
         }).then(async (result) => {
           if (result.isConfirmed) {
             this.ionLoaderService.simpleLoader()
-            this.liquidationManager.currentDate = this.currentDate.toString()
-            this.liquidationManager.encargada = name
-            this.dateCurrentDay()
+            this.liquidationManager.currentDate = this.currentDate
+            this.liquidationManager.manager = name
+            this.liquidationManager.company = this.company
             this.createIdUnique()
             await this.date(name)
             await this.getManagerLiquidationFalse(name)

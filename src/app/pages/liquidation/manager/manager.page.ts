@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import dayjs from "dayjs";
 
 // Models
 import { LiquidationManager } from 'src/app/core/models/liquidationManager';
@@ -28,8 +29,8 @@ export class ManagerPage {
   buttonDelete: boolean = false
   buttonEmpty: boolean = false
 
-  manager: any
-  selectedEncargada: string
+  manager = []
+  selectManager: string
   company: string
 
   id: number
@@ -113,20 +114,17 @@ export class ManagerPage {
   // --------------------------------
 
   liquidationManager: LiquidationManager = {
+    amount: 0,
     company: "",
-    currentDate: "",
-    desdeFechaLiquidado: "",
-    desdeHoraLiquidado: "",
-    encargada: "",
-    fixedDay: 0,
-    hastaFechaLiquidado: "",
-    hastaHoraLiquidado: new Date().toTimeString().substring(0, 5),
-    createdDate: "",
+    currentDate: 0,
+    dateStart: "",
+    dateEnd: dayjs().format("YYYY-MM-DD HH:mm"),
+    fixeDay: 0,
     id: 0,
-    idUnico: "",
-    idEncargada: "",
-    importe: 0,
-    tratamiento: 0,
+    idManag: "",
+    manager: "",
+    treatment: 0,
+    uniqueId: ""
   }
 
   modelServices: ModelService = {
@@ -157,15 +155,16 @@ export class ManagerPage {
 
   validitingUser() {
     this.serviceManager.getId(this.id).subscribe((rp) => {
-      this.company = rp[0].company
-      if (rp[0]['rol'] == 'Administrador') {
+      this.company = rp['manager'].company
+      if (rp['manager'].rol == 'Administrador') {
         this.administratorRole = true
         this.GetAllManagers()
       } else {
-        this.manager = rp
+        this.manager = [rp['manager']]
         this.administratorRole = false
-        this.liquidationManager.encargada = this.manager[0].nombre
-        this.serviceLiquidation.getByEncargada(this.liquidationManager.encargada).subscribe(async (rp) => {
+        this.selectManager = rp['manager'].name
+        this.liquidationManager.manager = this.manager[0].nombre
+        this.serviceLiquidation.getByManager(this.liquidationManager.manager).subscribe(async (rp) => {
           this.liquidated = rp
         })
       }
@@ -173,28 +172,44 @@ export class ManagerPage {
   }
 
   async consultLiquidationManager() {
-    this.serviceLiquidation.getByEncargada(this.liquidationManager.encargada).subscribe(async (rp) => {
+    this.serviceLiquidation.getByManager(this.liquidationManager.manager).subscribe(async (rp) => {
       this.liquidated = rp
       this.total(rp)
-      this.liquidationManager.encargada = ""
+      this.liquidationManager.manager = ""
     })
   }
 
   getLiquidation = async () => {
+    let day = '', month = '', year = ''
     this.dateTodayCurrent = 'HOY'
 
     this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-      this.company = rp[0].company
-      this.serviceLiquidation.getLiquidacionesEncargada(rp[0].company).subscribe(async (rp: any) => {
-        this.liquidated = rp
+      this.company = rp['manager'].company
+      this.serviceLiquidation.getByCompany(rp['manager'].company).subscribe(async (rp: any) => {
+
+        for (let i = 0; i < rp['liquidManager'].length; i++) {
+          rp['liquidManager'][i].hourStart = rp['liquidManager'][i].dateStart.substring(11, 16)
+          day = rp['liquidManager'][i].dateStart.substring(8, 10)
+          month = rp['liquidManager'][i].dateStart.substring(5, 7)
+          year = rp['liquidManager'][i].dateStart.substring(2, 4)
+          rp['liquidManager'][i].date = `${day}-${month}-${year}`
+
+          rp['liquidManager'][i].hourEnd = rp['liquidManager'][i].dateEnd.substring(11, 16)
+          day = rp['liquidManager'][i].dateEnd.substring(8, 10)
+          month = rp['liquidManager'][i].dateEnd.substring(5, 7)
+          year = rp['liquidManager'][i].dateEnd.substring(2, 4)
+          rp['liquidManager'][i].date2 = `${day}-${month}-${year}`
+        }
+
+        this.liquidated = rp['liquidManager']
       })
     })
   }
 
   GetAllManagers() {
     this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-      this.serviceManager.company(rp[0].company).subscribe((datosEncargada: any) => {
-        this.manager = datosEncargada
+      this.serviceManager.company(rp['manager'].company).subscribe((rp: any) => {
+        this.manager = rp['manager']
       })
     })
   }
@@ -223,15 +238,15 @@ export class ManagerPage {
   }
 
   filters() {
-    this.serviceLiquidation.getLiquidacionesEncargada(this.company).subscribe((rp: any) => {
-      this.liquidated = rp
+    this.serviceLiquidation.getByCompany(this.company).subscribe((rp: any) => {
+      this.liquidated = rp['liquidManager']
       this.calculateSumOfServices()
     })
   }
 
   calculateSumOfServices() {
     const managerCondition = serv => {
-      return (this.selectedEncargada) ? serv.encargada === this.selectedEncargada : true
+      return (this.selectManager) ? serv.encargada === this.selectManager : true
     }
 
     const conditionBetweenDates = serv => {
@@ -266,6 +281,22 @@ export class ManagerPage {
       return false
     }
 
+    let day = '', month = '', year = ''
+
+    for (let i = 0; i < this.liquidated.length; i++) {
+      this.liquidated[i].hourStart = this.liquidated[i].dateStart.substring(11, 16)
+      day = this.liquidated[i].dateStart.substring(8, 10)
+      month = this.liquidated[i].dateStart.substring(5, 7)
+      year = this.liquidated[i].dateStart.substring(2, 4)
+      this.liquidated[i].date = `${day}-${month}-${year}`
+
+      this.liquidated[i].hourEnd = this.liquidated[i].dateEnd.substring(11, 16)
+      day = this.liquidated[i].dateEnd.substring(8, 10)
+      month = this.liquidated[i].dateEnd.substring(5, 7)
+      year = this.liquidated[i].dateEnd.substring(2, 4)
+      this.liquidated[i].date2 = `${day}-${month}-${year}`
+    }
+
     if (Array.isArray(this.liquidated)) {
       const servicios = this.liquidated.filter(serv => managerCondition(serv) && conditionBetweenDates(serv) && conditionBetweenHours(serv))
       this.total(servicios)
@@ -273,7 +304,7 @@ export class ManagerPage {
   }
 
   emptyFilter() {
-    this.selectedEncargada = ""
+    this.selectManager = ""
     this.dateStart = this.CurrenDate
     this.dateEnd = this.CurrenDate
     this.buttonEmpty = true
@@ -351,22 +382,22 @@ export class ManagerPage {
     this.dateEnd = currentDate
 
     this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-      if (rp[0]['rol'] == 'Administrador') {
-        this.serviceLiquidation.getDateCurrentDay(currentDate, rp[0].company).subscribe((rp: any) => {
-          this.liquidated = rp
-          this.total(rp)
+      if (rp['manager'].rol == 'Administrador') {
+        this.serviceLiquidation.getDateCurrentDay(currentDate, rp['manager'].company).subscribe((rp: any) => {
+          this.liquidated = rp['liquidManager']
+          this.total(rp['liquidManager'])
         })
       } else {
-        this.serviceLiquidation.getEncargadaAndDate(currentDate, rp[0]['nombre'], rp[0].company).subscribe((rp: any) => {
-          this.liquidated = rp
-          this.total(rp)
+        this.serviceLiquidation.getDateTodayByManager(currentDate, rp['manager'].name, rp['manager'].company).subscribe((rp: any) => {
+          this.liquidated = rp['liquidManager']
+          this.total(rp['liquidManager'])
         })
       }
     })
   }
 
   goTherapist() {
-    this.selectedEncargada = ""
+    this.selectManager = ""
     this.router.navigate([`tabs/${this.id}/liquidation-therapist`])
   }
 
@@ -389,10 +420,15 @@ export class ManagerPage {
   }
 
   total(rp) {
-    const imports = rp.map(({ importe }) => importe).reduce((acc, value) => acc + value, 0)
+    let imports = 0
+
+    if (rp.length > 0)
+      imports = rp.map(({ amount }) => amount).reduce((acc, value) => acc + value, 0)
 
     if (imports > 999)
       this.totalImport = (imports / 1000).toFixed(3)
+    else if (imports == 0)
+      this.totalImport = '0'
     else
       this.totalImport = imports.toString()
   }
@@ -515,13 +551,13 @@ export class ManagerPage {
         this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
           if (rp[0]['rol'] == 'Administrador') {
             this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
-              this.liquidated = rp
-              this.total(rp)
+              this.liquidated = rp['liquidManager']
+              this.total(rp['liquidManager'])
             })
           } else {
-            this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-              this.liquidated = rp
-              this.total(rp)
+            this.serviceLiquidation.getDateTodayByManager(fechaActualmente, rp['manager'].name, this.company).subscribe((rp: any) => {
+              this.liquidated = rp['liquidManager']
+              this.total(rp['liquidManager'])
             })
           }
         })
@@ -628,13 +664,13 @@ export class ManagerPage {
           if (rp[0]['rol'] == 'Administrador') {
 
             this.serviceLiquidation.getDateCurrentDay(fechaActualmente, this.company).subscribe((rp: any) => {
-              this.liquidated = rp
-              this.total(rp)
+              this.liquidated = rp['liquidManager']
+              this.total(rp['liquidManager'])
             })
           } else {
-            this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
-              this.liquidated = rp
-              this.total(rp)
+            this.serviceLiquidation.getDateTodayByManager(fechaActualmente, rp['manager'].name, this.company).subscribe((rp: any) => {
+              this.liquidated = rp['liquidManager']
+              this.total(rp['liquidManager'])
             })
           }
         })
@@ -790,7 +826,7 @@ export class ManagerPage {
             })
           } else {
 
-            this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
+            this.serviceLiquidation.getDateTodayByManager(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               this.liquidated = rp
               this.total(rp)
             })
@@ -907,7 +943,7 @@ export class ManagerPage {
             })
           } else {
 
-            this.serviceLiquidation.getEncargadaAndDate(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
+            this.serviceLiquidation.getDateTodayByManager(fechaActualmente, rp[0]['nombre'], this.company).subscribe((rp: any) => {
               this.liquidated = rp
               this.total(rp)
             })
@@ -927,7 +963,7 @@ export class ManagerPage {
     if (this.details == true) {
       this.details = false
     } else {
-      this.serviceLiquidation.getIdEncarg(id).subscribe(async (rp) => {
+      this.serviceLiquidation.getByIdManager(id).subscribe(async (rp) => {
         this.nameTherapist = rp[0].encargada
         this.sinceDate = rp[0].desdeFechaLiquidado
         this.sinceTime = rp[0].desdeHoraLiquidado
@@ -944,7 +980,7 @@ export class ManagerPage {
   }
 
   async sumTotal(id: string) {
-    this.services.getByIdEncarg(id).subscribe(async (rp: any) => {
+    this.services.getByIdManager(id).subscribe(async (rp: any) => {
       if (rp.length > 0) {
         this.settledData = rp
 
@@ -1016,7 +1052,7 @@ export class ManagerPage {
 
         this.comission(service, tip, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
       } else {
-        await this.serviceLiquidation.getIdEncarg(id).subscribe(async (rp: any) => {
+        await this.serviceLiquidation.getByIdManager(id).subscribe(async (rp: any) => {
         })
       }
     })
@@ -1261,7 +1297,7 @@ export class ManagerPage {
           this.total(rp)
         })
       } else {
-        this.serviceLiquidation.getEncargadaAndDate(this.dateStart, this.nameTherapist, this.company).subscribe((rp: any) => {
+        this.serviceLiquidation.getDateTodayByManager(this.dateStart, this.nameTherapist, this.company).subscribe((rp: any) => {
           this.liquidated = rp
           this.total(rp)
         })

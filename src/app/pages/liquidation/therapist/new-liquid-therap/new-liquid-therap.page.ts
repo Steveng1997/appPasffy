@@ -259,14 +259,14 @@ export class NewLiquidTherapPage implements OnInit {
   }
 
   async dateDoesNotExist() {
-    let año = "", mes = "", dia = "", hour = ""
+    let year = "", month = "", day = "", hour = ""
 
     await this.service.getByTherapistAndManagerAndNotLiquidatedTherapistCurrentDateAsc(this.modelLiquidation.therapist, this.modelLiquidation.manager).subscribe(async (rp) => {
-      año = rp['service'][0].dateToday.substring(0, 4)
-      mes = rp['service'][0].dateToday.substring(5, 7)
-      dia = rp['service'][0].dateToday.substring(8, 10)
+      year = rp['service'][0].dateToday.substring(0, 4)
+      month = rp['service'][0].dateToday.substring(5, 7)
+      day = rp['service'][0].dateToday.substring(8, 10)
       hour = rp['service'][0].dateToday.substring(11, 16)
-      this.modelLiquidation.dateStart = `${año}-${mes}-${dia} ${hour}`
+      this.modelLiquidation.dateStart = `${year}-${month}-${day} ${hour}`
       await this.inputDateAndTime(false, null)
     })
   }
@@ -365,7 +365,7 @@ export class NewLiquidTherapPage implements OnInit {
           // Filter by totalCash
           const totalCashs = rp['service'].filter(serv => serv)
           let totalCash = totalCashs.reduce((accumulator, serv) => {
-            return accumulator + serv.valueCash
+            return accumulator + serv.valueEfectTherapist
           }, 0)
 
           // Filter by totalBizum
@@ -433,8 +433,8 @@ export class NewLiquidTherapPage implements OnInit {
       }
 
       element['service'].map(item => {
-        const numbTerap = this.unliquidatedService.filter(serv => serv)
-        receivedTherapist = numbTerap.reduce((accumulator, serv) => {
+        const numberTherap = this.unliquidatedService.filter(serv => serv)
+        receivedTherapist = numberTherap.reduce((accumulator, serv) => {
           return accumulator + serv.numberTherapist
         }, 0)
       })
@@ -545,6 +545,7 @@ export class NewLiquidTherapPage implements OnInit {
       this.totalReceived = receivedTherapist.toString()
 
     for (let o = 0; o < this.unliquidatedService?.length; o++) {
+      
       if (this.unliquidatedService[o]?.service > 999)
         this.unliquidatedService[o]['service'] = (this.unliquidatedService[o]?.service / 1000).toFixed(3)
       else

@@ -815,9 +815,6 @@ export class EditServicesPage implements OnInit {
         this.dateStart = `${year}-${month}-${day}`
 
         this.services.updated_at = dayjs().format("YYYY-MM-DD HH:mm:s")
-        console.log(this.services)
-        debugger
-
         this.collectionsValue()
 
         this.serviceManager.idAdmin(this.idUser).subscribe((rp: any[]) => {

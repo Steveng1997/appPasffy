@@ -77,23 +77,21 @@
             <div class="tratamiento">Tratamiento</div>
           </div>
 
-          <div class="rectangle-104" *ngFor="let liquidation of (liquidated | manager: selectedEncargada 
+          <div class="rectangle-104" *ngFor="let liquidation of (liquidated | manager: selectManager 
           | dateLiquidation: dateStart:dateEnd ) | paginate: { itemsPerPage: 12, currentPage: page }"
             (click)="detail(liquidation.idEncargada)">
             <div style="position: relative; top: 0px">
-              <div class="lili9">{{liquidation.encargada}}</div>
+              <div class="lili9">{{liquidation.manager}}</div>
 
-              <div class="_5-15-6-239">{{liquidation.importe + ' €'}}</div>
+              <div class="_5-15-6-239">{{liquidation.amount + ' €'}}</div>
 
-              <div class="_22-01-24-23-25"> {{liquidation.desdeFechaLiquidado + ' - ' +
-                liquidation.desdeHoraLiquidado}} </div>
+              <div class="_22-01-24-23-25"> {{liquidation.date + ' - ' + liquidation.hourStart}} </div>
 
-              <div class="_22-01-24-23-2517">{{liquidation.hastaFechaLiquidado + ' - '
-                + liquidation.hastaHoraLiquidado}}</div>
+              <div class="_22-01-24-23-2517">{{liquidation.date2 + ' - ' + liquidation.hourEnd}}</div>
 
-              <div class="_tarjeta"> {{liquidation.formaPago}} </div>
+              <div class="_tarjeta"> {{liquidation.payment}} </div>
 
-              <div class="_1">{{liquidation.tratamiento}}</div>
+              <div class="_1">{{liquidation.treatment}}</div>
             </div>
           </div>
         </div>
@@ -136,8 +134,8 @@
     <div class="component-8">
       <div class="rectangle-34-1"></div>
       <ion-select class="seleccionar_1" style="display: grid; min-height: -webkit-fill-available"
-        placeholder="Selecciona" [(ngModel)]="selectedEncargada" (ngModelChange)="filters()">
-        <ion-select-option *ngFor="let manager of manager">{{manager.nombre}}</ion-select-option>
+        placeholder="Selecciona" [(ngModel)]="selectManager" (ngModelChange)="filters()">
+        <ion-select-option *ngFor="let manager of manager">{{manager.name}}</ion-select-option>
       </ion-select>
     </div>
 

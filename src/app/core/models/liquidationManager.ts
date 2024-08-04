@@ -1,17 +1,13 @@
 export class LiquidationManager {
+  amount?: number;
   company?: string;
-  currentDate?: string;
-  createdDate?: string;
-  desdeFechaLiquidado?: string;
-  desdeHoraLiquidado?: string;
-  encargada?: string;
-  fixedDay?: number;
-  hastaFechaLiquidado?: string;
-  hastaHoraLiquidado?: string;
+  currentDate?: number;
+  dateStart?: string;
+  dateEnd?: string;
+  fixeDay?: number;
   id?: number;
-  idUnico?: string;
-  idEncargada?: string;
-  importe?: number;
-  formaPago?: string;
-  tratamiento?: number;
+  idManag?: string;
+  manager?: string;
+  treatment?: number;
+  uniqueId?: string;
 }

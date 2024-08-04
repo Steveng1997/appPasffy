@@ -95,10 +95,10 @@ export class EditTherapistPage implements OnInit {
     })
   }
 
-  async date(nombre: string) {
-    let untilYear = "", untilMonth = "", untilDay = "", currentDate = new Date()
+  async date(name: string) {
+    let untilYear = "", untilMonth = "", untilDay = ""
 
-    this.serviceLiquidationTherapist.getByTherapAndCompany(nombre, this.company).subscribe(async (rp: any) => {
+    this.serviceLiquidationTherapist.getByTherapAndCompany(name, this.company).subscribe(async (rp: any) => {
       if (rp['liquidTherapist'].length > 0) {
         untilYear = rp['liquidTherapist'][0].dateEnd.toString().substring(2, 4)
         untilMonth = rp['liquidTherapist'][0].dateEnd.toString().substring(5, 7)
@@ -106,7 +106,7 @@ export class EditTherapistPage implements OnInit {
         this.liquidationTherapist.dateStart = `${untilYear}-${untilMonth}-${untilDay}`
         this.liquidationTherapist.dateStart = rp['liquidTherapist'][0].dateEnd
       } else {
-        this.service.getByTherapistNotLiquidatedTherapist(nombre).subscribe(async (rp: any) => {
+        this.service.getByTherapistNotLiquidatedTherapist(name).subscribe(async (rp: any) => {
           if (rp['service'].length > 0) {
             untilYear = rp['service'][0]['dateToday'].substring(0, 4)
             untilMonth = rp['service'][0]['dateToday'].substring(5, 7)

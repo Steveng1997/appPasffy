@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import moment from 'moment'
+import dayjs from "dayjs";
 
 // Models
 import { LiquidationManager } from 'src/app/core/models/liquidationManager';
@@ -29,7 +30,7 @@ export class NewLiquidaManagerPage implements OnInit {
 
   terapeuta: any
   unliquidatedService: any
-  manager: any
+  manager = []
   receivedManager: any
 
   id: number
@@ -78,6 +79,10 @@ export class NewLiquidaManagerPage implements OnInit {
   totalServices: string
 
   currentDate = new Date().getTime()
+  dateStart: string
+  dateEnd: string
+  hourStart: string
+  hourEnd: string
 
   fijoDia: number
   fixedTotalDay: number
@@ -88,20 +93,17 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   modelLiquidation: LiquidationManager = {
+    amount: 0,
     company: "",
-    currentDate: "",
-    desdeFechaLiquidado: "",
-    desdeHoraLiquidado: "",
-    encargada: "",
-    fixedDay: 0,
-    hastaFechaLiquidado: "",
-    hastaHoraLiquidado: new Date().toTimeString().substring(0, 5),
-    createdDate: "",
+    currentDate: 0,
+    dateStart: "",
+    dateEnd: dayjs().format("YYYY-MM-DD HH:mm"),
+    fixeDay: 0,
     id: 0,
-    idUnico: "",
-    idEncargada: "",
-    importe: 0,
-    tratamiento: 0,
+    idManag: "",
+    manager: "",
+    treatment: 0,
+    uniqueId: ""
   }
 
   constructor(
@@ -127,16 +129,16 @@ export class NewLiquidaManagerPage implements OnInit {
 
   validitingUser() {
     this.serviceManager.getId(this.id).subscribe((rp) => {
-      this.company = rp[0].company
-      if (rp[0]['rol'] == 'administrador') {
+      this.company = rp['manager'].company
+      if (rp['manager'].rol == 'Administrador') {
         this.administratorRole = true
         this.GetAllManagers()
       } else {
-        this.manager = rp
+        this.manager = [rp['manager']]
         this.administratorRole = false
-        this.modelLiquidation.encargada = this.manager[0].nombre
+        this.modelLiquidation.manager = rp['manager'].name
         this.modelLiquidation.company = this.company
-        this.serviceLiquidation.getByEncargada(this.modelLiquidation.encargada).subscribe(async (rp) => {
+        this.serviceLiquidation.getByManager(this.modelLiquidation.manager).subscribe(async (rp) => {
           this.liquidated = rp
           this.calculateServices()
         })
@@ -146,9 +148,9 @@ export class NewLiquidaManagerPage implements OnInit {
 
   GetAllManagers() {
     this.serviceManager.getId(this.id).subscribe(async (rp: any) => {
-      this.modelLiquidation.company = rp[0].company
-      this.serviceManager.company(rp[0].company).subscribe((datosEncargada: any) => {
-        this.manager = datosEncargada
+      this.modelLiquidation.company = rp['manager'].company
+      this.serviceManager.company(rp['manager'].company).subscribe((rp: any) => {
+        this.manager = rp['manager']
       })
     })
   }
@@ -160,63 +162,43 @@ export class NewLiquidaManagerPage implements OnInit {
   }
 
   async dateExists() {
-    let fromMonth = '', fromDay = '', fromYear = '', convertMonth = '', convertDay = '',
-      untilMonth = 0, untilDay = 0, untilYear = 0, currentDate = new Date()
+    let fromMonth = '', fromDay = '', fromYear = ''
 
-    await this.serviceLiquidation.getByEncargada(this.modelLiquidation.encargada).subscribe(async (rp: any) => {
+    await this.serviceLiquidation.getByManager(this.modelLiquidation.manager).subscribe(async (rp: any) => {
       if (rp.length > 0) {
-        fromDay = rp[0]['hastaFechaLiquidado'].substring(0, 2)
-        fromMonth = rp[0]['hastaFechaLiquidado'].substring(3, 5)
-        fromYear = rp[0]['hastaFechaLiquidado'].substring(6, 8)
+        fromDay = rp[0]['dateEnd'].substring(0, 2)
+        fromMonth = rp[0]['dateEnd'].substring(3, 5)
+        fromYear = rp[0]['dateEnd'].substring(6, 8)
 
-        this.modelLiquidation.desdeFechaLiquidado = `${'20' + fromYear}-${fromMonth}-${fromDay}`
-        this.modelLiquidation.desdeHoraLiquidado = rp[0]['hastaHoraLiquidado']
-        await this.inputDateAndTime()
+        this.modelLiquidation.dateStart = `${'20' + fromYear}-${fromMonth}-${fromDay}`
+        this.modelLiquidation.dateStart = rp[0]['dateEnd']
+        await this.inputDateAndTime(false, null)
       } else {
         await this.dateDoesNotExist()
       }
     })
-
-    untilDay = currentDate.getDate()
-    untilMonth = currentDate.getMonth() + 1
-    untilYear = currentDate.getFullYear()
-
-    if (untilMonth > 0 && untilMonth < 10) {
-      convertMonth = '0' + untilMonth
-      this.modelLiquidation.hastaFechaLiquidado = `${untilYear}-${convertMonth}-${untilDay}`
-    } else {
-      convertMonth = untilMonth.toString()
-      this.modelLiquidation.hastaFechaLiquidado = `${untilYear}-${convertMonth}-${untilDay}`
-    }
-
-    if (untilDay > 0 && untilDay < 10) {
-      convertDay = '0' + untilDay
-      this.modelLiquidation.hastaFechaLiquidado = `${untilYear}-${convertMonth}-${convertDay}`
-    } else {
-      this.modelLiquidation.hastaFechaLiquidado = `${untilYear}-${convertMonth}-${untilDay}`
-    }
   }
 
   async dateDoesNotExist() {
-    let año = "", mes = "", dia = ""
+    let year = "", month = "", day = "", hour = ""
 
-    await this.service.getEncargadaFechaAsc(this.modelLiquidation.encargada).subscribe(async (rp) => {
-      año = rp[0]['fechaHoyInicio'].substring(0, 4)
-      mes = rp[0]['fechaHoyInicio'].substring(5, 7)
-      dia = rp[0]['fechaHoyInicio'].substring(8, 10)
-      this.modelLiquidation.desdeFechaLiquidado = `${año}-${mes}-${dia}`
-      this.modelLiquidation.desdeHoraLiquidado = rp[0]['horaStart']
-      await this.inputDateAndTime()
+    await this.service.getByManagerAndNotLiquidatedManagerCurrentDateAsc(this.modelLiquidation.manager).subscribe(async (rp) => {
+      year = rp['service'][0].dateToday.substring(0, 4)
+      month = rp['service'][0].dateToday.substring(5, 7)
+      day = rp['service'][0].dateToday.substring(8, 10)
+      hour = rp['service'][0].dateToday.substring(11, 16)
+      this.modelLiquidation.dateStart = `${year}-${month}-${day} ${hour}`
+      await this.inputDateAndTime(false, null)
     })
   }
 
   calculateServices() {
-    if (this.modelLiquidation.encargada != "") {
+    if (this.modelLiquidation.manager != "") {
       this.getThoseThatNotLiquidated()
       this.ionLoaderService.simpleLoader()
 
-      this.service.getByEncargada(this.modelLiquidation.encargada).subscribe(async (resp: any) => {
-        if (resp.length > 0) {
+      this.service.getByManagerNotLiquidatedManager(this.modelLiquidation.manager).subscribe(async (rp: any) => {
+        if (rp['service'].length > 0) {
           this.dates = false
           this.ionLoaderService.dismissLoader()
           await this.dateExists()
@@ -234,83 +216,95 @@ export class NewLiquidaManagerPage implements OnInit {
     }
   }
 
-  async inputDateAndTime() {
-    this.service.getByEncargadaFechaHoraInicioFechaHoraFin(this.modelLiquidation.encargada, this.modelLiquidation.desdeHoraLiquidado,
-      this.modelLiquidation.hastaHoraLiquidado, this.modelLiquidation.desdeFechaLiquidado, this.modelLiquidation.hastaFechaLiquidado, this.modelLiquidation.company).subscribe(async (rp: any) => {
+  async inputDateAndTime(event, date) {
+    if (event == true) {
+      if (date == 'start')
+        this.modelLiquidation.dateStart = `${this.dateStart} ${this.hourStart}`
+      else
+        this.modelLiquidation.dateEnd = `${this.dateEnd} ${this.hourEnd}`
+    }
 
-        if (rp.length > 0) {
-          this.unliquidatedService = rp
+    this.dateStart = this.modelLiquidation.dateStart.substring(0, 10)
+    this.dateEnd = this.modelLiquidation.dateEnd.substring(0, 10)
+    this.hourStart = this.modelLiquidation.dateStart.substring(11, 16)
+    this.hourEnd = this.modelLiquidation.dateEnd.substring(11, 16)
+
+    this.service.getByManagerAndDateStartAndDateEndAndCompany(this.modelLiquidation.manager, this.modelLiquidation.dateStart, this.modelLiquidation.dateEnd,
+      this.modelLiquidation.company).subscribe(async (rp: any) => {
+
+        if (rp['service'].length > 0) {
+          this.unliquidatedService = rp['service']
 
           // Filter by servicio
-          const servicios = rp.filter(serv => serv)
+          const servicios = rp['service'].filter(serv => serv)
           let service = servicios.reduce((accumulator, serv) => {
-            return accumulator + serv.servicio
+            return accumulator + serv.service
           }, 0)
 
           // Filter by Propina
-          const propinas = rp.filter(serv => serv)
+          const propinas = rp['service'].filter(serv => serv)
           let tip = propinas.reduce((accumulator, serv) => {
-            return accumulator + serv.propina
+            return accumulator + serv.tip
           }, 0)
 
           // Filter by Bebida
-          const bebida = rp.filter(serv => serv)
+          const bebida = rp['service'].filter(serv => serv)
           let drink = bebida.reduce((accumulator, serv) => {
-            return accumulator + serv.bebidas
+            return accumulator + serv.drink
           }, 0)
 
           // Filter by Bebida
-          const drinkTherap = rp.filter(serv => serv)
+          const drinkTherap = rp['service'].filter(serv => serv)
           let drinkTherapist = drinkTherap.reduce((accumulator, serv) => {
-            return accumulator + serv.bebidaTerap
+            return accumulator + serv.drinkTherapist
           }, 0)
 
           // Filter by Tabaco
-          const tabac = rp.filter(serv => serv)
+          const tabac = rp['service'].filter(serv => serv)
           let tobacco = tabac.reduce((accumulator, serv) => {
-            return accumulator + serv.tabaco
+            return accumulator + serv.tabacco
           }, 0)
 
           // Filter by Vitamina
-          const vitamina = rp.filter(serv => serv)
+          const vitamina = rp['service'].filter(serv => serv)
           let vitamins = vitamina.reduce((accumulator, serv) => {
-            return accumulator + serv.vitaminas
+            return accumulator + serv.vitamin
           }, 0)
 
           // Filter by Vitamina
-          const otroServicio = rp.filter(serv => serv)
+          const otroServicio = rp['service'].filter(serv => serv)
           let others = otroServicio.reduce((accumulator, serv) => {
-            return accumulator + serv.otros
+            return accumulator + serv.others
           }, 0)
 
           // Filter by totalCash
-          const totalCashs = rp.filter(serv => serv)
+          const totalCashs = rp['service'].filter(serv => serv)
           let totalCash = totalCashs.reduce((accumulator, serv) => {
-            return accumulator + serv.valueEfectEncargada
+            return accumulator + serv.valueEfectManager
           }, 0)
 
           // Filter by totalBizum
-          const totalBizums = rp.filter(serv => serv)
+          const totalBizums = rp['service'].filter(serv => serv)
           let totalBizum = totalBizums.reduce((accumulator, serv) => {
-            return accumulator + serv.valueBizuEncargada
+            return accumulator + serv.valueBizuManager
           }, 0)
 
           // Filter by totalCard
-          const totalCards = rp.filter(serv => serv)
+          const totalCards = rp['service'].filter(serv => serv)
           let totalCard = totalCards.reduce((accumulator, serv) => {
-            return accumulator + serv.valueTarjeEncargada
+            return accumulator + serv.valueCardManager
           }, 0)
 
           // Filter by totalTransaction
-          const totalTransactions = rp.filter(serv => serv)
+          const totalTransactions = rp['service'].filter(serv => serv)
           let totalTransaction = totalTransactions.reduce((accumulator, serv) => {
-            return accumulator + serv.valueTransEncargada
+            return accumulator + serv.valueTransactionManager
           }, 0)
 
           this.comission(service, tip, drinkTherapist, drink, tobacco, vitamins, others, rp, totalCash, totalBizum, totalCard, totalTransaction)
 
         } else {
-          this.unliquidatedService = rp
+          this.unliquidatedService = rp['service']
           this.ionLoaderService.dismissLoader()
           this.dates = true
           this.selected = true
@@ -327,27 +321,27 @@ export class NewLiquidaManagerPage implements OnInit {
     let comisiServicio = 0, comiPropina = 0, comiBebida = 0, comiBebidaTherapist = 0, comiTabaco = 0, comiVitamina = 0, comiOtros = 0, sumComision = 0, totalCommission = 0,
       sumCommission = 0, receivedManager = 0
 
-    await this.serviceManager.name(this.modelLiquidation.encargada).subscribe(async (rp) => {
-      this.terapeutaName = rp[0]
-      this.fijoDia = rp[0]['fijoDia']
+    await this.serviceManager.name(this.modelLiquidation.manager).subscribe(async (rp) => {
+      this.terapeutaName = rp['manager'][0]
+      this.fijoDia = rp['manager'][0]['fixeDay']
       this.letterFixedDay = this.fijoDia.toString()
 
       // Comision
-      comisiServicio = service / 100 * rp[0]?.servicio
-      comiPropina = tip / 100 * rp[0]?.propina
-      comiBebida = drink / 100 * rp[0]?.bebida
-      comiBebidaTherapist = drinkTherapist / 100 * rp[0]?.bebidaTerap
-      comiTabaco = tobacco / 100 * rp[0]?.tabaco
-      comiVitamina = vitamins / 100 * rp[0]?.vitamina
-      comiOtros = others / 100 * rp[0]?.otros
+      comisiServicio = service / 100 * rp['manager'][0]?.service
+      comiPropina = tip / 100 * rp['manager'][0]?.tip
+      comiBebida = drink / 100 * rp['manager'][0]?.drink
+      comiBebidaTherapist = drinkTherapist / 100 * rp['manager'][0]?.drinkTherapist
+      comiTabaco = tobacco / 100 * rp['manager'][0]?.tabacco
+      comiVitamina = vitamins / 100 * rp['manager'][0]?.vitamin
+      comiOtros = others / 100 * rp['manager'][0]?.others
 
-      let totalTreatment = Number(comisiServicio.toFixed(0))
-      let totalTip = Number(comiPropina.toFixed(0))
-      let totalDrink = Number(comiBebida.toFixed(0))
-      let totalDrinkTherap = Number(comiBebidaTherapist.toFixed(0))
-      let totalTobacco = Number(comiTabaco.toFixed(0))
-      let totalVitamin = Number(comiVitamina.toFixed(0))
-      let totalOther = Number(comiOtros.toFixed(0))
+      let totalTreatment = Number(comisiServicio.toFixed(1))
+      let totalTip = Number(comiPropina.toFixed(1))
+      let totalDrink = Number(comiBebida.toFixed(1))
+      let totalDrinkTherap = Number(comiBebidaTherapist.toFixed(1))
+      let totalTobacco = Number(comiTabaco.toFixed(1))
+      let totalVitamin = Number(comiVitamina.toFixed(1))
+      let totalOther = Number(comiOtros.toFixed(1))
 
       sumComision = Number(totalTreatment) + Number(totalTip) + Number(totalDrink) + Number(totalDrinkTherap) + Number(totalTobacco) + Number(totalVitamin) + Number(totalOther)
 
@@ -356,10 +350,10 @@ export class NewLiquidaManagerPage implements OnInit {
         sumCommission = Number(sumComision.toFixed(1))
       }
 
-      element.map(item => {
+      element['service'].map(item => {
         const numbTerap = this.unliquidatedService.filter(serv => serv)
         receivedManager = numbTerap.reduce((accumulator, serv) => {
-          return accumulator + serv.numberEncarg
+          return accumulator + serv.numberManager
         }, 0)
       })
 
@@ -371,7 +365,7 @@ export class NewLiquidaManagerPage implements OnInit {
 
       let totalLiquidation = Math.ceil(sumCommission) + this.fixedTotalDay - Number(receivedManager)
       let totalServices = Math.ceil(sumCommission) - Number(receivedManager)
-      this.modelLiquidation.importe = totalLiquidation
+      this.modelLiquidation.amount = totalLiquidation
 
       let sumTherapist = totalCash + totalBizum + totalCard + totalTransaction
 
@@ -390,21 +384,19 @@ export class NewLiquidaManagerPage implements OnInit {
   calculateTheDays() {
     let day = '', convertDay = '', month = '', year = '', hour = new Date().toTimeString().substring(0, 8), dayEnd = '', monthEnd = '', yearEnd = ''
 
-    dayEnd = this.modelLiquidation.desdeFechaLiquidado.substring(8, 10)
-    monthEnd = this.modelLiquidation.desdeFechaLiquidado.substring(5, 7)
-    yearEnd = this.modelLiquidation.desdeFechaLiquidado.substring(0, 4)
+    dayEnd = this.modelLiquidation.dateStart.substring(8, 10)
+    monthEnd = this.modelLiquidation.dateStart.substring(5, 7)
+    yearEnd = this.modelLiquidation.dateStart.substring(0, 4)
 
     var date1 = moment(`${yearEnd}-${monthEnd}-${dayEnd}`, "YYYY-MM-DD")
 
     // Date 2
 
-    day = this.modelLiquidation.hastaFechaLiquidado.substring(8, 10)
-    month = this.modelLiquidation.hastaFechaLiquidado.substring(5, 7)
-    year = this.modelLiquidation.hastaFechaLiquidado.substring(0, 4)
+    day = this.modelLiquidation.dateEnd.substring(8, 10)
+    month = this.modelLiquidation.dateEnd.substring(5, 7)
+    year = this.modelLiquidation.dateEnd.substring(0, 4)
 
     var date2 = moment(`${year}-${month}-${day}`, "YYYY-MM-DD")
-
-    // this.fixedDay = date1.diff(date2, 'd')
     this.fixedDay = date2.diff(date1, 'days')
   }
 
@@ -499,40 +491,40 @@ export class NewLiquidaManagerPage implements OnInit {
 
     for (let o = 0; o < this.unliquidatedService?.length; o++) {
 
-      if (this.unliquidatedService[o]?.servicio > 999)
-        this.unliquidatedService[o]['servicio'] = (this.unliquidatedService[o]?.servicio / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.service > 999)
+        this.unliquidatedService[o]['service'] = (this.unliquidatedService[o]?.service / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['servicio'] = this.unliquidatedService[o]?.servicio.toString()
+        this.unliquidatedService[o]['service'] = this.unliquidatedService[o]?.service.toString()
 
-      if (this.unliquidatedService[o]?.propina > 999)
-        this.unliquidatedService[o]['propina'] = (this.unliquidatedService[o]?.propina / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.tip > 999)
+        this.unliquidatedService[o]['tip'] = (this.unliquidatedService[o]?.tip / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['propina'] = this.unliquidatedService[o]?.propina.toString()
+        this.unliquidatedService[o]['tip'] = this.unliquidatedService[o]?.tip.toString()
 
-      if (this.unliquidatedService[o]?.numberTerap > 999)
-        this.unliquidatedService[o]['numberTerap'] = (this.unliquidatedService[o]?.numberTerap / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.numberTherapist > 999)
+        this.unliquidatedService[o]['numberTherapist'] = (this.unliquidatedService[o]?.numberTherapist / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['numberTerap'] = this.unliquidatedService[o]?.numberTerap.toString()
+        this.unliquidatedService[o]['numberTherapist'] = this.unliquidatedService[o]?.numberTherapist.toString()
 
-      if (this.unliquidatedService[o]?.bebidas > 999)
-        this.unliquidatedService[o]['bebidas'] = (this.unliquidatedService[o]?.bebidas / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.drink > 999)
+        this.unliquidatedService[o]['drink'] = (this.unliquidatedService[o]?.drink / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['bebidas'] = this.unliquidatedService[o]?.bebidas.toString()
+        this.unliquidatedService[o]['drink'] = this.unliquidatedService[o]?.drink.toString()
 
-      if (this.unliquidatedService[o]?.tabaco > 999)
-        this.unliquidatedService[o]['tabaco'] = (this.unliquidatedService[o]?.tabaco / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.tabacco > 999)
+        this.unliquidatedService[o]['tabacco'] = (this.unliquidatedService[o]?.tabacco / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['tabaco'] = this.unliquidatedService[o]?.tabaco.toString()
+        this.unliquidatedService[o]['tabacco'] = this.unliquidatedService[o]?.tabacco.toString()
 
-      if (this.unliquidatedService[o]?.vitaminas > 999)
-        this.unliquidatedService[o]['vitaminas'] = (this.unliquidatedService[o]?.vitaminas / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.vitamin > 999)
+        this.unliquidatedService[o]['vitamin'] = (this.unliquidatedService[o]?.vitamin / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['vitaminas'] = this.unliquidatedService[o]?.vitaminas.toString()
+        this.unliquidatedService[o]['vitamin'] = this.unliquidatedService[o]?.vitamin.toString()
 
-      if (this.unliquidatedService[o]?.otros > 999)
-        this.unliquidatedService[o]['otros'] = (this.unliquidatedService[o]?.otros / 1000).toFixed(3)
+      if (this.unliquidatedService[o]?.others > 999)
+        this.unliquidatedService[o]['others'] = (this.unliquidatedService[o]?.others / 1000).toFixed(3)
       else
-        this.unliquidatedService[o]['otros'] = this.unliquidatedService[o]?.otros.toString()
+        this.unliquidatedService[o]['others'] = this.unliquidatedService[o]?.others.toString()
     }
 
     if (totalCash > 999)
@@ -588,16 +580,16 @@ export class NewLiquidaManagerPage implements OnInit {
   fixedNumberDay(event: any) {
     let numberValue = 0
     numberValue = Number(event.target.value)
-    this.modelLiquidation.fixedDay = Number(event.target.value)
+    this.modelLiquidation.fixeDay = Number(event.target.value)
 
     if (numberValue > 0) {
-      this.serviceManager.name(this.modelLiquidation.encargada).subscribe((resp: any) => {
+      this.serviceManager.name(this.modelLiquidation.manager).subscribe((resp: any) => {
         this.fijoDia = resp[0]['fijoDia']
         this.letterFixedDay = this.fijoDia.toString()
         this.fixedTotalDay = numberValue * this.fijoDia
         this.pountFixedDay()
         let totalCommission = this.sumCommission2 + this.fixedTotalDay - this.receivedManager
-        this.modelLiquidation.importe = totalCommission
+        this.modelLiquidation.amount = totalCommission
 
         if (totalCommission > 999)
           this.totalLiquidation = (totalCommission / 1000).toFixed(3)
@@ -619,7 +611,7 @@ export class NewLiquidaManagerPage implements OnInit {
     document.getElementById('overviewDates').style.height = '109px'
     this.dates = false
     this.selected = false
-    this.modelLiquidation.encargada = ""
+    this.modelLiquidation.manager = ""
     this.ionLoaderService.dismissLoader()
     location.replace(`tabs/${this.id}/liquidation-manager`)
   }
@@ -633,73 +625,29 @@ export class NewLiquidaManagerPage implements OnInit {
     })
 
     this.modelServices.idManag = uuid
-    this.modelLiquidation.idUnico = uuid
-    this.modelLiquidation.idEncargada = uuid
-    return this.modelLiquidation.idUnico
-  }
-
-  dateCurrentDay() {
-    let date = new Date(), day = 0, month = 0, year = 0, convertMonth = '', convertDay = ''
-
-    day = date.getDate()
-    month = date.getMonth() + 1
-    year = date.getFullYear()
-
-    if (month > 0 && month < 10) {
-      convertMonth = '0' + month
-      this.modelLiquidation.createdDate = `${year}-${convertMonth}-${day}`
-    } else {
-      convertMonth = month.toString()
-      this.modelLiquidation.createdDate = `${year}-${month}-${day}`
-    }
-
-    if (day > 0 && day < 10) {
-      convertDay = '0' + day
-      this.modelLiquidation.createdDate = `${year}-${convertMonth}-${convertDay}`
-    } else {
-      this.modelLiquidation.createdDate = `${year}-${convertMonth}-${day}`
-    }
-  }
-
-  formatDate() {
-    let fromDay = '', fromMonth = '', fromYear = '', untilDay = '', untilMonth = '', untilYear = ''
-
-    // From 
-
-    fromDay = this.modelLiquidation.desdeFechaLiquidado.substring(8, 10)
-    fromMonth = this.modelLiquidation.desdeFechaLiquidado.substring(5, 7)
-    fromYear = this.modelLiquidation.desdeFechaLiquidado.substring(2, 4)
-
-    this.modelLiquidation.desdeFechaLiquidado = `${fromDay}-${fromMonth}-${fromYear}`
-
-    // Until
-
-    untilDay = this.modelLiquidation.hastaFechaLiquidado.substring(8, 10)
-    untilMonth = this.modelLiquidation.hastaFechaLiquidado.substring(5, 7)
-    untilYear = this.modelLiquidation.hastaFechaLiquidado.substring(2, 4)
-
-    this.modelLiquidation.hastaFechaLiquidado = `${untilDay}-${untilMonth}-${untilYear}`
+    this.modelLiquidation.uniqueId = uuid
+    this.modelLiquidation.idManag = uuid
+    return this.modelLiquidation.uniqueId
   }
 
   save() {
     if (this.administratorRole == true) {
-      if (this.modelLiquidation.encargada != "") {
+      debugger
+      if (this.modelLiquidation.manager != "") {
 
         this.createUniqueId()
-        this.modelLiquidation.currentDate = this.currentDate.toString()
-        this.formatDate()
-        this.dateCurrentDay()
+        this.modelLiquidation.currentDate = this.currentDate
 
-        if (this.modelLiquidation.fixedDay == 0)
-          this.modelLiquidation.fixedDay = this.fixedDay
+        if (this.modelLiquidation.fixeDay == 0)
+          this.modelLiquidation.fixeDay = this.fixedDay
 
         this.ionLoaderService.simpleLoader()
-        this.serviceLiquidation.getByEncargada(this.modelLiquidation.encargada).subscribe((rp: any) => {
+        this.serviceLiquidation.getByManager(this.modelLiquidation.manager).subscribe((rp: any) => {
 
-          if (rp.length > 0) {
+          if (rp['liquidManager'].length > 0) {
 
             for (let o = 0; o < this.unliquidatedService.length; o++) {
-              this.modelLiquidation.tratamiento = this.unliquidatedService.length
+              this.modelLiquidation.treatment = this.unliquidatedService.length
               this.modelServices.liquidatedManager = true
               this.service.updateLiquidatedManager(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
             }
@@ -709,17 +657,20 @@ export class NewLiquidaManagerPage implements OnInit {
               document.getElementById('overviewDates').style.height = '109px'
               this.dates = false
               this.selected = false
-              this.modelLiquidation.encargada = ""
+
+              if (this.administratorRole == true)
+                this.modelLiquidation.manager = ""
+
               this.ionLoaderService.dismissLoader()
               location.replace(`tabs/${this.id}/liquidation-manager`)
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })
             })
           }
 
-          else if (rp.length == 0) {
+          else if (rp['liquidManager'].length == 0) {
 
             for (let o = 0; o < this.unliquidatedService.length; o++) {
-              this.modelLiquidation.tratamiento = this.unliquidatedService.length
+              this.modelLiquidation.treatment = this.unliquidatedService.length
               this.service.updateLiquidatedManager(this.unliquidatedService[o]['id'], this.modelServices).subscribe((rp) => { })
             }
 
@@ -728,7 +679,10 @@ export class NewLiquidaManagerPage implements OnInit {
               document.getElementById('overviewDates').style.height = '109px'
               this.dates = false
               this.selected = false
-              this.modelLiquidation.encargada = ""
+
+              if (this.administratorRole == true)
+                this.modelLiquidation.manager = ""
+
               this.ionLoaderService.dismissLoader()
               location.replace(`tabs/${this.id}/liquidation-manager`)
               Swal.fire({ heightAuto: false, position: 'top-end', icon: 'success', title: 'Liquidado Correctamente!', showConfirmButton: false, timer: 2500 })

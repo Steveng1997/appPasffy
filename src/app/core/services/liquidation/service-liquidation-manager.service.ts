@@ -26,30 +26,24 @@ export class ServiceLiquidationManagerService {
 
   // Get
 
-  getLiquidacionesEncargada(company: string) {
-    return this.http.get(`${this.API_URL}/getByLiquidacionesEncargada/${company}`);
+  getByCompany(company: string) {
+    return this.http.get(`${this.API_URL}/company/${company}`);
   }
 
-  getIdEncarg(idEncargada: string) {
-    return this.http.get(`${this.API_URL}/getByIdEncarg/${idEncargada}`);
+  getByIdManager(idManag: string) {
+    return this.http.get(`${this.API_URL}/getIdManag/${idManag}`);
   }
 
-  getByEncargada(encargada: string) {
-    return this.http.get(`${this.API_URL}/getEncargada/${encargada}`);
+  getByManager(manager: string) {
+    return this.http.get(`${this.API_URL}/manager/${manager}`);
   }
 
-  getDateCurrentDay(fechaHoy: string, company: string) {
-    return this.http.get(`${this.API_URL}/getDateCurrent/${fechaHoy}/${company}`);
+  getDateCurrentDay(created_at: string, company: string) {
+    return this.http.get(`${this.API_URL}/getDateCurrentDay/${created_at}/${company}`);
   }
 
-  getEncargadaAndDate(createdDate: string, encargada: string, company: string) {
-    return this.http.get(`${this.API_URL}/getFechaHoyByManager`, {
-      params: {
-        createdDate,
-        encargada,
-        company
-      }
-    });
+  getDateTodayByManager(created_at: string, manager: string, company: string) {
+    return this.http.get(`${this.API_URL}/getDateTodayByManager/${created_at}/${manager}/${company}`);
   }
 
   // Update
